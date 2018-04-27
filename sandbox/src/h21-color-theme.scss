@@ -7,7 +7,7 @@ $h21-mat-blue: (
   100 : #b3c7f3,
   200 : #80a2eb,
   300 : #4d7ce2,
-  400 : #2660dc,
+  400 : #2c67e6,
   500 : #0044d6,
   600 : #003ed1,
   700 : #0035cc,
@@ -40,7 +40,7 @@ $h21-mat-green: (
   100 : #bfe5c7,
   200 : #94d3a2,
   300 : #69c17d,
-  400 : #48b461,
+  400 : #3dcc5d,
   500 : #28a745,
   600 : #249f3e,
   700 : #1e9636,
@@ -103,15 +103,29 @@ $h21-mat-red: (
 
 $h21-mat-typography: mat-typography-config(
   $font-family: Roboto,
-  $headline: mat-typography-level(8px, 100px, 400),
+  $headline: mat-typography-level(24px, 36px, 400),
   $body-1: mat-typography-level(16px, 24px, 400)
 );
 @include angular-material-typography($h21-mat-typography);
 
-$h21-mat-primary: mat-palette($h21-mat-blue);
-$h21-mat-accent:  mat-palette($h21-mat-green);
+$h21-mat-primary: mat-palette($h21-mat-blue, 500, 400, 900);
+$h21-mat-accent:  mat-palette($h21-mat-green, 500, 400, 900);
 $h21-mat-warn:    mat-palette($h21-mat-red);
 
 $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn);
 
 @include angular-material-theme($h21-mat-theme);
+
+.mat-form-field .mat-form-field-underline {
+  background: #4A90E2;
+}
+
+.mat-raised-button {
+  font-weight: normal;
+}
+.mat-raised-button.mat-primary:hover {
+  background-color: mat-color($h21-mat-primary, 400);
+}
+.mat-raised-button.mat-accent:hover {
+  background-color: mat-color($h21-mat-accent, 400);
+}

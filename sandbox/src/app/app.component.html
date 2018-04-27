@@ -9,6 +9,30 @@
       </mat-sidenav>
       <mat-sidenav-content>
         <!--<router-outlet></router-outlet>-->
+
+        <div>
+          <div>
+              <h3>Checkbox</h3>
+              <mat-checkbox color="primary" [checked]="true">Checkbox primary style</mat-checkbox><br />
+              <mat-checkbox color="accent" [checked]="true">Checkbox secondary style</mat-checkbox>
+          </div>
+          <div class="line-separator">&nbsp;</div>
+          <div>
+            <h3>Radio buttons</h3>
+            <mat-radio-group>
+              <mat-radio-button color="primary" [value]="'point1'">Radio button primary style</mat-radio-button>,
+              <mat-radio-button color="accent" [value]="'point2'">Radio button secondary style</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="line-separator">&nbsp;</div>
+          <div>
+            <h3>Buttons</h3>
+            <button mat-raised-button color="primary">Primary style</button>
+            <button mat-raised-button color="accent">Secondary style</button>
+          </div>
+        </div>
+
+
         <typography-example [hidden]="routeLink != '/style/typography'"></typography-example>
         <colors-example [hidden]="routeLink != '/style/colors'"></colors-example>
         <layout-example [hidden]="routeLink != '/style/layout'"></layout-example>
