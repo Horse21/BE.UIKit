@@ -1,0 +1,63 @@
+/*- Component 21-breadcrumbs - start */
+.c-breadcrumbs {
+  border-bottom: 1px solid #d6d6d6;
+  padding: 3px 0;
+}
+.c-breadcrumbs ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.c-breadcrumbs ul > li {
+  margin: 0 5px;
+  padding: 0;
+  display: inline-block;
+  color: #515151;
+}
+.c-breadcrumbs ul > li:first-child {
+  margin-left: 0;
+}
+.c-breadcrumbs ul > li::before {
+  display: inline-block;
+  content: '→';
+  font-size: 10px;
+  margin-right: 5px;
+}
+.c-breadcrumbs__without-last-link ul > li::before {
+  opacity: .4;
+}
+.c-breadcrumbs ul > li:first-child::before {
+  display: none;
+}
+.c-breadcrumbs ul li > a.mat-button {
+  font-weight: normal;
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+  padding: 0 10px;
+  min-width: 1px;
+  line-height: 28px;
+  color: #515151;
+}
+.c-breadcrumbs__without-last-link ul li > a.mat-button {
+  opacity: .4;
+}
+.c-breadcrumbs__without-last-link ul li > a.mat-button:hover {
+  opacity: 1;
+}
+.c-breadcrumbs ul li > a.mat-button:hover {
+  color: #000;
+}
+.c-breadcrumbs ul li > a.mat-button .mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+.c-breadcrumbs ul li > span {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 12px;
+  display: inline-block;
+  padding: 0 8px;
+  line-height: 28px;
+}
+/*- Component 21-breadcrumbs - end */

@@ -1,0 +1,30 @@
+<div class="page">
+  <header class="page_header">
+    <page-header></page-header>
+  </header>
+  <main class="page_body">
+    <mat-sidenav-container>
+      <mat-sidenav opened="true" mode ="side">
+        <page-sidebar (onChangeComponent)="changeComponent($event)"></page-sidebar>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <!--<router-outlet></router-outlet>-->
+        <typography-example [hidden]="routeLink != '/style/typography'"></typography-example>
+        <colors-example [hidden]="routeLink != '/style/colors'"></colors-example>
+        <layout-example [hidden]="routeLink != '/style/layout'"></layout-example>
+        <logotype-example [hidden]="routeLink != '/style/logotype'"></logotype-example>
+        <icons-example [hidden]="routeLink != '/style/icons'"></icons-example>
+
+        <buttons-example [hidden]="routeLink != '/components/buttons'"></buttons-example>
+        <forms-example [hidden]="routeLink != '/components/forms'"></forms-example>
+        <grid-example [hidden]="routeLink != '/components/grid'"></grid-example>
+        <images-example [hidden]="routeLink != '/components/images'"></images-example>
+        <search-components-example [hidden]="routeLink != '/components/search_components'"></search-components-example>
+        <tabs-example [hidden]="routeLink != '/components/tabs'"></tabs-example>
+        <tooltips-example [hidden]="routeLink != '/components/tooltips'"></tooltips-example>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </main>
+  <footer class="page_footer"></footer>
+</div>

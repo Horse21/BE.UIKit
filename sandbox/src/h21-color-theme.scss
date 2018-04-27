@@ -1,0 +1,117 @@
+@import '~@angular/material/_theming.scss';
+@include mat-core();
+
+
+$h21-mat-blue: (
+  50 : #e0e9fa,
+  100 : #b3c7f3,
+  200 : #80a2eb,
+  300 : #4d7ce2,
+  400 : #2660dc,
+  500 : #0044d6,
+  600 : #003ed1,
+  700 : #0035cc,
+  800 : #002dc6,
+  900 : #001fbc,
+  A100 : #e5e7ff,
+  A200 : #b2b9ff,
+  A400 : #7f8cff,
+  A700 : #6575ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #ffffff,
+  )
+);
+
+$h21-mat-green: (
+  50 : #e5f4e9,
+  100 : #bfe5c7,
+  200 : #94d3a2,
+  300 : #69c17d,
+  400 : #48b461,
+  500 : #28a745,
+  600 : #249f3e,
+  700 : #1e9636,
+  800 : #188c2e,
+  900 : #0f7c1f,
+  A100 : #aeffb8,
+  A200 : #7bff8b,
+  A400 : #48ff5e,
+  A700 : #2fff47,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$h21-mat-red: (
+  50 : #ffe0e0,
+  100 : #ffb3b3,
+  200 : #ff8080,
+  300 : #ff4d4d,
+  400 : #ff2626,
+  500 : #ff0000,
+  600 : #ff0000,
+  700 : #ff0000,
+  800 : #ff0000,
+  900 : #ff0000,
+  A100 : #ffffff,
+  A200 : #fff2f2,
+  A400 : #ffbfbf,
+  A700 : #ffa6a6,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$h21-mat-typography: mat-typography-config(
+  $font-family: Roboto,
+  $headline: mat-typography-level(8px, 100px, 400),
+  $body-1: mat-typography-level(16px, 24px, 400)
+);
+@include angular-material-typography($h21-mat-typography);
+
+$h21-mat-primary: mat-palette($h21-mat-blue);
+$h21-mat-accent:  mat-palette($h21-mat-green);
+$h21-mat-warn:    mat-palette($h21-mat-red);
+
+$h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn);
+
+@include angular-material-theme($h21-mat-theme);

@@ -1,0 +1,38 @@
+/*- Component page-sidebar - start */
+.c-page-sidebar .mat-expansion-panel {
+  box-shadow: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+::ng-deep .c-page-sidebar .mat-expansion-panel-header {
+  background: none;
+  box-shadow: none;
+}
+::ng-deep .c-page-sidebar .mat-expansion-panel-header.mat-expanded,
+::ng-deep .c-page-sidebar .mat-expansion-panel-header.mat-expanded:hover,
+::ng-deep .c-page-sidebar .mat-expansion-panel-header.mat-expanded:focus {
+  background: #efefef;
+}
+::ng-deep .c-page-sidebar .mat-expansion-panel .mat-expansion-panel-body {
+  background: #efefef;
+}
+.c-page-sidebar .mat-expansion-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.c-page-sidebar .mat-expansion-panel ul > li {
+  margin: 0;
+  padding: 0;
+}
+.c-page-sidebar .mat-expansion-panel ul > li a.mat-button {
+  width: 100%;
+  text-decoration: none;
+  text-align: left;
+  padding-left: 20px;
+  box-sizing: border-box;
+  color: #000;
+}
+/*- Component page-sidebar - end */
