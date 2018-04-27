@@ -21,8 +21,6 @@
       "styles": [
         "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
         "../node_modules/normalize.css/normalize.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/h21-custom-css/dist/android5.light.custom.css",
         "styles.css",
         "h21-color-theme.scss"
       ],
