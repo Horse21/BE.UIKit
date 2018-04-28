@@ -1,15 +1,34 @@
 <div class="page">
-  <header class="page_header">
+  <header class="page_header-container">
     <page-header></page-header>
   </header>
-  <main class="page_body">
+  <div class="page_sidebar-container">
+    <nav class="c-sideabr-nav">
+      <a mat-button href="#">
+        <mat-icon>search</mat-icon>
+        <span>Search</span>
+      </a>
+      <a mat-button href="#">
+        <mat-icon>filter_list</mat-icon>
+        <span>Filter</span>
+      </a>
+      <a mat-button href="#">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </a>
+      <a mat-button href="#" class="is-active">
+        <mat-icon>help_outline</mat-icon>
+        <span>guide</span>
+      </a>
+    </nav>
+  </div>
+  <main class="page_body-container">
     <mat-sidenav-container>
       <mat-sidenav opened="true" mode ="side">
         <page-sidebar (onChangeComponent)="changeComponent($event)"></page-sidebar>
       </mat-sidenav>
       <mat-sidenav-content>
         <!--<router-outlet></router-outlet>-->
-
         <div>
           <div>
               <h3>Checkbox</h3>
@@ -27,28 +46,58 @@
           <div class="line-separator">&nbsp;</div>
           <div>
             <h3>Buttons</h3>
+            <button mat-button color="primary">Primary style</button>
+            <button mat-button color="accent">Secondary style</button>
+          </div>
+          <div class="line-separator">&nbsp;</div>
+          <div>
+            <h3>Raised Buttons</h3>
             <button mat-raised-button color="primary">Primary style</button>
             <button mat-raised-button color="accent">Secondary style</button>
+          </div>
+          <div class="line-separator">&nbsp;</div>
+          <div>
+            <h3>Buttons group</h3>
+            <mat-button-toggle-group>
+              <mat-button-toggle color="primary" value="first">First button</mat-button-toggle>
+              <mat-button-toggle color="primary" value="Second">Second button</mat-button-toggle>
+              <mat-button-toggle color="primary" value="third">Third button</mat-button-toggle>
+            </mat-button-toggle-group><br /><br />
+            <mat-button-toggle-group class="mat-button-toggle-group__color-accent">
+              <mat-button-toggle color="accent" value="first">First button</mat-button-toggle>
+              <mat-button-toggle color="accent" value="Second">Second button</mat-button-toggle>
+              <mat-button-toggle color="accent" value="third">Third button</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <div class="line-separator">&nbsp;</div>
+          <div>
+            <h3>Text input</h3>
+            <mat-form-field color="primary">
+              <input matInput placeholder="Text field, primary color">
+            </mat-form-field><br />
+            <mat-form-field color="accent">
+              <input matInput placeholder="Text field, secondary color">
+            </mat-form-field>
           </div>
         </div>
 
 
-        <typography-example [hidden]="routeLink != '/style/typography'"></typography-example>
-        <colors-example [hidden]="routeLink != '/style/colors'"></colors-example>
-        <layout-example [hidden]="routeLink != '/style/layout'"></layout-example>
-        <logotype-example [hidden]="routeLink != '/style/logotype'"></logotype-example>
-        <icons-example [hidden]="routeLink != '/style/icons'"></icons-example>
+        <!--<typography-example [hidden]="routeLink != '/style/typography'"></typography-example>-->
+        <!--<colors-example [hidden]="routeLink != '/style/colors'"></colors-example>-->
+        <!--<layout-example [hidden]="routeLink != '/style/layout'"></layout-example>-->
+        <!--<logotype-example [hidden]="routeLink != '/style/logotype'"></logotype-example>-->
+        <!--<icons-example [hidden]="routeLink != '/style/icons'"></icons-example>-->
 
-        <buttons-example [hidden]="routeLink != '/components/buttons'"></buttons-example>
-        <forms-example [hidden]="routeLink != '/components/forms'"></forms-example>
-        <grid-example [hidden]="routeLink != '/components/grid'"></grid-example>
-        <images-example [hidden]="routeLink != '/components/images'"></images-example>
-        <search-components-example [hidden]="routeLink != '/components/search_components'"></search-components-example>
-        <tabs-example [hidden]="routeLink != '/components/tabs'"></tabs-example>
-        <tooltips-example [hidden]="routeLink != '/components/tooltips'"></tooltips-example>
+        <!--<buttons-example [hidden]="routeLink != '/components/buttons'"></buttons-example>-->
+        <!--<forms-example [hidden]="routeLink != '/components/forms'"></forms-example>-->
+        <!--<grid-example [hidden]="routeLink != '/components/grid'"></grid-example>-->
+        <!--<images-example [hidden]="routeLink != '/components/images'"></images-example>-->
+        <!--<search-components-example [hidden]="routeLink != '/components/search_components'"></search-components-example>-->
+        <!--<tabs-example [hidden]="routeLink != '/components/tabs'"></tabs-example>-->
+        <!--<tooltips-example [hidden]="routeLink != '/components/tooltips'"></tooltips-example>-->
 
       </mat-sidenav-content>
     </mat-sidenav-container>
   </main>
-  <footer class="page_footer"></footer>
+  <footer class="page_footer-container"></footer>
 </div>

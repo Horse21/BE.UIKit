@@ -1,6 +1,13 @@
 @import '~@angular/material/_theming.scss';
 @include mat-core();
 
+/* Base colors . */
+$h21-color-dark-bg: #27334D;
+$h21-color-light-bg: #FCFAFA;
+$h21-color-gray: #9B9B9B;
+
+/* . Base colors */
+
 $h21-mat-blue: (
   50 : #e0e9fa,
   100 : #b3c7f3,
@@ -115,10 +122,34 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
 @include angular-material-theme($h21-mat-theme);
 
-.mat-form-field .mat-form-field-underline {
-  background: #4A90E2;
-}
 
+/* mat-button . */
+.mat-button {
+  font-weight: normal;
+}
+.mat-button.mat-primary {
+  font-weight: normal;
+  border: 1px solid mat-color($h21-mat-primary, 500);
+}
+.mat-button.mat-accent {
+  font-weight: normal;
+  border: 1px solid mat-color($h21-mat-accent, 500);
+}
+.mat-button.mat-primary:hover {
+  color: mat-color($h21-mat-primary, 400);
+  border-color: mat-color($h21-mat-primary, 400);
+}
+.mat-button.mat-accent:hover {
+  color: mat-color($h21-mat-accent, 400);
+  border-color: mat-color($h21-mat-accent, 400);
+}
+.mat-button.mat-primary .mat-button-focus-overlay,
+.mat-button.mat-accent .mat-button-focus-overlay {
+  background: none;
+}
+/* . mat-button */
+
+/* mat-raised-button . */
 .mat-raised-button {
   font-weight: normal;
 }
@@ -128,3 +159,57 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-raised-button.mat-accent:hover {
   background-color: mat-color($h21-mat-accent, 400);
 }
+/* . mat-raised-button */
+
+/* mat-button-toggle-group . */
+.mat-button-toggle {
+  color: mat-color($h21-mat-primary, 500);
+  border: 1px solid mat-color($h21-mat-primary, 500);
+  font-weight: normal;
+  font-size: 14px;
+}
+.mat-button-toggle:not(:last-child) {
+  border-right: none;
+}
+.mat-button-toggle:hover {
+  color: mat-color($h21-mat-primary, 400);
+}
+.mat-button-toggle.mat-button-toggle-checked {
+  color: mat-color($h21-mat-primary, '500-contrast');
+  background-color: mat-color($h21-mat-primary, 500);
+  font-weight: normal;
+}
+
+.mat-button-toggle-group__color-accent .mat-button-toggle {
+  color: mat-color($h21-mat-accent, 500);
+  border-color: mat-color($h21-mat-accent, 500);
+}
+.mat-button-toggle-group__color-accent .mat-button-toggle:hover {
+  color: mat-color($h21-mat-accent, 400);
+}
+.mat-button-toggle-group__color-accent .mat-button-toggle.mat-button-toggle-checked {
+  color: mat-color($h21-mat-accent, '500-contrast');
+  background-color: mat-color($h21-mat-accent, 500);
+}
+/* . mat-button-toggle-group */
+
+/* mat-form-field . */
+.mat-form-field.mat-primary .mat-form-field-underline {
+  background-color: mat-color($h21-mat-primary, 400);
+}
+.mat-form-field.mat-accent .mat-form-field-underline {
+  background-color: mat-color($h21-mat-accent, 400);
+}
+.mat-form-field-placeholder {
+  color: $h21-color-gray;
+}
+/* . mat-form-field */
+
+/* Custom components . */
+.mat-toolbar.c-page-header_toolbar {
+  background: $h21-color-dark-bg;
+  color: #FFFFFF;
+  height: 60px;
+}
+/* . Custom components */
+
