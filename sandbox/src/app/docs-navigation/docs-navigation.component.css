@@ -1,4 +1,4 @@
-/*- Component page-sidebar - start */
+/*- Component docs-navigation - start */
 .c-page-sidebar .mat-expansion-panel {
   box-shadow: none;
   background: none;
@@ -35,4 +35,4 @@
   box-sizing: border-box;
   color: #000;
 }
-/*- Component page-sidebar - end */
+/*- Component docs-navigation - end */

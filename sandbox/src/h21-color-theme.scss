@@ -203,10 +203,24 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-form-field-placeholder {
   color: $h21-color-gray;
 }
+.mat-select-panel.mat-primary .mat-option.mat-selected {
+  background-color: mat-color($h21-mat-primary, 500);
+  color: mat-color($h21-mat-accent, '500-contrast');
+}
+.mat-select-panel.mat-accent .mat-option.mat-selected {
+  background-color: mat-color($h21-mat-accent, 500);
+  color: mat-color($h21-mat-accent, '500-contrast');
+}
 /* . mat-form-field */
 
+/* Layout . */
+.page_body-container .mat-sidenav-container {
+  background-color: $h21-color-light-bg;
+}
+/* Layout . */
+
 /* Custom components . */
-.mat-toolbar.c-page-header_toolbar {
+.mat-toolbar.c-h21-header_toolbar {
   background: $h21-color-dark-bg;
   color: #FFFFFF;
   height: 60px;

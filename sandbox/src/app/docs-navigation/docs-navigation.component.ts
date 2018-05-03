@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
-  selector: 'page-sidebar',
-  templateUrl: './page-sidebar.component.html',
-  styleUrls: ['./page-sidebar.component.css']
+  selector: 'docs-navigation',
+  templateUrl: './docs-navigation.component.html',
+  styleUrls: ['./docs-navigation.component.css']
 })
 
-export class PageSidebarComponent {
+export class DocsNavigationComponent {
 
   @Output()
 
@@ -22,5 +22,7 @@ export class PageSidebarComponent {
     var link = hrefAttr.nodeValue;
     this.onChangeComponent.emit(link);
   }
+
+  docsPagePath = '';
 
 }

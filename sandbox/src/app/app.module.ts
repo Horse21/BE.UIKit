@@ -4,9 +4,11 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/app-material.module';
-import { PageHeaderComponent } from './page-header/page-header.component';
-import { PageSidebarComponent } from './page-sidebar/page-sidebar.component';
+import { DocsNavigationComponent } from './docs-navigation/docs-navigation.component';
+import { DocsComponent } from './docs/docs.component';
+import { H21HeaderComponent } from './h21-header/h21-header.component';
 import { H21BreadcrumbsComponent } from './h21-breadcrumbs/h21-breadcrumbs.component';
+import { H21SidebarComponent } from './h21-sidebar/h21-sidebar.component';
 import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -38,6 +40,7 @@ const routes: Routes = [
   // {path: 'components-tabs', component: TabsExampleComponent },
   // {path: 'components-tooltips', component: TooltipsExampleComponent },
   // {path: 'components-images', component: ImagesExampleComponent },
+  {path: 'docs', component: DocsComponent },
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: '**', redirectTo: '/'}
 ];
@@ -45,10 +48,11 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PageHeaderComponent,
-    PageSidebarComponent,
+    H21HeaderComponent,
+    H21SidebarComponent,
     H21BreadcrumbsComponent,
-
+    DocsNavigationComponent,
+    DocsComponent,
     ExampleViewerComponent,
     ButtonsExampleComponent,
     ColorsExampleComponent,

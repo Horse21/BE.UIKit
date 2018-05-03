@@ -14,7 +14,7 @@ h3 {
   font: normal normal 24px Roboto;
 }
 
-/*- Layout page --------------------------------------------------*/
+/* Page layout .*/
 .page {
   height: 100%;
   position: relative;
@@ -32,32 +32,41 @@ h3 {
 .page_body-container {
   position: absolute;
   top: 120px;
-  left: 65px;
-  width: calc(100% - 65px);
+  left: 0;
+  width: 100%;
   height: calc(100% - 120px);
   box-sizing: border-box;
   background: #FCFAFA;
+  z-index: 90;
 }
-.page_sidebar-container {
-  position: absolute;
-  top: 120px;
-  left: 0;
-  width: 65px;
-  height: calc(100% - 120px);
+.page_body-container .mat-sidenav-container {
+  height: 100%;
+}
+.page_sidebar-container.mat-sidenav {
+  height: 100%;
+  width: 500px;
+  box-shadow: 2px 0 4px rgba(0,0,0, .2);
+}
+.page_content-container.mat-sidenav-content {
+  height: 100%;
+  padding: 16px;
   box-sizing: border-box;
 }
 .page_footer-container {
   display: none;
 }
-/*---------------------------------------------------------*/
-.c-sideabr-nav {
+/* . Page layout */
+
+/* h21-sidebar component . */
+.c-sideabr_nav {
   height: 100%;
   background: #27334D;
   color: #FFFFFF;
+  width: 65px;
 }
-.c-sideabr-nav a.mat-button {
+.c-sideabr_nav .mat-button {
   margin: 0;
-  padding: 3px 0 0 0;
+  padding: 0;
   box-sizing: border-box;
   height: 65px;
   width: 100%;
@@ -69,44 +78,42 @@ h3 {
   font-weight: normal;
   border-radius: 0;
 }
-.c-sideabr-nav a .mat-button-wrapper span {
+.c-sideabr_nav .mat-button-wrapper span {
   display: block;
   line-height: normal;
 }
-.c-sideabr-nav a.mat-button.is-active {
+.c-sideabr_nav .mat-button.is-active {
   background: #FFFFFF;
   color: #0044D6;
 }
+.c-sideabr_tabs-container {
+  position: absolute;
+  top: 0;
+  left: 65px;
+  height: 100%;
+  width: calc(100% - 65px);
+}
+.c-sideabr_tab {
+  padding: 16px;
+  box-sizing: border-box;
+  display: none;
+}
+.c-sideabr_tab.is-active {
+  display: block;
+}
+/* . h21-sidebar component */
 
-/*- Layout body --------------------------------------------------*/
-.page_body-container .mat-sidenav-container {
-  height: 100%;
-}
-.page_body-container .mat-sidenav {
-  width: 250px;
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  box-shadow: 1px 0 1px rgba(0,0,0, .10);
-  overflow: auto;
-}
-.page_body-container .mat-sidenav-content {
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  overflow: auto;
-}
-/*- Component page-header ----------------------------------------*/
-a.c-page-header_logo {
+/* h21-header component . */
+a.c-h21-header_logo {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   padding: 5px;
 }
-a.c-page-header_logo:hover {
+a.c-h21-header_logo:hover {
   color: #fff;
 }
-a.c-page-header_logo .mat-icon {
+a.c-h21-header_logo .mat-icon {
   padding: 8px;
   background: #1dafec;
   -webkit-border-radius: 50%;
@@ -114,13 +121,13 @@ a.c-page-header_logo .mat-icon {
   border-radius: 50%;
   margin-right: 10px;
 }
-button.c-page-header_button {
+button.c-h21-header_button {
   margin: 0 5px;
 }
-button.c-page-header_button:last-child {
+button.c-h21-header_button:last-child {
   margin-right: 0;
 }
-.c-page-header_button-notification-label {
+.c-h21-header_button-notification-label {
   background: #ff0000;
   color: #fff;
   font-size: 10px;
@@ -134,36 +141,18 @@ button.c-page-header_button:last-child {
   line-height: 18px;
   font-weight: normal;
 }
-.c-page-header_spacer {
+.c-h21-header_spacer {
   display: block;
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
-.c-page-header_open-menu-btn.mat-icon-button {
+.c-h21-header_open-menu-btn.mat-icon-button {
   margin: 10px;
   text-align: center;
   color: #27334D;
 }
-/*- Component example-viewer -------------------------------------*/
-.c-example-viewer {
-  box-shadow: 0 2px 5px rgba(0,0,0, .45);
-  margin: 20px 0;
-}
-.c-example-viewer_title {
-  background: #f5f5f5;
-  padding: 20px;
-  border-bottom: 1px solid #d8d8d8;
-}
-.c-example-viewer_code-box .mat-card {
-  padding: 0;
-}
-.c-example-viewer_code-example {
-  padding: 20px;
-  font-family: Courier;
-  color: #4d69ff;
-  white-space: pre;
-}
+/* . h21-header component */
 
 
 .line-separator {
@@ -173,4 +162,14 @@ button.c-page-header_button:last-child {
 .example-container {
   padding: 20px;
   border: 1px dashed #efefef;
+}
+.in-development {
+  padding: 50px;
+  font-size: 18px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #F1F1F1;
+}
+.form-field-test.mat-form-field,
+.form-field-test .mat-select {
+  width: 350px;
 }

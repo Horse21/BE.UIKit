@@ -1,28 +1,28 @@
-<div class="c-page-header">
-  <mat-toolbar class="c-page-header_toolbar">
-    <a class="c-page-header_logo" mat-button href="/">
+<div class="c-h21-header">
+  <mat-toolbar class="c-h21-header_toolbar">
+    <a class="c-h21-header_logo" mat-button href="/">
       <mat-icon svgIcon="logo"></mat-icon>
       <span>Horse21.Pro</span>
     </a>
-    <span class="c-page-header_spacer">&nbsp;</span>
+    <span class="c-h21-header_spacer">&nbsp;</span>
     <nav>
-      <button class="c-page-header_button" mat-icon-button
+      <button class="c-h21-header_button" mat-icon-button
               #notificationBtn="matMenuTrigger"
               [matMenuTriggerFor]="notificationMenu"
               (mouseover)="notificationBtn.openMenu()">
-        <span class="c-page-header_button-notification-label">2</span>
+        <span class="c-h21-header_button-notification-label">2</span>
         <mat-icon aria-label="">notifications</mat-icon>
       </button>
-      <button class="c-page-header_button" mat-icon-button [matMenuTriggerFor]="servicesMenu">
+      <button class="c-h21-header_button" mat-icon-button [matMenuTriggerFor]="servicesMenu">
         <mat-icon aria-label="">dialpad</mat-icon>
       </button>
-      <button class="c-page-header_button" mat-icon-button>
+      <button class="c-h21-header_button" mat-icon-button>
         <mat-icon aria-label="">person</mat-icon>
       </button>
     </nav>
   </mat-toolbar>
-  <nav class="c-page-header_menu">
-    <button mat-icon-button class="c-page-header_open-menu-btn">
+  <nav class="c-h21-header_menu">
+    <button mat-icon-button class="c-h21-header_open-menu-btn">
       <mat-icon aria-label="Header menu">menu</mat-icon>
     </button>
   </nav>
