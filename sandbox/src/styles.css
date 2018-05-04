@@ -154,6 +154,34 @@ button.c-h21-header_button:last-child {
 }
 /* . h21-header component */
 
+/* docs component . */
+.docs_table {
+  width: 100%;
+  font-weight: 300;
+  border-collapse: collapse;
+  margin: 0 0 32px 0;
+}
+.docs_table thead th {
+  border-bottom: 2px solid rgba(155,155,155, .3);
+  font-weight: normal;
+  font-size: 13px;
+  text-align: left;
+  vertical-align: bottom;
+}
+.docs_table tbody td {
+  border-bottom: 1px solid rgba(155,155,155, .3);
+  padding: 6px 3px;
+  text-align: left;
+  vertical-align: top;
+}
+.docs_color-preview {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+/* . docs component */
 
 .line-separator {
   height: 50px;

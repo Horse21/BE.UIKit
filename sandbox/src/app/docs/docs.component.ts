@@ -13,7 +13,6 @@ export class DocsComponent {
   }
   location: Location;
   pagePath = '';
-  title = '';
   routeLink = '';
 
   changeComponent(link:string): void {

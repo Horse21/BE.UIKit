@@ -3,8 +3,14 @@
 
 /* Base colors . */
 $h21-color-dark-bg: #27334D;
-$h21-color-light-bg: #FCFAFA;
-$h21-color-gray: #9B9B9B;
+$h21-color-light-bg: #F9F7F7;
+$h21-color-gray: #4A4A4A;
+$h21-color-gray-light: #9B9B9B;
+$h21-color-ui-primary: #0044d6;
+$h21-color-ui-primary-light: #2c67e6;
+$h21-color-ui-accent: #28a745;
+$h21-color-ui-accent-light: #3dcc5d;
+$h21-color-text-primary: #000000;
 
 /* . Base colors */
 
@@ -109,7 +115,7 @@ $h21-mat-red: (
 
 $h21-mat-typography: mat-typography-config(
   $font-family: Roboto,
-  $headline: mat-typography-level(24px, 36px, 400),
+  $headline: mat-typography-level(32px, 48px, 700),
   $body-1: mat-typography-level(16px, 24px, 400)
 );
 @include angular-material-typography($h21-mat-typography);
@@ -201,7 +207,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   background-color: mat-color($h21-mat-accent, 400);
 }
 .mat-form-field-placeholder {
-  color: $h21-color-gray;
+  color: $h21-color-gray-light;
 }
 .mat-select-panel.mat-primary .mat-option.mat-selected {
   background-color: mat-color($h21-mat-primary, 500);
@@ -225,5 +231,37 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   color: #FFFFFF;
   height: 60px;
 }
+
+.docs_color-preview__h21-color-ui-primary {
+  background: $h21-color-ui-primary;
+}
+.docs_color-preview__h21-color-ui-primary-light {
+  background: $h21-color-ui-primary-light;
+}
+.docs_color-preview__h21-color-ui-accent {
+  background: $h21-color-ui-accent;
+}
+.docs_color-preview__h21-color-ui-accent-light {
+  background: $h21-color-ui-accent-light;
+}
+.docs_color-preview__h21-color-gray {
+  background: $h21-color-gray;
+}
+.docs_color-preview__h21-color-gray-light {
+  background: $h21-color-gray-light;
+}
+.docs_color-preview__h21-color-text-primary {
+  background: $h21-color-text-primary;
+}
+.docs_color-preview__h21-color-bg-dark {
+  background: $h21-color-dark-bg;
+}
+.docs_color-preview__h21-color-bg-light {
+  background: $h21-color-light-bg;
+  border: 1px solid #000000;
+}
 /* . Custom components */
 
+.mat-form-field .mat-icon {
+  color: $h21-color-gray;
+}
