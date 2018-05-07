@@ -41,6 +41,8 @@ const routes: Routes = [
   // {path: 'components-tooltips', component: TooltipsExampleComponent },
   // {path: 'components-images', component: ImagesExampleComponent },
   {path: 'docs', component: DocsComponent },
+  {path: 'style/:', component: DocsNavigationComponent },
+  {path: 'components/:', component: DocsNavigationComponent },
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: '**', redirectTo: '/'}
 ];

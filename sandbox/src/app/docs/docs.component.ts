@@ -10,6 +10,7 @@ import { Location } from "@angular/common";
 export class DocsComponent {
   constructor(location: Location) {
     this.location = location;
+    this.routeLink = location.path();
   }
   location: Location;
   pagePath = '';
@@ -18,5 +19,6 @@ export class DocsComponent {
   changeComponent(link:string): void {
     this.routeLink = link;
     this.location.replaceState(link);
+    console.log(this.routeLink);
   }
 }

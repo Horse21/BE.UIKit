@@ -1,6 +1,5 @@
 {
   "rulesDirectory": [
     "node_modules/codelyzer"
-  ],
-  "extends": "../h21-tslint"
+  ]
 }
