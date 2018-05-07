@@ -10,10 +10,6 @@ html, body {
   outline: none !important;
 }
 
-h3 {
-  font: normal normal 24px Roboto;
-}
-
 /* Page layout .*/
 .page {
   height: 100%;
@@ -44,7 +40,7 @@ h3 {
 }
 .page_sidebar-container.mat-sidenav {
   height: 100%;
-  width: 500px;
+  width: 365px;
   box-shadow: 2px 0 4px rgba(0,0,0, .2);
 }
 .page_content-container.mat-sidenav-content {
@@ -181,6 +177,60 @@ button.c-h21-header_button:last-child {
   background: #ffffff;
   box-sizing: border-box;
 }
+.docs_-grid .mat-grid-tile {
+
+}
+.logo-preview {
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+}
+.logo-preview p {
+  padding: 16px;
+  box-sizing: border-box;
+  background: url('/assets/img/bg-for-transparent.png') center center repeat;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 16px auto;
+}
+.logo-preview p img {
+  width: 100%;
+}
+.logo-preview figcaption {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.logo-preview a {
+  text-decoration: none;
+}
+.logo-preview a * {
+  vertical-align: middle;
+}
+.logo-preview a > span {
+  text-decoration: underline;
+}
+.logo-preview a:hover > span {
+  text-decoration: none;
+}
+
+.icon-preview {
+  text-align: center;
+}
+.icon-preview .mat-icon {
+
+}
+.icon-preview__icon-size-48 .mat-icon {
+  width: 48px;
+  height: 48px;
+}
+.icon-preview span {
+  font-size: 14px;
+  font-weight: 300;
+}
+
 /* . docs component */
 
 .line-separator {

@@ -265,3 +265,12 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-form-field .mat-icon {
   color: $h21-color-gray;
 }
+
+a {
+  color: $h21-color-ui-primary;
+  text-decoration: underline;
+}
+a:hover {
+  color: $h21-color-ui-primary-light;
+  text-decoration: none;
+}
