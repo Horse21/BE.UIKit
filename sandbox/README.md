@@ -1,4 +1,4 @@
-[![Build Status](https://h21res.visualstudio.com/_apis/public/build/definitions/e1267f67-6131-4f1e-8e4b-0e4c71716e1d/17/badge](https://h21res.visualstudio.com/H21Core/Core%202.0.%20UI%20Flow/_build/index?path=%5C&definitionId=17)
+[![Build Status](https://h21res.visualstudio.com/_apis/public/build/definitions/e1267f67-6131-4f1e-8e4b-0e4c71716e1d/17/badge)](https://h21res.visualstudio.com/H21Core/Core%202.0.%20UI%20Flow/_build/index?path=%5C&definitionId=17)
 # Sandbox
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.
