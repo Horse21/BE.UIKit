@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --preserve-symlinks -sm -ec"
+    "start": "ng serve --preserve-symlinks -sm -ec",    
+    "build": "ng build"
   },
   "private": true,
   "dependencies": {
