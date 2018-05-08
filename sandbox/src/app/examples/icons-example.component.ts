@@ -1,34 +1,42 @@
 import { Component } from "@angular/core"
+import { MatDialog } from '@angular/material';
+import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 
 @Component({
   selector: 'icons-example',
   template: `
-  <section class="docs mat-typography">
-    <h1>{{title}}</h1>
-    <h2>Custom icons</h2>
-    <mat-grid-list cols="5" class="docs_icons-preview-grid">
-      <mat-grid-tile *ngFor="let icon of h21Icons">
-        <div class="icon-preview icon-preview__icon-size-48" matTooltip="<mat-icon svgIcon=\'{{icon}}\'></mat-icon>" [matTooltipPosition]="'below'">
-          <mat-icon svgIcon="{{icon}}">{{icon}}</mat-icon><br />
-          <span class="">{{icon.replace('_',' ')}}</span>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-    <div class="line-separator"></div>
-    <h2>Used material icons</h2>
-    <mat-grid-list cols="5" class="docs_icons-preview-grid">
-      <mat-grid-tile *ngFor="let icon of matIcons">
-        <div class="icon-preview" matTooltip="<mat-icon>{{icon}}</mat-icon>" [matTooltipPosition]="'below'">
-          <mat-icon class="">{{icon}}</mat-icon><br />
-          <span>{{icon.replace('_',' ')}}</span>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </section>`
+    <section class="docs mat-typography">
+      <h1>{{title}}</h1>
+      <h2>Custom icons</h2>
+      <mat-grid-list cols="5" class="docs_icons-preview-grid">
+        <mat-grid-tile *ngFor="let icon of h21Icons">
+          <div class="icon-preview icon-preview__icon-size-48">
+            <button mat-icon-button (click)="openDialog(icon, true);">
+              <mat-icon svgIcon="{{icon}}"></mat-icon>
+            </button><br />
+            <span class="">{{icon.replace('_',' ')}}</span>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="line-separator"></div>
+      <h2>Used material icons</h2>
+      <mat-grid-list cols="5" class="docs_icons-preview-grid">
+        <mat-grid-tile *ngFor="let icon of matIcons">
+          <div class="icon-preview">
+            <button mat-icon-button (click)="openDialog(icon, false);">
+              <mat-icon class="">{{icon}}</mat-icon>
+            </button><br />
+            <span>{{icon.replace('_',' ')}}</span>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </section>`
 })
 
 export class IconsExampleComponent {
   title = 'Icons';
+
+
   h21Icons = [
     'h21_flight_land_blue',
     'h21_flight_land_green',
@@ -54,4 +62,13 @@ export class IconsExampleComponent {
     'swap_horiz',
     'today',
   ];
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(iconName: String, isCustomIcon: boolean): void {
+    this.dialog.open(IconExampleDialogComponent, {
+      width: '600px',
+      data: { iconName: iconName, isCustomIcon: isCustomIcon }
+    });
+  }
 }

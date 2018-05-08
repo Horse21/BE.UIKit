@@ -25,21 +25,11 @@ import { SearchComponentsExampleComponent } from './examples/search-components-e
 import { TabsExampleComponent } from './examples/tabs-example.component';
 import { TooltipsExampleComponent } from './examples/tooltips-example.component';
 import { TypographyExampleComponent } from './examples/typography-example.component';
+import { IconExampleDialogComponent } from './examples/icon-example-dialog.component';
+import { FormsModule } from "@angular/forms";
 // . Examples
 
 const routes: Routes = [
-  // {path: 'style-colors', component: ColorsExampleComponent },
-  // {path: 'style-icons', component: IconsExampleComponent  },
-  // {path: 'style-layout', component: LayoutExampleComponent },
-  // {path: 'style-logotype', component: LogotypeExampleComponent },
-  // {path: 'style-typography', component: TypographyExampleComponent },
-  // {path: 'components-buttons', component: ButtonsExampleComponent },
-  // {path: 'components-forms', component: FormsExampleComponent  },
-  // {path: 'components-grid', component: GridExampleComponent },
-  // {path: 'components-search-components', component: SearchComponentsExampleComponent },
-  // {path: 'components-tabs', component: TabsExampleComponent },
-  // {path: 'components-tooltips', component: TooltipsExampleComponent },
-  // {path: 'components-images', component: ImagesExampleComponent },
   {path: 'docs', component: DocsComponent },
   {path: 'style/:', component: DocsNavigationComponent },
   {path: 'components/:', component: DocsNavigationComponent },
@@ -67,17 +57,20 @@ const routes: Routes = [
     SearchComponentsExampleComponent,
     TabsExampleComponent,
     TooltipsExampleComponent,
-    TypographyExampleComponent
+    TypographyExampleComponent,
+    IconExampleDialogComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     AppMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [IconExampleDialogComponent]
 })
 export class AppModule {
 

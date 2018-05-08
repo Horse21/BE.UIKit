@@ -231,6 +231,29 @@ button.c-h21-header_button:last-child {
   font-weight: 300;
 }
 
+
+.mat-icon.__icon-size-s {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+.mat-icon.__icon-size-m {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+.mat-icon.__icon-size-l {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+}
+.mat-icon.__icon-size-xl {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+}
+
+
 /* . docs component */
 
 .line-separator {
@@ -250,4 +273,23 @@ button.c-h21-header_button:last-child {
 .form-field-test.mat-form-field,
 .form-field-test .mat-select {
   width: 350px;
+}
+
+.code-example {
+  padding: 16px;
+  background: #F1F1F1;
+  color: #616161;
+  font-family: Courier;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0 0 16px 0;
+  min-height: 60px;
+}
+
+.mat-divider.bottom-dividier {
+  margin-bottom: 16px;
+}
+
+.__text-right {
+  text-align: right;
 }
