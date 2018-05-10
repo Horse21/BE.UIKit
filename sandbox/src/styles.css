@@ -232,22 +232,22 @@ button.c-h21-header_button:last-child {
 }
 
 
-.mat-icon.__icon-size-s {
+.mat-icon.__size-s {
   width: 16px;
   height: 16px;
   font-size: 16px;
 }
-.mat-icon.__icon-size-m {
+.mat-icon.__size-m {
   width: 24px;
   height: 24px;
   font-size: 24px;
 }
-.mat-icon.__icon-size-l {
+.mat-icon.__size-l {
   width: 32px;
   height: 32px;
   font-size: 32px;
 }
-.mat-icon.__icon-size-xl {
+.mat-icon.__size-xl {
   width: 48px;
   height: 48px;
   font-size: 48px;
@@ -285,11 +285,20 @@ button.c-h21-header_button:last-child {
   margin: 0 0 16px 0;
   min-height: 60px;
 }
+.docs_code-inline {
+  font-family: Courier;
+  font-size: 14px;
+  color: #616161;
+}
+
 
 .mat-divider.bottom-dividier {
   margin-bottom: 16px;
 }
 
 .__text-right {
-  text-align: right;
+  text-align: right !important;
+}
+.__nowrap {
+  white-space: nowrap;
 }

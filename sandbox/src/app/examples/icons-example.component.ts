@@ -5,6 +5,9 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 @Component({
   selector: 'icons-example',
   template: `
+    <div class="container" style="background: #f00;">
+      
+    </div>
     <section class="docs mat-typography">
       <h1>{{title}}</h1>
       <h2>Custom icons</h2>

@@ -18,10 +18,10 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
       <mat-grid-tile>
         <mat-radio-group [(ngModel)]="sizeVal">
           <mat-radio-button color="primary" [value]="''" [checked]="true">default</mat-radio-button><br />
-          <mat-radio-button color="primary" [value]="'__icon-size-s'">small</mat-radio-button><br />
-          <mat-radio-button color="primary" [value]="'__icon-size-m'">medium</mat-radio-button><br />
-          <mat-radio-button color="primary" [value]="'__icon-size-l'">large</mat-radio-button><br />
-          <mat-radio-button color="primary" [value]="'__icon-size-xl'">x large</mat-radio-button><br />
+          <mat-radio-button color="primary" [value]="'__size-s'">small</mat-radio-button><br />
+          <mat-radio-button color="primary" [value]="'__size-m'">medium</mat-radio-button><br />
+          <mat-radio-button color="primary" [value]="'__size-l'">large</mat-radio-button><br />
+          <mat-radio-button color="primary" [value]="'__size-xl'">x large</mat-radio-button><br />
         </mat-radio-group>
       </mat-grid-tile>
       <mat-grid-tile>

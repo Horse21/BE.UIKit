@@ -20,8 +20,9 @@
       "prefix": "app",
       "styles": [
         "../node_modules/normalize.css/normalize.css",
+        "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
         "styles.css",
-        "h21-color-theme.scss"
+        "h21-theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
