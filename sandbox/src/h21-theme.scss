@@ -301,7 +301,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
 .docs_sidebar {
   background: $h21-color-bg-dark;
-  padding: 0;
+  padding: 0 !important;
 }
 .docs_sidebar-show-hide-btns {
   display: block;
