@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from "@angular/common";
 
 @Component({
@@ -12,6 +12,7 @@ export class DocsComponent {
     this.location = location;
     this.routeLink = location.path();
   }
+
   location: Location;
   pagePath = '';
   routeLink = '';

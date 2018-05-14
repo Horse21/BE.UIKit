@@ -1,89 +1,92 @@
-<div [hidden]="routeLink != ''">
-  <div>
-    <h3>Checkbox</h3>
-    <mat-checkbox color="primary" [checked]="true">Checkbox primary style</mat-checkbox><br />
-    <mat-checkbox color="accent" [checked]="true">Checkbox secondary style</mat-checkbox>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Radio buttons</h3>
-    <mat-radio-group>
-      <mat-radio-button color="primary" [value]="'point1'">Radio button primary style</mat-radio-button>,
-      <mat-radio-button color="accent" [value]="'point2'">Radio button secondary style</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Buttons</h3>
-    <button mat-button color="primary">Primary style</button>
-    <button mat-button color="accent">Secondary style</button>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Raised Buttons</h3>
-    <button mat-raised-button color="primary">Primary style</button>
-    <button mat-raised-button color="accent">Secondary style</button>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Buttons group</h3>
-    <mat-button-toggle-group>
-      <mat-button-toggle color="primary" value="first">First button</mat-button-toggle>
-      <mat-button-toggle color="primary" value="Second">Second button</mat-button-toggle>
-      <mat-button-toggle color="primary" value="third">Third button</mat-button-toggle>
-    </mat-button-toggle-group>
-    <br /><br />
-    <mat-button-toggle-group class="mat-button-toggle-group__color-accent">
-      <mat-button-toggle color="accent" value="first">First button</mat-button-toggle>
-      <mat-button-toggle color="accent" value="Second">Second button</mat-button-toggle>
-      <mat-button-toggle color="accent" value="third">Third button</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Text input</h3>
-    <mat-form-field color="primary" class="form-field-test">
-      <input matInput placeholder="Text field, primary color">
-    </mat-form-field><br />
-    <mat-form-field color="accent" class="form-field-test">
-      <input matInput placeholder="Text field, secondary color">
-    </mat-form-field><br />
-    <mat-form-field color="accent" class="form-field-test">
-      <input matInput placeholder="Text field, secondary color">
-      <mat-icon matSuffix>flight_takeoff</mat-icon>
-    </mat-form-field>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Textarea</h3>
-    <mat-form-field color="primary" class="form-field-test">
-      <textarea matInput placeholder="Textarea, primary color"></textarea>
-    </mat-form-field><br />
-    <mat-form-field color="accent" class="form-field-test">
-      <textarea matInput placeholder="Textarea, secondary color"></textarea>
-    </mat-form-field>
-  </div>
-  <div class="line-separator">&nbsp;</div>
-  <div>
-    <h3>Select</h3>
-    <mat-form-field color="primary" class="form-field-test">
-      <mat-select placeholder="Select primary color">
-        <mat-option>None</mat-option>
-        <mat-option [value]="1">Option 1</mat-option>
-        <mat-option [value]="2">Option 2</mat-option>
-        <mat-option [value]="3">Option 3</mat-option>
-      </mat-select>
-    </mat-form-field><br />
-    <mat-form-field color="accent" class="form-field-test">
-      <mat-select placeholder="Select secondary color">
-        <mat-option>None</mat-option>
-        <mat-option [value]="1">Option 1</mat-option>
-        <mat-option [value]="2">Option 2</mat-option>
-        <mat-option [value]="3">Option 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="line-separator">&nbsp;</div>
+<!--<div [hidden]="routeLink != ''">-->
+  <!--<div>-->
+    <!--<h3>Checkbox</h3>-->
+    <!--<mat-checkbox color="primary" [checked]="true">Checkbox primary style</mat-checkbox><br />-->
+    <!--<mat-checkbox color="accent" [checked]="true">Checkbox secondary style</mat-checkbox>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Radio buttons</h3>-->
+    <!--<mat-radio-group>-->
+      <!--<mat-radio-button color="primary" [value]="'point1'">Radio button primary style</mat-radio-button>,-->
+      <!--<mat-radio-button color="accent" [value]="'point2'">Radio button secondary style</mat-radio-button>-->
+    <!--</mat-radio-group>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Buttons</h3>-->
+    <!--<button mat-button color="primary">Primary style</button>-->
+    <!--<button mat-button color="accent">Secondary style</button>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Raised Buttons</h3>-->
+    <!--<button mat-raised-button color="primary">Primary style</button>-->
+    <!--<button mat-raised-button color="accent">Secondary style</button>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Buttons group</h3>-->
+    <!--<mat-button-toggle-group>-->
+      <!--<mat-button-toggle color="primary" value="first">First button</mat-button-toggle>-->
+      <!--<mat-button-toggle color="primary" value="Second">Second button</mat-button-toggle>-->
+      <!--<mat-button-toggle color="primary" value="third">Third button</mat-button-toggle>-->
+    <!--</mat-button-toggle-group>-->
+    <!--<br /><br />-->
+    <!--<mat-button-toggle-group class="mat-button-toggle-group__color-accent">-->
+      <!--<mat-button-toggle color="accent" value="first">First button</mat-button-toggle>-->
+      <!--<mat-button-toggle color="accent" value="Second">Second button</mat-button-toggle>-->
+      <!--<mat-button-toggle color="accent" value="third">Third button</mat-button-toggle>-->
+    <!--</mat-button-toggle-group>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Text input</h3>-->
+    <!--<mat-form-field color="primary" class="form-field-test">-->
+      <!--<input matInput placeholder="Text field, primary color">-->
+    <!--</mat-form-field><br />-->
+    <!--<mat-form-field color="accent" class="form-field-test">-->
+      <!--<input matInput placeholder="Text field, secondary color">-->
+    <!--</mat-form-field><br />-->
+    <!--<mat-form-field color="accent" class="form-field-test">-->
+      <!--<input matInput placeholder="Text field, secondary color">-->
+      <!--<mat-icon matSuffix>flight_takeoff</mat-icon>-->
+    <!--</mat-form-field>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Textarea</h3>-->
+    <!--<mat-form-field color="primary" class="form-field-test">-->
+      <!--<textarea matInput placeholder="Textarea, primary color"></textarea>-->
+    <!--</mat-form-field><br />-->
+    <!--<mat-form-field color="accent" class="form-field-test">-->
+      <!--<textarea matInput placeholder="Textarea, secondary color"></textarea>-->
+    <!--</mat-form-field>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+  <!--<div>-->
+    <!--<h3>Select</h3>-->
+    <!--<mat-form-field color="primary" class="form-field-test">-->
+      <!--<mat-select placeholder="Select primary color">-->
+        <!--<mat-option>None</mat-option>-->
+        <!--<mat-option [value]="1">Option 1</mat-option>-->
+        <!--<mat-option [value]="2">Option 2</mat-option>-->
+        <!--<mat-option [value]="3">Option 3</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field><br />-->
+    <!--<mat-form-field color="accent" class="form-field-test">-->
+      <!--<mat-select placeholder="Select secondary color">-->
+        <!--<mat-option>None</mat-option>-->
+        <!--<mat-option [value]="1">Option 1</mat-option>-->
+        <!--<mat-option [value]="2">Option 2</mat-option>-->
+        <!--<mat-option [value]="3">Option 3</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+  <!--</div>-->
+  <!--<div class="line-separator">&nbsp;</div>-->
+<!--</div>-->
+<div [hidden]="routeLink != ''" class="docs_default-view">
+  <p>Component design system</p>
 </div>
 <typography-example [hidden]="routeLink != pagePath + '/style/typography'"></typography-example>
 <colors-example [hidden]="routeLink != pagePath + '/style/colors'"></colors-example>

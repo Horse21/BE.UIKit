@@ -5,6 +5,7 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 @Component({
   selector: 'icons-example',
   template: `
+<<<<<<< Updated upstream
     <div class="container" style="background: #f00;">
       
     </div>
@@ -39,6 +40,38 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
           </mat-grid-tile>
         </mat-grid-list>
       </div>
+=======
+    <section class="mat-typography">
+      <h1>{{title}}</h1>
+      <h2>Custom icons</h2>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let icon of h21Icons">
+          <figure class="docs_icon-preview">
+            <p>
+              <button mat-icon-button (click)="openDialog(icon, true);">
+                <mat-icon svgIcon="{{icon}}"></mat-icon>
+              </button>
+            </p>
+            <figcaption></figcaption>
+          </figure>
+          <span class="">{{icon.replace('_',' ')}}</span>
+        </div>
+      </div>
+      
+      <div class="line-separator"></div>
+      
+      <h2>Used material icons</h2>
+      <mat-grid-list cols="5" class="docs_icons-preview-grid">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let icon of h21Icons">
+          <div class="icon-preview">
+            <button mat-icon-button (click)="openDialog(icon, false);">
+              <mat-icon class="">{{icon}}</mat-icon>
+            </button><br />
+            <span>{{icon.replace('_',' ')}}</span>
+          </div>
+        </div>
+      </mat-grid-list>
+>>>>>>> Stashed changes
     </section>`
 })
 

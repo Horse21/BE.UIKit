@@ -2,18 +2,17 @@ import { Component, ViewChild} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { DocsComponent } from "./docs/docs.component";
-import { H21SidebarComponent } from "./h21-sidebar/h21-sidebar.component";
-
+import { DocsNavigationComponent } from "./docs-navigation/docs-navigation.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  viewProviders: [MatIconRegistry]
+  viewProviders: [MatIconRegistry],
 })
 
 export class AppComponent {
-  @ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
+  @ViewChild(DocsNavigationComponent) private docsNavigation: DocsNavigationComponent;
   @ViewChild(DocsComponent) private docs: DocsComponent;
 
   constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer) {
@@ -27,7 +26,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.subscription = this.sidebar.getEmitter().subscribe(item => this.docs.changeComponent(item));
+    this.subscription = this.docsNavigation.getEmitter().subscribe(item => this.docs.changeComponent(item));
   }
 
   title = 'Horse 21 Pro';

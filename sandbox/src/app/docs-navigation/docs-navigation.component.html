@@ -1,7 +1,6 @@
-<nav class="c-page-sidebar">
+<nav class="c-docs-navigation">
   <mat-accordion>
-
-    <mat-expansion-panel>
+    <mat-expansion-panel [ngClass]="'c-docs-navigation_mat-expansion-panel'">
       <mat-expansion-panel-header>
         <mat-panel-title>Style</mat-panel-title>
       </mat-expansion-panel-header>
@@ -13,8 +12,7 @@
         <li><a mat-button href="{{docsPagePath}}/style/logotype" (click)="changeComponent($event); false;">Logotype</a></li>
       </ul>
     </mat-expansion-panel>
-
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel [ngClass]="'c-docs-navigation_mat-expansion-panel'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>Components</mat-panel-title>
       </mat-expansion-panel-header>
@@ -28,8 +26,7 @@
         <li><a mat-button href="{{docsPagePath}}/components/images" (click)="changeComponent($event); false;">Images</a></li>
       </ul>
     </mat-expansion-panel>
-
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel [ngClass]="'c-docs-navigation_mat-expansion-panel'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>How to use</mat-panel-title>
       </mat-expansion-panel-header>
@@ -37,6 +34,13 @@
         <li><a mat-button href="#">Article</a></li>
       </ul>
     </mat-expansion-panel>
-
+    <mat-expansion-panel [ngClass]="'c-docs-navigation_mat-expansion-panel'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Demo</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li><a mat-button href="#">Search page</a></li>
+      </ul>
+    </mat-expansion-panel>
   </mat-accordion>
 </nav>

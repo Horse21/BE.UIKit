@@ -1,5 +1,4 @@
-import { Component, EventEmitter, ViewChild} from '@angular/core';
-import { DocsNavigationComponent } from "../docs-navigation/docs-navigation.component";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'h21-sidebar',
@@ -8,11 +7,5 @@ import { DocsNavigationComponent } from "../docs-navigation/docs-navigation.comp
 })
 
 export class H21SidebarComponent {
-  @ViewChild(DocsNavigationComponent) private docsNavigation: DocsNavigationComponent;
-
-  activeTab: string = 'tab-guide';
-
-  getEmitter(): EventEmitter<String> {
-    return this.docsNavigation.onChangeComponent;
-  };
+  activeTab: string = 'tab-search';
 }

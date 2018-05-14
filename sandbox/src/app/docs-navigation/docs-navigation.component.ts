@@ -23,5 +23,9 @@ export class DocsNavigationComponent {
     this.onChangeComponent.emit(link);
   }
 
+  getEmitter(): EventEmitter<String> {
+    return this.onChangeComponent;
+  };
+
   docsPagePath = '';
 }
