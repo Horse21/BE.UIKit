@@ -39,9 +39,7 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 export class IconsExampleComponent {
   title = 'Icons';
 
-
-  h21Icons = [
-    'h21_flight_land_blue',
+  allH21Icons = [    'h21_flight_land_blue',
     'h21_flight_land_green',
     'h21_flight_land_red',
     'h21_flight_takeoff_blue',
@@ -49,7 +47,7 @@ export class IconsExampleComponent {
     'h21_flight_takeoff_red'
   ];
 
-  matIcons = [
+  allMatIcons = [
     'attach_money',
     'cancel',
     'check_circle',
@@ -66,12 +64,11 @@ export class IconsExampleComponent {
     'today',
   ];
 
-  constructor(public dialog: MatDialog) {}
+  matIcons = this.allMatIcons;
+  h21Icons = this.allH21Icons;
 
-  openDialog(iconName: String, isCustomIcon: boolean): void {
-    this.dialog.open(IconExampleDialogComponent, {
-      width: '600px',
-      data: { iconName: iconName, isCustomIcon: isCustomIcon }
-    });
+  onEnter(value: string) {
+    this.matIcons = this.allMatIcons.filter(x=>x.indexOf(value.toLowerCase()) != -1);
+    this.h21Icons = this.allH21Icons.filter(x=>x.indexOf(value.toLowerCase()) != -1);
   }
 }
