@@ -10,8 +10,7 @@ import { Location } from "@angular/common";
 export class DocsComponent {
   constructor(location: Location) {
     this.location = location;
-    console.log(location.path());
-    this.routeLink = '';location.path();
+    this.routeLink = location.path();
   }
   location: Location;
   pagePath = '';
