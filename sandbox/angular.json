@@ -78,7 +78,7 @@
               "node_modules/normalize.css/normalize.css",
               "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
               "src/styles.css",
-              "src/h21-theme.scss"
+			  "projects/h21-be-ui-kit/h21-theme.scss"
             ],
             "assets": [
               "src/assets",
