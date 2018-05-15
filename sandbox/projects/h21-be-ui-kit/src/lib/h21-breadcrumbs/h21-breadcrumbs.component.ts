@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core"
-import { BreadCrumb } from "../../dto/BreadCrumb";
+import {Component, Input} from "@angular/core"
+import {Breadcrumb} from "./Breadcrumb";
 
 @Component({
   selector: 'h21-breadcrumbs',
@@ -12,7 +12,7 @@ export class H21BreadcrumbsComponent {
   @Input() lastIsLink: boolean = false;
   @Input() showHomeLink: boolean = true;
 
-  breadCrumbs: Array<BreadCrumb> = [
+	breadCrumbs: Array<Breadcrumb> = [
     {label: "test 1", url: "#"},
     {label: "test 2", url: "#"},
     {label: "test 3", url: "#"},

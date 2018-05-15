@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'h21-sidebar',
-  templateUrl: './h21-sidebar.component.html',
-  styleUrls: ['./h21-sidebar.component.css']
+	templateUrl: './h21-sidebar.component.html'
 })
 
 export class H21SidebarComponent {

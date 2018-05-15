@@ -1,8 +1,8 @@
-import { Component, ViewChild} from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { DocsComponent } from "./docs/docs.component";
-import { DocsNavigationComponent } from "./docs-navigation/docs-navigation.component";
+import {Component, ViewChild} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material';
+import {DocsComponent} from "./docs/docs.component";
+import {H21DocsNavigationComponent} from "./h21-docs-navigation/h21-docs-navigation.component";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ import { DocsNavigationComponent } from "./docs-navigation/docs-navigation.compo
 })
 
 export class AppComponent {
-  @ViewChild(DocsNavigationComponent) private docsNavigation: DocsNavigationComponent;
+	@ViewChild(H21DocsNavigationComponent) private docsNavigation: H21DocsNavigationComponent;
   @ViewChild(DocsComponent) private docs: DocsComponent;
 
   constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer) {

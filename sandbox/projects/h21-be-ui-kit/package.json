@@ -1,0 +1,12 @@
+{
+  "name": "h21-be-ui-kit",
+  "version": "0.0.1",
+  "peerDependencies": {
+	"@angular/common": "^6.0.1",
+	"@angular/core": "^6.0.1",
+	"@angular/cdk": "^6.0.2",
+	"@angular/material": "6.0.1",
+	"normalize.css": "^8.0.0",
+	"bootstrap": "4.1.1"
+  }
+}
