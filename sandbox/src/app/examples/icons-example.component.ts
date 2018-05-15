@@ -5,7 +5,6 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 @Component({
   selector: 'icons-example',
   template: `
-<<<<<<< Updated upstream
     <div class="container" style="background: #f00;">
       
     </div>
@@ -40,7 +39,7 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
           </mat-grid-tile>
         </mat-grid-list>
       </div>
-=======
+<!--
     <section class="mat-typography">
       <h1>{{title}}</h1>
       <h2>Custom icons</h2>
@@ -71,7 +70,7 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
           </div>
         </div>
       </mat-grid-list>
->>>>>>> Stashed changes
+-->
     </section>`
 })
 
