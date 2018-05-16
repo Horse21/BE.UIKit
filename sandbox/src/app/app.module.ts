@@ -6,11 +6,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './modules/app-material.module';
 import {H21DocsNavigationComponent} from './h21-docs-navigation/h21-docs-navigation.component';
 import {DocsComponent} from './docs/docs.component';
-import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
-import {H21BreadcrumbsComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
-import {H21SidebarComponent} from './h21-sidebar/h21-sidebar.component';
-import {ExampleViewerComponent} from './example-viewer/example-viewer.component';
 import {HttpClientModule} from '@angular/common/http';
+
+// H21 components .
+import { H21HeaderComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
+import { H21TopToolbarComponent } from './h21-top-toolbar/h21-top-toolbar.component';
+import { H21SidebarComponent } from './h21-sidebar/h21-sidebar.component';
+import { H21SidebarSearchComponent } from './h21-sidebar-search/h21-sidebar-search.component';
+import { H21SidebarFilterComponent } from './h21-sidebar-filter/h21-sidebar-filter.component';
+import { H21SidebarHistoryComponent } from './h21-sidebar-history/h21-sidebar-history.component';
+import { H21BreadcrumbsComponent } from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
+// . H21 components
+
 // Examples .
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
 import {ColorsExampleComponent} from './examples/colors-example.component';
@@ -28,12 +35,16 @@ import {IconExampleDialogComponent} from './examples/icon-example-dialog.compone
 import {FormsModule} from "@angular/forms";
 // . Examples
 
+// Demo pages .
+import { SearchPageDemoComponent } from "./demo/search-page-demo.component";
+// . Demo pages
+
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: H21DocsNavigationComponent },
 	{path: 'components/:', component: H21DocsNavigationComponent },
-	{path: 'demo',  component: LogotypeExampleComponent },
-	{path: 'demo/:',  component: LogotypeExampleComponent },
+	{path: 'demo',  component: SearchPageDemoComponent },
+	{path: 'demo/:',  component: SearchPageDemoComponent },
 	{path: '', redirectTo: '/', pathMatch: 'full'},
 	{path: '**', redirectTo: '/'}
 ];
@@ -42,11 +53,14 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     H21HeaderComponent,
+    H21TopToolbarComponent,
     H21SidebarComponent,
+    H21SidebarSearchComponent,
+    H21SidebarFilterComponent,
+    H21SidebarHistoryComponent,
     H21BreadcrumbsComponent,
 	H21DocsNavigationComponent,
     DocsComponent,
-    ExampleViewerComponent,
     ButtonsExampleComponent,
     ColorsExampleComponent,
     FormsExampleComponent,
@@ -59,7 +73,8 @@ const routes: Routes = [
     TabsExampleComponent,
     TooltipsExampleComponent,
     TypographyExampleComponent,
-    IconExampleDialogComponent
+    IconExampleDialogComponent,
+    SearchPageDemoComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +88,7 @@ const routes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [IconExampleDialogComponent]
 })
+
 export class AppModule {
 
 }
