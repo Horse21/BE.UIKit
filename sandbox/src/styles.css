@@ -188,7 +188,7 @@ button.c-h21-header_button:last-child {
 .logo-preview p {
   padding: 16px;
   box-sizing: border-box;
-	background: url('/projects/h21-be-ui-kit/assets/img/bg-for-transparent.png') center center repeat;
+	background: url('assets/img/bg-for-transparent.png') center center repeat;
   width: 260px;
   height: 260px;
   margin: 0 auto 16px auto;

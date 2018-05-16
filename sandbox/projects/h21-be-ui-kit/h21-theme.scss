@@ -246,7 +246,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 }
 .docs_default-view {
   height: 100%;
-  background: url('/src/assets/img/main-bg-picture.svg') center center no-repeat;
+  background: url('../../src/assets/img/main-bg-picture.svg') center center no-repeat;
   position: relative;
 
   p {
