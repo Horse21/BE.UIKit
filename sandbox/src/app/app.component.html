@@ -1,4 +1,4 @@
-<div class="docs_page-box container-fluid">
+<div class="docs_page-box container-fluid" *ngIf="!isDemo()">
   <div class="row">
     <div class="docs_sidebar col-12 col-md-1 col-lg-3">
       <div class="docs_logo-box">
@@ -22,8 +22,9 @@
     </div>
   </div>
 </div>
-
-
+<div *ngIf="isDemo()">
+	DEMO CONTENT
+</div>
 <!--<div class="page">-->
   <!--<header class="page_header-container">-->
     <!--<h21-header></h21-header>-->

@@ -29,11 +29,13 @@ import {FormsModule} from "@angular/forms";
 // . Examples
 
 const routes: Routes = [
-  {path: 'docs', component: DocsComponent },
-  {path: 'style/:', component: H21DocsNavigationComponent },
-  {path: 'components/:', component: H21DocsNavigationComponent },
-  {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: '**', redirectTo: '/'}
+	{path: 'docs', component: DocsComponent },
+	{path: 'style/:', component: H21DocsNavigationComponent },
+	{path: 'components/:', component: H21DocsNavigationComponent },
+	{path: 'demo',  component: LogotypeExampleComponent },
+	{path: 'demo/:',  component: LogotypeExampleComponent },
+	{path: '', redirectTo: '/', pathMatch: 'full'},
+	{path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
