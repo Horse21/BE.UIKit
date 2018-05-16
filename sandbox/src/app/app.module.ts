@@ -30,8 +30,8 @@ import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {path: 'docs', component: DocsComponent },
-  {path: 'style/:', component: DocsNavigationComponent },
-  {path: 'components/:', component: DocsNavigationComponent },
+  {path: 'style/:', component: H21DocsNavigationComponent },
+  {path: 'components/:', component: H21DocsNavigationComponent },
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: '**', redirectTo: '/'}
 ];
@@ -42,7 +42,7 @@ const routes: Routes = [
     H21HeaderComponent,
     H21SidebarComponent,
     H21BreadcrumbsComponent,
-	  H21DocsNavigationComponent,
+	H21DocsNavigationComponent,
     DocsComponent,
     ExampleViewerComponent,
     ButtonsExampleComponent,
