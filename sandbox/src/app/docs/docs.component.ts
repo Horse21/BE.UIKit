@@ -3,8 +3,7 @@ import { Location } from "@angular/common";
 
 @Component({
   selector: 'docs',
-  templateUrl: './docs.component.html',
-  styleUrls: ['./docs.component.css']
+  templateUrl: './docs.component.html'
 })
 
 export class DocsComponent {

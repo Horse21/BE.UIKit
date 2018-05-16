@@ -6,5 +6,6 @@ import { Component} from '@angular/core';
 })
 
 export class H21TopToolbarComponent {
-
+	selectedLanguage = 'eng';
+	selectedCurrency = 'eur';
 }

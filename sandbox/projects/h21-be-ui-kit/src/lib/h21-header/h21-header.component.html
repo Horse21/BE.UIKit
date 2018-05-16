@@ -1,57 +1,59 @@
 <div class="c-h21-header">
-  <mat-toolbar class="c-h21-header_toolbar">
-    <a class="c-h21-header_logo" mat-button href="/">
-      <mat-icon svgIcon="logo"></mat-icon>
-      <span>Horse21.Pro</span>
-    </a>
-    <span class="c-h21-header_spacer">&nbsp;</span>
-    <nav>
-      <button class="c-h21-header_button" mat-icon-button
-              #notificationBtn="matMenuTrigger"
-              [matMenuTriggerFor]="notificationMenu"
-              (mouseover)="notificationBtn.openMenu()">
-        <span class="c-h21-header_button-notification-label">2</span>
-        <mat-icon aria-label="">notifications</mat-icon>
-      </button>
-      <button class="c-h21-header_button" mat-icon-button [matMenuTriggerFor]="servicesMenu">
-        <mat-icon aria-label="">dialpad</mat-icon>
-      </button>
-      <button class="c-h21-header_button" mat-icon-button>
-        <mat-icon aria-label="">person</mat-icon>
-      </button>
-    </nav>
-  </mat-toolbar>
-  <mat-menu #servicesMenu="matMenu" yPosition="below" [overlapTrigger]="false">
-    <ng-template matMenuContent>
-      <button mat-menu-item>
-        <mat-icon>work</mat-icon>
-        <span>First project</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>watch_later</mat-icon>
-        <span>Second project</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>videocam</mat-icon>
-        <span>The third project</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>flag</mat-icon>
-        <span>Fourth, last project</span>
-      </button>
-    </ng-template>
-  </mat-menu>
+	<mat-toolbar class="c-h21-header_toolbar">
+		<a class="c-h21-header_logo" href="/">
+			<mat-icon svgIcon="logo"></mat-icon>
+			<span>Horse21.Pro</span>
+		</a>
+		<div class="w-spacer">&nbsp;</div>
+		<nav class="">
+			<button mat-icon-button matBadge="8" matBadgeColor="primary"
+					#notificationBtn="matMenuTrigger"
+					[matMenuTriggerFor]="notificationMenu"
+					(mouseover)="notificationBtn.openMenu()">
+				<mat-icon aria-label="">notifications</mat-icon>
+			</button>
+			<button mat-icon-button [matMenuTriggerFor]="servicesMenu">
+				<mat-icon aria-label="">dialpad</mat-icon>
+			</button>
+			<button mat-icon-button>
+				<mat-icon aria-label="">person</mat-icon>
+			</button>
+		</nav>
+		<span>Horse B.V. | Serhey Strovatikov</span>
+	</mat-toolbar>
 
-  <mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
-    <ng-template matMenuContent>
-      <div (mouseleave)="notificationBtn.closeMenu()">
-        <button mat-menu-item>
-          <span>First notification</span>
-        </button>
-        <button mat-menu-item>
-          <span>Second notification</span>
-        </button>
-      </div>
-    </ng-template>
-  </mat-menu>
+
+	<mat-menu #servicesMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+	<ng-template matMenuContent>
+	  <button mat-menu-item>
+		<mat-icon>work</mat-icon>
+		<span>First project</span>
+	  </button>
+	  <button mat-menu-item>
+		<mat-icon>watch_later</mat-icon>
+		<span>Second project</span>
+	  </button>
+	  <button mat-menu-item>
+		<mat-icon>videocam</mat-icon>
+		<span>The third project</span>
+	  </button>
+	  <button mat-menu-item>
+		<mat-icon>flag</mat-icon>
+		<span>Fourth, last project</span>
+	  </button>
+	</ng-template>
+	</mat-menu>
+
+	<mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+	<ng-template matMenuContent>
+	  <div (mouseleave)="notificationBtn.closeMenu()">
+		<button mat-menu-item>
+		  <span>First notification</span>
+		</button>
+		<button mat-menu-item>
+		  <span>Second notification</span>
+		</button>
+	  </div>
+	</ng-template>
+	</mat-menu>
 </div>

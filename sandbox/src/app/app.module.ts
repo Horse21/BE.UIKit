@@ -4,7 +4,7 @@ import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './modules/app-material.module';
-import {H21DocsNavigationComponent} from './h21-docs-navigation/h21-docs-navigation.component';
+import {DocsNavigationComponent} from './docs-navigation/docs-navigation.component';
 import {DocsComponent} from './docs/docs.component';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -41,8 +41,8 @@ import { SearchPageDemoComponent } from "./demo/search-page-demo.component";
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
-	{path: 'style/:', component: H21DocsNavigationComponent },
-	{path: 'components/:', component: H21DocsNavigationComponent },
+	{path: 'style/:', component: DocsNavigationComponent },
+	{path: 'components/:', component: DocsNavigationComponent },
 	{path: 'demo',  component: SearchPageDemoComponent },
 	{path: 'demo/:',  component: SearchPageDemoComponent },
 	{path: '', redirectTo: '/', pathMatch: 'full'},
@@ -59,7 +59,7 @@ const routes: Routes = [
     H21SidebarFilterComponent,
     H21SidebarHistoryComponent,
     H21BreadcrumbsComponent,
-	H21DocsNavigationComponent,
+	DocsNavigationComponent,
     DocsComponent,
     ButtonsExampleComponent,
     ColorsExampleComponent,

@@ -228,9 +228,110 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 }
 /* . mat-form-field */
 
+/* Layout . */
+html, body {
+  height: 100%;
+}
+* {
+  outline: none !important;
+}
+.page_box {
+  height: 100%;
+}
+.page_box.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+.page_header-box {
+  height: 120px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0, .2);
+}
+.page_content-box {
+  height: calc(100% - 120px);
+}
+.__has-sidebar {
+  padding-left: 65px !important;
+  position: relative;
+  overflow: hidden;
+}
+.w-spacer {
+  display: block;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.map-box {
+  width: 100%;
+  height: 100%;
+  background: #CAD2D3;
+  overflowY: scroll;
+}
+/* . Layout */
+
+/* H21-sidebar component . */
+.c-sideabr_nav {
+  height: 100%;
+  width: 65px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $h21-color-bg-dark;
+  color: white;
+  z-index: 2;
+}
+.c-sideabr_nav .mat-button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 65px;
+  width: 100%;
+  min-width: 65px;
+  display: block;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
+  border-radius: 0;
+
+  &.is-active {
+	background: $h21-color-bg-light;
+	color: #0044D6;
+  }
+  .mat-button-wrapper span {
+	display: block;
+	line-height: normal;
+  }
+}
+.c-sideabr_tabs-box {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: -475px;
+  height: 100%;
+  width: 410px;
+  background: $h21-color-bg-light;
+  box-shadow: 3px 0 21px 0 rgba(79,90,124, .40);
+  &.is-active {
+	left: 65px;
+  }
+}
+.c-sideabr_tab {
+  padding: 16px;
+  box-sizing: border-box;
+  display: none;
+  &.is-active {
+	display: block;
+  }
+}
+/* . H21-sidebar component */
 
 
-/* Layout. */
+
+
+
+
+
+/* Docs layout . */
 .docs_page-box {
   height: 100%;
 
@@ -377,17 +478,14 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
   }
 }
-/* . Layout */
+/* . Docs layout */
 
-/* Component h21-docs-navigation . */
+/* Component docs-navigation . */
 .c-docs-navigation {
 
 }
 
-/* . Component h21-docs-navigation */
-
-
-
+/* . Component docs-navigation */
 
 
 /* Custom components . */
@@ -395,7 +493,46 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   background: $h21-color-bg-dark;
   color: #FFFFFF;
   height: 60px;
+  > nav .mat-icon-button {
+	margin: 0 10px;
+  }
+  > nav .mat-icon-button:last-child {
+	margin-right: 0;
+  }
+  > span {
+	font-size: 14px;
+	font-weight: 300;
+  }
 }
+a.c-h21-header_logo {
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+	font-family: mat-font-family($h21-mat-typography);
+	font-weight: 400;
+	-moz-transition: background-color 0.1s;
+	-webkit-transition: background-color 0.1s;
+	-o-transition: background-color 0.1s;
+	transition: background-color 0.1s;
+  &:hover {
+	color: white;
+  }
+  .mat-icon {
+	padding: 8px;
+	border-radius: 50%;
+	background: #00ADF2;
+	height: 40px;
+	width: 40px;
+	vertical-align: middle;
+	margin-right: 5px;
+  }
+  > span {
+	text-transform: uppercase;
+	font-size: 14px;
+	vertical-align: middle;
+  }
+}
+
 
 .docs_color-preview__h21-color-ui-primary {
   background: $h21-color-ui-primary;

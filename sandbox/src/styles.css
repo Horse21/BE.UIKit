@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/*@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";*/
 
 html, body {
   height: 100%;
@@ -53,51 +51,7 @@ html, body {
 }
 /* . Page layout */
 
-/* h21-sidebar component . */
-.c-sideabr_nav {
-  height: 100%;
-  background: #27334D;
-  color: #FFFFFF;
-  width: 65px;
-}
-.c-sideabr_nav .mat-button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 65px;
-  width: 100%;
-  min-width: 65px;
-  display: block;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 12px;
-  font-weight: normal;
-  border-radius: 0;
-}
-.c-sideabr_nav .mat-button-wrapper span {
-  display: block;
-  line-height: normal;
-}
-.c-sideabr_nav .mat-button.is-active {
-  background: #FFFFFF;
-  color: #0044D6;
-}
-.c-sideabr_tabs-container {
-  position: absolute;
-  top: 0;
-  left: 65px;
-  height: 100%;
-  width: calc(100% - 65px);
-}
-.c-sideabr_tab {
-  padding: 16px;
-  box-sizing: border-box;
-  display: none;
-}
-.c-sideabr_tab.is-active {
-  display: block;
-}
-/* . h21-sidebar component */
+
 
 /* h21-header component . */
 a.c-h21-header_logo {
@@ -136,12 +90,6 @@ button.c-h21-header_button:last-child {
   text-align: center;
   line-height: 18px;
   font-weight: normal;
-}
-.c-h21-header_spacer {
-  display: block;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
 }
 .c-h21-header_open-menu-btn.mat-icon-button {
   margin: 10px;

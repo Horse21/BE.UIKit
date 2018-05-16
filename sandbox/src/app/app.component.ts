@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
-import {H21DocsNavigationComponent} from "./h21-docs-navigation/h21-docs-navigation.component";
+import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent {
-	@ViewChild(H21DocsNavigationComponent) private docsNavigation: H21DocsNavigationComponent;
+	@ViewChild(DocsNavigationComponent) private docsNavigation: DocsNavigationComponent;
 	@ViewChild(DocsComponent) private docs: DocsComponent;
 
 	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router) {

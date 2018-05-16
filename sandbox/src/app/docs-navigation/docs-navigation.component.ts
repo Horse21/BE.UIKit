@@ -2,10 +2,10 @@ import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
 	selector: 'h21-docs-navigation',
-	templateUrl: './h21-docs-navigation.component.html'
+	templateUrl: './docs-navigation.component.html'
 })
 
-export class H21DocsNavigationComponent {
+export class DocsNavigationComponent {
 
 	@Output() onChangeComponent: EventEmitter<string> = new EventEmitter<string>();
 
