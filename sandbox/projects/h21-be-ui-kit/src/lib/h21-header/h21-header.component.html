@@ -10,18 +10,20 @@
 					#notificationBtn="matMenuTrigger"
 					[matMenuTriggerFor]="notificationMenu"
 					(mouseover)="notificationBtn.openMenu()">
-				<mat-icon aria-label="">notifications</mat-icon>
+				<mat-icon>notifications</mat-icon>
 			</button>
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu">
-				<mat-icon aria-label="">dialpad</mat-icon>
+				<mat-icon>dialpad</mat-icon>
+			</button>
+			<button mat-icon-button (click)="openDialog();">
+				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
 			<button mat-icon-button>
-				<mat-icon aria-label="">person</mat-icon>
+				<mat-icon>person</mat-icon>
 			</button>
 		</nav>
 		<span>Horse B.V. | Serhey Strovatikov</span>
 	</mat-toolbar>
-
 
 	<mat-menu #servicesMenu="matMenu" yPosition="below" [overlapTrigger]="false">
 	<ng-template matMenuContent>

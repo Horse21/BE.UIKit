@@ -7,6 +7,7 @@ import {AppMaterialModule} from './modules/app-material.module';
 import {DocsNavigationComponent} from './docs-navigation/docs-navigation.component';
 import {DocsComponent} from './docs/docs.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 // H21 components .
 import { H21HeaderComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -32,12 +33,14 @@ import {TabsExampleComponent} from './examples/tabs-example.component';
 import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
 import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
-import {FormsModule} from "@angular/forms";
 // . Examples
 
 // Demo pages .
 import { SearchPageDemoComponent } from "./demo/search-page-demo.component";
 // . Demo pages
+
+import {H21HeaderUserSelectorDialogComponent} from './header-dialog/h21-header-user-selector-dialog.component';
+
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
@@ -75,6 +78,7 @@ const routes: Routes = [
     TypographyExampleComponent,
     IconExampleDialogComponent,
     SearchPageDemoComponent,
+	H21HeaderUserSelectorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -82,11 +86,12 @@ const routes: Routes = [
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+	ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [IconExampleDialogComponent]
+  entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
 })
 
 export class AppModule {

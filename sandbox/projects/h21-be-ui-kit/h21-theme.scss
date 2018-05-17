@@ -218,6 +218,9 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-form-field-placeholder {
   color: $h21-color-gray-light;
 }
+.mat-form-field .mat-icon {
+  color: $h21-color-gray;
+}
 .mat-select-panel.mat-primary .mat-option.mat-selected {
   background-color: mat-color($h21-mat-primary, 500);
   color: mat-color($h21-mat-accent, '500-contrast');
@@ -235,6 +238,15 @@ html, body {
 * {
   outline: none !important;
 }
+a {
+  color: $h21-color-ui-primary;
+  text-decoration: underline;
+}
+a:hover {
+  color: $h21-color-ui-primary-light;
+  text-decoration: none;
+}
+
 .page_box {
   height: 100%;
 }
@@ -564,15 +576,30 @@ a.c-h21-header_logo {
 }
 /* . Custom components */
 
-.mat-form-field .mat-icon {
-  color: $h21-color-gray;
-}
 
-a {
-  color: $h21-color-ui-primary;
-  text-decoration: underline;
+.mat-divider.modal-form-dividier {
+  margin: 16px -24px;
 }
-a:hover {
-  color: $h21-color-ui-primary-light;
-  text-decoration: none;
+.modal-form-alone-text-filed {
+  & .mat-form-field {
+	width: 100%;
+	margin-bottom: 16px;
+  }
+}
+.modal-form-vertical-checkboxes {
+  & .mat-checkbox {
+	display: block;
+	margin-bottom: 8px;
+  }
+  & .mat-checkbox:last-child {
+	margin-bottom: 0;
+  }
+}
+.modal-form-buttons-to-right {
+  text-align: right;
+
+  & .mat-button,
+  & .mat-raised-button {
+	margin-left: 16px;
+  }
 }
