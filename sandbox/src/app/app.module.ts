@@ -39,7 +39,7 @@ import {IconExampleDialogComponent} from './examples/icon-example-dialog.compone
 import { SearchPageDemoComponent } from "./demo/search-page-demo.component";
 // . Demo pages
 
-import {H21HeaderUserSelectorDialogComponent} from './header-dialog/h21-header-user-selector-dialog.component';
+import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 
 
 const routes: Routes = [
