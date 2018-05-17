@@ -15,7 +15,7 @@
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu">
 				<mat-icon>dialpad</mat-icon>
 			</button>
-			<button mat-icon-button (click)="openDialog();" *ngIf="!isPrototype">
+			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype">
 				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
 			<button mat-icon-button>
