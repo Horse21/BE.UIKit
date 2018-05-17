@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatBadge} from "@angular/material";
+import {MatBadgeModule, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {H21HeaderComponent} from "./h21-header.component";
 
 @NgModule({
@@ -10,7 +10,7 @@ import {H21HeaderComponent} from "./h21-header.component";
 		MatIconModule,
 		MatMenuModule,
 		MatToolbarModule,
-		MatBadge
+		MatBadgeModule
 	],
 	declarations: [H21HeaderComponent],
 	exports: [H21HeaderComponent]

@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {
 	MatAutocompleteModule,
+	MatBadgeModule,
 	MatButtonModule,
 	MatButtonToggleModule,
 	MatCardModule,
@@ -62,7 +63,8 @@ const dependencies = [
 	MatSnackBarModule,
 	MatTableModule,
 	MatSortModule,
-	MatPaginatorModule
+	MatPaginatorModule,
+	MatBadgeModule
 ];
 
 @NgModule({
