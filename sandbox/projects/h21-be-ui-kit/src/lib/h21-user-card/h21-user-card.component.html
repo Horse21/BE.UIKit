@@ -1,0 +1,29 @@
+<mat-card>
+	<mat-card-header>
+		<img mat-card-avatar src="{{userAvatarUrl}}" alt="" />
+		<mat-card-title>{{userName}}}</mat-card-title>
+		<mat-card-subtitle>{{userEmail}}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-actions>
+		<mat-nav-list>
+			<mat-list-item>
+				<a mat-button href="#">
+					<mat-icon>person</mat-icon>
+					<span>My profile</span>
+				</a>
+			</mat-list-item>
+			<mat-list-item>
+				<a mat-button href="#">
+					<mat-icon></mat-icon>
+					<span>Orders</span>
+				</a>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-button>
+					<mat-icon></mat-icon>
+					<span>Exit</span>
+				</button>
+			</mat-list-item>
+		</mat-nav-list>
+	</mat-card-actions>
+</mat-card>

@@ -17,6 +17,7 @@ import { H21SidebarSearchComponent } from './h21-sidebar-search/h21-sidebar-sear
 import { H21SidebarFilterComponent } from './h21-sidebar-filter/h21-sidebar-filter.component';
 import { H21SidebarHistoryComponent } from './h21-sidebar-history/h21-sidebar-history.component';
 import { H21BreadcrumbsComponent } from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
+import { H21UserCardComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component'
 // . H21 components
 
 // Examples .
@@ -62,6 +63,8 @@ const routes: Routes = [
     H21SidebarFilterComponent,
     H21SidebarHistoryComponent,
     H21BreadcrumbsComponent,
+	H21HeaderUserSelectorDialogComponent,
+	H21UserCardComponent,
 	DocsNavigationComponent,
     DocsComponent,
     ButtonsExampleComponent,
@@ -77,8 +80,7 @@ const routes: Routes = [
     TooltipsExampleComponent,
     TypographyExampleComponent,
     IconExampleDialogComponent,
-    SearchPageDemoComponent,
-	H21HeaderUserSelectorDialogComponent
+    SearchPageDemoComponent
   ],
   imports: [
     BrowserModule,

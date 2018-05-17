@@ -9,10 +9,13 @@ import {
 	MatInputModule,
 	MatFormFieldModule,
 	MatCheckboxModule,
-	MatDividerModule} from "@angular/material";
+	MatDividerModule,
+	MatCardModule,
+	MatListModule} from "@angular/material";
 import {H21HeaderComponent} from "./h21-header.component";
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 
 @NgModule({
 	imports: [
@@ -27,11 +30,14 @@ import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 		MatInputModule,
 		MatFormFieldModule,
 		MatCheckboxModule,
-		MatDividerModule
+		MatDividerModule,
+		MatCardModule,
+		MatListModule
 	],
 	declarations: [
 		H21HeaderComponent,
-		H21HeaderUserSelectorDialogComponent
+		H21HeaderUserSelectorDialogComponent,
+		H21UserCardComponent
 	],
 	exports: [H21HeaderComponent]
 })

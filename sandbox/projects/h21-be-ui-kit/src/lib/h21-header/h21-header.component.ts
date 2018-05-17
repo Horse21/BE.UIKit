@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
+import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 
 @Component({
 	selector: 'h21-header',
