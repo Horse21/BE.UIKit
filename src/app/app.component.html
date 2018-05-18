@@ -3,7 +3,9 @@
     <div class="col-12 no-gutters">
       <h21-header [isPrototype]="true"
                   (onPrototypeAuth)="prototypeAuth($event)"
-                  [username]="username"></h21-header>
+                  [username]="username"
+                  (onLogout)="logout()">
+      </h21-header>
     </div>
   </div>
 </div>

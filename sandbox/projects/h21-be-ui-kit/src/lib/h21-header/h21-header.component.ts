@@ -15,6 +15,7 @@ export class H21HeaderComponent {
 	@Input() username;
 	@Input() isPrototype = false;
 	@Output() onPrototypeAuth: EventEmitter<any> = new EventEmitter();
+	@Output() onLogout: EventEmitter<any> = new EventEmitter();
 
 	openDialog(): void {
 		var dialogRef = this.dialog.open(H21HeaderUserSelectorDialogComponent, {
@@ -26,5 +27,9 @@ export class H21HeaderComponent {
 					this.onPrototypeAuth.emit(result);
 				}
 			});
+	}
+
+	logout(): void {
+		this.onLogout.emit();
 	}
 }

@@ -18,7 +18,7 @@
 			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !username">
 				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
-			<button [hidden]="!username" mat-button [matMenuTriggerFor]="userCardMenu">
+			<button *ngIf="!!username" mat-button [matMenuTriggerFor]="userCardMenu">
 				<mat-icon>person</mat-icon>
 				<span>{{username}}</span>
 			</button>
@@ -49,7 +49,7 @@
 	<mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false">
 		<ng-template matMenuContent>
 			<div (mouseleave)="notificationBtn.closeMenu()">
-				<h21-user-card></h21-user-card>
+				<h21-user-card (onLogout)="logout()"></h21-user-card>
 			</div>
 		</ng-template>
 	</mat-menu>

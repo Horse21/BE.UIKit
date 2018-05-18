@@ -13,7 +13,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 })
 export class AppComponent {
   title = 'prototype';
-  username:string;
+  username: string;
 
   constructor(
     iconReg: MatIconRegistry,
@@ -30,7 +30,7 @@ export class AppComponent {
       .getItem<AuthData>("authData")
       .subscribe((data) => {
         console.log(data);
-        if(data) {
+        if (data) {
           this.username = data.name;
           this.permissionsService.loadPermissions(data.roles);
         }
@@ -43,7 +43,16 @@ export class AppComponent {
       roles: data.roles,
       claims: data.claims
     };
-    this.localStorage.setItem("authData", authData).subscribe( () => {} );
+    this.localStorage.setItem("authData", authData)
+      .subscribe(() => {
+      });
+    location.reload();
+  }
+
+  logout(): void {
+    this.localStorage.clear()
+      .subscribe(() => {
+      });
     location.reload();
   }
 }
