@@ -1,28 +1,24 @@
-<mat-card>
+<mat-card class="c-h21-user-card">
 	<mat-card-header>
 		<img mat-card-avatar src="{{userAvatarUrl}}" alt="" />
-		<mat-card-title>{{userName}}}</mat-card-title>
+		<mat-card-title>{{userName}}</mat-card-title>
 		<mat-card-subtitle>{{userEmail}}</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-actions>
 		<mat-nav-list>
 			<mat-list-item>
-				<a mat-button href="#">
-					<mat-icon>person</mat-icon>
-					<span>My profile</span>
-				</a>
+				<mat-icon mat-list-icon>person</mat-icon>
+				<a matLine href="#">My profile</a>
 			</mat-list-item>
+			<mat-divider></mat-divider>
 			<mat-list-item>
-				<a mat-button href="#">
-					<mat-icon></mat-icon>
-					<span>Orders</span>
-				</a>
+				<mat-icon mat-list-icon>insert_drive_file</mat-icon>
+				<a matLine href="#">Orders</a>
 			</mat-list-item>
+			<mat-divider></mat-divider>
 			<mat-list-item>
-				<button mat-button (click)="logout()">
-					<mat-icon></mat-icon>
-					<span>Exit</span>
-				</button>
+				<mat-icon mat-list-icon>exit_to_app</mat-icon>
+				<a matLine href="#" (click)="logout(); false;">Exit</a>
 			</mat-list-item>
 		</mat-nav-list>
 	</mat-card-actions>

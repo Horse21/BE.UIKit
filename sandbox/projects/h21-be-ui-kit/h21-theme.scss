@@ -138,7 +138,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 @include angular-material-theme($h21-mat-theme);
 
 
-/* mat-button . */
+// mat-button
 .mat-button {
   font-weight: normal;
 }
@@ -162,9 +162,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-button.mat-accent .mat-button-focus-overlay {
   background: none;
 }
-/* . mat-button */
 
-/* mat-raised-button . */
+// mat-raised-button
 .mat-raised-button {
   font-weight: normal;
 }
@@ -174,9 +173,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 .mat-raised-button.mat-accent:hover {
   background-color: mat-color($h21-mat-accent, 400);
 }
-/* . mat-raised-button */
 
-/* mat-button-toggle-group . */
+// mat-button-toggle-group
 .mat-button-toggle {
   color: mat-color($h21-mat-primary, 500);
   border: 1px solid mat-color($h21-mat-primary, 500);
@@ -194,7 +192,6 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   background-color: mat-color($h21-mat-primary, 500);
   font-weight: normal;
 }
-
 .mat-button-toggle-group__color-accent .mat-button-toggle {
   color: mat-color($h21-mat-accent, 500);
   border-color: mat-color($h21-mat-accent, 500);
@@ -206,9 +203,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   color: mat-color($h21-mat-accent, '500-contrast');
   background-color: mat-color($h21-mat-accent, 500);
 }
-/* . mat-button-toggle-group */
 
-/* mat-form-field . */
+// mat-form-field
 .mat-form-field.mat-primary .mat-form-field-underline {
   background-color: mat-color($h21-mat-primary, 400);
 }
@@ -229,9 +225,36 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   background-color: mat-color($h21-mat-accent, 500);
   color: mat-color($h21-mat-accent, '500-contrast');
 }
-/* . mat-form-field */
+.mat-menu-content {
+  padding: 0;
+}
 
-/* Layout . */
+// mat-icon size modifiers
+.mat-icon {
+  & .__size-s {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+  }
+  & .__size-m {
+	width: 24px;
+	height: 24px;
+	font-size: 24px;
+  }
+  & .__size-l {
+	width: 32px;
+	height: 32px;
+	font-size: 32px;
+  }
+  & .__size-xl {
+	width: 48px;
+	height: 48px;
+	font-size: 48px;
+  }
+}
+
+
+// Layout ----------------------------------------------------------
 html, body {
   height: 100%;
 }
@@ -278,9 +301,8 @@ a:hover {
   background: #CAD2D3;
   overflowY: scroll;
 }
-/* . Layout */
 
-/* H21-sidebar component . */
+// H21-sidebar component
 .c-sideabr_nav {
   height: 100%;
   width: 65px;
@@ -335,15 +357,8 @@ a:hover {
 	display: block;
   }
 }
-/* . H21-sidebar component */
 
-
-
-
-
-
-
-/* Docs layout . */
+// Docs layout
 .docs_page-box {
   height: 100%;
 
@@ -500,48 +515,130 @@ a:hover {
 /* . Component docs-navigation */
 
 
-/* Custom components . */
+// H21-header component
 .mat-toolbar.c-h21-header_toolbar {
   background: $h21-color-bg-dark;
   color: #FFFFFF;
   height: 60px;
   > nav .mat-icon-button {
 	margin: 0 10px;
+	.mat-badge-content {
+	  background: #FF0000;
+	}
   }
   > nav .mat-icon-button:last-child {
 	margin-right: 0;
   }
-  > span {
-	font-size: 14px;
-	font-weight: 300;
+  .mat-button {
+	.mat-button-wrapper > span {
+	  font-size: 14px;
+	  font-weight: 300;
+	  margin-left: 8px;
+	}
   }
 }
 a.c-h21-header_logo {
-	color: white;
 	text-decoration: none;
 	display: inline-block;
-	font-family: mat-font-family($h21-mat-typography);
-	font-weight: 400;
-	-moz-transition: background-color 0.1s;
-	-webkit-transition: background-color 0.1s;
-	-o-transition: background-color 0.1s;
-	transition: background-color 0.1s;
-  &:hover {
-	color: white;
+  	padding: 5px;
+}
+.c-h21-header-user-card-box.mat-menu-panel {
+  width: 330px;
+  max-width: 330px;
+
+  .mat-menu-content {
+	padding: 0;
   }
-  .mat-icon {
-	padding: 8px;
-	border-radius: 50%;
-	background: #00ADF2;
-	height: 40px;
-	width: 40px;
-	vertical-align: middle;
-	margin-right: 5px;
+}
+
+// H21-user-card component
+.c-h21-user-card {
+  padding: 20px 15px !important;
+
+  &.mat-card:not([class*=mat-elevation-z]) {
+	@include mat-elevation(0);
   }
-  > span {
-	text-transform: uppercase;
-	font-size: 14px;
-	vertical-align: middle;
+  .mat-card-header {
+	.mat-card-avatar {
+	  width: 56px;
+	  height: 56px;
+	  background: #27334d;
+	}
+	.mat-card-header-text {
+		margin: 0 0 0 15px;
+	}
+	.mat-card-title {
+	  color: #4f5a7c;
+	  font-weight: 300;
+	  font-size: 18px;
+	}
+	.mat-card-subtitle {
+	  color: #4f5a7c;
+	  font-weight: 700;
+	  font-size: 14px;
+	}
+  }
+  .mat-nav-list {
+	.mat-list-item {
+	  height: 32px;
+	  font-size: 13px;
+
+	  &:hover {
+		background: #f0f0f0;
+	  }
+	  .mat-icon {
+		color: #4f5a7c;
+		width: 16px;
+		height: 16px;
+		font-size: 16px;
+	  }
+	  .mat-list-text {
+		padding-left: 0 !important;
+	  }
+	  a {
+		color: #4f5a7c;
+	  }
+	}
+	.mat-divider {
+		background: #f0f0f0;
+	}
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.mat-divider.modal-form-dividier {
+  margin: 16px -24px;
+}
+.modal-form-alone-text-filed {
+  & .mat-form-field {
+	width: 100%;
+	margin-bottom: 16px;
+  }
+}
+.modal-form-vertical-checkboxes {
+  & .mat-checkbox {
+	display: block;
+	margin-bottom: 8px;
+  }
+  & .mat-checkbox:last-child {
+	margin-bottom: 0;
+  }
+}
+.modal-form-buttons-to-right {
+  text-align: right;
+
+  & .mat-button,
+  & .mat-raised-button {
+	margin-left: 16px;
   }
 }
 
@@ -573,33 +670,4 @@ a.c-h21-header_logo {
 .docs_color-preview__h21-color-bg-light {
   background: $h21-color-bg-light;
   border: 1px solid #000000;
-}
-/* . Custom components */
-
-
-.mat-divider.modal-form-dividier {
-  margin: 16px -24px;
-}
-.modal-form-alone-text-filed {
-  & .mat-form-field {
-	width: 100%;
-	margin-bottom: 16px;
-  }
-}
-.modal-form-vertical-checkboxes {
-  & .mat-checkbox {
-	display: block;
-	margin-bottom: 8px;
-  }
-  & .mat-checkbox:last-child {
-	margin-bottom: 0;
-  }
-}
-.modal-form-buttons-to-right {
-  text-align: right;
-
-  & .mat-button,
-  & .mat-raised-button {
-	margin-left: 16px;
-  }
 }

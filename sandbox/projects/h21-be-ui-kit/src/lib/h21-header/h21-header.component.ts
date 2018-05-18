@@ -13,6 +13,7 @@ export class H21HeaderComponent {
 	}
 
 	@Input() username;
+	@Input() logotypeUrl;
 	@Input() isPrototype = false;
 	@Output() onPrototypeAuth: EventEmitter<any> = new EventEmitter();
 	@Output() onLogout: EventEmitter<any> = new EventEmitter();

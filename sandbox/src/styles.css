@@ -54,23 +54,6 @@ html, body {
 
 
 /* h21-header component . */
-a.c-h21-header_logo {
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 5px;
-}
-a.c-h21-header_logo:hover {
-  color: #fff;
-}
-a.c-h21-header_logo .mat-icon {
-  padding: 8px;
-  background: #1dafec;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  margin-right: 10px;
-}
 button.c-h21-header_button {
   margin: 0 5px;
 }
@@ -182,28 +165,6 @@ button.c-h21-header_button:last-child {
 .icon-preview span {
   font-size: 14px;
   font-weight: 300;
-}
-
-
-.mat-icon.__size-s {
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
-}
-.mat-icon.__size-m {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-}
-.mat-icon.__size-l {
-  width: 32px;
-  height: 32px;
-  font-size: 32px;
-}
-.mat-icon.__size-xl {
-  width: 48px;
-  height: 48px;
-  font-size: 48px;
 }
 
 
