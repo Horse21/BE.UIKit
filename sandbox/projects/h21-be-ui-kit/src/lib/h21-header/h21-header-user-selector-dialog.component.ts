@@ -13,15 +13,16 @@ import {FormControl, Validators} from '@angular/forms';
 		</mat-form-field>
 	</div>
 	<div class="col-sm-12 modal-form-vertical-checkboxes">
-		<mat-checkbox color="primary" [checked]="">Administrator</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="">Moderator</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="">Unknown user</mat-checkbox>
+		<mat-checkbox color="primary" [checked]="hasAirBE" (change)="hasAirBE = !hasAirBE">AirBE</mat-checkbox>
+		<mat-checkbox color="primary" [checked]="isAgent" (change)="isAgent = !isAgent">Agent</mat-checkbox>
+		<mat-checkbox color="primary" [checked]="isAgencyManager" (change)="isAgencyManager = !isAgencyManager">AgencyManager</mat-checkbox>
+		<mat-checkbox color="primary" [checked]="isBranchManager" (change)="isBranchManager = !isBranchManager">BranchManager</mat-checkbox>
 	</div>
 	<div class="col-sm-12">
 		<mat-divider class="modal-form-dividier"></mat-divider>
 	</div>
 	<div class="col-sm-12 modal-form-buttons-to-right">
-		<button mat-raised-button color="accent" (click)="closeDialog()">Acсept</button>
+		<button mat-raised-button color="accent" (click)="auth()">Auth</button>
 		<button mat-raised-button color="primary" (click)="closeDialog()">Cancel</button>
 	</div>
 </div>`
@@ -30,17 +31,57 @@ import {FormControl, Validators} from '@angular/forms';
 export class H21HeaderUserSelectorDialogComponent {
 	constructor(public dialogRef: MatDialogRef<H21HeaderUserSelectorDialogComponent>) {
 	}
+
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
 
-	userName = new FormControl('', [Validators.required]);
+	hasAirBE: boolean = true;
+	isAgent: boolean = true;
+	isAgencyManager: boolean = true;
+	isBranchManager: boolean = true;
+	userName = new FormControl('Ivan Ivanov', [Validators.required]);
+
 	getErrorMessage() {
 		return this.userName.hasError('required') ? 'You must enter a value' : '';
 	}
 
 	closeDialog() {
 		this.dialogRef.close();
+	}
+
+	auth() {
+		if (!this.userName.value) {
+			return;
+		}
+		var authData: any = {
+			name: this.userName.value,
+			roles: [],
+			claims: []
+		};
+		if (this.hasAirBE) {
+			authData.roles.push('AirBE');
+		}
+		if (this.isAgent) {
+			authData.claims.push({
+				name: 'AgentId',
+				value: 2100
+			});
+		}
+		if (this.isAgencyManager) {
+			authData.claims.push({
+				name: 'AgencyManager',
+				value: 2200
+			});
+		}
+		if (this.isBranchManager) {
+			authData.claims.push({
+				name: 'BranchManager',
+				value: 2300
+			});
+		}
+
+		this.dialogRef.close(authData);
 	}
 }
 

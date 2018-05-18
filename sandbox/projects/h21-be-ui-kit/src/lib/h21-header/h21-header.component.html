@@ -15,12 +15,12 @@
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu">
 				<mat-icon>dialpad</mat-icon>
 			</button>
-			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype">
+			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !username">
 				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
-			<button mat-button [matMenuTriggerFor]="userCardMenu">
+			<button [hidden]="!username" mat-button [matMenuTriggerFor]="userCardMenu">
 				<mat-icon>person</mat-icon>
-				<span>Horse B.V. | Serhey Strovatikov</span>
+				<span>{{username}}</span>
 			</button>
 		</nav>
 	</mat-toolbar>

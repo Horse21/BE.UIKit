@@ -1,7 +1,6 @@
-import {Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
-import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 
 @Component({
 	selector: 'h21-header',
@@ -13,11 +12,19 @@ export class H21HeaderComponent {
 
 	}
 
+	@Input() username;
 	@Input() isPrototype = false;
+	@Output() onPrototypeAuth: EventEmitter<any> = new EventEmitter();
 
 	openDialog(): void {
-		this.dialog.open(H21HeaderUserSelectorDialogComponent, {
+		var dialogRef = this.dialog.open(H21HeaderUserSelectorDialogComponent, {
 			width: '600px'
 		});
+		dialogRef.afterClosed()
+			.subscribe(result => {
+				if (this.onPrototypeAuth) {
+					this.onPrototypeAuth.emit(result);
+				}
+			});
 	}
 }
