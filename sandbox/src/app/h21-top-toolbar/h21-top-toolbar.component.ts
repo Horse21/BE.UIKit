@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'h21-top-toolbar',
@@ -6,6 +6,15 @@ import { Component} from '@angular/core';
 })
 
 export class H21TopToolbarComponent {
+
+	@Output () onMenuClick: EventEmitter <void> = new EventEmitter<void>();
+
+	menuIsOpened = false;
 	selectedLanguage = 'eng';
 	selectedCurrency = 'eur';
+
+	menuClick(): void {
+		this.menuIsOpened = !this.menuIsOpened;
+		this.onMenuClick.emit();
+	}
 }

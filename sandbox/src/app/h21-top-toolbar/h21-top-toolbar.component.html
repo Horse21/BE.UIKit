@@ -1,25 +1,30 @@
-<mat-toolbar class="c-h21-top-toolbar mat-typography">
-	<button mat-icon-button class="c-h21-header_open-menu-btn">
-		<mat-icon aria-label="Header menu">menu</mat-icon>
+<mat-toolbar class="c-h21-top-toolbar">
+	<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="menuClick()" [class.is-opened]="menuIsOpened" >
+		<mat-icon class="c-h21-top-toolbar-menu-btn_open" aria-label="Open">menu</mat-icon>
+		<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
 	</button>
 
 	<div class="w-spacer">&nbsp;</div>
 
-	<mat-form-field>
+	<!--<mat-form-field appearance="fill">-->
+		<!--<mat-select  placeholder="Cart (0)"></mat-select>-->
+		<!--<mat-icon matPrefix>shopping_cart</mat-icon>-->
+	<!--</mat-form-field>-->
+
+	<mat-form-field appearance="fill">
 		<mat-select [(value)]="selectedLanguage">
-			<mat-option [value]="deu">DEU</mat-option>
-			<mat-option [value]="eng">ENG</mat-option>
-			<mat-option [value]="fra">FRA</mat-option>
-			<mat-option [value]="rus">RUS</mat-option>
+			<mat-option [value]="'deu'">DEU</mat-option>
+			<mat-option [value]="'eng'">ENG</mat-option>
+			<mat-option [value]="'fra'">FRA</mat-option>
+			<mat-option [value]="'rus'">RUS</mat-option>
 		</mat-select>
 	</mat-form-field>
 
-	<mat-form-field>
+	<mat-form-field appearance="fill">
 		<mat-select [(value)]="selectedCurrency">
-			<mat-option [value]="eur">EUR</mat-option>
-			<mat-option [value]="rub">RUR</mat-option>
-			<mat-option [value]="usd">USD</mat-option>
+			<mat-option [value]="'eur'">EUR</mat-option>
+			<mat-option [value]="'rub'">RUR</mat-option>
+			<mat-option [value]="'usd'">USD</mat-option>
 		</mat-select>
 	</mat-form-field>
-
 </mat-toolbar>
