@@ -26,7 +26,6 @@
     "core-js": "^2.5.3",
     "es6-shim": "^0.35.3",
     "h21-custom-css": "^1.0.1610",
-    "ngx-permissions": "^5.0.0",
     "normalize.css": "^7.0.0",
     "oidc-client": "^1.4.1",
     "rxjs": "^6.1.0",

@@ -5,7 +5,7 @@
 		</a>
 		<div class="w-spacer">&nbsp;</div>
 		<nav>
-			<button mat-icon-button matBadge="8" [matMenuTriggerFor]="notificationMenu">
+			<button mat-icon-button matBadge="8" [matMenuTriggerFor]="notificationMenu" *ngIf="showNotifications">
 				<mat-icon>notifications</mat-icon>
 			</button>
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu">
@@ -23,11 +23,8 @@
 
 	<mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
 		<ng-template matMenuContent>
-			<button mat-menu-item>
-				<span>First notification</span>
-			</button>
-			<button mat-menu-item>
-				<span>Second notification</span>
+			<button mat-menu-item *ngFor="let n of notifyList">
+				<span>{{n.text}}</span>
 			</button>
 		</ng-template>
 	</mat-menu>
@@ -59,14 +56,4 @@
 		</ng-template>
 	</mat-menu>
 
-	<mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
-		<ng-template matMenuContent>
-            <button mat-menu-item>
-                <span>First notification</span>
-            </button>
-            <button mat-menu-item>
-                <span>Second notification</span>
-            </button>
-		</ng-template>
-	</mat-menu>
 </div>

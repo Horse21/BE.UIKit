@@ -1,15 +1,15 @@
 <div class="container-fluid page_box">
-  <div class="row no-gutters">
+  <div class="row no-gutters page_header-box">
     <div class="col-12 no-gutters">
-      <h21-header [isPrototype]="true"
-                  (onPrototypeAuth)="prototypeAuth($event)"
-                  [username]="username"
-                  (onLogout)="logout()">
-      </h21-header>
+      <div class="col-12 no-gutters">
+        <h21-header [isPrototype]="true"
+                    (onPrototypeAuth)="prototypeAuth($event)"
+                    [username]="username"
+                    (onLogout)="logout()"
+                    [logotypeUrl]="'/assets/img/logo.svg'"
+                    [notifyList]="getNotifyList()">
+        </h21-header>
+      </div>
     </div>
   </div>
-</div>
-<div *ngxPermissionsOnly="['AirBE']"
-     style="width: 100px; height: 100px; border: 1px solid black">
-  ADMIN TEXT
 </div>

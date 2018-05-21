@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
+import { INotifyItem } from '../../sandbox/projects/h21-be-ui-kit/src/dto/inotifyItem';
+import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/services/permission-service';
 import { AuthData } from './dto/auth-data';
-import { NgxPermissionsService } from 'ngx-permissions';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
@@ -18,7 +19,6 @@ export class AppComponent {
   constructor(
     iconReg: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private permissionsService: NgxPermissionsService,
     private localStorage: LocalStorage
   ) {
     iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
@@ -32,7 +32,6 @@ export class AppComponent {
         console.log(data);
         if (data) {
           this.username = data.name;
-          this.permissionsService.loadPermissions(data.roles);
         }
       });
   }
@@ -54,5 +53,12 @@ export class AppComponent {
       .subscribe(() => {
       });
     location.reload();
+  }
+
+  getNotifyList(): INotifyItem[] {
+    return [
+      <INotifyItem>{text:'First notification'},
+      <INotifyItem>{text:'Second notification'}
+      ];
   }
 }
