@@ -1,0 +1,26 @@
+<nav class="c-21-sidebar_nav">
+	<button mat-button (click)="activeTab='tab-search'" [class.is-active]="activeTab == 'tab-search'" [disabled]="!activeTab">
+		<mat-icon>search</mat-icon>
+		<span>Search</span>
+	</button>
+	<button mat-button (click)="activeTab='tab-filter'" [class.is-active]="activeTab == 'tab-filter'" [disabled]="!activeTab">
+		<mat-icon>filter_list</mat-icon>
+		<span>Filter</span>
+	</button>
+	<button mat-button (click)="activeTab='tab-history'" [class.is-active]="activeTab == 'tab-history'" [disabled]="!activeTab">
+		<mat-icon>history</mat-icon>
+		<span>History</span>
+	</button>
+</nav>
+
+<div class="c-21-sidebar_tabs-box" [class.is-active]="visibility">
+	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-search'">
+		<div>The functional is in development</div>
+	</div>
+	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-filter'">
+		<div>The functional is in development</div>
+	</div>
+	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-history'">
+		<div>The functional is in development</div>
+	</div>
+</div>

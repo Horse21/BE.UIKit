@@ -3,7 +3,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
 	@ViewChild(DocsNavigationComponent) private docsNavigation: DocsNavigationComponent;
 	@ViewChild(DocsComponent) private docs: DocsComponent;
+	@ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
 
 	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router) {
 		iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
@@ -53,6 +55,10 @@ export class AppComponent {
 
 	isDemo(): boolean {
 		return this.router.url.indexOf('/demo') == 0;
+	}
+
+	showSidebar(): void {
+		this.sidebar.visibiltyToggle();
 	}
 
 	changeComponent(event): void {
