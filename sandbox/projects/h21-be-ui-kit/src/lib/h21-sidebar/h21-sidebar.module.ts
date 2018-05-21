@@ -13,4 +13,5 @@ import {MatButtonModule, MatIconModule} from "@angular/material";
 	exports: [H21SidebarComponent]
 })
 export class H21SidebarModule {
+
 }

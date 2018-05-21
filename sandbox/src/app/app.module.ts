@@ -11,8 +11,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 // H21 components
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
-import {H21TopToolbarComponent} from './h21-top-toolbar/h21-top-toolbar.component';
-import {H21SidebarComponent} from './h21-sidebar/h21-sidebar.component';
+import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
+import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SidebarSearchComponent} from './h21-sidebar-search/h21-sidebar-search.component';
 import {H21SidebarFilterComponent} from './h21-sidebar-filter/h21-sidebar-filter.component';
 import {H21SidebarHistoryComponent} from './h21-sidebar-history/h21-sidebar-history.component';

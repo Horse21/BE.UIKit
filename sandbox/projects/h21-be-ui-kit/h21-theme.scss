@@ -312,8 +312,9 @@ a:hover {
 
   .c-h21-top-toolbar-menu-btn {
 	color: #757575;
-	height: 60px;
-	width: 65px;
+	height: 50px;
+	width: 50px;
+	margin: 5px 8px;
 
 	.c-h21-top-toolbar-menu-btn_open {
 	  display: inline-block;
@@ -413,14 +414,12 @@ a:hover {
   width: 410px;
   background: $h21-color-bg-light;
   box-shadow: 3px 0 21px 0 rgba(79,90,124, .40);
-  opacity: 0;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
+  -moz-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
 
   &.is-active {
-	opacity: 1;
 	left: 65px;
   }
 }
@@ -444,6 +443,8 @@ a:hover {
 	margin: 0 10px;
 	.mat-badge-content {
 	  background: #FF0000;
+	  top: -6px;
+	  right: -6px;
 	}
   }
   > nav .mat-icon-button:last-child {

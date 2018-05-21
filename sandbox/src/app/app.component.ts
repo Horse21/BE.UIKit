@@ -4,7 +4,7 @@ import {MatIconRegistry} from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
 import {Router} from '@angular/router';
-import {H21SidebarComponent} from "./h21-sidebar/h21-sidebar.component";
+import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
 
 @Component({
   selector: 'app-root',
