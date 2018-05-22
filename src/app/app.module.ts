@@ -4,6 +4,8 @@ import { PrototypePermissionService } from 'app/services/prototype-permission-se
 import { H21HeaderUserSelectorDialogComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 import { H21UserCardComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/services/permission-service';
+import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
+import { H21TopToolbarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +24,9 @@ const routes: Routes = [
     AppComponent,
     H21HeaderComponent,
     H21HeaderUserSelectorDialogComponent,
-    H21UserCardComponent
+    H21UserCardComponent,
+    H21TopToolbarComponent,
+    H21SidebarComponent
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,8 @@
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",
+              "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+              "src/styles.css",
               "sandbox/projects/h21-be-ui-kit/h21-theme.scss"
             ],
             "scripts": []
@@ -74,6 +76,8 @@
             "scripts": [],
             "styles": [
               "node_modules/normalize.css/normalize.css",
+              "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+              "src/styles.css",
               "sandbox/projects/h21-be-ui-kit/h21-theme.scss"
             ],
             "assets": [
