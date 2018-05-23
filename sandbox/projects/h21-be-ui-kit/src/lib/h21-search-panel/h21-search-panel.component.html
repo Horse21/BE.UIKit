@@ -1,25 +1,28 @@
 <div class="c-h21-search-panel">
 	<!--<mat-button-toggle-group class="mat-button-toggle-group__color-primary">-->
-	<mat-button-toggle-group color="accent">
-		<mat-button-toggle value="1">Round trip</mat-button-toggle>
-		<mat-divider [vertical]="true"></mat-divider>
-		<mat-button-toggle value="2">One way</mat-button-toggle>
-		<mat-divider [vertical]="true"></mat-divider>
-		<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
-	</mat-button-toggle-group>
+	<div class="c-h21-search-panel_inner">
+		<mat-button-toggle-group color="accent">
+			<mat-button-toggle value="1">Round trip</mat-button-toggle>
+			<mat-divider [vertical]="true"></mat-divider>
+			<mat-button-toggle value="2">One way</mat-button-toggle>
+			<mat-divider [vertical]="true"></mat-divider>
+			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
+		</mat-button-toggle-group>
 
-	<fly-route-selection></fly-route-selection>
-	<fly-route-selection></fly-route-selection>
+		<fly-route-selection></fly-route-selection>
+		<fly-route-selection></fly-route-selection>
 
-	<div class="row no-gutters">
-		<div class="col-12 col-md-6 no-gutters">
-			<mat-checkbox color="primary">Direct flight</mat-checkbox>
-		</div>
-		<div class="col-12 col-md-6 no-gutters __text-right">
-			<mat-checkbox color="primary">Refundable flights</mat-checkbox>
+		<div class="row no-gutters">
+			<div class="col-12 col-md-6 no-gutters">
+				<mat-checkbox color="primary">Direct flight</mat-checkbox>
+			</div>
+			<div class="col-12 col-md-6 no-gutters __text-right">
+				<mat-checkbox color="primary">Refundable flights</mat-checkbox>
+			</div>
 		</div>
 	</div>
-
-	<button mat-button>Clear search</button>
-	<button mat-raised-button color="primary">Search</button>
+	<div class="c-h21-search-panel_bottom-attached-box __buttons-to-right">
+		<button mat-button class="__size-l">Clear search</button>
+		<button mat-raised-button class="__size-l" color="primary">Search</button>
+	</div>
 </div>

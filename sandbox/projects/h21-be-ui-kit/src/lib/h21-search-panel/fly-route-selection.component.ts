@@ -36,14 +36,14 @@ import {FormControl} from '@angular/forms';
 		  <mat-datepicker #arrivalDatePicker></mat-datepicker>
 	  </mat-form-field>
 	  
-	  <div class="c-fly-route-selection_add-remove-buttons-box">
-		  <button mat-icon-button>
-			  <mat-icon>cancel</mat-icon>
-		  </button>
-		  <button mat-icon-button>
-			  <mat-icon color="accent">add_circle</mat-icon>
-		  </button>
-	  </div>
+	  <!--<div class="c-fly-route-selection_add-remove-buttons-box">-->
+		  <!--<button mat-icon-button>-->
+			  <!--<mat-icon>cancel</mat-icon>-->
+		  <!--</button>-->
+		  <!--<button mat-icon-button>-->
+			  <!--<mat-icon color="accent">add_circle</mat-icon>-->
+		  <!--</button>-->
+	  <!--</div>-->
   </div>
   `
 })
