@@ -30,7 +30,8 @@ import {
 	MatTableModule,
 	MatTabsModule,
 	MatToolbarModule,
-	MatTooltipModule
+	MatTooltipModule,
+	MatNativeDateModule
 } from '@angular/material';
 
 const dependencies = [
@@ -64,7 +65,8 @@ const dependencies = [
 	MatTableModule,
 	MatSortModule,
 	MatPaginatorModule,
-	MatBadgeModule
+	MatBadgeModule,
+	MatNativeDateModule
 ];
 
 @NgModule({
