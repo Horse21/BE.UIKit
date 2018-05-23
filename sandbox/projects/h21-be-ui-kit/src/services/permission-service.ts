@@ -1,4 +1,8 @@
 export abstract class PermissionService {
+	abstract isAuth(): boolean;
+
+	abstract getUsername(): string;
+
 	abstract isInRole(role: string): boolean;
 
 	abstract isAgent(id: number): boolean;

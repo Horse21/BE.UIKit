@@ -8,7 +8,6 @@ import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/serv
 import { Passenger } from '../../sandbox/projects/h21-be-ui-kit/src/dto/passenger';
 import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import { AuthData } from './dto/auth-data';
-import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-root',
@@ -17,62 +16,52 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
   viewProviders: [MatIconRegistry],
 })
 export class AppComponent {
-  @ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
-  title = 'prototype';
-  username: string;
+	@ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
+	title = 'prototype';
+	username: string;
+	private permissionService: PermissionService;
 
-  constructor(
-    iconReg: MatIconRegistry,
-    sanitizer: DomSanitizer,
-    private localStorage: LocalStorage,
-    private http: HttpClient
-  ) {
-    iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
-    this.loadPermissions();
-  }
+	constructor(
+		iconReg: MatIconRegistry,
+		sanitizer: DomSanitizer,
+		private http: HttpClient,
+		permissionService: PermissionService
+	) {
+		this.permissionService = permissionService;
+		console.log(this.permissionService.isAuth());
+		if(this.permissionService.isAuth()) {
+			this.username = this.permissionService.getUsername();
+		}
+		iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
+	}
 
-  loadPermissions(): void {
-    this.localStorage
-      .getItem<AuthData>("authData")
-      .subscribe((data) => {
-        console.log(data);
-        if (data) {
-          this.username = data.name;
-        }
-      });
-  }
+	prototypeAuth(data: any): void {
+		var authData: AuthData = <AuthData> {
+			name: data.name,
+			roles: data.roles,
+			claims: data.claims
+		};
+		localStorage.setItem("authData", JSON.stringify(authData));
+		location.reload();
+	}
 
-  prototypeAuth(data: any): void {
-    var authData: AuthData = <AuthData> {
-      name: data.name,
-      roles: data.roles,
-      claims: data.claims
-    };
-    this.localStorage.setItem("authData", authData)
-      .subscribe(() => {
-      });
-    location.reload();
-  }
+	logout(): void {
+		localStorage.setItem("authData", null);
+		location.reload();
+	}
 
-  logout(): void {
-    this.localStorage.clear()
-      .subscribe(() => {
-      });
-    location.reload();
-  }
+	getNotifyList(): INotifyItem[] {
+		return [
+			<INotifyItem>{text: 'First notification'},
+			<INotifyItem>{text: 'Second notification'}
+		];
+	}
 
-  getNotifyList(): INotifyItem[] {
-    return [
-      <INotifyItem>{text:'First notification'},
-      <INotifyItem>{text:'Second notification'}
-      ];
-  }
+	showSidebar(): void {
+		this.sidebar.visibiltyToggle();
+	}
 
-  showSidebar(): void {
-    this.sidebar.visibiltyToggle();
-  }
-
-  public getPassengers(): Observable<Passenger> {
-    return this.http.get<Passenger>("../assets/prototype-storage/passengers.json");
-  }
+	public getPassengers(): Observable<Passenger> {
+		return this.http.get<Passenger>("../assets/prototype-storage/passengers.json");
+	}
 }
