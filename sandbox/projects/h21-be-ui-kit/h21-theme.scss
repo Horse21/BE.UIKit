@@ -175,33 +175,27 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 }
 
 // mat-button-toggle-group
-.mat-button-toggle {
-  color: mat-color($h21-mat-primary, 500);
+.mat-button-toggle-group {
   border: 1px solid mat-color($h21-mat-primary, 500);
-  font-weight: normal;
-  font-size: 14px;
-}
-.mat-button-toggle:not(:last-child) {
-  border-right: none;
-}
-.mat-button-toggle:hover {
-  color: mat-color($h21-mat-primary, 400);
-}
-.mat-button-toggle.mat-button-toggle-checked {
-  color: mat-color($h21-mat-primary, '500-contrast');
-  background-color: mat-color($h21-mat-primary, 500);
-  font-weight: normal;
-}
-.mat-button-toggle-group__color-accent .mat-button-toggle {
-  color: mat-color($h21-mat-accent, 500);
-  border-color: mat-color($h21-mat-accent, 500);
-}
-.mat-button-toggle-group__color-accent .mat-button-toggle:hover {
-  color: mat-color($h21-mat-accent, 400);
-}
-.mat-button-toggle-group__color-accent .mat-button-toggle.mat-button-toggle-checked {
-  color: mat-color($h21-mat-accent, '500-contrast');
-  background-color: mat-color($h21-mat-accent, 500);
+
+  .mat-button-toggle {
+	color: mat-color($h21-mat-primary, 500);
+	font-weight: normal;
+	font-size: 14px;
+	border: none;
+	background: white;
+	&:hover {
+	  color: mat-color($h21-mat-primary, 400);
+	}
+	&.mat-button-toggle-checked {
+	  color: mat-color($h21-mat-primary, '500-contrast');
+	  background-color: mat-color($h21-mat-primary, 500);
+	  font-weight: normal;
+	}
+  }
+  .mat-divider-vertical {
+	border-color: mat-color($h21-mat-primary, 500);
+  }
 }
 
 // mat-form-field
@@ -424,7 +418,7 @@ a:hover {
   }
 }
 .c-21-sidebar_tab {
-  padding: 16px;
+  padding: 30px;
   box-sizing: border-box;
   display: none;
   &.is-active {
@@ -530,6 +524,108 @@ a.c-h21-header_logo {
 	}
   }
 }
+
+//
+.c-h21-search-panel {
+  > .mat-button-toggle-group {
+	width: 100%;
+
+	.mat-button-toggle {;
+	  display: flex;
+	  -webkit-flex-basis: 100%;
+	  flex-basis: 100%;
+
+	  .mat-button-toggle-label {
+		width: 100%;
+		text-align: center;
+	  }
+	}
+  }
+}
+
+// fly-route-selection component
+.c-fly-route-selection {
+  background: white;
+  padding: 16px 30px 16px 38px;
+  box-sizing: border-box;
+  width: 100%;
+  @include mat-elevation(1);
+  border-bottom: 3px solid $h21-color-ui-primary;
+  margin: 30px 0;
+
+  .mat-form-field {
+	width: 100%;
+	.mat-icon {
+	  color: #757575;
+	}
+	.mat-input-element {
+	  font-weight: 300;
+	}
+  }
+
+  .relative-box {
+	position: relative;
+	height: 0;
+  }
+
+  .c-fly-route-selection_swap-btn {
+	position: absolute;
+	right: -30px;
+	transform: translateY(-50%);
+
+	.mat-icon {
+	  color: #757575;
+	}
+  }
+
+  .c-fly-route-selection_route-matker {
+	height: 57px;
+	width: 2px;
+	position: absolute;
+	left: -20px;
+	border-left: 2px dotted #cdcbcb;
+	transform: translateY(-33px);
+
+	&::before,
+	&::after {
+	  position: absolute;
+	  left: -7px;
+	  display: block;
+	  content: '';
+	  width: 12px;
+	  height: 12px;
+	  background: white;
+	  border: 2px solid black;
+	  -webkit-border-radius: 50%;
+	  -moz-border-radius: 50%;
+	  border-radius: 50%;
+	}
+	&::before {
+	  top: -10px;
+	}
+	&::after {
+	  bottom: -10px;
+	}
+  }
+  .c-fly-route-selection_add-remove-buttons-box {
+	position: absolute;
+	bottom: 0;
+	height: 0;
+	.mat-button {
+	  position: relative;
+	  float: left;
+	}
+  }
+}
+
+// Common classes
+.__text-right {
+  text-align: right !important;
+}
+
+
+
+
 
 
 
