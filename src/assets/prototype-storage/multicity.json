@@ -1,0 +1,67 @@
+[{
+    "DepartureDateTime": "2018-11-10T04:45:00",
+    "ArrivalDateTime": "2018-11-10T07:15:00",
+    "StopQuantity": 0,
+    "FlightNumber": "294",
+    "ResBookDesigCode": "W",
+    "ElapsedTime": 150,
+    "DepartureAirport": {
+        "LocationCode": "ROV",
+        "content": ""
+    },
+    "ArrivalAirport": {
+        "LocationCode": "IST",
+        "TerminalID": "I",
+        "content": ""
+    }
+}, {
+    "DepartureDateTime": "2018-11-10T13:40:00",
+    "ArrivalDateTime": "2018-11-10T16:50:00",
+    "StopQuantity": 0,
+    "FlightNumber": "9",
+    "ResBookDesigCode": "W",
+    "ElapsedTime": 850,
+    "DepartureAirport": {
+        "LocationCode": "IST",
+        "TerminalID": "I",
+        "content": ""
+    },
+    "ArrivalAirport": {
+        "LocationCode": "LAX",
+        "TerminalID": "B",
+        "content": ""
+    }
+},{
+    "DepartureDateTime": "2018-11-11T18:30:00",
+    "ArrivalDateTime": "2018-11-12T18:35:00",
+    "StopQuantity": 0,
+    "FlightNumber": "10",
+    "ResBookDesigCode": "W",
+    "ElapsedTime": 785,
+    "DepartureAirport": {
+        "LocationCode": "LAX",
+        "TerminalID": "B",
+        "content": ""
+    },
+    "ArrivalAirport": {
+        "LocationCode": "IST",
+        "TerminalID": "I",
+        "content": ""
+    }
+}, {
+    "DepartureDateTime": "2018-11-13T01:05:00",
+    "ArrivalDateTime": "2018-11-13T03:20:00",
+    "StopQuantity": 0,
+    "FlightNumber": "293",
+    "ResBookDesigCode": "W",
+    "ElapsedTime": 135,
+    "DepartureAirport": {
+        "LocationCode": "IST",
+        "TerminalID": "I",
+        "content": ""
+    },
+    "ArrivalAirport": {
+        "LocationCode": "ROV",
+        "content": ""
+    }
+}]
