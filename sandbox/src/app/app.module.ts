@@ -48,47 +48,47 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    H21HeaderComponent,
-    H21TopToolbarComponent,
-    H21SidebarComponent,
-    H21SearchPanelComponent,
-	FlyRouteSelectionComponent,
-    H21SidebarFilterPanelComponent,
-    H21SidebarHistoryPanelComponent,
-    H21BreadcrumbsComponent,
-	H21HeaderUserSelectorDialogComponent,
-	H21UserCardComponent,
-	H21RightFloatingContainerComponent,
-	DocsNavigationComponent,
-    DocsComponent,
-    ButtonsExampleComponent,
-    ColorsExampleComponent,
-    FormsExampleComponent,
-    GridExampleComponent,
-    IconsExampleComponent,
-    ImagesExampleComponent,
-    LayoutExampleComponent,
-    LogotypeExampleComponent,
-    SearchComponentsExampleComponent,
-    TabsExampleComponent,
-    TooltipsExampleComponent,
-    TypographyExampleComponent,
-    IconExampleDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    AppMaterialModule,
-    HttpClientModule,
-    FormsModule,
-	ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
+	declarations: [
+		AppComponent,
+		H21HeaderComponent,
+		H21TopToolbarComponent,
+		H21SidebarComponent,
+		H21SearchPanelComponent,
+		FlyRouteSelectionComponent,
+		H21SidebarFilterPanelComponent,
+		H21SidebarHistoryPanelComponent,
+		H21BreadcrumbsComponent,
+		H21HeaderUserSelectorDialogComponent,
+		H21UserCardComponent,
+		H21RightFloatingContainerComponent,
+		DocsNavigationComponent,
+		DocsComponent,
+		ButtonsExampleComponent,
+		ColorsExampleComponent,
+		FormsExampleComponent,
+		GridExampleComponent,
+		IconsExampleComponent,
+		ImagesExampleComponent,
+		LayoutExampleComponent,
+		LogotypeExampleComponent,
+		SearchComponentsExampleComponent,
+		TabsExampleComponent,
+		TooltipsExampleComponent,
+		TypographyExampleComponent,
+		IconExampleDialogComponent
+	],
+	imports: [
+		BrowserModule,
+		RouterModule.forRoot(routes),
+		BrowserAnimationsModule,
+		AppMaterialModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule
+	],
+	providers: [],
+	bootstrap: [AppComponent],
+	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
 })
 
 export class AppModule {

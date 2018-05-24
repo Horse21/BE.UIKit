@@ -1,5 +1,9 @@
-import {Component} from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import {FormControl} from '@angular/forms';
+import { map, startWith, debounceTime } from 'rxjs/internal/operators';
+import { City } from '../../dto/city';
+import { Observable } from 'rxjs/index';
+import { VocabularyService } from '../../services/vocabulary-service';
 // import {MomentDateAdapter} from '@angular/material-moment-adapter';
 // import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
@@ -8,7 +12,7 @@ import {FormControl} from '@angular/forms';
   template: `
   <div class="c-fly-route-selection">
 	  <mat-form-field color="primary" class="form-field-test">
-		  <input type="text" matInput placeholder="From" [formControl]="citiesAutocomplete" [matAutocomplete]="cities">
+		  <input type="text" matInput placeholder="From" [formControl]="cityFromControl" [matAutocomplete]="citiesAutocomplete">
 		  <mat-icon matSuffix>flight_takeoff</mat-icon>
 	  </mat-form-field>
 	  <div class="relative-box">
@@ -18,16 +22,15 @@ import {FormControl} from '@angular/forms';
 		  </button>
 	  </div>
 	  <mat-form-field color="primary" class="form-field-test">
-		  <input type="text" matInput placeholder="To" [formControl]="citiesAutocomplete" [matAutocomplete]="cities">
+		  <input type="text" matInput placeholder="To" [formControl]="cityToControl" [matAutocomplete]="citiesAutocomplete">
 		  <mat-icon matSuffix>flight_land</mat-icon>
 	  </mat-form-field>
-	  <mat-autocomplete #cities="matAutocomplete">
-		  <mat-option [value]="'London'">London</mat-option>
-		  <mat-option [value]="'Saint Petersburg'">Saint Petersburg</mat-option>
-		  <mat-option [value]="'Berlin'">Berlin</mat-option>
-		  <mat-option [value]="'Moscow'">Moscow</mat-option>
+	  <mat-autocomplete #citiesAutocomplete="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">
+		  <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+			  {{ city.name }}
+		  </mat-option>
 	  </mat-autocomplete>
-
+	  
 	  <mat-form-field>
 		  <input matInput [matDatepicker]="arrivalDatePicker" placeholder="Arrival Date" >
 		  <mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">
@@ -47,8 +50,37 @@ import {FormControl} from '@angular/forms';
   </div>
   `
 })
-export class FlyRouteSelectionComponent {
-	citiesAutocomplete: FormControl = new FormControl();
+export class FlyRouteSelectionComponent implements OnInit {
+	cityFromControl: FormControl = new FormControl();
+	cityToControl: FormControl = new FormControl();
+	filteredCities: Observable<City[]>;
+
+	constructor(private _vocabulary: VocabularyService) {
+	}
+
+	ngOnInit() {
+		this.cityFromControl.valueChanges.subscribe(value => {
+			this.filteredCities = this._vocabulary.getCities(value);
+		});
+
+		this.cityToControl.valueChanges.subscribe(value => {
+			this.filteredCities = this._vocabulary.getCities(value);
+		});
+	}
+
+	displayCity(city: City): string {
+		return city ? city.name : null;
+	}
+
+	@Output('cityFrom')
+	get cityFrom(): City {
+		return this.cityFromControl.value;
+	}
+
+	@Output('cityTo')
+	get cityTo(): City {
+		return this.cityToControl.value;
+	}
 }
 
 

@@ -28,7 +28,6 @@ export class AppComponent {
 		permissionService: PermissionService
 	) {
 		this.permissionService = permissionService;
-		console.log(this.permissionService.isAuth());
 		if(this.permissionService.isAuth()) {
 			this.username = this.permissionService.getUsername();
 		}
