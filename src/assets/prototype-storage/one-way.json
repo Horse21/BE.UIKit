@@ -1,4 +1,4 @@
-[{
+{
     "DepartureDateTime": "2018-11-10T07:25:00+03:00",
     "ArrivalDateTime": "2018-11-10T08:50:00+03:00",
     "FlightNumber": "2912",
@@ -14,4 +14,4 @@
         "TerminalID": "2",
         "content": ""
     }
-}]
+}
