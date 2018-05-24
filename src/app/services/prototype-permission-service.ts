@@ -1,22 +1,36 @@
 import { Injectable } from '@angular/core';
+import { AuthData } from 'app/dto/auth-data';
 import { PermissionService } from '../../../sandbox/projects/h21-be-ui-kit/src/services/permission-service';
 
 @Injectable()
 export class PrototypePermissionService implements PermissionService {
-  isInRole(role: string): boolean {
-    console.log('is n role');
-    return true;
-  }
+	private authData: AuthData;
 
-  isAgent(id: number): boolean {
-    return true;
-  }
+	constructor() {
+		this.authData = JSON.parse(localStorage.getItem("authData"));
+	}
 
-  isAgencyManager(id: number): boolean {
-    return true;
-  }
+	public isAuth(): boolean {
+		return !!this.authData;
+	}
 
-  isBranchManager(id: number): boolean {
-    return true;
-  }
+	public getUsername(): string {
+		return this.isAuth() ? this.authData.name : null;
+	}
+
+	public isInRole(role: string): boolean {
+		return true;
+	}
+
+	public isAgent(id: number): boolean {
+		return true;
+	}
+
+	public isAgencyManager(id: number): boolean {
+		return true;
+	}
+
+	public isBranchManager(id: number): boolean {
+		return true;
+	}
 }

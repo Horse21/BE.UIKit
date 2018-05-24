@@ -13,9 +13,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
 import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
-import {H21SidebarSearchComponent} from './h21-sidebar-search/h21-sidebar-search.component';
-import {H21SidebarFilterComponent} from './h21-sidebar-filter/h21-sidebar-filter.component';
-import {H21SidebarHistoryComponent} from './h21-sidebar-history/h21-sidebar-history.component';
+import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
+import {FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/fly-route-selection.component";
+import {H21SidebarFilterPanelComponent} from './h21-sidebar-filter-panel/h21-sidebar-filter-panel.component';
+import {H21SidebarHistoryPanelComponent} from './h21-sidebar-history-panel/h21-sidebar-history-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightFloatingContainerComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-floating-container/h21-right-floating-container.component';
@@ -36,6 +37,7 @@ import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
 import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
 
+
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
@@ -51,9 +53,10 @@ const routes: Routes = [
     H21HeaderComponent,
     H21TopToolbarComponent,
     H21SidebarComponent,
-    H21SidebarSearchComponent,
-    H21SidebarFilterComponent,
-    H21SidebarHistoryComponent,
+    H21SearchPanelComponent,
+	FlyRouteSelectionComponent,
+    H21SidebarFilterPanelComponent,
+    H21SidebarHistoryPanelComponent,
     H21BreadcrumbsComponent,
 	H21HeaderUserSelectorDialogComponent,
 	H21UserCardComponent,
