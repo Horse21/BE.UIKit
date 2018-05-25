@@ -88,7 +88,7 @@ const routes: Routes = [
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [{provide: VocabularyService, useClass: FakeVocabularyService}],
+	providers: [{provide: VocabularyService, useValue: new FakeVocabularyService()}],
 	bootstrap: [AppComponent],
 	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
 })

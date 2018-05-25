@@ -54,9 +54,8 @@ export class FlyRouteSelectionComponent implements OnInit {
 	cityFromControl: FormControl = new FormControl();
 	cityToControl: FormControl = new FormControl();
 	filteredCities: Observable<City[]>;
-	_vocabulary: VocabularyService = this.injector.get(VocabularyService);
 
-	constructor(private injector:Injector) {
+	constructor(private _vocabulary: VocabularyService) {
 	}
 
 	ngOnInit() {
