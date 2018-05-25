@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
 // import {MomentDateAdapter} from '@angular/material-moment-adapter';
 // import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -12,7 +12,7 @@ import {FormControl} from '@angular/forms';
 		  <mat-icon matSuffix>flight_takeoff</mat-icon>
 	  </mat-form-field>
 	  <div class="relative-box">
-		  <div class="c-fly-route-selection_route-matker"></div>
+		  <div class="c-fly-route-selection_route-marker route-marker__route-num-{{routeNumber}}"></div>
 		  <button mat-icon-button class="c-fly-route-selection_swap-btn">
 			  <mat-icon>swap_vert</mat-icon>
 		  </button>
@@ -36,18 +36,21 @@ import {FormControl} from '@angular/forms';
 		  <mat-datepicker #arrivalDatePicker></mat-datepicker>
 	  </mat-form-field>
 	  
-	  <!--<div class="c-fly-route-selection_add-remove-buttons-box">-->
-		  <!--<button mat-icon-button>-->
-			  <!--<mat-icon>cancel</mat-icon>-->
-		  <!--</button>-->
-		  <!--<button mat-icon-button>-->
-			  <!--<mat-icon color="accent">add_circle</mat-icon>-->
-		  <!--</button>-->
-	  <!--</div>-->
+	  <div class="c-fly-route-selection_add-remove-buttons-box" *ngIf="showAddRemoveButtons == true">
+		  <button mat-icon-button class="c-fly-route-selection_remove-button">
+			  <mat-icon>cancel</mat-icon>
+		  </button>
+		  <button mat-icon-button class="c-fly-route-selection_add-button">
+			  <mat-icon>add_circle</mat-icon>
+		  </button>
+	  </div>
   </div>
   `
 })
 export class FlyRouteSelectionComponent {
+	@Input() routeNumber = 1;
+	@Input() showAddRemoveButtons = false;
+
 	citiesAutocomplete: FormControl = new FormControl();
 }
 

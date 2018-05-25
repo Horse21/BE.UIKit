@@ -15,7 +15,7 @@ import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-t
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
 import {FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/fly-route-selection.component";
-import {H21SidebarFilterPanelComponent} from './h21-sidebar-filter-panel/h21-sidebar-filter-panel.component';
+import {H21FilterPanelComponent} from './h21-filter-panel/h21-filter-panel.component';
 import {H21SidebarHistoryPanelComponent} from './h21-sidebar-history-panel/h21-sidebar-history-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
@@ -55,7 +55,7 @@ const routes: Routes = [
     H21SidebarComponent,
     H21SearchPanelComponent,
 	FlyRouteSelectionComponent,
-    H21SidebarFilterPanelComponent,
+    H21FilterPanelComponent,
     H21SidebarHistoryPanelComponent,
     H21BreadcrumbsComponent,
 	H21HeaderUserSelectorDialogComponent,

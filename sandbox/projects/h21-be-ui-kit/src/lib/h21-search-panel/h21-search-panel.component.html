@@ -9,14 +9,39 @@
 			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
 		</mat-button-toggle-group>
 
-		<fly-route-selection></fly-route-selection>
-		<fly-route-selection></fly-route-selection>
+		<div class="row" style="margin-top: 30px;">
+			<div class="col-12 col-md-6">
+				<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_passangers-combobox">
+					<mat-icon matPrefix>group</mat-icon>
+					<mat-select placeholder="Passangers">
+						<mat-optgroup [label]="'Passangers'">
+						</mat-optgroup>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-12 col-md-6">
+				<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_preferred-class-combobox">
+					<mat-icon matPrefix>attach_money</mat-icon>
+					<mat-select placeholder="Preferred class" panelClass="c-h21-search-panel_preferred-class-combobox-panel">
+						<mat-optgroup [label]="'Preferred class'">
+							<mat-option [value]="1" >Economy</mat-option>
+							<mat-option [value]="2">Premium economy</mat-option>
+							<mat-option [value]="3">Business</mat-option>
+							<mat-option [value]="3">First class</mat-option>
+						</mat-optgroup>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<fly-route-selection [routeNumber]="'1'"></fly-route-selection>
+		<fly-route-selection [routeNumber]="'2'" [showAddRemoveButtons]="true"></fly-route-selection>
 
 		<div class="row no-gutters">
-			<div class="col-12 col-md-6 no-gutters">
+			<div class="col-12 col-md-6">
 				<mat-checkbox color="primary">Direct flight</mat-checkbox>
 			</div>
-			<div class="col-12 col-md-6 no-gutters __text-right">
+			<div class="col-12 col-md-6 __text-right">
 				<mat-checkbox color="primary">Refundable flights</mat-checkbox>
 			</div>
 		</div>
@@ -25,4 +50,7 @@
 		<button mat-button class="__size-l">Clear search</button>
 		<button mat-raised-button class="__size-l" color="primary">Search</button>
 	</div>
+</div>
+<div class="c-h21-search-panel__search-result">
+
 </div>
