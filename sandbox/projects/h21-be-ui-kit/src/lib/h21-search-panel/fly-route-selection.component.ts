@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Injector, OnInit, Output } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { map, startWith, debounceTime } from 'rxjs/internal/operators';
 import { City } from '../../dto/city';
@@ -54,8 +54,9 @@ export class FlyRouteSelectionComponent implements OnInit {
 	cityFromControl: FormControl = new FormControl();
 	cityToControl: FormControl = new FormControl();
 	filteredCities: Observable<City[]>;
+	_vocabulary: VocabularyService = this.injector.get(VocabularyService);
 
-	constructor(private _vocabulary: VocabularyService) {
+	constructor(private injector:Injector) {
 	}
 
 	ngOnInit() {
