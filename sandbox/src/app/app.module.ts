@@ -1,5 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FakeVocabularyService } from 'services/fake-vocabulary-service';
+import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -86,7 +88,7 @@ const routes: Routes = [
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [],
+	providers: [{provide: VocabularyService, useClass: FakeVocabularyService}],
 	bootstrap: [AppComponent],
 	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
 })
