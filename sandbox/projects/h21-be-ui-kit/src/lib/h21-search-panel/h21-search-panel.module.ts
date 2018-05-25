@@ -7,7 +7,7 @@ import {
 	MatButtonToggleModule,
 	MatCheckboxModule, MatDatepickerModule,
 	MatDividerModule, MatFormFieldModule,
-	MatIconModule, MatOptionModule
+	MatIconModule, MatOptionModule, MatSelectModule
 } from "@angular/material";
 import {FlyRouteSelectionComponent} from "./fly-route-selection.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -26,6 +26,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 		MatDatepickerModule,
 		FormsModule,
 		ReactiveFormsModule,
+		MatSelectModule
 	],
 	declarations: [H21SearchPanelComponent, FlyRouteSelectionComponent],
 	exports: [H21SearchPanelComponent]
