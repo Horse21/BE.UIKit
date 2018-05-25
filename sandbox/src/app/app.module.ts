@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { FakeVocabularyService } from 'services/fake-vocabulary-service';
+import { FakeVocabularyService } from '../services/fake-vocabulary-service';
 import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
