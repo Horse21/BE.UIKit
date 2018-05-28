@@ -4,6 +4,17 @@
 		<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
 	</button>
 
+	<mat-button-toggle-group color="accent">
+		<mat-button-toggle value="1" [checked]="true">List</mat-button-toggle>
+		<mat-divider [vertical]="true"></mat-divider>
+		<mat-button-toggle value="2">Map</mat-button-toggle>
+	</mat-button-toggle-group>
+
+	<div class="c-h21-top-toolbar-search-result-caption">
+		<span class="c-h21-top-toolbar-search-result-caption_large-label">London (Any) to - Barcelona (BCN) 2 flights</span>
+		<span class="c-h21-top-toolbar-search-result-caption_small-label">Fri 18 MAy - Fri 25 MAy 1 adult. Economy</span>
+	</div>
+
 	<div class="w-spacer">&nbsp;</div>
 
 	<!--<mat-form-field appearance="fill">-->

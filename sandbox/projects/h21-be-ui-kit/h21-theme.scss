@@ -150,7 +150,6 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 // mat-button
 .mat-button {
   font-weight: normal;
-  color: #4f5a7c;
   &.__size-l {
 	font-size: 18px;
 	padding-left: 30px;
@@ -345,6 +344,31 @@ a:hover {
 	height: 60px;
 	padding-left: 0;
   }
+  .mat-button-toggle-group {
+	@include mat-elevation(0);
+	margin-left: 30px;
+	.mat-button-toggle-label-content {
+	  padding-left: 30px;
+	  padding-right: 30px;
+	}
+  }
+
+  .c-h21-top-toolbar-search-result-caption {
+	line-height: 1.1em;
+	margin-left: 200px;
+	font-weight: 400;
+
+	.c-h21-top-toolbar-search-result-caption_large-label {
+	  font-size: 18px;
+	  color: #27334d;
+	  display: block;
+	}
+	.c-h21-top-toolbar-search-result-caption_small-label {
+	  font-size: 12px;
+	  color: $h21-color-ui-primary;
+	  display: block;
+	}
+  }
 
   .c-h21-top-toolbar-menu-btn {
 	color: #757575;
@@ -516,7 +540,7 @@ a.c-h21-header_logo {
   }
 }
 
-// H21-user-card component
+// h21-user-card component
 .c-h21-user-card {
   padding: 20px 15px !important;
 
@@ -570,7 +594,7 @@ a.c-h21-header_logo {
   }
 }
 
-// c-h21-search-panel component
+// h21-search-panel component
 .c-h21-search-panel {
   height: 100%;
 
@@ -585,9 +609,13 @@ a.c-h21-header_logo {
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	.mat-button {
+	  color: #4f5a7c;
+	}
   }
   .c-h21-search-panel_inner > .mat-button-toggle-group {
 	width: 100%;
+	margin: 30px 0 0 0;
 
 	.mat-button-toggle {;
 	  display: flex;
@@ -601,9 +629,144 @@ a.c-h21-header_logo {
 	}
   }
 }
-.c-h21-search-panel__search-result {
-
+.c-21-sidebar_search-result-box {
+  height: 100%;
+  width: calc(100% - 465px);
+  position: absolute;
+  left: 465px;
+  top: 0;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 3px 0 21px 0 rgba(79,90,124, .40);
 }
+
+// h21-search-result component
+.c-h21-search-result {
+  .mat-tab-label {
+	height: 52px;
+	width: 33.3333%;
+	max-width: 300px;
+	opacity: 1;
+
+	&.mat-tab-label-active {
+	  background-color: #e4ebfb;
+
+	  .c-h21-search-result-tab-icon,
+	  .c-h21-search-result-tab-label_name {
+		color: $h21-color-ui-primary;
+	  }
+	}
+  }
+}
+.c-h21-search-result_tab {
+  display: table;
+  .c-h21-search-result-tab-label {
+	display: table-cell;
+	height: 52px;
+	vertical-align: middle;
+	text-align: left;
+	padding-right: 24px;
+	width: 99%;
+
+	.c-h21-search-result-tab-label_name {
+	  display: block;
+	  font-size: 14px;
+	  text-transform: uppercase;
+	  color: #4d4d4e;
+	}
+	.c-h21-search-result-tab-label_price {
+	  font-size: 12px;
+	  color: #4d4d4e;
+	}
+	.c-h21-search-result-tab-label_time {
+	  font-size: 12px;
+	  color: #4d4d4e;
+	}
+  }
+  .c-h21-search-result-tab-icon {
+	display: table-cell;
+	height: 52px;
+	vertical-align: middle;
+	width: 1%;
+	color: #757575;
+  }
+}
+.c-h21-search-result_tab-content {
+  padding: 16px;
+}
+
+// h21-search-result-row component
+.c-h21-search-result-row {
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  background: white;
+  @include mat-elevation(3);
+  margin: 16px 0;
+
+  .c-h21-search-result-row_bottom {
+	> div {
+	  padding: 16px !important;
+	}
+  }
+  .c-h21-search-result-row_buttons-box {
+	text-align: right;
+	> button {
+	  margin-left: 16px;
+	}
+  }
+}
+
+.c-h21-search-result-row_flight {
+
+  .c-h21-search-result-row_large-label {
+	color: #4f5a7c;
+	font-size: 20px;
+	font-weight: 500;
+	display: block;
+	text-align: center;
+  }
+  .c-h21-search-result-row_small-label {
+	color: #606b8d;
+	font-size: 14px;
+	display: block;
+	text-align: center
+  }
+  .c-h21-search-result-row_price {
+	font-size: 24px;
+	font-weight: 500;
+	color: #4f5a7c;
+  }
+  .c-h21-search-result-row_transfer-indicator {
+	height: 1px;
+	border-top: 1px solid #4f5a7c;
+	margin: 10px;
+	position: relative;
+
+	&::before,
+	&::after {
+	  display: block;
+	  content: '';
+	  position: absolute;
+	  top: -6px;
+	  width: 11px;
+	  height: 11px;
+	  border: 1px solid #4f5a7c;
+	  border-radius: 50%;
+	  background: white;
+	}
+	&::before {
+	  left: -10px;
+	}
+	&::after {
+	  right: -10px;
+	}
+  }
+}
+
+
+
+
+
 
 
 // fly-route-selection component

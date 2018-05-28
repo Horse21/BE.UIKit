@@ -1,15 +1,7 @@
 <div class="c-h21-search-panel">
 	<!--<mat-button-toggle-group class="mat-button-toggle-group__color-primary">-->
 	<div class="c-h21-search-panel_inner">
-		<mat-button-toggle-group color="accent">
-			<mat-button-toggle value="1">Round trip</mat-button-toggle>
-			<mat-divider [vertical]="true"></mat-divider>
-			<mat-button-toggle value="2">One way</mat-button-toggle>
-			<mat-divider [vertical]="true"></mat-divider>
-			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
-		</mat-button-toggle-group>
-
-		<div class="row" style="margin-top: 30px;">
+		<div class="row">
 			<div class="col-12 col-md-6">
 				<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_passangers-combobox">
 					<mat-icon matPrefix>group</mat-icon>
@@ -34,6 +26,14 @@
 			</div>
 		</div>
 
+		<mat-button-toggle-group color="accent">
+			<mat-button-toggle value="1">Round trip</mat-button-toggle>
+			<mat-divider [vertical]="true"></mat-divider>
+			<mat-button-toggle value="2">One way</mat-button-toggle>
+			<mat-divider [vertical]="true"></mat-divider>
+			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
+		</mat-button-toggle-group>
+
 		<fly-route-selection [routeNumber]="'1'"></fly-route-selection>
 		<fly-route-selection [routeNumber]="'2'" [showAddRemoveButtons]="true"></fly-route-selection>
 
@@ -50,7 +50,4 @@
 		<button mat-button class="__size-l">Clear search</button>
 		<button mat-raised-button class="__size-l" color="primary">Search</button>
 	</div>
-</div>
-<div class="c-h21-search-panel__search-result">
-
 </div>

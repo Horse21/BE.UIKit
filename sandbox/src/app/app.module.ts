@@ -17,6 +17,8 @@ import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-t
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
 import {FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/fly-route-selection.component";
+import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
+import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
 import {H21FilterPanelComponent} from './h21-filter-panel/h21-filter-panel.component';
 import {H21SidebarHistoryPanelComponent} from './h21-sidebar-history-panel/h21-sidebar-history-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
@@ -56,6 +58,8 @@ const routes: Routes = [
 		H21TopToolbarComponent,
 		H21SidebarComponent,
 		H21SearchPanelComponent,
+		H21SearchResultComponent,
+		H21SearchResultRowComponent,
 		FlyRouteSelectionComponent,
 		H21FilterPanelComponent,
 		H21SidebarHistoryPanelComponent,
