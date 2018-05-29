@@ -2,15 +2,12 @@
 	<div class="c-h21-search-result_sort">
 		<span>Sort by</span>
 		<mat-form-field>
-			<mat-select [value]="'val-1'">
-				<mat-option value="'val-1'">Price up</mat-option>
-				<mat-option value="'val-2'">Price down</mat-option>
-				<mat-option value="'val-3'">Departure time up</mat-option>
-				<mat-option value="'val-4'">Departure time down</mat-option>
+			<mat-select [(value)]="sortParameter">
+				<mat-option value="price">Price</mat-option>
+				<mat-option value="departure_time">Departure time</mat-option>
 			</mat-select>
 		</mat-form-field>
 	</div>
-
 	<mat-tab-group>
 		<mat-tab label="Recommended">
 			<ng-template mat-tab-label>

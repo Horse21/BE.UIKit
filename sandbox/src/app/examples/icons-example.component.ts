@@ -83,7 +83,12 @@ export class IconsExampleComponent {
     'h21_flight_land_red',
     'h21_flight_takeoff_blue',
     'h21_flight_takeoff_green',
-    'h21_flight_takeoff_red'
+    'h21_flight_takeoff_red',
+	'h21_baggage',
+	'h21_no_baggage',
+	'h21_luggage',
+	'h21_no_luggage',
+	'h21_night',
   ];
 
   allMatIcons = [

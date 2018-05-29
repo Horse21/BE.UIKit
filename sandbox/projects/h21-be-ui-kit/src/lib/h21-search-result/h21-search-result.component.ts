@@ -6,5 +6,5 @@ import {Component} from "@angular/core";
 })
 
 export class H21SearchResultComponent {
-
+	sortParameter = "price";
 }

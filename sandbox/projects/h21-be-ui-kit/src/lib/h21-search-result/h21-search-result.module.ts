@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
-	MatButtonModule, MatIconModule, MatTabsModule
+	MatButtonModule, MatIconModule, MatSelectModule, MatTabsModule
 } from "@angular/material";
 import {H21SearchResultComponent} from './h21-search-result.component';
 import {H21SearchResultRowModule} from "../h21-search-result-row/h21-search-result-row.module";
@@ -12,7 +12,8 @@ import {H21SearchResultRowModule} from "../h21-search-result-row/h21-search-resu
 		MatButtonModule,
 		MatIconModule,
 		MatTabsModule,
-		H21SearchResultRowModule
+		H21SearchResultRowModule,
+		MatSelectModule
 	],
 	declarations: [H21SearchResultComponent],
 	exports: [H21SearchResultComponent]
