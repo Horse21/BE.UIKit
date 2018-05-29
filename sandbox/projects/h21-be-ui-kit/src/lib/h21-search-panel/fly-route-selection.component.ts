@@ -40,11 +40,11 @@ import {VocabularyService} from '../../services/vocabulary-service';
 		  <mat-datepicker #arrivalDatePicker></mat-datepicker>
 	  </mat-form-field>
 
-	  <div class="c-fly-route-selection_add-remove-buttons-box" *ngIf="showAddRemoveButtons == true">
-		  <button mat-icon-button class="c-fly-route-selection_remove-button">
+	  <div class="c-fly-route-selection_add-remove-buttons-box" *ngIf="canAdd || canRemove">
+		  <button mat-icon-button class="c-fly-route-selection_remove-button" *ngIf="canRemove">
 			  <mat-icon>cancel</mat-icon>
 		  </button>
-		  <button mat-icon-button class="c-fly-route-selection_add-button">
+		  <button mat-icon-button class="c-fly-route-selection_add-button" *ngIf="canAdd">
 			  <mat-icon>add_circle</mat-icon>
 		  </button>
 	  </div>
@@ -53,7 +53,8 @@ import {VocabularyService} from '../../services/vocabulary-service';
 })
 export class FlyRouteSelectionComponent {
 	@Input() routeNumber = 1;
-	@Input() showAddRemoveButtons = false;
+	@Input() canAdd = true;
+	@Input() canRemove = false;
 
 	cityFromControl: FormControl = new FormControl();
 	cityToControl: FormControl = new FormControl();
