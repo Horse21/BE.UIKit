@@ -26,16 +26,23 @@
 			</div>
 		</div>
 
-		<mat-button-toggle-group color="accent">
-			<mat-button-toggle value="1">Round trip</mat-button-toggle>
+		<mat-button-toggle-group color="accent" [(ngModel)]="searchMode" (change)="changeMode()">
+			<mat-button-toggle value="round_trip">Round trip</mat-button-toggle>
 			<mat-divider [vertical]="true"></mat-divider>
-			<mat-button-toggle value="2">One way</mat-button-toggle>
+			<mat-button-toggle value="one_way">One way</mat-button-toggle>
 			<mat-divider [vertical]="true"></mat-divider>
-			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
+			<mat-button-toggle value="multi_city" [checked]="true">Multi-city</mat-button-toggle>
 		</mat-button-toggle-group>
 
-		<fly-route-selection [routeNumber]="'1'" [canAdd]="false"></fly-route-selection>
-		<fly-route-selection [routeNumber]="'2'"></fly-route-selection>
+		<fly-route-selection *ngFor="let flyRoute of flyRoutes; index as i"
+							 [routeNumber]="i+1"
+							 [canAdd]="canAdd(i)"
+							 [canRemove]="canRemove(i)"
+							 [(cityFrom)]="flyRoute.cityFrom"
+							 [(cityTo)]="flyRoute.cityTo"
+							 (onAdd)="addFlyRoute()"
+							 (onRemove)="removeFlyRoute()">
+		</fly-route-selection>
 
 		<div class="row no-gutters">
 			<div class="col-12 col-md-6">
@@ -48,6 +55,6 @@
 	</div>
 	<div class="c-h21-search-panel_bottom-attached-box __buttons-to-right">
 		<button mat-button class="__size-l">Clear search</button>
-		<button mat-raised-button class="__size-l" color="primary">Search</button>
+		<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
 	</div>
 </div>
