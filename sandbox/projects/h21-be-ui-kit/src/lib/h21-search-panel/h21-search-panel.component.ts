@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { SearchFlightDto } from '../../dto/search-flight-dto';
 import { FlyRoute } from '../../dto/fly-route';
 
 @Component({
@@ -8,54 +9,83 @@ import { FlyRoute } from '../../dto/fly-route';
 
 export class H21SearchPanelComponent {
 	constructor() {
+		this.searchOptions = <SearchFlightDto>{
+			flyRoutes: [<FlyRoute>{},<FlyRoute>{}],
+			searchMode: 'round_trip'
+		};
 	}
 
-	flyRoutes: FlyRoute[] = [<FlyRoute>{},<FlyRoute>{}];
-	searchMode = 'round_trip';
-
-	search(): void {
-		console.log(this.flyRoutes);
-	}
+	@Output() onSearch: EventEmitter<SearchFlightDto> = new EventEmitter<SearchFlightDto>();
+	searchOptions: SearchFlightDto;
 
 	addFlyRoute() {
-		this.flyRoutes.push(<FlyRoute>{});
+		var flyRoute = <FlyRoute>{};
+		var previous = this.searchOptions.flyRoutes[this.searchOptions.flyRoutes.length - 1];
+		console.log(this.searchOptions.flyRoutes);
+		if (!!previous.cityTo) {
+			flyRoute.cityFrom = previous.cityTo;
+		}
+		console.log(flyRoute);
+		this.searchOptions.flyRoutes.push(flyRoute);
 	}
 
 	removeFlyRoute() {
-		this.flyRoutes.pop();
+		this.searchOptions.flyRoutes.pop();
 	}
 
 	canAdd(i: number): boolean {
 		return (
-				   this.flyRoutes.length == i + 1 && this.searchMode == 'multi_city'
+				   this.searchOptions.flyRoutes.length == i + 1 && this.searchOptions.searchMode == 'multi_city'
 			   ) ||
 			   (
-				   this.searchMode == 'round_trip' && this.flyRoutes.length == 1
+				   this.searchOptions.searchMode == 'round_trip' && this.searchOptions.flyRoutes.length == 1
 			   );
 	}
 
 	canRemove(i: number): boolean {
-		return this.searchMode == 'multi_city' && this.flyRoutes.length == i + 1 && i != 0;
+		return this.searchOptions.searchMode == 'multi_city' && this.searchOptions.flyRoutes.length == i + 1 && i != 0;
 	}
 
 	changeMode() {
-		switch (this.searchMode) {
+		switch (this.searchOptions.searchMode) {
 			case 'one_way': {
-				while (this.flyRoutes.length > 1) {
-					this.flyRoutes.pop();
+				while (this.searchOptions.flyRoutes.length > 1) {
+					this.searchOptions.flyRoutes.pop();
 				}
 				break;
 			}
 			case 'round_trip': {
-				while (this.flyRoutes.length > 2) {
-					this.flyRoutes.pop();
+				while (this.searchOptions.flyRoutes.length > 2) {
+					this.searchOptions.flyRoutes.pop();
 				}
-				if (this.flyRoutes.length == 1) {
-					this.flyRoutes.push(<FlyRoute>{});
+				if (this.searchOptions.flyRoutes.length == 1) {
+					this.searchOptions.flyRoutes.push(<FlyRoute>{});
 				}
 				break;
 			}
+		}
+	}
+
+	clearSearch() {
+		switch (this.searchOptions.searchMode) {
+			case 'one_way': {
+				this.searchOptions.flyRoutes[0].cityFrom = null;
+				this.searchOptions.flyRoutes[0].cityTo = null;
+				break;
+			}
+			case 'round_trip': {
+				this.searchOptions.flyRoutes[0].cityFrom = null;
+				this.searchOptions.flyRoutes[0].cityTo = null;
+				this.searchOptions.flyRoutes[1].cityFrom = null;
+				this.searchOptions.flyRoutes[1].cityTo = null;
+				break;
+			}
 			case 'multi_city': {
+				while (this.searchOptions.flyRoutes.length > 1) {
+					this.searchOptions.flyRoutes.pop();
+				}
+				this.searchOptions.flyRoutes[0].cityFrom = null;
+				this.searchOptions.flyRoutes[0].cityTo = null;
 				break;
 			}
 		}

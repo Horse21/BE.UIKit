@@ -10,7 +10,8 @@ import {VocabularyService} from '../../services/vocabulary-service';
   template: `
   <div class="c-fly-route-selection">
 	  <mat-form-field color="primary">
-		  <input type="text" matInput placeholder="From" [formControl]="cityFromControl" [matAutocomplete]="citiesAutocompleteFrom">
+		  <input type="text" matInput placeholder="From" [formControl]="cityFromControl" [matAutocomplete]="citiesAutocompleteFrom"
+				 [(ngModel)]="_cityFrom">
 		  <mat-icon matSuffix>flight_takeoff</mat-icon>
 	  </mat-form-field>
 	  
@@ -22,7 +23,8 @@ import {VocabularyService} from '../../services/vocabulary-service';
 	  </div>
 	  
 	  <mat-form-field color="primary">
-		  <input type="text" matInput placeholder="To" [formControl]="cityToControl" [matAutocomplete]="citiesAutocompleteTo">
+		  <input type="text" matInput placeholder="To" [formControl]="cityToControl" [matAutocomplete]="citiesAutocompleteTo"
+				 [(ngModel)]="_cityTo">
 		  <mat-icon matSuffix>flight_land</mat-icon>
 	  </mat-form-field>
 	  
@@ -86,31 +88,31 @@ export class FlyRouteSelectionComponent {
 		return city ? city.name : null;
 	}
 
-	public _cityFrom: string;
-	public _cityTo: string;
+	public _cityFrom: City;
+	public _cityTo: City;
 
-	@Input() get cityFrom(): string {
+	@Input() get cityFrom(): City {
 		return this._cityFrom;
 	}
 
-	set cityFrom(value: string) {
+	set cityFrom(value: City) {
 		this._cityFrom = value;
 	}
 
-	@Input() get cityTo(): string {
+	@Input() get cityTo(): City {
 		return this._cityTo;
 	}
 
-	set cityTo(value: string) {
+	set cityTo(value: City) {
 		this._cityTo = value;
 	}
 
-	@Output('cityFromChange') public cityFromChange: EventEmitter<string> = new EventEmitter<string>();
-	@Output('cityToChange') public cityToChange: EventEmitter<string> = new EventEmitter<string>();
+	@Output('cityFromChange') public cityFromChange: EventEmitter<City> = new EventEmitter<City>();
+	@Output('cityToChange') public cityToChange: EventEmitter<City> = new EventEmitter<City>();
 
 	onSelectFromItem($event) {
 		if ($event) {
-			this.cityFrom = $event.source.value.code;
+			this.cityFrom = $event.source.value;
 			this.cityFromChange.emit(this._cityFrom);
 		}
 	}
@@ -118,7 +120,7 @@ export class FlyRouteSelectionComponent {
 	onSelectToItem($event) {
 		console.log($event);
 		if ($event) {
-			this.cityTo = $event.source.value.code;
+			this.cityTo = $event.source.value;
 			this.cityToChange.emit(this._cityTo);
 		}
 	}

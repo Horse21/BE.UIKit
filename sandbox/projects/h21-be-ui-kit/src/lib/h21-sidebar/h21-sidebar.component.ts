@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { H21SearchResultRowComponent } from '../h21-search-result-row/h21-search-result-row.component';
+import { SearchFlightDto } from '../../dto/search-flight-dto';
 
 @Component({
 	selector: 'h21-sidebar',
@@ -9,21 +11,25 @@ export class H21SidebarComponent {
 
 	activeTab: string = '';
 	visibility: boolean = false;
+	@ViewChild(H21SearchResultRowComponent) private resultPanel: H21SearchResultRowComponent;
 
-	public visibiltyToggle(): void {
+	visibiltyToggle(): void {
 		if (this.visibility) {
 			this.visibiltyHide();
 		} else {
 			this.visibiltyShow();
 		}
 	}
-	public visibiltyShow(): void {
+	visibiltyShow(): void {
 		this.visibility = true;
 		this.activeTab = "tab-search";
 	}
-	public visibiltyHide(): void {
+	visibiltyHide(): void {
 		this.visibility = false;
 		this.activeTab = "";
 	}
 
+	search(searchOptions:SearchFlightDto) {
+		console.log(searchOptions);
+	}
 }
