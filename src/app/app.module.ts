@@ -8,7 +8,7 @@ import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/serv
 import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import { H21TopToolbarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import { H21SearchPanelComponent } from "../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component";
-import { FlyRouteSelectionComponent } from "../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/fly-route-selection.component";
+import { H21FlyRouteSelectionComponent } from "../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
 import { MatNativeDateModule } from '@angular/material';
 import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { AppComponent } from './app.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
 			H21TopToolbarComponent,
 			H21SidebarComponent,
 			H21SearchPanelComponent,
-			FlyRouteSelectionComponent
+			H21FlyRouteSelectionComponent
 		],
 		imports: [
 			BrowserModule,

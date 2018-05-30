@@ -3,27 +3,17 @@
 	<div class="c-h21-search-panel_inner">
 		<div class="row">
 			<div class="col-12 col-md-6">
-				<button mat-button class="c-h21-search-panel_select-passangers-button">
-					<mat-icon matPrefix>supervisor_account</mat-icon>
-					<span>Adult 1</span>
-				</button>
-				<!--<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_passangers-combobox">-->
-					<!--<mat-icon matPrefix>supervisor_account</mat-icon>-->
-					<!--<mat-select placeholder="Passangers">-->
-						<!--<mat-optgroup [label]="'Passangers'">-->
-						<!--</mat-optgroup>-->
-					<!--</mat-select>-->
-				<!--</mat-form-field>-->
+				<h21-passangers-select></h21-passangers-select>
 			</div>
 			<div class="col-12 col-md-6">
 				<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_preferred-class-combobox">
 					<mat-icon matPrefix>attach_money</mat-icon>
 					<mat-select placeholder="Preferred class" panelClass="c-h21-search-panel_preferred-class-combobox-panel">
 						<mat-optgroup [label]="'Preferred class'">
-							<mat-option [value]="1" >Economy</mat-option>
-							<mat-option [value]="2">Premium economy</mat-option>
-							<mat-option [value]="3">Business</mat-option>
-							<mat-option [value]="3">First class</mat-option>
+							<mat-option value="val-1" >Economy</mat-option>
+							<mat-option value="val-2">Premium economy</mat-option>
+							<mat-option value="val-3">Business</mat-option>
+							<mat-option value="val-4">First class</mat-option>
 						</mat-optgroup>
 					</mat-select>
 				</mat-form-field>
@@ -38,8 +28,8 @@
 			<mat-button-toggle value="3" [checked]="true">Multi-city</mat-button-toggle>
 		</mat-button-toggle-group>
 
-		<fly-route-selection [routeNumber]="'1'" [canAdd]="false"></fly-route-selection>
-		<fly-route-selection [routeNumber]="'2'"></fly-route-selection>
+		<h21-fly-route-selection [routeNumber]="'1'" [canAdd]="false"></h21-fly-route-selection>
+		<h21-fly-route-selection [routeNumber]="'2'"></h21-fly-route-selection>
 
 		<div class="row no-gutters">
 			<div class="col-12 col-md-6">

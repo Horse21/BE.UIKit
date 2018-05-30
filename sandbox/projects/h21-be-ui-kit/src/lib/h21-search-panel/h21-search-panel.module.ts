@@ -9,7 +9,7 @@ import {
 	MatDividerModule, MatFormFieldModule,
 	MatIconModule, MatOptionModule, MatSelectModule
 } from "@angular/material";
-import {FlyRouteSelectionComponent} from "./fly-route-selection.component";
+import {H21FlyRouteSelectionComponent} from "./h21-fly-route-selection.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
@@ -28,7 +28,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 		ReactiveFormsModule,
 		MatSelectModule
 	],
-	declarations: [H21SearchPanelComponent, FlyRouteSelectionComponent],
+	declarations: [H21SearchPanelComponent, H21FlyRouteSelectionComponent],
 	exports: [H21SearchPanelComponent]
 })
 export class H21SearchPanelModule {

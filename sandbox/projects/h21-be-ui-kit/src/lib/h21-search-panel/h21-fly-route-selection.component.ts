@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/index';
 import {VocabularyService} from '../../services/vocabulary-service';
 
 @Component({
-  selector: 'fly-route-selection',
+  selector: 'h21-fly-route-selection',
   template: `
   <div class="c-fly-route-selection">
 	  <mat-form-field color="primary">
@@ -51,7 +51,7 @@ import {VocabularyService} from '../../services/vocabulary-service';
   </div>
   `
 })
-export class FlyRouteSelectionComponent {
+export class H21FlyRouteSelectionComponent {
 	@Input() routeNumber = 1;
 	@Input() canAdd = true;
 	@Input() canRemove = false;
