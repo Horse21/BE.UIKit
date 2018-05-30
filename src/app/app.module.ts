@@ -9,6 +9,8 @@ import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/li
 import { H21TopToolbarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import { H21SearchPanelComponent } from "../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component";
 import { H21FlyRouteSelectionComponent } from "../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
+import { H21SearchResultComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component';
+import { H21SearchResultRowComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component';
 import { MatNativeDateModule } from '@angular/material';
 import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { AppComponent } from './app.component';
@@ -33,7 +35,9 @@ const routes: Routes = [
 			H21TopToolbarComponent,
 			H21SidebarComponent,
 			H21SearchPanelComponent,
-			H21FlyRouteSelectionComponent
+			H21FlyRouteSelectionComponent,
+			H21SearchResultComponent,
+			H21SearchResultRowComponent
 		],
 		imports: [
 			BrowserModule,
