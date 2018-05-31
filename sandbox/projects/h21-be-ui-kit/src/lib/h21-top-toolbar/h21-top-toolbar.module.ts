@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
 	MatButtonModule,
 	MatIconModule,
@@ -16,7 +17,8 @@ import {H21TopToolbarComponent} from "./h21-top-toolbar.component";
 		MatToolbarModule,
 		MatSelectModule,
 		MatButtonToggleModule,
-		MatDividerModule
+		MatDividerModule,
+		FormsModule
 	],
 	declarations: [
 		H21TopToolbarComponent,
