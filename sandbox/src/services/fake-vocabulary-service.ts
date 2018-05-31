@@ -4,6 +4,8 @@ import { Subscriber } from 'rxjs/index';
 import { VocabularyService } from '../../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { City } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/city';
 import { Observable } from 'rxjs';
+import { FlightItem } from '../../projects/h21-be-ui-kit/src/dto/flight-item';
+import { SearchFlightDto } from '../../projects/h21-be-ui-kit/src/dto/search-flight-dto';
 
 @Injectable()
 export class FakeVocabularyService implements VocabularyService {
@@ -25,6 +27,18 @@ export class FakeVocabularyService implements VocabularyService {
 				id: 4,
 				name: "Erevan"
 			}
+		];
+		return Observable.create((observer: Subscriber<any>) => {
+			observer.next(data);
+			observer.complete();
+		});
+	}
+
+	public searchFlights(options: SearchFlightDto): Observable<FlightItem[]> {
+		var data = [
+			<FlightItem>{},
+			<FlightItem>{},
+			<FlightItem>{}
 		];
 		return Observable.create((observer: Subscriber<any>) => {
 			observer.next(data);
