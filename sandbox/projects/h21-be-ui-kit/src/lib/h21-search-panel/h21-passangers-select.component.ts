@@ -1,4 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {H21RightOverlayPanelService} from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {H21RightOverlayPanelRef} from "../h21-right-overlay-panel/h21-right-overlay-panel-ref";
 
 @Component({
 	selector: 'h21-passangers-select',
@@ -19,12 +21,12 @@ import {Component, Input} from '@angular/core';
 							<button mat-icon-button color="primary" [disabled]="adultCount <= 1" (click)="removePassanger('adult');">
 								<mat-icon>remove</mat-icon>
 							</button>
-							<input type="text" name="" value="{{adultCount}}" />
+							<input type="text" value="{{adultCount}}" />
 							<button mat-icon-button color="primary" (click)="addPassanger('adult');">
 								<mat-icon>add</mat-icon>
 							</button>
 						</div>
-						<button mat-button color="primary">
+						<button mat-button color="primary" (click)="openOverlayPanel();">
 							<mat-icon>person</mat-icon> 
 							<span>&times; 1</span>
 						</button>
@@ -64,6 +66,10 @@ export class H21PassangersSelectComponent {
 	@Input() childrenCount = 0;
 	@Input() infantCount = 0;
 
+	constructor(private rightPanelDialog: H21RightOverlayPanelService) {
+
+	}
+
 	addPassanger(passangerType) {
 		switch (passangerType) {
 			case 'adult' :  this.adultCount += 1;
@@ -84,5 +90,9 @@ export class H21PassangersSelectComponent {
 			case 'infant' : this.infantCount -= 1;
 				break;
 		}
+	}
+
+	openOverlayPanel() {
+		let dialogRef: H21RightOverlayPanelRef = this.rightPanelDialog.open();
 	}
 }

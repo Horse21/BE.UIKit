@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { FakeVocabularyService } from '../services/fake-vocabulary-service';
-import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
+import {FakeVocabularyService} from '../services/fake-vocabulary-service';
+import {VocabularyService} from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -10,6 +10,7 @@ import {DocsNavigationComponent} from './docs-navigation/docs-navigation.compone
 import {DocsComponent} from './docs/docs.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {OverlayModule} from "@angular/cdk/overlay";
 
 // H21 components
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -24,7 +25,7 @@ import {H21FilterPanelComponent} from './h21-filter-panel/h21-filter-panel.compo
 import {H21SidebarHistoryPanelComponent} from './h21-sidebar-history-panel/h21-sidebar-history-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
-import {H21RightFloatingContainerComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-floating-container/h21-right-floating-container.component';
+import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 
 // Examples
@@ -41,6 +42,7 @@ import {TabsExampleComponent} from './examples/tabs-example.component';
 import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
 import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
+import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 
 const routes: Routes = [
@@ -68,7 +70,7 @@ const routes: Routes = [
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
 		H21UserCardComponent,
-		H21RightFloatingContainerComponent,
+		H21RightOverlayPanelComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		ButtonsExampleComponent,
@@ -94,9 +96,9 @@ const routes: Routes = [
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [{provide: VocabularyService, useValue: new FakeVocabularyService()}],
+	providers: [{provide: VocabularyService, useValue: new FakeVocabularyService()}, H21RightOverlayPanelService],
 	bootstrap: [AppComponent],
-	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent]
+	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]
 })
 
 export class AppModule {
