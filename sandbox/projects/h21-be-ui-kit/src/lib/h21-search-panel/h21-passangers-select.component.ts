@@ -16,11 +16,11 @@ import {Component, Input} from '@angular/core';
 					<div class="c-h21-passangers-select_counter">
 						<span>Adult(s)</span>
 						<div>
-							<button mat-icon-button color="primary" [disabled]="true">
+							<button mat-icon-button color="primary" [disabled]="adultCount <= 1" (click)="removePassanger('adult');">
 								<mat-icon>remove</mat-icon>
 							</button>
-							<input type="text" name="" value="1" />
-							<button mat-icon-button color="primary">
+							<input type="text" name="" value="{{adultCount}}" />
+							<button mat-icon-button color="primary" (click)="addPassanger('adult');">
 								<mat-icon>add</mat-icon>
 							</button>
 						</div>
@@ -32,11 +32,11 @@ import {Component, Input} from '@angular/core';
 					<div class="c-h21-passangers-select_counter">
 						<span>Children</span>
 						<div>
-							<button mat-icon-button color="primary">
+							<button mat-icon-button color="primary" [disabled]="childrenCount < 1" (click)="removePassanger('children');">
 								<mat-icon>remove</mat-icon>
 							</button>
-							<input type="text" name="" value="2" />
-							<button mat-icon-button color="primary">
+							<input type="text" name="" value="{{childrenCount}}" />
+							<button mat-icon-button color="primary" (click)="addPassanger('children');">
 								<mat-icon>add</mat-icon>
 							</button>
 						</div>
@@ -44,11 +44,11 @@ import {Component, Input} from '@angular/core';
 					<div class="c-h21-passangers-select_counter">
 						<span>Infant</span>
 						<div>
-							<button mat-icon-button color="primary" [disabled]="true">
+							<button mat-icon-button color="primary" [disabled]="infantCount < 1" (click)="removePassanger('infant');">
 								<mat-icon>remove</mat-icon>
 							</button>
-							<input type="text" name="" value="0" />
-							<button mat-icon-button color="primary">
+							<input type="text" name="" value="{{infantCount}}" />
+							<button mat-icon-button color="primary" (click)="addPassanger('infant');">
 								<mat-icon>add</mat-icon>
 							</button>
 						</div>
@@ -60,5 +60,29 @@ import {Component, Input} from '@angular/core';
 })
 
 export class H21PassangersSelectComponent {
-	@Input() test = 1;
+	@Input() adultCount = 2;
+	@Input() childrenCount = 0;
+	@Input() infantCount = 0;
+
+	addPassanger(passangerType) {
+		switch (passangerType) {
+			case 'adult' :  this.adultCount += 1;
+				break;
+			case 'children' : this.childrenCount += 1;
+				break;
+			case 'infant' : this.infantCount += 1;
+				break;
+		}
+	}
+
+	removePassanger(passangerType) {
+		switch (passangerType) {
+			case 'adult' :  this.adultCount -= 1;
+				break;
+			case 'children' : this.childrenCount -= 1;
+				break;
+			case 'infant' : this.infantCount -= 1;
+				break;
+		}
+	}
 }
