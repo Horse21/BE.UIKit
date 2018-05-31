@@ -4,6 +4,8 @@ import { map } from 'rxjs/internal/operators';
 import { VocabularyService } from '../../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { City } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/city';
 import { Observable } from 'rxjs';
+import { FlightItem } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/flight-item';
+import { SearchFlightDto } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/search-flight-dto';
 
 @Injectable()
 export class PrototypeVocabularyService implements VocabularyService {
@@ -21,6 +23,13 @@ export class PrototypeVocabularyService implements VocabularyService {
 					.filter((i, index) => (
 						index < 10
 					));
+			}));
+	}
+
+	public searchFlights(options: SearchFlightDto): Observable<FlightItem[]> {
+		return this._http.get<FlightItem[]>("../../assets/prototype-storage/one-way.json")
+			.pipe(map(data => {
+				return data.filter((i, index) => index < 10);
 			}));
 	}
 }

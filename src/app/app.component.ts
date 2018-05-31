@@ -7,6 +7,7 @@ import { INotifyItem } from '../../sandbox/projects/h21-be-ui-kit/src/dto/inotif
 import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/services/permission-service';
 import { Passenger } from '../../sandbox/projects/h21-be-ui-kit/src/dto/passenger';
 import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
+import { H21TopToolbarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import { AuthData } from './dto/auth-data';
 
 @Component({
@@ -17,6 +18,7 @@ import { AuthData } from './dto/auth-data';
 })
 export class AppComponent {
 	@ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
+	@ViewChild(H21TopToolbarComponent) private toolbar: H21TopToolbarComponent;
 	title = 'prototype';
 	username: string;
 	private permissionService: PermissionService;
@@ -62,5 +64,23 @@ export class AppComponent {
 
 	public getPassengers(): Observable<Passenger> {
 		return this.http.get<Passenger>("../assets/prototype-storage/passengers.json");
+	}
+
+	changeResultsMode(mode: string) {
+		if(mode == 'list') {
+			this.sidebar.showList();
+		} else{
+			this.sidebar.hideList();
+		}
+	}
+
+	onSearch() {
+		this.toolbar.modeVisibility = true;
+		this.toolbar.resultsMode = 'list';
+		console.log(this.toolbar.resultsMode);
+	}
+
+	onClearSearch() {
+		this.toolbar.modeVisibility = false;
 	}
 }

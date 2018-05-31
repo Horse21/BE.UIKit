@@ -13,6 +13,7 @@ import { H21SearchResultComponent } from '../../sandbox/projects/h21-be-ui-kit/s
 import { H21SearchResultRowComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component';
 import { MatNativeDateModule } from '@angular/material';
 import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
+import { H21PassangersSelectComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,7 +38,8 @@ const routes: Routes = [
 			H21SearchPanelComponent,
 			H21FlyRouteSelectionComponent,
 			H21SearchResultComponent,
-			H21SearchResultRowComponent
+			H21SearchResultRowComponent,
+			H21PassangersSelectComponent
 		],
 		imports: [
 			BrowserModule,

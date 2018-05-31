@@ -8,12 +8,12 @@
                   [logotypeUrl]="'/assets/img/logo.svg'"
                   [notifyList]="getNotifyList()">
       </h21-header>
-      <h21-top-toolbar (onMenuClick)="showSidebar()"></h21-top-toolbar>
+      <h21-top-toolbar (onMenuClick)="showSidebar()" (onChangeResultsMode)="changeResultsMode($event)"></h21-top-toolbar>
     </div>
   </div>
   <div class="row no-gutters page_content-box">
     <div class="col-12 no-gutters __has-sidebar">
-      <h21-sidebar></h21-sidebar>
+      <h21-sidebar (onSearch)="onSearch($event)" (onClearSearch)="onClearSearch()"></h21-sidebar>
       <div class="map-box">
       </div>
     </div>

@@ -23,9 +23,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
+				<h21-search-result-row *ngFor="let item of result.recommended"></h21-search-result-row>
 			</div>
 		</mat-tab>
 		<mat-tab label="Cheapest">
@@ -42,9 +40,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
+				<h21-search-result-row *ngFor="let item of result.cheapest"></h21-search-result-row>
 			</div>
 		</mat-tab>
 		<mat-tab label="Shortest">
@@ -61,9 +57,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
-				<h21-search-result-row></h21-search-result-row>
+				<h21-search-result-row *ngFor="let item of result.cheapest"></h21-search-result-row>
 			</div>
 		</mat-tab>
 	</mat-tab-group>

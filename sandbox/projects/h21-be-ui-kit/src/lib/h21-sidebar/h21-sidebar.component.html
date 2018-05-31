@@ -15,7 +15,7 @@
 
 <div class="c-21-sidebar_tabs-box" [class.is-active]="visibility">
 	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-search'">
-		<h21-search-panel (onSearch)="search($event)"></h21-search-panel>
+		<h21-search-panel (onSearch)="search($event)" (onClearSearch)="clearSearch()"></h21-search-panel>
 	</div>
 	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-filter'">
 		<!--<h21-filter-panel></h21-filter-panel>-->
@@ -26,6 +26,6 @@
 	</div>
 </div>
 
-<div class="c-21-sidebar_search-result-box">
+<div class="c-21-sidebar_search-result-box" [hidden]="!listVisibility">
 	<h21-search-result></h21-search-result>
 </div>

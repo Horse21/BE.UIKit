@@ -16,6 +16,7 @@ export class H21SearchPanelComponent {
 	}
 
 	@Output() onSearch: EventEmitter<SearchFlightDto> = new EventEmitter<SearchFlightDto>();
+	@Output() onClearSearch: EventEmitter<void> = new EventEmitter<void>();
 	searchOptions: SearchFlightDto;
 
 	addFlyRoute() {
@@ -89,5 +90,6 @@ export class H21SearchPanelComponent {
 				break;
 			}
 		}
+		this.onClearSearch.emit();
 	}
 }
