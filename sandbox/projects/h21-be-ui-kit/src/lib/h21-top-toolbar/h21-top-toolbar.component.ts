@@ -9,7 +9,7 @@ export class H21TopToolbarComponent {
 	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
 	@Output() onChangeResultsMode: EventEmitter <string> = new EventEmitter<string>();
 
-	menuIsOpened = false;
+	menuIsOpened = true;
 	selectedLanguage = 'eng';
 	selectedCurrency = 'eur';
 	resultsMode = 'list';

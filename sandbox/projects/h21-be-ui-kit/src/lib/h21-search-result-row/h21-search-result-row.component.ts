@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import { Component, Input } from '@angular/core';
+import { FlightItemGroup } from '../../dto/flight-item-group';
 
 @Component ({
 	selector: "h21-search-result-row",
@@ -6,5 +7,5 @@ import {Component} from "@angular/core";
 })
 
 export class H21SearchResultRowComponent {
-
+	@Input() group: FlightItemGroup;
 }

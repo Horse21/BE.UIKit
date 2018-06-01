@@ -1,7 +1,5 @@
-import { FlightItem } from '../dto/flight-item';
+import { FlightItemGroup } from './flight-item-group';
 
 export class SearchResult {
-	recommended: FlightItem[];
-	cheapest: FlightItem[];
-	shortest: FlightItem[];
+	groups: FlightItemGroup[];
 }
