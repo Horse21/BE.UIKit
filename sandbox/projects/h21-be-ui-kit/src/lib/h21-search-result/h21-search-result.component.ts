@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
 import { SearchResult } from '../../dto/search-result';
 
 @Component ({
@@ -7,6 +7,5 @@ import { SearchResult } from '../../dto/search-result';
 })
 
 export class H21SearchResultComponent {
-	sortParameter = "price";
 	result: SearchResult = new SearchResult();
 }

@@ -7,6 +7,11 @@ import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref"
 })
 
 export class H21RightOverlayPanelComponent {
+
+	constructor (public dialogRef: H21RightOverlayPanelRef) {
+
+	}
+
 	// close() {
 	// 	H21RightOverlayPanelRef.close();
 	// }

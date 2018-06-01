@@ -22,7 +22,7 @@ export class H21SidebarComponent {
 	visibiltyToggle(): void {
 		if (this.visibility) {
 			this.visibiltyHide();
-			this.listVisibility = false;
+			//this.listVisibility = false;
 			this.onClearSearch.emit();
 		} else {
 			this.visibiltyShow();
