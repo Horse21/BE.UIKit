@@ -1,36 +1,85 @@
-[
-    {
-        "DepartureDateTime": "2018-11-10T07:25:00+03:00",
-        "ArrivalDateTime": "2018-11-10T08:50:00+03:00",
-        "FlightNumber": "2912",
-        "ResBookDesigCode": "V",
-        "ElapsedTime": 205,
-        "DepartureAirport": {
-            "LocationCode": "DFW",
-            "TerminalID": "E",
-            "content": ""
-        },
-        "ArrivalAirport": {
-            "LocationCode": "LAX",
-            "TerminalID": "2",
-            "content": ""
-        }
-    },
-    {
-        "DepartureDateTime": "2018-11-10T11:25:00+03:00",
-        "ArrivalDateTime": "2018-11-11T07:20:00+03:00",
-        "FlightNumber": "8",
-        "ResBookDesigCode": "S",
-        "ElapsedTime": 655,
-        "DepartureAirport": {
-            "LocationCode": "LAX",
-            "TerminalID": "B",
-            "content": ""
-        },
-        "ArrivalAirport": {
-            "LocationCode": "DFW",
-            "TerminalID": "2A",
-            "content": ""
-        }
-    }
-]
+{
+	"groups": [
+		{
+			"price": 240,
+			"items": [
+				{
+					"departureDateTime": "2018-11-10T07:25:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:50:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 195,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "LAX",
+					"arrivalAirportTerminal": "2"
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C"
+				}
+			]
+		},
+		{
+			"price": 195.50,
+			"items": [
+				{
+					"departureDateTime": "2018-11-10T07:25:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:50:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 195,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "LAX",
+					"arrivalAirportTerminal": "2"
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C"
+				}
+			]
+		},
+		{
+			"price": 210,
+			"items": [
+				{
+					"departureDateTime": "2018-11-10T07:25:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:50:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 195,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "LAX",
+					"arrivalAirportTerminal": "2"
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C"
+				}
+			]
+		}
+	]
+}

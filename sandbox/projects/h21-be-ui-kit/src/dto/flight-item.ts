@@ -8,5 +8,4 @@ export class FlightItem {
 	departureAirportTerminal: string;
 	arrivalAirportCode: string;
 	arrivalAirportTerminal: string;
-	price: number;
 }

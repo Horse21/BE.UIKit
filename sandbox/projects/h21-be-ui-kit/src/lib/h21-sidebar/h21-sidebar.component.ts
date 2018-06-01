@@ -10,8 +10,8 @@ import { SearchFlightDto } from '../../dto/search-flight-dto';
 })
 
 export class H21SidebarComponent {
-	activeTab: string = '';
-	visibility: boolean = false;
+	activeTab: string = 'tab-search';
+	visibility = true;
 	listVisibility = false;
 	@ViewChild(H21SearchResultComponent) private resultPanel: H21SearchResultComponent;
 	@Output() onSearch: EventEmitter<void> = new EventEmitter<void>();
@@ -22,8 +22,6 @@ export class H21SidebarComponent {
 	visibiltyToggle(): void {
 		if (this.visibility) {
 			this.visibiltyHide();
-			this.listVisibility = false;
-			this.onClearSearch.emit();
 		} else {
 			this.visibiltyShow();
 		}
@@ -43,9 +41,8 @@ export class H21SidebarComponent {
 		this.resultPanel.result = new SearchResult();
 		this.showList();
 		this._vocabulary.searchFlights(searchOptions).subscribe(result=>{
-			this.resultPanel.result.recommended = result;
-			this.resultPanel.result.cheapest = result.filter(x=>x.price < 200).sort(x=>x.price);
-			this.resultPanel.result.shortest = result.filter(x=>x.elapsedTime < 200).sort(x=>x.elapsedTime);
+			this.resultPanel.result = result;
+			console.log(this.resultPanel.result.groups[0].items);
 		});
 		this.onSearch.emit();
 	}
