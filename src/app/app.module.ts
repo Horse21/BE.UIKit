@@ -22,6 +22,8 @@ import { AppMaterialModule } from './modules/app-material.module';
 import { H21HeaderComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { H21RightOverlayPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
+import { H21PassangersSearchComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -40,7 +42,9 @@ const routes: Routes = [
 			H21FlyRouteSelectionComponent,
 			H21SearchResultComponent,
 			H21SearchResultRowComponent,
-			H21PassangersSelectComponent
+			H21PassangersSelectComponent,
+			H21RightOverlayPanelComponent,
+			H21PassangersSearchComponent
 		],
 		imports: [
 			BrowserModule,
@@ -51,7 +55,6 @@ const routes: Routes = [
 			FormsModule,
 			HttpClientModule,
 			MatNativeDateModule,
-
 		],
 		providers: [
 			{
@@ -65,7 +68,7 @@ const routes: Routes = [
 			H21RightOverlayPanelService
 		],
 		bootstrap: [AppComponent],
-		entryComponents: [H21HeaderUserSelectorDialogComponent]
+		entryComponents: [H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]
 	}
 )
 export class AppModule {
