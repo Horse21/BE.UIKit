@@ -40,9 +40,6 @@ export class H21SearchPanelComponent implements OnInit {
 	canAdd(i: number): boolean {
 		return (
 				   this.searchOptions.flyRoutes.length == i + 1 && this.searchOptions.searchMode == 'multi_city'
-			   ) ||
-			   (
-				   this.searchOptions.searchMode == 'round_trip' && this.searchOptions.flyRoutes.length == 1
 			   );
 	}
 
