@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
 import { FlightItemGroup } from '../../dto/flight-item-group';
 import { SearchResult } from '../../dto/search-result';
 
@@ -8,7 +8,6 @@ import { SearchResult } from '../../dto/search-result';
 })
 
 export class H21SearchResultComponent {
-	sortParameter = "price";
 	result: SearchResult = new SearchResult();
 
 	getCheapest(groups: FlightItemGroup[]) {

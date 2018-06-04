@@ -26,6 +26,9 @@
 	</div>
 </div>
 
-<div class="c-21-sidebar_search-result-box" [hidden]="!listVisibility">
-	<h21-search-result></h21-search-result>
+<div class="c-21-sidebar_search-result-box" [hidden]="!listVisibility" [class.is-deployed]="!visibility && listVisibility">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	<div class="c-21-sidebar_search-result-box_inner">
+		<h21-search-result></h21-search-result>
+	</div>
 </div>
