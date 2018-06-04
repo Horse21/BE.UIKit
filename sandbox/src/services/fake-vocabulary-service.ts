@@ -40,58 +40,76 @@ export class FakeVocabularyService implements VocabularyService {
 			groups: [
 				<FlightItemGroup>{
 					price: 250,
+					totalElapsedTime: 355,
 					items: [
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "MOS",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg",
+							transfers: [{
+								time: new Date()
+							}]
 						},
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "LON",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg"
 						}
 					]
 				},
 				<FlightItemGroup>{
 					price: 250,
+					totalElapsedTime: 345,
 					items: [
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "MOS",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg"
 						},
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "LON",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg"
 						}
 					]
 				},
 				<FlightItemGroup>{
 					price: 250,
+					totalElapsedTime: 290,
 					items: [
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "MOS",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg"
 						},
 						<FlightItem>{
 							arrivalDateTime: new Date(),
 							arrivalAirportCode: "LON",
 							elapsedTime:100,
 							departureDateTime: new Date(),
-							departureAirportCode: "SPB"
+							departureAirportCode: "SPB",
+							arrivalLogo: "swiss.svg",
+							departureLogo: "swiss.svg"
 						}
 					]
 				}

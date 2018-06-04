@@ -1,3 +1,5 @@
+import { FlightItemTransfer } from './flight-item-transfer';
+
 export class FlightItem {
 	departureDateTime: Date;
 	arrivalDateTime: Date;
@@ -8,4 +10,7 @@ export class FlightItem {
 	departureAirportTerminal: string;
 	arrivalAirportCode: string;
 	arrivalAirportTerminal: string;
+	arrivalLogo: string;
+	departureLogo: string;
+	transfers: FlightItemTransfer[];
 }

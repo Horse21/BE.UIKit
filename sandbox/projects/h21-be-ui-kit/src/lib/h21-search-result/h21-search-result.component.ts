@@ -8,17 +8,37 @@ import { SearchResult } from '../../dto/search-result';
 })
 
 export class H21SearchResultComponent {
-	result: SearchResult = new SearchResult();
+	recommended: FlightItemGroup[];
+	cheapest: FlightItemGroup[];
+	shortest: FlightItemGroup[];
 
-	getCheapest(groups: FlightItemGroup[]) {
-		if(!groups)
-			return undefined;
-		return groups.sort(x => x.price);
+	setResult(result: SearchResult) {
+		this.recommended = result.groups;
+		if (result.groups) {
+			this.cheapest = result.groups.map(x => x)
+				.sort((a, b) => a.price - b.price);
+			this.shortest = result.groups.map(x => x)
+				.sort((a, b) => a.totalElapsedTime - b.totalElapsedTime);
+		} else {
+			this.cheapest = undefined;
+			this.shortest = undefined;
+		}
 	}
 
-	getShortest(groups: FlightItemGroup[]) {
-		if(!groups)
-			return undefined;
-		return groups;
+	getTimeString(groups: FlightItemGroup[]): string {
+		if (!groups) {
+			return "";
+		}
+		let group = groups[0];
+		let result = "";
+		let h = Math.floor(group.totalElapsedTime / 60);
+		if (h && h > 0) {
+			result = h + "h ";
+		}
+		let m = group.totalElapsedTime % 60;
+		if (m && m > 0) {
+			result += m + "m ";
+		}
+		return result.trim();
 	}
 }

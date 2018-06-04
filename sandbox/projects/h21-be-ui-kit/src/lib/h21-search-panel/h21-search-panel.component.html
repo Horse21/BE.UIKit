@@ -29,13 +29,14 @@
 		</mat-button-toggle-group>
 
 		<h21-fly-route-selection *ngFor="let flyRoute of searchOptions.flyRoutes; index as i"
-							 [routeNumber]="i+1"
-							 [canAdd]="canAdd(i)"
-							 [canRemove]="canRemove(i)"
-							 [(cityFrom)]="flyRoute.cityFrom"
-							 [(cityTo)]="flyRoute.cityTo"
-							 (onAdd)="addFlyRoute()"
-							 (onRemove)="removeFlyRoute()">
+								 [routeNumber]="i+1"
+								 [canAdd]="canAdd(i)"
+								 [canRemove]="canRemove(i)"
+								 [hidden]="searchOptions.searchMode != 'multi_city' && i > 0"
+								 [(cityFrom)]="flyRoute.cityFrom"
+								 [(cityTo)]="flyRoute.cityTo"
+								 (onAdd)="addFlyRoute()"
+								 (onRemove)="removeFlyRoute()">
 		</h21-fly-route-selection>
 
 		<div class="row no-gutters">
@@ -49,6 +50,6 @@
 	</div>
 	<div class="c-h21-search-panel_bottom-attached-box __buttons-to-right">
 		<button mat-button class="__size-l" (click)="clearSearch()">Clear search</button>
-		<button mat-raised-button class="__size-l" color="primary" (click)="onSearch.emit(searchOptions);">Search</button>
+		<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
 	</div>
 </div>
