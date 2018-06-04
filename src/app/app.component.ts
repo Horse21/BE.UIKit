@@ -66,26 +66,4 @@ export class AppComponent {
 	showSidebar(): void {
 		this.sidebar.visibiltyToggle();
 	}
-
-	public getPassengers(): Observable<Passenger> {
-		return this.http.get<Passenger>("../assets/prototype-storage/passengers.json");
-	}
-
-	changeResultsMode(mode: string) {
-		if(mode == 'list') {
-			this.sidebar.showList();
-		} else{
-			this.sidebar.hideList();
-		}
-	}
-
-	onSearch() {
-		this.toolbar.modeVisibility = true;
-		this.toolbar.resultsMode = 'list';
-		console.log(this.toolbar.resultsMode);
-	}
-
-	onClearSearch() {
-		this.toolbar.modeVisibility = false;
-	}
 }

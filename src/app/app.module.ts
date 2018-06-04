@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { H21PassangersSelectComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component';
 import { H21RightOverlayPanelService } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service';
+import { AppSubscriberService } from '../../sandbox/projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -62,7 +63,8 @@ const routes: Routes = [
 				provide: VocabularyService,
 				useClass: PrototypeVocabularyService
 			},
-			H21RightOverlayPanelService
+			H21RightOverlayPanelService,
+			AppSubscriberService
 		],
 		bootstrap: [AppComponent],
 		entryComponents: [H21HeaderUserSelectorDialogComponent]

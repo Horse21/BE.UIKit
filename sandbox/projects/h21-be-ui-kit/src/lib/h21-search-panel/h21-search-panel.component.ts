@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { SearchFlightDto } from '../../dto/search-flight-dto';
 import { FlyRoute } from '../../dto/fly-route';
 
@@ -7,12 +8,16 @@ import { FlyRoute } from '../../dto/fly-route';
   templateUrl: './h21-search-panel.component.html'
 })
 
-export class H21SearchPanelComponent {
-	constructor() {
+export class H21SearchPanelComponent implements OnInit {
+	constructor(private _appSubscriber: AppSubscriberService) {
 		this.searchOptions = <SearchFlightDto>{
 			flyRoutes: [<FlyRoute>{},<FlyRoute>{}],
 			searchMode: 'round_trip'
 		};
+	}
+
+	public ngOnInit(): void {
+
 	}
 
 	@Output() onSearch: EventEmitter<SearchFlightDto> = new EventEmitter<SearchFlightDto>();
@@ -22,11 +27,9 @@ export class H21SearchPanelComponent {
 	addFlyRoute() {
 		var flyRoute = <FlyRoute>{};
 		var previous = this.searchOptions.flyRoutes[this.searchOptions.flyRoutes.length - 1];
-		console.log(this.searchOptions.flyRoutes);
 		if (!!previous.cityTo) {
 			flyRoute.cityFrom = previous.cityTo;
 		}
-		console.log(flyRoute);
 		this.searchOptions.flyRoutes.push(flyRoute);
 	}
 
@@ -90,6 +93,10 @@ export class H21SearchPanelComponent {
 				break;
 			}
 		}
-		this.onClearSearch.emit();
+		this._appSubscriber.clearSearch();
+	}
+
+	search() {
+		this._appSubscriber.search(this.searchOptions);
 	}
 }
