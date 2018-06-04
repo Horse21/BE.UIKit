@@ -10,8 +10,8 @@
 				<div class="c-h21-search-result_tab">
 					<div class="c-h21-search-result-tab-label">
 						<span class="c-h21-search-result-tab-label_name">Recommended</span>
-						<span class="c-h21-search-result-tab-label_price">250 &euro;</span>
-						<span class="c-h21-search-result-tab-label_time">4h 45m</span>
+						<span class="c-h21-search-result-tab-label_price">{{recommended ? recommended[0].price : ""}} &euro;</span>
+						<span class="c-h21-search-result-tab-label_time">{{getTimeString(recommended)}}</span>
 					</div>
 					<div class="c-h21-search-result-tab-icon">
 						<mat-icon>thumb_up_alt</mat-icon>
@@ -19,7 +19,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row *ngFor="let group of result.groups" [group]="group"></h21-search-result-row>
+				<h21-search-result-row *ngFor="let group of recommended" [group]="group"></h21-search-result-row>
 			</div>
 		</mat-tab>
 		<mat-tab label="Cheapest">
@@ -27,8 +27,8 @@
 				<div class="c-h21-search-result_tab">
 					<div class="c-h21-search-result-tab-label">
 						<span class="c-h21-search-result-tab-label_name">Cheapest</span>
-						<span class="c-h21-search-result-tab-label_price">250 &euro;</span>
-						<span class="c-h21-search-result-tab-label_time">4h 45m</span>
+						<span class="c-h21-search-result-tab-label_price">{{cheapest ? cheapest[0].price : ""}} &euro;</span>
+						<span class="c-h21-search-result-tab-label_time">{{getTimeString(cheapest)}}</span>
 					</div>
 					<div class="c-h21-search-result-tab-icon">
 						<mat-icon>euro_symbol</mat-icon>
@@ -36,7 +36,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row *ngFor="let group of getCheapest(result.groups)" [group]="group"></h21-search-result-row>
+				<h21-search-result-row *ngFor="let group of cheapest" [group]="group"></h21-search-result-row>
 			</div>
 		</mat-tab>
 		<mat-tab label="Shortest">
@@ -44,8 +44,8 @@
 				<div class="c-h21-search-result_tab">
 					<div class="c-h21-search-result-tab-label">
 						<span class="c-h21-search-result-tab-label_name">Shortest</span>
-						<span class="c-h21-search-result-tab-label_price">250 &euro;</span>
-						<span class="c-h21-search-result-tab-label_time">4h 45m</span>
+						<span class="c-h21-search-result-tab-label_price">{{shortest ? shortest[0].price : ""}} &euro;</span>
+						<span class="c-h21-search-result-tab-label_time">{{getTimeString(shortest)}}</span>
 					</div>
 					<div class="c-h21-search-result-tab-icon">
 						<mat-icon>access_time</mat-icon>
@@ -53,7 +53,7 @@
 				</div>
 			</ng-template>
 			<div class="c-h21-search-result_tab-content">
-				<h21-search-result-row *ngFor="let group of getShortest(result.groups)" [group]="group"></h21-search-result-row>
+				<h21-search-result-row *ngFor="let group of shortest" [group]="group"></h21-search-result-row>
 			</div>
 		</mat-tab>
 	</mat-tab-group>

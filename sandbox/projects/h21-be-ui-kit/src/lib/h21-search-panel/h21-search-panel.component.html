@@ -29,13 +29,14 @@
 		</mat-button-toggle-group>
 
 		<h21-fly-route-selection *ngFor="let flyRoute of searchOptions.flyRoutes; index as i"
-							 [routeNumber]="i+1"
-							 [canAdd]="canAdd(i)"
-							 [canRemove]="canRemove(i)"
-							 [(cityFrom)]="flyRoute.cityFrom"
-							 [(cityTo)]="flyRoute.cityTo"
-							 (onAdd)="addFlyRoute()"
-							 (onRemove)="removeFlyRoute()">
+								 [routeNumber]="i+1"
+								 [canAdd]="canAdd(i)"
+								 [canRemove]="canRemove(i)"
+								 [hidden]="searchOptions.searchMode != 'multi_city' && i > 0"
+								 [(cityFrom)]="flyRoute.cityFrom"
+								 [(cityTo)]="flyRoute.cityTo"
+								 (onAdd)="addFlyRoute()"
+								 (onRemove)="removeFlyRoute()">
 		</h21-fly-route-selection>
 
 		<div class="row no-gutters">

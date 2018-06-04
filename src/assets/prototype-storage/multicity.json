@@ -2,55 +2,7 @@
 	"groups": [
 		{
 			"price": 195.50,
-			"items": [
-				{
-					"departureDateTime": "2018-11-10T07:25:00+03:00",
-					"arrivalDateTime": "2018-11-10T08:50:00+03:00",
-					"flightNumber": "2912",
-					"resBookDesigCode": "V",
-					"elapsedTime": 195,
-					"departureAirportCode": "DFW",
-					"departureAirportTerminal": "E",
-					"arrivalAirportCode": "LAX",
-					"arrivalAirportTerminal": "2"
-				},
-				{
-					"departureDateTime": "2018-11-10T07:30:00+03:00",
-					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
-					"flightNumber": "2912",
-					"resBookDesigCode": "V",
-					"elapsedTime": 190,
-					"departureAirportCode": "DFW",
-					"departureAirportTerminal": "E",
-					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
-				},
-				{
-					"departureDateTime": "2018-11-10T07:30:00+03:00",
-					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
-					"flightNumber": "2912",
-					"resBookDesigCode": "V",
-					"elapsedTime": 190,
-					"departureAirportCode": "DFW",
-					"departureAirportTerminal": "E",
-					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
-				},
-				{
-					"departureDateTime": "2018-11-10T07:30:00+03:00",
-					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
-					"flightNumber": "2912",
-					"resBookDesigCode": "V",
-					"elapsedTime": 190,
-					"departureAirportCode": "DFW",
-					"departureAirportTerminal": "E",
-					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
-				}
-			]
-		},
-		{
-			"price": 240,
+			"totalElapsedTime": 300,
 			"items": [
 				{
 					"departureDateTime": "2018-11-10T07:25:00+03:00",
@@ -62,7 +14,8 @@
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "LAX",
 					"arrivalAirportTerminal": "2",
-					"price": 195.50
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -73,7 +26,15 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg",
+					"transfers": [
+						{
+							"time": "2018-11-10T09:50:00+03:00",
+							"airportCode": "LAX"
+						}
+					]
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -84,7 +45,9 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -95,12 +58,15 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				}
 			]
 		},
 		{
 			"price": 240,
+			"totalElapsedTime": 290,
 			"items": [
 				{
 					"departureDateTime": "2018-11-10T07:25:00+03:00",
@@ -111,7 +77,15 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "LAX",
-					"arrivalAirportTerminal": "2"
+					"arrivalAirportTerminal": "2",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg",
+					"transfers": [
+						{
+							"time": "2018-11-10T09:50:00+03:00",
+							"airportCode": "LAX"
+						}
+					]
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -122,7 +96,9 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -133,7 +109,9 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				},
 				{
 					"departureDateTime": "2018-11-10T07:30:00+03:00",
@@ -144,7 +122,83 @@
 					"departureAirportCode": "DFW",
 					"departureAirportTerminal": "E",
 					"arrivalAirportCode": "ALB",
-					"arrivalAirportTerminal": "C"
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg",
+					"transfers": [
+						{
+							"time": "2018-11-10T09:50:00+03:00",
+							"airportCode": "LAX"
+						}
+					]
+				}
+			]
+		},
+		{
+			"price": 240,
+			"totalElapsedTime": 350,
+			"items": [
+				{
+					"departureDateTime": "2018-11-10T07:25:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:50:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 195,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "LAX",
+					"arrivalAirportTerminal": "2",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg",
+					"transfers": [
+						{
+							"time": "2018-11-10T09:50:00+03:00",
+							"airportCode": "LAX"
+						},
+						{
+							"time": "2018-11-10T09:50:00+03:00",
+							"airportCode": "DFW"
+						}
+					]
+				},
+				{
+					"departureDateTime": "2018-11-10T07:30:00+03:00",
+					"arrivalDateTime": "2018-11-10T08:40:00+03:00",
+					"flightNumber": "2912",
+					"resBookDesigCode": "V",
+					"elapsedTime": 190,
+					"departureAirportCode": "DFW",
+					"departureAirportTerminal": "E",
+					"arrivalAirportCode": "ALB",
+					"arrivalAirportTerminal": "C",
+					"arrivalLogo": "swiss.svg",
+					"departureLogo": "swiss.svg"
 				}
 			]
 		}

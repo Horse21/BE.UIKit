@@ -11,7 +11,7 @@ import { FlyRoute } from '../../dto/fly-route';
 export class H21SearchPanelComponent implements OnInit {
 	constructor(private _appSubscriber: AppSubscriberService) {
 		this.searchOptions = <SearchFlightDto>{
-			flyRoutes: [<FlyRoute>{},<FlyRoute>{}],
+			flyRoutes: [<FlyRoute>{}],
 			searchMode: 'round_trip'
 		};
 	}
@@ -53,18 +53,15 @@ export class H21SearchPanelComponent implements OnInit {
 	changeMode() {
 		switch (this.searchOptions.searchMode) {
 			case 'one_way': {
-				while (this.searchOptions.flyRoutes.length > 1) {
+				/*while (this.searchOptions.flyRoutes.length > 1) {
 					this.searchOptions.flyRoutes.pop();
-				}
+				}*/
 				break;
 			}
 			case 'round_trip': {
-				while (this.searchOptions.flyRoutes.length > 2) {
+				/*while (this.searchOptions.flyRoutes.length > 1) {
 					this.searchOptions.flyRoutes.pop();
-				}
-				if (this.searchOptions.flyRoutes.length == 1) {
-					this.searchOptions.flyRoutes.push(<FlyRoute>{});
-				}
+				}*/
 				break;
 			}
 		}
@@ -80,8 +77,6 @@ export class H21SearchPanelComponent implements OnInit {
 			case 'round_trip': {
 				this.searchOptions.flyRoutes[0].cityFrom = null;
 				this.searchOptions.flyRoutes[0].cityTo = null;
-				this.searchOptions.flyRoutes[1].cityFrom = null;
-				this.searchOptions.flyRoutes[1].cityTo = null;
 				break;
 			}
 			case 'multi_city': {

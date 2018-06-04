@@ -56,10 +56,10 @@ export class H21SidebarComponent implements OnInit {
 	}
 
 	search(searchOptions: SearchFlightDto) {
-		this.resultPanel.result = new SearchResult();
+		this.resultPanel.setResult(new SearchResult());
 		this.showList();
 		this._vocabulary.searchFlights(searchOptions).subscribe(result=>{
-			this.resultPanel.result = result;
+			this.resultPanel.setResult(result);
 		});
 	}
 

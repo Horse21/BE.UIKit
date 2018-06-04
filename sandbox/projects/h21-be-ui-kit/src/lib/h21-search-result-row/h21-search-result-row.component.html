@@ -3,7 +3,7 @@
 		<div class="c-h21-search-result-row_flight row no-gutters">
 			<div class="col-sm-2">
 				<div class="c-h21-search-result-row_airline-logo">
-					<img src="/assets/airline_logos/swiss.svg" alt="" />
+					<img src="/assets/airline_logos/{{item.arrivalLogo}}" alt="" />
 				</div>
 				<span class="c-h21-search-result-row_small-label">{{item.arrivalDateTime | date: 'EEE, MMM dd'}}</span>
 			</div>
@@ -13,9 +13,9 @@
 			</div>
 			<div class="col-sm-2">
 				<div class="c-h21-search-result-row_transfer-indicator">
-					<mat-icon>flight</mat-icon>
+					<mat-icon *ngIf="!!item.transfers">flight</mat-icon>
 				</div>
-				<span class="c-h21-search-result-row_small-label">4h 45m (1 stop)</span>
+				<span class="c-h21-search-result-row_small-label">{{getTimeString(item)}}</span>
 			</div>
 			<div class="col-sm-2">
 				<span class="c-h21-search-result-row_large-label">{{item.departureDateTime | date: 'HH:mm'}}</span>
@@ -23,7 +23,7 @@
 			</div>
 			<div class="col-sm-2">
 				<div class="c-h21-search-result-row_airline-logo">
-					<img src="/assets/airline_logos/swiss.svg" alt="" />
+					<img src="/assets/airline_logos/{{item.departureLogo}}" alt="" />
 				</div>
 				<span class="c-h21-search-result-row_small-label">{{item.departureDateTime | date: 'EEE, MMM dd'}}</span>
 			</div>
