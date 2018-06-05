@@ -702,6 +702,11 @@ a.c-h21-header_logo {
   }
 }
 
+.c-h21-passangers-search_snackbar {
+  background: $h21-color-bg-dark;
+  color: white;
+}
+
 .c-h21-passangers-search_result-list {
   &.mat-list {
 	padding: 0;

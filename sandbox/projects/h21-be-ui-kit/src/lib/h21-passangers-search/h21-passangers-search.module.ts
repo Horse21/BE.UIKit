@@ -5,7 +5,7 @@ import {
 	MatCardModule,
 	MatFormFieldModule,
 	MatIconModule,
-	MatListModule
+	MatListModule, MatSnackBarModule
 } from "@angular/material";
 import {H21PassangersSearchComponent} from "./h21-passangers-search.component"
 
@@ -16,7 +16,8 @@ import {H21PassangersSearchComponent} from "./h21-passangers-search.component"
 		MatIconModule,
 		MatFormFieldModule,
 		MatListModule,
-		MatCardModule
+		MatCardModule,
+		MatSnackBarModule
 	],
 	declarations: [H21PassangersSearchComponent],
 	exports: [H21PassangersSearchComponent]

@@ -7,16 +7,16 @@ import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref";
 	templateUrl: "./h21-right-overlay-panel.component.html",
 	animations: [
 		trigger('toggleVisibility', [
-			state('is-hidden', style({transform: 'transalteX(-500px)'})),
-			state('is-visible',style({transform: 'transalteX(0)'})),
-			transition('is-hidden => is-visible', animate('400ms')),
-			transition('is-visible => is-hidden', animate('400ms'))
+			state('void', style({transform: 'translateX(550px)'})),
+			state('enter', style({transform: 'translateX(0)'})),
+			state('leave',style({transform: 'translateX(550px)'})),
+			transition('* => *', animate('120ms')),
 		])
 	]
 })
 
 export class H21RightOverlayPanelComponent {
-	animationState: 'is-hidden' | 'is-visible' = 'is-hidden';
+	animationState: 'void' | 'enter' | 'leave' = 'enter';
 	animationStateChanged = new EventEmitter<AnimationEvent>();
 
 	constructor (public dialogRef: H21RightOverlayPanelRef) {
@@ -33,5 +33,9 @@ export class H21RightOverlayPanelComponent {
 
 	onAnimationDone(event: AnimationEvent) {
 		this.animationStateChanged.emit(event);
+	}
+
+	startExitAnimation() {
+		this.animationState = 'leave';
 	}
 }
