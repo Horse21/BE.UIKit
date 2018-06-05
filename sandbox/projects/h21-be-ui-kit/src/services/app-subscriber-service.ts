@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Traveler } from '../dto/traveler';
 import { SearchFlightDto } from '../dto/search-flight-dto';
 import { Observable, Subject } from 'rxjs';
 
@@ -31,5 +32,21 @@ export class AppSubscriberService {
 
 	searchResultModeObservable(): Observable<string> {
 		return this._searchResultMode.asObservable();
+	}
+
+	/* traveler selecter */
+
+	private _traveler = new Subject<any>();
+
+	addTraveler(traveler: Traveler) {
+		return this._traveler.next(traveler);
+	}
+
+	removeTraveler(id: number) {
+		return this._traveler.next();
+	}
+
+	travelerObservable(): Observable<any> {
+		return this._traveler.asObservable();
 	}
 }
