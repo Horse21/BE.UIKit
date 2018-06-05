@@ -14,6 +14,7 @@ export class H21SidebarComponent implements OnInit {
 	activeTab: string = 'tab-search';
 	visibility = true;
 	listVisibility = false;
+	actionInProcess = false;
 	@ViewChild(H21SearchResultComponent) private resultPanel: H21SearchResultComponent;
 
 	constructor(private _vocabulary: VocabularyService,
@@ -58,9 +59,13 @@ export class H21SidebarComponent implements OnInit {
 	search(searchOptions: SearchFlightDto) {
 		this.resultPanel.setResult(new SearchResult());
 		this.showList();
-		this._vocabulary.searchFlights(searchOptions).subscribe(result=>{
-			this.resultPanel.setResult(result);
-		});
+		this.actionInProcess = true;
+		setTimeout(()=>{
+			this._vocabulary.searchFlights(searchOptions).subscribe(result=>{
+				this.resultPanel.setResult(result);
+				this.actionInProcess = false;
+			});
+		}, 2000);
 	}
 
 	clearSearch() {

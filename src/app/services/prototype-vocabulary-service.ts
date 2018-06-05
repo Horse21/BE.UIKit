@@ -27,7 +27,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 	}
 
 	public searchFlights(options: SearchFlightDto): Observable<SearchResult> {
-		console.log(options.searchMode);
+
 		switch (options.searchMode) {
 			case 'round_trip':
 				return this._http.get<SearchResult>('../../assets/prototype-storage/round-trip.json');
