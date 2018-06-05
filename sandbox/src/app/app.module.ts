@@ -11,7 +11,6 @@ import {DocsNavigationComponent} from './docs-navigation/docs-navigation.compone
 import {DocsComponent} from './docs/docs.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {OverlayModule} from "@angular/cdk/overlay";
 
 // H21 components
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -28,6 +27,7 @@ import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h2
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
+import {H21PassangersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
 
 // Examples
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
@@ -72,6 +72,7 @@ const routes: Routes = [
 		H21HeaderUserSelectorDialogComponent,
 		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
+		H21PassangersSearchComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		ButtonsExampleComponent,

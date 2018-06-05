@@ -4,14 +4,16 @@ import {MatButtonModule, MatIconModule} from "@angular/material";
 import {H21RightOverlayPanelComponent} from "./h21-right-overlay-panel.component";
 import {H21RightOverlayPanelService} from "./h21-right-overlay-panel.service";
 import {H21RightOverlayPanelRef} from "./h21-right-overlay-panel-ref";
+import {H21PassangersSearchModule} from "../h21-passangers-search/h21-passangers-search.module";
 
 @NgModule({
 	imports: [
 		CommonModule,
 		MatButtonModule,
 		MatIconModule,
+		H21PassangersSearchModule
 	],
-	declarations: [H21RightOverlayPanelComponent, H21RightOverlayPanelService, H21RightOverlayPanelRef],
+	declarations: [H21RightOverlayPanelComponent],
 	exports: [H21RightOverlayPanelComponent]
 })
 export class H21RightOverlayPanelModule {

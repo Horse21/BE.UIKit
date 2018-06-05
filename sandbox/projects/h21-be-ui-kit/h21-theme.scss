@@ -266,25 +266,29 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
 // mat-icon size modifiers
 .mat-icon {
-  & .__size-s {
+  &.__size-s {
 	width: 16px;
 	height: 16px;
 	font-size: 16px;
+	line-height: 16px !important;
   }
-  & .__size-m {
+  &.__size-m {
 	width: 24px;
 	height: 24px;
 	font-size: 24px;
+	line-height: 24px !important;
   }
-  & .__size-l {
+  &.__size-l {
 	width: 32px;
 	height: 32px;
 	font-size: 32px;
+	line-height: 32px !important;
   }
-  & .__size-xl {
+  &.__size-xl {
 	width: 48px;
 	height: 48px;
 	font-size: 48px;
+	line-height: 48px !important;
   }
 }
 
@@ -646,6 +650,148 @@ a.c-h21-header_logo {
 	}
   }
 }
+// h21-passangers-search component
+.c-h21-passangers-search {
+  .c-h21-passangers-search_search-field-box {
+	background-color: $h21-color-ui-primary;
+	box-sizing: border-box;
+	padding: 25px 30px 45px 30px;
+	.mat-form-field {
+	  width: 100%;
+	  background: white;
+
+	  .mat-input-element {
+		font-size: 14px;
+	  }
+	  .mat-icon {
+		color: #757575;
+	  }
+	  .mat-form-field-wrapper {
+		padding-bottom: 0;
+	  }
+	  .mat-form-field-flex {
+		background: none;
+		padding: .75em;
+		align-items: center;
+
+		.mat-form-field-infix {
+		  border-top-width: 0;
+		  padding: 0;
+		}
+	  }
+	  .mat-form-field-label-wrapper {
+		padding: 0;
+	  }
+	  .mat-form-field-underline {
+		display: none;
+	  }
+	  .mat-form-field-label-wrapper {
+		top: 0;
+	  }
+	  .mat-form-field-subscript-wrapper {
+		display: none;
+	  }
+	}
+  }
+  .c-h21-passangers-search_title {
+	font-size: 24px;
+	color: white;
+	font-weight: 300;
+	display: block;
+	margin-bottom: 20px;
+  }
+}
+
+.c-h21-passangers-search_result-list {
+  &.mat-list {
+	padding: 0;
+  }
+  &.mat-list .mat-list-item {
+	height: auto;
+	.mat-list-item-content {
+	  padding: 0;
+	}
+  }
+}
+
+.c-h21-passangers-search_result-card {
+  &.mat-card {
+	padding: 0;
+	width: 100%;
+	height: 80px;
+	position: relative;
+	background-color: white;
+	transition: background-color 0.2s;
+
+	&:hover {
+	  background-color: #f0f0f0;
+	}
+
+	&:not([class*=mat-elevation-z]) {
+	  @include mat-elevation(0);
+	}
+	.mat-card-header {
+	  width: 100%;
+	  height: 80px;
+	  padding: 12px 26px;
+
+	  .mat-card-avatar {
+		height: 56px;
+		width: 56px;
+	  }
+	  .mat-card-header-text {
+		width: 100%;
+		margin-left: 12px;
+		margin-right: 12px;
+	  }
+	  .mat-card-title {
+		color: #4f5a7c;
+		font-size: 18px;
+		font-weight: 300;
+		margin-bottom: 8px;
+	  }
+	  .mat-card-subtitle {
+		font-size: 14px;
+		color: #4f5a7c;
+		font-weight: 700;
+		margin-bottom: 8px;
+	  }
+	  .c-h21-passangers-search-result-card_company {
+		float: right;
+		font-size: 14px;
+		font-weight: 700;
+		color: #4f5a7c;
+		white-space: nowrap;
+	  }
+	}
+	.mat-card-actions {
+	  height: 80px;
+	  width: 50px;
+	  position: absolute;
+	  top: 0;
+	  right: -80px;
+	  margin: 0;
+	  padding: 0;
+	  transition: right 0.2s;
+
+	  .mat-raised-button {
+		height: 80px;
+		width: 50px;
+		min-width: 50px;
+		padding: 0;
+		font-size: 18px;
+		border-radius: 0;
+		&:not([class*=mat-elevation-z]) {
+		  @include mat-elevation(0);
+		}
+	  }
+	}
+	&:hover .mat-card-actions {
+	  right: 0;
+	}
+  }
+}
+
 
 // h21-search-result component
 .c-h21-search-result {
@@ -1256,8 +1402,9 @@ a.c-h21-header_logo {
 
   .c-h21-right-overlay-panel_close-btn {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 15px;
+	right: 20px;
+	color: white;
   }
 }
 

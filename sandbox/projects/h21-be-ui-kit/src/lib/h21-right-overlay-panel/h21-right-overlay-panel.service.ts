@@ -1,13 +1,14 @@
 import { Injectable, Injector, ComponentRef} from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+
 import { H21RightOverlayPanelComponent } from "./h21-right-overlay-panel.component";
 import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref";
 
 @Injectable()
 export class H21RightOverlayPanelService {
 
-	constructor(private overlay: Overlay) {
+	constructor(private injector: Injector, private overlay: Overlay) {
 
 	}
 
@@ -21,15 +22,13 @@ export class H21RightOverlayPanelService {
 
 	open() {
 		const overlayRef = this.overlay.create(this.overlayConfig);
-
 		const dialogRef = new H21RightOverlayPanelRef(overlayRef);
-
-		const containerPortal = new ComponentPortal(H21RightOverlayPanelComponent);
-
+		const injectionTokens = new WeakMap();
+		injectionTokens.set(H21RightOverlayPanelRef, dialogRef);
+		const injector = new PortalInjector(this.injector, injectionTokens);
+		const containerPortal = new ComponentPortal(H21RightOverlayPanelComponent, null, injector);
 		const containerRef: ComponentRef<H21RightOverlayPanelComponent> = overlayRef.attach(containerPortal);
-
 		dialogRef.componentInstance = containerRef.instance;
-
 		return dialogRef;
 	}
 }

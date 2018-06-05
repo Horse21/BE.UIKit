@@ -5,10 +5,11 @@ export class H21RightOverlayPanelRef {
 
 	componentInstance: H21RightOverlayPanelComponent;
 
-	constructor(private overlayRef: OverlayRef) { }
+	constructor(private overlayRef: OverlayRef) {
+
+	}
 
 	close(): void {
 		this.overlayRef.dispose();
 	}
-
 }

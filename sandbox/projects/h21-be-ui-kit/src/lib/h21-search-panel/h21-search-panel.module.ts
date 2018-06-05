@@ -9,10 +9,10 @@ import {
 	MatDividerModule, MatFormFieldModule,
 	MatIconModule, MatMenuModule, MatOptionModule, MatSelectModule
 } from "@angular/material";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {H21RightOverlayPanelModule} from "../h21-right-overlay-panel/h21-right-overlay-panel.module"
 import {H21FlyRouteSelectionComponent} from "./h21-fly-route-selection.component";
 import {H21PassangersSelectComponent} from "./h21-passangers-select.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {H21RightOverlayPanelComponent} from "../h21-right-overlay-panel/h21-right-overlay-panel.component"
 
 @NgModule({
 	imports: [
@@ -29,9 +29,10 @@ import {H21RightOverlayPanelComponent} from "../h21-right-overlay-panel/h21-righ
 		FormsModule,
 		ReactiveFormsModule,
 		MatSelectModule,
-		MatMenuModule
+		MatMenuModule,
+		H21RightOverlayPanelModule
 	],
-	declarations: [H21SearchPanelComponent, H21FlyRouteSelectionComponent, H21PassangersSelectComponent, H21RightOverlayPanelComponent],
+	declarations: [H21SearchPanelComponent, H21FlyRouteSelectionComponent, H21PassangersSelectComponent],
 	exports: [H21SearchPanelComponent]
 })
 export class H21SearchPanelModule {
