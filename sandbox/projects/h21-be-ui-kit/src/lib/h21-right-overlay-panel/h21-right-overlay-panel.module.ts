@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule, MatIconModule} from "@angular/material";
 import {H21RightOverlayPanelComponent} from "./h21-right-overlay-panel.component";
-import {H21RightOverlayPanelService} from "./h21-right-overlay-panel.service";
-import {H21RightOverlayPanelRef} from "./h21-right-overlay-panel-ref";
 import {H21PassangersSearchModule} from "../h21-passangers-search/h21-passangers-search.module";
 
 @NgModule({

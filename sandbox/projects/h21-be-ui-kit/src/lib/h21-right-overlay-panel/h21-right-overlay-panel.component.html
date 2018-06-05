@@ -1,4 +1,7 @@
-<div class="c-h21-right-overlay-panel">
+<div class="c-h21-right-overlay-panel"
+	 [@toggleVisibility]="animationState"
+	 (@toggleVisibility.start)="onAnimationStart($event)"
+	 (@toggleVisibility.done)="onAnimationDone($event)">
 	<button mat-icon-button class="c-h21-right-overlay-panel_close-btn" (click)="close();">
 		<mat-icon class="__size-l">close</mat-icon>
 	</button>
