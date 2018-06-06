@@ -103,6 +103,6 @@ export class H21PassangersSelectComponent {
 	}
 
 	openOverlayPanel() {
-		let dialogRef: H21RightOverlayPanelRef = this.rightPanelDialog.open();
+		let dialogRef: H21RightOverlayPanelRef = this.rightPanelDialog.open('h21-passangers-search');
 	}
 }

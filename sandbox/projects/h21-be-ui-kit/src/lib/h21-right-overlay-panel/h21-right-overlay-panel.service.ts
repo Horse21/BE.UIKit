@@ -9,7 +9,6 @@ import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref";
 export class H21RightOverlayPanelService {
 
 	constructor(private injector: Injector, private overlay: Overlay) {
-
 	}
 
 	overlayConfig = {
@@ -20,7 +19,7 @@ export class H21RightOverlayPanelService {
 		panelClass: '',
 	};
 
-	open() {
+	open(componentType: string) {
 		const overlayRef = this.overlay.create(this.overlayConfig);
 		const dialogRef = new H21RightOverlayPanelRef(overlayRef);
 		const injectionTokens = new WeakMap();
@@ -29,6 +28,7 @@ export class H21RightOverlayPanelService {
 		const containerPortal = new ComponentPortal(H21RightOverlayPanelComponent, null, injector);
 		const containerRef: ComponentRef<H21RightOverlayPanelComponent> = overlayRef.attach(containerPortal);
 		dialogRef.componentInstance = containerRef.instance;
+		dialogRef.componentInstance.componentType = componentType;
 		return dialogRef;
 	}
 }

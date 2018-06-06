@@ -16,12 +16,11 @@ import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref";
 })
 
 export class H21RightOverlayPanelComponent {
+	componentType: string;
 	animationState: 'void' | 'enter' | 'leave' = 'enter';
 	animationStateChanged = new EventEmitter<AnimationEvent>();
 
-	constructor (public dialogRef: H21RightOverlayPanelRef) {
-
-	}
+	constructor (public dialogRef: H21RightOverlayPanelRef) {}
 
 	close() {
 		this.dialogRef.close();
