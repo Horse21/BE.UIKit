@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { Traveler } from '../../dto/traveler';
+import { Passenger } from '../../dto/passenger';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import {H21RightOverlayPanelService} from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
 import {H21RightOverlayPanelRef} from "../h21-right-overlay-panel/h21-right-overlay-panel-ref";
@@ -67,14 +67,17 @@ export class H21PassangersSelectComponent {
 	@Input() adultCount = 1;
 	@Input() childrenCount = 0;
 	@Input() infantCount = 0;
+	passengers: Passenger[] = [];
 
 	constructor(private rightPanelDialog: H21RightOverlayPanelService,
 		appSubscriber: AppSubscriberService) {
 		appSubscriber.travelerObservable()
 			.subscribe(value => {
-				if (typeof value === 'number') {
+				if (typeof value === 'string') {
+					this.passengers = this.passengers.filter(x=>x.id != value);
 					this.removePassanger('adult');
 				} else {
+					this.passengers.push(value);
 					this.addPassanger('adult');
 				}
 			});

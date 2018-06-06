@@ -4,4 +4,6 @@ export class Passenger {
 	firstName: string;
 	surname: string;
 	email: string;
+	company: string;
+	position: string;
 }

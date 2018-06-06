@@ -1,5 +1,7 @@
 import {Component} from "@angular/core";
-import { Traveler } from '../../dto/traveler';
+import { VocabularyService } from '../../services/vocabulary-service';
+import { Observable } from 'rxjs/internal/Observable';
+import { Passenger } from '../../dto/passenger';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import {MatSnackBar} from "@angular/material"
 
@@ -9,22 +11,31 @@ import {MatSnackBar} from "@angular/material"
 })
 
 export class H21PassangersSearchComponent {
-	constructor (private _appSubscriber: AppSubscriberService, public snackBar: MatSnackBar) {}
-	selectedTravelers: number[] = [];
+	constructor(
+		private _appSubscriber: AppSubscriberService,
+		public snackBar: MatSnackBar,
+		private _vocabulary: VocabularyService
+	) {
+	}
 
-	selectTraveler(id: number) {
-		this.selectedTravelers.push(id);
-		this._appSubscriber.addTraveler(<Traveler>{
-			id: id,
-			name: 'traveler ' + id
-		});
+	selectedTravelers: string[] = [];
+	passengers: Observable<Passenger[]>;
+
+	selectTraveler(passenger: Passenger) {
+		this.selectedTravelers.push(passenger.id);
+		this._appSubscriber.addTraveler(passenger);
 
 		this.snackBar.open('Traveler has ben added', '', {
-			duration: 1000, panelClass: 'c-h21-passangers-search_snackbar'
+			duration: 1000,
+			panelClass: 'c-h21-passangers-search_snackbar'
 		});
 	}
 
-	isSelected(id: number): boolean {
+	isSelected(id: string): boolean {
 		return this.selectedTravelers.indexOf(id) != -1;
+	}
+
+	search(searchPattern: string) {
+		this.passengers = this._vocabulary.searchPassengers(searchPattern);
 	}
 }

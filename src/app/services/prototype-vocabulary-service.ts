@@ -6,6 +6,7 @@ import { City } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/city';
 import { Observable } from 'rxjs';
 import { SearchFlightDto } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/search-flight-dto';
 import { SearchResult } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/search-result';
+import { Passenger } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/passenger';
 
 @Injectable()
 export class PrototypeVocabularyService implements VocabularyService {
@@ -38,6 +39,19 @@ export class PrototypeVocabularyService implements VocabularyService {
 			default:
 				return undefined;
 		}
+	}
 
+	public searchPassengers(pattern: string): Observable<Passenger[]> {
+		if (!pattern) {
+			return Observable.create();
+		}
+		return this._http.get<Passenger[]>("../../assets/prototype-storage/passengers.json")
+			.pipe(map(data => {
+				return data.filter(x => (x.firstName && x.firstName.indexOf(pattern) != -1)
+										|| (x.surname && x.surname.indexOf(pattern) != -1))
+					.filter((i, index) => (
+						index < 10
+					));
+			}));
 	}
 }

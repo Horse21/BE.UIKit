@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Traveler } from '../dto/traveler';
+import { Passenger } from '../dto/passenger';
 import { SearchFlightDto } from '../dto/search-flight-dto';
 import { Observable, Subject } from 'rxjs';
 
@@ -38,11 +38,11 @@ export class AppSubscriberService {
 
 	private _traveler = new Subject<any>();
 
-	addTraveler(traveler: Traveler) {
+	addTraveler(traveler: Passenger) {
 		return this._traveler.next(traveler);
 	}
 
-	removeTraveler(id: number) {
+	removeTraveler(id: string) {
 		return this._traveler.next();
 	}
 
