@@ -21,7 +21,7 @@ import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/li
 import {H21PassangersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component";
 import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
 import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
-import {H21FilterPanelComponent} from './h21-filter-panel/h21-filter-panel.component';
+import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
 import {H21SidebarHistoryPanelComponent} from './h21-sidebar-history-panel/h21-sidebar-history-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';

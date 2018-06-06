@@ -25,6 +25,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { H21RightOverlayPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import { H21PassangersSearchComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
+import { H21FilterPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -45,7 +46,8 @@ const routes: Routes = [
 			H21SearchResultRowComponent,
 			H21PassangersSelectComponent,
 			H21RightOverlayPanelComponent,
-			H21PassangersSearchComponent
+			H21PassangersSearchComponent,
+			H21FilterPanelComponent
 		],
 		imports: [
 			BrowserModule,
