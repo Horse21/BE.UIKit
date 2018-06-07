@@ -18,11 +18,11 @@ export class H21PassangersSearchComponent {
 	) {
 	}
 
-	selectedTravelers: string[] = [];
+	selectedTravelers: Passenger[] = [];
 	passengers: Observable<Passenger[]>;
 
 	selectTraveler(passenger: Passenger) {
-		this.selectedTravelers.push(passenger.id);
+		this.selectedTravelers.push(passenger);
 		this._appSubscriber.addTraveler(passenger);
 
 		this.snackBar.open('Traveler has ben added', '', {
@@ -32,7 +32,7 @@ export class H21PassangersSearchComponent {
 	}
 
 	isSelected(id: string): boolean {
-		return this.selectedTravelers.indexOf(id) != -1;
+		return this.selectedTravelers.filter(x => x.id == id).length != 0;
 	}
 
 	search(searchPattern: string) {

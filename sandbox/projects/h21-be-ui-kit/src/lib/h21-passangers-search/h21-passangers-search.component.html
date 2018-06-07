@@ -8,7 +8,7 @@
 	</div>
 	<mat-list class="c-h21-passangers-search_result-list">
 		<mat-list-item *ngFor="let passenger of passengers | async">
-			<mat-card class="c-h21-passangers-search_result-card">
+			<mat-card class="c-h21-passangers-search_result-card" [class.is-selected]="isSelected(passenger.id)">
 				<mat-card-header>
 					<img src="/assets/avatar-picture.png" mat-card-avatar alt="" />
 					<mat-card-title>{{passenger.firstName}} {{passenger.surname}}</mat-card-title>
