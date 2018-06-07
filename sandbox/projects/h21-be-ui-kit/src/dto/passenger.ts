@@ -6,4 +6,5 @@ export class Passenger {
 	email: string;
 	company: string;
 	position: string;
+	listState: string;
 }

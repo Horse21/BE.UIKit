@@ -34,19 +34,24 @@ export class AppSubscriberService {
 		return this._searchResultMode.asObservable();
 	}
 
-	/* traveler selecter */
+	/* traveler selector */
 
 	private _traveler = new Subject<any>();
+	private _removeTraveler = new Subject<any>();
 
 	addTraveler(traveler: Passenger) {
 		return this._traveler.next(traveler);
 	}
 
-	removeTraveler(id: string) {
-		return this._traveler.next();
+	removeTraveler(traveler: Passenger) {
+		return this._removeTraveler.next(traveler);
 	}
 
-	travelerObservable(): Observable<any> {
+	travelerObservable(): Observable<Passenger> {
+		return this._traveler.asObservable();
+	}
+
+	removeTravelerObservable(): Observable<Passenger> {
 		return this._traveler.asObservable();
 	}
 }

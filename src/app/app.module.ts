@@ -16,6 +16,7 @@ import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/serv
 import { H21PassangersSelectComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component';
 import { H21RightOverlayPanelService } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { AppSubscriberService } from '../../sandbox/projects/h21-be-ui-kit/src/services/app-subscriber-service';
+import { OrderService } from '../../sandbox/projects/h21-be-ui-kit/src/services/order-service';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -69,7 +70,8 @@ const routes: Routes = [
 				useClass: PrototypeVocabularyService
 			},
 			H21RightOverlayPanelService,
-			AppSubscriberService
+			AppSubscriberService,
+			OrderService
 		],
 		bootstrap: [AppComponent],
 		entryComponents: [H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]
