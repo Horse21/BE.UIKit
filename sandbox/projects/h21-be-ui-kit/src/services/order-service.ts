@@ -4,7 +4,7 @@ import { OrderData } from '../dto/order-data';
 
 @Injectable()
 export class OrderService {
-	private _orderData: OrderData;
+	private _orderData: OrderData = new OrderData();
 
 	addPassenger(passenger: Passenger) {
 		this._orderData.passengers.push(passenger);

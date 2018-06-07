@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscriber } from 'rxjs/index';
 import { OrderService } from '../../services/order-service';
 import { VocabularyService } from '../../services/vocabulary-service';
 import { Observable } from 'rxjs/internal/Observable';
@@ -25,13 +26,18 @@ export class H21PassangersSearchComponent implements OnInit {
 
 	public ngOnInit(): void {
 		if (this.onlySelected) {
-			this.passengers = Observable.create(this._orderService.getPassengers());
+			var selectedPassengers = this._orderService.getPassengers();
+			this.passengers = Observable.create((observer: Subscriber<any>) => {
+				observer.next(selectedPassengers);
+				observer.complete();
+			});
 		}
 	}
 
 	selectTraveler(passenger: Passenger) {
 		passenger.listState = 'selected';
 		this._appSubscriber.addTraveler(passenger);
+		this._orderService.addPassenger(passenger);
 
 		this.snackBar.open('Traveler has ben added', '', {
 			duration: 1000,
@@ -47,6 +53,7 @@ export class H21PassangersSearchComponent implements OnInit {
 		if (passenger.listState == 'confirm') {
 			passenger.listState = null;
 			this._appSubscriber.removeTraveler(passenger);
+			this._orderService.removePassenger(passenger.id);
 		} else {
 			passenger.listState = 'confirm';
 		}
