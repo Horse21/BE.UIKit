@@ -20,8 +20,4 @@ export class H21FilterPanelComponent {
 			max: 1000
 		},
 	};
-
-	// pageSteps: 10,  // number of page steps, defaults to 10
-	// keyboard: true,  // same as [keyboard]="true"
-
 }
