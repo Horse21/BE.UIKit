@@ -11,6 +11,7 @@ import {DocsNavigationComponent} from './docs-navigation/docs-navigation.compone
 import {DocsComponent} from './docs/docs.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NouisliderModule} from 'ng2-nouislider';
 
 // H21 components
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -96,7 +97,8 @@ const routes: Routes = [
 		AppMaterialModule,
 		HttpClientModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		NouisliderModule
 	],
 	providers: [
 		{provide: VocabularyService, useValue: new FakeVocabularyService()},
