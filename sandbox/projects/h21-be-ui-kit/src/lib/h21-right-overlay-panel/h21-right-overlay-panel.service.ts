@@ -29,6 +29,5 @@ export class H21RightOverlayPanelService {
 		const containerRef: ComponentRef<H21RightOverlayPanelComponent> = overlayRef.attach(containerPortal);
 		dialogRef.componentInstance = containerRef.instance;
 		dialogRef.componentInstance.componentType = componentType;
-		return dialogRef;
 	}
 }

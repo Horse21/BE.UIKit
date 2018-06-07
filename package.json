@@ -31,7 +31,8 @@
 		"oidc-client": "^1.4.1",
 		"rxjs": "^6.1.0",
 		"zone.js": "^0.8.26",
-		"ng2-nouislider": "^1.7.11"
+		"ng2-nouislider": "1.7.11",
+		"nouislider": "11.1.0"
 	},
 	"devDependencies": {
 		"@angular/animations": "6.0.1",

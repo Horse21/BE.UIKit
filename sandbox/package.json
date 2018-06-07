@@ -30,7 +30,7 @@
 		"h21-custom-css": "^1.0.1610",
 		"ng2-nouislider": "^1.7.11",
 		"normalize.css": "^8.0.0",
-		"nouislider": "^11.1.0",
+		"nouislider": "11.1.0",
 		"oidc-client": "^1.4.1",
 		"rxjs": "^6.1.0",
 		"zone.js": "^0.8.26"

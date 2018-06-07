@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { AppSubscriberService } from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
+import { OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
 import {FakeVocabularyService} from '../services/fake-vocabulary-service';
 import {VocabularyService} from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import {AppComponent} from './app.component';
@@ -103,7 +104,8 @@ const routes: Routes = [
 	providers: [
 		{provide: VocabularyService, useValue: new FakeVocabularyService()},
 		H21RightOverlayPanelService,
-		AppSubscriberService
+		AppSubscriberService,
+		OrderService
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]

@@ -1,4 +1,6 @@
-import {Component} from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscriber } from 'rxjs/index';
+import { OrderService } from '../../services/order-service';
 import { VocabularyService } from '../../services/vocabulary-service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Passenger } from '../../dto/passenger';
@@ -10,20 +12,32 @@ import {MatSnackBar} from "@angular/material"
 	templateUrl: './h21-passangers-search.component.html'
 })
 
-export class H21PassangersSearchComponent {
+export class H21PassangersSearchComponent implements OnInit {
 	constructor(
 		private _appSubscriber: AppSubscriberService,
 		public snackBar: MatSnackBar,
-		private _vocabulary: VocabularyService
+		private _vocabulary: VocabularyService,
+		private _orderService: OrderService
 	) {
 	}
 
-	selectedTravelers: Passenger[] = [];
 	passengers: Observable<Passenger[]>;
+	@Input() onlySelected = false;
+
+	public ngOnInit(): void {
+		if (this.onlySelected) {
+			var selectedPassengers = this._orderService.getPassengers();
+			this.passengers = Observable.create((observer: Subscriber<any>) => {
+				observer.next(selectedPassengers);
+				observer.complete();
+			});
+		}
+	}
 
 	selectTraveler(passenger: Passenger) {
-		this.selectedTravelers.push(passenger);
+		passenger.listState = 'selected';
 		this._appSubscriber.addTraveler(passenger);
+		this._orderService.addPassenger(passenger);
 
 		this.snackBar.open('Traveler has ben added', '', {
 			duration: 1000,
@@ -31,11 +45,17 @@ export class H21PassangersSearchComponent {
 		});
 	}
 
-	isSelected(id: string): boolean {
-		return this.selectedTravelers.filter(x => x.id == id).length != 0;
-	}
-
 	search(searchPattern: string) {
 		this.passengers = this._vocabulary.searchPassengers(searchPattern);
+	}
+
+	removePassenger(passenger: Passenger) {
+		if (passenger.listState == 'confirm') {
+			passenger.listState = null;
+			this._appSubscriber.removeTraveler(passenger);
+			this._orderService.removePassenger(passenger.id);
+		} else {
+			passenger.listState = 'confirm';
+		}
 	}
 }
