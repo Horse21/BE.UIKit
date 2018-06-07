@@ -9,15 +9,19 @@ export class H21FilterPanelComponent {
 
 	matExpansionPanelHeaderDefaultHeight = '44px';
 
+	minPrice = 1;
+	maxPrice = 1000;
+	currencyName = 'EUR';
+
 	priceSliderConfig: any = {
 		behaviour: 'drag',
 		connect: true,
-		start: [1, 1000],
+		start: [250, 750],
 		step: 1,
 		tooltips: [ true, true ],
 		range: {
-			min: 1,
-			max: 1000
+			min: this.minPrice,
+			max: this.maxPrice
 		},
 	};
 }

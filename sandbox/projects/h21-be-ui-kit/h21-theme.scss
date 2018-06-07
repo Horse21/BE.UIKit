@@ -769,9 +769,23 @@ a.c-h21-header_logo {
   }
 }
 .c-h21-filter-panel_price-slider {
+
+  padding: 0 0 24px 0;
+
+  .c-h21-filter-panel_price-slider-legend {
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
+	white-space: nowrap;
+	font-size: 13px;
+	color: $black-87-opacity;
+  }
+
   .ng2-nouislider {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	.noUi-target {
 	  background: #ababab;
 	  box-shadow: none;
@@ -812,13 +826,31 @@ a.c-h21-header_logo {
 		font-family: mat-font-family($h21-mat-typography);
 		font-size: 13px;
 		color: white;
-		bottom: 0;
-		top: 150%;
-		transition: all 0.1s;
-		opacity: 0;
+		bottom: -35px;
+		display: none;
+
+		&::before {
+		  display: block;
+		  content: '';
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  border-left: 5px solid transparent;
+		  border-right: 5px solid transparent;
+		  border-bottom: 5px solid;
+		  margin: 0 0 0 -5px;
+		  color: rgba(0,0,0, .57);
+		  top: -5px;
+		  left: 50%;
+		}
+
+		&::after {
+		  display: inline;
+		  content: ' EUR';
+		}
 	  }
 	  &:hover .noUi-tooltip {
-		opacity: 1;
+		display: block;
 	  }
 	}
   }
