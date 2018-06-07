@@ -18,7 +18,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 					<div class="c-h21-passangers-select_counter">
 						<span>Adult(s)</span>
 						<div>
-							<button mat-icon-button color="primary" [disabled]="adultCount <= 1" (click)="removePassenger('adult');">
+							<button mat-icon-button color="primary" [disabled]="adultCount <= 1" (click)="showPassengers();">
 								<mat-icon>remove</mat-icon>
 							</button>
 							<input type="text" value="{{adultCount}}" />
@@ -34,7 +34,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 					<div class="c-h21-passangers-select_counter">
 						<span>Children</span>
 						<div>
-							<button mat-icon-button color="primary" [disabled]="childrenCount < 1" (click)="removePassenger('children');">
+							<button mat-icon-button color="primary" [disabled]="childrenCount < 1" (click)="showPassengers();">
 								<mat-icon>remove</mat-icon>
 							</button>
 							<input type="text" name="" value="{{childrenCount}}" />
@@ -46,7 +46,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 					<div class="c-h21-passangers-select_counter">
 						<span>Infant</span>
 						<div>
-							<button mat-icon-button color="primary" [disabled]="infantCount < 1" (click)="removePassenger('infant');">
+							<button mat-icon-button color="primary" [disabled]="infantCount < 1" (click)="showPassengers();">
 								<mat-icon>remove</mat-icon>
 							</button>
 							<input type="text" name="" value="{{infantCount}}" />
@@ -89,8 +89,11 @@ export class H21PassangersSelectComponent {
 		}
 	}
 
-	removePassenger(passengerType) {
+	showPassengers() {
 		this.rightPanelDialog.open('h21-selected-passengers');
+	}
+
+	removePassenger(passengerType) {
 		switch (passengerType) {
 			case 'adult' :  this.adultCount -= 1;
 				break;

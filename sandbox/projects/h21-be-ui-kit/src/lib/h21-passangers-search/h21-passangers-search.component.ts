@@ -20,7 +20,6 @@ export class H21PassangersSearchComponent implements OnInit {
 	) {
 	}
 
-	selectedTravelers: Passenger[] = [];
 	passengers: Observable<Passenger[]>;
 	@Input() onlySelected = false;
 
@@ -31,7 +30,7 @@ export class H21PassangersSearchComponent implements OnInit {
 	}
 
 	selectTraveler(passenger: Passenger) {
-		this.selectedTravelers.push(passenger);
+		passenger.listState = 'selected';
 		this._appSubscriber.addTraveler(passenger);
 
 		this.snackBar.open('Traveler has ben added', '', {
@@ -40,18 +39,16 @@ export class H21PassangersSearchComponent implements OnInit {
 		});
 	}
 
-	isSelected(id: string): boolean {
-		return this.selectedTravelers.filter(x => x.id == id).length != 0;
-	}
-
 	search(searchPattern: string) {
 		this.passengers = this._vocabulary.searchPassengers(searchPattern);
 	}
 
 	removePassenger(passenger: Passenger) {
-		//todo: заменим состояние
-		this._appSubscriber.removeTraveler(passenger);
+		if (passenger.listState == 'confirm') {
+			passenger.listState = null;
+			this._appSubscriber.removeTraveler(passenger);
+		} else {
+			passenger.listState = 'confirm';
+		}
 	}
-
-
 }

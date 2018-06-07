@@ -52,6 +52,6 @@ export class AppSubscriberService {
 	}
 
 	removeTravelerObservable(): Observable<Passenger> {
-		return this._traveler.asObservable();
+		return this._removeTraveler.asObservable();
 	}
 }

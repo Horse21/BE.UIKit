@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NouisliderModule } from 'ng2-nouislider';
 import { PrototypePermissionService } from '../app/services/prototype-permission-service';
 import { PrototypeVocabularyService } from '../app/services/prototype-vocabulary-service';
 import { H21HeaderUserSelectorDialogComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
@@ -59,6 +60,7 @@ const routes: Routes = [
 			FormsModule,
 			HttpClientModule,
 			MatNativeDateModule,
+			NouisliderModule
 		],
 		providers: [
 			{
