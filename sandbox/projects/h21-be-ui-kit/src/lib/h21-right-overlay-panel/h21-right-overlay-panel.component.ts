@@ -1,6 +1,8 @@
 import { Component, EventEmitter } from "@angular/core";
 import { trigger, state, transition, animate, style } from "@angular/animations";
 import { H21RightOverlayPanelRef } from "./h21-right-overlay-panel-ref";
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 @Component ({
 	selector: "h21-right-overlay-panel",
@@ -20,7 +22,9 @@ export class H21RightOverlayPanelComponent {
 	animationState: 'void' | 'enter' | 'leave' = 'enter';
 	animationStateChanged = new EventEmitter<AnimationEvent>();
 
-	constructor (public dialogRef: H21RightOverlayPanelRef) {}
+	constructor (public dialogRef: H21RightOverlayPanelRef, iconReg: MatIconRegistry, sanitizer: DomSanitizer,) {
+		iconReg.addSvgIcon('h21_back_to_list', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
+	}
 
 	close() {
 		this.dialogRef.close();

@@ -16,8 +16,17 @@
 					<span class="c-h21-passangers-search-result-card_company">{{passenger.company}}</span>
 				</mat-card-header>
 				<mat-card-actions>
-					<button mat-raised-button color="primary" (click)="selectTraveler(passenger)">
+					<button mat-raised-button class="c-h21-passangers-search_btn-select" color="primary" (click)="selectTraveler(passenger)">
 						<mat-icon>add</mat-icon>
+					</button>
+					<button mat-raised-button class="c-h21-passangers-search_btn-remove">
+						<mat-icon>close</mat-icon>
+					</button>
+					<button mat-raised-button class="c-h21-passangers-search_btn-back">
+						<mat-icon svgIcon="h21_back_to_list"></mat-icon>
+					</button>
+					<button mat-raised-button class="c-h21-passangers-search_btn-confirm">
+						<mat-icon>delete</mat-icon>
 					</button>
 				</mat-card-actions>
 			</mat-card>

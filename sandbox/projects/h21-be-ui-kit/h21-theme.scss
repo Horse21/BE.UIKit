@@ -905,10 +905,12 @@ a.c-h21-header_logo {
 	background-color: white;
 	transition: background-color 0.2s;
 
+	&.is-selected {
+	  background-color: #deffe6;
+	}
 	&:hover {
 	  background-color: #f0f0f0;
 	}
-
 	&:not([class*=mat-elevation-z]) {
 	  @include mat-elevation(0);
 	}
@@ -948,14 +950,13 @@ a.c-h21-header_logo {
 	}
 	.mat-card-actions {
 	  height: 80px;
-	  width: 50px;
+	  width: auto;
 	  position: absolute;
 	  top: 0;
-	  right: -80px;
+	  right: -100%;
 	  margin: 0;
 	  padding: 0;
 	  transition: right 0.2s;
-
 	  .mat-raised-button {
 		height: 80px;
 		width: 50px;
@@ -963,8 +964,25 @@ a.c-h21-header_logo {
 		padding: 0;
 		font-size: 18px;
 		border-radius: 0;
+		margin: 0;
+		display: block;
+		float: left;
 		&:not([class*=mat-elevation-z]) {
 		  @include mat-elevation(0);
+		}
+		&.c-h21-passangers-search_btn-remove,
+		&.c-h21-passangers-search_btn-confirm {
+		  background-color: #E26666;
+		  color: #5c2929;
+		  &:hover {
+			background-color: #E67D7D;
+		  }
+		}
+		&.c-h21-passangers-search_btn-back {
+		  background-color: #E3E3E3;
+		  &:hover {
+			background-color: #E7E7E7;
+		  }
 		}
 	  }
 	}
