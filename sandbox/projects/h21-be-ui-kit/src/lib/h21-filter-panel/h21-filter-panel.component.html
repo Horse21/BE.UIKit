@@ -16,7 +16,11 @@
 				<mat-expansion-panel-header [collapsedHeight]="matExpansionPanelHeaderDefaultHeight" [expandedHeight]="matExpansionPanelHeaderDefaultHeight">
 					<mat-panel-title>Price</mat-panel-title>
 				</mat-expansion-panel-header>
-				<div>The functional is in development</div>
+				<div>
+					<div class="c-h21-filter-panel_price-slider">
+						<nouislider [config]="priceSliderConfig"></nouislider>
+					</div>
+				</div>
 			</mat-expansion-panel>
 			<mat-expansion-panel>
 				<mat-expansion-panel-header [collapsedHeight]="matExpansionPanelHeaderDefaultHeight" [expandedHeight]="matExpansionPanelHeaderDefaultHeight">
@@ -53,5 +57,4 @@
 	<div class="c-h21-filter-panel_bottom-attached-box __buttons-to-right">
 		<button mat-stroked-button color="primary">Clear filter</button>
 	</div>
-	<!--<nouislider [connect]="true" [min]="0" [max]="15"></nouislider>-->
 </div>
