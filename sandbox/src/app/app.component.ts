@@ -5,6 +5,7 @@ import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
 import {Router} from '@angular/router';
 import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
+import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
 	@ViewChild(DocsComponent) private docs: DocsComponent;
 	@ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
 
-	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router) {
+	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService) {
 		iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
 		iconReg.addSvgIcon(
 			'h21_flight_land_blue',
@@ -72,6 +73,6 @@ export class AppComponent {
 	}
 
 	openHelpSection(): void {
-		// this.rightPanelDialog.open('h21-search-passengers');
+		this.rightPanelDialog.open('h21-help');
 	}
 }

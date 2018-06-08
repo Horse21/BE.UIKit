@@ -30,6 +30,7 @@ import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-use
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 import {H21PassangersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
+import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 
 // Examples
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
@@ -75,6 +76,7 @@ const routes: Routes = [
 		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
 		H21PassangersSearchComponent,
+		H21HelpComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		ButtonsExampleComponent,
@@ -89,7 +91,7 @@ const routes: Routes = [
 		TabsExampleComponent,
 		TooltipsExampleComponent,
 		TypographyExampleComponent,
-		IconExampleDialogComponent
+		IconExampleDialogComponent,
 	],
 	imports: [
 		BrowserModule,

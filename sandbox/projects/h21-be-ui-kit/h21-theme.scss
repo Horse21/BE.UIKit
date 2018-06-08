@@ -356,6 +356,53 @@ a:hover {
 //----------------------------------------------------------------------------------------------------------------------
 // H21-top-toolbar component
 //
+.c-h21-help_accordion {
+  .mat-expansion-panel {
+	background: none;
+	color: #4d4d4e;
+
+	&:not([class*=mat-elevation-z]) {
+	  @include mat-elevation(0);
+	}
+	.mat-expansion-panel-header {
+	  color: #757575;
+	  padding-left: 10px;
+	  padding-right: 10px;
+	  position: relative;
+	  border-bottom: 1px solid #999999;
+	}
+	.mat-expansion-panel-header-title {
+	  color: inherit;
+	  font-size: 18px;
+	  font-weight: 500;
+	  align-items: center;
+	  .mat-icon {
+		margin-right: 8px;
+	  }
+	}
+	.mat-expansion-panel-body {
+	  padding: 20px;
+	  p {
+		margin: 0;
+	  }
+	}
+
+	&.mat-expanded {
+	  margin-top: 0;
+	  margin-bottom: 16px;
+
+	  .mat-expansion-panel-content {
+		background: white;
+		color: #757575;
+		font-size: 14px;
+	  }
+	}
+  }
+}
+//
+//----------------------------------------------------------------------------------------------------------------------
+// H21-top-toolbar component
+//
 .c-h21-top-toolbar {
   &.mat-toolbar {
 	background-color: white;
@@ -888,54 +935,7 @@ a.c-h21-header_logo {
 // h21-passangers-search component
 //
 .c-h21-passangers-search {
-  .c-h21-passangers-search_search-field-box {
-	background-color: $h21-color-ui-primary;
-	box-sizing: border-box;
-	padding: 25px 30px 45px 30px;
-	.mat-form-field {
-	  width: 100%;
-	  background: white;
 
-	  .mat-input-element {
-		font-size: 14px;
-	  }
-	  .mat-icon {
-		color: #757575;
-	  }
-	  .mat-form-field-wrapper {
-		padding-bottom: 0;
-	  }
-	  .mat-form-field-flex {
-		background: none;
-		padding: .75em;
-		align-items: center;
-
-		.mat-form-field-infix {
-		  border-top-width: 0;
-		  padding: 0;
-		}
-	  }
-	  .mat-form-field-label-wrapper {
-		padding: 0;
-	  }
-	  .mat-form-field-underline {
-		display: none;
-	  }
-	  .mat-form-field-label-wrapper {
-		top: 0;
-	  }
-	  .mat-form-field-subscript-wrapper {
-		display: none;
-	  }
-	}
-  }
-  .c-h21-passangers-search_title {
-	font-size: 24px;
-	color: white;
-	font-weight: 300;
-	display: block;
-	margin-bottom: 20px;
-  }
 }
 
 .c-h21-passangers-search_snackbar {
@@ -1662,6 +1662,7 @@ a.c-h21-header_logo {
   background: white;
   bordre-right: 1px solid #d6d6d6;
   box-shadow: 0 2px 8px 0 rgba(0,68,214, .2);
+  font-family: mat-font-family($h21-mat-typography);
 
   .c-h21-right-overlay-panel_close-btn {
 	position: absolute;
@@ -1670,9 +1671,56 @@ a.c-h21-header_logo {
 	color: white;
   }
 }
+.overlay-panel-search-field-box {
+  background-color: $h21-color-ui-primary;
+  box-sizing: border-box;
+  padding: 25px 30px 45px 30px;
 
+  .overlay-panel-search-field-box_title {
+	font-size: 24px;
+	color: white;
+	font-weight: 300;
+	display: block;
+	margin-bottom: 20px;
+  }
 
+  .mat-form-field {
+	width: 100%;
+	background: white;
 
+	.mat-input-element {
+	  font-size: 14px;
+	}
+	.mat-icon {
+	  color: #757575;
+	}
+	.mat-form-field-wrapper {
+	  padding-bottom: 0;
+	}
+	.mat-form-field-flex {
+	  background: none;
+	  padding: .75em;
+	  align-items: center;
+
+	  .mat-form-field-infix {
+		border-top-width: 0;
+		padding: 0;
+	  }
+	}
+	.mat-form-field-label-wrapper {
+	  padding: 0;
+	}
+	.mat-form-field-underline {
+	  display: none;
+	}
+	.mat-form-field-label-wrapper {
+	  top: 0;
+	}
+	.mat-form-field-subscript-wrapper {
+	  display: none;
+	}
+  }
+}
 //
 //----------------------------------------------------------------------------------------------------------------------
 // fake date
