@@ -69,8 +69,8 @@ export class H21PassangersSearchComponent implements OnInit {
 		}
 		else {
 			var selectedPassengers = this._orderService.getPassengers();
-			if (selectedPassengers.length == 1) {
-				this.snackBar.open('Traveler can not been removed', '',{
+			if (selectedPassengers.length == 1 && passenger.firstName == 'no name') {
+				this.snackBar.open('Traveler can not been removed', '', {
 					duration: 1000,
 					panelClass: 'c-h21-passangers-error_snackbar'
 				});

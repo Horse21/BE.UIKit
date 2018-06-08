@@ -111,6 +111,9 @@ export class H21PassangersSelectComponent {
 			case 'infant' : this.infantCount -= 1;
 				break;
 		}
+		if (this.adultCount + this.childrenCount + this.infantCount === 0) {
+			this.addPassenger('adult');
+		}
 	}
 
 	openOverlayPanel() {
