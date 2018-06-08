@@ -70,4 +70,8 @@ export class AppComponent {
 	changeComponent(event): void {
 		this.docs.changeComponent(event);
 	}
+
+	openHelpSection(): void {
+		// this.rightPanelDialog.open('h21-search-passengers');
+	}
 }

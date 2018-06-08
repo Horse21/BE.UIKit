@@ -25,11 +25,54 @@
 	</div>
 </div>
 
-<div class="c-21-sidebar_search-result-box" [hidden]="!listVisibility" [class.is-deployed]="!visibility && listVisibility">
+<div class="c-21-sidebar_search-result-box" [class.is-visible]="listVisibility" [class.is-deployed]="!visibility && listVisibility">
 	<div [hidden]="!actionInProcess">
 		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 	</div>
 	<div class="c-21-sidebar_search-result-box_inner">
-		<h21-search-result></h21-search-result>
+		<div [hidden]="!actionInProcess" class="search-result-fake-view">
+			<div class="fake_line">
+				<span class="fake_element fake_element__w-m"></span>
+			</div>
+			<div class="fake_line">
+				<span class="fake_element fake_element__w-s"></span>
+			</div>
+			<div class="fake_line"></div>
+			<div class="row">
+				<div class="col-sm-3">
+					<span class="fake_element fake_element__w-xl"></span>
+				</div>
+				<div class="col-sm-3">
+					<span class="fake_element fake_element__w-xl"></span>
+				</div>
+				<div class="col-sm-3">
+					<span class="fake_element fake_element__w-xl"></span>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="fake_box" *ngFor="let i of [1,2]">
+				<div class="row">
+					<div class="col-sm-2" *ngFor="let j of [1,2,3,4,5,6]">
+						<span class="fake_element"></span>
+						<span class="fake_element"></span>
+					</div>
+				</div>
+				<div class="fake_divider fake_divider__with-indent"></div>
+				<div class="row">
+					<div class="col-sm-2" *ngFor="let j of [1,2,3,4,5,6]">
+						<span class="fake_element"></span>
+						<span class="fake_element"></span>
+					</div>
+				</div>
+				<div class="fake_divider fake_divider__with-indent"></div>
+				<div class="row">
+					<div class="col-sm-2">
+						<span class="fake_element fake_element__w-m"></span>
+					</div>
+					<div class="col-sm-10"></div>
+				</div>
+			</div>
+		</div>
+		<h21-search-result [hidden]="actionInProcess"></h21-search-result>
 	</div>
 </div>

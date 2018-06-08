@@ -312,6 +312,7 @@ a:hover {
 
 .page_box {
   height: 100%;
+  position: relative;
 }
 .page_box.container-fluid {
   margin: 0;
@@ -327,6 +328,17 @@ a:hover {
   height: calc(100% - 120px);
   position: relative;
   z-index: 99;
+}
+.page_help-btn {
+  &.mat-fab {
+	font-size: 30px;
+	background: #f44025;
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	z-index: 101;
+	font-weight: 400;
+  }
 }
 .w-spacer {
   display: block;
@@ -630,14 +642,25 @@ a.c-h21-header_logo {
   height: 100%;
   width: calc(100% - 65px);
   position: absolute;
-  left: 65px;
-  top: 0;
-  background: white;
   z-index: 98;
+  top: 0;
+  left: -100%;
+  opacity: 0;
+  background: white;
   padding: 0 0 0 410px;
   box-sizing: border-box;
-  transition: padding 0.2s;
+  transition: padding 0.2s ease-out, opacity 0.2s ease-out;
 
+  &.is-deployed {
+	padding: 0;
+	.mat-progress-bar {
+	  margin-left: 0;
+	}
+  }
+  &.is-visible {
+	left: 65px;
+	opacity: 1;
+  }
   .mat-progress-bar {
 	position: absolute;
 	top: 0;
@@ -653,12 +676,16 @@ a.c-h21-header_logo {
 	overflow-y: auto;
 	height: 100%;
   }
-  &.is-deployed {
-	padding: 0;
-	.mat-progress-bar {
-	  margin-left: 0;
-	}
-  }
+}
+
+.search-result-fake-view {
+  padding: 24px;
+  background-color: white;
+  //opacity: 0;
+  //transition: opacity 0.2s;
+  //&.is-visible {
+	//opacity: 1;
+  //}
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -1640,6 +1667,57 @@ a.c-h21-header_logo {
 }
 
 
+
+//
+//----------------------------------------------------------------------------------------------------------------------
+// fake date
+//
+$h21-color-fake: #F1F1F1;
+
+.fake_line {
+  margin-bottom: 8px;
+  min-height: 24px;
+}
+.fake_divider {
+  clear: both;
+  display: block;
+  height: 1px;
+  background: $h21-color-fake;
+  &.fake_divider__with-indent {
+	margin: 16px 0;
+  }
+}
+.fake_box {
+  border: 1px solid $h21-color-fake;
+  margin: 24px 0;
+  padding: 16px;
+  .fake_divider {
+	margin-left: -16px;
+	margin-right: -16px;
+  }
+  .fake_element {
+	height: 18px;
+  }
+}
+.fake_element {
+  display: inline-block;
+  border-radius: 2px;
+  width: 100%;
+  height: 24px;
+  background: $h21-color-fake;
+  &.fake_element__w-xl {
+	width: 100%;
+  }
+  &.fake_element__w-l {
+	width: calc(75% - 6px);
+  }
+  &.fake_element__w-m {
+	width: calc(50% - 6px);
+  }
+  &.fake_element__w-s {
+	width: calc(25% - 6px);
+  }
+}
 
 
 
