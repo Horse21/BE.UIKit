@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { OrderService } from '../../services/order-service';
+import { Passenger } from '../../dto/passenger';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
 
@@ -62,23 +64,30 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 })
 
 export class H21PassangersSelectComponent {
-	@Input() adultCount = 1;
-	@Input() childrenCount = 0;
-	@Input() infantCount = 0;
+	adultCount = 0;
+	childrenCount = 0;
+	infantCount = 0;
 
 	constructor(private rightPanelDialog: H21RightOverlayPanelService,
-		appSubscriber: AppSubscriberService) {
-		appSubscriber.travelerObservable()
+		private _appSubscriber: AppSubscriberService,
+		private _orderService: OrderService) {
+		_appSubscriber.travelerObservable()
 			.subscribe(value => {
-				this.addPassenger('adult');
+				this.incrementPassenger('adult');
 			});
-		appSubscriber.removeTravelerObservable()
+		_appSubscriber.removeTravelerObservable()
 			.subscribe(value => {
-				this.removePassenger('adult');
+				this.decrementPassenger('adult');
 			});
+		this.addPassenger('adult');
 	}
 
 	addPassenger(passengerType) {
+		this._orderService.addPassenger(<Passenger>{listState:'selected', firstName:'no name'})
+		this.incrementPassenger(passengerType);
+	}
+
+	incrementPassenger(passengerType) {
 		switch (passengerType) {
 			case 'adult' :  this.adultCount += 1;
 				break;
@@ -93,7 +102,7 @@ export class H21PassangersSelectComponent {
 		this.rightPanelDialog.open('h21-selected-passengers');
 	}
 
-	removePassenger(passengerType) {
+	decrementPassenger(passengerType) {
 		switch (passengerType) {
 			case 'adult' :  this.adultCount -= 1;
 				break;
