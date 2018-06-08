@@ -18,6 +18,11 @@
 				</mat-expansion-panel-header>
 				<div>
 					<div class="c-h21-filter-panel_price-slider">
+						<div class="c-h21-filter-panel_price-slider-legend">
+							<span>From: {{minPrice}} {{currencyName}}</span>
+							<div class="w-spacer">&nbsp;</div>
+							<span>To: {{maxPrice}} {{currencyName}}</span>
+						</div>
 						<nouislider [config]="priceSliderConfig"></nouislider>
 					</div>
 				</div>
