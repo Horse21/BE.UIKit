@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
 import { Subscriber } from 'rxjs/index';
 import { OrderService } from '../../services/order-service';
 import { VocabularyService } from '../../services/vocabulary-service';
@@ -21,16 +22,14 @@ export class H21PassangersSearchComponent implements OnInit {
 	) {
 	}
 
-	passengers: Observable<Passenger[]>;
+	passengers: Passenger[] = [];
 	@Input() onlySelected = false;
 
 	public ngOnInit(): void {
 		if (this.onlySelected) {
 			var selectedPassengers = this._orderService.getPassengers();
-			this.passengers = Observable.create((observer: Subscriber<any>) => {
-				observer.next(selectedPassengers);
-				observer.complete();
-			});
+			console.log(selectedPassengers)
+			this.passengers = selectedPassengers.map(x => x);
 		}
 	}
 
@@ -46,7 +45,17 @@ export class H21PassangersSearchComponent implements OnInit {
 	}
 
 	search(searchPattern: string) {
-		this.passengers = this._vocabulary.searchPassengers(searchPattern);
+		this.onlySelected = false;
+		this._vocabulary.searchPassengers(searchPattern)
+			.subscribe(data => {
+				var selectedPassengers = this._orderService.getPassengers();
+				data.forEach(item => {
+					if (selectedPassengers.find(x => x.id == item.id)) {
+						item.listState = 'selected';
+					}
+				});
+				this.passengers = data;
+			});
 	}
 
 	removePassenger(passenger: Passenger) {
@@ -54,8 +63,26 @@ export class H21PassangersSearchComponent implements OnInit {
 			passenger.listState = null;
 			this._appSubscriber.removeTraveler(passenger);
 			this._orderService.removePassenger(passenger.id);
-		} else {
-			passenger.listState = 'confirm';
+			if (this.onlySelected) {
+				this.passengers = this.passengers.filter(x => x.id != passenger.id);
+			}
+		}
+		else {
+			var selectedPassengers = this._orderService.getPassengers();
+			if (selectedPassengers.length == 1) {
+				this.snackBar.open('Traveler can not been removed', '',{
+					duration: 1000,
+					panelClass: 'c-h21-passangers-error_snackbar'
+				});
+			} else {
+				passenger.listState = 'confirm';
+			}
+		}
+	}
+
+	onMouseLeave(passenger: Passenger) {
+		if (passenger.listState == 'confirm') {
+			passenger.listState = 'selected';
 		}
 	}
 }
