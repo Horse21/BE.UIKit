@@ -5,19 +5,19 @@ import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 @Component({
-	selector: 'h21-passangers-select',
+	selector: 'h21-passengers-select',
 	template: `
-		<div class="c-h21-passangers-select">
-			<button mat-button color="primary" class="c-h21-passangers-select_open-menu-btn" [matMenuTriggerFor]="passangersSelectMenu">
+		<div class="c-h21-passengers-select">
+			<button mat-button color="primary" class="c-h21-passengers-select_open-menu-btn" [matMenuTriggerFor]="passengersSelectMenu">
 				<mat-icon matPrefix>supervisor_account</mat-icon>
 				<span>Adult 1</span>
 			</button>
 		</div>
-		<mat-menu #passangersSelectMenu="matMenu" class="c-h21-passangers-select_menu">
+		<mat-menu #passengersSelectMenu="matMenu" class="c-h21-passengers-select_menu">
 			<ng-template matMenuContent>
 				<div (click)="$event.stopPropagation();">
-					<span class="c-h21-passangers-select_menu-title">Passengers</span>
-					<div class="c-h21-passangers-select_counter">
+					<span class="c-h21-passengers-select_menu-title">Passengers</span>
+					<div class="c-h21-passengers-select_counter">
 						<span>Adult(s)</span>
 						<div>
 							<button mat-icon-button color="primary" [disabled]="adultCount <= 1" (click)="showPassengers();">
@@ -33,7 +33,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 							<span>&times; 1</span>
 						</button>
 					</div>
-					<div class="c-h21-passangers-select_counter">
+					<div class="c-h21-passengers-select_counter">
 						<span>Children</span>
 						<div>
 							<button mat-icon-button color="primary" [disabled]="childrenCount < 1" (click)="showPassengers();">
@@ -45,7 +45,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 							</button>
 						</div>
 					</div>
-					<div class="c-h21-passangers-select_counter">
+					<div class="c-h21-passengers-select_counter">
 						<span>Infant</span>
 						<div>
 							<button mat-icon-button color="primary" [disabled]="infantCount < 1" (click)="showPassengers();">
@@ -63,7 +63,7 @@ import { H21RightOverlayPanelService } from "../h21-right-overlay-panel/h21-righ
 	`
 })
 
-export class H21PassangersSelectComponent {
+export class H21PassengersSelectComponent {
 	adultCount = 0;
 	childrenCount = 0;
 	infantCount = 0;

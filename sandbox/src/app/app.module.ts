@@ -20,7 +20,7 @@ import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-t
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
 import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
-import {H21PassangersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component";
+import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
 import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
 import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
 import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
@@ -29,7 +29,7 @@ import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h2
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
-import {H21PassangersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
+import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 
 // Examples
@@ -68,14 +68,14 @@ const routes: Routes = [
 		H21SearchResultComponent,
 		H21SearchResultRowComponent,
 		H21FlyRouteSelectionComponent,
-		H21PassangersSelectComponent,
+		H21PassengersSelectComponent,
 		H21FilterPanelComponent,
 		H21SidebarHistoryPanelComponent,
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
 		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
-		H21PassangersSearchComponent,
+		H21PassengersSearchComponent,
 		H21HelpComponent,
 		DocsNavigationComponent,
 		DocsComponent,

@@ -932,23 +932,23 @@ a.c-h21-header_logo {
 
 //
 //----------------------------------------------------------------------------------------------------------------------
-// h21-passangers-search component
+// h21-passengers-search component
 //
-.c-h21-passangers-search {
+.c-h21-passengers-search {
 
 }
 
-.c-h21-passangers-search_snackbar {
+.c-h21-passengers-search_snackbar {
   background: $h21-color-bg-dark;
   color: white;
 }
 
-.c-h21-passangers-error_snackbar {
+.c-h21-passengers-error_snackbar {
   background: #ff6259;
   color: white;
 }
 
-.c-h21-passangers-search_result-list {
+.c-h21-passengers-search_result-list {
   &.mat-list {
 	padding: 0;
   }
@@ -960,7 +960,7 @@ a.c-h21-header_logo {
   }
 }
 
-.c-h21-passangers-search_result-card {
+.c-h21-passengers-search_result-card {
   &.mat-card {
 	padding: 0;
 	width: 100%;
@@ -1004,7 +1004,7 @@ a.c-h21-header_logo {
 		font-weight: 700;
 		margin-bottom: 8px;
 	  }
-	  .c-h21-passangers-search-result-card_company {
+	  .c-h21-passengers-search-result-card_company {
 		float: right;
 		font-size: 14px;
 		font-weight: 700;
@@ -1034,15 +1034,15 @@ a.c-h21-header_logo {
 		&:not([class*=mat-elevation-z]) {
 		  @include mat-elevation(0);
 		}
-		&.c-h21-passangers-search_btn-remove,
-		&.c-h21-passangers-search_btn-confirm {
+		&.c-h21-passengers-search_btn-remove,
+		&.c-h21-passengers-search_btn-confirm {
 		  background-color: #E26666;
 		  color: #5c2929;
 		  &:hover {
 			background-color: #E67D7D;
 		  }
 		}
-		&.c-h21-passangers-search_btn-back {
+		&.c-h21-passengers-search_btn-back {
 		  background-color: #E3E3E3;
 		  &:hover {
 			background-color: #E7E7E7;
@@ -1405,11 +1405,11 @@ a.c-h21-header_logo {
 	}
   }
 }
-.c-h21-passangers-select {
+.c-h21-passengers-select {
   display: inline-block;
   width: 100%;
 
-  .c-h21-passangers-select_open-menu-btn {
+  .c-h21-passengers-select_open-menu-btn {
 	&.mat-button {
 	  width: 100%;
 	  background: white;
@@ -1475,7 +1475,7 @@ a.c-h21-header_logo {
 	}
   }
 }
-.c-h21-passangers-select_menu {
+.c-h21-passengers-select_menu {
   font-family: mat-font-family($h21-mat-typography);
   width: 280px;
   @include mat-elevation(8);
@@ -1483,7 +1483,7 @@ a.c-h21-header_logo {
   .mat-menu-content {
 	padding: 0;
   }
-  .c-h21-passangers-select_menu-title {
+  .c-h21-passengers-select_menu-title {
 	height: 42px;
 	line-height: 42px;
 	background: #f0f0f0;
@@ -1495,7 +1495,7 @@ a.c-h21-header_logo {
 	box-sizing: border-box;
   }
 
-  .c-h21-passangers-select_counter {
+  .c-h21-passengers-select_counter {
 	display: block;
 	margin: 16px;
 

@@ -7,7 +7,7 @@ import {
 	MatIconModule,
 	MatListModule, MatSnackBarModule
 } from "@angular/material";
-import {H21PassangersSearchComponent} from "./h21-passangers-search.component"
+import {H21PassengersSearchComponent} from "./h21-passengers-search.component"
 
 @NgModule({
 	imports: [
@@ -19,9 +19,9 @@ import {H21PassangersSearchComponent} from "./h21-passangers-search.component"
 		MatCardModule,
 		MatSnackBarModule
 	],
-	declarations: [H21PassangersSearchComponent],
-	exports: [H21PassangersSearchComponent]
+	declarations: [H21PassengersSearchComponent],
+	exports: [H21PassengersSearchComponent]
 })
-export class H21PassangersSearchModule {
+export class H21PassengersSearchModule {
 
 }

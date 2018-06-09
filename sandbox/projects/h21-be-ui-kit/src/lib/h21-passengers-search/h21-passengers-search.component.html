@@ -1,4 +1,4 @@
-<div class="c-h21-passangers-search mat-typography">
+<div class="c-h21-passengers-search mat-typography">
 	<div class="overlay-panel-search-field-box">
 		<span class="overlay-panel-search-field-box_title">Select traveler</span>
 		<mat-form-field appearance="fill">
@@ -6,33 +6,33 @@
 			<mat-icon matSuffix>search</mat-icon>
 		</mat-form-field>
 	</div>
-	<mat-list class="c-h21-passangers-search_result-list">
+	<mat-list class="c-h21-passengers-search_result-list">
 		<mat-list-item *ngFor="let passenger of passengers">
-			<mat-card class="c-h21-passangers-search_result-card" [class.is-selected]="passenger.listState == 'selected'">
+			<mat-card class="c-h21-passengers-search_result-card" [class.is-selected]="passenger.listState == 'selected'">
 				<div (mouseleave)="onMouseLeave(passenger)">
 				<mat-card-header>
 					<img src="/assets/avatar-picture.png" mat-card-avatar alt="" />
 					<mat-card-title>{{passenger.firstName}} {{passenger.surname}}</mat-card-title>
 					<mat-card-subtitle>{{passenger.position}}</mat-card-subtitle>
-					<span class="c-h21-passangers-search-result-card_company">{{passenger.company}}</span>
+					<span class="c-h21-passengers-search-result-card_company">{{passenger.company}}</span>
 				</mat-card-header>
 				<mat-card-actions>
-					<button mat-raised-button class="c-h21-passangers-search_btn-select" color="primary"
+					<button mat-raised-button class="c-h21-passengers-search_btn-select" color="primary"
 							[class.__display-none]="!!passenger.listState"
 							(click)="selectTraveler(passenger)">
 						<mat-icon>add</mat-icon>
 					</button>
-					<button mat-raised-button class="c-h21-passangers-search_btn-remove"
+					<button mat-raised-button class="c-h21-passengers-search_btn-remove"
 							[class.__display-none]="passenger.listState != 'selected'"
 							(click)="removePassenger(passenger)">
 						<mat-icon>close</mat-icon>
 					</button>
-					<button mat-raised-button class="c-h21-passangers-search_btn-back"
+					<button mat-raised-button class="c-h21-passengers-search_btn-back"
 							[class.__display-none]="passenger.listState != 'confirm'"
 							(click)="passenger.listState = 'selected'">
 						<mat-icon svgIcon="h21_back_to_list"></mat-icon>
 					</button>
-					<button mat-raised-button class="c-h21-passangers-search_btn-confirm"
+					<button mat-raised-button class="c-h21-passengers-search_btn-confirm"
 							[class.__display-none]="passenger.listState != 'confirm'"
 							(click)="removePassenger(passenger)">
 						<mat-icon>delete</mat-icon>

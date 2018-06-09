@@ -9,11 +9,11 @@ import { AppSubscriberService } from '../../services/app-subscriber-service';
 import {MatSnackBar} from "@angular/material"
 
 @Component ({
-	selector: 'h21-passangers-search',
-	templateUrl: './h21-passangers-search.component.html'
+	selector: 'h21-passengers-search',
+	templateUrl: './h21-passengers-search.component.html'
 })
 
-export class H21PassangersSearchComponent implements OnInit {
+export class H21PassengersSearchComponent implements OnInit {
 	constructor(
 		private _appSubscriber: AppSubscriberService,
 		public snackBar: MatSnackBar,
@@ -40,7 +40,7 @@ export class H21PassangersSearchComponent implements OnInit {
 
 		this.snackBar.open('Traveler has ben added', '', {
 			duration: 1000,
-			panelClass: 'c-h21-passangers-search_snackbar'
+			panelClass: 'c-h21-passengers-search_snackbar'
 		});
 	}
 
@@ -72,7 +72,7 @@ export class H21PassangersSearchComponent implements OnInit {
 			if (selectedPassengers.length == 1 && passenger.firstName == 'no name') {
 				this.snackBar.open('Traveler can not been removed', '', {
 					duration: 1000,
-					panelClass: 'c-h21-passangers-error_snackbar'
+					panelClass: 'c-h21-passengers-error_snackbar'
 				});
 			} else {
 				passenger.listState = 'confirm';

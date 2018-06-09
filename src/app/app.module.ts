@@ -14,7 +14,7 @@ import { H21SearchResultComponent } from '../../sandbox/projects/h21-be-ui-kit/s
 import { H21SearchResultRowComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component';
 import { MatNativeDateModule } from '@angular/material';
 import { VocabularyService } from '../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
-import { H21PassangersSelectComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passangers-select.component';
+import { H21PassengersSelectComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component';
 import { H21RightOverlayPanelService } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { AppSubscriberService } from '../../sandbox/projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import { OrderService } from '../../sandbox/projects/h21-be-ui-kit/src/services/order-service';
@@ -27,7 +27,7 @@ import { H21HeaderComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { H21RightOverlayPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
-import { H21PassangersSearchComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-passangers-search/h21-passangers-search.component';
+import { H21PassengersSearchComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import { H21FilterPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
 
 const routes: Routes = [
@@ -47,9 +47,9 @@ const routes: Routes = [
 			H21FlyRouteSelectionComponent,
 			H21SearchResultComponent,
 			H21SearchResultRowComponent,
-			H21PassangersSelectComponent,
+			H21PassengersSelectComponent,
 			H21RightOverlayPanelComponent,
-			H21PassangersSearchComponent,
+			H21PassengersSearchComponent,
 			H21FilterPanelComponent,
 			H21HelpComponent
 		],
