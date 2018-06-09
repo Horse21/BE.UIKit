@@ -18,6 +18,7 @@ import { H21PassangersSelectComponent } from '../../sandbox/projects/h21-be-ui-k
 import { H21RightOverlayPanelService } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { AppSubscriberService } from '../../sandbox/projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import { OrderService } from '../../sandbox/projects/h21-be-ui-kit/src/services/order-service';
+import { H21HelpComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,7 +50,8 @@ const routes: Routes = [
 			H21PassangersSelectComponent,
 			H21RightOverlayPanelComponent,
 			H21PassangersSearchComponent,
-			H21FilterPanelComponent
+			H21FilterPanelComponent,
+			H21HelpComponent
 		],
 		imports: [
 			BrowserModule,
