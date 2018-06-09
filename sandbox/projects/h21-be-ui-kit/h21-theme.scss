@@ -356,13 +356,27 @@ a:hover {
 //----------------------------------------------------------------------------------------------------------------------
 // H21-top-toolbar component
 //
+.c-h21-help {
+  height: 100%;
+}
+.c-h21-help_overflow-box {
+  height: calc(100% - 165px);
+  padding: 15px 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
 .c-h21-help_accordion {
   .mat-expansion-panel {
 	background: none;
 	color: #4d4d4e;
+	margin-bottom: 16px;
 
 	&:not([class*=mat-elevation-z]) {
 	  @include mat-elevation(0);
+	}
+	&.mat-expanded {
+	  margin-top: 0;
+	  background-color: #fafafa;
 	}
 	.mat-expansion-panel-header {
 	  color: #757575;
@@ -381,20 +395,12 @@ a:hover {
 	  }
 	}
 	.mat-expansion-panel-body {
-	  padding: 20px;
+	  padding: 10px 20px;
+	  color: #232d44;
+	  line-height: 1.6em;
+	  font-size: 14px;
 	  p {
-		margin: 0;
-	  }
-	}
-
-	&.mat-expanded {
-	  margin-top: 0;
-	  margin-bottom: 16px;
-
-	  .mat-expansion-panel-content {
-		background: white;
-		color: #757575;
-		font-size: 14px;
+		margin: 16px 0;
 	  }
 	}
   }
