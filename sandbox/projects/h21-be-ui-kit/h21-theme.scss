@@ -696,23 +696,17 @@ a.c-h21-header_logo {
   width: calc(100% - 65px);
   position: absolute;
   z-index: 98;
-  top: 0;
-  left: -100%;
-  opacity: 0;
+  left: 65px;
   background: white;
   padding: 0 0 0 410px;
   box-sizing: border-box;
-  transition: padding 0.2s ease-out, opacity 0.2s ease-out;
+  transition: padding 0.2s ease-out;
 
   &.is-deployed {
 	padding: 0;
 	.mat-progress-bar {
 	  margin-left: 0;
 	}
-  }
-  &.is-visible {
-	left: 65px;
-	opacity: 1;
   }
   .mat-progress-bar {
 	position: absolute;

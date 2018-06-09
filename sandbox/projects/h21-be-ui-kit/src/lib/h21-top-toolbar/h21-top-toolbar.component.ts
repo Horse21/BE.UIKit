@@ -1,12 +1,22 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
+import { trigger, state, transition, animate, style } from "@angular/animations";
 
 @Component({
-  selector: 'h21-top-toolbar',
-  templateUrl: './h21-top-toolbar.component.html'
+	selector: 'h21-top-toolbar',
+	templateUrl: './h21-top-toolbar.component.html',
+	animations: [
+		trigger('toggleVisibility', [
+			state('void', style({ opacity: 0 })),
+			state('enter', style({ opacity: 1 })),
+			state('leave',style({ opacity: 0 })),
+			transition('* => *', animate('100ms')),
+		])
+	]
 })
 
 export class H21TopToolbarComponent implements OnInit {
+
 	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
 
 	constructor(private _appSubscriber: AppSubscriberService) {}

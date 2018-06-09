@@ -4,7 +4,7 @@
 		<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
 	</button>
 
-	<div [hidden]="!modeVisibility">
+	<div *ngIf="modeVisibility" [@toggleVisibility]>
 		<mat-button-toggle-group color="accent" [(ngModel)]="resultsMode" (change)="changeResultMode()">
 			<mat-button-toggle value="list">List</mat-button-toggle>
 			<mat-divider [vertical]="true"></mat-divider>
@@ -13,11 +13,6 @@
 	</div>
 
 	<div class="w-spacer">&nbsp;</div>
-
-	<!--<mat-form-field appearance="fill">-->
-		<!--<mat-select  placeholder="Cart (0)"></mat-select>-->
-		<!--<mat-icon matPrefix>shopping_cart</mat-icon>-->
-	<!--</mat-form-field>-->
 
 	<mat-form-field appearance="fill">
 		<mat-select [(value)]="selectedLanguage">
