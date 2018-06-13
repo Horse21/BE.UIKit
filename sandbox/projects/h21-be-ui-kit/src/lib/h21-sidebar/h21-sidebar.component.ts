@@ -14,16 +14,19 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 			state('void', style({ opacity: 0 })),
 			state('enter', style({ opacity: 1 })),
 			state('leave',style({ opacity: 0 })),
-			transition('* => *', animate('500ms')),
+			transition('* => *', animate('200ms')),
 		])
 	]
 })
 
 export class H21SidebarComponent implements OnInit, AfterViewInit {
+
 	activeTab: string = 'tab-search';
 	visibility = true;
 	listVisibility = false;
 	actionInProcess = false;
+	resultVisibility = false;
+
 	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
 	private resultPanel: H21SearchResultComponent;
 	private _result: SearchResult;
@@ -76,11 +79,15 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 				this.actionInProcess = false;
 				this._result = result;
 			});
+			setTimeout(() => {
+				this.resultVisibility = true;
+			}, 250);
 		}, 2000);
 	}
 
 	clearSearch() {
 		this.hideList();
+		this.resultVisibility = false;
 	}
 
 	private showList() {
