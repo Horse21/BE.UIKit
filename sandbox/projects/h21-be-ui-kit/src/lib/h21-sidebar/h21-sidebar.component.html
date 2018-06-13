@@ -25,8 +25,8 @@
 	</div>
 </div>
 
-<div class="c-21-sidebar_search-result-box" [hidden]="!listVisibility" ngClass="{ transition: listVisibility }" [class.is-deployed]="!visibility && listVisibility">
-	<mat-progress-bar *ngIf="actionInProcess" mode="indeterminate"></mat-progress-bar>
+<div class="c-21-sidebar_search-result-box" *ngIf="listVisibility" [@toggleVisibility] [class.is-deployed]="!visibility && listVisibility">
+	<mat-progress-bar *ngIf="actionInProcess" [@toggleVisibility] mode="indeterminate"></mat-progress-bar>
 	<div class="c-21-sidebar_search-result-box_inner">
 		<div *ngIf="actionInProcess" [@toggleVisibility] class="search-result-fake-view" >
 			<div class="fake_line">
@@ -71,6 +71,8 @@
 				</div>
 			</div>
 		</div>
-		<h21-search-result *ngIf="listVisibility && !actionInProcess"></h21-search-result>
+		<div *ngIf="resultVisibility" [@toggleVisibility]>
+			<h21-search-result></h21-search-result>
+		</div>
 	</div>
 </div>

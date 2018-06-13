@@ -1,19 +1,10 @@
 import { Component } from "@angular/core";
 import { FlightItemGroup } from '../../dto/flight-item-group';
 import { SearchResult } from '../../dto/search-result';
-import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component ({
 	selector: "h21-search-result",
 	templateUrl: "./h21-search-result.component.html",
-	animations: [
-		trigger('toggleVisibility', [
-			state('void', style({ opacity: 0 })),
-			state('enter', style({ opacity: 1 })),
-			state('leave',style({ opacity: 0 })),
-			transition('* => *', animate('500ms')),
-		])
-	]
 })
 
 export class H21SearchResultComponent {
