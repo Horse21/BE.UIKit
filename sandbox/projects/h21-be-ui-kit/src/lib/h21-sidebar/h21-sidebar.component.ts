@@ -1,4 +1,5 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { SearchResult } from '../../dto/search-result';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { H21SearchResultComponent } from '../h21-search-result/h21-search-result.component';
 import { VocabularyService } from '../../services/vocabulary-service';
@@ -18,12 +19,14 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 	]
 })
 
-export class H21SidebarComponent implements OnInit {
+export class H21SidebarComponent implements OnInit, AfterViewInit {
 	activeTab: string = 'tab-search';
 	visibility = true;
 	listVisibility = false;
 	actionInProcess = false;
-	@ViewChild(H21SearchResultComponent) private resultPanel: H21SearchResultComponent;
+	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
+	private resultPanel: H21SearchResultComponent;
+	private _result: SearchResult;
 
 	constructor(private _vocabulary: VocabularyService,
 				private _appSubscriber: AppSubscriberService) {
@@ -47,31 +50,31 @@ export class H21SidebarComponent implements OnInit {
 		});
 	}
 
-	visibiltyToggle(): void {
+	visibilityToggle(): void {
 		if (this.visibility) {
-			this.visibiltyHide();
+			this.visibilityHide();
 		} else {
-			this.visibiltyShow();
+			this.visibilityShow();
 		}
 	}
 
-	visibiltyShow(): void {
+	visibilityShow(): void {
 		this.visibility = true;
 		this.activeTab = "tab-search";
 	}
 
-	visibiltyHide(): void {
+	visibilityHide(): void {
 		this.visibility = false;
 		this.activeTab = "";
 	}
 
 	search(searchOptions: SearchFlightDto) {
-		this.showList();
 		this.actionInProcess = true;
+		this.showList();
 		setTimeout(() => {
 			this._vocabulary.searchFlights(searchOptions).subscribe(result => {
 				this.actionInProcess = false;
-				this.resultPanel.setResult(result);
+				this._result = result;
 			});
 		}, 2000);
 	}
@@ -82,11 +85,22 @@ export class H21SidebarComponent implements OnInit {
 
 	private showList() {
 		this.listVisibility = true;
-		this.resultPanel.visibility = true;
+		//this.resultPanel.visibility = true;
 	}
 
 	private hideList() {
 		this.listVisibility = false;
-		this.resultPanel.visibility = false;
+		//this.resultPanel.visibility = false;
+	}
+
+	public ngAfterViewInit(): void {
+		this.queryResultPanels.changes.subscribe((comps: QueryList<H21SearchResultComponent>) =>
+		{
+			let resultPanel = comps.toArray()[0];
+			if(resultPanel) {
+				console.log(this.actionInProcess);
+				resultPanel.setResult(this._result);
+			}
+		});
 	}
 }

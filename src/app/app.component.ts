@@ -64,6 +64,6 @@ export class AppComponent {
 	}
 
 	showSidebar(): void {
-		this.sidebar.visibiltyToggle();
+		this.sidebar.visibilityToggle();
 	}
 }

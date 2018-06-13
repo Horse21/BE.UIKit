@@ -17,26 +17,29 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 })
 
 export class H21SearchResultComponent {
+
 	recommended: FlightItemGroup[];
 	cheapest: FlightItemGroup[];
 	shortest: FlightItemGroup[];
-	visibility = false;
 
 	setResult(result: SearchResult) {
-		this.recommended = result.groups;
-		if (result.groups) {
-			this.cheapest = result.groups.map(x => x)
-				.sort((a, b) => a.price - b.price);
-			this.shortest = result.groups.map(x => x)
-				.sort((a, b) => a.totalElapsedTime - b.totalElapsedTime);
-		} else {
-			this.cheapest = undefined;
-			this.shortest = undefined;
-		}
+		setTimeout(()=>{
+			if (result.groups) {
+				this.recommended = result.groups;
+				this.cheapest = result.groups.map(x => x)
+					.sort((a, b) => a.price - b.price);
+				this.shortest = result.groups.map(x => x)
+					.sort((a, b) => a.totalElapsedTime - b.totalElapsedTime);
+			} else {
+				this.recommended = [];
+				this.cheapest = [];
+				this.shortest = [];
+			}
+		});
 	}
 
 	getTimeString(groups: FlightItemGroup[]): string {
-		if (!groups) {
+		if (!groups || groups.length == 0) {
 			return "";
 		}
 		let group = groups[0];
