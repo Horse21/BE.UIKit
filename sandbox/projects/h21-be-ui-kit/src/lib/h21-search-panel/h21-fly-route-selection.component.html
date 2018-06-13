@@ -1,0 +1,83 @@
+<div class="c-fly-route-selection">
+	<mat-form-field color="primary">
+		<input type="text" matInput placeholder="From" [formControl]="cityFromControl" [matAutocomplete]="citiesAutocompleteFrom"
+			   [(ngModel)]="_cityFrom">
+		<mat-icon matSuffix>flight_takeoff</mat-icon>
+	</mat-form-field>
+
+	<div class="relative-box">
+		<div class="c-fly-route-selection_route-marker route-marker__route-num-{{routeNumber}}"></div>
+		<button mat-icon-button class="c-fly-route-selection_swap-btn">
+			<mat-icon>swap_vert</mat-icon>
+		</button>
+	</div>
+
+	<mat-form-field color="primary">
+		<input type="text" matInput placeholder="To" [formControl]="cityToControl" [matAutocomplete]="citiesAutocompleteTo"
+			   [(ngModel)]="_cityTo">
+		<mat-icon matSuffix>flight_land</mat-icon>
+	</mat-form-field>
+
+	<!--<mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
+	<!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectFromItem($event)">-->
+	<!--{{ city.name }}-->
+	<!--</mat-option>-->
+	<!--</mat-autocomplete>-->
+
+	<!--<mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
+	<!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectToItem($event)">-->
+	<!--{{ city.name }}-->
+	<!--</mat-option>-->
+	<!--</mat-autocomplete>-->
+
+	<mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity" class="c-fly-route-selection_autocomplete">
+		<mat-optgroup *ngFor="let city of filteredCities | async">
+			<mat-option [value]="city" class="autocomplete_optgroup-label" (onSelectionChange)="onSelectFromItem($event)">
+				<mat-icon>location_city</mat-icon>
+				<span class="autocomplete_opt-title">{{ city.name }}</span>
+				<span class="autocomplete_opt-desc" *ngIf="city.airports && city.airports.length > 1">(All airports)</span>
+			</mat-option>
+			<ng-container *ngIf="city.airports && city.airports.length != 0">
+				<mat-option [value]="airport" *ngFor="let airport of city.airports" (onSelectionChange)="onSelectFromItem($event)">
+					<mat-icon>local_airport</mat-icon>
+					<span class="autocomplete_opt-title">{{airport.name}}</span>
+					<span class="autocomplete_opt-desc">({{airport.code}})</span>
+				</mat-option>
+			</ng-container>
+		</mat-optgroup>
+	</mat-autocomplete>
+
+	<mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity" class="c-fly-route-selection_autocomplete">
+		<mat-optgroup *ngFor="let city of filteredCities | async">
+			<mat-option [value]="city" class="autocomplete_optgroup-label" (onSelectionChange)="onSelectToItem($event)">
+				<mat-icon>location_city</mat-icon>
+				<span class="autocomplete_opt-title">{{ city.name }}</span>
+				<span class="autocomplete_opt-desc" *ngIf="city.airports && city.airports.length > 1">(All airports)</span>
+			</mat-option>
+			<ng-container *ngIf="city.airports && city.airports.length != 0">
+				<mat-option [value]="airport" *ngFor="let airport of city.airports" (onSelectionChange)="onSelectToItem($event)">
+					<mat-icon>local_airport</mat-icon>
+					<span class="autocomplete_opt-title">{{airport.name}}</span>
+					<span class="autocomplete_opt-desc">({{airport.code}})</span>
+				</mat-option>
+			</ng-container>
+		</mat-optgroup>
+	</mat-autocomplete>
+
+	<mat-form-field>
+		<input matInput [matDatepicker]="arrivalDatePicker" placeholder="Arrival Date" >
+		<mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">
+			<mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+		</mat-datepicker-toggle>
+		<mat-datepicker #arrivalDatePicker></mat-datepicker>
+	</mat-form-field>
+
+	<div class="c-fly-route-selection_add-remove-buttons-box" [hidden]="!canAdd && !canRemove">
+		<button mat-icon-button class="c-fly-route-selection_remove-button" *ngIf="canRemove" (click)="onRemove.emit()">
+			<mat-icon>cancel</mat-icon>
+		</button>
+		<button mat-icon-button class="c-fly-route-selection_add-button" *ngIf="canAdd" (click)="onAdd.emit()">
+			<mat-icon>add_circle</mat-icon>
+		</button>
+	</div>
+</div>
