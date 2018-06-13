@@ -1405,6 +1405,40 @@ a.c-h21-header_logo {
 	}
   }
 }
+
+.c-fly-route-selection_autocomplete {
+  //min-width: 400px;
+  .mat-option {
+	&:hover {
+	  background: rgba(185, 204, 245, .2);
+	}
+	.mat-icon {
+	  color: #757575;
+	}
+	.autocomplete_opt-title {
+	  color: #000000;
+	  margin-right: 8px;
+	}
+	.autocomplete_opt-desc {
+	  color: rgba(0,0,0, .54);
+	  font-size: 14px;
+	}
+  }
+  .mat-optgroup {
+	.mat-optgroup-label {
+	  display: none;
+	}
+	.mat-option {
+	  &:hover {
+		background: rgba(185,204,245, .2);
+	  }
+	  &.autocomplete_optgroup-label {
+		padding: 0 16px;
+	  }
+	}
+  }
+}
+
 .c-h21-passengers-select {
   display: inline-block;
   width: 100%;

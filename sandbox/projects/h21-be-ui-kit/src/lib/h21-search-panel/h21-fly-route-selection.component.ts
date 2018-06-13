@@ -28,15 +28,105 @@ import {VocabularyService} from '../../services/vocabulary-service';
 		  <mat-icon matSuffix>flight_land</mat-icon>
 	  </mat-form-field>
 	  
-	  <mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">
-		  <mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectFromItem($event)">
-			  {{ city.name }}
+	  <!--<mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
+		  <!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectFromItem($event)">-->
+			  <!--{{ city.name }}-->
+		  <!--</mat-option>-->
+	  <!--</mat-autocomplete>-->
+	  
+	  <!--<mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
+		  <!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectToItem($event)">-->
+			  <!--{{ city.name }}-->
+		  <!--</mat-option>-->
+	  <!--</mat-autocomplete>-->
+
+	  <mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption="false" [displayWith]="displayCity" class="c-fly-route-selection_autocomplete">
+		  <mat-optgroup>
+			  <mat-option value="SVO" class="autocomplete_optgroup-label">
+				  <mat-icon>location_city</mat-icon>
+				  <span class="autocomplete_opt-title">Moscow</span>
+				  <span class="autocomplete_opt-desc">(All airports)</span>
+			  </mat-option>
+			  <mat-option value="SVO">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Sheremetyevo</span>
+				  <span class="autocomplete_opt-desc">(SVO)</span>
+			  </mat-option>
+			  <mat-option value="DME">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Domodedovo</span>
+				  <span class="autocomplete_opt-desc">(DME)</span>
+			  </mat-option>
+			  <mat-option value="VKO">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Vnukovo</span>
+				  <span class="autocomplete_opt-desc">(VKO)</span>
+			  </mat-option>
+			  <mat-option value="ZIA">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Zhukovsky</span>
+				  <span class="autocomplete_opt-desc">(ZIA)</span>
+			  </mat-option>
+		  </mat-optgroup>
+		  <mat-option value="LON">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">London</span>
+			  <span class="autocomplete_opt-desc">(LON)</span>
+		  </mat-option>
+		  <mat-option value="BER">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">Berlin</span>
+			  <span class="autocomplete_opt-desc">(BER)</span>
+		  </mat-option>
+		  <mat-option value="PAR">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">Paris</span>
+			  <span class="autocomplete_opt-desc">(PAR)</span>
 		  </mat-option>
 	  </mat-autocomplete>
 	  
-	  <mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">
-		  <mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectToItem($event)">
-			  {{ city.name }}
+	  <mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption="false" [displayWith]="displayCity" class="c-fly-route-selection_autocomplete">
+		  <mat-optgroup>
+			  <mat-option value="SVO" class="autocomplete_optgroup-label">
+				  <mat-icon>location_city</mat-icon>
+				  <span class="autocomplete_opt-title">Moscow</span>
+				  <span class="autocomplete_opt-desc">(All airports)</span>
+			  </mat-option>
+			  <mat-option value="SVO">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Sheremetyevo</span>
+				  <span class="autocomplete_opt-desc">(SVO)</span>
+			  </mat-option>
+			  <mat-option value="DME">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Domodedovo</span>
+				  <span class="autocomplete_opt-desc">(DME)</span>
+			  </mat-option>
+			  <mat-option value="VKO">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Vnukovo</span>
+				  <span class="autocomplete_opt-desc">(VKO)</span>
+			  </mat-option>
+			  <mat-option value="ZIA">
+				  <mat-icon>local_airport</mat-icon>
+				  <span class="autocomplete_opt-title">Zhukovsky</span>
+				  <span class="autocomplete_opt-desc">(ZIA)</span>
+			  </mat-option>
+		  </mat-optgroup>
+		  <mat-option value="LON">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">London</span>
+			  <span class="autocomplete_opt-desc">(LON)</span>
+		  </mat-option>
+		  <mat-option value="BER">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">Berlin</span>
+			  <span class="autocomplete_opt-desc">(BER)</span>
+		  </mat-option>
+		  <mat-option value="PAR">
+			  <mat-icon>local_airport</mat-icon>
+			  <span class="autocomplete_opt-title">Paris</span>
+			  <span class="autocomplete_opt-desc">(PAR)</span>
 		  </mat-option>
 	  </mat-autocomplete>
 	  
