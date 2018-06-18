@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
+import { AppSubscriberService } from '../../services/app-subscriber-service';
 import {map, startWith, debounceTime } from 'rxjs/internal/operators';
 import {City} from '../../dto/city';
 import {Observable} from 'rxjs/index';
@@ -17,11 +18,14 @@ export class H21FlyRouteSelectionComponent {
 	cityFromControl: FormControl = new FormControl();
 	cityToControl: FormControl = new FormControl();
 	filteredCities: Observable<City[]>;
+	@Input() minDate: Date;
+	maxDate: Date;
 
 	@Output() onAdd: EventEmitter<void> = new EventEmitter<void>();
 	@Output() onRemove: EventEmitter<void> = new EventEmitter<void>();
 
-	constructor(private _vocabulary: VocabularyService) {
+	constructor(private _vocabulary: VocabularyService,
+		private _appSubscriber: AppSubscriberService) {
 	}
 
 	ngOnInit() {
@@ -32,6 +36,14 @@ export class H21FlyRouteSelectionComponent {
 		this.cityToControl.valueChanges.subscribe(value => {
 			this.filteredCities = this._vocabulary.getCities(value);
 		});
+
+		this._appSubscriber.arrivalDateObservable().subscribe(value => {
+			if (value.routeNumber == this.routeNumber - 1) {
+				this.minDate = value.date;
+			} else if (value.routeNumber == this.routeNumber + 1) {
+				this.maxDate = value.date;
+			}
+		});
 	}
 
 	displayCity(city: City): string {
@@ -40,6 +52,7 @@ export class H21FlyRouteSelectionComponent {
 
 	public _cityFrom: City;
 	public _cityTo: City;
+	public _arrivalDate: Date;
 
 	@Input() get cityFrom(): City {
 		return this._cityFrom;
@@ -57,13 +70,21 @@ export class H21FlyRouteSelectionComponent {
 		this._cityTo = value;
 	}
 
+	@Input() get arrivalDate(): Date {
+		return this._arrivalDate;
+	}
+
+	set arrivalDate(value: Date) {
+		this._arrivalDate = value;
+	}
+
 	@Output('cityFromChange') public cityFromChange: EventEmitter<City> = new EventEmitter<City>();
 	@Output('cityToChange') public cityToChange: EventEmitter<City> = new EventEmitter<City>();
+	@Output('arrivalDateChange') public arrivalDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
 	onSelectFromItem($event) {
 		if ($event) {
 			this.cityFrom = $event.source.value;
-			console.log($event);
 			this.cityFromChange.emit(this._cityFrom);
 		}
 	}
@@ -72,6 +93,18 @@ export class H21FlyRouteSelectionComponent {
 		if ($event) {
 			this.cityTo = $event.source.value;
 			this.cityToChange.emit(this._cityTo);
+		}
+	}
+
+	onArrivalDateChange($event) {
+		if ($event) {
+			this.arrivalDate = $event.value;
+			this.arrivalDateChange.emit(this._arrivalDate);
+
+			this._appSubscriber.arrivalDateChanged({
+				routeNumber: this.routeNumber,
+				date: this.arrivalDate
+			});
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <div class="c-fly-route-selection">
 	<mat-form-field color="primary">
 		<input type="text" matInput placeholder="From" [formControl]="cityFromControl" [matAutocomplete]="citiesAutocompleteFrom"
-			   [(ngModel)]="_cityFrom">
+			   [ngModel]="_cityFrom">
 		<mat-icon matSuffix>flight_takeoff</mat-icon>
 	</mat-form-field>
 
@@ -14,21 +14,9 @@
 
 	<mat-form-field color="primary">
 		<input type="text" matInput placeholder="To" [formControl]="cityToControl" [matAutocomplete]="citiesAutocompleteTo"
-			   [(ngModel)]="_cityTo">
+			   [ngModel]="_cityTo">
 		<mat-icon matSuffix>flight_land</mat-icon>
 	</mat-form-field>
-
-	<!--<mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
-	<!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectFromItem($event)">-->
-	<!--{{ city.name }}-->
-	<!--</mat-option>-->
-	<!--</mat-autocomplete>-->
-
-	<!--<mat-autocomplete #citiesAutocompleteTo="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity">-->
-	<!--<mat-option *ngFor="let city of filteredCities | async" [value]="city" (onSelectionChange)="onSelectToItem($event)">-->
-	<!--{{ city.name }}-->
-	<!--</mat-option>-->
-	<!--</mat-autocomplete>-->
 
 	<mat-autocomplete #citiesAutocompleteFrom="matAutocomplete" autoActiveFirstOption [displayWith]="displayCity" class="c-fly-route-selection_autocomplete">
 		<mat-optgroup *ngFor="let city of filteredCities | async">
@@ -65,7 +53,9 @@
 	</mat-autocomplete>
 
 	<mat-form-field>
-		<input matInput [matDatepicker]="arrivalDatePicker" placeholder="Arrival Date" >
+		<input matInput [matDatepicker]="arrivalDatePicker"
+			   [min]="minDate" [max]="maxDate"
+			   (dateChange)="onArrivalDateChange($event)" placeholder="Arrival Date" readonly>
 		<mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">
 			<mat-icon matDatepickerToggleIcon>date_range</mat-icon>
 		</mat-datepicker-toggle>
