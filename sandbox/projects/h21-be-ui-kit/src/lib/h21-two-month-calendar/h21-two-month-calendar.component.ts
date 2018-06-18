@@ -27,12 +27,6 @@ export class H21TwoMonthCalendarComponent {
 	constructor () {
 
 	}
-	// constructor (
-	// 	@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
-	// 	private _adapter: DateAdapter<Date>
-	// ) {
-    //
-	// }
 
 	sliderItemsCount = 12;
 	sliderItemsBoxWidth = 0;
