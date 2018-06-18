@@ -2,12 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import { Observable } from 'rxjs/index';
 import { INotifyItem } from '../../sandbox/projects/h21-be-ui-kit/src/dto/inotifyItem';
 import { PermissionService } from '../../sandbox/projects/h21-be-ui-kit/src/services/permission-service';
-import { Passenger } from '../../sandbox/projects/h21-be-ui-kit/src/dto/passenger';
 import { H21SidebarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import { H21TopToolbarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
+import { H21RightOverlayPanelService } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { AuthData } from './dto/auth-data';
 
 @Component({
@@ -27,7 +26,8 @@ export class AppComponent {
 		iconReg: MatIconRegistry,
 		sanitizer: DomSanitizer,
 		private http: HttpClient,
-		permissionService: PermissionService
+		permissionService: PermissionService,
+		private rightPanelDialog: H21RightOverlayPanelService
 	) {
 		this.permissionService = permissionService;
 		if(this.permissionService.isAuth()) {
@@ -65,5 +65,9 @@ export class AppComponent {
 
 	showSidebar(): void {
 		this.sidebar.visibilityToggle();
+	}
+
+	openHelpSection(): void {
+		this.rightPanelDialog.open('h21-help');
 	}
 }

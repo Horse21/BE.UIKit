@@ -1,6 +1,9 @@
 import { City } from '../dto/city';
 
 export class FlyRoute {
-	public cityFrom: City;
-	public cityTo: City;
+	cityFrom: City;
+	cityTo: City;
+	arrivalDate: Date;
+	returnDate: Date;
+	minDate: Date;
 }

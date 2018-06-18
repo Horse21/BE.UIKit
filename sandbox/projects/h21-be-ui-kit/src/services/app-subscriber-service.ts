@@ -54,4 +54,16 @@ export class AppSubscriberService {
 	removeTravelerObservable(): Observable<Passenger> {
 		return this._removeTraveler.asObservable();
 	}
+
+	/* route dates */
+
+	private _arrivalDate = new Subject<any>();
+
+	arrivalDateChanged(data: any) {
+		return this._arrivalDate.next(data);
+	}
+
+	arrivalDateObservable(): Observable<any> {
+		return this._arrivalDate.asObservable();
+	}
 }
