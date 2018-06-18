@@ -31,6 +31,7 @@ import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/li
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
+import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
 
 // Examples
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
@@ -77,6 +78,7 @@ const routes: Routes = [
 		H21RightOverlayPanelComponent,
 		H21PassengersSearchComponent,
 		H21HelpComponent,
+		H21TwoMonthCalendarComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		ButtonsExampleComponent,

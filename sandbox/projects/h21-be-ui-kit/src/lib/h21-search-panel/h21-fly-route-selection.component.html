@@ -72,6 +72,11 @@
 		<mat-datepicker #arrivalDatePicker></mat-datepicker>
 	</mat-form-field>
 
+	<!--<h21-two-month-calendar>-->
+		<!--<mat-calendar></mat-calendar>-->
+	<!--</h21-two-month-calendar>-->
+
+
 	<div class="c-fly-route-selection_add-remove-buttons-box" [hidden]="!canAdd && !canRemove">
 		<button mat-icon-button class="c-fly-route-selection_remove-button" *ngIf="canRemove" (click)="onRemove.emit()">
 			<mat-icon>cancel</mat-icon>
