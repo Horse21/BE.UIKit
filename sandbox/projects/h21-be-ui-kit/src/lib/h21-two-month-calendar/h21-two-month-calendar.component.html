@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-6">
-				<div class="c-h21-two-month-calendar_date-box">
+				<div class="c-h21-two-month-calendar_date-box" *ngIf="rangeSelectMode">
 					<span>Return date</span>
 					<mat-icon>date_range</mat-icon>
 					<input type="text" value="Mon 25, May" />
@@ -33,22 +33,25 @@
 	</div>
 	<div class="c-h21-two-month-calendar_body">
 		<div class="c-h21-two-month-calendar_slider">
-			<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()">
+			<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()" [disabled]="sliderCurrentIndex == 0">
 				<mat-icon>navigate_before</mat-icon>
 			</button>
-			<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()">
+			<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()" [disabled]="sliderCurrentIndex == (sliderItemsCount - 2)">
 				<mat-icon>navigate_next</mat-icon>
 			</button>
 			<div class="twc-slider_view-port">
-				<div class="twc-slider_view-port-items-box" #twcSliderItemsBox [@sliderMove]>
-					<div class="twc-slider_item" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
-						<mat-calendar></mat-calendar>
+				<!--[@sliderMove]="animationState"-->
+				<div class="twc-slider_view-port-items-box" #twcSliderItemsBox>
+					<div class="twc-slider_item" *ngFor="let i of [6,7,8,9,10,11,12]">
+						<div class="twc-slider_month-label">Month name</div>
+						<mat-calendar [minDate]="getMinDate(i)"></mat-calendar>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="c-h21-two-month-calendar_footer">
+		<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary">range select mode (dev)</mat-checkbox>
 		<button mat-raised-button color="primary">ready</button>
 	</div>
 </div>

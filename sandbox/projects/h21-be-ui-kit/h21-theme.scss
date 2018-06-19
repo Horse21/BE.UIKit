@@ -1751,6 +1751,20 @@ a.c-h21-header_logo {
   left: 50%;
   transform: translate(-50%,-50%);
   @include mat-elevation(2);
+
+  .mat-calendar-header {
+	display: none;
+  }
+  .mat-calendar-body-label {
+	visibility: hidden;
+  }
+  .mat-calendar-body-label[colspan="7"] {
+	display: none;
+  }
+  .mat-calendar-table-header th {
+	color: black;
+	font-size: 14px;
+  }
 }
 .c-h21-two-month-calendar_header {
   padding: 16px;
@@ -1797,7 +1811,7 @@ a.c-h21-header_logo {
   }
 }
 .c-h21-two-month-calendar_body {
-  height: 440px;
+  height: 390px;
   padding: 16px;
   box-sizing: border-box;
   border-top: 1px solid $black-6-opacity;
@@ -1807,6 +1821,10 @@ a.c-h21-header_logo {
   padding: 16px;
   box-sizing: border-box;
   text-align: right;
+
+  .mat-raised-button {
+	margin-left: 16px;
+  }
 }
 .c-h21-two-month-calendar_slider {
   position: relative;
@@ -1844,13 +1862,22 @@ a.c-h21-header_logo {
 	position: absolute;
 	top: 0;
 	left: 0;
+	transition: transform .12s;
+	transform: translateX(0);
   }
   .twc-slider_item {
 	box-sizing: border-box;
 	padding: 0 24px;
 	display: inline-block;
 	width: 376px;
-	height: 395px;
+	height: 350px;
+  }
+  .twc-slider_month-label {
+	display: block;
+	margin: 16px 0;
+	font-size: 16px;
+	color: black;
+	text-align: center;
   }
 }
 //
