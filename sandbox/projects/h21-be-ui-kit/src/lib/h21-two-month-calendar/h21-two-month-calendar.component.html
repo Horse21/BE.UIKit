@@ -1,0 +1,54 @@
+<div class="c-h21-two-month-calendar mat-typography">
+	<div class="c-h21-two-month-calendar_header">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="c-h21-two-month-calendar_date-box">
+					<span>Departure date</span>
+					<mat-icon>date_range</mat-icon>
+					<input type="text" value="Mon 25, May" />
+					<div class="w-spacer"></div>
+					<button mat-icon-button>
+						<mat-icon>navigate_before</mat-icon>
+					</button>
+					<button mat-icon-button>
+						<mat-icon>navigate_next</mat-icon>
+					</button>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div class="c-h21-two-month-calendar_date-box">
+					<span>Return date</span>
+					<mat-icon>date_range</mat-icon>
+					<input type="text" value="Mon 25, May" />
+					<div class="w-spacer"></div>
+					<button mat-icon-button>
+						<mat-icon>navigate_before</mat-icon>
+					</button>
+					<button mat-icon-button>
+						<mat-icon>navigate_next</mat-icon>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="c-h21-two-month-calendar_body">
+		<div class="c-h21-two-month-calendar_slider">
+			<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()">
+				<mat-icon>navigate_before</mat-icon>
+			</button>
+			<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()">
+				<mat-icon>navigate_next</mat-icon>
+			</button>
+			<div class="twc-slider_view-port">
+				<div class="twc-slider_view-port-items-box" #twcSliderItemsBox [@sliderMove]>
+					<div class="twc-slider_item" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+						<mat-calendar></mat-calendar>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="c-h21-two-month-calendar_footer">
+		<button mat-raised-button color="primary">ready</button>
+	</div>
+</div>

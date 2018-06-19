@@ -10,6 +10,7 @@ import {VocabularyService} from '../../services/vocabulary-service';
   selector: 'h21-fly-route-selection',
   templateUrl: './h21-fly-route-selection.component.html'
 })
+
 export class H21FlyRouteSelectionComponent {
 	@Input() routeNumber = 1;
 	@Input() canAdd = true;

@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { H21RightOverlayPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import { H21PassengersSearchComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import { H21FilterPanelComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
+import { H21TwoMonthCalendarComponent } from '../../sandbox/projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
@@ -51,7 +52,8 @@ const routes: Routes = [
 			H21RightOverlayPanelComponent,
 			H21PassengersSearchComponent,
 			H21FilterPanelComponent,
-			H21HelpComponent
+			H21HelpComponent,
+			H21TwoMonthCalendarComponent
 		],
 		imports: [
 			BrowserModule,

@@ -350,7 +350,7 @@ a:hover {
   width: 100%;
   height: 100%;
   background: #CAD2D3;
-  overflowY: scroll;
+  overflow-y: auto;
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -724,15 +724,9 @@ a.c-h21-header_logo {
 	height: 100%;
   }
 }
-
 .search-result-fake-view {
   padding: 24px;
   background-color: white;
-  //opacity: 0;
-  //transition: opacity 0.2s;
-  //&.is-visible {
-	//opacity: 1;
-  //}
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -1057,11 +1051,10 @@ a.c-h21-header_logo {
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
-//
 // h21-search-result component
+//
 .c-h21-search-result {
   padding: 24px;
-
   .c-h21-search-result_title-box {
 	margin-bottom: 30px;
 	.c-h21-search-result_title {
@@ -1077,16 +1070,13 @@ a.c-h21-header_logo {
 	  font-weight: 400;
 	}
   }
-
   .mat-tab-label {
 	height: 52px;
 	width: 33.3333%;
 	max-width: 300px;
 	opacity: 1;
-
 	&.mat-tab-label-active {
 	  background-color: #e4ebfb;
-
 	  .c-h21-search-result-tab-icon,
 	  .c-h21-search-result-tab-label_name {
 		color: $h21-color-ui-primary;
@@ -1094,9 +1084,9 @@ a.c-h21-header_logo {
 	}
   }
 }
-
 .c-h21-search-result_tab {
   display: table;
+
   .c-h21-search-result-tab-label {
 	display: table-cell;
 	height: 52px;
@@ -1134,14 +1124,14 @@ a.c-h21-header_logo {
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
-//
 // h21-search-result-row component
+//
 .c-h21-search-result-row {
   border: 1px solid #d6d6d6;
   border-radius: 2px;
   background: white;
-  @include mat-elevation(3);
   margin: 16px 0;
+  @include mat-elevation(3);
 
   .c-h21-search-result-row_bottom {
 	> div {
@@ -1162,7 +1152,6 @@ a.c-h21-header_logo {
 	}
   }
 }
-
 .c-h21-search-result-row_flight {
   > div {
 	padding-top: 16px;
@@ -1175,6 +1164,7 @@ a.c-h21-header_logo {
 	padding: 3px 0;
 	box-sizing: border-box;
 	margin-bottom: 5px;
+
 	img {
 	  height: 100%;
 	  width: auto;
@@ -1248,25 +1238,27 @@ a.c-h21-header_logo {
 }
 //
 //----------------------------------------------------------------------------------------------------------------------
-//
 // fly-route-selection component
+//
 .c-fly-route-selection {
   background: white;
   padding: 16px 30px 16px 38px;
   box-sizing: border-box;
   width: 100%;
-  @include mat-elevation(1);
   border-bottom: 3px solid $h21-color-ui-primary;
   margin: 30px 0;
   position: relative;
+  @include mat-elevation(1);
 
   .mat-form-field {
 	width: 100%;
+
 	.mat-form-field-flex {
 	  align-items: flex-end;
 	}
 	.mat-form-field-suffix {
 	  padding-bottom: 0.4375em;
+
 	  .mat-datepicker-toggle,
 	  .mat-datepicker-toggle .mat-icon-button {
 		font-size: 24px;
@@ -1313,8 +1305,6 @@ a.c-h21-header_logo {
 	  height: 12px;
 	  background: white;
 	  border: 2px solid black;
-	  -webkit-border-radius: 50%;
-	  -moz-border-radius: 50%;
 	  border-radius: 50%;
 	}
 	&::before {
@@ -1370,6 +1360,7 @@ a.c-h21-header_logo {
 		line-height: 40px;
 		height: 40px;
 		position: relative;
+
 		&::after {
 		  display: block;
 		  content: "";
@@ -1405,9 +1396,7 @@ a.c-h21-header_logo {
 	}
   }
 }
-
 .c-fly-route-selection_autocomplete {
-  //min-width: 400px;
   .mat-option {
 	&:hover {
 	  background: rgba(185, 204, 245, .2);
@@ -1438,7 +1427,6 @@ a.c-h21-header_logo {
 	}
   }
 }
-
 .c-h21-passengers-select {
   display: inline-block;
   width: 100%;
@@ -1587,7 +1575,6 @@ a.c-h21-header_logo {
 	  &:hover .mat-button-focus-overlay {
 		opacity: 0;
 	  }
-
 	  .mat-icon {
 		color: $black-87-opacity;
 	  }
@@ -1598,11 +1585,6 @@ a.c-h21-header_logo {
 	}
   }
 }
-
-
-
-
-
 .c-h21-search-panel_preferred-class-combobox {
   .mat-form-field-wrapper {
 	padding-bottom: 0;
@@ -1682,8 +1664,10 @@ a.c-h21-header_logo {
 	}
   }
 }
-
+//
+//----------------------------------------------------------------------------------------------------------------------
 // h21-right-overlay-panel component
+//
 .c-h21-right-overlay-panel-box {
   background: rgba(0,0,0, .5);
 }
@@ -1694,7 +1678,7 @@ a.c-h21-header_logo {
   height: 100%;
   width: 550px;
   background: white;
-  bordre-right: 1px solid #d6d6d6;
+  border-right: 1px solid #d6d6d6;
   box-shadow: 0 2px 8px 0 rgba(0,68,214, .2);
   font-family: mat-font-family($h21-mat-typography);
 
@@ -1753,6 +1737,120 @@ a.c-h21-header_logo {
 	.mat-form-field-subscript-wrapper {
 	  display: none;
 	}
+  }
+}
+//
+//----------------------------------------------------------------------------------------------------------------------
+// h21-two-month-calendar component
+//
+.c-h21-two-month-calendar {
+  width: 800px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  @include mat-elevation(2);
+}
+.c-h21-two-month-calendar_header {
+  padding: 16px;
+  box-sizing: border-box;
+  background: $h21-color-ui-primary;
+}
+.c-h21-two-month-calendar_date-box-label {
+  height: 18px;
+  color: white;
+  font-size: 8px;
+}
+.c-h21-two-month-calendar_date-box {
+  margin-top: 18px;
+  min-height: 40px;
+  background: white;
+  box-sizing: padding-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 8px;
+  position: relative;
+  > span {
+	display: block;
+	position: absolute;
+	top: -18px;
+	left: 0;
+	height: 18px;
+	line-height: 18px;
+	font-size: 12px;
+	font-weight: 300;
+	color: white;
+	width: 100%;
+  }
+  > input[type="text"] {
+	margin-left: 8px;
+	display: inline-block;
+	width: auto;
+	border: none;
+	background: none;
+  }
+  .mat-icon {
+	color: #757575;
+  }
+}
+.c-h21-two-month-calendar_body {
+  height: 440px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-top: 1px solid $black-6-opacity;
+  border-bottom: 1px solid $black-6-opacity;
+}
+.c-h21-two-month-calendar_footer {
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: right;
+}
+.c-h21-two-month-calendar_slider {
+  position: relative;
+  height: 100%;
+  margin: 0 -16px;
+  padding: 0 24px;
+
+  &::after {
+	display: block;
+	content: '';
+	clear: both;
+	height: 0;
+  }
+ .twc-slider_button-prev {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(-50%, -50%);
+  }
+  .twc-slider_button-next {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(50%, -50%);
+  }
+  .twc-slider_view-port {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+  }
+  .twc-slider_view-port-items-box {
+	height: 100%;
+	width: auto;
+	white-space: nowrap;
+	position: absolute;
+	top: 0;
+	left: 0;
+  }
+  .twc-slider_item {
+	box-sizing: border-box;
+	padding: 0 24px;
+	display: inline-block;
+	width: 376px;
+	height: 395px;
   }
 }
 //
