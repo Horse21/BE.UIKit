@@ -7,7 +7,8 @@
 
 	<div class="relative-box">
 		<div class="c-fly-route-selection_route-marker route-marker__route-num-{{routeNumber}}"></div>
-		<button mat-icon-button class="c-fly-route-selection_swap-btn">
+		<button mat-icon-button class="c-fly-route-selection_swap-btn"
+				(click)="swapCities()">
 			<mat-icon>swap_vert</mat-icon>
 		</button>
 	</div>
@@ -53,7 +54,7 @@
 	</mat-autocomplete>
 
 	<mat-form-field>
-		<input matInput [matDatepicker]="arrivalDatePicker"
+		<input matInput [matDatepicker]="arrivalDatePicker" [value]="_arrivalDate"
 			   [min]="minDate" [max]="maxDate"
 			   (dateChange)="onArrivalDateChange($event)" placeholder="Arrival Date" readonly>
 		<mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">

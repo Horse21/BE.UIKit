@@ -28,7 +28,6 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 	resultVisibility = false;
 
 	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
-	private resultPanel: H21SearchResultComponent;
 	private _result: SearchResult;
 
 	constructor(private _vocabulary: VocabularyService,
@@ -72,16 +71,17 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 	}
 
 	search(searchOptions: SearchFlightDto) {
+		this.resultVisibility = false;
 		this.actionInProcess = true;
 		this.showList();
 		setTimeout(() => {
 			this._vocabulary.searchFlights(searchOptions).subscribe(result => {
-				this.actionInProcess = false;
 				this._result = result;
+				this.actionInProcess = false;
+				setTimeout(() => {
+					this.resultVisibility = true;
+				}, 250);
 			});
-			setTimeout(() => {
-				this.resultVisibility = true;
-			}, 250);
 		}, 2000);
 	}
 
@@ -92,7 +92,6 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 
 	private showList() {
 		this.listVisibility = true;
-		//this.resultPanel.visibility = true;
 	}
 
 	private hideList() {

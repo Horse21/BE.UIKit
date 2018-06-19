@@ -46,6 +46,10 @@ export class H21SearchPanelComponent implements OnInit {
 		}
 		flyRoute.minDate = previous.arrivalDate;
 		flyRoute.cityFrom = previous.cityTo;
+		flyRoute.cityTo = previous.cityFrom;
+		flyRoute.arrivalDate = new Date(previous.arrivalDate);
+		flyRoute.arrivalDate.setDate(flyRoute.arrivalDate.getDate() + 4);
+
 		this.searchOptions.flyRoutes.push(flyRoute);
 	}
 

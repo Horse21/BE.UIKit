@@ -38,11 +38,13 @@ export class H21FlyRouteSelectionComponent {
 		});
 
 		this._appSubscriber.arrivalDateObservable().subscribe(value => {
-			if (value.routeNumber == this.routeNumber - 1) {
-				this.minDate = value.date;
-			} else if (value.routeNumber == this.routeNumber + 1) {
-				this.maxDate = value.date;
-			}
+			setTimeout(()=>{
+				if (value.routeNumber == this.routeNumber - 1) {
+					this.minDate = value.date;
+				} else if (value.routeNumber == this.routeNumber + 1) {
+					this.maxDate = value.date;
+				}
+			});
 		});
 	}
 
@@ -76,6 +78,10 @@ export class H21FlyRouteSelectionComponent {
 
 	set arrivalDate(value: Date) {
 		this._arrivalDate = value;
+		this._appSubscriber.arrivalDateChanged({
+			routeNumber: this.routeNumber,
+			date: this.arrivalDate
+		});
 	}
 
 	@Output('cityFromChange') public cityFromChange: EventEmitter<City> = new EventEmitter<City>();
@@ -100,12 +106,15 @@ export class H21FlyRouteSelectionComponent {
 		if ($event) {
 			this.arrivalDate = $event.value;
 			this.arrivalDateChange.emit(this._arrivalDate);
-
-			this._appSubscriber.arrivalDateChanged({
-				routeNumber: this.routeNumber,
-				date: this.arrivalDate
-			});
 		}
+	}
+
+	swapCities() {
+		var tmp = this._cityTo;
+		this.cityTo = this._cityFrom;
+		this.cityFrom = tmp;
+		this.cityFromChange.emit(this._cityFrom);
+		this.cityToChange.emit(this._cityTo);
 	}
 }
 
