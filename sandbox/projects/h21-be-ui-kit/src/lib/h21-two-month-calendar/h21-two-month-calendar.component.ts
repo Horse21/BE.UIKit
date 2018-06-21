@@ -45,7 +45,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 
 	constructor (
 		private renderer: Renderer2,
-		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
+		//@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
 		private dateAdapter: DateAdapter<Date>,
 		private elementRef: ElementRef
 	) {
