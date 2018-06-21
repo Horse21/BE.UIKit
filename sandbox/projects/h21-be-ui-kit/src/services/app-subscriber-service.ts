@@ -66,4 +66,16 @@ export class AppSubscriberService {
 	arrivalDateObservable(): Observable<any> {
 		return this._arrivalDate.asObservable();
 	}
+
+	/* two month calendar */
+
+	private _calendarFromDate = new Subject<any>();
+
+	changeSelectedFromDate(data: any) {
+		return this._calendarFromDate.next(data);
+	}
+
+	changeSelectedFromObservable(): Observable<any> {
+		return this._calendarFromDate.asObservable();
+	}
 }

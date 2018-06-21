@@ -22,7 +22,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 export class H21SidebarComponent implements OnInit, AfterViewInit {
 
 	activeTab: string = 'tab-search';
-	visibility = true;
+	visibility = false;
 	listVisibility = false;
 	actionInProcess = false;
 	resultVisibility = false;

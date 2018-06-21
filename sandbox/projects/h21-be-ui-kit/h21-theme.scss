@@ -1752,18 +1752,81 @@ a.c-h21-header_logo {
   transform: translate(-50%,-50%);
   @include mat-elevation(2);
 
-  .mat-calendar-header {
-	display: none;
-  }
-  .mat-calendar-body-label {
-	visibility: hidden;
-  }
-  .mat-calendar-body-label[colspan="7"] {
-	display: none;
-  }
-  .mat-calendar-table-header th {
-	color: black;
-	font-size: 14px;
+  .mat-calendar {
+	.mat-calendar-header {
+	  display: none;
+	}
+	.mat-calendar-body-label {
+	  visibility: hidden;
+	}
+	.mat-calendar-body-label[colspan="7"] {
+	  display: none;
+	}
+	.mat-calendar-table-header th {
+	  color: black;
+	  font-size: 14px;
+	}
+	.mat-calendar-body-selected {
+	  background-color: inherit;
+	  color: inherit;
+	}
+
+	.mat-calendar-body-cell {
+	  //.mat-calendar-body-cell-content {
+		//transition: all 120ms;
+	  //}
+	  &:hover .mat-calendar-body-cell-content {
+		background: white !important;
+		border: 1px solid $h21-color-ui-primary !important;;
+		color: black !important;;
+	  }
+	}
+	.c-h21-two-month-calendar_range-highlight {
+	  background-color: rgba(185,204,245, .2);
+	  &.c-h21-two-month-calendar_range-highlight__finish {
+		&::after {
+		  display: block;
+		  content: '';
+		  width: 50%;
+		  height: 100%;
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  background-color: white;
+		}
+		.mat-calendar-body-cell-content {
+			z-index: 1;
+		}
+	  }
+	}
+	.c-h21-two-month-calendar_selected {
+	  &::after {
+		display: none;
+		content: '';
+		width: 50%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		background-color: white;
+	  }
+	  &.c-h21-two-month-calendar_selected__start {
+		&::after {
+		  display: block;
+		  left: 0;
+		}
+	  }
+	  &.c-h21-two-month-calendar_selected__finish {
+		&::after {
+		  display: block;
+		  right: 0;
+		}
+	  }
+	  .mat-calendar-body-cell-content {
+		background-color: $h21-color-ui-primary;
+		color: white;
+		z-index: 1;
+	  }
+	}
   }
 }
 .c-h21-two-month-calendar_header {

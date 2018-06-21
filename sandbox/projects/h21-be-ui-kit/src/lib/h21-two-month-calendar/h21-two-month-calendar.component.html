@@ -40,11 +40,11 @@
 				<mat-icon>navigate_next</mat-icon>
 			</button>
 			<div class="twc-slider_view-port">
-				<!--[@sliderMove]="animationState"-->
 				<div class="twc-slider_view-port-items-box" #twcSliderItemsBox>
-					<div class="twc-slider_item" *ngFor="let i of [6,7,8,9,10,11,12]">
-						<div class="twc-slider_month-label">Month name</div>
-						<mat-calendar [minDate]="getMinDate(i)"></mat-calendar>
+					<div class="twc-slider_item" *ngFor="let item of monthList">
+						<div class="twc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
+						<mat-calendar [startAt]="getMonthFirstDay(item.month, item.year)" [minDate]="fromDate" [maxDate]="toDate" [selected]="selectedFromDate"
+									  (selectedChange)="selectedDateChange($event)"></mat-calendar>
 					</div>
 				</div>
 			</div>
@@ -52,6 +52,6 @@
 	</div>
 	<div class="c-h21-two-month-calendar_footer">
 		<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary">range select mode (dev)</mat-checkbox>
-		<button mat-raised-button color="primary">ready</button>
+		<button mat-raised-button color="primary" (click)="clearSelection()">clear selected</button>
 	</div>
 </div>
