@@ -11,7 +11,7 @@ import {
 	QueryList, AfterViewInit, HostListener
 } from "@angular/core";
 import { MatCalendar } from "@angular/material";
-import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats } from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
 
 @Component ({
 	selector: 'h21-two-month-calendar',
