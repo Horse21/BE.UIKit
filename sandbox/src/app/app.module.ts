@@ -109,7 +109,7 @@ const routes: Routes = [
 		{provide: VocabularyService, useValue: new FakeVocabularyService()},
 		H21RightOverlayPanelService,
 		AppSubscriberService,
-		OrderService
+		OrderService,
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]
