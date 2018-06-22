@@ -1,57 +1,87 @@
-<div class="c-h21-two-month-calendar mat-typography">
-	<div class="c-h21-two-month-calendar_header">
-		<div class="row">
-			<div class="col-sm-12 col-md-6">
-				<div class="c-h21-two-month-calendar_date-box">
-					<span>Departure date</span>
-					<mat-icon>date_range</mat-icon>
-					<input type="text" value="Mon 25, May" />
-					<div class="w-spacer"></div>
-					<button mat-icon-button>
-						<mat-icon>navigate_before</mat-icon>
-					</button>
-					<button mat-icon-button>
-						<mat-icon>navigate_next</mat-icon>
-					</button>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6">
-				<div class="c-h21-two-month-calendar_date-box" *ngIf="rangeSelectMode">
-					<span>Return date</span>
-					<mat-icon>date_range</mat-icon>
-					<input type="text" value="Mon 25, May" />
-					<div class="w-spacer"></div>
-					<button mat-icon-button>
-						<mat-icon>navigate_before</mat-icon>
-					</button>
-					<button mat-icon-button>
-						<mat-icon>navigate_next</mat-icon>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="c-h21-two-month-calendar_body">
-		<div class="c-h21-two-month-calendar_slider">
-			<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()" [disabled]="sliderCurrentIndex == 0">
-				<mat-icon>navigate_before</mat-icon>
-			</button>
-			<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()" [disabled]="sliderCurrentIndex == (sliderItemsCount - 2)">
-				<mat-icon>navigate_next</mat-icon>
-			</button>
-			<div class="twc-slider_view-port">
-				<div class="twc-slider_view-port-items-box" #twcSliderItemsBox>
-					<div class="twc-slider_item" *ngFor="let item of monthList">
-						<div class="twc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
-						<mat-calendar [startAt]="getMonthFirstDay(item.month, item.year)" [minDate]="fromDate" [maxDate]="toDate" [selected]="selectedFromDate"
-									  (selectedChange)="selectedDateChange($event)"></mat-calendar>
+<div (click)="showMenu()" style="padding 16px; margin: 16px; width: 700px; background: white;">
+	<mat-form-field>
+		<mat-icon matPrefix="">date_range</mat-icon>
+		<input type="text" matInput placeholder="Departure date" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
+		<button mat-icon-button matSuffix (click)="false">
+			<mat-icon matSuffix>navigate_before</mat-icon>
+		</button>
+		<button mat-icon-button matSuffix (click)="false">
+			<mat-icon matSuffix>navigate_next</mat-icon>
+		</button>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-icon matPrefix="">date_range</mat-icon>
+		<input type="text" matInput placeholder="Return date" value="{{selectedToDate | date: 'EEEEEE, d LLL'}}" />
+		<button mat-icon-button matSuffix (click)="false">
+			<mat-icon matSuffix>navigate_before</mat-icon>
+		</button>
+		<button mat-icon-button matSuffix (click)="false">
+			<mat-icon matSuffix>navigate_next</mat-icon>
+		</button>
+	</mat-form-field>
+</div>
+<div [matMenuTriggerFor]="twoMonthCalendaarMenu"></div>
+
+<mat-menu #twoMonthCalendaarMenu="matMenu" class="c-h21-two-month-calendar_menu">
+	<ng-template matMenuContent>
+		<div class="c-h21-two-month-calendar mat-typography" (click)="$event.stopPropagation();">
+			<div class="c-h21-two-month-calendar_header">
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<div class="c-h21-two-month-calendar_date-box">
+							<span>Departure date</span>
+							<mat-icon>date_range</mat-icon>
+							<input type="text" matInput placeholder="Departure date" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
+							<div class="w-spacer"></div>
+							<button mat-icon-button (click)="selectedFromDate = prevDay(selectedFromDate);">
+								<mat-icon>navigate_before</mat-icon>
+							</button>
+							<button mat-icon-button (click)="selectedFromDate = nextDay(selectedFromDate);">
+								<mat-icon>navigate_next</mat-icon>
+							</button>
+						</div>
+					</div>
+
+					<div class="col-sm-12 col-md-6">
+						<div class="c-h21-two-month-calendar_date-box" *ngIf="rangeSelectMode">
+							<span>Return date</span>
+							<mat-icon>date_range</mat-icon>
+							<input type="text" matInput placeholder="Return date" value="{{selectedToDate | date: 'EEE, d LLL'}}" />
+							<div class="w-spacer"></div>
+							<button mat-icon-button (click)="selectedToDate = prevDay(selectedToDate);">
+								<mat-icon>navigate_before</mat-icon>
+							</button>
+							<button mat-icon-button (click)="selectedToDate = nextDay(selectedToDate);">
+								<mat-icon>navigate_next</mat-icon>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="c-h21-two-month-calendar_body">
+				<div class="c-h21-two-month-calendar_slider">
+					<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()" [disabled]="sliderCurrentIndex == 0">
+						<mat-icon>navigate_before</mat-icon>
+					</button>
+					<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()" [disabled]="sliderCurrentIndex == (sliderItemsCount - 2)">
+						<mat-icon>navigate_next</mat-icon>
+					</button>
+					<div class="twc-slider_view-port">
+						<div class="twc-slider_view-port-items-box" #twcSliderItemsBox id="calendar-menu">
+							<div class="twc-slider_item" *ngFor="let item of monthList">
+								<div class="twc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
+								<mat-calendar [startAt]="getMonthFirstDay(item.month, item.year)" [minDate]="fromDate" [maxDate]="toDate" [selected]="selectedFromDate"
+											  (selectedChange)="selectedDateChange($event)"></mat-calendar>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="c-h21-two-month-calendar_footer">
+				<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary">range select mode (dev)</mat-checkbox>
+				<button mat-raised-button color="primary" (click)="clearSelection()">clear selected</button>
+			</div>
 		</div>
-	</div>
-	<div class="c-h21-two-month-calendar_footer">
-		<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary">range select mode (dev)</mat-checkbox>
-		<button mat-raised-button color="primary" (click)="clearSelection()">clear selected</button>
-	</div>
-</div>
+	</ng-template>
+</mat-menu>

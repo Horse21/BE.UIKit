@@ -10,7 +10,7 @@ import {
 	Renderer2,
 	QueryList, AfterViewInit, HostListener
 } from "@angular/core";
-import { MatCalendar } from "@angular/material";
+import {MatCalendar, MatMenuTrigger} from "@angular/material";
 import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats } from '@angular/material';
 
 @Component ({
@@ -24,8 +24,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	@Input() finishDate: Date; 	//
 	@Input() fromDate: Date; 	//
 	@Input() toDate: Date; 		//
-
-	@ViewChild('twcSliderItemsBox') elementView: ElementRef;
+	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
 	monthNames: Array<string>;
 	monthList: Array<any>;
@@ -59,10 +58,21 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.sliderItemsBoxWidth = this.elementView.nativeElement.clientWidth;
+
+	}
+
+	init() {
+		let elementView = document.getElementById('calendar-menu');
+		if (!elementView) {
+			return;
+		}
+
+		console.log(elementView.clientWidth);
+		//const elementView = elementRef.nativeElement.querySelectorAll("")[0];
+		this.sliderItemsBoxWidth = elementView.clientWidth;
 		this.sliderItemWidth = this.sliderItemsBoxWidth / this.sliderItemsCount;
 
-		this.dayCells = Array.from(this.elementRef.nativeElement.querySelectorAll(".mat-calendar-body-cell"))
+		this.dayCells = Array.from(document.querySelectorAll(".mat-calendar-body-cell"))
 			.map((x: any)=>{
 				let xDate = new Date(x.getAttribute('aria-label'));
 				return {
@@ -76,6 +86,18 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 				this.refreshRange(item.date);
 			});
 		});
+
+		if (this.selectedFromDate) {
+			let start = new Date(this.selectedFromDate);
+			let end = this.selectedToDate != null ? new Date(this.selectedToDate) : null;
+			this.selectedFromDate = null;
+			this.selectedToDate = null;
+			this.selectedDateChange(start);
+			if (end) {
+				this.selectedDateChange(end);
+			}
+			this.refreshRange(null);
+		}
 	}
 
 	/**
@@ -98,8 +120,9 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	 *
 	 */
 	moveSlide() {
+		let elementView = document.getElementById('calendar-menu');
 		this.sliderCurrentTranslation = this.sliderCurrentIndex * this.sliderItemWidth;
-		this.renderer.setStyle(this.elementView.nativeElement, 'transform', 'translateX(' + String(-this.sliderCurrentTranslation) + 'px)');
+		this.renderer.setStyle(elementView, 'transform', 'translateX(' + String(-this.sliderCurrentTranslation) + 'px)');
 	}
 
 	/**
@@ -135,6 +158,37 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		return result;
 	}
 
+	/**
+	 *
+	 * @param {Date} date
+	 * @returns {Date}
+	 */
+	prevDay(date: Date)
+	{
+		let newDate = this.dateAdapter.addCalendarDays(date, -1);
+		if (newDate >= this.fromDate) {
+			return newDate;
+		} else {
+			return date;
+		}
+	}
+
+	/**
+	 *
+	 * @param {Date} date
+	 * @returns {Date}
+	 */
+	nextDay(date: Date)
+	{
+		let newDate = this.dateAdapter.addCalendarDays(date, 1);
+		if (newDate <= this.toDate) {
+			this.selectedDateChange(newDate);
+			return newDate;
+		} else {
+			return date;
+		}
+	}
+
 	selectedDateChange($event) {
 		if (!this.rangeSelectMode) {
 			this.selectedFromDate = $event;
@@ -153,7 +207,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		} else {
 			if (this.selectedToDate) {
 				let ariaLabel = this.getMonthName(this.selectedToDate.getMonth()) + ' ' + this.selectedToDate.getDate() + ', ' + this.selectedToDate.getFullYear();
-				const element = this.elementRef.nativeElement.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+				const element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 				element.classList.remove('c-h21-two-month-calendar_selected');
 				element.classList.remove('c-h21-two-month-calendar_selected__finish');
 				element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
@@ -163,7 +217,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		}
 
 		let ariaLabel = this.getMonthName($event.getMonth()) + ' ' + $event.getDate() + ', ' + $event.getFullYear();
-		const element = this.elementRef.nativeElement.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+		const element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 		element.classList.add('c-h21-two-month-calendar_selected');
 		element.classList.add(this.selectedToDate ? 'c-h21-two-month-calendar_selected__finish' : 'c-h21-two-month-calendar_selected__start');
 	}
@@ -171,7 +225,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	clearSelection() {
 		this.selectedFromDate = null;
 		this.selectedToDate = null;
-		const els = this.elementRef.nativeElement.querySelectorAll('.c-h21-two-month-calendar_selected');
+		const els = Array.from(document.querySelectorAll('.c-h21-two-month-calendar_selected'));
 		els.forEach(element => {
 			element.classList.remove('c-h21-two-month-calendar_selected');
 			element.classList.remove('c-h21-two-month-calendar_selected__finish');
@@ -197,11 +251,11 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		if (!this.selectedToDate) {
 			if (this._rangeDate) {
 				let ariaLabel = this.getMonthName(this._rangeDate.getMonth()) + ' ' + this._rangeDate.getDate() + ', ' + this._rangeDate.getFullYear();
-				let element = this.elementRef.nativeElement.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+				let element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 				element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
 			}
 			let ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
-			let element = this.elementRef.nativeElement.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			let element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 			element.classList.add('c-h21-two-month-calendar_range-highlight__finish');
 		}
 
@@ -218,5 +272,10 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 			item.isHover = false;
 			item.element.classList.remove('c-h21-two-month-calendar_range-highlight');
 		});
+	}
+
+	showMenu() {
+		this.trigger.openMenu();
+		this.init();
 	}
 }

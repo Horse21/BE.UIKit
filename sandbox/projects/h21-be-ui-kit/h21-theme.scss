@@ -1743,14 +1743,24 @@ a.c-h21-header_logo {
 //----------------------------------------------------------------------------------------------------------------------
 // h21-two-month-calendar component
 //
+.c-h21-two-month-calendar_menu {
+  &.mat-menu-panel {
+	width: 860px;
+	max-width: 860px;
+	margin: auto;
+	background: none;
+	@include mat-elevation(0);
+	.mat-menu-content {
+	  padding: 0;
+	}
+  }
+}
+
 .c-h21-two-month-calendar {
   width: 800px;
   background: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  @include mat-elevation(2);
+  margin: 0 auto;
+  @include mat-elevation(4);
 
   .mat-calendar {
 	.mat-calendar-header {
