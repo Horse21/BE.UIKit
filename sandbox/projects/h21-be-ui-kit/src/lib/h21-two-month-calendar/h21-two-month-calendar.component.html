@@ -11,7 +11,6 @@
 		<div class="__display-none" [matMenuTriggerFor]="twoMonthCalendaarMenu"></div>
 	</div>
 </div>
-
 <mat-menu #twoMonthCalendaarMenu="matMenu" class="c-h21-two-month-calendar_menu" [backdropClass]="'c-h21-two-month-calendar_menu-backdrop'" [hasBackdrop]="true">
 	<ng-template matMenuContent>
 		<div class="c-h21-two-month-calendar mat-typography" (click)="$event.stopPropagation();">
@@ -58,7 +57,7 @@
 					</button>
 					<div class="twc-slider_view-port">
 						<div class="twc-slider_view-port-items-box" #twcSliderItemsBox id="calendar-menu">
-							<div class="twc-slider_item" *ngFor="let item of monthList">
+							<div class="twc-slider_item" *ngFor="let item of monthList;">
 								<div class="twc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
 								<mat-calendar [startAt]="getMonthFirstDay(item.month, item.year)" [minDate]="fromDate" [maxDate]="toDate" [selected]="selectedFromDate"
 											  (selectedChange)="selectedDateChange($event)"></mat-calendar>
