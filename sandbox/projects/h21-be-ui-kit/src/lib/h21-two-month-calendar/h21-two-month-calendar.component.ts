@@ -32,9 +32,7 @@ export class H21TwoMonthCalendarComponent {
 	monthNames: Array<string>;
 	monthList: Array<any>;
 
-	/** Количество элементов в слайдере */
 	sliderItemsCount: number;
-	/** Ширина видимого пространства блока */
 	sliderItemsBoxWidth: number = 0;
 	sliderItemWidth: number = 0;
 	sliderCurrentIndex: number = 0;
@@ -119,66 +117,51 @@ export class H21TwoMonthCalendarComponent {
 
 		if (this.selectedFromDate) {
 			// todo:
+			this.moveToSlide(this.getMonthNumberInList(this.selectedFromDate));
 		}
 	}
 
-	/**
-	 *
-	 */
 	prevSlide() {
 		this.sliderCurrentIndex--;
 		this.moveSlide();
 	}
 
-	/**
-	 *
-	 */
 	nextSlide() {
 		this.sliderCurrentIndex++;
 		this.moveSlide();
 	}
 
-	/**
-	 *
-	 * @param {number} slideNumber
-	 */
+
 	moveToSlide(slideNumber: number) {
 		this.sliderCurrentIndex = slideNumber;
 		this.moveSlide();
 	}
 
-	/**
-	 *
-	 */
+	private getMonthNumberInList (date: Date): number {
+		let month = date.getMonth();
+		let year = date.getFullYear();
+		for (let i = 0; i < this.monthList.length; i++) {
+			if (this.monthList[i].month == month && this.monthList[i].year == year) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
 	moveSlide() {
 		let elementView = document.getElementById('calendar-menu');
 		this.sliderCurrentTranslation = this.sliderCurrentIndex * this.sliderItemWidth;
 		this.renderer.setStyle(elementView, 'transform', 'translateX(' + String(-this.sliderCurrentTranslation) + 'px)');
 	}
 
-	/**
-	 * Возвращает полное название меяца по его порядковому номеру
-	 * @param monthNumber Порядковый номер месяца (от 0 до 11)
-	 * @returns {string} Название месяца
-	 */
 	getMonthName(monthNumber): string {
 		return monthNumber >= 0 && monthNumber <= 11 ? this.monthNames[monthNumber] : 'undefined';
 	}
 
-	/**
-	 * Возвращает дату первого для месяца по заданным параметрам
-	 * @param {number} month Номер месяца (от 0 до 11)
-	 * @param {number} year Год
-	 * @returns {Date}
-	 */
 	getMonthFirstDay(month: number, year: number): Date {
 		return this.dateAdapter.createDate(year, month, 1);
 	}
 
-	/**
-	 * Возвращает массив
-	 * @returns {any[]}
-	 */
 	private getMonthList() {
 		let result = new Array();
 		let tmpDate = this.dateAdapter.clone(this.startDate);
@@ -189,38 +172,29 @@ export class H21TwoMonthCalendarComponent {
 		return result;
 	}
 
-	/**
-	 *
-	 * @param {Date} date
-	 * @returns {Date}
-	 */
-	prevDay(date: Date)
-	{
-		let newDate = this.dateAdapter.addCalendarDays(date, -1);
-		if (newDate >= this.fromDate) {
-			return newDate;
-		} else {
-			return date;
+	prevDay(date: Date) {
+		if (this.dateAdapter.addCalendarDays(date, -1) <= this.fromDate) {
+			let d = new Date(date);
+			d.setDate(d.getDate() - 1);
+			this.selectedDateChange(d);
+			if (date.getMonth() > d.getMonth()) {
+				this.prevSlide();
+			}
 		}
 	}
 
-	/**
-	 *
-	 * @param {Date} date
-	 * @returns {Date}
-	 */
-	nextDay(date: Date)
-	{
-		let newDate = this.dateAdapter.addCalendarDays(date, 1);
-		if (newDate <= this.toDate) {
-			this.selectedDateChange(newDate);
-			return newDate;
-		} else {
-			return date;
+	nextDay(date: Date) {
+		if (this.dateAdapter.addCalendarDays(date, 1) <= this.toDate) {
+			let d = new Date(date);
+			d.setDate(d.getDate() + 1);
+			this.selectedDateChange(d);
+			if (date.getMonth() < d.getMonth()) {
+				this.nextSlide();
+			}
 		}
 	}
 
-	selectedDateChange($event) {
+	selectedDateChange($event): void {
 		if (!this.rangeSelectMode) {
 			if (this.selectedFromDate) {
 				const from = this.selectedFromDate;

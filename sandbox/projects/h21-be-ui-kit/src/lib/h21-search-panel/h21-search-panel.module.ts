@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {H21RightOverlayPanelModule} from "../h21-right-overlay-panel/h21-right-overlay-panel.module"
 import {H21FlyRouteSelectionComponent} from "./h21-fly-route-selection.component";
 import {H21PassengersSelectComponent} from "./h21-passengers-select.component";
+import {H21TwoMonthCalendarModule} from "../h21-two-month-calendar/h21-two-month-calendar.module";
 
 @NgModule({
 	imports: [
@@ -30,7 +31,8 @@ import {H21PassengersSelectComponent} from "./h21-passengers-select.component";
 		ReactiveFormsModule,
 		MatSelectModule,
 		MatMenuModule,
-		H21RightOverlayPanelModule
+		H21RightOverlayPanelModule,
+		H21TwoMonthCalendarModule
 	],
 	declarations: [H21SearchPanelComponent, H21FlyRouteSelectionComponent, H21PassengersSelectComponent],
 	exports: [H21SearchPanelComponent]

@@ -1747,6 +1747,7 @@ a.c-h21-header_logo {
 .c-h21-two-month-calendar_field {
   display: inline-block;
   width: 100%;
+  cursor: pointer;
 
   .c-h21-two-month-calendar_field-inner {
 	display: flex;
@@ -1762,12 +1763,6 @@ a.c-h21-header_logo {
 
 .c-h21-two-month-calendar_menu {
   &.mat-menu-panel {
-	//position: absolute;
-	//display: block;
-	//top: 50%;
-	//left: 50%;
-	//transform: translate(-50%, -50%);
-	align-self: center;
 	width: 860px;
 	max-width: 860px;
 	padding: 20px 0;
@@ -1780,7 +1775,12 @@ a.c-h21-header_logo {
 }
 
 .c-h21-two-month-calendar_menu-backdrop {
-  background: rgba(0,0,0, .5);;
+  background: rgba(0,0,0, .5);
+}
+
+.c-h21-two-month-calendar_menu-backdrop + .cdk-overlay-connected-position-bounding-box {
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .c-h21-two-month-calendar {
@@ -1809,9 +1809,6 @@ a.c-h21-header_logo {
 	}
 
 	.mat-calendar-body-cell {
-	  //.mat-calendar-body-cell-content {
-		//transition: all 120ms;
-	  //}
 	  &:hover .mat-calendar-body-cell-content {
 		background: white !important;
 		border: 1px solid $h21-color-ui-primary !important;;
