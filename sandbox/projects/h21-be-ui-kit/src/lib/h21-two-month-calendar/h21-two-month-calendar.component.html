@@ -1,38 +1,27 @@
-<div (click)="showMenu()" style="padding 16px; margin: 16px; width: 700px; background: white;">
-	<mat-form-field>
-		<mat-icon matPrefix="">date_range</mat-icon>
-		<input type="text" matInput placeholder="Departure date" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
-		<button mat-icon-button matSuffix (click)="false">
-			<mat-icon matSuffix>navigate_before</mat-icon>
-		</button>
-		<button mat-icon-button matSuffix (click)="false">
-			<mat-icon matSuffix>navigate_next</mat-icon>
-		</button>
-	</mat-form-field>
-
-	<mat-form-field>
-		<mat-icon matPrefix="">date_range</mat-icon>
-		<input type="text" matInput placeholder="Return date" value="{{selectedToDate | date: 'EEEEEE, d LLL'}}" />
-		<button mat-icon-button matSuffix (click)="false">
-			<mat-icon matSuffix>navigate_before</mat-icon>
-		</button>
-		<button mat-icon-button matSuffix (click)="false">
-			<mat-icon matSuffix>navigate_next</mat-icon>
-		</button>
-	</mat-form-field>
+<div (click)="showMenu()" class="c-h21-two-month-calendar_field">
+	<div class="c-h21-two-month-calendar_field-inner">
+		<mat-form-field>
+			<mat-icon matSuffix *ngIf="!rangeSelectMode">date_range</mat-icon>
+			<input type="text" matInput placeholder="{{fromDateText}}" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
+		</mat-form-field>
+		<mat-form-field *ngIf="rangeSelectMode">
+			<mat-icon matSuffix>date_range</mat-icon>
+			<input type="text" matInput placeholder="{{toDateText}}" value="{{selectedToDate | date: 'EEEEEE, d LLL'}}" />
+		</mat-form-field>
+		<div class="__display-none" [matMenuTriggerFor]="twoMonthCalendaarMenu"></div>
+	</div>
 </div>
-<div [matMenuTriggerFor]="twoMonthCalendaarMenu"></div>
 
-<mat-menu #twoMonthCalendaarMenu="matMenu" class="c-h21-two-month-calendar_menu">
+<mat-menu #twoMonthCalendaarMenu="matMenu" class="c-h21-two-month-calendar_menu" [backdropClass]="'c-h21-two-month-calendar_menu-backdrop'" [hasBackdrop]="true">
 	<ng-template matMenuContent>
 		<div class="c-h21-two-month-calendar mat-typography" (click)="$event.stopPropagation();">
 			<div class="c-h21-two-month-calendar_header">
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
 						<div class="c-h21-two-month-calendar_date-box">
-							<span>Departure date</span>
+							<span>{{fromDateText}}</span>
 							<mat-icon>date_range</mat-icon>
-							<input type="text" matInput placeholder="Departure date" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
+							<input type="text" matInput placeholder="{{fromDateText}}" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
 							<div class="w-spacer"></div>
 							<button mat-icon-button (click)="selectedFromDate = prevDay(selectedFromDate);">
 								<mat-icon>navigate_before</mat-icon>
@@ -45,9 +34,9 @@
 
 					<div class="col-sm-12 col-md-6">
 						<div class="c-h21-two-month-calendar_date-box" *ngIf="rangeSelectMode">
-							<span>Return date</span>
+							<span>{{toDateText}}</span>
 							<mat-icon>date_range</mat-icon>
-							<input type="text" matInput placeholder="Return date" value="{{selectedToDate | date: 'EEE, d LLL'}}" />
+							<input type="text" matInput placeholder="{{toDateText}}" value="{{selectedToDate | date: 'EEE, d LLL'}}" />
 							<div class="w-spacer"></div>
 							<button mat-icon-button (click)="selectedToDate = prevDay(selectedToDate);">
 								<mat-icon>navigate_before</mat-icon>
@@ -79,8 +68,8 @@
 				</div>
 			</div>
 			<div class="c-h21-two-month-calendar_footer">
-				<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary" (change)="clearSelection()">range select mode (dev)</mat-checkbox>
-				<button mat-raised-button color="primary" (click)="clearSelection()">clear selected</button>
+				<button mat-button color="primary" (click)="clearSelection()">Clear selection</button>
+				<button mat-raised-button color="primary">Ready</button>
 			</div>
 		</div>
 	</ng-template>

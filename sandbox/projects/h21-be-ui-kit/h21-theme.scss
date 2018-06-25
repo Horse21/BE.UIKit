@@ -1743,17 +1743,44 @@ a.c-h21-header_logo {
 //----------------------------------------------------------------------------------------------------------------------
 // h21-two-month-calendar component
 //
+
+.c-h21-two-month-calendar_field {
+  display: inline-block;
+  width: 100%;
+
+  .c-h21-two-month-calendar_field-inner {
+	display: flex;
+	align-items: center;
+  }
+  .mat-form-field-infix {
+	width: 100%;
+  }
+  .mat-icon {
+	color: #757575;
+  }
+}
+
 .c-h21-two-month-calendar_menu {
   &.mat-menu-panel {
+	//position: absolute;
+	//display: block;
+	//top: 50%;
+	//left: 50%;
+	//transform: translate(-50%, -50%);
+	align-self: center;
 	width: 860px;
 	max-width: 860px;
-	margin: auto;
+	padding: 20px 0;
 	background: none;
 	@include mat-elevation(0);
 	.mat-menu-content {
 	  padding: 0;
 	}
   }
+}
+
+.c-h21-two-month-calendar_menu-backdrop {
+  background: rgba(0,0,0, .5);;
 }
 
 .c-h21-two-month-calendar {
@@ -1922,6 +1949,12 @@ a.c-h21-header_logo {
 	top: 50%;
 	right: 0;
 	transform: translate(50%, -50%);
+  }
+  .twc-slider_button-prev,
+  .twc-slider_button-next {
+	&[disabled] {
+	  background: white;
+	}
   }
   .twc-slider_view-port {
 	height: 100%;

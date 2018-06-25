@@ -18,12 +18,14 @@ import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats } from '@angular/material
 	templateUrl: './h21-two-month-calendar.component.html'
 })
 
-export class H21TwoMonthCalendarComponent implements AfterViewInit {
-	@Input() rangeSelectMode: boolean = true;	//
-	@Input() startDate: Date; 	//
-	@Input() finishDate: Date; 	//
-	@Input() fromDate: Date; 	//
-	@Input() toDate: Date; 		//
+export class H21TwoMonthCalendarComponent {
+	@Input() rangeSelectMode: boolean;
+	@Input() startDate: Date;
+	@Input() finishDate: Date;
+	@Input() fromDate: Date;
+	@Input() toDate: Date;
+	@Input() fromDateText: string;
+	@Input() toDateText: string;
 	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
 	monthNames: Array<string>;
@@ -48,6 +50,9 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		private dateAdapter: DateAdapter<Date>,
 		private elementRef: ElementRef
 	) {
+		this.rangeSelectMode = true;
+		this.fromDateText = "Departure date";
+		this.toDateText = "Return date";
 		this.startDate = this.dateAdapter.today();
 		this.finishDate = this.dateAdapter.addCalendarYears(this.startDate, 1);
 		this.fromDate = this.dateAdapter.clone(this.startDate);
@@ -115,6 +120,15 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	 */
 	nextSlide() {
 		this.sliderCurrentIndex++;
+		this.moveSlide();
+	}
+
+	/**
+	 *
+	 * @param {number} slideNumber
+	 */
+	moveToSlide(slideNumber: number) {
+		this.sliderCurrentIndex = slideNumber;
 		this.moveSlide();
 	}
 

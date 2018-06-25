@@ -53,15 +53,18 @@
 		</mat-optgroup>
 	</mat-autocomplete>
 
-	<mat-form-field>
-		<input matInput [matDatepicker]="arrivalDatePicker" [value]="_arrivalDate"
-			   [min]="minDate" [max]="maxDate"
-			   (dateChange)="onArrivalDateChange($event)" placeholder="Arrival Date" readonly>
-		<mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">
-			<mat-icon matDatepickerToggleIcon>date_range</mat-icon>
-		</mat-datepicker-toggle>
-		<mat-datepicker #arrivalDatePicker></mat-datepicker>
-	</mat-form-field>
+	<h21-two-month-calendar [rangeSelectMode]="true"></h21-two-month-calendar>
+	<h21-two-month-calendar [rangeSelectMode]="false"></h21-two-month-calendar>
+
+	<!--<mat-form-field>-->
+		<!--<input matInput [matDatepicker]="arrivalDatePicker" [value]="_arrivalDate"-->
+			   <!--[min]="minDate" [max]="maxDate"-->
+			   <!--(dateChange)="onArrivalDateChange($event)" placeholder="Arrival Date" readonly>-->
+		<!--<mat-datepicker-toggle matSuffix [for]="arrivalDatePicker">-->
+			<!--<mat-icon matDatepickerToggleIcon>date_range</mat-icon>-->
+		<!--</mat-datepicker-toggle>-->
+		<!--<mat-datepicker #arrivalDatePicker></mat-datepicker>-->
+	<!--</mat-form-field>-->
 
 	<div class="c-fly-route-selection_add-remove-buttons-box" [hidden]="!canAdd && !canRemove">
 		<button mat-icon-button class="c-fly-route-selection_remove-button" *ngIf="canRemove" (click)="onRemove.emit()">
