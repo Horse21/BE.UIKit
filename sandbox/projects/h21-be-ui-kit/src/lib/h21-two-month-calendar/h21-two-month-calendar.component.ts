@@ -67,8 +67,6 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 			return;
 		}
 
-		console.log(elementView.clientWidth);
-		//const elementView = elementRef.nativeElement.querySelectorAll("")[0];
 		this.sliderItemsBoxWidth = elementView.clientWidth;
 		this.sliderItemWidth = this.sliderItemsBoxWidth / this.sliderItemsCount;
 
@@ -97,6 +95,10 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 				this.selectedDateChange(end);
 			}
 			this.refreshRange(null);
+		}
+
+		if (this.selectedFromDate) {
+			// todo:
 		}
 	}
 
@@ -191,6 +193,16 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 
 	selectedDateChange($event) {
 		if (!this.rangeSelectMode) {
+			if (this.selectedFromDate) {
+				const from = this.selectedFromDate;
+				const ariaLabel = this.getMonthName(from.getMonth()) + ' ' + from.getDate() + ', ' + from.getFullYear();
+				const element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+				element.classList.remove('c-h21-two-month-calendar_selected');
+			}
+			const ariaLabel = this.getMonthName($event.getMonth()) + ' ' + $event.getDate() + ', ' + $event.getFullYear();
+			const element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			element.classList.add('c-h21-two-month-calendar_selected');
+
 			this.selectedFromDate = $event;
 			return;
 		}
@@ -239,6 +251,9 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	}
 
 	refreshRange(date: Date) {
+		if (!this.rangeSelectMode) {
+			return;
+		}
 		if (!this.selectedFromDate) {
 			return;
 		}

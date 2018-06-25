@@ -25,8 +25,10 @@ export class H21FlyRouteSelectionComponent {
 	@Output() onAdd: EventEmitter<void> = new EventEmitter<void>();
 	@Output() onRemove: EventEmitter<void> = new EventEmitter<void>();
 
-	constructor(private _vocabulary: VocabularyService,
-		private _appSubscriber: AppSubscriberService) {
+	constructor(
+		private _vocabulary: VocabularyService,
+		private _appSubscriber: AppSubscriberService
+	) {
 	}
 
 	ngOnInit() {
@@ -38,15 +40,16 @@ export class H21FlyRouteSelectionComponent {
 			this.filteredCities = this._vocabulary.getCities(value);
 		});
 
-		this._appSubscriber.arrivalDateObservable().subscribe(value => {
-			setTimeout(()=>{
-				if (value.routeNumber == this.routeNumber - 1) {
-					this.minDate = value.date;
-				} else if (value.routeNumber == this.routeNumber + 1) {
-					this.maxDate = value.date;
-				}
+		this._appSubscriber.arrivalDateObservable()
+			.subscribe(value => {
+				setTimeout(() => {
+					if (value.routeNumber == this.routeNumber - 1) {
+						this.minDate = value.date;
+					} else if (value.routeNumber == this.routeNumber + 1) {
+						this.maxDate = value.date;
+					}
+				});
 			});
-		});
 	}
 
 	displayCity(city: City): string {
@@ -118,5 +121,3 @@ export class H21FlyRouteSelectionComponent {
 		this.cityToChange.emit(this._cityTo);
 	}
 }
-
-

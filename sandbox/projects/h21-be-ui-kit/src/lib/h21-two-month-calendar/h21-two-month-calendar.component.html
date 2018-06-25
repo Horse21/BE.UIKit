@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class="c-h21-two-month-calendar_footer">
-				<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary">range select mode (dev)</mat-checkbox>
+				<mat-checkbox [(ngModel)]="rangeSelectMode" color="primary" (change)="clearSelection()">range select mode (dev)</mat-checkbox>
 				<button mat-raised-button color="primary" (click)="clearSelection()">clear selected</button>
 			</div>
 		</div>
