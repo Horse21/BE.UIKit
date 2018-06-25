@@ -12,6 +12,7 @@ import {
 } from "@angular/core";
 import {MatCalendar, MatMenuTrigger} from "@angular/material";
 import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats } from '@angular/material';
+import { Observable, Subscriber } from 'rxjs/index';
 
 @Component ({
 	selector: 'h21-two-month-calendar',
@@ -54,7 +55,7 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 		this.toDate = this.dateAdapter.clone(this.finishDate);
 		this.monthNames =  this.dateAdapter.getMonthNames('long');
 		this.monthList = this.getMonthList();
-		this.sliderItemsCount = this.monthList.length;
+		this.sliderItemsCount = this.getMonthList().length;
 	}
 
 	ngAfterViewInit() {
@@ -96,6 +97,20 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 			}
 			this.refreshRange(null);
 		}
+
+		// mouse leave
+		let elements = Array.from(document.querySelectorAll(".mat-calendar-body"));
+		elements.forEach(element => {
+			element.addEventListener('mouseleave', () => {
+				console.log('leave');
+				if (this.selectedFromDate && !this.selectedToDate) {
+					this.dayCells.filter(item=>item.isHover).forEach(item => {
+						item.isHover = false;
+						item.element.classList.remove('c-h21-two-month-calendar_range-highlight');
+					});
+				}
+			});
+		});
 
 		if (this.selectedFromDate) {
 			// todo:
@@ -290,7 +305,24 @@ export class H21TwoMonthCalendarComponent implements AfterViewInit {
 	}
 
 	showMenu() {
+		/*if (this.monthList.length != 2) {
+			this.monthList = this.getMonthList().slice(0,2);
+		}*/
+
+
 		this.trigger.openMenu();
 		this.init();
+		let elements = document.querySelectorAll(".c-h21-two-month-calendar");
+		if (elements && elements.length > 1) {
+			let el = elements[0];
+			el.parentElement.removeChild(el);
+		}
+
+		/*setTimeout(()=> {
+			this.monthList = this.getMonthList();
+			setTimeout(()=>{
+				this.init()
+			}, 0);
+			}, 1000);*/
 	}
 }
