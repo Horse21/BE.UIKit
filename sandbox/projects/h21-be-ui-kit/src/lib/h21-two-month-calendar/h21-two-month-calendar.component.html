@@ -20,7 +20,7 @@
 						<div class="c-h21-two-month-calendar_date-box">
 							<span>{{fromDateText}}</span>
 							<mat-icon>date_range</mat-icon>
-							<input type="text" matInput placeholder="{{fromDateText}}" value="{{selectedFromDate | date: 'EEEEEE, d LLL'}}" />
+							<input type="text" matInput placeholder="{{fromDateText}}" value="{{selectedFromDate | date: 'EEE, d LLL'}}" />
 							<div class="w-spacer"></div>
 							<button mat-icon-button (click)="prevDay(selectedFromDate);">
 								<mat-icon>navigate_before</mat-icon>
@@ -68,7 +68,7 @@
 			</div>
 			<div class="c-h21-two-month-calendar_footer">
 				<button mat-button color="primary" (click)="clearSelection()">Clear selection</button>
-				<button mat-raised-button color="primary">Ready</button>
+				<button mat-raised-button color="primary" (click)="trigger.closeMenu()">Ready</button>
 			</div>
 		</div>
 	</ng-template>

@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
-import {map, startWith, debounceTime } from 'rxjs/internal/operators';
 import {City} from '../../dto/city';
 import {Observable} from 'rxjs/index';
 import {VocabularyService} from '../../services/vocabulary-service';
@@ -15,6 +14,7 @@ export class H21FlyRouteSelectionComponent {
 	@Input() routeNumber = 1;
 	@Input() canAdd = true;
 	@Input() canRemove = false;
+	@Input() rangeDateMode = false;
 
 	cityFromControl: FormControl = new FormControl();
 	cityToControl: FormControl = new FormControl();
@@ -59,6 +59,7 @@ export class H21FlyRouteSelectionComponent {
 	public _cityFrom: City;
 	public _cityTo: City;
 	public _arrivalDate: Date;
+	public _returnDate: Date;
 
 	@Input() get cityFrom(): City {
 		return this._cityFrom;
@@ -88,9 +89,18 @@ export class H21FlyRouteSelectionComponent {
 		});
 	}
 
+	@Input() get returnDate(): Date {
+		return this._returnDate;
+	}
+
+	set returnDate(value: Date) {
+		this._returnDate = value;
+	}
+
 	@Output('cityFromChange') public cityFromChange: EventEmitter<City> = new EventEmitter<City>();
 	@Output('cityToChange') public cityToChange: EventEmitter<City> = new EventEmitter<City>();
 	@Output('arrivalDateChange') public arrivalDateChange: EventEmitter<Date> = new EventEmitter<Date>();
+	@Output('returnDateChange') public returnDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
 	onSelectFromItem($event) {
 		if ($event) {
@@ -108,8 +118,15 @@ export class H21FlyRouteSelectionComponent {
 
 	onArrivalDateChange($event) {
 		if ($event) {
-			this.arrivalDate = $event.value;
+			this.arrivalDate = $event;
 			this.arrivalDateChange.emit(this._arrivalDate);
+		}
+	}
+
+	onReturnDateChange($event) {
+		if ($event) {
+			this.returnDate = $event;
+			this.returnDateChange.emit(this._returnDate);
 		}
 	}
 

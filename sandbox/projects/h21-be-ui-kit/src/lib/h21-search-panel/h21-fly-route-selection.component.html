@@ -53,8 +53,10 @@
 		</mat-optgroup>
 	</mat-autocomplete>
 
-	<h21-two-month-calendar [rangeSelectMode]="true"></h21-two-month-calendar>
-	<h21-two-month-calendar [rangeSelectMode]="false"></h21-two-month-calendar>
+	<h21-two-month-calendar [rangeSelectMode]="rangeDateMode"
+							(onArrivalDateChanged)="onArrivalDateChange($event)"
+							(onReturnDateChanged)="onReturnDateChange($event)">
+	</h21-two-month-calendar>
 
 	<!--<mat-form-field>-->
 		<!--<input matInput [matDatepicker]="arrivalDatePicker" [value]="_arrivalDate"-->
