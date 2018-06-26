@@ -1,18 +1,13 @@
 import {
 	Component,
 	ViewChild,
-	ViewChildren,
 	Input,
-	Output,
-	EventEmitter,
 	Inject,
 	ElementRef,
-	Renderer2,
-	QueryList, AfterViewInit, HostListener
-} from "@angular/core";
-import {MatCalendar, MatMenuTrigger} from "@angular/material";
+	Renderer2, Output, EventEmitter
+} from '@angular/core';
+import { MatMenuTrigger } from "@angular/material";
 import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats } from '@angular/material';
-import { Observable, Subscriber } from 'rxjs/index';
 
 @Component ({
 	selector: 'h21-two-month-calendar',
@@ -28,6 +23,9 @@ export class H21TwoMonthCalendarComponent {
 	@Input() fromDateText: string;
 	@Input() toDateText: string;
 	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+	@Output() onArrivalDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
+	@Output() onReturnDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 
 	monthNames: Array<string>;
 	monthList: Array<any>;
@@ -94,6 +92,9 @@ export class H21TwoMonthCalendarComponent {
 			let end = this.selectedToDate != null ? new Date(this.selectedToDate) : null;
 			this.selectedFromDate = null;
 			this.selectedToDate = null;
+			this.onArrivalDateChanged.emit(this.selectedFromDate);
+			this.onReturnDateChanged.emit(this.selectedToDate);
+
 			this.selectedDateChange(start);
 			if (end) {
 				this.selectedDateChange(end);
@@ -105,7 +106,6 @@ export class H21TwoMonthCalendarComponent {
 		let elements = Array.from(document.querySelectorAll(".mat-calendar-body"));
 		elements.forEach(element => {
 			element.addEventListener('mouseleave', () => {
-				console.log('leave');
 				if (this.selectedFromDate && !this.selectedToDate) {
 					this.dayCells.filter(item=>item.isHover).forEach(item => {
 						item.isHover = false;
@@ -173,22 +173,75 @@ export class H21TwoMonthCalendarComponent {
 	}
 
 	prevDay(date: Date) {
-		if (this.dateAdapter.addCalendarDays(date, -1) <= this.fromDate) {
-			let d = new Date(date);
-			d.setDate(d.getDate() - 1);
-			this.selectedDateChange(d);
-			if (date.getMonth() > d.getMonth()) {
+		let d = new Date(date);
+		let lastVal = new Date(date);
+		d.setDate(d.getDate() - 1);
+		if (d >= this.fromDate) {
+			let ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
+			let element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			element.classList.remove('c-h21-two-month-calendar_selected');
+			element.classList.remove('c-h21-two-month-calendar_selected__finish');
+			element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
+
+			date.setDate(date.getDate() - 1);
+			ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
+			element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			element.classList.add('c-h21-two-month-calendar_selected');
+			element.classList.add(date == this.selectedToDate ? 'c-h21-two-month-calendar_selected__finish' : 'c-h21-two-month-calendar_selected__start');
+
+			if(this.selectedToDate &&
+			   this.selectedToDate.getMonth() == this.selectedFromDate.getMonth() &&
+			   this.selectedToDate.getDate() == this.selectedFromDate.getDate()) {
+				this.clearSelection();
+				return;
+			}
+
+			if (this.selectedToDate) {
+				this.refreshRange(this.selectedToDate);
+				this.selectedToDate = new Date(this.selectedToDate);
+				this.onReturnDateChanged.emit(this.selectedToDate)
+			}
+			this.selectedFromDate = new Date(this.selectedFromDate);
+			this.onArrivalDateChanged.emit(this.selectedFromDate);
+
+			if (lastVal.getMonth() > date.getMonth()) {
 				this.prevSlide();
 			}
 		}
 	}
 
 	nextDay(date: Date) {
-		if (this.dateAdapter.addCalendarDays(date, 1) <= this.toDate) {
-			let d = new Date(date);
-			d.setDate(d.getDate() + 1);
-			this.selectedDateChange(d);
-			if (date.getMonth() < d.getMonth()) {
+		let d = new Date(date);
+		let lastVal = new Date(date);
+		d.setDate(d.getDate() + 1);
+		if (d <= this.toDate) {
+			let ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
+			let element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			element.classList.remove('c-h21-two-month-calendar_selected');
+			element.classList.remove('c-h21-two-month-calendar_selected__finish');
+			element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
+
+			date.setDate(date.getDate() + 1);
+			ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
+			element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
+			element.classList.add('c-h21-two-month-calendar_selected');
+			element.classList.add(date == this.selectedToDate ? 'c-h21-two-month-calendar_selected__finish' : 'c-h21-two-month-calendar_selected__start');
+
+			if(this.selectedToDate.getMonth() == this.selectedFromDate.getMonth() &&
+			   this.selectedToDate.getDate() == this.selectedFromDate.getDate()) {
+				this.clearSelection();
+				return;
+			}
+
+			if (this.selectedToDate) {
+				this.refreshRange(this.selectedToDate);
+				this.selectedToDate = new Date(this.selectedToDate);
+				this.onReturnDateChanged.emit(this.selectedToDate)
+			}
+			this.selectedFromDate = new Date(this.selectedFromDate);
+			this.onArrivalDateChanged.emit(this.selectedFromDate);
+
+			if (lastVal.getMonth() < date.getMonth()) {
 				this.nextSlide();
 			}
 		}
@@ -207,6 +260,7 @@ export class H21TwoMonthCalendarComponent {
 			element.classList.add('c-h21-two-month-calendar_selected');
 
 			this.selectedFromDate = $event;
+			this.onArrivalDateChanged.emit(this.selectedFromDate);
 			return;
 		}
 		if (this.selectedFromDate == $event) {
@@ -219,6 +273,7 @@ export class H21TwoMonthCalendarComponent {
 
 		if (!this.selectedFromDate) {
 			this.selectedFromDate = $event;
+			this.onArrivalDateChanged.emit(this.selectedFromDate);
 		} else {
 			if (this.selectedToDate) {
 				let ariaLabel = this.getMonthName(this.selectedToDate.getMonth()) + ' ' + this.selectedToDate.getDate() + ', ' + this.selectedToDate.getFullYear();
@@ -228,6 +283,7 @@ export class H21TwoMonthCalendarComponent {
 				element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
 			}
 			this.selectedToDate = $event;
+			this.onReturnDateChanged.emit(this.selectedToDate);
 			this.refreshRange($event);
 		}
 
@@ -240,6 +296,9 @@ export class H21TwoMonthCalendarComponent {
 	clearSelection() {
 		this.selectedFromDate = null;
 		this.selectedToDate = null;
+		this.onArrivalDateChanged.emit(this.selectedFromDate);
+		this.onReturnDateChanged.emit(this.selectedToDate);
+
 		const els = Array.from(document.querySelectorAll('.c-h21-two-month-calendar_selected'));
 		els.forEach(element => {
 			element.classList.remove('c-h21-two-month-calendar_selected');
@@ -296,7 +355,6 @@ export class H21TwoMonthCalendarComponent {
 		/*if (this.monthList.length != 2) {
 			this.monthList = this.getMonthList().slice(0,2);
 		}*/
-
 
 		this.trigger.openMenu();
 		this.init();

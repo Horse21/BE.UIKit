@@ -13,7 +13,10 @@ export class H21SearchPanelComponent implements OnInit {
 	constructor(private _appSubscriber: AppSubscriberService,
 		private _snackBar: MatSnackBar) {
 		this.searchOptions = <SearchFlightDto>{
-			flyRoutes: [<FlyRoute>{minDate: new Date()}],
+			flyRoutes: [<FlyRoute>{
+				minDate: new Date(),
+				rangeDateMode: true
+			}],
 			searchMode: 'round_trip'
 		};
 	}
@@ -69,16 +72,13 @@ export class H21SearchPanelComponent implements OnInit {
 
 	changeMode() {
 		switch (this.searchOptions.searchMode) {
-			case 'one_way': {
-				/*while (this.searchOptions.flyRoutes.length > 1) {
-					this.searchOptions.flyRoutes.pop();
-				}*/
+			case 'one_way':
+			case 'multi_city': {
+				this.searchOptions.flyRoutes[0].rangeDateMode = false;
 				break;
 			}
 			case 'round_trip': {
-				/*while (this.searchOptions.flyRoutes.length > 1) {
-					this.searchOptions.flyRoutes.pop();
-				}*/
+				this.searchOptions.flyRoutes[0].rangeDateMode = true;
 				break;
 			}
 		}

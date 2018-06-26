@@ -6,4 +6,5 @@ export class FlyRoute {
 	arrivalDate: Date;
 	returnDate: Date;
 	minDate: Date;
+	rangeDateMode: boolean;
 }
