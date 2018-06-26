@@ -62,7 +62,13 @@ export class H21TwoMonthCalendarComponent {
 	}
 
 	ngAfterViewInit() {
-
+		this.trigger.menuOpened.subscribe(() => {
+			document.querySelector('body').classList.add('cdk-overlay-container__for-h21-tmc');
+		});
+		this.trigger.menuClosed.subscribe(() => {
+			setTimeout(() => {document.querySelector('body').classList.remove('cdk-overlay-container__for-h21-tmc')},
+				500);
+		});
 	}
 
 	init() {
@@ -297,7 +303,6 @@ export class H21TwoMonthCalendarComponent {
 			this.monthList = this.getMonthList().slice(0,2);
 		}*/
 
-
 		this.trigger.openMenu();
 		this.init();
 		let elements = document.querySelectorAll(".c-h21-two-month-calendar");
@@ -305,7 +310,6 @@ export class H21TwoMonthCalendarComponent {
 			let el = elements[0];
 			el.parentElement.removeChild(el);
 		}
-
 		/*setTimeout(()=> {
 			this.monthList = this.getMonthList();
 			setTimeout(()=>{
@@ -313,4 +317,6 @@ export class H21TwoMonthCalendarComponent {
 			}, 0);
 			}, 1000);*/
 	}
+
+
 }

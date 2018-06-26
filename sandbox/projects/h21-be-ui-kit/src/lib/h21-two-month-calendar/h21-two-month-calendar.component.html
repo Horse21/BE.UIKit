@@ -49,16 +49,16 @@
 			</div>
 			<div class="c-h21-two-month-calendar_body">
 				<div class="c-h21-two-month-calendar_slider">
-					<button mat-mini-fab color="primary" class="twc-slider_button-prev" (click)="prevSlide()" [disabled]="sliderCurrentIndex == 0">
+					<button mat-mini-fab color="primary" class="tmc-slider_button-prev" (click)="prevSlide()" [disabled]="sliderCurrentIndex == 0">
 						<mat-icon>navigate_before</mat-icon>
 					</button>
-					<button mat-mini-fab color="primary" class="twc-slider_button-next" (click)="nextSlide()" [disabled]="sliderCurrentIndex == (sliderItemsCount - 2)">
+					<button mat-mini-fab color="primary" class="tmc-slider_button-next" (click)="nextSlide()" [disabled]="sliderCurrentIndex == (sliderItemsCount - 2)">
 						<mat-icon>navigate_next</mat-icon>
 					</button>
-					<div class="twc-slider_view-port">
-						<div class="twc-slider_view-port-items-box" #twcSliderItemsBox id="calendar-menu">
-							<div class="twc-slider_item" *ngFor="let item of monthList;">
-								<div class="twc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
+					<div class="tmc-slider_view-port">
+						<div class="tmc-slider_view-port-items-box" #tmcSliderItemsBox id="calendar-menu">
+							<div class="tmc-slider_item" *ngFor="let item of monthList;">
+								<div class="tmc-slider_month-label">{{getMonthName(item.month)}} {{startDate.getFullYear() == item.year ? '' : item.year}}</div>
 								<mat-calendar [startAt]="getMonthFirstDay(item.month, item.year)" [minDate]="fromDate" [maxDate]="toDate" [selected]="selectedFromDate"
 											  (selectedChange)="selectedDateChange($event)"></mat-calendar>
 							</div>

@@ -1743,7 +1743,6 @@ a.c-h21-header_logo {
 //----------------------------------------------------------------------------------------------------------------------
 // h21-two-month-calendar component
 //
-
 .c-h21-two-month-calendar_field {
   display: inline-block;
   width: 100%;
@@ -1753,9 +1752,11 @@ a.c-h21-header_logo {
 	display: flex;
 	align-items: center;
   }
+
   .mat-form-field-infix {
 	width: 100%;
   }
+
   .mat-icon {
 	color: #757575;
   }
@@ -1778,7 +1779,7 @@ a.c-h21-header_logo {
   background: rgba(0,0,0, .5);
 }
 
-.c-h21-two-month-calendar_menu-backdrop + .cdk-overlay-connected-position-bounding-box {
+.cdk-overlay-container__for-h21-tmc .cdk-overlay-connected-position-bounding-box {
   align-items: center !important;
   justify-content: center !important;
 }
@@ -1793,16 +1794,56 @@ a.c-h21-header_logo {
 	.mat-calendar-header {
 	  display: none;
 	}
+
 	.mat-calendar-body-label {
 	  visibility: hidden;
 	}
+
 	.mat-calendar-body-label[colspan="7"] {
 	  display: none;
 	}
+
+	.mat-calendar-body tr[role="row"]:first-child,
+	.mat-calendar-body tr[aria-hidden="true"] + tr[role="row"] {
+	  td.mat-calendar-body-cell:first-child,
+	  td[aria-hidden="true"] + td.mat-calendar-body-cell {
+		&.c-h21-two-month-calendar_range-highlight:not(.c-h21-two-month-calendar_selected__start) {
+		  &::before {
+			display: block;
+			content: '';
+			width: 10px;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: -10px;
+			background: linear-gradient(to right, #FFFFFF, rgba(185,204,245, .2));
+		  }
+		}
+	  }
+	}
+
+	.mat-calendar-body tr[role="row"]:last-child {
+	  td.mat-calendar-body-cell:last-child {
+		&.c-h21-two-month-calendar_range-highlight:not(.c-h21-two-month-calendar_selected__finish) {
+		  &::after {
+			display: block;
+			content: '';
+			width: 10px;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			right: -10px;
+		  	background: linear-gradient(to left, #FFFFFF, rgba(185,204,245, .2));
+		  }
+	  	}
+	  }
+	}
+
 	.mat-calendar-table-header th {
 	  color: black;
 	  font-size: 14px;
 	}
+
 	.mat-calendar-body-selected {
 	  background-color: inherit;
 	  color: inherit;
@@ -1815,8 +1856,10 @@ a.c-h21-header_logo {
 		color: black !important;;
 	  }
 	}
+
 	.c-h21-two-month-calendar_range-highlight {
 	  background-color: rgba(185,204,245, .2);
+
 	  &.c-h21-two-month-calendar_range-highlight__finish {
 		&::after {
 		  display: block;
@@ -1828,11 +1871,13 @@ a.c-h21-header_logo {
 		  right: 0;
 		  background-color: white;
 		}
+
 		.mat-calendar-body-cell-content {
 			z-index: 1;
 		}
 	  }
 	}
+
 	.c-h21-two-month-calendar_selected {
 	  &::after {
 		display: none;
@@ -1843,18 +1888,21 @@ a.c-h21-header_logo {
 		top: 0;
 		background-color: white;
 	  }
+
 	  &.c-h21-two-month-calendar_selected__start {
 		&::after {
 		  display: block;
 		  left: 0;
 		}
 	  }
+
 	  &.c-h21-two-month-calendar_selected__finish {
 		&::after {
 		  display: block;
 		  right: 0;
 		}
 	  }
+
 	  .mat-calendar-body-cell-content {
 		background-color: $h21-color-ui-primary;
 		color: white;
@@ -1863,16 +1911,19 @@ a.c-h21-header_logo {
 	}
   }
 }
+
 .c-h21-two-month-calendar_header {
   padding: 16px;
   box-sizing: border-box;
   background: $h21-color-ui-primary;
 }
+
 .c-h21-two-month-calendar_date-box-label {
   height: 18px;
   color: white;
   font-size: 8px;
 }
+
 .c-h21-two-month-calendar_date-box {
   margin-top: 18px;
   min-height: 40px;
@@ -1884,6 +1935,7 @@ a.c-h21-header_logo {
   white-space: nowrap;
   padding-left: 8px;
   position: relative;
+
   > span {
 	display: block;
 	position: absolute;
@@ -1896,6 +1948,7 @@ a.c-h21-header_logo {
 	color: white;
 	width: 100%;
   }
+
   > input[type="text"] {
 	margin-left: 8px;
 	display: inline-block;
@@ -1903,17 +1956,20 @@ a.c-h21-header_logo {
 	border: none;
 	background: none;
   }
+
   .mat-icon {
 	color: #757575;
   }
 }
+
 .c-h21-two-month-calendar_body {
-  height: 390px;
+  height: 400px;
   padding: 16px;
   box-sizing: border-box;
   border-top: 1px solid $black-6-opacity;
   border-bottom: 1px solid $black-6-opacity;
 }
+
 .c-h21-two-month-calendar_footer {
   padding: 16px;
   box-sizing: border-box;
@@ -1923,6 +1979,7 @@ a.c-h21-header_logo {
 	margin-left: 16px;
   }
 }
+
 .c-h21-two-month-calendar_slider {
   position: relative;
   height: 100%;
@@ -1935,30 +1992,35 @@ a.c-h21-header_logo {
 	clear: both;
 	height: 0;
   }
- .twc-slider_button-prev {
+
+ .tmc-slider_button-prev {
 	position: absolute;
 	top: 50%;
 	left: 0;
 	transform: translate(-50%, -50%);
   }
-  .twc-slider_button-next {
+
+  .tmc-slider_button-next {
 	position: absolute;
 	top: 50%;
 	right: 0;
 	transform: translate(50%, -50%);
   }
-  .twc-slider_button-prev,
-  .twc-slider_button-next {
+
+  .tmc-slider_button-prev,
+  .tmc-slider_button-next {
 	&[disabled] {
 	  background: white;
 	}
   }
-  .twc-slider_view-port {
+
+  .tmc-slider_view-port {
 	height: 100%;
 	overflow: hidden;
 	position: relative;
   }
-  .twc-slider_view-port-items-box {
+
+  .tmc-slider_view-port-items-box {
 	height: 100%;
 	width: auto;
 	white-space: nowrap;
@@ -1968,19 +2030,71 @@ a.c-h21-header_logo {
 	transition: transform .12s;
 	transform: translateX(0);
   }
-  .twc-slider_item {
+
+  .tmc-slider_item {
 	box-sizing: border-box;
 	padding: 0 24px;
 	display: inline-block;
 	width: 376px;
 	height: 350px;
   }
-  .twc-slider_month-label {
+
+  .tmc-slider_month-label {
 	display: block;
 	margin: 16px 0;
 	font-size: 16px;
 	color: black;
 	text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .c-h21-two-month-calendar_menu {
+	&.mat-menu-panel {
+	  width: 460px;
+	  max-width: 460px;
+	}
+  }
+
+  .c-h21-two-month-calendar {
+	width: 100%;
+  }
+
+  .c-h21-two-month-calendar_slider {
+	position: static;
+	margin: 0;
+	padding: 0;
+
+	&::after {
+	  display: none;
+	}
+
+	.tmc-slider_button-prev {
+	  display: none;
+	}
+
+	.tmc-slider_button-next {
+	  display: none;
+	}
+
+	.tmc-slider_view-port {
+	  overflow: auto;
+	  overflow-y: auto;
+	}
+
+	.tmc-slider_view-port-items-box {
+	  width: 100%;
+	  white-space: normal;
+	  position: static;
+	  transition: none;
+	  transform: none;
+	}
+
+	.tmc-slider_item {
+	  display: block;
+	  width: 100%;
+	  height: 350px;
+	}
   }
 }
 //
