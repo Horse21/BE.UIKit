@@ -54,6 +54,7 @@
 	</mat-autocomplete>
 
 	<h21-two-month-calendar [rangeSelectMode]="rangeDateMode"
+							[selectedFromDate]="_arrivalDate"
 							(onArrivalDateChanged)="onArrivalDateChange($event)"
 							(onReturnDateChanged)="onReturnDateChange($event)">
 	</h21-two-month-calendar>

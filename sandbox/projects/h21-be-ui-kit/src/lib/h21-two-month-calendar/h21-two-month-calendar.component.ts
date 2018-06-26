@@ -36,7 +36,7 @@ export class H21TwoMonthCalendarComponent {
 	sliderCurrentIndex: number = 0;
 	sliderCurrentTranslation: number = 0;
 
-	selectedFromDate: Date;
+	@Input() selectedFromDate: Date;
 	selectedToDate: Date;
 	dayCells: any[];
 	private _rangeDate: Date;
