@@ -180,7 +180,6 @@ export class H21TwoMonthCalendarComponent {
 
 	prevDay(date: Date) {
 		let d = new Date(date);
-		let lastVal = new Date(date);
 		d.setDate(d.getDate() - 1);
 		if (d >= this.fromDate) {
 			let ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
@@ -210,15 +209,16 @@ export class H21TwoMonthCalendarComponent {
 			this.selectedFromDate = new Date(this.selectedFromDate);
 			this.onArrivalDateChanged.emit(this.selectedFromDate);
 
-			if (lastVal.getMonth() > date.getMonth()) {
-				this.prevSlide();
+			let newDateSlideIndex = this.getMonthNumberInList(date);
+			if (Math.abs(newDateSlideIndex - this.sliderCurrentIndex) > 0) {
+
+				this.moveToSlide(newDateSlideIndex == 0 ? 0 : newDateSlideIndex - 1);
 			}
 		}
 	}
 
 	nextDay(date: Date) {
 		let d = new Date(date);
-		let lastVal = new Date(date);
 		d.setDate(d.getDate() + 1);
 		if (d <= this.toDate) {
 			let ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
@@ -247,8 +247,9 @@ export class H21TwoMonthCalendarComponent {
 			this.selectedFromDate = new Date(this.selectedFromDate);
 			this.onArrivalDateChanged.emit(this.selectedFromDate);
 
-			if (lastVal.getMonth() < date.getMonth()) {
-				this.nextSlide();
+			let newDateSlideIndex = this.getMonthNumberInList(date);
+			if (Math.abs(newDateSlideIndex - this.sliderCurrentIndex) > 1) {
+				this.moveToSlide(newDateSlideIndex - 1);
 			}
 		}
 	}

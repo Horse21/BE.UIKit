@@ -22,10 +22,10 @@
 							<mat-icon>date_range</mat-icon>
 							<input type="text" matInput placeholder="{{fromDateText}}" value="{{selectedFromDate | date: 'EEE, d LLL'}}" />
 							<div class="w-spacer"></div>
-							<button mat-icon-button (click)="prevDay(selectedFromDate);">
+							<button mat-icon-button (click)="prevDay(selectedFromDate);" [disabled]="!selectedFromDate">
 								<mat-icon>navigate_before</mat-icon>
 							</button>
-							<button mat-icon-button (click)="nextDay(selectedFromDate);">
+							<button mat-icon-button (click)="nextDay(selectedFromDate);" [disabled]="!selectedFromDate">
 								<mat-icon>navigate_next</mat-icon>
 							</button>
 						</div>
@@ -37,10 +37,10 @@
 							<mat-icon>date_range</mat-icon>
 							<input type="text" matInput placeholder="{{toDateText}}" value="{{selectedToDate | date: 'EEE, d LLL'}}" />
 							<div class="w-spacer"></div>
-							<button mat-icon-button (click)="prevDay(selectedToDate);">
+							<button mat-icon-button (click)="prevDay(selectedToDate);" [disabled]="!selectedToDate">
 								<mat-icon>navigate_before</mat-icon>
 							</button>
-							<button mat-icon-button (click)="nextDay(selectedToDate);">
+							<button mat-icon-button (click)="nextDay(selectedToDate);" [disabled]="!selectedToDate">
 								<mat-icon>navigate_next</mat-icon>
 							</button>
 						</div>
