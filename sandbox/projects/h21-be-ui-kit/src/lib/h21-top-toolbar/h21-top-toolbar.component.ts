@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { trigger, state, transition, animate, style } from "@angular/animations";
 
@@ -19,7 +19,8 @@ export class H21TopToolbarComponent implements OnInit {
 
 	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
 
-	constructor(private _appSubscriber: AppSubscriberService) {}
+	constructor(private _appSubscriber: AppSubscriberService) {
+	}
 
 	public ngOnInit(): void {
 		this._appSubscriber.searchObservable().subscribe(options => {
@@ -29,6 +30,9 @@ export class H21TopToolbarComponent implements OnInit {
 			} else {
 				this.modeVisibility = false;
 			}
+		});
+		this._appSubscriber.closeMenuObservable().subscribe(()=>{
+			this.menuIsOpened = false;
 		});
 	}
 

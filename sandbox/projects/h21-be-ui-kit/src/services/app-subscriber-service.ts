@@ -67,15 +67,15 @@ export class AppSubscriberService {
 		return this._arrivalDate.asObservable();
 	}
 
-	/* two month calendar */
+	/* menu close */
 
-	private _calendarFromDate = new Subject<any>();
+	private _closeMenu = new Subject<void>();
 
-	changeSelectedFromDate(data: any) {
-		return this._calendarFromDate.next(data);
+	closeMenu() {
+		return this._closeMenu.next();
 	}
 
-	changeSelectedFromObservable(): Observable<any> {
-		return this._calendarFromDate.asObservable();
+	closeMenuObservable(): Observable<void> {
+		return this._closeMenu.asObservable();
 	}
 }

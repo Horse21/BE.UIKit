@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { SearchResult } from '../../dto/search-result';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { H21SearchResultComponent } from '../h21-search-result/h21-search-result.component';
@@ -30,8 +30,16 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
 	private _result: SearchResult;
 
+	private screenWidth: number;
+	private maxScreenWidth: number = 1200;
+
+	@HostListener('window:resize', ['$event']) onResize(event?) {
+		this.screenWidth = window.innerWidth;
+	}
+
 	constructor(private _vocabulary: VocabularyService,
 				private _appSubscriber: AppSubscriberService) {
+		this.onResize();
 	}
 
 	public ngOnInit(): void {
@@ -83,6 +91,10 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 				}, 250);
 			});
 		}, 2000);
+		if (this.screenWidth <= this.maxScreenWidth) {
+			this.visibilityHide();
+			this._appSubscriber.closeMenu();
+		}
 	}
 
 	clearSearch() {
