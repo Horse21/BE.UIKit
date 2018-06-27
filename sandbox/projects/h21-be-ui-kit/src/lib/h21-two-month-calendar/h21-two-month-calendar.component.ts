@@ -192,9 +192,11 @@ export class H21TwoMonthCalendarComponent {
 			ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
 			element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 			element.classList.add('c-h21-two-month-calendar_selected');
-			element.classList.add(date.getTime() == this.selectedToDate.getTime()
-				? 'c-h21-two-month-calendar_selected__finish'
-				: 'c-h21-two-month-calendar_selected__start');
+			if (this.selectedToDate) {
+				element.classList.add(date.getTime() == this.selectedToDate.getTime()
+					? 'c-h21-two-month-calendar_selected__finish'
+					: 'c-h21-two-month-calendar_selected__start');
+			}
 
 			if(this.selectedToDate &&
 			   this.selectedToDate.getTime() == this.selectedFromDate.getTime()) {
@@ -232,7 +234,11 @@ export class H21TwoMonthCalendarComponent {
 			ariaLabel = this.getMonthName(date.getMonth()) + ' ' + date.getDate() + ', ' + date.getFullYear();
 			element = document.querySelectorAll("[aria-label='" + ariaLabel + "']")[0];
 			element.classList.add('c-h21-two-month-calendar_selected');
-			element.classList.add(date == this.selectedToDate ? 'c-h21-two-month-calendar_selected__finish' : 'c-h21-two-month-calendar_selected__start');
+			if (this.selectedToDate) {
+				element.classList.add(date.getTime() == this.selectedToDate.getTime()
+					? 'c-h21-two-month-calendar_selected__finish'
+					: 'c-h21-two-month-calendar_selected__start');
+			}
 
 			if(this.selectedToDate &&
 			   this.selectedToDate.getTime() == this.selectedFromDate.getTime()) {
