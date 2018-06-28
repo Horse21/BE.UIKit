@@ -45,17 +45,17 @@
 
 		<div class="row">
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary" [(ngModel)]="searchOptions.directFlight">Direct flight</mat-checkbox>
+				<mat-checkbox color="primary" [value]="searchOptions.directFlight">Direct flight</mat-checkbox>
 			</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary" [(ngModel)]="searchOptions.refundableFlights">Refundable flights</mat-checkbox>
+				<mat-checkbox color="primary" [value]="searchOptions.refundableFlights">Refundable flights</mat-checkbox>
 			</div>
 			<div class="col-12">&nbsp;</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary" [(ngModel)]="searchOptions.showTransfers">Show transfers</mat-checkbox>
+				<mat-checkbox color="primary" [value]="searchOptions.showTransfers">Show transfers</mat-checkbox>
 			</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary" [(ngModel)]="searchOptions.showHotels">Show hotels</mat-checkbox>
+				<mat-checkbox color="primary" [value]="searchOptions.showHotels">Show hotels</mat-checkbox>
 			</div>
 		</div>
 	</div>

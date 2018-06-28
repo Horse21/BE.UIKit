@@ -6,10 +6,10 @@
 					<mat-panel-title>Stops</mat-panel-title>
 				</mat-expansion-panel-header>
 				<div class="c-h21-filter-panel_checkbox-group">
-					<mat-checkbox color="primary" [(ngModel)]="searchOptions.anyNumberOfStops">Any number of stops</mat-checkbox>
-					<mat-checkbox color="primary" [(ngModel)]="searchOptions.nonstopOnly">Nonstop only</mat-checkbox>
-					<mat-checkbox color="primary" [(ngModel)]="searchOptions.oneStopOfFewer">1 stop or fewer</mat-checkbox>
-					<mat-checkbox color="primary" [(ngModel)]="searchOptions.twoStopOfFewer">2 stop or fewer</mat-checkbox>
+					<mat-checkbox color="primary" [value]="searchOptions.anyNumberOfStops">Any number of stops</mat-checkbox>
+					<mat-checkbox color="primary" [value]="searchOptions.nonstopOnly">Nonstop only</mat-checkbox>
+					<mat-checkbox color="primary" [value]="searchOptions.oneStopOfFewer">1 stop or fewer</mat-checkbox>
+					<mat-checkbox color="primary" [value]="searchOptions.twoStopOfFewer">2 stop or fewer</mat-checkbox>
 				</div>
 			</mat-expansion-panel>
 			<mat-expansion-panel>
