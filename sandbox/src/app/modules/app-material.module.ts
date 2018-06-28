@@ -73,4 +73,5 @@ const dependencies = [
 	imports: dependencies,
 	exports: dependencies
 })
+
 export class AppMaterialModule { }

@@ -24,7 +24,8 @@
             "styles": [
               "node_modules/normalize.css/normalize.css",
               "src/styles.css",
-			  "projects/h21-be-ui-kit/h21-theme.scss"
+			  "projects/h21-be-ui-kit/h21-theme.scss",
+			  "src/assets/styles/docs.scss"
             ],
             "scripts": []
           },

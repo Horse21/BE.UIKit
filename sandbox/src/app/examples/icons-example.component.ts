@@ -5,73 +5,35 @@ import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 @Component({
   selector: 'icons-example',
   template: `
-    <div class="container" style="background: #f00;">
-      
-    </div>
-    <h1>{{title}}</h1>
-    <input #box (keyup.enter)="onEnter(box.value)"/>
-    
-    <section class="docs mat-typography">
-      <div [hidden]="h21Icons.length == 0">
-        <h2>Custom icons</h2>
-        <mat-grid-list cols="5" class="docs_icons-preview-grid">
-          <mat-grid-tile *ngFor="let icon of h21Icons">
-            <div class="icon-preview icon-preview__icon-size-48">
-              <button mat-icon-button (click)="openDialog(icon, true);">
-                <mat-icon svgIcon="{{icon}}"></mat-icon>
-              </button><br />
-              <span class="">{{icon.replace('_',' ')}}</span>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-      <div class="line-separator"></div>
-      <div [hidden]="matIcons.length == 0">
-        <h2>Used material icons</h2>
-        <mat-grid-list cols="5" class="docs_icons-preview-grid">
-          <mat-grid-tile *ngFor="let icon of matIcons">
-            <div class="icon-preview">
-              <button mat-icon-button (click)="openDialog(icon, false);">
-                <mat-icon class="">{{icon}}</mat-icon>
-              </button><br />
-              <span>{{icon.replace('_',' ')}}</span>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-<!--
-    <section class="mat-typography">
-      <h1>{{title}}</h1>
-      <h2>Custom icons</h2>
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let icon of h21Icons">
-          <figure class="docs_icon-preview">
-            <p>
-              <button mat-icon-button (click)="openDialog(icon, true);">
-                <mat-icon svgIcon="{{icon}}"></mat-icon>
-              </button>
-            </p>
-            <figcaption></figcaption>
-          </figure>
-          <span class="">{{icon.replace('_',' ')}}</span>
-        </div>
-      </div>
-      
-      <div class="line-separator"></div>
-      
-      <h2>Used material icons</h2>
-      <mat-grid-list cols="5" class="docs_icons-preview-grid">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let icon of h21Icons">
-          <div class="icon-preview">
-            <button mat-icon-button (click)="openDialog(icon, false);">
-              <mat-icon class="">{{icon}}</mat-icon>
-            </button><br />
-            <span>{{icon.replace('_',' ')}}</span>
-          </div>
-        </div>
-      </mat-grid-list>
--->
-    </section>`
+	<section class="mat-typography">
+		<h1>{{title}}</h1>
+		<h2>Custom icons</h2>
+		<div class="row m-b-5">
+			<div class="col-md-3 col-lg-2" *ngFor="let icon of h21Icons">
+				<figure class="docs_icon-preview">
+					<div>
+						<button mat-icon-button class="__size-l" (click)="openDialog(icon, true);">
+							<mat-icon class="__size-xl" svgIcon="{{icon}}"></mat-icon>
+						</button>
+					</div>
+					<figcaption>{{icon}}</figcaption>
+				</figure>
+			</div>
+		</div>
+		<h2>Used material icons</h2>
+		<div class="row">
+			<div class="col-md-3 col-lg-2" *ngFor="let icon of matIcons">
+				<figure class="docs_icon-preview">
+					<div>
+						<button mat-icon-button class="__size-l" (click)="openDialog(icon, false);">
+							<mat-icon class="__size-xl">{{icon}}</mat-icon>
+						</button>
+					</div>
+					<figcaption>{{icon}}</figcaption>
+				</figure>
+			</div>
+		</div>
+	</section>`
 })
 
 export class IconsExampleComponent {
@@ -111,11 +73,8 @@ export class IconsExampleComponent {
   matIcons = this.allMatIcons;
   h21Icons = this.allH21Icons;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
 
-  onEnter(value: string) {
-    this.matIcons = this.allMatIcons.filter(x=>x.indexOf(value.toLowerCase()) != -1);
-    this.h21Icons = this.allH21Icons.filter(x=>x.indexOf(value.toLowerCase()) != -1);
   }
 
   openDialog(iconName: String, isCustomIcon: boolean): void {

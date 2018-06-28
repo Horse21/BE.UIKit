@@ -1,28 +1,37 @@
 <div class="docs_page-box container-fluid" *ngIf="!isDemo()">
-  <div class="row">
-    <div class="docs_sidebar col-12 col-md-1 col-lg-3">
-      <div class="docs_logo-box">
-        <a href="" class="docs_logo">
-          <mat-icon svgIcon="logo"></mat-icon>
-          <span>Horse21.PRO</span>
-        </a>
-      </div>
-      <div class="docs_sidebar-show-hide-btns">
-        <button mat-icon-button class="docs_sidebar-show-btn">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <button mat-icon-button class="docs_sidebar-hide-btn">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-		<h21-docs-navigation (onChangeComponent)="changeComponent($event)"></h21-docs-navigation>
-    </div>
-    <div class="docs_content-box col-12 col-md-11 col-lg-9">
-      <docs></docs>
-    </div>
-  </div>
+	<div class="docs_sidebar-wrapper row no-gutters">
+		<div class="docs_sidebar" [class.is-opened]="sidebarOpened">
+			<div class="docs_logo-box">
+				<a href="" class="docs_logo">
+					<mat-icon svgIcon="logo"></mat-icon>
+					<span>Horse21.PRO</span>
+				</a>
+			</div>
+			<div class="docs_sidebar-open-close-btns">
+				<button mat-icon-button class="docs_sidebar-open-btn"
+						*ngIf="!sidebarOpened"
+						(click)="toggleSidebarOpened()">
+					<mat-icon>menu</mat-icon>
+				</button>
+				<button mat-icon-button class="docs_sidebar-close-btn"
+						*ngIf="sidebarOpened"
+						(click)="toggleSidebarOpened()">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+			<div class="docs_sidebar-navigation">
+				<h21-docs-navigation (onChangeComponent)="changeComponent($event)"></h21-docs-navigation>
+			</div>
+		</div>
+		<div class="docs_content-box col-12">
+			<div class="docs_content-box-inner">
+				<docs></docs>
+			</div>
+		</div>
+	</div>
 </div>
 
+<!-- Demo page -->
 <div class="container-fluid page_box" *ngIf="isDemo()">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
@@ -38,3 +47,4 @@
 	</div>
 	<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>
 </div>
+<!-- Demo page -->

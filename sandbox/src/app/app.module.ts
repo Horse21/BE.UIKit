@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { AppSubscriberService } from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
-import { OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
+import {AppSubscriberService} from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
+import {OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
 import {FakeVocabularyService} from '../services/fake-vocabulary-service';
 import {VocabularyService} from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import {AppComponent} from './app.component';
@@ -14,7 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NouisliderModule} from 'ng2-nouislider';
 
-// H21 components
+/** Import H21 components */
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
 import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
@@ -33,7 +33,7 @@ import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
 
-// Examples
+/** Import Examples */
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
 import {ColorsExampleComponent} from './examples/colors-example.component';
 import {FormsExampleComponent} from './examples/forms-example.component';
@@ -48,7 +48,6 @@ import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
 import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
-
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
