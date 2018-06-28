@@ -105,7 +105,9 @@ export class H21TwoMonthCalendarComponent {
 			if (end) {
 				this.selectedDateChange(end);
 			}
-			this.refreshRange(null);
+			if (this.selectedToDate) {
+				this.refreshRange(null);
+			}
 		}
 
 		// mouse leave
