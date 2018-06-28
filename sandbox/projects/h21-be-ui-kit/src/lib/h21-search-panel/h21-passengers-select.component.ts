@@ -72,28 +72,36 @@ export class H21PassengersSelectComponent {
 		private _appSubscriber: AppSubscriberService,
 		private _orderService: OrderService) {
 		_appSubscriber.travelerObservable()
-			.subscribe(value => {
-				this.incrementPassenger('adult');
+			.subscribe(passenger => {
+				this.incrementPassenger(passenger);
 			});
 		_appSubscriber.removeTravelerObservable()
-			.subscribe(value => {
-				this.decrementPassenger('adult');
+			.subscribe(passenger => {
+				this.decrementPassenger(passenger);
 			});
 		this.addPassenger('adult');
 	}
 
-	addPassenger(passengerType) {
-		this._orderService.addPassenger(<Passenger>{listState:'selected', firstName:'no name'})
-		this.incrementPassenger(passengerType);
+	addPassenger(passengerType: 'adult' | 'children' | 'infant') {
+		const passenger = <Passenger>{
+			listState: 'selected',
+			firstName: 'no name',
+			type: passengerType
+		};
+		this._orderService.addPassenger(passenger);
+		this.incrementPassenger(passenger);
 	}
 
-	incrementPassenger(passengerType) {
-		switch (passengerType) {
-			case 'adult' :  this.adultCount += 1;
+	incrementPassenger(passenger: Passenger) {
+		switch (passenger.type) {
+			case 'adult' :
+				this.adultCount += 1;
 				break;
-			case 'children' : this.childrenCount += 1;
+			case 'children' :
+				this.childrenCount += 1;
 				break;
-			case 'infant' : this.infantCount += 1;
+			case 'infant' :
+				this.infantCount += 1;
 				break;
 		}
 	}
@@ -102,13 +110,16 @@ export class H21PassengersSelectComponent {
 		this.rightPanelDialog.open('h21-selected-passengers');
 	}
 
-	decrementPassenger(passengerType) {
-		switch (passengerType) {
-			case 'adult' :  this.adultCount -= 1;
+	decrementPassenger(passenger: Passenger) {
+		switch (passenger.type) {
+			case 'adult' :
+				this.adultCount -= 1;
 				break;
-			case 'children' : this.childrenCount -= 1;
+			case 'children' :
+				this.childrenCount -= 1;
 				break;
-			case 'infant' : this.infantCount -= 1;
+			case 'infant' :
+				this.infantCount -= 1;
 				break;
 		}
 		if (this.adultCount + this.childrenCount + this.infantCount === 0) {

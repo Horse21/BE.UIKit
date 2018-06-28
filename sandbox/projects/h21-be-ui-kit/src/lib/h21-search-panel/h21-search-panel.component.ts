@@ -15,9 +15,12 @@ export class H21SearchPanelComponent implements OnInit {
 		this.searchOptions = <SearchFlightDto>{
 			flyRoutes: [<FlyRoute>{
 				minDate: new Date(),
-				rangeDateMode: true
+				rangeDateMode: true,
 			}],
-			searchMode: 'round_trip'
+			searchMode: 'round_trip',
+			anyNumberOfStops: true,
+			nonstopOnly: true,
+			oneStopOfFewer: true
 		};
 	}
 

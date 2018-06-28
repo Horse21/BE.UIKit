@@ -7,12 +7,13 @@
 			<div class="col-12 col-md-6">
 				<mat-form-field color="primary" appearance="fill" class="c-h21-search-panel_preferred-class-combobox">
 					<mat-icon matPrefix>attach_money</mat-icon>
-					<mat-select placeholder="Preferred class" panelClass="c-h21-search-panel_preferred-class-combobox-panel">
+					<mat-select placeholder="Preferred class" panelClass="c-h21-search-panel_preferred-class-combobox-panel"
+								[(value)]="searchOptions.preferedClass">
 						<mat-optgroup [label]="'Preferred class'">
-							<mat-option value="val-1" >Economy</mat-option>
-							<mat-option value="val-2">Premium economy</mat-option>
-							<mat-option value="val-3">Business</mat-option>
-							<mat-option value="val-4">First class</mat-option>
+							<mat-option value="economy" >Economy</mat-option>
+							<mat-option value="premium_economy">Premium economy</mat-option>
+							<mat-option value="business">Business</mat-option>
+							<mat-option value="first_class">First class</mat-option>
 						</mat-optgroup>
 					</mat-select>
 				</mat-form-field>
@@ -44,17 +45,17 @@
 
 		<div class="row">
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary">Direct flight</mat-checkbox>
+				<mat-checkbox color="primary" [(ngModel)]="searchOptions.directFlight">Direct flight</mat-checkbox>
 			</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary">Refundable flights</mat-checkbox>
+				<mat-checkbox color="primary" [(ngModel)]="searchOptions.refundableFlights">Refundable flights</mat-checkbox>
 			</div>
 			<div class="col-12">&nbsp;</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary">Show transfers</mat-checkbox>
+				<mat-checkbox color="primary" [(ngModel)]="searchOptions.showTransfers">Show transfers</mat-checkbox>
 			</div>
 			<div class="col-12 col-md-6">
-				<mat-checkbox color="primary">Show hotels</mat-checkbox>
+				<mat-checkbox color="primary" [(ngModel)]="searchOptions.showHotels">Show hotels</mat-checkbox>
 			</div>
 		</div>
 	</div>

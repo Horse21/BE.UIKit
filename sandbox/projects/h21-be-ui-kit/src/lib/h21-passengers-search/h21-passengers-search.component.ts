@@ -1,12 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Subscriber } from 'rxjs/index';
 import { OrderService } from '../../services/order-service';
 import { VocabularyService } from '../../services/vocabulary-service';
-import { Observable } from 'rxjs/internal/Observable';
 import { Passenger } from '../../dto/passenger';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
-import {MatSnackBar} from "@angular/material"
+import { MatSnackBar } from "@angular/material"
 
 @Component ({
 	selector: 'h21-passengers-search',

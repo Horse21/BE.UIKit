@@ -10,7 +10,6 @@ import {INotifyItem} from '../../dto/inotifyItem';
 
 export class H21HeaderComponent {
 	constructor(public dialog: MatDialog) {
-
 	}
 
 	@Input() username;

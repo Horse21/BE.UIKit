@@ -7,4 +7,5 @@ export class Passenger {
 	company: string;
 	position: string;
 	listState: string;
+	type: 'adult' | 'children' | 'infant';
 }

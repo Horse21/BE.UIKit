@@ -15,10 +15,10 @@
 
 <div class="c-21-sidebar_tabs-box" [class.is-active]="visibility">
 	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-search'">
-		<h21-search-panel></h21-search-panel>
+		<h21-search-panel #searchPanel></h21-search-panel>
 	</div>
 	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-filter'">
-		<h21-filter-panel></h21-filter-panel>
+		<h21-filter-panel [searchOptions]="searchPanel.searchOptions"></h21-filter-panel>
 	</div>
 	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-history'">
 		<div class="mat-typography">The functional is in development</div>
