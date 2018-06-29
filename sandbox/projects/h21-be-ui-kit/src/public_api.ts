@@ -8,3 +8,7 @@ export * from './lib/h21-top-toolbar/h21-top-toolbar.module';
 export * from './lib/h21-search-panel/h21-search-panel.module';
 export * from './lib/h21-passengers-search/h21-passengers-search.module';
 export * from './lib/h21-right-overlay-panel/h21-right-overlay-panel.module';
+export * from './services/vocabulary-service'
+export * from './services/app-subscriber-service'
+export * from './services/order-service'
+export * from './services/permission-service'
