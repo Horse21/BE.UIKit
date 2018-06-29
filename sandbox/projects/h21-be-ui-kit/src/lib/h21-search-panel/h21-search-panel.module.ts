@@ -7,8 +7,8 @@ import {
 	MatButtonToggleModule,
 	MatCheckboxModule, MatDatepickerModule,
 	MatDividerModule, MatFormFieldModule,
-	MatIconModule, MatMenuModule, MatOptionModule, MatSelectModule
-} from "@angular/material";
+	MatIconModule, MatInputModule, MatMenuModule, MatOptionModule, MatSelectModule
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {H21RightOverlayPanelModule} from "../h21-right-overlay-panel/h21-right-overlay-panel.module"
 import {H21FlyRouteSelectionComponent} from "./h21-fly-route-selection.component";
@@ -32,9 +32,14 @@ import {H21TwoMonthCalendarModule} from "../h21-two-month-calendar/h21-two-month
 		MatSelectModule,
 		MatMenuModule,
 		H21RightOverlayPanelModule,
-		H21TwoMonthCalendarModule
+		H21TwoMonthCalendarModule,
+		MatInputModule
 	],
-	declarations: [H21SearchPanelComponent, H21FlyRouteSelectionComponent, H21PassengersSelectComponent],
+	declarations: [
+		H21SearchPanelComponent,
+		H21FlyRouteSelectionComponent,
+		H21PassengersSelectComponent
+	],
 	exports: [H21SearchPanelComponent]
 })
 export class H21SearchPanelModule {
