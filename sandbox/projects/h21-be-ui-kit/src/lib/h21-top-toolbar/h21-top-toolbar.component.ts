@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { trigger, state, transition, animate, style } from "@angular/animations";
 
