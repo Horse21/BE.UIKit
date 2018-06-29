@@ -14,7 +14,8 @@ import {H21HelpModule} from "../h21-help/h21-help.module";
 		H21HelpModule
 	],
 	declarations: [H21RightOverlayPanelComponent],
-	exports: [H21RightOverlayPanelComponent]
+	exports: [H21RightOverlayPanelComponent],
+	entryComponents: [H21RightOverlayPanelComponent]
 })
 export class H21RightOverlayPanelModule {
 

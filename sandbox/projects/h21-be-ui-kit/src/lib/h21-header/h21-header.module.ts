@@ -39,7 +39,8 @@ import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 		H21HeaderUserSelectorDialogComponent,
 		H21UserCardComponent
 	],
-	exports: [H21HeaderComponent]
+	exports: [H21HeaderComponent],
+	entryComponents: [H21HeaderUserSelectorDialogComponent]
 })
 export class H21HeaderModule {
 }
