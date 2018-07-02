@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
-	selector: 'h21-docs-navigation',
+	selector: 'docs-navigation',
 	templateUrl: './docs-navigation.component.html'
 })
 

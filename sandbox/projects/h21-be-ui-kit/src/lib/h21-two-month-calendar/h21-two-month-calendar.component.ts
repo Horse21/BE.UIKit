@@ -22,23 +22,21 @@ export class H21TwoMonthCalendarComponent {
 	@Input() toDate: Date;
 	@Input() fromDateText: string;
 	@Input() toDateText: string;
-	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-
+	@Input() selectedFromDate: Date;
 	@Output() onArrivalDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 	@Output() onReturnDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 
-	monthNames: Array<string>;
-	monthList: Array<any>;
+	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-	sliderItemsCount: number;
-	sliderItemsBoxWidth: number = 0;
-	sliderItemWidth: number = 0;
-	sliderCurrentIndex: number = 0;
-	sliderCurrentTranslation: number = 0;
-
-	@Input() selectedFromDate: Date;
+	private monthNames: Array<string>;
+	private monthList: Array<any>;
+	private sliderItemsCount: number;
+	private sliderItemsBoxWidth: number = 0;
+	private sliderItemWidth: number = 0;
+	private sliderCurrentIndex: number = 0;
+	private sliderCurrentTranslation: number = 0;
 	selectedToDate: Date;
-	dayCells: any[];
+	private dayCells: any[];
 	private _rangeDate: Date;
 
 	constructor (

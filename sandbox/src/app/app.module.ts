@@ -10,9 +10,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './modules/app-material.module';
 import {DocsNavigationComponent} from './docs-navigation/docs-navigation.component';
 import {DocsComponent} from './docs/docs.component';
+import {DocsExampleViewerComponent} from './docs-example-viewer/docs-example-viewer.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NouisliderModule} from 'ng2-nouislider';
+import {NgxMdModule} from 'ngx-md';
 
 /** Import H21 components */
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -32,6 +34,7 @@ import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit
 import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
+import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 /** Import Examples */
 import {ButtonsExampleComponent} from './examples/buttons-example.component';
@@ -47,7 +50,7 @@ import {TabsExampleComponent} from './examples/tabs-example.component';
 import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
 import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
-import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
@@ -80,6 +83,7 @@ const routes: Routes = [
 		H21TwoMonthCalendarComponent,
 		DocsNavigationComponent,
 		DocsComponent,
+		DocsExampleViewerComponent,
 		ButtonsExampleComponent,
 		ColorsExampleComponent,
 		FormsExampleComponent,
@@ -93,6 +97,7 @@ const routes: Routes = [
 		TooltipsExampleComponent,
 		TypographyExampleComponent,
 		IconExampleDialogComponent,
+		TwoMonthCalendarDocsComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -102,7 +107,8 @@ const routes: Routes = [
 		HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NouisliderModule
+		NouisliderModule,
+		NgxMdModule.forRoot(),
 	],
 	providers: [
 		{provide: VocabularyService, useValue: new FakeVocabularyService()},

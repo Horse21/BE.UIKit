@@ -1,0 +1,25 @@
+<div class="c-docs_example">
+	<div class="c-docs_example-header">
+		<span class="c-docs_example-header-title">{{title}}</span>
+		<div class="w-spacer">&nbsp;</div>
+		<button mat-icon-button matTooltip="View source" (click)="viewExampleCodeTogle()">
+			<mat-icon>code</mat-icon>
+		</button>
+	</div>
+	<div [hidden]="!viewExampleCode" class="c-docs_example-code">
+		<mat-tab-group class="docs_tabs">
+			<mat-tab label="HTML" [disabled]="false">
+				<ngx-md [path]="htmlCodePath"> </ngx-md>
+			</mat-tab>
+			<mat-tab label="TS" [disabled]="false">
+				<ngx-md [path]="tsCodePath"> </ngx-md>
+			</mat-tab>
+			<mat-tab label="CSS" [disabled]="false">
+				<ngx-md [path]="cssCodePath"> </ngx-md>
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+	<div class="c-docs_example-body">
+		<ng-content></ng-content>
+	</div>
+</div>

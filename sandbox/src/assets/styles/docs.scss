@@ -4,6 +4,31 @@
 
 @import '../../../projects/h21-be-ui-kit/h21-theme.scss';
 
+
+/* Include and override markdown styles */
+@import '~prismjs/themes/prism.css';
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: Courier;
+}
+
+pre[class*="language-"] {
+  padding: 24px;
+  margin: 0;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: none;
+}
+
+
+
+$docs-gray: rgba(0, 0, 0, .45);
+$docs-gray-light: rgba(0, 0, 0, .1);
+$docs-gray-dark: rgba(0, 0, 0, .75);
+
 .docs_page-box {
   height: 100%;
 
@@ -315,4 +340,67 @@
   figcaption {
 
   }
+}
+
+.docs_tabs {
+  .mat-tab-label {
+	text-transform: uppercase;
+  }
+  .mat-tab-label-active {
+	color: $h21-color-ui-primary;
+	opacity: 1;
+  }
+}
+
+.c-docs_example {
+  @include mat-elevation(2);
+  margin: 24px 16px;
+
+  .c-docs_example-header {
+	padding: 16px 24px;
+	background: $docs-gray-light;
+	color: $docs-gray;
+	display: flex;
+	align-items: center;
+
+	.c-docs_example-header-title {
+	  display: inline-block;
+	}
+  }
+
+  .c-docs_example-code {
+	border-bottom: 1px solid $docs-gray-light;
+  }
+
+  .c-docs_example-body {
+	padding: 24px;
+  }
+}
+
+.docs_properties-table {
+  width: calc(100% - 2px);
+  border-collapse: collapse;
+
+  thead {
+	th {
+	  background: $docs-gray-light;
+	  color: $docs-gray-dark;
+	  padding: 16px;
+	  box-sizing: border-box;
+	}
+  }
+
+  tbody {
+	td {
+	  border: 1px solid $docs-gray-light;
+	  padding: 16px;
+	  box-sizing: border-box;
+	}
+  }
+}
+
+.docs_example-code {
+  font-family: "Courier";
+  font-weight: 300;
+  font-size: 14px;
 }
