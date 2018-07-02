@@ -4,7 +4,8 @@ import {
 	MatExpansionModule,
 	MatFormFieldModule,
 	MatIconModule,
-} from "@angular/material";
+	MatInputModule
+} from '@angular/material';
 import {H21HelpComponent} from "./h21-help.component"
 
 @NgModule({
@@ -12,7 +13,8 @@ import {H21HelpComponent} from "./h21-help.component"
 		CommonModule,
 		MatIconModule,
 		MatFormFieldModule,
-		MatExpansionModule
+		MatExpansionModule,
+		MatInputModule
 	],
 	declarations: [H21HelpComponent],
 	exports: [H21HelpComponent]
