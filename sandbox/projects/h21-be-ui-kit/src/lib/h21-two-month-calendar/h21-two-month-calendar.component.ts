@@ -29,13 +29,13 @@ export class H21TwoMonthCalendarComponent {
 	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
 	private monthNames: Array<string>;
-	monthList: Array<any>;
-	sliderItemsCount: number;
-	sliderCurrentIndex: number = 0;
-	selectedToDate: Date;
+	private monthList: Array<any>;
+	private sliderItemsCount: number;
 	private sliderItemsBoxWidth: number = 0;
 	private sliderItemWidth: number = 0;
+	private sliderCurrentIndex: number = 0;
 	private sliderCurrentTranslation: number = 0;
+	selectedToDate: Date;
 	private dayCells: any[];
 	private _rangeDate: Date;
 
