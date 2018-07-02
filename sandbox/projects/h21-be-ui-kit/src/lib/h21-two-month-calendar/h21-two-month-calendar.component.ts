@@ -28,15 +28,15 @@ export class H21TwoMonthCalendarComponent {
 
 	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-	private monthNames: Array<string>;
-	private monthList: Array<any>;
-	private sliderItemsCount: number;
-	private sliderItemsBoxWidth: number = 0;
-	private sliderItemWidth: number = 0;
-	private sliderCurrentIndex: number = 0;
-	private sliderCurrentTranslation: number = 0;
-	selectedToDate: Date;
-	private dayCells: any[];
+	public monthNames: Array<string>;
+	public monthList: Array<any>;
+	public sliderItemsCount: number;
+	public sliderItemsBoxWidth: number = 0;
+	public sliderItemWidth: number = 0;
+	public sliderCurrentIndex: number = 0;
+	public sliderCurrentTranslation: number = 0;
+	public selectedToDate: Date;
+	public dayCells: any[];
 	private _rangeDate: Date;
 
 	constructor (
