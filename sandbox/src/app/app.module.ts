@@ -41,7 +41,8 @@ import {ButtonsExampleComponent} from './examples/buttons-example.component';
 import {ColorsExampleComponent} from './examples/colors-example.component';
 import {FormsExampleComponent} from './examples/forms-example.component';
 import {GridExampleComponent} from './examples/grid-example.component';
-import {IconsExampleComponent} from './examples/icons-example.component';
+import {IconsDocsComponent} from './docs/icons/icons-docs.component';
+import {IconExampleDialogComponent} from './docs/icons/icon-example-dialog.component';
 import {ImagesExampleComponent} from './examples/images-example.component';
 import {LayoutExampleComponent} from './examples/layout-example.component';
 import {LogotypeExampleComponent} from './examples/logotype-example.component';
@@ -49,7 +50,6 @@ import {SearchComponentsExampleComponent} from './examples/search-components-exa
 import {TabsExampleComponent} from './examples/tabs-example.component';
 import {TooltipsExampleComponent} from './examples/tooltips-example.component';
 import {TypographyExampleComponent} from './examples/typography-example.component';
-import {IconExampleDialogComponent} from './examples/icon-example-dialog.component';
 import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
 
 const routes: Routes = [
@@ -88,7 +88,7 @@ const routes: Routes = [
 		ColorsExampleComponent,
 		FormsExampleComponent,
 		GridExampleComponent,
-		IconsExampleComponent,
+		IconsDocsComponent,
 		ImagesExampleComponent,
 		LayoutExampleComponent,
 		LogotypeExampleComponent,

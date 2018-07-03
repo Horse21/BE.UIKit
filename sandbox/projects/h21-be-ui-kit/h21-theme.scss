@@ -1,5 +1,6 @@
 @import '~@angular/material/_theming.scss';
 @import '~bootstrap/scss/bootstrap-grid.scss';
+@import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/utilities/_display.scss';
 @import '~bootstrap/scss/utilities/_spacing.scss';
 
@@ -151,6 +152,89 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 @include angular-material-theme($h21-mat-theme);
 
 
+
+/**
+ *	mat-icon style override
+ */
+.mat-icon {
+  /** size modifiers */
+  &.__size-s {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	line-height: 16px;
+  }
+  &.__size-m {
+	width: 24px;
+	height: 24px;
+	font-size: 24px;
+	line-height: 24px;
+  }
+  &.__size-l {
+	width: 32px;
+	height: 32px;
+	font-size: 32px;
+	line-height: 32px;
+  }
+  &.__size-xl {
+	width: 48px;
+	height: 48px;
+	font-size: 48px;
+	line-height: 48px;
+  }
+}
+
+/**
+ *	mat-icon-button style override
+ */
+.mat-icon-button {
+  /** size modifiers */
+  &.__size-s {
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	.mat-icon {
+	  width: 16px;
+	  height: 16px;
+	  line-height: 16px;
+	  font-size: 16px;
+	}
+  }
+  &.__size-m {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	.mat-icon {
+	  width: 24px;
+	  height: 24px;
+	  line-height: 24px;
+	  font-size: 24px;
+	}
+  }
+  &.__size-l {
+	width: 48px;
+	height: 48px;
+	line-height: 48px;
+	.mat-icon {
+	  width: 32px;
+	  height: 32px;
+	  line-height: 32px;
+	  font-size: 32px;
+	}
+  }
+  &.__size-xl {
+	width: 64px;
+	height: 64px;
+	line-height: 64px;
+	.mat-icon {
+	  width: 48px;
+	  height: 48px;
+	  line-height: 48px;
+	  font-size: 48px;
+	}
+  }
+}
+
 // mat-button
 .mat-button {
   font-weight: normal;
@@ -243,33 +327,6 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   padding: 0;
 }
 
-// mat-icon size modifiers
-.mat-icon {
-  &.__size-s {
-	width: 16px;
-	height: 16px;
-	font-size: 16px;
-	line-height: 16px !important;
-  }
-  &.__size-m {
-	width: 24px;
-	height: 24px;
-	font-size: 24px;
-	line-height: 24px !important;
-  }
-  &.__size-l {
-	width: 32px;
-	height: 32px;
-	font-size: 32px;
-	line-height: 32px !important;
-  }
-  &.__size-xl {
-	width: 48px;
-	height: 48px;
-	font-size: 48px;
-	line-height: 48px !important;
-  }
-}
 
 // material buttons size modifiers
 .mat-button,
@@ -291,19 +348,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	border-radius: 4px;
   }
 }
-.mat-icon-button {
-  &.__size-s {
 
-  }
-  &.__size-m {
-
-  }
-  &.__size-l {
-	width: 48px;
-	height: 48px;
-	line-height: 48px;
-  }
-}
 //
 //----------------------------------------------------------------------------------------------------------------------
 // Layout
@@ -2196,9 +2241,6 @@ $h21-color-fake: #F1F1F1;
 
 
 // Common classes
-.__text-right {
-  text-align: right !important;
-}
 .__buttons-to-right {
   text-align: right;
 
@@ -2257,6 +2299,24 @@ $h21-color-fake: #F1F1F1;
   & .mat-raised-button {
 	margin-left: 16px;
   }
+}
+
+
+.__text-center {
+  text-align: center !important;
+}
+.__text-left {
+  text-align: left !important;
+}
+.__text-right {
+  text-align: right !important;
+}
+
+.__w-100 {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .__display-none {
