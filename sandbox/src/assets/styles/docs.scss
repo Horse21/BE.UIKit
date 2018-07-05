@@ -79,10 +79,12 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 }
 
 .docs_default-view {
+  width: 100%;
   height: 100%;
   background: url('../img/main-bg-picture.svg') center center no-repeat;
-  position: relative;
-
+  position: absolute;
+  top: 0;
+  left: 0;
   p {
 	font-family: mat-font-family($h21-mat-typography);
 	font-size: 48px;
@@ -187,6 +189,14 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
   }
 }
 
+
+.docs_section {
+  color: rgba(0,0,0, .93);
+
+  h1, h2, h3, h4, h5, h6 {
+	color: black;
+  }
+}
 
 /*
 	Style - colors
@@ -302,6 +312,16 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
   }
 }
 
+.docs_button-example {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid $docs-gray-light;
+  margin-bottom: 24px;
+}
+
+
 .docs_example-code {
   font-family: Courier;
   background: $docs-gray-light;
@@ -310,14 +330,29 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
   margin: 0;
   font-weight: 300;
   overflow-x: auto;
+  color: black;
 }
 
 .docs_code {
   font-family: Courier;
   font-weight: 300;
+  font-size: 15px;
   opacity: .75;
+  color: black;
+  background: $docs-gray-light;
+  padding: 2px 5px;
+  margin: 0 5px;
+  display: inline-block;
 }
 
+
+.docs_buttons-row {
+  margin: 16px 0;
+
+  button {
+	margin: 0 16px;
+  }
+}
 
 
 

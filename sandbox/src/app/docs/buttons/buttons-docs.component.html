@@ -1,0 +1,134 @@
+<section class="docs_section mat-typography">
+	<h1>{{title}}</h1>
+
+	<p>UI Kit предлагает использовать стадартные компоненты кнопок Angular Material, представляя возможности по их
+		стилизации и модификации с помощью cобственно стилевой схемы. Вся подробная информация с описанием базовых
+		компнонентов и доступным API представленна в <a href="https://material.angular.io/components/button/overview">официальной документации</a>.
+	</p>
+
+	<docs-example-viewer [title]="'Button types'"
+						 [htmlCodePath]="''"
+						 [tsCodePath]="''"
+						 [cssCodePath]="''">
+		<div class="docs_buttons-row">
+			<button mat-button color="primary">Button</button>
+			<button mat-raised-button color="primary">Raised button</button>
+			<button mat-flat-button color="primary">Flat button</button>
+			<button mat-stroked-button color="primary">Stroked button</button>
+		</div>
+	</docs-example-viewer>
+
+	<h2>Тематизация</h2>
+	<p>Окраска кнопок в соответствии с использемой цветовой темой производится сдандартым путем, с помощью атрибута
+		<span class="docs_code">color</span>. Возможны три стадартных варианта цветовой темой: <span class="docs_code">primary</span>,
+		<span class="docs_code">accent</span> и <span class="docs_code">warn</span>.
+	</p>
+	<docs-example-viewer [title]="'Button colors'"
+						 [htmlCodePath]="''"
+						 [tsCodePath]="''"
+						 [cssCodePath]="''">
+		<div class="docs_buttons-row">
+			<button mat-raised-button>Basic color</button>
+			<button mat-raised-button color="primary">Primary color</button>
+			<button mat-raised-button color="accent">Accent color</button>
+			<button mat-raised-button color="warn">Warn color</button>
+		</div>
+	</docs-example-viewer>
+
+
+	<h2>Изменение размера</h2>
+	<p>Кнопки могут иметь одит из трех предопределенных рамеров: маленький, средний (базовый размер из Angular Material)
+		и большой. Для изменения размера кнопки используются используются соответствующие CSS модификаторы, которые
+		необходимо указать в атрибуте <span class="docs_code">class</span> компонента кнопки: <span class="docs_code">__size-s</span>,
+		<span class="docs_code">__size-m</span> (полностью идентичен базомовому значению), <span class="docs_code">__size-l</span>.
+	</p>
+	<docs-example-viewer [title]="'Button sizes'"
+						 [htmlCodePath]="''"
+						 [tsCodePath]="''"
+						 [cssCodePath]="''">
+		<div class="docs_buttons-row">
+			<button mat-raised-button color="primary">Basic size</button>
+			<button mat-raised-button color="primary" class="__size-s">Small size</button>
+			<button mat-raised-button color="primary" class="__size-m">Medium size</button>
+			<button mat-raised-button color="primary" class="__size-l">Large size</button>
+		</div>
+	</docs-example-viewer>
+
+	<h2>Деактивация кнопки</h2>
+	<p>Отображение деактивированных кнопок:</p>
+	<docs-example-viewer [title]="'Disabled buttons'"
+						 [htmlCodePath]="''"
+						 [tsCodePath]="''"
+						 [cssCodePath]="''">
+		<div class="docs_buttons-row">
+			<button mat-button disabled>Button</button>
+			<button mat-raised-button disabled>Raised button</button>
+			<button mat-flat-button disabled>Flat button</button>
+			<button mat-stroked-button disabled>Stroked button</button>
+		</div>
+	</docs-example-viewer>
+
+	<h2>Конфигуратор</h2>
+
+
+	<mat-card>
+		<mat-card-content>
+			<div class="docs_icon-example-box mat-typography">
+				<div class="row __text-center">
+					<div class="col-12">
+						<div class="docs_button-example">
+							<button mat-button *ngIf="typeVal == 'button'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
+							<button mat-raised-button *ngIf="typeVal == 'raised'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
+							<button mat-flat-button *ngIf="typeVal == 'flat'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
+							<button mat-stroked-button *ngIf="typeVal == 'stroked'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
+						</div>
+					</div>
+				</div>
+				<div class="row __text-center">
+					<div class="col-4"><h3>Type</h3></div>
+					<div class="col-4"><h3>Size</h3></div>
+					<div class="col-4"><h3>Color</h3></div>
+				</div>
+				<div class="row mb-4">
+					<div class="col-4">
+						<mat-radio-group [(ngModel)]="typeVal">
+							<mat-radio-button class="__w-100" color="primary" [value]="'button'" [checked]="true">mat-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'raised'">mat-raised-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'flat'">mat-flat-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'stroked'">mat-stroked-button</mat-radio-button>
+						</mat-radio-group>
+					</div>
+
+					<div class="col-4">
+						<mat-radio-group [(ngModel)]="sizeVal">
+							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-l'">large</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-4">
+						<mat-radio-group [(ngModel)]="colorVal">
+							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'primary'">primary</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'accent'">accent</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'warn'">warn</mat-radio-button>
+						</mat-radio-group>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<h3 class="m-0">HTML code:</h3>
+						<pre class="docs_example-code">
+							&nbsp;
+						</pre>
+						<!--<pre class="docs_example-code" *ngIf="isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span> svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;</pre>-->
+						<!--<pre class="docs_example-code" *ngIf="isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>-->
+						<!--<pre class="docs_example-code" *ngIf="!isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;{{iconName}}&lt;/mat-icon&gt;</pre>-->
+						<!--<pre class="docs_example-code" *ngIf="!isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon&gt;{{iconName}}&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>-->
+					</div>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</section>

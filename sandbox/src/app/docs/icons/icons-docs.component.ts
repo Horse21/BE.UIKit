@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { IconExampleDialogComponent } from "./icon-example-dialog.component";
 
 @Component({
-  selector: 'icons-example',
+  selector: 'icons-docs',
   templateUrl: './icons-docs.component.html'
 })
 

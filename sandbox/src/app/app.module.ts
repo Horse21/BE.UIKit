@@ -37,19 +37,19 @@ import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 /** Import Examples */
-import {ButtonsExampleComponent} from './examples/buttons-example.component';
-import {ColorsExampleComponent} from './examples/colors-example.component';
-import {FormsExampleComponent} from './examples/forms-example.component';
-import {GridExampleComponent} from './examples/grid-example.component';
+import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
+import {ColorsDocsComponent} from './docs/colors/colors-docs.component';
+import {FormsDocsComponent} from './docs/forms/forms-docs.component';
+import {GridDocsComponent} from './docs/grid/grid-docs.component';
 import {IconsDocsComponent} from './docs/icons/icons-docs.component';
 import {IconExampleDialogComponent} from './docs/icons/icon-example-dialog.component';
-import {ImagesExampleComponent} from './examples/images-example.component';
-import {LayoutExampleComponent} from './examples/layout-example.component';
-import {LogotypeExampleComponent} from './examples/logotype-example.component';
-import {SearchComponentsExampleComponent} from './examples/search-components-example.component';
-import {TabsExampleComponent} from './examples/tabs-example.component';
-import {TooltipsExampleComponent} from './examples/tooltips-example.component';
-import {TypographyExampleComponent} from './examples/typography-example.component';
+import {ImagesDocsComponent} from './docs/images/images-docs.component';
+import {LayoutDocsComponent} from './docs/layout/layout-docs.component';
+import {LogotypeDocsComponent} from './docs/logotype/logotype-docs.component';
+import {SearchComponentsDocsComponent} from './docs/search-components/search-components-docs.component';
+import {TabsDocsComponent} from './docs/tabs/tabs-docs.component';
+import {TooltipsDocsComponent} from './docs/tooltips/tooltips-docs.component';
+import {TypographyDocsComponent} from './docs/typography/typography-docs.component';
 import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
 
 const routes: Routes = [
@@ -84,18 +84,18 @@ const routes: Routes = [
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,
-		ButtonsExampleComponent,
-		ColorsExampleComponent,
-		FormsExampleComponent,
-		GridExampleComponent,
+		ButtonsDocsComponent,
+		ColorsDocsComponent,
+		FormsDocsComponent,
+		GridDocsComponent,
 		IconsDocsComponent,
-		ImagesExampleComponent,
-		LayoutExampleComponent,
-		LogotypeExampleComponent,
-		SearchComponentsExampleComponent,
-		TabsExampleComponent,
-		TooltipsExampleComponent,
-		TypographyExampleComponent,
+		ImagesDocsComponent,
+		LayoutDocsComponent,
+		LogotypeDocsComponent,
+		SearchComponentsDocsComponent,
+		TabsDocsComponent,
+		TooltipsDocsComponent,
+		TypographyDocsComponent,
 		IconExampleDialogComponent,
 		TwoMonthCalendarDocsComponent,
 	],
