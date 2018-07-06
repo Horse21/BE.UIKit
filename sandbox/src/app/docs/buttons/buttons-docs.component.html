@@ -77,55 +77,56 @@
 				<div class="row __text-center">
 					<div class="col-12">
 						<div class="docs_button-example">
-							<button mat-button *ngIf="typeVal == 'button'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
-							<button mat-raised-button *ngIf="typeVal == 'raised'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
-							<button mat-flat-button *ngIf="typeVal == 'flat'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
-							<button mat-stroked-button *ngIf="typeVal == 'stroked'" ngClass="{{sizeVal}}" color="{{colorVal}}">Button</button>
+							<button mat-button *ngIf="buttonType == 'mat-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
+							<button mat-raised-button *ngIf="buttonType == 'mat-raised-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
+							<button mat-flat-button *ngIf="buttonType == 'mat-flat-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
+							<button mat-stroked-button *ngIf="buttonType == 'mat-stroked-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
 						</div>
 					</div>
 				</div>
 				<div class="row __text-center">
-					<div class="col-4"><h3>Type</h3></div>
-					<div class="col-4"><h3>Size</h3></div>
-					<div class="col-4"><h3>Color</h3></div>
+					<div class="col-3"><h3>Type</h3></div>
+					<div class="col-3"><h3>Size</h3></div>
+					<div class="col-3"><h3>Color</h3></div>
+					<div class="col-3"><h3>Disabled</h3></div>
 				</div>
 				<div class="row mb-4">
-					<div class="col-4">
-						<mat-radio-group [(ngModel)]="typeVal">
-							<mat-radio-button class="__w-100" color="primary" [value]="'button'" [checked]="true">mat-button</mat-radio-button>
-							<mat-radio-button class="__w-100" color="primary" [value]="'raised'">mat-raised-button</mat-radio-button>
-							<mat-radio-button class="__w-100" color="primary" [value]="'flat'">mat-flat-button</mat-radio-button>
-							<mat-radio-button class="__w-100" color="primary" [value]="'stroked'">mat-stroked-button</mat-radio-button>
+					<div class="col-3">
+						<mat-radio-group [(ngModel)]="buttonType">
+							<mat-radio-button class="__w-100" color="primary" [value]="'mat-button'" [checked]="true">mat-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'mat-raised-button'">mat-raised-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'mat-flat-button'">mat-flat-button</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'mat-stroked-button'">mat-stroked-button</mat-radio-button>
 						</mat-radio-group>
 					</div>
 
-					<div class="col-4">
-						<mat-radio-group [(ngModel)]="sizeVal">
+					<div class="col-3">
+						<mat-radio-group [(ngModel)]="buttonSize">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-l'">large</mat-radio-button>
 						</mat-radio-group>
 					</div>
-					<div class="col-4">
-						<mat-radio-group [(ngModel)]="colorVal">
+					<div class="col-3">
+						<mat-radio-group [(ngModel)]="buttonColor">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'primary'">primary</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'accent'">accent</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'warn'">warn</mat-radio-button>
 						</mat-radio-group>
 					</div>
+					<div class="col-3">
+						<mat-radio-group [(ngModel)]="buttonDisable">
+							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">false</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="true">true</mat-radio-button>
+						</mat-radio-group>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-12">
 						<h3 class="m-0">HTML code:</h3>
-						<pre class="docs_example-code">
-							&nbsp;
-						</pre>
-						<!--<pre class="docs_example-code" *ngIf="isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span> svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;</pre>-->
-						<!--<pre class="docs_example-code" *ngIf="isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>-->
-						<!--<pre class="docs_example-code" *ngIf="!isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;{{iconName}}&lt;/mat-icon&gt;</pre>-->
-						<!--<pre class="docs_example-code" *ngIf="!isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon&gt;{{iconName}}&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>-->
+						<pre class="docs_example-code">&lt;button {{buttonType}}<span [hidden]="!buttonColor"> color="{{buttonColor}}"</span><span [hidden]="!buttonSize"> class="{{buttonSize}}"</span><span [hidden]="!buttonDisable"> disabled</span>&gt;Button&lt;/button&gt;</pre>
 					</div>
 				</div>
 			</div>

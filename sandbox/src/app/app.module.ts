@@ -38,6 +38,7 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
+import {ButtonToggleDocsComponent} from './docs/button-toggle/button-toggle-docs.component';
 import {ColorsDocsComponent} from './docs/colors/colors-docs.component';
 import {FormsDocsComponent} from './docs/forms/forms-docs.component';
 import {GridDocsComponent} from './docs/grid/grid-docs.component';
@@ -85,6 +86,7 @@ const routes: Routes = [
 		DocsComponent,
 		DocsExampleViewerComponent,
 		ButtonsDocsComponent,
+		ButtonToggleDocsComponent,
 		ColorsDocsComponent,
 		FormsDocsComponent,
 		GridDocsComponent,

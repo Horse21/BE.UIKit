@@ -1,0 +1,98 @@
+<section class="docs_section mat-typography">
+	<h1>{{title}}</h1>
+
+	<!--<p>UI Kit предлагает использовать стадартный компонент Button toggle  Angular Material, представляя возможности по его-->
+		<!--стилизации и модификации с помощью cобственно стилевой схемы. Вся подробная информация с описанием базового-->
+		<!--компнонента и доступного API представленна в <a href="https://material.angular.io/components/button/overview">соответствующем разделе</a>-->
+		<!--официальной документации.-->
+	<!--</p>-->
+
+	<!--<h2>Тематизация</h2>-->
+	<!--<p>Поскольку для данного компонента Material-->
+
+		<!--Окраска кнопок в соответствии с использемой цветовой темой производится сдандартым путем, с помощью атрибута-->
+		<!--<span class="docs_code">color</span>. Возможны три стадартных варианта цветовой темой: <span class="docs_code">primary</span>,-->
+		<!--<span class="docs_code">accent</span> и <span class="docs_code">warn</span>.-->
+	<!--</p>-->
+
+	<h2>Конфигуратор</h2>
+	<mat-card>
+		<mat-card-content>
+			<div class="docs_icon-example-box mat-typography">
+				<div class="row __text-center">
+					<div class="col-12">
+						<div class="docs_button-example">
+							<mat-button-toggle-group ngClass="{{confColor}} {{confSize}} {{confWidth}}" [disabled]="confDisable" [vertical]="confVerticalOrientation">
+								<mat-button-toggle value="'value-1'" [checked]="true">Button 1</mat-button-toggle>
+								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
+								<mat-button-toggle value="'value-2'">Button 2</mat-button-toggle>
+								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
+								<mat-button-toggle value="'value-3'">Button 3</mat-button-toggle>
+								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
+								<mat-button-toggle value="'value-4'">Button 4</mat-button-toggle>
+							</mat-button-toggle-group>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row __text-center">
+					<div class="col-2"><h3>Divider</h3></div>
+					<div class="col-2"><h3>Size</h3></div>
+					<div class="col-2"><h3>Color</h3></div>
+					<div class="col-2"><h3>Width</h3></div>
+					<div class="col-2"><h3>Orientation</h3></div>
+					<div class="col-2"><h3>Disabled</h3></div>
+				</div>
+				<div class="row mb-4">
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confShowDivider">
+							<mat-radio-button class="__w-100" color="primary" [value]="true" [checked]="true">show divider</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="false">no divider</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confSize">
+							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__size-l'">large</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confColor">
+							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__primary'">primary</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__accent'">accent</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__warn'">warn</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confWidth">
+							<mat-radio-button class="__w-100" color="primary" [value]="''">Auto</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="'__w-100'" [checked]="true">Width - 100%</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confVerticalOrientation">
+							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">horizontal</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="true">vertical</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<div class="col-2">
+						<mat-radio-group [(ngModel)]="confDisable">
+							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">false</mat-radio-button>
+							<mat-radio-button class="__w-100" color="primary" [value]="true">true</mat-radio-button>
+						</mat-radio-group>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<h3 class="m-0">HTML code:</h3>
+						<pre class="docs_example-code">&lt;mat-button-toggle-group<span *ngIf="confColor || confSize || confWidth"> class="{{confColor}} {{confSize}} {{confWidth}}"</span><span *ngIf="confDisable"> [disabled]="true"</span> <span *ngIf="confVerticalOrientation"> [vertical]="true"</span>&gt;<br>    &lt;mat-button-toggle value="'value-1'" [checked]="true"&gt;Button 1&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-2'"&gt;Button 2&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-3'"&gt;Button 3&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-4'"&gt;Button 4&lt;/mat-button-toggle&gt;<br>&lt;/mat-button-toggle-group&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</section>

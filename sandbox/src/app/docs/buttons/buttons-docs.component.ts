@@ -9,7 +9,9 @@ export class ButtonsDocsComponent {
 	/** Section title */
 	title = 'Buttons';
 
-	typeVal: String = 'button';
-	colorVal: String = '';
-	sizeVal: String = '';
+	buttonType: String = 'mat-button';
+	buttonColor: String = '';
+	buttonSize: String = '';
+	buttonDisable: boolean = false;
+
 }
