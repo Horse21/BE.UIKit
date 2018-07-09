@@ -7,19 +7,19 @@
 	<div class="row mb-4">
 		<div class="col-4">
 			<div class="docs_icon-example">
-				<mat-icon color="{{colorVal}}" ngClass="{{sizeVal}}" *ngIf="isCustomIcon && !includeInButton"
+				<mat-icon color="{{confColor}}" ngClass="{{confSize}}" *ngIf="isCustomIcon && !includeInButton"
 						  svgIcon="{{iconName}}"></mat-icon>
-				<button mat-icon-button ngClass="{{sizeVal}}" *ngIf="isCustomIcon && includeInButton">
+				<button mat-icon-button ngClass="{{confSize}}" *ngIf="isCustomIcon && includeInButton">
 					<mat-icon svgIcon="{{iconName}}"></mat-icon>
 				</button>
-				<mat-icon color="{{colorVal}}" ngClass="{{sizeVal}}" *ngIf="!isCustomIcon && !includeInButton">{{iconName}}</mat-icon>
-				<button mat-icon-button color="{{colorVal}}" ngClass="{{sizeVal}}" *ngIf="!isCustomIcon && includeInButton">
+				<mat-icon color="{{confColor}}" ngClass="{{confSize}}" *ngIf="!isCustomIcon && !includeInButton">{{iconName}}</mat-icon>
+				<button mat-icon-button color="{{confColor}}" ngClass="{{confSize}}" *ngIf="!isCustomIcon && includeInButton">
 					<mat-icon>{{iconName}}</mat-icon>
 				</button>
 			</div>
 		</div>
 		<div class="col-4">
-			<mat-radio-group [(ngModel)]="sizeVal">
+			<mat-radio-group [(ngModel)]="confSize" (change)="updateCodeSample()">
 				<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 				<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
 				<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
@@ -28,10 +28,11 @@
 			</mat-radio-group>
 		</div>
 		<div class="col-4">
-			<mat-radio-group [(ngModel)]="colorVal" *ngIf="!isCustomIcon">
+			<mat-radio-group [(ngModel)]="confColor" *ngIf="!isCustomIcon" (change)="updateCodeSample()">
 				<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 				<mat-radio-button class="__w-100" color="primary" [value]="'primary'">primary</mat-radio-button>
 				<mat-radio-button class="__w-100" color="primary" [value]="'accent'">accent</mat-radio-button>
+				<mat-radio-button class="__w-100" color="primary" [value]="'warn'">warn</mat-radio-button>
 			</mat-radio-group>
 			<p *ngIf="isCustomIcon">
 				You can not set the color for SVG icons!
@@ -41,14 +42,11 @@
 	<div class="row">
 		<div class="col-12">
 			<h3 class="m-0">HTML code:</h3>
-			<pre class="docs_example-code" *ngIf="isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span> svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;</pre>
-			<pre class="docs_example-code" *ngIf="isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon svgIcon="{{iconName}}"&gt;&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>
-			<pre class="docs_example-code" *ngIf="!isCustomIcon && !includeInButton">&lt;mat-icon<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;{{iconName}}&lt;/mat-icon&gt;</pre>
-			<pre class="docs_example-code" *ngIf="!isCustomIcon && includeInButton">&lt;button mat-icon-button<span [hidden]="!colorVal"> color="{{colorVal}}"</span><span [hidden]="!sizeVal"> class="{{sizeVal}}"</span>&gt;<br>    &lt;mat-icon&gt;{{iconName}}&lt;/mat-icon&gt;<br>&lt;/button&gt;</pre>
+			<code class="docs_example-code" [innerHtml]="confCodeSample"></code>
 		</div>
 	</div>
 	<div class="docs_icon-example-actions">
-		<mat-checkbox color="primary" [(ngModel)]="includeInButton" [checked]="includeInButton">Icon button</mat-checkbox>
+		<mat-checkbox color="primary" [(ngModel)]="includeInButton" [checked]="includeInButton" (change)="updateCodeSample()">Icon button</mat-checkbox>
 		<div class="w-spacer"></div>
 		<button mat-raised-button color="primary" (click)="close()">Close</button>
 	</div>

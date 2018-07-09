@@ -325,9 +325,20 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   border-radius: 2px;
   color: black;
 
+  &[ng-reflect-disabled="true"] {
+	border-color: black !important;
+	.mat-divider {
+	  border-color: black !important;
+	}
+  }
+
+  .mat-button-toggle {
+	font-size: 14px;
+  }
+
   .mat-divider {
 	position: static !important;
-	border-color: black;
+
 	&.mat-divider-vertical {
 	  width: 0 !important;
 	}
@@ -354,8 +365,9 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	.mat-divider {
 	  border-color: mat-color($h21-mat-primary, 500);
 	}
-	.mat-button-toggle {
+	.mat-button-toggle:not(.mat-button-toggle-disabled) {
 	  color: mat-color($h21-mat-primary, 500);
+	  background: white;
 	  &.mat-button-toggle-checked {
 		background: mat-color($h21-mat-primary, 500);
 		color: mat-color($h21-mat-primary, '500-contrast');
@@ -386,8 +398,9 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	.mat-divider {
 	  border-color: mat-color($h21-mat-accent, 500);
 	}
-	.mat-button-toggle {
+	.mat-button-toggle:not(.mat-button-toggle-disabled) {
 	  color: mat-color($h21-mat-accent, 500);
+	  background: white;
 	  &.mat-button-toggle-checked {
 		background: mat-color($h21-mat-accent, 500);
 		color: mat-color($h21-mat-accent, '500-contrast');
@@ -418,8 +431,9 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	.mat-divider {
 	  border-color: mat-color($h21-mat-warn, 500);
 	}
-	.mat-button-toggle {
+	.mat-button-toggle:not(.mat-button-toggle-disabled) {
 	  color: mat-color($h21-mat-warn, 500);
+	  background: white;
 	  &.mat-button-toggle-checked {
 		background: mat-color($h21-mat-warn, 500);
 		color: mat-color($h21-mat-warn, '500-contrast');
@@ -467,39 +481,6 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 }
-
-
-//border: 1px solid mat-color($h21-mat-primary, 500);
-//
-//.mat-button-toggle {
-//color: mat-color($h21-mat-primary, 500);
-//font-weight: normal;
-//font-size: 14px;
-//border: none;
-//background: white;
-
-//&:hover {
-//  color: mat-color($h21-mat-primary, 400);
-//}
-//&.mat-button-toggle-checked {
-//  color: mat-color($h21-mat-primary, '500-contrast');
-//  background-color: mat-color($h21-mat-primary, 500);
-//  font-weight: normal;
-//}
-//}
-//.mat-divider-vertical {
-//border-color: mat-color($h21-mat-primary, 500);
-//}
-
-
-
-
-
-
-
-
-
-
 
 // mat-form-field
 .mat-form-field.mat-primary .mat-form-field-underline {
@@ -940,19 +921,7 @@ a.c-h21-header_logo {
 	}
   }
   .c-h21-search-panel_inner > .mat-button-toggle-group {
-	width: 100%;
 	margin: 30px 0 0 0;
-
-	.mat-button-toggle {;
-	  display: flex;
-	  -webkit-flex-basis: 100%;
-	  flex-basis: 100%;
-
-	  .mat-button-toggle-label {
-		width: 100%;
-		text-align: center;
-	  }
-	}
   }
 }
 

@@ -23,13 +23,13 @@
 					<div class="col-12">
 						<div class="docs_button-example">
 							<mat-button-toggle-group ngClass="{{confColor}} {{confSize}} {{confWidth}}" [disabled]="confDisable" [vertical]="confVerticalOrientation">
-								<mat-button-toggle value="'value-1'" [checked]="true">Button 1</mat-button-toggle>
+								<mat-button-toggle value="1" [checked]="true">Button 1</mat-button-toggle>
 								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
-								<mat-button-toggle value="'value-2'">Button 2</mat-button-toggle>
+								<mat-button-toggle value="2">Button 2</mat-button-toggle>
 								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
-								<mat-button-toggle value="'value-3'">Button 3</mat-button-toggle>
+								<mat-button-toggle value="3">Button 3</mat-button-toggle>
 								<mat-divider *ngIf="confShowDivider" [vertical]="!confVerticalOrientation"></mat-divider>
-								<mat-button-toggle value="'value-4'">Button 4</mat-button-toggle>
+								<mat-button-toggle value="4">Button 4</mat-button-toggle>
 							</mat-button-toggle-group>
 						</div>
 					</div>
@@ -46,13 +46,13 @@
 				</div>
 				<div class="row mb-4">
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confShowDivider">
+						<mat-radio-group [(ngModel)]="confShowDivider" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="true" [checked]="true">show divider</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="false">no divider</mat-radio-button>
 						</mat-radio-group>
 					</div>
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confSize">
+						<mat-radio-group [(ngModel)]="confSize" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
@@ -60,7 +60,7 @@
 						</mat-radio-group>
 					</div>
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confColor">
+						<mat-radio-group [(ngModel)]="confColor" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__primary'">primary</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__accent'">accent</mat-radio-button>
@@ -68,19 +68,19 @@
 						</mat-radio-group>
 					</div>
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confWidth">
+						<mat-radio-group [(ngModel)]="confWidth" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="''">Auto</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__w-100'" [checked]="true">Width - 100%</mat-radio-button>
 						</mat-radio-group>
 					</div>
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confVerticalOrientation">
+						<mat-radio-group [(ngModel)]="confVerticalOrientation" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">horizontal</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="true">vertical</mat-radio-button>
 						</mat-radio-group>
 					</div>
 					<div class="col-2">
-						<mat-radio-group [(ngModel)]="confDisable">
+						<mat-radio-group [(ngModel)]="confDisable" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">false</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="true">true</mat-radio-button>
 						</mat-radio-group>
@@ -89,7 +89,7 @@
 				<div class="row">
 					<div class="col-12">
 						<h3 class="m-0">HTML code:</h3>
-						<pre class="docs_example-code">&lt;mat-button-toggle-group<span *ngIf="confColor || confSize || confWidth"> class="{{confColor}} {{confSize}} {{confWidth}}"</span><span *ngIf="confDisable"> [disabled]="true"</span> <span *ngIf="confVerticalOrientation"> [vertical]="true"</span>&gt;<br>    &lt;mat-button-toggle value="'value-1'" [checked]="true"&gt;Button 1&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-2'"&gt;Button 2&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-3'"&gt;Button 3&lt;/mat-button-toggle&gt;<br><span *ngIf="confShowDivider">    &lt;mat-divider<span *ngIf="!confVerticalOrientation"> [vertical]="true"</span>&gt;&lt;/mat-divider&gt;<br></span>    &lt;mat-button-toggle value="'value-4'"&gt;Button 4&lt;/mat-button-toggle&gt;<br>&lt;/mat-button-toggle-group&gt;</pre>
+						<code class="docs_example-code" [innerHtml]="confCodeSample"></code>
 					</div>
 				</div>
 			</div>

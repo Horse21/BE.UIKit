@@ -3,27 +3,10 @@
  */
 
 @import '../../../projects/h21-be-ui-kit/h21-theme.scss';
-
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&subset=latin-ext');
 
 /* Include and override markdown styles */
 @import '~prismjs/themes/prism.css';
-
-code[class*="language-"],
-pre[class*="language-"] {
-  font-family: Courier;
-}
-
-pre[class*="language-"] {
-  padding: 24px;
-  margin: 0;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: none;
-}
-
-
 
 $docs-gray: rgba(0, 0, 0, .45);
 $docs-gray-light: rgba(0, 0, 0, .1);
@@ -323,20 +306,88 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 
 
 .docs_example-code {
-  font-family: Courier;
-  background: $docs-gray-light;
+  display: block;
+  font-family: 'Roboto Mono', monospace;
+  background: rgba(0,0,0, .03);
   font-size: 14px;
   padding: 24px;
   margin: 0;
   font-weight: 300;
   overflow-x: auto;
-  color: black;
+  color: #232323;
+  white-space: pre;
+
+  .token.punctuation {
+	color: #AC4FBC;
+  }
+
+  .namespace {
+	opacity: .7;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.constant,
+  .token.symbol,
+  .token.deleted {
+	color: #3B78E7;
+  }
+
+  .token.boolean,
+  .token.number {
+	color: #ae81ff;
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted {
+	color: #AC4FBC;
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  .token.variable {
+	color: #f8f8f2;
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.function,
+  .token.class-name {
+	color: #0C904F;
+  }
+
+  .token.keyword {
+	color: #66d9ef;
+  }
+
+  .token.regex,
+  .token.important {
+	color: #fd971f;
+  }
+
+  .token.important,
+  .token.bold {
+	font-weight: bold;
+  }
+  .token.italic {
+	font-style: italic;
+  }
+
+  .token.entity {
+	cursor: help;
+  }
 }
 
 .docs_code {
-  font-family: Courier;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 300;
-  font-size: 15px;
   opacity: .75;
   color: black;
   background: $docs-gray-light;
@@ -353,6 +404,14 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 	margin: 0 16px;
   }
 }
+
+
+
+
+
+
+
+
 
 
 

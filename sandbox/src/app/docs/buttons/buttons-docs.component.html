@@ -77,10 +77,10 @@
 				<div class="row __text-center">
 					<div class="col-12">
 						<div class="docs_button-example">
-							<button mat-button *ngIf="buttonType == 'mat-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
-							<button mat-raised-button *ngIf="buttonType == 'mat-raised-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
-							<button mat-flat-button *ngIf="buttonType == 'mat-flat-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
-							<button mat-stroked-button *ngIf="buttonType == 'mat-stroked-button'" ngClass="{{buttonSize}}" color="{{buttonColor}}" [disabled]="buttonDisable">Button</button>
+							<button mat-button *ngIf="confType == 'mat-button'" ngClass="{{confSize}}" color="{{confColor}}" [disabled]="confDisable">Button</button>
+							<button mat-raised-button *ngIf="confType == 'mat-raised-button'" ngClass="{{confSize}}" color="{{confColor}}" [disabled]="confDisable">Button</button>
+							<button mat-flat-button *ngIf="confType == 'mat-flat-button'" ngClass="{{confSize}}" color="{{confColor}}" [disabled]="confDisable">Button</button>
+							<button mat-stroked-button *ngIf="confType == 'mat-stroked-button'" ngClass="{{confSize}}" color="{{confColor}}" [disabled]="confDisable">Button</button>
 						</div>
 					</div>
 				</div>
@@ -92,7 +92,7 @@
 				</div>
 				<div class="row mb-4">
 					<div class="col-3">
-						<mat-radio-group [(ngModel)]="buttonType">
+						<mat-radio-group [(ngModel)]="confType" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="'mat-button'" [checked]="true">mat-button</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'mat-raised-button'">mat-raised-button</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'mat-flat-button'">mat-flat-button</mat-radio-button>
@@ -101,7 +101,7 @@
 					</div>
 
 					<div class="col-3">
-						<mat-radio-group [(ngModel)]="buttonSize">
+						<mat-radio-group [(ngModel)]="confSize" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-s'">small</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'__size-m'">medium</mat-radio-button>
@@ -109,7 +109,7 @@
 						</mat-radio-group>
 					</div>
 					<div class="col-3">
-						<mat-radio-group [(ngModel)]="buttonColor">
+						<mat-radio-group [(ngModel)]="confColor" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="''" [checked]="true">default</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'primary'">primary</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="'accent'">accent</mat-radio-button>
@@ -117,7 +117,7 @@
 						</mat-radio-group>
 					</div>
 					<div class="col-3">
-						<mat-radio-group [(ngModel)]="buttonDisable">
+						<mat-radio-group [(ngModel)]="confDisable" (change)="updateCodeSample()">
 							<mat-radio-button class="__w-100" color="primary" [value]="false" [checked]="true">false</mat-radio-button>
 							<mat-radio-button class="__w-100" color="primary" [value]="true">true</mat-radio-button>
 						</mat-radio-group>
@@ -126,7 +126,7 @@
 				<div class="row">
 					<div class="col-12">
 						<h3 class="m-0">HTML code:</h3>
-						<pre class="docs_example-code">&lt;button {{buttonType}}<span [hidden]="!buttonColor"> color="{{buttonColor}}"</span><span [hidden]="!buttonSize"> class="{{buttonSize}}"</span><span [hidden]="!buttonDisable"> disabled</span>&gt;Button&lt;/button&gt;</pre>
+						<code class="docs_example-code" [innerHtml]="confCodeSample"></code>
 					</div>
 				</div>
 			</div>

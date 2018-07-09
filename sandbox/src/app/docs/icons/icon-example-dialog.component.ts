@@ -2,6 +2,13 @@ import {Component, Inject} from "@angular/core";
 import {MatDialogRef, MAT_DIALOG_DATA, MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from "@angular/platform-browser";
 
+import 'prismjs/prism';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+
+declare var Prism;
+
 @Component({
 	selector: 'icon-example-dialog',
 	templateUrl: './icon-example-dialog.component.html'
@@ -10,10 +17,11 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class IconExampleDialogComponent {
 	title: String;
 	iconName: String;
-	sizeVal: String = '';
-	colorVal: String = '';
+	confSize: String = '';
+	confColor: String = '';
 	isCustomIcon: boolean = false;
 	includeInButton: boolean = false;
+	confCodeSample: String = '';
 
 	constructor(public dialogRef: MatDialogRef<IconExampleDialogComponent>,
 				@Inject(MAT_DIALOG_DATA) public data: any,
@@ -36,6 +44,25 @@ export class IconExampleDialogComponent {
 		iconReg.addSvgIcon('h21_no_luggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-luggage-gray.svg'));
 		iconReg.addSvgIcon('h21_night', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-night-blue.svg'));
 		iconReg.addSvgIcon('h21_back_to_list', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
+	}
+
+	ngOnInit() {
+		this.updateCodeSample();
+	}
+
+	updateCodeSample() {
+		this.confCodeSample = this.highlightCode(this.getCodeSample());
+	}
+
+	getCodeSample(): String {
+		let code = this.includeInButton ?
+			`<button mat-icon-button${this.confColor && !this.isCustomIcon ? ` color="${this.confColor}"` : ''}${this.confSize ? ` class="${this.confSize}"` : ''}>\n    <mat-icon${this.isCustomIcon ? ` svgIcon="${this.iconName}"` : ''}>${!this.isCustomIcon ? this.iconName : ''}</mat-icon>\n</button>` :
+			`<mat-icon${this.confColor && !this.isCustomIcon ? ` color="${this.confColor}"` : ''}${this.confSize ? ` class="${this.confSize}"` : ''}${this.isCustomIcon ? ` svgIcon="${this.iconName}"` : ''}>${!this.isCustomIcon ? this.iconName : ''}</mat-icon>`;
+		return code;
+	}
+
+	highlightCode(code: String): String {
+		return Prism.highlight(code, Prism.languages.html);
 	}
 
 	close() {

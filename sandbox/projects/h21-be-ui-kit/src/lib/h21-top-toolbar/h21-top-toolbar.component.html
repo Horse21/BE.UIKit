@@ -5,7 +5,7 @@
 	</button>
 
 	<div *ngIf="modeVisibility" [@toggleVisibility]>
-		<mat-button-toggle-group color="accent" [(ngModel)]="resultsMode" (change)="changeResultMode()">
+		<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
 			<mat-button-toggle value="list">List</mat-button-toggle>
 			<mat-divider [vertical]="true"></mat-divider>
 			<mat-button-toggle value="map">Map</mat-button-toggle>
