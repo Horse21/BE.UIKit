@@ -1,0 +1,15 @@
+{
+    "build": {
+        "content": [
+            {
+                "cwd": "../",
+                "files": [
+									"**.yml"
+                ],
+                "src": "../yml",
+                "dest": "api"
+            }
+        ],
+        "dest": "_site"
+    }
+}
