@@ -7,7 +7,10 @@
 		"start": "ng serve",
 		"build": "ng build",
 		"build:lib": "ng build h21-be-ui-kit --prod",
-		"copypackage": "copyfiles projects/h21-be-ui-kit/h21-theme.scss dist/h21-be-ui-kit -f"
+		"copypackage": "copyfiles projects/h21-be-ui-kit/h21-theme.scss dist/h21-be-ui-kit -f",
+		"docfx": "typedoc src/ --target ES6 --mode file --json build/docs/typedoc.json --baseUrl / && type2docfx build/docs/typedoc.json yml",
+		"doc:serve" : "npm run docfx && docfx docfx_project\\docfx.json --serve",
+		"doc:build": "npm run docfx && docfx docfx_project\\docfx.json --build"
 	},
 	"private": true,
 	"dependencies": {
@@ -29,6 +32,7 @@
 		"es6-shim": "^0.35.3",
 		"h21-custom-css": "^1.0.1610",
 		"ng2-nouislider": "^1.7.11",
+		"ngx-md": "6.0.0",
 		"normalize.css": "^8.0.0",
 		"nouislider": "11.1.0",
 		"oidc-client": "^1.4.1",
@@ -61,6 +65,8 @@
 		"tsickle": ">=0.25.5",
 		"tslib": "^1.7.1",
 		"tslint": "~5.10.0",
+		"type2docfx": "^0.9.100",
+		"typedoc": "^0.11.1",
 		"typescript": "~2.7.2"
 	},
 	"prettier": {
