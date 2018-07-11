@@ -174,7 +174,7 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 
 
 .docs_section {
-  color: rgba(0,0,0, .93);
+  color: rgba(0,0,0, .8);
 
   h1, h2, h3, h4, h5, h6 {
 	color: black;
@@ -340,11 +340,15 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 
   .token.selector,
   .token.attr-name,
-  .token.string,
   .token.char,
-  .token.builtin,
-  .token.inserted {
+  .token.inserted,
+  .token.function,
+  .token.class-name {
 	color: #AC4FBC;
+  }
+
+  .token.builtin {
+	color: #6182b8;
   }
 
   .token.operator,
@@ -358,13 +362,12 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 
   .token.atrule,
   .token.attr-value,
-  .token.function,
-  .token.class-name {
+  .token.string {
 	color: #0C904F;
   }
 
   .token.keyword {
-	color: #66d9ef;
+	color: #3B78E7;
   }
 
   .token.regex,
@@ -383,15 +386,20 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
   .token.entity {
 	cursor: help;
   }
+
+  &.docs_example-code__ts {
+	.token.punctuation {
+	  color: #232323;
+	}
+  }
 }
 
 .docs_code {
   font-family: 'Roboto Mono', monospace;
   font-weight: 300;
   opacity: .75;
+  font-size: 15px;
   color: black;
-  background: $docs-gray-light;
-  padding: 2px 5px;
   margin: 0 5px;
   display: inline-block;
 }
@@ -492,7 +500,7 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 
 .c-docs_example {
   @include mat-elevation(2);
-  margin: 24px 16px;
+  margin: 24px 4px;
 
   .c-docs_example-header {
 	padding: 16px 24px;
@@ -506,8 +514,20 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 	}
   }
 
-  .c-docs_example-code {
+  .c-docs_example-tabs {
 	border-bottom: 1px solid $docs-gray-light;
+
+	.mat-tab-body-wrapper {
+	  background: rgba(0,0,0, .03);;
+	}
+
+	.mat-tab-body-content {
+	  padding: 0;
+	}
+
+	.docs_example-code {
+	  background: none;
+	}
   }
 
   .c-docs_example-body {
