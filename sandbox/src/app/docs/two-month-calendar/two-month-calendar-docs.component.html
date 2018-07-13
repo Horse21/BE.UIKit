@@ -20,12 +20,25 @@
 				<h21-two-month-calendar [rangeSelectMode]="true"></h21-two-month-calendar>
 			</docs-example-viewer>
 
-			<!--<docs-example-viewer [title]="'For date range'"-->
-								 <!--[pathToHtml]="'./assets/code_examples/two-month-calendar/example-3.html'"-->
-								 <!--[pathToTs]="'./assets/code_examples/two-month-calendar/example.txt'"-->
-								 <!--[pathToCss]="'./assets/code_examples/two-month-calendar/example.css'">-->
-				<!--<h21-two-month-calendar [rangeSelectMode]="true" [startDate]="startDate" [finishDate]="finishDate" [fromDateText]="finishText" [toDateText]="startText" [selectedFromDate]="selectedDate"></h21-two-month-calendar>-->
-			<!--</docs-example-viewer>-->
+			<h2>Входные и выходные параметры</h2>
+			<p>Получить выбранные в календаре значения дат можно подписавшись на события
+				<span class="docs_code">onSelectedFromDateChanged()</span> и <span class="docs_code">onSelectedToDateChanged()</span>
+				возвращающих даты начала и конца диапазона соответственно. Two month calendar поддерживает также различные
+				входные параметры с полным списокм которых можно ознакомиться на вкладке "PROPERTIES & METHODS".</p>
+			<docs-example-viewer [title]="'Use with input and output parameters'"
+								 [pathToHtml]="'./assets/code_examples/two-month-calendar/example-3.html'"
+								 [pathToTs]="'./assets/code_examples/two-month-calendar/example-3.txt'"
+								 [pathToCss]="'./assets/code_examples/two-month-calendar/example.css'">
+				<h21-two-month-calendar [fromDateText]="startText"
+										[toDateText]="finishText"
+										[selectedFromDate]="startDate"
+										[selectedToDate]="finishDate"
+										(onSelectedFromDateChanged)="updateStartDate($event);"
+										(onSelectedToDateChanged)="updateFinishDate($event);">
+				</h21-two-month-calendar>
+				<p>Selected start date - {{startDate}}</p>
+				<p>Selected finish date - {{finishDate}}</p>
+			</docs-example-viewer>
 		</mat-tab>
 		<mat-tab label="Properties & methods">
 			<div>
@@ -69,17 +82,25 @@
 						<!--<td>The name of the initial date range, the default "Departure date".</td>-->
 					</tr>
 					<tr>
-						<td><span class="docs_code">@Input()<br>toDateText</span></td>
+						<td><span class="docs_code">@Input()<br>toDateText: String</span></td>
 						<td>Название конечной даты диапазона, по умолчанию "Return date".</td>
 						<!--<td>The name of the end date of the range, the default is "Return date".</td>-->
 					</tr>
 					<tr>
-						<td><span class="docs_code">@Input()<br>selectedFromDate</span></td>
-						<td>&nbsp;</td>
+						<td><span class="docs_code">@Input()<br>selectedFromDate: Date</span></td>
+						<td>Выбранная начальная дата</td>
 					</tr>
 					<tr>
-						<td><span class="docs_code">selectedToDate</span></td>
-						<td>&nbsp;</td>
+						<td><span class="docs_code">@Input()<br>selectedToDate: Date</span></td>
+						<td>Выбранная конечная дата</td>
+					</tr>
+					<tr>
+						<td><span class="docs_code">@Output()<br>onSelectedFromDateChanged: EventEmitter&lt;Date&gt;</span></td>
+						<td>Передает выбранную начальную дату</td>
+					</tr>
+					<tr>
+						<td><span class="docs_code">@Output()<br>onSelectedToDateChanged: EventEmitter&lt;Date&gt;</span></td>
+						<td>Передает выбранную конечную дату</td>
 					</tr>
 					</tbody>
 				</table>

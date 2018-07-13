@@ -357,7 +357,7 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
   .language-css .token.string,
   .style .token.string,
   .token.variable {
-	color: #f8f8f2;
+	color: #232323;
   }
 
   .token.atrule,
@@ -412,9 +412,68 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 	margin: 0 16px;
   }
 }
+.docs_button-toggle-row {
+  margin: 16px 0;
+
+  & > {
+	margin: 0 16px;
+  }
+}
 
 
+.conf_card {
+  margin: 0 4px;
 
+  &.conf_card__for-dialog {
+	@include mat-elevation(0);
+	margin: -24px;
+
+	.mat-card-actions {
+	  padding: 24px 0;
+	  box-sizing: border-box;
+	  display: flex;
+	  align-items: center;
+	  margin: 0 !important;
+	}
+  }
+
+  .conf_view-example {
+	display: flex;
+	min-height: 160px;
+	box-sizing: border-box;
+	padding: 0 0 24px 0;
+	justify-content: center;
+	align-items: center;
+  }
+  .mat-divider {
+	border-color: $docs-gray-light;
+  }
+  .conf_setting-options {
+	padding: 24px 0;
+  }
+
+  .conf_code-example {
+	padding: 24px 0 0 0;
+  }
+
+
+  .docs_icon-example {
+  }
+
+  .docs_example-code {
+	min-height: 160px;
+  }
+
+  .docs_icon-example-actions {
+	margin: 24px -24px -24px -24px;
+	padding: 24px;
+	box-sizing: border-box;
+	border-top: 1px solid $docs-gray-light;
+	display: flex;
+	align-items: center;
+  }
+
+}
 
 
 
@@ -556,3 +615,20 @@ $docs-gray-dark: rgba(0, 0, 0, .75);
 	}
   }
 }
+
+
+
+
+
+
+
+.button-toggle-wrapper {
+  display: inline-block;
+  margin: 16px;
+}
+
+.button-toggle-wrapper-box {
+  display: block;
+  margin: 16px;
+}
+

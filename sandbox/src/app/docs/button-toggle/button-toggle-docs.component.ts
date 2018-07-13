@@ -37,8 +37,11 @@ export class ButtonToggleDocsComponent {
 	}
 
 	getCodeSample(): String {
+		let attrClassCode = this.confColor || this.confSize || this.confWidth ?
+			` class="${this.confSize}${this.confSize && this.confColor ? ' ' : ''}${this.confColor}${(this.confColor || this.confSize) && this.confWidth ? ' ' : ''}${this.confWidth}"`:
+			'';
 		let code = `
-<mat-button-toggle-group class="${this.confColor} ${this.confSize} ${this.confWidth}"${this.confDisable ? ' [disabled]="true"' : ''}${this.confVerticalOrientation ? ' [vertical]="true"' : ''}>
+<mat-button-toggle-group${attrClassCode}${this.confDisable ? ' [disabled]="true"' : ''}${this.confVerticalOrientation ? ' [vertical]="true"' : ''}>
     <mat-button-toggle value="1" [checked]="true">Button 1</mat-button-toggle>${this.confShowDivider ? this.confVerticalOrientation ? '\n    <mat-divider></mat-divider>' : '\n    <mat-divider [vertical]="true"></mat-divider>' : ''}
     <mat-button-toggle value="2" [checked]="true">Button 2</mat-button-toggle>${this.confShowDivider ? this.confVerticalOrientation ? '\n    <mat-divider></mat-divider>' : '\n    <mat-divider [vertical]="true"></mat-divider>' : ''}
     <mat-button-toggle value="3" [checked]="true">Button 3</mat-button-toggle>${this.confShowDivider ? this.confVerticalOrientation ? '\n    <mat-divider></mat-divider>' : '\n    <mat-divider [vertical]="true"></mat-divider>' : ''}

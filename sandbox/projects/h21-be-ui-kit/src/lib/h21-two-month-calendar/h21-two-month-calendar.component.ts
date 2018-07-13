@@ -23,10 +23,12 @@ export class H21TwoMonthCalendarComponent {
 	@Input() fromDateText: string;
 	@Input() toDateText: string;
 	@Input() selectedFromDate: Date;
-	@Output() onArrivalDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
-	@Output() onReturnDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
+	@Input() selectedToDate: Date;
+	@Output() onSelectedFromDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
+	@Output() onSelectedToDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 
 	@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
 
 	public monthNames: Array<string>;
 	public monthList: Array<any>;
@@ -35,7 +37,7 @@ export class H21TwoMonthCalendarComponent {
 	public sliderItemWidth: number = 0;
 	public sliderCurrentIndex: number = 0;
 	public sliderCurrentTranslation: number = 0;
-	public selectedToDate: Date;
+	//public selectedToDate: Date;
 	public dayCells: any[];
 	private _rangeDate: Date;
 
@@ -96,8 +98,8 @@ export class H21TwoMonthCalendarComponent {
 			let end = this.selectedToDate != null ? new Date(this.selectedToDate) : null;
 			this.selectedFromDate = null;
 			this.selectedToDate = null;
-			this.onArrivalDateChanged.emit(this.selectedFromDate);
-			this.onReturnDateChanged.emit(this.selectedToDate);
+			this.onSelectedFromDateChanged.emit(this.selectedFromDate);
+			this.onSelectedToDateChanged.emit(this.selectedToDate);
 
 			this.selectedDateChange(start);
 			if (end) {
@@ -207,10 +209,10 @@ export class H21TwoMonthCalendarComponent {
 			if (this.selectedToDate) {
 				this.refreshRange(this.selectedToDate);
 				this.selectedToDate = new Date(this.selectedToDate);
-				this.onReturnDateChanged.emit(this.selectedToDate)
+				this.onSelectedToDateChanged.emit(this.selectedToDate)
 			}
 			this.selectedFromDate = new Date(this.selectedFromDate);
-			this.onArrivalDateChanged.emit(this.selectedFromDate);
+			this.onSelectedFromDateChanged.emit(this.selectedFromDate);
 
 			let newDateSlideIndex = this.getMonthNumberInList(date);
 			if (Math.abs(newDateSlideIndex - this.sliderCurrentIndex) > 0) {
@@ -249,10 +251,10 @@ export class H21TwoMonthCalendarComponent {
 			if (this.selectedToDate) {
 				this.refreshRange(this.selectedToDate);
 				this.selectedToDate = new Date(this.selectedToDate);
-				this.onReturnDateChanged.emit(this.selectedToDate)
+				this.onSelectedToDateChanged.emit(this.selectedToDate)
 			}
 			this.selectedFromDate = new Date(this.selectedFromDate);
-			this.onArrivalDateChanged.emit(this.selectedFromDate);
+			this.onSelectedFromDateChanged.emit(this.selectedFromDate);
 
 			let newDateSlideIndex = this.getMonthNumberInList(date);
 			if (Math.abs(newDateSlideIndex - this.sliderCurrentIndex) > 1) {
@@ -274,7 +276,7 @@ export class H21TwoMonthCalendarComponent {
 			element.classList.add('c-h21-two-month-calendar_selected');
 
 			this.selectedFromDate = $event;
-			this.onArrivalDateChanged.emit(this.selectedFromDate);
+			this.onSelectedFromDateChanged.emit(this.selectedFromDate);
 			return;
 		}
 		if (this.selectedFromDate == $event) {
@@ -287,7 +289,7 @@ export class H21TwoMonthCalendarComponent {
 
 		if (!this.selectedFromDate) {
 			this.selectedFromDate = $event;
-			this.onArrivalDateChanged.emit(this.selectedFromDate);
+			this.onSelectedFromDateChanged.emit(this.selectedFromDate);
 		} else {
 			if (this.selectedToDate) {
 				let ariaLabel = this.getMonthName(this.selectedToDate.getMonth()) + ' ' + this.selectedToDate.getDate() + ', ' + this.selectedToDate.getFullYear();
@@ -297,7 +299,7 @@ export class H21TwoMonthCalendarComponent {
 				element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
 			}
 			this.selectedToDate = $event;
-			this.onReturnDateChanged.emit(this.selectedToDate);
+			this.onSelectedToDateChanged.emit(this.selectedToDate);
 			this.refreshRange($event);
 		}
 
@@ -310,8 +312,8 @@ export class H21TwoMonthCalendarComponent {
 	clearSelection() {
 		this.selectedFromDate = null;
 		this.selectedToDate = null;
-		this.onArrivalDateChanged.emit(this.selectedFromDate);
-		this.onReturnDateChanged.emit(this.selectedToDate);
+		this.onSelectedFromDateChanged.emit(this.selectedFromDate);
+		this.onSelectedToDateChanged.emit(this.selectedToDate);
 
 		const els = Array.from(document.querySelectorAll('.c-h21-two-month-calendar_selected'));
 		els.forEach(element => {

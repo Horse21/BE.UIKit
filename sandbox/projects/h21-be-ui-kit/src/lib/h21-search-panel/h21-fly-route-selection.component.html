@@ -55,8 +55,8 @@
 
 	<h21-two-month-calendar [rangeSelectMode]="rangeDateMode"
 							[selectedFromDate]="_arrivalDate"
-							(onArrivalDateChanged)="onArrivalDateChange($event)"
-							(onReturnDateChanged)="onReturnDateChange($event)">
+							(onSelectedFromDateChanged)="onArrivalDateChange($event)"
+							(onSelectedToDateChanged)="onReturnDateChange($event)">
 	</h21-two-month-calendar>
 
 	<div class="c-fly-route-selection_add-remove-buttons-box" [hidden]="!canAdd && !canRemove">

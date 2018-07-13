@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {DateAdapter} from "@angular/material";
 
 @Component({
 	selector: 'two-month-calendar-docs',
@@ -6,21 +7,27 @@ import {Component} from "@angular/core";
 })
 
 export class TwoMonthCalendarDocsComponent {
+
 	/** Section title */
 	title = 'Two month calendar component';
 
-	starDate: Date;
+	startDate: Date;
 	finishDate: Date;
-	starText: string;
+	startText: string;
 	finishText: string;
-	selectedDate: Date;
 
-	constructor() {
-		this.starDate = new Date();
-		this.finishDate = new Date(this.starDate.getFullYear(), this.starDate.getMonth() + 4, this.starDate.getDay());
-		this.starText = "Start";
+	constructor(private _dateAdapter: DateAdapter<Date>) {
+		this.startText = "Start";
 		this.finishText = "Finish";
-		this.selectedDate = new Date(this.starDate.getFullYear(), this.starDate.getMonth(), this.starDate.getDay())
+		this.startDate = this._dateAdapter.addCalendarDays(new Date(), 1);
+		this.finishDate = this._dateAdapter.addCalendarMonths(this.startDate, 1);
+	}
+
+	updateStartDate($event) {
+		this.startDate = $event;
+	}
+
+	updateFinishDate($event) {
+		this.finishDate = $event;
 	}
 }
-
