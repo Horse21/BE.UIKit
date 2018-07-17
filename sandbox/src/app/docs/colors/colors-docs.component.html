@@ -1,109 +1,115 @@
+<!--<div class="test-bg_2">#fbfbfb</div>-->
+<!--<div class="test-bg_3">#f0f0f0</div>-->
+<!--<div class="test-bg_8">#ebebeb +</div>-->
+<!--<div class="test-bg_1">#e3e3e3</div>-->
+<!--<div class="test-bg_4">#b4b4b4</div>-->
+<!--<div class="test-bg_5">#ababab</div>-->
+<!--<div class="test-bg_6">#999999</div>-->
+<!--<div class="test-bg_7">#797979 +</div>-->
+<!--<div class="test-bg_9">#757575</div>-->
+<!--<br />-->
+<!--<div class="test-bg_10">#0044d6</div>-->
+<!--<div class="test-bg_11">#27334d</div>-->
+<!--<div class="test-bg_12">#faf9f9</div>-->
+<!--<div class="test-bg_13">#eceef6</div>-->
+<!--<div class="test-bg_14">#4f5a7c</div>-->
+<!--<div class="test-bg_15">#e4ebfb</div>-->
+<!--<div class="test-bg_16">rgba(185, 204, 245, 0.21)</div>-->
+<!--<div class="test-bg_17">#e26666</div>-->
+<!--<div class="test-bg_18">#deffe6</div>-->
+
+
+<!--<div class="test-txt">-->
+	<!--<div class="test-txt-1">Ahtung Alram Warning #9b9b9b .42</div>-->
+	<!--<div class="test-txt-2">Ahtung Alram Warning #4a4a4a .73</div>-->
+	<!--<div class="test-txt-4">Ahtung Alram Warning #757575 .57</div>-->
+	<!--<div class="test-txt-5">Ahtung Alram Warning #d8d8d8 .16</div>-->
+	<!--<div class="test-txt-11">Ahtung Alram Warning rgba(0, 0, 0, 0.26) BDBDBD</div>-->
+	<!--<div class="test-txt-10">Ahtung Alram Warning rgba(0, 0, 0, 0.87) 212121</div>-->
+	<!--<div class="test-txt-5">Ahtung Alram Warning #e2e2e2 .12</div>-->
+	<!--<div class="test-txt-6">Ahtung Alram Warning #27334d</div>-->
+	<!--<div class="test-txt-7">Ahtung Alram Warning #4f5a7c</div>-->
+	<!--<div class="test-txt-8">Ahtung Alram Warning #0044d6</div>-->
+	<!--<div class="test-txt-9">Ahtung Alram Warning #606b8d</div>-->
+<!--</div>-->
+<!--<br><br><br>-->
+
 <section class="docs_section mat-typography">
 	<h1>{{title}}</h1>
-	<p>Description of the section</p>
-	<h2>Primary colors in the interface</h2>
+
+	<h2>UI colors</h2>
 	<table class="docs_table">
 		<thead>
+			<tr>
+				<th style="width: 25%">Name</th>
+				<th style="width: 8%">Color</th>
+				<th style="width: 15%">Hex</th>
+				<th style="width: 15%">RGBA</th>
+				<th>Code name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of colorsUi">
+				<td>{{item.name}}</td>
+				<td>
+					<div class="color-example {{item.cssClass}}"></div>
+				</td>
+				<td>{{item.hex}}</td>
+				<td>{{item.rgba}}</td>
+				<td>{{item.scssName}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="mb-5">For Angular Material components supporting the <span class="docs_code">color</span> property, colors
+		can be specified using the appropriate values - <span class="docs_code">primary</span>, <span class="docs_code">accent</span>
+		and <span class="docs_code">warn</span>, because the color scheme of components is redefined in the theme "h21-theme.scss".
+	</p>
+
+	<h2>Background colors</h2>
+	<table class="docs_table mb-5">
+		<thead>
 		<tr>
-			<th>Name</th>
-			<th>Color</th>
-			<th>Hex</th>
-			<th>RGBA</th>
+			<th style="width: 25%">Name</th>
+			<th style="width: 8%">Color</th>
+			<th style="width: 15%">Hex</th>
+			<th style="width: 15%">RGBA</th>
 			<th>Code name</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td>UI Primari</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-ui-primary"></div></td>
-			<td>#0044d6</td>
-			<td>0 68 214 100</td>
-			<td>h21-color-ui-primary</td>
-		</tr>
-		<tr>
-			<td>UI Primari light</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-ui-primary-light"></div></td>
-			<td>#2c67e6</td>
-			<td>44 103 230 100</td>
-			<td>h21-color-ui-primary-light</td>
-		</tr>
-		<tr>
-			<td>UI Accent</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-ui-accent"></div></td>
-			<td>#28a745</td>
-			<td>40 167 69 100</td>
-			<td>h21-color-ui-accent</td>
-		</tr>
-		<tr>
-			<td>UI Accent light</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-ui-accent-light"></div></td>
-			<td>#3dcc5d</td>
-			<td>61 204 93 100</td>
-			<td>h21-color-ui-accent-light</td>
-		</tr>
-		<tr>
-			<td>Gray</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-gray"></div></td>
-			<td>#4A4A4A</td>
-			<td>74 74 74 100</td>
-			<td>h21-color-gray</td>
-		</tr>
-		<tr>
-			<td>Gray Light</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-gray-light"></div></td>
-			<td>#9B9B9B</td>
-			<td>155 155 155 100</td>
-			<td>h21-color-gray-light</td>
+		<tr *ngFor="let item of colorsBg">
+			<td>{{item.name}}</td>
+			<td>
+				<div class="color-example {{item.cssClass}}"></div>
+			</td>
+			<td>{{item.hex}}</td>
+			<td>{{item.rgba}}</td>
+			<td>{{item.scssName}}</td>
 		</tr>
 		</tbody>
 	</table>
-	<h2>Text</h2>
-	<table class="docs_table">
+
+	<h2>Text colors</h2>
+	<table class="docs_table mb-5">
 		<thead>
-		<tr>
-			<th>Name</th>
-			<th>Color</th>
-			<th>Hex</th>
-			<th>RGBA</th>
-			<th>Code name</th>
-		</tr>
+			<tr>
+				<th style="width: 25%">Name</th>
+				<th style="width: 8%">Color</th>
+				<th style="width: 15%">Hex</th>
+				<th style="width: 15%">RGBA</th>
+				<th>Code name</th>
+			</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td>Text primary</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-text-primary"></div></td>
-			<td>#000000</td>
-			<td>0 0 0 100</td>
-			<td>h21-color-text-primary</td>
-		</tr>
-		</tbody>
-	</table>
-	<h2>Background</h2>
-	<table class="docs_table">
-		<thead>
-		<tr>
-			<th>Name</th>
-			<th>Color</th>
-			<th>Hex</th>
-			<th>RGBA</th>
-			<th>Code name</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>Background dark</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-bg-dark"></div></td>
-			<td>#27334D</td>
-			<td>39 51 77 100</td>
-			<td>h21-color-bg-dark</td>
-		</tr>
-		<tr>
-			<td>Background light</td>
-			<td><div class="docs_color-preview docs_color-preview__h21-color-bg-light"></div></td>
-			<td>#F9F7F7</td>
-			<td>249 247 247 100</td>
-			<td>h21-color-bg-light</td>
-		</tr>
+			<tr *ngFor="let item of colorsFg">
+				<td>{{item.name}}</td>
+				<td>
+					<div class="color-example {{item.cssClass}}"></div>
+				</td>
+				<td>{{item.hex}}</td>
+				<td>{{item.rgba}}</td>
+				<td>{{item.scssName}}</td>
+			</tr>
 		</tbody>
 	</table>
 </section>

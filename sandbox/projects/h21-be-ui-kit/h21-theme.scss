@@ -1,23 +1,55 @@
 @import '~@angular/material/_theming.scss';
+@include mat-core();
+
 @import '~bootstrap/scss/bootstrap-grid.scss';
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/utilities/_display.scss';
 @import '~bootstrap/scss/utilities/_spacing.scss';
 
-@include mat-core();
-
 // Base colors
-$h21-color-bg-dark: #27334D;
-$h21-color-bg-light: #F9F7F7;
-$h21-color-gray: #4A4A4A;
-$h21-color-gray-light: #9B9B9B;
-$h21-color-ui-primary: #0044d6;
-$h21-color-ui-primary-light: #2c67e6;
-$h21-color-ui-accent: #28a745;
-$h21-color-ui-accent-light: #3dcc5d;
-$h21-color-text-primary: #000000;
+// background colors
+$h21-bg-dark:	#27334d;
+$h21-bg-light:	#faf9f9;
+$h21-bg-ashen-blue: #4f5a7c;
+$h21-bg-ashen-blue-light-1: #F0F4FC;
+$h21-bg-ashen-blue-light-2: #eceef6;
+$h21-bg-ashen-blue-light-3: #e4ebfb;
 
-// Routes
+// gray colors
+$h21-bg-black: #f0f0f0;
+$h21-bg-black-1: #fbfbfb;
+$h21-bg-black-2: #f0f0f0;
+$h21-bg-gray-3: #ebebeb;
+$h21-bg-gray-4: #e3e3e3;
+$h21-bg-gray-5: #b4b4b4;
+$h21-bg-gray-6: #ababab;
+$h21-bg-gray-7: #999999;
+$h21-bg-gray-8: #797979;
+
+//$h21-bg-red-light:;
+//$h21-bg-green-light:;
+
+// foreground colors
+$h21-fg-base: #27334d;
+$h21-fg-gray: #757575;
+$h21-fg-ashen-blue: #4f5a7c;
+$h21-fg-ashen-blue-light: #606b8d;
+$h21-black-12-opacity: rgba(0,0,0, .12); // gray - #e2e2e2
+$h21-black-16-opacity: rgba(0,0,0, .16); // gray - #d8d8d8
+$h21-black-26-opacity: rgba(0,0,0, .26); // gray - #bdbdbd
+$h21-black-42-opacity: rgba(0,0,0, .42); // gray - #9b9b9b
+$h21-black-57-opacity: rgba(0,0,0, .57); // gray - #757575
+$h21-black-73-opacity: rgba(0,0,0, .73); // gray - #4a4a4a
+$h21-black-87-opacity: rgba(0,0,0, .87); // gray - #212121
+
+// user interface colors
+$h21-ui-primary: 		#0044d6;
+$h21-ui-primary-light: 	#2c67e6;
+$h21-ui-accent: 		#28a745;
+$h21-ui-accent-light: 	#3dcc5d;
+$h21-ui-warn: 			#ff0000;
+$h21-ui-warn-light: 	#ff5050;
+
 // Routes color
 $h21-routes-color-1: #0044d6;
 $h21-routes-color-2: #e26666;
@@ -151,29 +183,76 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
 @include angular-material-theme($h21-mat-theme);
 
-/**
- *	mat-icon style override
- */
+//.h21-theme {
+//  @include angular-material-theme($h21-mat-theme);
+//}
+
+
+// Background palette for light themes.
+$mat-light-theme-background: (
+		status-bar: map_get($mat-grey, 300),
+		app-bar:    map_get($mat-grey, 100),
+		background: map_get($mat-grey, 50),
+		hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+		card:       white,
+		dialog:     white,
+		disabled-button: rgba(black, 0.12),
+		raised-button: white,
+		focused-button: $dark-focused,
+		selected-button: map_get($mat-grey, 300),
+		selected-disabled-button: map_get($mat-grey, 400),
+		disabled-button-toggle: map_get($mat-grey, 200),
+		unselected-chip: map_get($mat-grey, 300),
+		disabled-list-option: map_get($mat-grey, 200),
+);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+		status-bar: black,
+		app-bar:    map_get($mat-grey, 900),
+		background: #303030,
+		hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+		card:       map_get($mat-grey, 800),
+		dialog:     map_get($mat-grey, 800),
+		disabled-button: rgba(white, 0.12),
+		raised-button: map-get($mat-grey, 800),
+		focused-button: $light-focused,
+		selected-button: map_get($mat-grey, 900),
+		selected-disabled-button: map_get($mat-grey, 800),
+		disabled-button-toggle: black,
+		unselected-chip: map_get($mat-grey, 700),
+		disabled-list-option: black,
+);
+
+
+
+
+
+// mat-icon style override
 .mat-icon {
-  /** size modifiers */
+  // Icon size modifiers
+  // small
   &.__size-s {
 	width: 16px;
 	height: 16px;
 	font-size: 16px;
 	line-height: 16px;
   }
+  // medium
   &.__size-m {
 	width: 24px;
 	height: 24px;
 	font-size: 24px;
 	line-height: 24px;
   }
+  // large
   &.__size-l {
 	width: 32px;
 	height: 32px;
 	font-size: 32px;
 	line-height: 32px;
   }
+  // x large
   &.__size-xl {
 	width: 48px;
 	height: 48px;
@@ -182,11 +261,10 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   }
 }
 
-/**
- *	mat-icon-button style override
- */
+// mat-icon-button style override
 .mat-icon-button {
-  /** size modifiers */
+  // Icon button size modifiers
+  // small
   &.__size-s {
 	width: 32px;
 	height: 32px;
@@ -198,6 +276,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  font-size: 16px;
 	}
   }
+  // medium
   &.__size-m {
 	width: 40px;
 	height: 40px;
@@ -209,6 +288,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  font-size: 24px;
 	}
   }
+  // large
   &.__size-l {
 	width: 48px;
 	height: 48px;
@@ -220,6 +300,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  font-size: 32px;
 	}
   }
+  // x large
   &.__size-xl {
 	width: 64px;
 	height: 64px;
@@ -233,23 +314,24 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   }
 }
 
-/**
- *	Material buttons style override (mat-button, mat-raised-button, mat-flat-button, mat-stroked-button)
- */
+// Material buttons style override (mat-button, mat-raised-button, mat-flat-button, mat-stroked-button)
 .mat-button,
 .mat-raised-button,
 .mat-flat-button,
 .mat-stroked-button {
   font-weight: 400;
-
+  // Buttons size modifiers
+  // small
   &.__size-s {
 	font-size: 13px;
 	padding: 0 8px;
 	line-height: 28px;
   }
+  // medium
   &.__size-m {
 	padding: 0 16px;
   }
+  // large
   &.__size-l {
 	font-size: 18px;
 	padding: 0 32px;
@@ -258,6 +340,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
   }
 }
 
+// Buttons colors
+// primary
 .mat-primary:not(:disabled) {
   &:hover {
 	&.mat-button {
@@ -277,7 +361,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 }
-
+// accent
 .mat-accent:not(:disabled) {
   &:hover {
 	&.mat-button {
@@ -297,7 +381,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 }
-
+// warn
 .mat-warn:not(:disabled) {
   &:hover {
 	&.mat-button {
@@ -317,20 +401,12 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 }
-/**
- *	Material button toggle style override
- */
+
+// Material button toggle style override
 .mat-button-toggle-group {
   border: 1px solid black;
   border-radius: 2px;
   color: black;
-
-  &[ng-reflect-disabled="true"] {
-	border-color: black !important;
-	.mat-divider {
-	  border-color: black !important;
-	}
-  }
 
   .mat-button-toggle {
 	font-size: 14px;
@@ -344,6 +420,15 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 
+  // disabled toggle buttons group
+  &[ng-reflect-disabled="true"] {
+	border-color: black !important;
+	.mat-divider {
+	  border-color: black !important;
+	}
+  }
+
+  // full width modifier
   &.__w-100 {
 	.mat-button-toggle {;
 	  display: flex;
@@ -359,6 +444,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 
+  // Color modifiers
+  // primary
   &.__primary {
 	border-color: mat-color($h21-mat-primary, 500);
 	color: mat-color($h21-mat-primary, 500);
@@ -392,6 +479,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  }
 	}
   }
+  // accent
   &.__accent {
 	border-color: mat-color($h21-mat-accent, 500);
 	color: mat-color($h21-mat-accent, 500);
@@ -425,6 +513,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  }
 	}
   }
+  // warn
   &.__warn {
 	border-color: mat-color($h21-mat-warn, 500);
 	color: mat-color($h21-mat-warn, 500);
@@ -459,6 +548,8 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	}
   }
 
+  // Size modifiers
+  // small
   &.__size-s {
 	.mat-button-toggle-label-content {
 	  line-height: 28px;
@@ -466,12 +557,14 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 	  padding: 0 8px;
 	}
   }
+  // medium
   &.__size-m {
 	.mat-button-toggle-label-content {
 	  line-height: 36px;
 	  padding: 0 16px;
 	}
   }
+  // large
   &.__size-l {
 	border-radius: 4px;
 	.mat-button-toggle-label-content {
@@ -492,11 +585,11 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 }
 
 .mat-form-field-placeholder {
-  color: $h21-color-gray-light;
+  color: $h21-black-42-opacity;
 }
 
 .mat-form-field .mat-icon {
-  color: $h21-color-gray;
+  color: $h21-black-57-opacity;
 }
 
 .mat-select-panel.mat-primary .mat-option.mat-selected {
@@ -526,12 +619,12 @@ html, body {
 }
 
 a {
-  color: $h21-color-ui-primary;
+  color: $h21-ui-primary;
   text-decoration: underline;
 }
 
 a:hover {
-  color: $h21-color-ui-primary-light;
+  color: $h21-ui-primary-light;
   text-decoration: none;
 }
 
@@ -613,7 +706,7 @@ a:hover {
 	  background-color: #fafafa;
 	}
 	.mat-expansion-panel-header {
-	  color: #757575;
+	  color: $h21-black-57-opacity;
 	  padding-left: 10px;
 	  padding-right: 10px;
 	  position: relative;
@@ -660,7 +753,7 @@ a:hover {
   }
 
   .c-h21-top-toolbar-menu-btn {
-	color: #757575;
+	color: $h21-black-57-opacity;
 	height: 50px;
 	width: 50px;
 	margin: 5px 8px;
@@ -724,7 +817,7 @@ a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  background: $h21-color-bg-dark;
+  background: $h21-bg-dark;
   color: white;
   z-index: 100;
 }
@@ -737,7 +830,7 @@ a:hover {
   width: 100%;
   min-width: 65px;
   display: block;
-  color: #FFFFFF;
+  color: white;
   text-align: center;
   font-size: 12px;
   font-weight: normal;
@@ -747,8 +840,8 @@ a:hover {
 	color: rgba(255, 255, 255, .5);
   }
   &.is-active {
-	background: $h21-color-bg-light;
-	color: #0044D6;
+	background: $h21-bg-light;
+	color: $h21-ui-primary;
   }
   .mat-icon {
 	display: block;
@@ -768,7 +861,7 @@ a:hover {
   height: 100%;
   width: 410px;
   overflow-y: auto;
-  background: $h21-color-bg-light;
+  background: $h21-bg-light;
   box-shadow: 3px 0 21px 0 rgba(79, 90, 124, .40);
   -moz-transition: all 0.2s;
   -webkit-transition: all 0.2s;
@@ -796,15 +889,15 @@ a:hover {
 // H21-header component
 //
 .mat-toolbar.c-h21-header_toolbar {
-  background: $h21-color-bg-dark;
-  color: #FFFFFF;
+  background: $h21-bg-dark;
+  color: white;
   height: 60px;
   padding-left: 0;
   padding-right: 0;
   > nav .mat-icon-button {
 	margin: 0 10px;
 	.mat-badge-content {
-	  background: #FF0000;
+	  background: $h21-ui-warn;
 	  top: -6px;
 	  right: -6px;
 	}
@@ -1005,7 +1098,7 @@ a.c-h21-header_logo {
 		@include mat-elevation(0);
 	  }
 	  .mat-expansion-panel-header {
-		color: #757575;
+		color: $h21-black-57-opacity;
 		padding-left: 18px;
 		padding-right: 18px;
 		position: relative;
@@ -1029,14 +1122,14 @@ a.c-h21-header_logo {
 		&::after {
 		  height: 2px;
 		  opacity: 0;
-		  background: $h21-color-ui-primary;
+		  background: $h21-ui-primary;
 		  transition: opacity 0.3s;
 		}
 
 		&:hover {
 		  background: none;
 		  &::before {
-			background: $h21-color-ui-primary;
+			background: $h21-ui-primary;
 		  }
 		  &::after {
 			opacity: 1;
@@ -1061,7 +1154,7 @@ a.c-h21-header_logo {
 		  margin-top: 0;
 		}
 		.mat-expansion-panel-header {
-		  background-color: $h21-color-ui-primary;
+		  background-color: $h21-ui-primary;
 		  border-bottom: none;
 		  color: white;
 		}
@@ -1181,7 +1274,7 @@ a.c-h21-header_logo {
 }
 
 .c-h21-passengers-search_snackbar {
-  background: $h21-color-bg-dark;
+  background: $h21-bg-dark;
   color: white;
 }
 
@@ -1314,7 +1407,7 @@ a.c-h21-header_logo {
 	}
 	.c-h21-search-result_subtitle {
 	  font-size: 12px;
-	  color: $h21-color-ui-primary;
+	  color: $h21-ui-primary;
 	  display: block;
 	  font-weight: 400;
 	}
@@ -1328,7 +1421,7 @@ a.c-h21-header_logo {
 	  background-color: #e4ebfb;
 	  .c-h21-search-result-tab-icon,
 	  .c-h21-search-result-tab-label_name {
-		color: $h21-color-ui-primary;
+		color: $h21-ui-primary;
 	  }
 	}
   }
@@ -1366,7 +1459,7 @@ a.c-h21-header_logo {
 	height: 52px;
 	vertical-align: middle;
 	width: 1%;
-	color: #757575;
+	color: $h21-black-57-opacity;
   }
 }
 
@@ -1499,7 +1592,7 @@ a.c-h21-header_logo {
   padding: 16px 30px 16px 38px;
   box-sizing: border-box;
   width: 100%;
-  border-bottom: 3px solid $h21-color-ui-primary;
+  border-bottom: 3px solid $h21-ui-primary;
   margin: 30px 0;
   position: relative;
   @include mat-elevation(1);
@@ -1521,7 +1614,7 @@ a.c-h21-header_logo {
 		line-height: 24px;
 	  }
 	  .mat-icon {
-		color: #757575;
+		color: $h21-black-57-opacity;
 		display: block;
 	  }
 	}
@@ -1538,7 +1631,7 @@ a.c-h21-header_logo {
 	right: -30px;
 	transform: translateY(-50%);
 	.mat-icon {
-	  color: #757575;
+	  color: $h21-black-57-opacity;
 	}
   }
   .c-fly-route-selection_route-marker {
@@ -1657,7 +1750,7 @@ a.c-h21-header_logo {
 	  background: rgba(185, 204, 245, .2);
 	}
 	.mat-icon {
-	  color: #757575;
+	  color: $h21-black-57-opacity;
 	}
 	.autocomplete_opt-title {
 	  color: #000000;
@@ -1705,7 +1798,7 @@ a.c-h21-header_logo {
 	  height: 1px;
 	  left: 0;
 	  bottom: 0;
-	  background: $h21-color-ui-primary;
+	  background: $h21-ui-primary;
 	}
 	&::before {
 	  height: 2px;
@@ -1724,7 +1817,7 @@ a.c-h21-header_logo {
 	  position: relative;
 	  .mat-icon {
 		display: block;
-		color: #757575;
+		color: $h21-black-57-opacity;
 		margin-right: 6px;
 	  }
 	  span {
@@ -1852,7 +1945,7 @@ a.c-h21-header_logo {
   }
   .mat-form-field-underline::before,
   .mat-form-field-ripple {
-	background-color: $h21-color-ui-primary;
+	background-color: $h21-ui-primary;
   }
   .mat-form-field-infix {
 	width: 100%;
@@ -1862,7 +1955,7 @@ a.c-h21-header_logo {
   .mat-form-field-prefix {
 	.mat-icon {
 	  display: block;
-	  color: #757575;
+	  color: $h21-black-57-opacity;
 	  margin-right: 6px;
 	}
   }
@@ -1952,7 +2045,7 @@ a.c-h21-header_logo {
 }
 
 .overlay-panel-search-field-box {
-  background-color: $h21-color-ui-primary;
+  background-color: $h21-ui-primary;
   box-sizing: border-box;
   padding: 25px 30px 45px 30px;
 
@@ -1972,7 +2065,7 @@ a.c-h21-header_logo {
 	  font-size: 14px;
 	}
 	.mat-icon {
-	  color: #757575;
+	  color: $h21-black-57-opacity;
 	}
 	.mat-form-field-wrapper {
 	  padding-bottom: 0;
@@ -2021,7 +2114,7 @@ a.c-h21-header_logo {
   }
 
   .mat-icon {
-	color: #757575;
+	color: $h21-black-57-opacity;
   }
 }
 
@@ -2115,7 +2208,7 @@ a.c-h21-header_logo {
 	.mat-calendar-body-cell {
 	  &:hover .mat-calendar-body-cell-content {
 		background: white !important;
-		border: 1px solid $h21-color-ui-primary !important;;
+		border: 1px solid $h21-ui-primary !important;;
 		color: black !important;;
 	  }
 	}
@@ -2167,7 +2260,7 @@ a.c-h21-header_logo {
 	  }
 
 	  .mat-calendar-body-cell-content {
-		background-color: $h21-color-ui-primary;
+		background-color: $h21-ui-primary;
 		color: white;
 		z-index: 1;
 	  }
@@ -2178,7 +2271,7 @@ a.c-h21-header_logo {
 .c-h21-two-month-calendar_header {
   padding: 16px;
   box-sizing: border-box;
-  background: $h21-color-ui-primary;
+  background: $h21-ui-primary;
 }
 
 .c-h21-two-month-calendar_date-box-label {
@@ -2221,7 +2314,7 @@ a.c-h21-header_logo {
   }
 
   .mat-icon {
-	color: #757575;
+	color: $h21-black-57-opacity;
   }
 }
 
@@ -2325,7 +2418,7 @@ a.c-h21-header_logo {
 	.mat-calendar {
 	  .mat-calendar-body-cell.c-h21-two-month-calendar_selected:hover {
 		.mat-calendar-body-cell-content {
-		  background-color: $h21-color-ui-primary !important;
+		  background-color: $h21-ui-primary !important;
 		  color: white !important;
 		}
 	  }
@@ -2564,7 +2657,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .noUi-handle {
   border: 1px solid #D9D9D9;
   border-radius: 3px;
-  background: #FFF;
+  background: white;
   cursor: default;
   box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB
 }
@@ -2706,7 +2799,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   position: absolute;
   border: 1px solid #D9D9D9;
   border-radius: 3px;
-  background: #fff;
+  background: white;
   color: #000;
   padding: 5px;
   text-align: center;
