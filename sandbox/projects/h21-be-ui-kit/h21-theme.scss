@@ -8,32 +8,32 @@
 
 // Base colors
 // background colors
-$h21-bg-dark:	#27334d;
-$h21-bg-light:	#faf9f9;
-$h21-bg-ashen-blue: #4f5a7c;
-$h21-bg-ashen-blue-light-1: #F0F4FC;
-$h21-bg-ashen-blue-light-2: #eceef6;
-$h21-bg-ashen-blue-light-3: #e4ebfb;
-
-// gray colors
-$h21-bg-black: #f0f0f0;
-$h21-bg-black-1: #fbfbfb;
-$h21-bg-black-2: #f0f0f0;
-$h21-bg-gray-3: #ebebeb;
-$h21-bg-gray-4: #e3e3e3;
-$h21-bg-gray-5: #b4b4b4;
-$h21-bg-gray-6: #ababab;
-$h21-bg-gray-7: #999999;
-$h21-bg-gray-8: #797979;
-
-//$h21-bg-red-light:;
-//$h21-bg-green-light:;
+$h21-bg-dark:			#27334d;
+$h21-bg-light:			#faf9f9;
+$h21-bg-red-light:		#e26666;
+$h21-bg-green-light:	#deffe6;
+$h21-bg-ashen-blue-dark:	#4f5a7c;
+$h21-bg-ashen-blue-light-1:	#F0F4FC;
+$h21-bg-ashen-blue-light-2:	#eceef6;
+$h21-bg-ashen-blue-light-3:	#e4ebfb;
 
 // foreground colors
-$h21-fg-base: #27334d;
-$h21-fg-gray: #757575;
-$h21-fg-ashen-blue: #4f5a7c;
-$h21-fg-ashen-blue-light: #606b8d;
+$h21-fg-base:	#27334d;
+$h21-fg-gray:	#757575;
+$h21-fg-ashen-blue: 		#4f5a7c;
+$h21-fg-ashen-blue-light:	#606b8d;
+
+// gray colors
+$h21-gray-2: #fbfbfb;	// black - rgba(0,0,0, 0.02)
+$h21-gray-7: #f0f0f0;	// black - rgba(0,0,0, 0.07)
+$h21-gray-9: #ebebeb;	// black - rgba(0,0,0, 0.09)
+$h21-gray-13: #e3e3e3;	// black - rgba(0,0,0, 0.13)
+$h21-gray-33: #b4b4b4;	// black - rgba(0,0,0, 0.33)
+$h21-gray-37: #ababab;	// black - rgba(0,0,0, 0.37)
+$h21-gray-44: #999999;	// black - rgba(0,0,0, 0.44)
+$h21-gray-57: #757575;	// black - rgba(0,0,0, 0.57)
+
+// black opacity colors
 $h21-black-12-opacity: rgba(0,0,0, .12); // gray - #e2e2e2
 $h21-black-16-opacity: rgba(0,0,0, .16); // gray - #d8d8d8
 $h21-black-26-opacity: rgba(0,0,0, .26); // gray - #bdbdbd
@@ -173,6 +173,7 @@ $h21-mat-typography: mat-typography-config(
 		$body-1: mat-typography-level(16px, 24px, 400),
 		$caption: mat-typography-level(12px, 20px, 400)
 );
+
 @include angular-material-typography($h21-mat-typography);
 
 $h21-mat-primary: mat-palette($h21-mat-blue, 500, 400, 900);
@@ -184,49 +185,12 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 @include angular-material-theme($h21-mat-theme);
 
 //.h21-theme {
-//  @include angular-material-theme($h21-mat-theme);
+//  @include angular-material-theme($h21-theme);
 //}
 
-
-// Background palette for light themes.
-$mat-light-theme-background: (
-		status-bar: map_get($mat-grey, 300),
-		app-bar:    map_get($mat-grey, 100),
-		background: map_get($mat-grey, 50),
-		hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-		card:       white,
-		dialog:     white,
-		disabled-button: rgba(black, 0.12),
-		raised-button: white,
-		focused-button: $dark-focused,
-		selected-button: map_get($mat-grey, 300),
-		selected-disabled-button: map_get($mat-grey, 400),
-		disabled-button-toggle: map_get($mat-grey, 200),
-		unselected-chip: map_get($mat-grey, 300),
-		disabled-list-option: map_get($mat-grey, 200),
-);
-
-// Background palette for dark themes.
-$mat-dark-theme-background: (
-		status-bar: black,
-		app-bar:    map_get($mat-grey, 900),
-		background: #303030,
-		hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-		card:       map_get($mat-grey, 800),
-		dialog:     map_get($mat-grey, 800),
-		disabled-button: rgba(white, 0.12),
-		raised-button: map-get($mat-grey, 800),
-		focused-button: $light-focused,
-		selected-button: map_get($mat-grey, 900),
-		selected-disabled-button: map_get($mat-grey, 800),
-		disabled-button-toggle: black,
-		unselected-chip: map_get($mat-grey, 700),
-		disabled-list-option: black,
-);
-
-
-
-
+.h21-theme {
+  color: $h21-fg-base;
+}
 
 // mat-icon style override
 .mat-icon {
@@ -606,7 +570,7 @@ $mat-dark-theme-background: (
   padding: 0;
 }
 
-//
+
 //----------------------------------------------------------------------------------------------------------------------
 // Layout
 //
@@ -673,7 +637,7 @@ a:hover {
 .map-box {
   width: 100%;
   height: 100%;
-  background: #CAD2D3;
+  background: #CAD2D3; // todo: remove after adding a map
   overflow-y: auto;
 }
 
@@ -695,7 +659,7 @@ a:hover {
 .c-h21-help_accordion {
   .mat-expansion-panel {
 	background: none;
-	color: #4d4d4e;
+	color: $h21-black-73-opacity;
 	margin-bottom: 16px;
 
 	&:not([class*=mat-elevation-z]) {
@@ -703,14 +667,14 @@ a:hover {
 	}
 	&.mat-expanded {
 	  margin-top: 0;
-	  background-color: #fafafa;
+	  background-color: $h21-gray-2;
 	}
 	.mat-expansion-panel-header {
 	  color: $h21-black-57-opacity;
 	  padding-left: 10px;
 	  padding-right: 10px;
 	  position: relative;
-	  border-bottom: 1px solid #999999;
+	  border-bottom: 1px solid $h21-gray-44;
 	}
 	.mat-expansion-panel-header-title {
 	  color: inherit;
@@ -723,7 +687,7 @@ a:hover {
 	}
 	.mat-expansion-panel-body {
 	  padding: 10px 20px;
-	  color: #232d44;
+	  color: $h21-fg-base;
 	  line-height: 1.6em;
 	  font-size: 14px;
 	  p {
@@ -773,7 +737,7 @@ a:hover {
   }
 
   .mat-form-field {
-	color: #4f5a7c;
+	color: $h21-fg-ashen-blue;
 	font-size: 14px;
 	margin-left: 16px;
 	width: 80px;
@@ -782,7 +746,7 @@ a:hover {
 	  padding-bottom: 0;
 	}
 	.mat-form-field-flex {
-	  background: #eceef6;
+	  background: $h21-bg-ashen-blue-light-2;
 	  padding-top: 0;
 	  -webkit-border-radius: 2px;
 	  -moz-border-radius: 2px;
@@ -948,18 +912,18 @@ a.c-h21-header_logo {
 	.mat-card-avatar {
 	  width: 56px;
 	  height: 56px;
-	  background: #27334d;
+	  background: $h21-bg-dark;
 	}
 	.mat-card-header-text {
 	  margin: 0 0 0 15px;
 	}
 	.mat-card-title {
-	  color: #4f5a7c;
+	  color: $h21-fg-base;
 	  font-weight: 300;
 	  font-size: 18px;
 	}
 	.mat-card-subtitle {
-	  color: #4f5a7c;
+	  color: $h21-fg-ashen-blue;
 	  font-weight: 700;
 	  font-size: 14px;
 	}
@@ -970,10 +934,10 @@ a.c-h21-header_logo {
 	  font-size: 13px;
 
 	  &:hover {
-		background: #f0f0f0;
+		background: $h21-gray-7;
 	  }
 	  .mat-icon {
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 		width: 16px;
 		height: 16px;
 		font-size: 16px;
@@ -982,11 +946,11 @@ a.c-h21-header_logo {
 		padding-left: 0 !important;
 	  }
 	  a {
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 	  }
 	}
 	.mat-divider {
-	  background: #f0f0f0;
+	  background: $h21-gray-7;
 	}
   }
 }
@@ -1010,7 +974,7 @@ a.c-h21-header_logo {
 	bottom: 0;
 	left: 0;
 	.mat-button {
-	  color: #4f5a7c;
+	  color: $h21-fg-ashen-blue;
 	}
   }
   .c-h21-search-panel_inner > .mat-button-toggle-group {
@@ -1092,7 +1056,7 @@ a.c-h21-header_logo {
   .c-h21-filter-panel_accordion {
 	.mat-expansion-panel {
 	  background: none;
-	  color: #4d4d4e;
+	  color: $h21-black-73-opacity;
 
 	  &:not([class*=mat-elevation-z]) {
 		@include mat-elevation(0);
@@ -1116,7 +1080,7 @@ a.c-h21-header_logo {
 		&::before {
 		  height: 1px;
 		  opacity: 1;
-		  background: #999999;
+		  background: $h21-gray-44;
 		}
 
 		&::after {
@@ -1196,7 +1160,7 @@ a.c-h21-header_logo {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	.noUi-target {
-	  background: #ababab;
+	  background: $h21-gray-37;
 	  box-shadow: none;
 	  border: none;
 	  border-radius: 0;
@@ -1305,10 +1269,10 @@ a.c-h21-header_logo {
 	transition: background-color 0.2s;
 
 	&.is-selected {
-	  background-color: #deffe6;
+	  background-color: $h21-bg-green-light;
 	}
 	&:hover {
-	  background-color: #f0f0f0;
+	  background-color: $h21-gray-7;
 	}
 	&:not([class*=mat-elevation-z]) {
 	  @include mat-elevation(0);
@@ -1328,14 +1292,14 @@ a.c-h21-header_logo {
 		margin-right: 12px;
 	  }
 	  .mat-card-title {
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 		font-size: 18px;
 		font-weight: 300;
 		margin-bottom: 8px;
 	  }
 	  .mat-card-subtitle {
 		font-size: 14px;
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 		font-weight: 700;
 		margin-bottom: 8px;
 	  }
@@ -1343,7 +1307,7 @@ a.c-h21-header_logo {
 		float: right;
 		font-size: 14px;
 		font-weight: 700;
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 		white-space: nowrap;
 	  }
 	}
@@ -1401,7 +1365,7 @@ a.c-h21-header_logo {
 	margin-bottom: 30px;
 	.c-h21-search-result_title {
 	  font-size: 18px;
-	  color: #27334d;
+	  color: $h21-fg-base;
 	  display: block;
 	  font-weight: 400;
 	}
@@ -1418,7 +1382,7 @@ a.c-h21-header_logo {
 	max-width: 300px;
 	opacity: 1;
 	&.mat-tab-label-active {
-	  background-color: #e4ebfb;
+	  background-color: $h21-bg-ashen-blue-light-1;
 	  .c-h21-search-result-tab-icon,
 	  .c-h21-search-result-tab-label_name {
 		color: $h21-ui-primary;
@@ -1442,16 +1406,16 @@ a.c-h21-header_logo {
 	  display: block;
 	  font-size: 14px;
 	  text-transform: uppercase;
-	  color: #4d4d4e;
+	  color: $h21-black-73-opacity;
 	}
 	.c-h21-search-result-tab-label_price {
 	  font-size: 12px;
-	  color: #4d4d4e;
+	  color: $h21-black-73-opacity;
 	  margin-right: 15px;
 	}
 	.c-h21-search-result-tab-label_time {
 	  font-size: 12px;
-	  color: #4d4d4e;
+	  color: $h21-black-73-opacity;
 	}
   }
   .c-h21-search-result-tab-icon {
@@ -1485,7 +1449,7 @@ a.c-h21-header_logo {
 	.c-h21-search-result-row_price {
 	  font-size: 24px;
 	  font-weight: 500;
-	  color: #4f5a7c;
+	  color: $h21-fg-ashen-blue;
 	  display: inline-block;
 	  line-height: 36px;
 	}
@@ -1517,7 +1481,7 @@ a.c-h21-header_logo {
 	}
   }
   .c-h21-search-result-row_large-label {
-	color: #4f5a7c;
+	color: $h21-fg-ashen-blue;
 	font-size: 20px;
 	font-weight: 500;
 	display: block;
@@ -1527,14 +1491,14 @@ a.c-h21-header_logo {
 	margin-bottom: 5px;
   }
   .c-h21-search-result-row_small-label {
-	color: #606b8d;
+	color: $h21-fg-ashen-blue-light;
 	font-size: 14px;
 	display: block;
 	text-align: center;
   }
   .c-h21-search-result-row_transfer-indicator {
 	height: 1px;
-	border-top: 1px solid #4f5a7c;
+	border-top: 1px solid $h21-fg-ashen-blue;
 	position: relative;
 	margin: 15px 10px 19px 10px;
 	display: block;
@@ -1548,7 +1512,7 @@ a.c-h21-header_logo {
 	  top: -6px;
 	  width: 11px;
 	  height: 11px;
-	  border: 1px solid #4f5a7c;
+	  border: 1px solid $h21-fg-ashen-blue;
 	  border-radius: 50%;
 	  background: white;
 	}
@@ -1565,7 +1529,7 @@ a.c-h21-header_logo {
 	  margin: -11px 0 0 -11px;
 	  border: 3px solid white;
 	  box-sizing: content-box;
-	  color: #e26666;
+	  color: $h21-bg-red-light;
 	  background: white;
 	  font-size: 16px;
 	  height: 16px;
@@ -1732,12 +1696,12 @@ a.c-h21-header_logo {
 	  }
 	  &.c-fly-route-selection_remove-button {
 		.mat-icon {
-		  color: #ababab;
+		  color: $h21-gray-37;
 		}
 	  }
 	  &.c-fly-route-selection_add-button {
 		.mat-icon {
-		  color: #28a745;
+		  color: $h21-ui-accent;
 		}
 	  }
 	}
@@ -1753,7 +1717,7 @@ a.c-h21-header_logo {
 	  color: $h21-black-57-opacity;
 	}
 	.autocomplete_opt-title {
-	  color: #000000;
+	  color: black;
 	  margin-right: 8px;
 	}
 	.autocomplete_opt-desc {
@@ -1858,10 +1822,10 @@ a.c-h21-header_logo {
   .c-h21-passengers-select_menu-title {
 	height: 42px;
 	line-height: 42px;
-	background: #f0f0f0;
+	background: $h21-gray-7;
 	font-weight: 500;
 	font-size: 18px;
-	color: #4f5a7c;
+	color: $h21-fg-ashen-blue;
 	display: block;
 	padding: 0 20px;
 	box-sizing: border-box;
@@ -1874,7 +1838,7 @@ a.c-h21-header_logo {
 	> span {
 	  display: inline-block;
 	  min-width: 90px;
-	  color: #4d4d4e;
+	  color: $h21-black-73-opacity;
 	  font-size: 15px;
 	}
 	> div {
@@ -1883,7 +1847,7 @@ a.c-h21-header_logo {
 	  height: 30px;
 	  border-radius: 2px;
 	  background-color: #e9ebf5;
-	  color: #4f5a7c;
+	  color: $h21-fg-ashen-blue;
 	  font-size: 18px;
 	  font-weight: 500;
 	  line-height: 30px;
@@ -1897,7 +1861,7 @@ a.c-h21-header_logo {
 		top: -5px;
 	  }
 	  .mat-icon-button:not(:disabled) {
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 	  }
 	  .mat-icon-button:first-child {
 		left: -5px;
@@ -1976,14 +1940,14 @@ a.c-h21-header_logo {
   .mat-select-content {
 	.mat-optgroup {
 	  .mat-optgroup-label {
-		color: #4f5a7c;
+		color: $h21-fg-ashen-blue;
 		font-size: 18px;
 		font-weight: 500;
-		background: #f0f0f0;
+		background: $h21-gray-7;
 	  }
 	  .mat-option {
 		font-size: 15px;
-		color: #4d4d4e;
+		color: $h21-black-73-opacity;
 		padding-left: 16px;
 		&::before {
 		  font-family: 'Material Icons';
@@ -2000,7 +1964,7 @@ a.c-h21-header_logo {
 		  -webkit-font-feature-settings: 'liga';
 		  -webkit-font-smoothing: antialiased;
 		  content: 'check';
-		  color: #4f5a7c;
+		  color: $h21-fg-ashen-blue;
 		  opacity: 0;
 		  margin-right: 10px;
 		}
@@ -2472,7 +2436,7 @@ a.c-h21-header_logo {
 //----------------------------------------------------------------------------------------------------------------------
 // fake date
 //
-$h21-color-fake: #F1F1F1;
+$h21-color-fake: $h21-gray-7;
 
 .fake_line {
   margin-bottom: 8px;

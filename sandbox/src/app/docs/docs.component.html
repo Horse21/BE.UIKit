@@ -1,22 +1,22 @@
 <!-- Default -->
-<div [hidden]="routeLink != ''" class="docs_default-view">
+<div *ngIf="routeLink == ''" class="docs_default-view">
 	<p>Component design system</p>
 </div>
 
 <!-- Style section -->
-<typography-docs [hidden]="routeLink != pagePath + '/style/typography'"></typography-docs>
-<colors-docs [hidden]="routeLink != pagePath + '/style/colors'"></colors-docs>
-<layout-docs [hidden]="routeLink != pagePath + '/style/layout'"></layout-docs>
-<logotype-docs [hidden]="routeLink != pagePath + '/style/logotype'"></logotype-docs>
-<icons-docs [hidden]="routeLink != pagePath + '/style/icons'"></icons-docs>
+<typography-docs *ngIf="routeLink == pagePath + '/style/typography'"></typography-docs>
+<colors-docs *ngIf="routeLink == pagePath + '/style/colors'"></colors-docs>
+<layout-docs *ngIf="routeLink == pagePath + '/style/layout'"></layout-docs>
+<logotype-docs *ngIf="routeLink == pagePath + '/style/logotype'"></logotype-docs>
+<icons-docs *ngIf="routeLink == pagePath + '/style/icons'"></icons-docs>
 
 <!-- Component section -->
-<buttons-docs [hidden]="routeLink != pagePath + '/components/buttons'"></buttons-docs>
-<button-toggle-docs [hidden]="routeLink != pagePath + '/components/button-toggle'"></button-toggle-docs>
-<two-month-calendar-docs [hidden]="routeLink != pagePath + '/components/two_month_calendar'"></two-month-calendar-docs>
-<forms-docs [hidden]="routeLink != pagePath + '/components/forms'"></forms-docs>
-<grid-docs [hidden]="routeLink != pagePath + '/components/grid'"></grid-docs>
-<images-docs [hidden]="routeLink != pagePath + '/components/images'"></images-docs>
-<search-components-docs [hidden]="routeLink != pagePath + '/components/search_components'"></search-components-docs>
-<tabs-docs [hidden]="routeLink != pagePath + '/components/tabs'"></tabs-docs>
-<tooltips-docs [hidden]="routeLink != pagePath + '/components/tooltips'"></tooltips-docs>
+<buttons-docs *ngIf="routeLink == pagePath + '/components/buttons'"></buttons-docs>
+<button-toggle-docs *ngIf="routeLink == pagePath + '/components/button-toggle'"></button-toggle-docs>
+<two-month-calendar-docs *ngIf="routeLink == pagePath + '/components/two_month_calendar'"></two-month-calendar-docs>
+<forms-docs *ngIf="routeLink == pagePath + '/components/forms'"></forms-docs>
+<grid-docs *ngIf="routeLink == pagePath + '/components/grid'"></grid-docs>
+<images-docs *ngIf="routeLink == pagePath + '/components/images'"></images-docs>
+<search-components-docs *ngIf="routeLink == pagePath + '/components/search_components'"></search-components-docs>
+<tabs-docs *ngIf="routeLink == pagePath + '/components/tabs'"></tabs-docs>
+<tooltips-docs *ngIf="routeLink == pagePath + '/components/tooltips'"></tooltips-docs>
