@@ -13,10 +13,16 @@ export class TypographyDocsComponent {
 	isDataInit: boolean = false;
 
 	colorsFg: Array<any> = new Array();
+	cssModifiers: Array<any> = new Array();
 
 	constructor(private _http: HttpClient) {
 		this._http.get<any>('../../assets/storage/colors.json').subscribe(data => {
 			this.colorsFg = data.foreground;
+			this.isDataInit = true;
+		});
+
+		this._http.get<any>('../../assets/storage/typography.json').subscribe(data => {
+			this.cssModifiers = data.modifiers;
 			this.isDataInit = true;
 		});
 	}
