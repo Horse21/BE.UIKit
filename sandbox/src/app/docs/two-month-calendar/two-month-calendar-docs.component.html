@@ -112,4 +112,18 @@
 			<div></div>
 		</mat-tab>
 	</mat-tab-group>
+
+	<h2 class="mt-5">Temporary example</h2>
+	<h21-two-month-calendar [rangeSelectMode]="false"
+							[selectedFromDate]="startDate"
+							(onSelectedFromDateChanged)="updateStartDate($event);">
+	</h21-two-month-calendar>
+
+	<h21-two-month-calendar [fromDateText]="startText"
+							[toDateText]="finishText"
+							[selectedFromDate]="startDate"
+							[selectedToDate]="finishDate"
+							(onSelectedFromDateChanged)="updateStartDate($event);"
+							(onSelectedToDateChanged)="updateFinishDate($event);">
+	</h21-two-month-calendar>
 </section>

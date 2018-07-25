@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
 import {INotifyItem} from '../../dto/inotifyItem';
