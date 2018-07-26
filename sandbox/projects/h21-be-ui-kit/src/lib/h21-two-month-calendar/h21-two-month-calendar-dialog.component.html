@@ -47,7 +47,7 @@
 				<mat-icon>navigate_next</mat-icon>
 			</button>
 			<div class="tmc-slider_view-port">
-				<div class="tmc-slider_view-port-items-box" #tmcSliderItemsBox id="calendar-menu">
+				<div class="tmc-slider_view-port-items-box" #tmcSliderItemsBox id="calendar-dialog-body">
 					<div class="tmc-slider_item" *ngFor="let item of monthList; let n = index;" >
 						<div class="tmc-slider_month-label">{{getMonthName(item.month)}} {{data.startDate.getFullYear()
 							== item.year ? '' : item.year}}
