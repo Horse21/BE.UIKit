@@ -114,7 +114,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Returns an array of months (as objects {month: "", year: ""}) for the range of the specified data.startDate and data.finishDate.
-	 * @returns {any[]} An array of objects - {month: "", year: ""}
+	 * @returns An array of objects - {month: "", year: ""}
 	 */
 	private getMonthList() {
 		let result = [];
@@ -129,17 +129,17 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 	/**
 	 * Returns the name of the month by its index (from 0 to 11).
 	 * @param monthNumber Month index
-	 * @returns {string} Month name
+	 * @returns Month name
 	 */
-	private getMonthName(monthNumber): string {
+	getMonthName(monthNumber): string {
 		return monthNumber >= 0 && monthNumber <= 11 ? this.monthNames[monthNumber] : 'undefined';
 	}
 
 	/**
 	 * Returns the date of the first day of the month.
-	 * @param {number} month Number of the month (from 0 to 11)
-	 * @param {number} year Year
-	 * @returns {Date} First day of the month
+	 * @param month Number of the month (from 0 to 11)
+	 * @param year Year
+	 * @returns First day of the month
 	 */
 	getMonthFirstDay(month: number, year: number): Date {
 		return this._dateAdapter.createDate(year, month, 1);
@@ -147,8 +147,8 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Returns the index of the month's position in the monthList array by the specified date.
-	 * @param {Date} date
-	 * @returns {number}
+	 * @param date
+	 * @returns Month
 	 */
 	private getMonthNumberInList(date: Date): number {
 		let month = date.getMonth();
@@ -219,8 +219,8 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Checks whether the specified date is present in the array of cells of the calendar - dayCells.
-	 * @param {Date} d Check date
-	 * @returns {boolean} true - if successful, false otherwise
+	 * @param d Check date
+	 * @returns true - if successful, false otherwise
 	 */
 	private checkDateInDayCells(d: Date) {
 		if (this.dayCells && this.dayCells.length > 0) {
@@ -234,7 +234,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Marks the cell of the calendar with the specified date as the selected.
-	 * @param {Date} d Date
+	 * @param d Date
 	 */
 	private markSelectedCell(d: Date) {
 		if (this.checkDateInDayCells(d)) {
@@ -253,7 +253,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Cancels the selection of a calendar cell with the specified date.
-	 * @param {Date} d Date
+	 * @param d Date
 	 */
 	private unMarkSelectedCell(d: Date) {
 		if (this.checkDateInDayCells(d)) {
@@ -293,7 +293,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 	/**
 	 * Highlights the range of calendar cells from the selected start date to the specified date, if the date is not
 	 * specified, the selected end date is taken.
-	 * @param {Date} d The end date of the range for highlighting, the default is null
+	 * @param d The end date of the range for highlighting, the default is null
 	 */
 	private highlightRange(d: Date = null) {
 		if (!d) {
@@ -319,7 +319,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Highlights the range of calendar cells before the specified date.
-	 * @param {Date} d Date
+	 * @param d Date
 	 */
 	private dynamicHighlight(d: Date) {
 		if (!this.data.rangeSelectMode) {
@@ -363,7 +363,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Moves the slider to the specified slider cell, making it active.
-	 * @param {number} slideNumber Cell index
+	 * @param slideNumber Cell index
 	 */
 	private moveToSlide(slideNumber: number) {
 		this.sliderCurrentIndex = slideNumber;
@@ -373,7 +373,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Shifts the selected date one day ago.
-	 * @param {Date} date Selected date
+	 * @param date Selected date
 	 */
 	prevDay(date: Date) {
 		let d = new Date(date);
@@ -402,7 +402,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 
 	/**
 	 * Shifts the selected date one day ahead.
-	 * @param {Date} date Selected date
+	 * @param date Selected date
 	 */
 	nextDay(date: Date) {
 		let d = new Date(date);
