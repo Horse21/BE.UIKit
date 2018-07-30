@@ -52,6 +52,9 @@ import {TabsDocsComponent} from './docs/tabs/tabs-docs.component';
 import {TooltipsDocsComponent} from './docs/tooltips/tooltips-docs.component';
 import {TypographyDocsComponent} from './docs/typography/typography-docs.component';
 import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
+import {CounterInputComponent} from './docs/counter-input/counter-input.component';
+import { count } from '../../node_modules/rxjs/operators';
+import { DashboardComponent } from './docs/dashboard/dashboard.component';
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
@@ -100,6 +103,8 @@ const routes: Routes = [
 		TypographyDocsComponent,
 		IconExampleDialogComponent,
 		TwoMonthCalendarDocsComponent,
+		CounterInputComponent,
+		DashboardComponent,
 	],
 	imports: [
 		BrowserModule,
