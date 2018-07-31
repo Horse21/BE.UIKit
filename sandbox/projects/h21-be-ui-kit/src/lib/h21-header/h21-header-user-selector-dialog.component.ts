@@ -5,35 +5,35 @@ import {FormControl, Validators} from '@angular/forms';
 @Component({
 	selector: 'h21-header-user-selector-dialog',
 	template: `
-<div class="row mat-typography">
-	<div class="col-sm-12 modal-form-alone-text-filed">
-		<mat-form-field color="primary">
-			<input matInput placeholder="User name" [formControl]="userName" required>
-			<mat-error *ngIf="userName.invalid">{{getErrorMessage()}}</mat-error>
-		</mat-form-field>
-	</div>
-	<div class="col-sm-12 modal-form-vertical-checkboxes">
-		<mat-checkbox color="primary" [checked]="hasAirBE" (change)="hasAirBE = !hasAirBE">AirBE</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="isAgent" (change)="isAgent = !isAgent">Agent</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="isAgencyManager" (change)="isAgencyManager = !isAgencyManager">AgencyManager</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="isBranchManager" (change)="isBranchManager = !isBranchManager">BranchManager</mat-checkbox>
-	</div>
-	<div class="col-sm-12">
-		<mat-divider class="modal-form-dividier"></mat-divider>
-	</div>
-	<div class="col-sm-12 modal-form-buttons-to-right">
-		<button mat-raised-button color="accent" (click)="auth()">Auth</button>
-		<button mat-raised-button color="primary" (click)="closeDialog()">Cancel</button>
-	</div>
-</div>`
+		<div class="row mat-typography">
+			<div class="col-sm-12 modal-form-alone-text-filed">
+				<mat-form-field color="primary">
+					<input matInput placeholder="User name" [formControl]="userName" required>
+					<mat-error *ngIf="userName.invalid">{{getErrorMessage()}}</mat-error>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-12 modal-form-vertical-checkboxes">
+				<mat-checkbox color="primary" [checked]="hasAirBE" (change)="hasAirBE = !hasAirBE">AirBE</mat-checkbox>
+				<mat-checkbox color="primary" [checked]="isAgent" (change)="isAgent = !isAgent">Agent</mat-checkbox>
+				<mat-checkbox color="primary" [checked]="isAgencyManager" (change)="isAgencyManager = !isAgencyManager">
+					AgencyManager
+				</mat-checkbox>
+				<mat-checkbox color="primary" [checked]="isBranchManager" (change)="isBranchManager = !isBranchManager">
+					BranchManager
+				</mat-checkbox>
+			</div>
+			<div class="col-sm-12">
+				<mat-divider class="modal-form-dividier"></mat-divider>
+			</div>
+			<div class="col-sm-12 modal-form-buttons-to-right">
+				<button mat-raised-button color="accent" (click)="auth()">Auth</button>
+				<button mat-raised-button color="primary" (click)="closeDialog()">Cancel</button>
+			</div>
+		</div>`
 })
 
 export class H21HeaderUserSelectorDialogComponent {
 	constructor(public dialogRef: MatDialogRef<H21HeaderUserSelectorDialogComponent>) {
-	}
-
-	onNoClick(): void {
-		this.dialogRef.close();
 	}
 
 	hasAirBE: boolean = true;

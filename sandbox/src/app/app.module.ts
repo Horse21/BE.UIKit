@@ -34,6 +34,7 @@ import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit
 import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
+import {H21TwoMonthCalendarDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar-dialog.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 
 /** Import Examples */
@@ -85,6 +86,7 @@ const routes: Routes = [
 		H21PassengersSearchComponent,
 		H21HelpComponent,
 		H21TwoMonthCalendarComponent,
+		H21TwoMonthCalendarDialogComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,
@@ -124,7 +126,7 @@ const routes: Routes = [
 		OrderService,
 	],
 	bootstrap: [AppComponent],
-	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21RightOverlayPanelComponent]
+	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21TwoMonthCalendarDialogComponent, H21RightOverlayPanelComponent]
 })
 
 export class AppModule {

@@ -2088,26 +2088,21 @@ a.c-h21-header_logo {
   }
 }
 
-.c-h21-two-month-calendar_menu {
-  &.mat-menu-panel {
+.c-h21-two-month-calendar_dialog {
+  width: 860px;
+  font-family: mat-font-family($h21-mat-typography);
+
+  .mat-dialog-container {
 	width: 860px;
 	max-width: 860px;
-	padding: 20px 0;
+	padding: 0;
 	background: none;
 	@include mat-elevation(0);
-	.mat-menu-content {
-	  padding: 0;
-	}
   }
 }
 
-.c-h21-two-month-calendar_menu-backdrop {
+.c-h21-two-month-calendar_dialog-backdrop {
   background: rgba(0, 0, 0, .5);
-}
-
-.cdk-overlay-container__for-h21-tmc .cdk-overlay-connected-position-bounding-box {
-  align-items: center !important;
-  justify-content: center !important;
 }
 
 .c-h21-two-month-calendar {

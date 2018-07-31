@@ -19,6 +19,5 @@ export class DocsComponent {
   changeComponent(link:string): void {
     this.routeLink = link;
     this.location.replaceState(link);
-    console.log(this.routeLink);
   }
 }

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
 	MatButtonModule,
 	MatDatepickerModule,
@@ -8,7 +8,8 @@ import {
 	MatInputModule,
 	MatMenuModule
 } from '@angular/material';
-import { H21TwoMonthCalendarComponent } from "./h21-two-month-calendar.component"
+import {H21TwoMonthCalendarComponent} from "./h21-two-month-calendar.component"
+import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialog.component"
 
 @NgModule({
 	imports: [
@@ -20,8 +21,9 @@ import { H21TwoMonthCalendarComponent } from "./h21-two-month-calendar.component
 		MatDatepickerModule,
 		MatInputModule
 	],
-	declarations: [H21TwoMonthCalendarComponent],
-	exports: [H21TwoMonthCalendarComponent]
+	declarations: [H21TwoMonthCalendarComponent, H21TwoMonthCalendarDialogComponent],
+	exports: [H21TwoMonthCalendarComponent],
+	entryComponents: [H21TwoMonthCalendarDialogComponent]
 })
 
 export class H21TwoMonthCalendarModule {
