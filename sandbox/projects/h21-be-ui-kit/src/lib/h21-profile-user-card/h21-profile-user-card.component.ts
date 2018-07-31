@@ -19,7 +19,7 @@ const CLAIMS_DATA: Claim[] = [
 
 @Component ({
 	selector: 'h21-profile-user-card',
-	templateUrl: 'h21-profile-user-card.component.html'
+	templateUrl: './h21-profile-user-card.component.html'
 })
 
 export class H21ProfileUserCardComponent {
