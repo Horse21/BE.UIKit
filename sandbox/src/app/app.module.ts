@@ -36,6 +36,7 @@ import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h2
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
 import {H21TwoMonthCalendarDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar-dialog.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {H21ProfileUserCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-profile-user-card/h21-profile-user-card.component";
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -53,6 +54,7 @@ import {TabsDocsComponent} from './docs/tabs/tabs-docs.component';
 import {TooltipsDocsComponent} from './docs/tooltips/tooltips-docs.component';
 import {TypographyDocsComponent} from './docs/typography/typography-docs.component';
 import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
+import {ProfileUserCardDocsComponent} from "./docs/profile-user-card/profile-user-card-docs.component";
 import {CounterInputComponent} from './docs/counter-input/counter-input.component';
 import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
@@ -87,6 +89,7 @@ const routes: Routes = [
 		H21HelpComponent,
 		H21TwoMonthCalendarComponent,
 		H21TwoMonthCalendarDialogComponent,
+		H21ProfileUserCardComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,
@@ -107,6 +110,7 @@ const routes: Routes = [
 		TwoMonthCalendarDocsComponent,
 		CounterInputComponent,
 		DashboardComponent,
+		ProfileUserCardDocsComponent,
 	],
 	imports: [
 		BrowserModule,
