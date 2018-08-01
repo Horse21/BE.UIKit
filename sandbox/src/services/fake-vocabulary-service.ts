@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subscriber } from 'rxjs/index';
-import { VocabularyService } from '../../../sandbox/projects/h21-be-ui-kit/src/services/vocabulary-service';
-import { City } from '../../../sandbox/projects/h21-be-ui-kit/src/dto/city';
+import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
+import { City } from '../../projects/h21-be-ui-kit/src/dto/city';
 import { Observable } from 'rxjs';
 import { FlightItem } from '../../projects/h21-be-ui-kit/src/dto/flight-item';
 import { SearchFlightDto } from '../../projects/h21-be-ui-kit/src/dto/search-flight-dto';
