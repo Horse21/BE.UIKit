@@ -1,0 +1,202 @@
+<mat-card class="c-h21-profile-user-card">
+	<div class="c-h21-profile-user-card_header">
+		<mat-card-title class="c-h21-profile-user-card_title">Banan Ananovich</mat-card-title>
+		<mat-card-header>
+			<img mat-card-avatar src="" alt=""/>
+			<div class="c-h21-profile-user-card_meta-data-box">
+				<div class="row">
+					<div class="col-12 col-xl-6">
+						<div class="row no-gutters c-h21-profile-user-card_meta-data-item">
+							<div class="col-6">Date of registration</div>
+							<div class="col-6"><b>15.03.2018 14:56:17</b></div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-6">
+						<div class="row no-gutters c-h21-profile-user-card_meta-data-item">
+							<div class="col-6 col-xl-4">Identity user ID:</div>
+							<div class="col-6 col-xl-8"><b>6893922f-0ee8-4b1c-b7b3</b></div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-6">
+						<div class="row no-gutters c-h21-profile-user-card_meta-data-item">
+							<div class="col-6">Date of update</div>
+							<div class="col-6"><b>15:03:2018 15:58:19</b></div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-6">
+						<div class="row no-gutters c-h21-profile-user-card_meta-data-item">
+							<div class="col-6 col-xl-4">Status</div>
+							<div class="col-6 col-xl-8"><b>Active</b></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</mat-card-header>
+	</div>
+	<mat-card-content>
+		<mat-tab-group>
+			<mat-tab label="General info">
+				<h4 class="c-h21-profile-user-card_title">General info</h4>
+				<div class="row">
+					<div class="col-6">
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Email" [readonly]="!editable">
+							<span matSuffix class="c-h21-profile-user-card_required">*</span>
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="First name" [readonly]="!editable">
+							<span matSuffix class="c-h21-profile-user-card_required">*</span>
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Last name" [readonly]="!editable">
+							<span matSuffix class="c-h21-profile-user-card_required">*</span>
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Middle name" [readonly]="!editable">
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<mat-select placeholder="Gender" [disabled]="!editable">
+								<mat-option value="">Male</mat-option>
+								<mat-option value="">Female</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Birth day" [matDatepicker]="picker" [readonly]="!editable">
+							<mat-datepicker-toggle matSuffix [for]="picker" class="c-h21-profile-user-card_datepicker-icon" [disabled]="!editable"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</div>
+					<div class="col-6">
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Country" [readonly]="!editable">
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="City" [readonly]="!editable">
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Code" [readonly]="!editable">
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="Phone" [readonly]="!editable">
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<mat-select placeholder="Language" [disabled]="!editable">
+								<mat-option [value]="'eng'">English</mat-option>
+								<mat-option [value]="'fra'">French</mat-option>
+								<mat-option [value]="'deu'">German</mat-option>
+								<mat-option [value]="'rus'">Russian</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="__w-100">
+							<input matInput placeholder="More information" [readonly]="!editable">
+						</mat-form-field>
+					</div>
+				</div>
+			</mat-tab>
+			<mat-tab label="Roles">
+				<h4 class="c-h21-profile-user-card_title">Roles</h4>
+				<div class="row">
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+								color="accent"
+								[labelPosition]="'before'"
+								[checked]="true"
+								[disabled]="!editable">
+							market
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="true"
+										  [disabled]="!editable">
+							market
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="true"
+										  [disabled]="!editable">
+							disk
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="true"
+										  [disabled]="!editable">
+							disk
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="false"
+										  [disabled]="!editable">
+							admin
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="false"
+										  [disabled]="!editable">
+							admin
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="false"
+										  [disabled]="!editable">
+							travelportAgencyManager
+						</mat-slide-toggle>
+					</div>
+					<div class="col-6">
+						<mat-slide-toggle class="c-h21-profile-user-card_slide-toggle"
+										  color="accent"
+										  [labelPosition]="'before'"
+										  [checked]="false"
+										  [disabled]="!editable">
+							travelportAgencyManager
+						</mat-slide-toggle>
+					</div>
+				</div>
+			</mat-tab>
+			<mat-tab label="Claims">
+				<h4 class="c-h21-profile-user-card_title">Claims</h4>
+				<table mat-table [dataSource]="claimsData">
+					<!-- Type Column -->
+					<ng-container matColumnDef="type">
+						<th mat-header-cell *matHeaderCellDef>Type</th>
+						<td mat-cell *matCellDef="let element"> {{element.type}} </td>
+					</ng-container>
+					<!-- Value Column -->
+					<ng-container matColumnDef="value">
+						<th mat-header-cell *matHeaderCellDef>Value</th>
+						<td mat-cell *matCellDef="let element"> {{element.value}} </td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="claimsDisplayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: claimsDisplayedColumns;"></tr>
+				</table>
+			</mat-tab>
+			<mat-tab label="Special folders">
+				<h4 class="c-h21-profile-user-card_title">Special folders</h4>
+			</mat-tab>
+			<mat-tab label="History">
+				<h4 class="c-h21-profile-user-card_title">History</h4>
+			</mat-tab>
+		</mat-tab-group>
+	</mat-card-content>
+	<mat-card-actions *ngIf="editable">
+		<button mat-stroked-button color="primary">Cancel</button>
+		<button mat-raised-button color="primary">Save</button>
+	</mat-card-actions>
+</mat-card>
