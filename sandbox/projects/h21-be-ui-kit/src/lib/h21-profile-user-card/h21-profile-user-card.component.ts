@@ -30,6 +30,20 @@ export interface Code {
 	code: string;
 }
 
+export interface History {
+	id: number;
+	date: Date;
+	action: string;
+	user: string;
+	expandData: [
+		{
+			field: string;
+			oldValue: string;
+			newValue: string
+		}]
+}
+
+
 const CLAIMS_DATA: Claim[] = [
 	{id: 1, type: "Email", value: "name@mysite.com"},
 	{id: 2, type: "Gender", value: "Male"},
@@ -71,10 +85,27 @@ const CODES_DATA: Code[] = [
 	{id: 5, cityId: 5, code: "50000"},
 ];
 
+const HISTORY_DATA: History[] = [
+	{id: 1, date: new Date(2018, 8, 1), action: "Edit", user: "Sergey Strovatikov", expandData: [
+			{field: "Name", oldValue: "Anan", newValue: "Banan"}
+		]},
+	{id: 2, date: new Date(2018, 8, 1), action: "Edit", user: "Sergey Strovatikov", expandData: [
+			{field: "Name", oldValue: "Anan", newValue: "Banan"}
+		]},
+	{id: 3, date: new Date(2018, 8, 1), action: "Edit", user: "Sergey Strovatikov", expandData: [
+			{field: "Name", oldValue: "Anan", newValue: "Banan"}
+		]},
+	{id: 4, date: new Date(2018, 8, 1), action: "Edit", user: "Sergey Strovatikov", expandData: [
+			{field: "Name", oldValue: "Anan", newValue: "Banan"}
+		]},
+	{id: 5, date: new Date(2018, 8, 1), action: "Edit", user: "Sergey Strovatikov", expandData: [
+			{field: "Name", oldValue: "Anan", newValue: "Banan"}
+		]},
+];
 
 @Component({
 	selector: 'h21-profile-user-card',
-	templateUrl: './h21-profile-user-card.component.html'
+	templateUrl: './h21-profile-user-card.component.html',
 })
 
 export class H21ProfileUserCardComponent {
@@ -82,10 +113,14 @@ export class H21ProfileUserCardComponent {
 	claimsData = CLAIMS_DATA;
 	foldersDisplayedColumns: string[] = ['name', 'permission', 'remove'];
 	foldersData = FOLDERS_DATA;
+	historyDisplayedColumns: string[] = ['expand', 'date', 'action', 'user'];
+	historyExpandDisplayedColumns: string[] = ['blank', 'field', 'oldValue', 'newValue'];
+	historyData = HISTORY_DATA;
 
 	countriesData = COUNTRIES_DATA;
 	citiesData = CITIES_DATA;
 	codesData = CODES_DATA;
+
 
 	// Form Controls
 	emailControl = new FormControl('', [Validators.required, Validators.email]);
@@ -95,7 +130,10 @@ export class H21ProfileUserCardComponent {
 	cityControl = new FormControl();
 	codeControl = new FormControl();
 
-	// Input options
+	/** Expanded row element */
+	historyExpandedElement: History;
+
+	/** Editable mode option */
 	@Input() editable: boolean;
 
 	constructor() {
@@ -117,6 +155,11 @@ export class H21ProfileUserCardComponent {
 
 	}
 
+	/**
+	 * Returns a description of the generated FormControl validation error
+	 * @param FormControl element
+	 * @returns {string} Error message text
+	 */
 	getErrorMessage(control: any): string {
 		return control.hasError('required') ? 'You must enter a value' :
 			control.hasError('email') ? 'Not a valid email' : '';
