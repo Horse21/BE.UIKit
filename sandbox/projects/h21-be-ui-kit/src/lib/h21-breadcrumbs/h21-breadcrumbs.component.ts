@@ -1,21 +1,17 @@
 import {Component, Input} from "@angular/core"
-import {Breadcrumb} from "./Breadcrumb";
+import {IBreadcrumb} from "./../../dto/i-breadcrumb";
 
 @Component({
-  selector: 'h21-breadcrumbs',
-  templateUrl: './h21-breadcrumbs.component.html',
-  styleUrls: ['./h21-breadcrumbs.component.css']
+	selector: 'h21-breadcrumbs',
+	templateUrl: './h21-breadcrumbs.component.html'
 })
 
 export class H21BreadcrumbsComponent {
 
-  @Input() lastIsLink: boolean = false;
-  @Input() showHomeLink: boolean = true;
+	@Input() lastIsLink: boolean = false;
+	@Input() breadcrumbsData: Array<IBreadcrumb>;
 
-	breadCrumbs: Array<Breadcrumb> = [
-    {label: "test 1", url: "#"},
-    {label: "test 2", url: "#"},
-    {label: "test 3", url: "#"},
-    {label: "test 4", url: "#"}
-  ];
+	constructor () {
+
+	}
 }

@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { trigger, state, transition, animate, style } from "@angular/animations";
+import { IBreadcrumb } from './../../dto/i-breadcrumb';
 
 @Component({
 	selector: 'h21-top-toolbar',
@@ -17,7 +18,22 @@ import { trigger, state, transition, animate, style } from "@angular/animations"
 
 export class H21TopToolbarComponent implements OnInit {
 
+	@Input() showProfileBreadcrumbsControl = false;
+	@Input() showProfileUserCardControls = false;
+	@Input() showProfileAgentsControls = false;
+	@Input() showProfileAgentAddControl = false;
+	@Input() showProfileTuneControl = false;
+	@Input() showProfileListControl = false;
+	@Input() showFlightsMapToggleControl = false;
+	@Input() showFlightsMenuToggleControl = false;
+	@Input() showFlightsLanguageControl = false;
+	@Input() showFlightsCurrencyControl = false;
+
+	@Input() breadcrumbsData: IBreadcrumb;
+
 	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
+
+
 
 	constructor(private _appSubscriber: AppSubscriberService) {
 	}

@@ -1,5 +1,9 @@
-import {Component, Input} from "@angular/core"
+import {AfterContentChecked, Component, Input} from "@angular/core"
 import {FormControl, Validators} from "@angular/forms";
+
+
+
+// Model Simulation
 
 export interface Claim {
 	id: number;
@@ -43,6 +47,12 @@ export interface History {
 		}]
 }
 
+export interface Link {
+	id: number;
+	agency: string;
+	branch: string;
+	role: string
+}
 
 const CLAIMS_DATA: Claim[] = [
 	{id: 1, type: "Email", value: "name@mysite.com"},
@@ -103,12 +113,31 @@ const HISTORY_DATA: History[] = [
 		]},
 ];
 
+const LINKS_DATA: Link[] = [
+	{id: 1, agency: "VCK travel", branch: "VCK Travel (H)", role: "Agent, Traveler"},
+	{id: 2, agency: "VCK travel", branch: "VCK Travel (H)", role: "Agent, Traveler"},
+];
+
+
+
+// Component Code
+
+export declare type ProfileCardView = 'provider' | 'user' | 'agent' | 'traveler' | 'agency';
+const VIEW_TABS: Array<any> = [
+	{ cardView: 'provider',	viewTabs: { generalInfo: true, links: true, roles: false, claims: false, specialFolders: false, history: true, stat: false } },
+	{ cardView: 'user',		viewTabs: { generalInfo: true, links: true, roles: true, claims: true, specialFolders: true, history: true, stat: true } },
+	{ cardView: 'agent',	viewTabs: { generalInfo: true, links: true, roles: false, claims: false, specialFolders: false, history: true, stat: false } },
+	{ cardView: 'traveler',	viewTabs: { generalInfo: true, links: false, roles: false, claims: false, specialFolders: false, history: false, stat: false } },
+	{ cardView: 'agency',	viewTabs: { generalInfo: true, links: false, roles: false, claims: false, specialFolders: false, history: false, stat: false } }
+];
+
 @Component({
 	selector: 'h21-profile-user-card',
 	templateUrl: './h21-profile-user-card.component.html',
 })
 
-export class H21ProfileUserCardComponent {
+export class H21ProfileUserCardComponent implements AfterContentChecked {
+
 	claimsDisplayedColumns: string[] = ['type', 'value'];
 	claimsData = CLAIMS_DATA;
 	foldersDisplayedColumns: string[] = ['name', 'permission', 'remove'];
@@ -116,11 +145,16 @@ export class H21ProfileUserCardComponent {
 	historyDisplayedColumns: string[] = ['expand', 'date', 'action', 'user'];
 	historyExpandDisplayedColumns: string[] = ['blank', 'field', 'oldValue', 'newValue'];
 	historyData = HISTORY_DATA;
-
+	linksDisplayedColumns: string [] = [ 'agency', 'branch', 'role', 'actions'];
+	linksData = LINKS_DATA;
 	countriesData = COUNTRIES_DATA;
 	citiesData = CITIES_DATA;
 	codesData = CODES_DATA;
 
+
+
+	/** Expanded row element */
+	historyExpandedElement: History;
 
 	// Form Controls
 	emailControl = new FormControl('', [Validators.required, Validators.email]);
@@ -130,29 +164,27 @@ export class H21ProfileUserCardComponent {
 	cityControl = new FormControl();
 	codeControl = new FormControl();
 
-	/** Expanded row element */
-	historyExpandedElement: History;
 
 	/** Editable mode option */
-	@Input() editable: boolean;
+	@Input() editable: boolean = false;
+	/** View type */
+	@Input() cardView: ProfileCardView = 'user';
+
+	displayedTabs: any;
 
 	constructor() {
-		this.editable = false;
-
 		this.emailControl.setValue('banan@banancompany.com');
 		this.firstNameControl.setValue('Banan');
 		this.lastNameControl.setValue('Yellow');
 		this.countryControl.setValue('Germany');
 		this.cityControl.setValue('Berlin');
 		this.codeControl.setValue('20000');
+
+		this.updateDisplayedTabs();
 	}
 
-	cancel() {
-
-	}
-
-	save() {
-
+	ngAfterContentChecked() {
+		this.updateDisplayedTabs();
 	}
 
 	/**
@@ -165,11 +197,38 @@ export class H21ProfileUserCardComponent {
 			control.hasError('email') ? 'Not a valid email' : '';
 	}
 
+	/**
+	 *
+	 */
+	updateDisplayedTabs(): void {
+		this.displayedTabs = VIEW_TABS.find((item) => { return item.cardView == this.cardView ? true : false }).viewTabs;
+	}
+
+	cancel() {
+
+	}
+
+	save() {
+
+	}
+
 	removeFolderRow(id: number): void {
 
 	}
 
 	addNewFolderRow() {
+
+	}
+
+	addLink() {
+
+	}
+
+	viewLink(id: number): void {
+
+	}
+
+	editLink(id: number): void {
 
 	}
 }

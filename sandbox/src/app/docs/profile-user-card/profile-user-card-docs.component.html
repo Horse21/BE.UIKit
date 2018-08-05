@@ -1,29 +1,24 @@
 <section class="docs_section mat-typography">
 	<h1>{{title}}</h1>
 
-	<div class="mb-5">
-		Mode:
+	<div class="mb-3">
+		<span class="docs_code">@Input() editable: boolean;</span><br>
 		<mat-radio-group [(ngModel)]="editable">
-			<mat-radio-button color="primary" [value]="false">View</mat-radio-button>,
-			<mat-radio-button color="primary" [value]="true">Edit</mat-radio-button>
+			<mat-radio-button color="primary" [value]="true">true</mat-radio-button>,
+			<mat-radio-button color="primary" [value]="false">false</mat-radio-button>.
+		</mat-radio-group>
+	</div>
+	<div class="mb-5">
+		<span class="docs_code">@Input() cardView: 'provider' | 'user' | 'agent' | 'traveler' | 'agency';</span><br>
+		<mat-radio-group [(ngModel)]="cardView">
+			<ng-container *ngFor="let item of cardViews; let last = last;">
+				<mat-radio-button color="primary" [value]="item">{{item}}</mat-radio-button>
+				<ng-container *ngIf="!last">, </ng-container>
+				<ng-container *ngIf="last">.</ng-container>
+			</ng-container>
 		</mat-radio-group>
 	</div>
 
+	<h21-profile-user-card [editable]="editable" [cardView]="cardView"></h21-profile-user-card>
 
-	<h21-profile-user-card [editable]="editable"></h21-profile-user-card>
-
-	<!--<mat-tab-group class="docs_tabs">-->
-		<!--<mat-tab label="Examples">-->
-			<!--<div>-->
-			<!--</div>-->
-		<!--</mat-tab>-->
-		<!--<mat-tab label="Properties & methods">-->
-			<!--<div>-->
-			<!--</div>-->
-		<!--</mat-tab>-->
-		<!--<mat-tab label="Terms of use">-->
-			<!--<div>-->
-			<!--</div>-->
-		<!--</mat-tab>-->
-	<!--</mat-tab-group>-->
 </section>

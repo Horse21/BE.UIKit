@@ -1,8 +1,17 @@
 <mat-card class="c-h21-profile-user-card">
+
 	<div class="c-h21-profile-user-card_header">
 		<mat-card-title class="c-h21-profile-user-card_title">Banan Ananovich</mat-card-title>
 		<mat-card-header>
-			<img mat-card-avatar src="" alt=""/>
+			<div mat-card-avatar>
+				<button *ngIf="editable" class="c-h21-profile-user-card_upload-avatar-button" (click)="fileInput.click()">
+					<span>Add photo</span>
+				</button>
+			</div>
+			<input #fileInput type="file" style="display:none;" />
+
+			<input id="fileToUpload" type="file" style="display:none;">
+			<!--<img mat-card-avatar src="" alt=""/>-->
 			<div class="c-h21-profile-user-card_meta-data-box">
 				<div class="row">
 					<div class="col-12 col-xl-6">
@@ -33,13 +42,14 @@
 			</div>
 		</mat-card-header>
 	</div>
+
 	<mat-card-content>
 		<mat-tab-group>
 
 			<!-- General info tab -->
-			<mat-tab label="General info">
+			<mat-tab label="General Info" *ngIf="displayedTabs.generalInfo">
 				<h4 class="c-h21-profile-user-card_title">General info</h4>
-				<div class="row">
+				<div class="row" *ngIf="cardView == 'user'">
 					<div class="col-6">
 						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
 							<input matInput placeholder="Email" [readonly]="!editable" [formControl]="emailControl">
@@ -115,14 +125,171 @@
 						</mat-form-field>
 					</div>
 				</div>
+
+
+				<div class="row" *ngIf="cardView == 'agent'">
+					<div class="col-6">
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Name" [readonly]="!editable" [value]="''">
+							<span matSuffix class="c-h21-profile-user-card_required" *ngIf="!firstNameControl.invalid">*</span>
+							<mat-icon matSuffix *ngIf="firstNameControl.invalid" color="warn">error</mat-icon>
+							<mat-error *ngIf="firstNameControl.invalid">{{getErrorMessage(firstNameControl)}}</mat-error>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Code" [readonly]="!editable" [value]="''">
+							<span matSuffix class="c-h21-profile-user-card_required" *ngIf="!firstNameControl.invalid">*</span>
+							<mat-icon matSuffix *ngIf="firstNameControl.invalid" color="warn">error</mat-icon>
+							<mat-error *ngIf="firstNameControl.invalid">{{getErrorMessage(firstNameControl)}}</mat-error>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Title" [readonly]="!editable" [value]="''">
+							<span matSuffix class="c-h21-profile-user-card_required" *ngIf="!firstNameControl.invalid">*</span>
+							<mat-icon matSuffix *ngIf="firstNameControl.invalid" color="warn">error</mat-icon>
+							<mat-error *ngIf="firstNameControl.invalid">{{getErrorMessage(firstNameControl)}}</mat-error>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Phone" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<mat-select placeholder="Status" [disabled]="!editable" value="a">
+								<mat-option value="a">Active</mat-option>
+								<mat-option value="b">Blocked</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Suffix" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+					</div>
+
+					<div class="col-6">
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Nicname" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Occupational Title" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Given Name" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Other Name" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Description" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+					</div>
+				</div>
+
+
+				<div class="row" *ngIf="cardView == 'provider'">
+					<div class="col-6">
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<mat-select placeholder="Provider" [disabled]="!editable">
+								<mat-option value="v1">Provider 1</mat-option>
+								<mat-option value="v2">Provider 2</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Name" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Code" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Description" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<mat-select placeholder="Status" [disabled]="!editable" value="a">
+								<mat-option value="a">Active</mat-option>
+								<mat-option value="b">Blocked</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Connection state" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+					</div>
+					<div class="col-6">
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Endpoint" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Login" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="Password" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<mat-select placeholder="GTargetBranch" [disabled]="!editable" value="a">
+								<mat-option value="v1">GTargetBranch 1</mat-option>
+								<mat-option value="v2">GTargetBranch 2</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="PTargetBranch" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="VTargetBranch" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+						<mat-form-field class="c-h21-profile-user-card_form-field" [class.__is-readonly]="!editable">
+							<input matInput placeholder="TRMTargetBranch" [readonly]="!editable" [value]="''">
+						</mat-form-field>
+					</div>
+				</div>
+
 				<div *ngIf="editable" class="c-h21-profile-user-card_action-buttons">
 					<button mat-stroked-button color="primary">Cancel</button>
 					<button mat-raised-button color="primary">Save</button>
 				</div>
 			</mat-tab>
 
+			<!-- Links tab -->
+			<mat-tab label="Links" *ngIf="displayedTabs.links">
+				<div class="row no-gutters">
+					<div class="col-6">
+						<h4 class="c-h21-profile-user-card_title mb-0">Links</h4>
+					</div>
+					<div class="col-6 __text-right">
+						<button mat-raised-button color="primary" (click)="addLink()" *ngIf="editable">Add link</button>
+					</div>
+				</div>
+				<table mat-table [dataSource]="linksData" class="profile-table">
+					<!-- Agency Column -->
+					<ng-container matColumnDef="agency">
+						<th mat-header-cell *matHeaderCellDef [width]="'35%'">Agency</th>
+						<td mat-cell *matCellDef="let element"> {{element.agency}} </td>
+					</ng-container>
+					<!-- Branch Column -->
+					<ng-container matColumnDef="branch">
+						<th mat-header-cell *matHeaderCellDef [width]="'25%'">Branch</th>
+						<td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+					</ng-container>
+					<!-- Role Column -->
+					<ng-container matColumnDef="role">
+						<th mat-header-cell *matHeaderCellDef [width]="'25%'">Role</th>
+						<td mat-cell *matCellDef="let element"> {{element.role}} </td>
+					</ng-container>
+					<!-- Actions Column -->
+					<ng-container matColumnDef="actions">
+						<th mat-header-cell *matHeaderCellDef [width]="'15%'">&nbsp;</th>
+						<td mat-cell *matCellDef="let element">
+							<button mat-icon-button (click)="viewLink(element.id);" matTooltip="View">
+								<mat-icon>visibility</mat-icon>
+							</button>
+							<button mat-icon-button (click)="editLink(element.id);" [disabled]="!editable" matTooltip="Edit">
+								<mat-icon>edit</mat-icon>
+							</button>
+							<button mat-icon-button class="profile-table_removed-row-button" (click)="removeFolderRow(element.id);" [disabled]="!editable" matTooltip="Remove">
+								<mat-icon>delete</mat-icon>
+							</button>
+						</td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="linksDisplayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: linksDisplayedColumns;" class="profile-table_removed-row"></tr>
+				</table>
+			</mat-tab>
+
 			<!-- Roles tab -->
-			<mat-tab label="Roles">
+			<mat-tab label="Roles" *ngIf="displayedTabs.roles">
 				<h4 class="c-h21-profile-user-card_title">Roles</h4>
 				<div class="row">
 					<div class="col-6">
@@ -201,7 +368,7 @@
 			</mat-tab>
 
 			<!-- Claims tab -->
-			<mat-tab label="Claims">
+			<mat-tab label="Claims" *ngIf="displayedTabs.claims;">
 				<h4 class="c-h21-profile-user-card_title">Claims</h4>
 				<table mat-table [dataSource]="claimsData" class="profile-table">
 					<!-- Type Column -->
@@ -220,7 +387,7 @@
 			</mat-tab>
 
 			<!-- Special folders tab -->
-			<mat-tab label="Special folders">
+			<mat-tab label="Special folders" *ngIf="displayedTabs.specialFolders;">
 				<div class="row no-gutters">
 					<div class="col-6">
 						<h4 class="c-h21-profile-user-card_title mb-0">Special folders</h4>
@@ -244,7 +411,7 @@
 					<ng-container matColumnDef="remove">
 						<th mat-header-cell *matHeaderCellDef [width]="'4%'">&nbsp;</th>
 						<td mat-cell *matCellDef="let element">
-							<button mat-icon-button class="profile-table_removed-row-button" (click)="removeFolderRow(element.id);" [disabled]="!editable">
+							<button mat-icon-button class="profile-table_removed-row-button" (click)="removeFolderRow(element.id);" [disabled]="!editable" matTooltip="Delete">
 								<mat-icon>delete</mat-icon>
 							</button>
 						</td>
@@ -253,17 +420,19 @@
 					<tr mat-row *matRowDef="let row; columns: foldersDisplayedColumns;" class="profile-table_removed-row"></tr>
 				</table>
 			</mat-tab>
-			<mat-tab label="History">
+
+			<!-- History tab -->
+			<mat-tab label="History" *ngIf="displayedTabs.history">
 				<h4 class="c-h21-profile-user-card_title">History</h4>
 				<table mat-table [dataSource]="historyData" class="profile-table" multiTemplateDataRows>
 					<!-- Expand button Column -->
 					<ng-container matColumnDef="expand">
 						<th mat-header-cell *matHeaderCellDef [width]="'4%'">&nbsp;</th>
 						<td mat-cell *matCellDef="let element" class="profile-table_no-padding">
-							<button class="profile-table_expand-button" mat-icon-button (click)="historyExpandedElement = element" *ngIf="historyExpandedElement != element">
+							<button class="profile-table_expand-button" mat-icon-button (click)="historyExpandedElement = element" *ngIf="historyExpandedElement != element" matTooltip="Show detail">
 								<mat-icon>chevron_right</mat-icon>
 							</button>
-							<button class="profile-table_expand-button" mat-icon-button (click)="historyExpandedElement = null" *ngIf="historyExpandedElement == element">
+							<button class="profile-table_expand-button" mat-icon-button (click)="historyExpandedElement = null" *ngIf="historyExpandedElement == element" matTooltip="Hide detail">
 								<mat-icon>expand_more</mat-icon>
 							</button>
 						</td>
@@ -316,6 +485,12 @@
 					<tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="profile-table_expanded-row-detail"></tr>
 				</table>
 			</mat-tab>
+
+			<!-- Stat tab -->
+			<mat-tab label="Stat" *ngIf="displayedTabs.stat">
+				<h4 class="c-h21-profile-user-card_title">Stat</h4>
+			</mat-tab>
+
 		</mat-tab-group>
 	</mat-card-content>
 </mat-card>

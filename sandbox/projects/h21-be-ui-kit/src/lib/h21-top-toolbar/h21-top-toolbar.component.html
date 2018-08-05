@@ -1,33 +1,103 @@
 <mat-toolbar class="c-h21-top-toolbar">
-	<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="menuClick()" [class.is-opened]="menuIsOpened" >
-		<mat-icon class="c-h21-top-toolbar-menu-btn_open" aria-label="Open">menu</mat-icon>
-		<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
-	</button>
 
-	<div *ngIf="modeVisibility" [@toggleVisibility]>
-		<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
-			<mat-button-toggle value="list">List</mat-button-toggle>
-			<mat-divider [vertical]="true"></mat-divider>
-			<mat-button-toggle value="map">Map</mat-button-toggle>
-		</mat-button-toggle-group>
-	</div>
+	<!-- Breadcrumbs -->
+	<ng-container *ngIf="showProfileBreadcrumbsControl">
+		<h21-breadcrumbs [breadcrumbsData]="breadcrumbsData"></h21-breadcrumbs>
+	</ng-container>
+
+	<!--  -->
+	<ng-container *ngIf="showFlightsMenuToggleControl">
+		<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="menuClick()" [class.is-opened]="menuIsOpened" >
+			<mat-icon class="c-h21-top-toolbar-menu-btn_open" aria-label="Open">menu</mat-icon>
+			<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
+		</button>
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showFlightsMapToggleControl">
+		<div *ngIf="modeVisibility" [@toggleVisibility]>
+			<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
+				<mat-button-toggle value="list">List</mat-button-toggle>
+				<mat-divider [vertical]="true"></mat-divider>
+				<mat-button-toggle value="map">Map</mat-button-toggle>
+			</mat-button-toggle-group>
+		</div>
+	</ng-container>
 
 	<div class="w-spacer">&nbsp;</div>
 
-	<mat-form-field appearance="fill">
-		<mat-select [(value)]="selectedLanguage">
-			<mat-option [value]="'deu'">DEU</mat-option>
-			<mat-option [value]="'eng'">ENG</mat-option>
-			<mat-option [value]="'fra'">FRA</mat-option>
-			<mat-option [value]="'rus'">RUS</mat-option>
-		</mat-select>
-	</mat-form-field>
+	<!-- -->
+	<ng-container *ngIf="showFlightsLanguageControl">
+		<mat-form-field appearance="fill">
+			<mat-select [(value)]="selectedLanguage">
+				<mat-option [value]="'deu'">DEU</mat-option>
+				<mat-option [value]="'eng'">ENG</mat-option>
+				<mat-option [value]="'fra'">FRA</mat-option>
+				<mat-option [value]="'rus'">RUS</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</ng-container>
 
-	<mat-form-field appearance="fill">
-		<mat-select [(value)]="selectedCurrency">
-			<mat-option [value]="'eur'">EUR</mat-option>
-			<mat-option [value]="'rub'">RUR</mat-option>
-			<mat-option [value]="'usd'">USD</mat-option>
-		</mat-select>
-	</mat-form-field>
+	<!-- -->
+	<ng-container *ngIf="showFlightsCurrencyControl">
+		<mat-form-field appearance="fill">
+			<mat-select [(value)]="selectedCurrency">
+				<mat-option [value]="'eur'">EUR</mat-option>
+				<mat-option [value]="'rub'">RUR</mat-option>
+				<mat-option [value]="'usd'">USD</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showProfileUserCardControls">
+		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+			<mat-icon>edit</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Update card" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+			<mat-icon>autorenew</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Сonfirm email address" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+			<mat-icon>email</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Change password" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+			<mat-icon>vpn_key</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Block user" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-red">
+			<mat-icon>block</mat-icon>
+		</button>
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showProfileListControl">
+		<button mat-icon-button matTooltip="">
+			<mat-icon>view_column</mat-icon>
+		</button>
+
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showProfileAgentAddControl">
+		<button mat-icon-button matTooltip="Add agent">
+			<mat-icon>person_add</mat-icon>
+		</button>
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showProfileAgentsControls">
+		<button mat-icon-button matTooltip="">
+			<mat-icon>autorenew</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="">
+			<mat-icon>delete</mat-icon>
+		</button>
+	</ng-container>
+
+	<!-- -->
+	<ng-container *ngIf="showProfileTuneControl">
+		<button mat-icon-button matTooltip="Settings">
+			<mat-icon>tune</mat-icon>
+		</button>
+	</ng-container>
+
 </mat-toolbar>

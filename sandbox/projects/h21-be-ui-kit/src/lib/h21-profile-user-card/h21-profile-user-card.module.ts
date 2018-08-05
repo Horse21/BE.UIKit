@@ -10,7 +10,8 @@ import {
 	MatSelectModule,
 	MatSlideToggleModule,
 	MatTableModule,
-	MatTabsModule
+	MatTabsModule,
+	MatTooltipModule
 } from '@angular/material';
 
 import {H21ProfileUserCardComponent} from "./h21-profile-user-card.component"
@@ -23,6 +24,7 @@ import {H21ProfileUserCardComponent} from "./h21-profile-user-card.component"
 		MatCardModule,
 		MatTabsModule,
 		MatTableModule,
+		MatTooltipModule,
 		MatSlideToggleModule,
 		MatDatepickerModule,
 		MatSelectModule,

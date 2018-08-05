@@ -1,14 +1,7 @@
-<nav class="c-breadcrumbs" [class.breadcrumb-nav__without-last-link]="!lastIsLink">
-  <ul>
-    <li *ngIf="showHomeLink">
-      <a mat-button href="#">
-        <mat-icon>home</mat-icon>
-        <span>home</span>
-      </a>
-    </li>
-    <li *ngFor="let breadcrumb of breadCrumbs; let i = index;">
-      <a mat-button href="{{breadcrumb.url}}" *ngIf="i != breadCrumbs.length - 1 || lastIsLink">{{breadcrumb.label}}</a>
-      <span *ngIf="i == breadCrumbs.length - 1 && !lastIsLink">{{breadcrumb.label}}</span>
-    </li>
-  </ul>
+<nav class="c-h21-breadcrumbs">
+	<ng-container *ngFor="let item of breadcrumbsData; let i = index; let last = last;">
+		<a href="{{item.url}}" *ngIf="!last || lastIsLink">{{item.label}}</a>
+		<mat-icon *ngIf="!last">chevron_right</mat-icon>
+		<span *ngIf="last && !lastIsLink">{{item.label}}</span>
+	</ng-container>
 </nav>

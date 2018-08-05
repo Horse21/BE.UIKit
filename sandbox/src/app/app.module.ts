@@ -58,6 +58,7 @@ import {ProfileUserCardDocsComponent} from "./docs/profile-user-card/profile-use
 import {CounterInputComponent} from './docs/counter-input/counter-input.component';
 import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
+import { TopToolbarDocsComponent } from './docs/top-toolbar/top-toolbar-docs.component';
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
@@ -111,6 +112,7 @@ const routes: Routes = [
 		CounterInputComponent,
 		DashboardComponent,
 		ProfileUserCardDocsComponent,
+		TopToolbarDocsComponent,
 	],
 	imports: [
 		BrowserModule,

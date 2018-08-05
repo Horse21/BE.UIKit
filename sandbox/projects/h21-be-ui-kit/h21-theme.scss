@@ -717,7 +717,8 @@ a:hover {
   &.mat-toolbar {
 	background-color: white;
 	height: 60px;
-	padding-left: 0;
+	padding-left: 16px;
+	padding-right: 16px;
   }
   .mat-button-toggle-group {
 	@include mat-elevation(0);
@@ -774,6 +775,15 @@ a:hover {
 	.mat-form-field-underline {
 	  display: none;
 	}
+  }
+}
+.c-h21-top-toolbar_btn {
+  color: $h21-fg-gray;
+  &.c-h21-top-toolbar_btn__hover-blue:hover {
+	color: $h21-fg-ashen-blue;
+  }
+  &.c-h21-top-toolbar_btn__hover-red:hover {
+	color: #ec1200;
   }
 }
 
@@ -2440,6 +2450,29 @@ a.c-h21-header_logo {
 //----------------------------------------------------------------------------------------------------------------------
 // h21-profile-user-card component
 
+.c-h21-breadcrumbs {
+  display: inline-block;
+  font-size: 13px;
+
+  a {
+	color: mat-color($h21-mat-primary, 400);
+	display: inline-block;
+  }
+
+  span {
+	color: $h21-fg-ashen-blue;
+	display: inline-block;
+  }
+
+  .mat-icon {
+	vertical-align: middle;
+	color: $h21-fg-gray;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// h21-profile-user-card component
+
 .c-h21-profile-user-card {
 
   &.mat-card {
@@ -2456,7 +2489,49 @@ a.c-h21-header_logo {
 	width: 160px;
 	height: 160px;
 	border: 1px solid #6695e2;
-	background: $h21-bg-ashen-blue-dark;
+	background: white;
+	overflow: hidden;
+
+	.c-h21-profile-user-card_upload-avatar-button {
+	  width: 160px;
+	  height: 160px;
+	  display: block;
+	  border: none;
+	  cursor: pointer;
+	  padding: 0;
+	  margin: 0;
+	  line-height: normal;
+	  font-size: 16px;
+	  color: $h21-fg-ashen-blue;
+	  position: relative;
+
+	  &::before,
+	  &::after {
+		display: block;
+		content: '';
+		background: $h21-fg-ashen-blue;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	  }
+	  &::before {
+		width: 46px;
+		height: 1px;
+	  }
+	  &::after {
+		width: 1px;
+		height: 46px;
+	  }
+
+	  span {
+		position: absolute;
+		display: inline-block;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, 30px);
+	  }
+	}
   }
 
   .mat-card-header-text {
@@ -2618,6 +2693,7 @@ a.c-h21-header_logo {
   }
 }
 //----------------------------------------------------------------------------------------------------------------------
+// mat-table style
 .profile-table {
   width: 100%;
 
