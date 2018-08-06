@@ -57,6 +57,11 @@ import {CounterInputComponent} from './docs/counter-input/counter-input.componen
 import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
 import { TopToolbarDocsComponent } from './docs/top-toolbar/top-toolbar-docs.component';
+import { H21TableUsersComponent } from './docs/h21-table-users/h21-table-users.component';
+import { H21TableAgentsComponent } from './docs/h21-table-agents/h21-table-agents.component';
+import { H21TableAgenciesComponent } from './docs/h21-table-agencies/h21-table-agencies.component';
+import { H21TableTravelersComponent } from './docs/h21-table-travelers/h21-table-travelers.component';
+import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table-providers.component';
 
 const routes: Routes = [
 	{path: 'docs', component: DocsComponent },
@@ -109,6 +114,11 @@ const routes: Routes = [
 		CounterInputComponent,
 		DashboardComponent,
 		TopToolbarDocsComponent,
+		H21TableUsersComponent,
+		H21TableAgentsComponent,
+		H21TableAgenciesComponent,
+		H21TableTravelersComponent,
+		H21TableProvidersComponent,
 	],
 	imports: [
 		BrowserModule,
