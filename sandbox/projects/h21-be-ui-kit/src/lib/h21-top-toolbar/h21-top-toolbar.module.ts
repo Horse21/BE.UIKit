@@ -8,6 +8,7 @@ import {
 	MatSelectModule, MatButtonToggleModule, MatDividerModule
 } from "@angular/material";
 import {H21TopToolbarComponent} from "./h21-top-toolbar.component";
+import {H21BreadcrumbsModule} from "../h21-breadcrumbs/h21-breadcrumbs.module";
 
 @NgModule({
 	imports: [
@@ -18,7 +19,8 @@ import {H21TopToolbarComponent} from "./h21-top-toolbar.component";
 		MatSelectModule,
 		MatButtonToggleModule,
 		MatDividerModule,
-		FormsModule
+		FormsModule,
+		H21BreadcrumbsModule,
 	],
 	declarations: [
 		H21TopToolbarComponent,
@@ -26,4 +28,5 @@ import {H21TopToolbarComponent} from "./h21-top-toolbar.component";
 	exports: [H21TopToolbarComponent]
 })
 export class H21TopToolbarModule {
+
 }

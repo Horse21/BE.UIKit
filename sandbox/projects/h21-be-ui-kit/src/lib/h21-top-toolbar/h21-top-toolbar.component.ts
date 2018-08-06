@@ -29,11 +29,9 @@ export class H21TopToolbarComponent implements OnInit {
 	@Input() showFlightsLanguageControl = false;
 	@Input() showFlightsCurrencyControl = false;
 
-	@Input() breadcrumbsData: IBreadcrumb;
+	@Input() breadcrumbsData: Array<IBreadcrumb>;
 
 	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
-
-
 
 	constructor(private _appSubscriber: AppSubscriberService) {
 	}
