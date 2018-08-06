@@ -16,3 +16,5 @@ export * from './i-h21-date-time';
 export * from './i-request-options';
 export * from './entity';
 export * from './query';
+export * from './i-validation-rule';
+export * from './h21-validator';
