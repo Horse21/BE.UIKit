@@ -18,12 +18,12 @@ import { IBreadcrumb } from './../../dto/i-breadcrumb';
 
 export class H21TopToolbarComponent implements OnInit {
 
-	@Input() showProfileBreadcrumbsControl = false;
-	@Input() showProfileUserCardControls = false;
-	@Input() showProfileAgentsControls = false;
-	@Input() showProfileAgentAddControl = false;
-	@Input() showProfileTuneControl = false;
-	@Input() showProfileListControl = false;
+	@Input() showBreadcrumbs = false;
+	@Input() showProfileUserCardActions = false;
+	@Input() showProfileAgentsActions = false;
+	@Input() showProfileAgentAddActions = false;
+	@Input() showProfileTuneActions = false;
+	@Input() showProfileListActions = false;
 	@Input() showFlightsMapToggleControl = false;
 	@Input() showFlightsMenuToggleControl = false;
 	@Input() showFlightsLanguageControl = false;

@@ -65,6 +65,7 @@ const routes: Routes = [
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
 	{path: 'demo',  component: AppComponent },
+	{path: 'profile_demo',  component: AppComponent },
 	{path: '', redirectTo: '/', pathMatch: 'full'},
 	{path: '**', redirectTo: '/'}
 ];

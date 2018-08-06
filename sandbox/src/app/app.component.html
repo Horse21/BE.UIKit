@@ -1,4 +1,4 @@
-<div class="docs_page-box container-fluid" *ngIf="!isDemo()">
+<div class="docs_page-box container-fluid" *ngIf="!isDemo() && !isProfileDemo()">
 	<div class="docs_sidebar-wrapper row no-gutters">
 		<div class="docs_sidebar" [class.is-opened]="sidebarOpened">
 			<div class="docs_logo-box">
@@ -35,8 +35,13 @@
 <div class="container-fluid page_box" *ngIf="isDemo()">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
-			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'" [logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
-			<h21-top-toolbar (onMenuClick)="showSidebar()"></h21-top-toolbar>
+			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
+						[logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
+			<h21-top-toolbar [showFlightsMenuToggleControl]="true"
+							 [showFlightsMapToggleControl]="true"
+							 [showFlightsLanguageControl]="true"
+							 [showFlightsCurrencyControl]="true"
+							 (onMenuClick)="showSidebar()"></h21-top-toolbar>
 		</div>
 	</div>
 	<div class="row no-gutters page_content-box">
@@ -47,4 +52,36 @@
 	</div>
 	<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>
 </div>
-<!-- Demo page -->
+
+<!-- Profile demo -->
+<div class="container-fluid page_box" *ngIf="isProfileDemo()">
+	<div class="row no-gutters page_header-box">
+		<div class="col-12 no-gutters">
+			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
+						[logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
+			<h21-top-toolbar [showBreadcrumbs]="true" [breadcrumbsData]="breadcrumbsData"
+							 [showProfileUserCardActions]="true"></h21-top-toolbar>
+		</div>
+	</div>
+	<div class="row no-gutters page_content-box">
+		<div class="col-12 no-gutters __has-sidebar">
+			<nav class="sidebar_nav">
+				<a mat-button href="/profile_demo/board" class="is-active">
+					<mat-icon>apps</mat-icon>
+					<span>Board</span>
+				</a>
+				<a mat-button href="/profile_demo/tmc">
+					<mat-icon>domain</mat-icon>
+					<span>TMC</span>
+				</a>
+				<a mat-button href="/profile_demo/users">
+					<mat-icon>person</mat-icon>
+					<span>Users</span>
+				</a>
+			</nav>
+			<div class="page_content">
+				<h21-profile-user-card [cardView]="'user'"></h21-profile-user-card>
+			</div>
+		</div>
+	</div>
+</div>
