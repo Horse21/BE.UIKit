@@ -6,6 +6,7 @@ import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.compone
 import {Router} from '@angular/router';
 import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,13 @@ export class AppComponent {
 	title = 'HORSE21.PRO - Component design system';
 	subscription: any;
 	sidebarOpened = false;
+
+	breadcrumbsData: Array<IBreadcrumb> = [
+		{label: "Home", url: "#"},
+		{label: "Company", url: "#"},
+		{label: "My Company", url: "#"},
+		{label: "My User", url: "#"}
+	];
 
 	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService) {
 		iconReg.addSvgIcon('logo',						sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
@@ -53,6 +61,10 @@ export class AppComponent {
 
 	isDemo(): boolean {
 		return this.router.url.indexOf('/demo') == 0;
+	}
+
+	isProfileDemo(): boolean {
+		return this.router.url.indexOf('/profile_demo') == 0;
 	}
 
 	showSidebar(): void {

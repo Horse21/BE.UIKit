@@ -1,4 +1,4 @@
-<nav class="c-21-sidebar_nav">
+<nav class="sidebar_nav">
 	<button mat-button (click)="activeTab='tab-search'" [class.is-active]="activeTab == 'tab-search'" [disabled]="!activeTab">
 		<mat-icon>search</mat-icon>
 		<span>Search</span>
@@ -13,21 +13,21 @@
 	</button>
 </nav>
 
-<div class="c-21-sidebar_tabs-box" [class.is-active]="visibility">
-	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-search'">
+<div class="c-h21-sidebar_tabs-box" [class.is-active]="visibility">
+	<div class="c-h21-sidebar_tab" [class.is-active]="activeTab == 'tab-search'">
 		<h21-search-panel #searchPanel></h21-search-panel>
 	</div>
-	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-filter'">
+	<div class="c-h21-sidebar_tab" [class.is-active]="activeTab == 'tab-filter'">
 		<h21-filter-panel [searchOptions]="searchPanel.searchOptions"></h21-filter-panel>
 	</div>
-	<div class="c-21-sidebar_tab" [class.is-active]="activeTab == 'tab-history'">
+	<div class="c-h21-sidebar_tab" [class.is-active]="activeTab == 'tab-history'">
 		<div class="mat-typography">The functional is in development</div>
 	</div>
 </div>
 
-<div class="c-21-sidebar_search-result-box" *ngIf="listVisibility" [@toggleVisibility] [class.is-deployed]="!visibility && listVisibility">
+<div class="c-h21-sidebar_search-result-box" *ngIf="listVisibility" [@toggleVisibility] [class.is-deployed]="!visibility && listVisibility">
 	<mat-progress-bar *ngIf="actionInProcess" [@toggleVisibility] mode="indeterminate"></mat-progress-bar>
-	<div class="c-21-sidebar_search-result-box_inner">
+	<div class="c-h21-sidebar_search-result-box_inner">
 		<div *ngIf="actionInProcess" [@toggleVisibility] class="search-result-fake-view" >
 			<div class="fake_line">
 				<span class="fake_element fake_element__w-m"></span>

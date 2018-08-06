@@ -1,7 +1,7 @@
 <mat-toolbar class="c-h21-top-toolbar">
 
 	<!-- Breadcrumbs -->
-	<ng-container *ngIf="showProfileBreadcrumbsControl">
+	<ng-container *ngIf="showBreadcrumbs">
 		<h21-breadcrumbs [breadcrumbsData]="breadcrumbsData"></h21-breadcrumbs>
 	</ng-container>
 
@@ -13,7 +13,7 @@
 		</button>
 	</ng-container>
 
-	<!-- -->
+	<!--  -->
 	<ng-container *ngIf="showFlightsMapToggleControl">
 		<div *ngIf="modeVisibility" [@toggleVisibility]>
 			<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
@@ -49,53 +49,52 @@
 		</mat-form-field>
 	</ng-container>
 
-	<!-- -->
-	<ng-container *ngIf="showProfileUserCardControls">
-		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+	<!-- Profile user card actions -->
+	<ng-container *ngIf="showProfileUserCardActions">
+		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>edit</mat-icon>
 		</button>
-		<button mat-icon-button matTooltip="Update card" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+		<button mat-icon-button matTooltip="Update card" class="c-h21-top-toolbar_action-btn" [disabled]="true">
 			<mat-icon>autorenew</mat-icon>
 		</button>
-		<button mat-icon-button matTooltip="Сonfirm email address" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+		<button mat-icon-button matTooltip="Сonfirm email address" class="c-h21-top-toolbar_action-btn" [disabled]="true">
 			<mat-icon>email</mat-icon>
 		</button>
-		<button mat-icon-button matTooltip="Change password" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-blue">
+		<button mat-icon-button matTooltip="Change password" class="c-h21-top-toolbar_action-btn" [disabled]="true">
 			<mat-icon>vpn_key</mat-icon>
 		</button>
-		<button mat-icon-button matTooltip="Block user" class="c-h21-top-toolbar_btn c-h21-top-toolbar_btn__hover-red">
+		<button mat-icon-button matTooltip="Block user" class="c-h21-top-toolbar_action-btn c-h21-top-toolbar_action-btn__hover-red">
 			<mat-icon>block</mat-icon>
 		</button>
 	</ng-container>
 
-	<!-- -->
-	<ng-container *ngIf="showProfileListControl">
-		<button mat-icon-button matTooltip="">
+	<!-- Profile show list actions -->
+	<ng-container *ngIf="showProfileListActions">
+		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>view_column</mat-icon>
 		</button>
-
 	</ng-container>
 
-	<!-- -->
-	<ng-container *ngIf="showProfileAgentAddControl">
-		<button mat-icon-button matTooltip="Add agent">
+	<!-- Profile agent add actions -->
+	<ng-container *ngIf="showProfileAgentAddActions">
+		<button mat-icon-button matTooltip="Add agent" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>person_add</mat-icon>
 		</button>
 	</ng-container>
 
-	<!-- -->
-	<ng-container *ngIf="showProfileAgentsControls">
-		<button mat-icon-button matTooltip="">
+	<!-- Profile agents list actions -->
+	<ng-container *ngIf="showProfileAgentsActions">
+		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>autorenew</mat-icon>
 		</button>
-		<button mat-icon-button matTooltip="">
+		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn c-h21-top-toolbar_action-btn__hover-red">
 			<mat-icon>delete</mat-icon>
 		</button>
 	</ng-container>
 
-	<!-- -->
-	<ng-container *ngIf="showProfileTuneControl">
-		<button mat-icon-button matTooltip="Settings">
+	<!-- Profile tune actions -->
+	<ng-container *ngIf="showProfileTuneActions">
+		<button mat-icon-button matTooltip="Settings" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>tune</mat-icon>
 		</button>
 	</ng-container>
