@@ -11,7 +11,7 @@ export class H21TableProvidersComponent implements OnInit {
 
   ngOnInit() {
   }
-  displayedColumns: string[] = ['name', 'type', 'create', 'change', 'status', 'action'];
+  displayedColumns: string[] = ['name', 'type', 'createdby', 'change', 'status', 'action'];
   dataSource = ELEMENT_DATA;
 }
 export interface TableProviders {
