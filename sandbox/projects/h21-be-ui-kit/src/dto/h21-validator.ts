@@ -1,6 +1,6 @@
 import {IValidationRule} from "./i-validation-rule";
 
-export class Validator {
+export class H21Validator {
 	private rules: IValidationRule[] = [];
 
 	register(rule: string, predicate: () => boolean, message): void {
