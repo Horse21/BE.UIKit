@@ -2524,16 +2524,35 @@ a.c-h21-header_logo {
 
 .c-h21-breadcrumbs {
   display: inline-block;
-  font-size: 13px;
 
-  a {
+
+  .mat-button {
+	min-width: auto;
+	padding: 4px;
+	line-height: normal;
+	font-size: 13px;
 	color: mat-color($h21-mat-primary, 400);
-	display: inline-block;
+	text-decoration: underline;
+
+	&:hover {
+	  text-decoration: none;
+	  .mat-button-focus-overlay {
+		background: none;
+	  }
+	}
+
+	.mat-ripple {
+	  .mat-ripple-element {
+		background-color: mat-color($h21-mat-primary, 400);
+		opacity: 0.1;
+	  }
+	}
   }
 
-  span {
+  > span {
 	color: $h21-fg-ashen-blue;
 	display: inline-block;
+	font-size: 13px;
   }
 
   .mat-icon {

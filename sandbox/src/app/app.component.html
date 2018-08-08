@@ -83,26 +83,3 @@
 		</div>
 	</div>
 </div>
-
-
-<table mat-table [dataSource]="expandData" class="profile-table profile-table__expanded-table">
-	<ng-container matColumnDef="blank">
-		<th mat-header-cell *matHeaderCellDef [width]="'4%'">&nbsp;</th>
-		<td mat-cell *matCellDef>&nbsp;</td>
-	</ng-container>
-	<ng-container matColumnDef="field">
-		<th mat-header-cell *matHeaderCellDef [width]="'32%'">Field</th>
-		<td mat-cell *matCellDef="let expElement"> {{expElement.field}} </td>
-	</ng-container>
-	<ng-container matColumnDef="oldValue">
-		<th mat-header-cell *matHeaderCellDef [width]="'32%'">oldValue</th>
-		<td mat-cell *matCellDef="let expElement" class="__text-strike"> {{expElement.oldValue}} </td>
-	</ng-container>
-	<ng-container matColumnDef="newValue">
-		<th mat-header-cell *matHeaderCellDef [width]="'32%'">newValue</th>
-		<td mat-cell *matCellDef="let expElement"> {{expElement.newValue}} </td>
-	</ng-container>
-
-	<tr mat-header-row *matHeaderRowDef="historyExpandDisplayedColumns"></tr>
-	<tr mat-row *matRowDef="let expElement; columns: historyExpandDisplayedColumns;"></tr>
-</table>
