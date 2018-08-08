@@ -1,6 +1,6 @@
 <nav class="c-h21-breadcrumbs">
 	<ng-container *ngFor="let item of breadcrumbsData; let i = index; let last = last;">
-		<a href="{{item.url}}" *ngIf="!last || lastIsLink">{{item.label}}</a>
+		<a mat-button [routerLink]="item.url" *ngIf="!last || lastIsLink">{{item.label}}</a>
 		<mat-icon *ngIf="!last">chevron_right</mat-icon>
 		<span *ngIf="last && !lastIsLink">{{item.label}}</span>
 	</ng-container>
