@@ -1,5 +1,6 @@
 <div class="c-h21-header">
 	<mat-toolbar class="c-h21-header_toolbar">
+
 		<a class="c-h21-header_logo" href="/">
 			<img src="{{logotypeUrl}}" alt="" />
 		</a>
@@ -7,11 +8,11 @@
 		<div class="w-spacer">&nbsp;</div>
 
 		<mat-form-field class="c-h21-header_search-field">
-			<mat-icon matPrefix="">search</mat-icon>
-			<button mat-icon-button matSuffix>
+			<mat-icon matPrefix>search</mat-icon>
+			<input matInput />
+			<button mat-icon-button matSuffix (click)="openSearchSettingsDialog()">
 				<mat-icon>tune</mat-icon>
 			</button>
-			<input matInput>
 		</mat-form-field>
 
 		<nav>
@@ -41,39 +42,43 @@
 			<!--</button>-->
 		</nav>
 	</mat-toolbar>
-
-	<mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
-		<ng-template matMenuContent>
-			<button mat-menu-item *ngFor="let n of notifyList">
-				<span>{{n.text}}</span>
-			</button>
-		</ng-template>
-	</mat-menu>
-
-	<mat-menu #servicesMenu="matMenu" yPosition="below" [overlapTrigger]="false">
-		<ng-template matMenuContent>
-			<button mat-menu-item>
-				<mat-icon>work</mat-icon>
-				<span>First project</span>
-			</button>
-			<button mat-menu-item>
-				<mat-icon>watch_later</mat-icon>
-				<span>Second project</span>
-			</button>
-			<button mat-menu-item>
-				<mat-icon>videocam</mat-icon>
-				<span>The third project</span>
-			</button>
-			<button mat-menu-item>
-				<mat-icon>flag</mat-icon>
-				<span>Fourth, last project</span>
-			</button>
-		</ng-template>
-	</mat-menu>
-
-	<mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="c-h21-header-user-card-box">
-		<ng-template matMenuContent>
-            <h21-user-card (onLogout)="logout();"></h21-user-card>
-		</ng-template>
-	</mat-menu>
 </div>
+
+<!-- Notification menu -->
+<mat-menu #notificationMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+	<ng-template matMenuContent>
+		<button mat-menu-item *ngFor="let n of notifyList">
+			<span>{{n.text}}</span>
+		</button>
+	</ng-template>
+</mat-menu>
+
+<!-- Projects menu -->
+<mat-menu #servicesMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+	<ng-template matMenuContent>
+		<button mat-menu-item>
+			<mat-icon>work</mat-icon>
+			<span>First project</span>
+		</button>
+		<button mat-menu-item>
+			<mat-icon>watch_later</mat-icon>
+			<span>Second project</span>
+		</button>
+		<button mat-menu-item>
+			<mat-icon>videocam</mat-icon>
+			<span>The third project</span>
+		</button>
+		<button mat-menu-item>
+			<mat-icon>flag</mat-icon>
+			<span>Fourth, last project</span>
+		</button>
+	</ng-template>
+</mat-menu>
+
+<!-- User card menu -->
+<mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="c-h21-header-user-card-box">
+	<ng-template matMenuContent>
+		<h21-user-card (onLogout)="logout();"></h21-user-card>
+	</ng-template>
+</mat-menu>
+

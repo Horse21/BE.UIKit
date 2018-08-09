@@ -11,10 +11,12 @@ import {
 	MatCheckboxModule,
 	MatDividerModule,
 	MatCardModule,
-	MatListModule} from "@angular/material";
+	MatListModule, MatSelectModule, MatDatepicker, MatDatepickerModule
+} from "@angular/material";
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {H21HeaderComponent} from "./h21-header.component";
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
-import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+import {H21HeaderSearchSettingsDialogComponent} from "./h21-header-search-settings-dialog.component";
 import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 
 @NgModule({
@@ -32,15 +34,18 @@ import {H21UserCardComponent} from "../h21-user-card/h21-user-card.component";
 		MatCheckboxModule,
 		MatDividerModule,
 		MatCardModule,
-		MatListModule
+		MatListModule,
+		MatSelectModule,
+		MatDatepickerModule,
 	],
 	declarations: [
 		H21HeaderComponent,
 		H21HeaderUserSelectorDialogComponent,
+		H21HeaderSearchSettingsDialogComponent,
 		H21UserCardComponent
 	],
 	exports: [H21HeaderComponent],
-	entryComponents: [H21HeaderUserSelectorDialogComponent]
+	entryComponents: [H21HeaderUserSelectorDialogComponent, H21HeaderSearchSettingsDialogComponent]
 })
 export class H21HeaderModule {
 }

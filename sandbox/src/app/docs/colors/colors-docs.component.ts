@@ -17,7 +17,7 @@ export class ColorsDocsComponent {
 	colorsUi: Array<any> = new Array();
 
 	constructor(private _http: HttpClient) {
-		this._http.get<any>('../../assets/storage/colors.json').subscribe(data => {
+		this._http.get<any>('./assets/storage/colors.json').subscribe(data => {
 			this.colorsUi = data.ui;
 			this.colorsFg = data.foreground;
 			this.colorsBg = data.background;

@@ -21,6 +21,7 @@ import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-heade
 import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
+import {H21HotelsSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotels-search-panel/h21-hotels-search-panel.component';
 import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
 import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
 import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
@@ -31,6 +32,7 @@ import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h2
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
+import {H21HeaderSearchSettingsDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-search-settings-dialog.component';
 import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
@@ -80,6 +82,7 @@ const routes: Routes = [
 		H21TopToolbarComponent,
 		H21SidebarComponent,
 		H21SearchPanelComponent,
+		H21HotelsSearchPanelComponent,
 		H21SearchResultComponent,
 		H21SearchResultRowComponent,
 		H21FlyRouteSelectionComponent,
@@ -88,6 +91,7 @@ const routes: Routes = [
 		H21SidebarHistoryPanelComponent,
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
+		H21HeaderSearchSettingsDialogComponent,
 		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
 		H21PassengersSearchComponent,
@@ -133,13 +137,22 @@ const routes: Routes = [
 		NgxMdModule.forRoot(),
 	],
 	providers: [
-		{provide: VocabularyService, useValue: new FakeVocabularyService()},
+		{
+			provide: VocabularyService,
+			useValue: new FakeVocabularyService()
+		},
 		H21RightOverlayPanelService,
 		AppSubscriberService,
 		OrderService,
 	],
 	bootstrap: [AppComponent],
-	entryComponents: [IconExampleDialogComponent, H21HeaderUserSelectorDialogComponent, H21TwoMonthCalendarDialogComponent, H21RightOverlayPanelComponent]
+	entryComponents: [
+		IconExampleDialogComponent,
+		H21HeaderUserSelectorDialogComponent,
+		H21HeaderSearchSettingsDialogComponent,
+		H21TwoMonthCalendarDialogComponent,
+		H21RightOverlayPanelComponent,
+	]
 })
 
 export class AppModule {
