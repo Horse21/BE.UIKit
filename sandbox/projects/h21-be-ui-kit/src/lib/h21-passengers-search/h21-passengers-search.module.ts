@@ -4,10 +4,13 @@ import {
 	MatButtonModule,
 	MatCardModule,
 	MatFormFieldModule,
-	MatIconModule, MatInputModule,
-	MatListModule, MatSnackBarModule
+	MatIconModule,
+	MatInputModule,
+	MatListModule,
+	MatSnackBarModule,
 } from '@angular/material';
 import {H21PassengersSearchComponent} from "./h21-passengers-search.component"
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 	imports: [
@@ -15,10 +18,12 @@ import {H21PassengersSearchComponent} from "./h21-passengers-search.component"
 		MatButtonModule,
 		MatIconModule,
 		MatFormFieldModule,
+		MatInputModule,
 		MatListModule,
 		MatCardModule,
 		MatSnackBarModule,
-		MatInputModule
+		FormsModule,
+		ReactiveFormsModule,
 	],
 	declarations: [H21PassengersSearchComponent],
 	exports: [H21PassengersSearchComponent]

@@ -1,0 +1,44 @@
+<div class="c-h21-header-search-settings">
+	<mat-form-field class="c-h21-profile-user-card_form-field" color="primary">
+		<mat-select placeholder="State">
+			<mat-option value="">New</mat-option>
+			<mat-option value="">Active</mat-option>
+			<mat-option value="">Blocked</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="c-h21-profile-user-card_form-field" color="primary">
+		<mat-select placeholder="Tags" value="v1">
+			<mat-option value=""></mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="c-h21-profile-user-card_form-field" color="primary">
+		<mat-select placeholder="Create user" value="v1">
+			<mat-option value=""></mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<h5>Create date</h5>
+	<div class="row">
+		<div class="col-6">
+			<mat-form-field class="c-h21-profile-user-card_form-field" color="primary">
+				<input matInput placeholder="From" [matDatepicker]="pickerFrom">
+				<mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+				<mat-datepicker #pickerFrom></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<div class="col-6">
+			<mat-form-field class="c-h21-profile-user-card_form-field" color="primary">
+				<input matInput placeholder="To" [matDatepicker]="pickerTo">
+				<mat-datepicker-toggle matSuffix [for]="pickerTo" class="c-h21-profile-user-card_datepicker-icon"></mat-datepicker-toggle>
+				<mat-datepicker #pickerTo></mat-datepicker>
+			</mat-form-field>
+		</div>
+	</div>
+
+	<div class="c-h21-header-search-settings_actions">
+		<button mat-button class="__size-s" color="primary">Clear filter</button>
+		<button mat-raised-button color="primary">Filter</button>
+	</div>
+</div>
