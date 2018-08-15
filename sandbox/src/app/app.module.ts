@@ -67,6 +67,7 @@ import { H21TableAgentsComponent } from './docs/h21-table-agents/h21-table-agent
 import { H21TableAgenciesComponent } from './docs/h21-table-agencies/h21-table-agencies.component';
 import { H21TableTravelersComponent } from './docs/h21-table-travelers/h21-table-travelers.component';
 import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table-providers.component';
+import { SearchResultItemComponent } from './docs/search-result-item/search-result-item.component';
 import {HotelSearchPanelDocsComponent} from './docs/hotels-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotels-filter-panel/hotel-filter-panel-docs.component';
 
@@ -139,6 +140,7 @@ const routes: Routes = [
 		H21TableAgenciesComponent,
 		H21TableTravelersComponent,
 		H21TableProvidersComponent,
+		SearchResultItemComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
 	],
