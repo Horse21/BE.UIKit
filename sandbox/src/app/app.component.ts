@@ -67,6 +67,10 @@ export class AppComponent {
 		return this.router.url.indexOf('/profile_demo') == 0;
 	}
 
+	isHotelsDemo(): boolean {
+		return this.router.url.indexOf('/hotels') == 0;
+	}
+
 	showSidebar(): void {
 		this.sidebar.visibilityToggle();
 	}

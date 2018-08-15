@@ -83,3 +83,24 @@
 		</div>
 	</div>
 </div>
+
+<!-- Demo page -->
+<div class="container-fluid page_box" *ngIf="isHotelsDemo()">
+	<div class="row no-gutters page_header-box">
+		<div class="col-12 no-gutters">
+			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
+						[logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
+			<h21-top-toolbar [showFlightsMenuToggleControl]="true"
+							 [showFlightsMapToggleControl]="true"
+							 [showFlightsLanguageControl]="true"
+							 [showFlightsCurrencyControl]="true"
+							 (onMenuClick)="showSidebar()"></h21-top-toolbar>
+		</div>
+	</div>
+	<div class="row no-gutters page_content-box">
+		<div class="col-12 no-gutters __has-sidebar">
+			<h21-sidebar></h21-sidebar>
+			<div class="map-box"></div>
+		</div>
+	</div>
+</div>
