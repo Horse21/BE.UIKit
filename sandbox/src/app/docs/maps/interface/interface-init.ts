@@ -6,9 +6,9 @@ export interface LoadApiMap {
     version:string;
 }
 
-export interface InitMap{
+export interface InitMap {
     source: LoadApiMap;
     Init (source: LoadApiMap);
-    Load();
+    Load(): any;
     Destroy();
 }
