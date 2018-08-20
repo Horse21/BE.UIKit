@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {H21HotelsSearchPanelComponent} from "./h21-hotels-search-panel.component";
+import {H21HotelSearchPanelComponent} from "./h21-hotel-search-panel.component";
 import {
 	MatAutocompleteModule,
 	MatButtonModule,
@@ -38,9 +38,9 @@ import {H21CounterModule} from "../h21-counter/h21-counter.module";
 		MatInputModule,
 		H21CounterModule
 	],
-	declarations: [H21HotelsSearchPanelComponent],
-	exports: [H21HotelsSearchPanelComponent]
+	declarations: [H21HotelSearchPanelComponent],
+	exports: [H21HotelSearchPanelComponent]
 })
-export class H21HotelsSearchPanelModule {
+export class H21HotelSearchPanelModule {
 
 }

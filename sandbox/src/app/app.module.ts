@@ -19,10 +19,11 @@ import {NgxMdModule} from 'ngx-md';
 /** Import H21 components */
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
 import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
+import {H21SidebarNavComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar-nav/h21-sidebar-nav.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
-import {H21HotelsSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotels-search-panel/h21-hotels-search-panel.component';
-import {H21HotelsFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotels-filter-panel/h21-hotels-filter-panel.component';
+import {H21HotelSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-panel/h21-hotel-search-panel.component';
+import {H21HotelFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel.component';
 import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
 import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
 import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
@@ -41,6 +42,8 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-counter/h21-counter.component";
 import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
 import {H21HistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
+import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -68,23 +71,22 @@ import { H21TableAgenciesComponent } from './docs/h21-table-agencies/h21-table-a
 import { H21TableTravelersComponent } from './docs/h21-table-travelers/h21-table-travelers.component';
 import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table-providers.component';
 import { SearchResultItemComponent } from './docs/search-result-item/search-result-item.component';
-import {HotelSearchPanelDocsComponent} from './docs/hotels-search-panel/hotel-search-panel-docs.component';
-import {HotelFilterPanelDocsComponent} from './docs/hotels-filter-panel/hotel-filter-panel-docs.component';
+import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
+import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
 
 
 
 const routes: Routes = [
+	{path: '', redirectTo: '/', pathMatch: 'full'},
+	// {path: 'demo', component: HomeComponent, children: [
+	// 		{path: '', component: H21SearchPanelComponent, outlet: 'searchPanel'},
+	// 		//{path: '', component: H21FilterPanelComponent, outlet: 'filterPanel'},
+	// 		{path: '', component: H21HistoryPanelComponent, outlet: 'historyPanel'},
+	// 	]},
+	{path: 'demo', component: AppComponent },
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
-	{path: 'demo',  component: AppComponent },
-	{path: 'hotels', component: AppComponent, children:[
-		{path: 'search', component: H21HotelsSearchPanelComponent, outlet: 'searchPanelOutlet'},
-		{path: 'filter', component: H21HotelsFilterPanelComponent, outlet: 'filterPanelOutlet'},
-		//{path: 'history', component: H21HotelsHistoryPanelComponent, outlet: 'historyPanelOutlet'},
-	]},
-	{path: 'profile_demo',  component: AppComponent },
-	{path: '', redirectTo: '/', pathMatch: 'full'},
 	{path: '**', redirectTo: '/'}
 ];
 
@@ -95,8 +97,8 @@ const routes: Routes = [
 		H21TopToolbarComponent,
 		H21SidebarComponent,
 		H21SearchPanelComponent,
-		H21HotelsSearchPanelComponent,
-		H21HotelsFilterPanelComponent,
+		H21HotelSearchPanelComponent,
+		H21HotelFilterPanelComponent,
 		H21SearchResultComponent,
 		H21SearchResultRowComponent,
 		H21FlyRouteSelectionComponent,
@@ -114,6 +116,8 @@ const routes: Routes = [
 		H21CounterComponent,
 		H21RateComponent,
 		H21HistoryPanelComponent,
+		H21HotelSearchResultComponent,
+		H21SidebarNavComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,

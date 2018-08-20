@@ -1,0 +1,119 @@
+<div class="c-h21-hotel-search-result" [class.__grid-view]="viewMode == 'grid'">
+
+	<mat-progress-bar *ngIf="searchInProgress" [@toggleVisibility] mode="indeterminate"></mat-progress-bar>
+
+	<div *ngIf="searchInProgress" [@toggleVisibility] class="search-result-fake-view">
+		<div class="row">
+			<div class="col-4">
+				<span class="fake_element fake_element__w-xl"></span>
+			</div>
+			<div class="col-4">
+				<span class="fake_element fake_element__w-xl"></span>
+			</div>
+			<div class="col-4">
+				<span class="fake_element fake_element__w-xl"></span>
+			</div>
+		</div>
+		<div class="fake_divider fake_divider__bold"></div>
+		<div class="fake_line"></div>
+		<ng-container *ngIf="viewMode != 'grid'">
+			<div class="fake_box" *ngFor="let i of [1,2,3]">
+				<div class="row">
+					<div class="col-3">
+						<div class="fake_img"></div>
+					</div>
+					<div class="col-7">
+						<div class="fake_element fake_element__w-xl"></div>
+						<div class="fake_element fake_element__w-xl"></div>
+						<div class="row">
+							<div class="col-6">
+								<div class="fake_element fake_element__w-xl"></div>
+							</div>
+							<div class="col-6">
+								<div class="fake_element fake_element__w-xl"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-2 __text-right">
+						<div class="fake_element fake_element__w-l"></div>
+						<div class="fake_element fake_element__w-l"></div>
+						<div class="fake_element fake_element__xl"></div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="viewMode == 'grid'">
+			<div class="fake_box" *ngFor="let i of [1,2]">
+				<div class="fake_img"></div>
+				<div class="fake_line"></div>
+				<div class="fake_element fake_element__w-xl"></div>
+				<div class="fake_element fake_element__w-xl"></div>
+				<div class="fake_element fake_element__w-l"></div>
+				<div class="fake_line"></div>
+				<div class="row">
+					<div class="col-6">&nbsp;</div>
+					<div class="col-6 __text-right">
+						<div class="fake_element fake_element__m"></div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+
+	<mat-tab-group *ngIf="searchResultReady">
+		<mat-tab label="Search result">
+			<div class="c-h21-hotel-search-result_tab-content">
+				<div class="__text-right">
+					<span class="__text-size-s">Sort by:</span>
+					<mat-form-field class="sorting-form-field">
+						<mat-select>
+							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+								{{item.name}}
+								<span matSuffix><mat-icon class="__size-s" *ngIf="item.direction == 'up'">arrow_upward</mat-icon></span>
+								<span matSuffix><mat-icon class="__size-s" *ngIf="item.direction == 'down'">arrow_downward</mat-icon></span>
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<!-- content -->
+			</div>
+		</mat-tab>
+		<mat-tab label="Favorites">
+			<div class="c-h21-hotel-search-result_tab-content">
+				<div class="__text-right">
+					<span class="__text-size-s">Sort by:</span>
+					<mat-form-field class="sorting-form-field">
+						<mat-select>
+							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+								{{item.name}}
+								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'up'">close</mat-icon>
+								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'down'">close</mat-icon>
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<!-- content -->
+			</div>
+		</mat-tab>
+		<mat-tab label="Negotiated Rates">
+			<ng-template mat-tab-label>
+				Negotiated <ng-container *ngIf="viewMode != 'grid'">Rates</ng-container>
+			</ng-template>
+			<div class="c-h21-hotel-search-result_tab-content">
+				<div class="__text-right">
+					<span class="__text-size-s">Sort by:</span>
+					<mat-form-field class="sorting-form-field">
+						<mat-select>
+							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+								{{item.name}}
+								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'up'">close</mat-icon>
+								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'down'">close</mat-icon>
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<!-- content -->
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+</div>

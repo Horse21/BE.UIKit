@@ -1,12 +1,20 @@
 import {Component, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {
+	MatIconRegistry,
+	MatSidenav
+} from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
 import {Router} from '@angular/router';
 import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
+import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
+import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
+import {ISearchHotelOptions} from "../../projects/h21-be-ui-kit/src/dto/i-search-hotel-options";
+import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+
 
 @Component({
   selector: 'app-root',
@@ -31,7 +39,7 @@ export class AppComponent {
 		{label: "My User", url: "#"}
 	];
 
-	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService) {
+	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
 		iconReg.addSvgIcon('logo',						sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
 		iconReg.addSvgIcon('h21_flight_land_blue',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-blue-icon.svg'));
 		iconReg.addSvgIcon('h21_flight_land_green',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-green-icon.svg'));
@@ -63,23 +71,62 @@ export class AppComponent {
 		return this.router.url.indexOf('/demo') == 0;
 	}
 
-	isProfileDemo(): boolean {
-		return this.router.url.indexOf('/profile_demo') == 0;
-	}
-
-	isHotelsDemo(): boolean {
-		return this.router.url.indexOf('/hotels') == 0;
-	}
-
-	showSidebar(): void {
-		this.sidebar.visibilityToggle();
-	}
-
 	changeComponent(event): void {
 		this.docs.changeComponent(event);
 	}
 
 	openHelpSection(): void {
 		this.rightPanelDialog.open('h21-help');
+	}
+
+
+	/* For prototype */
+
+	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
+	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
+
+	activeLeftSidenavPanel: string = 'search';
+	sidenavOpened: boolean = true;
+	searchResultVisibility: boolean = false;
+	searchResultViewMode: string = 'list';
+	sidebarNavDisabled: boolean = false;
+
+	leftSidenavToggle() {
+		this.leftSidenav.toggle();
+		if (this.leftSidenav.opened) {
+			this.sidebarNavDisabled = false;
+			this.searchResultViewMode = 'list';
+			this.sidenavOpened = true;
+		} else {
+			this.sidebarNavDisabled = true;
+			this.sidenavOpened = false;
+		}
+	}
+
+	showSidebarPanel(tab: ISidebarNavTab): void {
+		if (!this.leftSidenav.opened) {
+			this.leftSidenavToggle();
+		}
+		this.activeLeftSidenavPanel = tab.name;
+	}
+
+	search(options: ISearchHotelOptions): void {
+		this.searchResultVisibility = true;
+		setTimeout(() => {
+			this.searchResult.search(options);
+		}, 0);
+	}
+
+	clearSearch(): void {
+		this.searchResultVisibility = false;
+		this.searchResult.clear();
+	}
+
+	changeResultViewMode(mode: string): void {
+		this.searchResultViewMode = mode;
+
+		if (mode == 'map') {
+			this.leftSidenavToggle();
+		}
 	}
 }

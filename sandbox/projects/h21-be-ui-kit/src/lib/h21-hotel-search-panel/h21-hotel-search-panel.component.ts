@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {DateAdapter} from '@angular/material';
 import {H21RightOverlayPanelService} from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {ISearchHotelOptions} from "../../dto/i-search-hotel-options";
 
 const DESTINATION_ARR: Array<any> = [
 	{id: 1, type: "city", name: "Amsterdam", description: "Netherlands"},
@@ -12,52 +13,56 @@ const DESTINATION_ARR: Array<any> = [
 ];
 
 @Component({
-	selector: 'h21-hotels-search-panel',
-	templateUrl: './h21-hotels-search-panel.component.html'
+	selector: 'h21-hotel-search-panel',
+	templateUrl: './h21-hotel-search-panel.component.html'
 })
 
-export class H21HotelsSearchPanelComponent {
+export class H21HotelSearchPanelComponent {
 
-	paymentMethod: 'account' | 'hotel' = 'account';
-	destination: string = "";
-	hotelName: string = "";
-	nationality: string = "";
-	checkInDate: Date;
-	checkOutDate: Date;
-	nightsCount: number = null;
+	searchOptions: ISearchHotelOptions;
 	adultsCount: number = 1;
 	childrenCount: number = 0;
-	roomsCount: number = 0;
-
 	childAge_1: number = null;
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
-
 	destinations: Array<any> = DESTINATION_ARR;
 	destinationControl: FormControl = new FormControl();
+
+	@Output() onSearch: EventEmitter<ISearchHotelOptions> = new EventEmitter<ISearchHotelOptions>();
+	@Output() onClearSearch: EventEmitter<void> = new EventEmitter<void>();
 
 	constructor(private _dateAdapter: DateAdapter<Date>,
 				private _rightPanelDialog: H21RightOverlayPanelService) {
 
+		this.searchOptions = <ISearchHotelOptions> {
+			paymentMethod: 'account',
+			destination: "",
+			hotelName: "",
+			nationality: "",
+			checkInDate: null,
+			checkOutDate: null,
+			nightsCount: null,
+			roomCount: 0
+		};
 	}
 
 	changeCheckInDate($event) {
-		this.checkInDate = $event;
+		this.searchOptions.checkInDate = $event;
 		this.setNightsCount();
 	}
 
 	changeCheckOutDate($event) {
-		this.checkOutDate = $event;
+		this.searchOptions.checkOutDate = $event;
 		this.setNightsCount();
 	}
 
 	setNightsCount() {
-		if (this.checkInDate && this.checkOutDate) {
+		if (this.searchOptions.checkInDate && this.searchOptions.checkOutDate) {
 			const oneDayTime = 86400000; // let oneDayTime = 24 * 60 * 60 * 1000;
-			let diffTime = this.checkOutDate.getTime() - this.checkInDate.getTime();
-			this.nightsCount = diffTime / oneDayTime;
+			let diffTime = this.searchOptions.checkOutDate.getTime() - this.searchOptions.checkInDate.getTime();
+			this.searchOptions.nightsCount = diffTime / oneDayTime;
 		} else {
-			this.nightsCount = null;
+			this.searchOptions.nightsCount = null;
 		}
 	}
 
@@ -75,6 +80,23 @@ export class H21HotelsSearchPanelComponent {
 
 	showTravelers() {
 		this._rightPanelDialog.open('h21-selected-passengers');
+	}
+
+	clearSearch() {
+		this.searchOptions.paymentMethod = 'account';
+		this.searchOptions.destination = "";
+		this.searchOptions.hotelName = "";
+		this.searchOptions.nationality = "";
+		this.searchOptions.checkInDate = null;
+		this.searchOptions.checkOutDate = null;
+		this.searchOptions.nightsCount = null;
+		this.searchOptions.roomCount = 0;
+
+		this.onClearSearch.emit();
+	}
+
+	search() {
+		this.onSearch.emit(this.searchOptions);
 	}
 
 }

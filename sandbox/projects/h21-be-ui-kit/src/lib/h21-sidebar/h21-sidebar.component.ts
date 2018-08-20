@@ -1,31 +1,27 @@
-import {AfterViewInit, Component, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
-import { SearchResult } from '../../dto/search-result';
-import { AppSubscriberService } from '../../services/app-subscriber-service';
-import { H21SearchResultComponent } from '../h21-search-result/h21-search-result.component';
-import { VocabularyService } from '../../services/vocabulary-service';
-import { SearchFlightDto } from '../../dto/search-flight-dto';
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import {
+	AfterViewInit,
+	Component,
+	HostListener,
+	OnInit,
+	QueryList,
+	ViewChildren
+} from '@angular/core';
+import {SearchResult} from '../../dto/search-result';
+import {AppSubscriberService} from '../../services/app-subscriber-service';
+import {H21SearchResultComponent} from '../h21-search-result/h21-search-result.component';
+import {VocabularyService} from '../../services/vocabulary-service';
 
 @Component({
 	selector: 'h21-sidebar',
 	templateUrl: './h21-sidebar.component.html',
-	animations: [
-		trigger('toggleVisibility', [
-			state('void', style({ opacity: 0 })),
-			state('enter', style({ opacity: 1 })),
-			state('leave',style({ opacity: 0 })),
-			transition('* => *', animate('200ms')),
-		])
-	]
 })
 
 export class H21SidebarComponent implements OnInit, AfterViewInit {
 
 	activeTab: string = 'tab-search';
 	visibility = true;
-	listVisibility = false;
+	searchResultVisibility = false;
 	actionInProcess = false;
-	resultVisibility = false;
 
 	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
 	private _result: SearchResult;
@@ -43,19 +39,19 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 	}
 
 	public ngOnInit(): void {
-		this._appSubscriber.searchObservable().subscribe(options => {
-			if (options) {
-				this.search(options);
-			} else {
-				this.clearSearch();
-			}
-		});
+		// this._appSubscriber.searchObservable().subscribe(options => {
+		// 	if (options) {
+		// 		this.search(options);
+		// 	} else {
+		// 		this.clearSearch();
+		// 	}
+		// });
 
 		this._appSubscriber.searchResultModeObservable().subscribe(mode => {
-			if (mode == 'list') {
-				this.showList();
-			} else {
-				this.hideList();
+			if (mode == 'list' || mode == 'grid' || mode == 'full-width-list') {
+				this.showSearchResult();
+			} else if (mode == 'map')  {
+				this.hideSearchResult();
 			}
 		});
 	}
@@ -78,38 +74,47 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 		this.activeTab = "";
 	}
 
-	search(searchOptions: SearchFlightDto) {
-		this.resultVisibility = false;
-		this.actionInProcess = true;
-		this.showList();
-		setTimeout(() => {
-			this._vocabulary.searchFlights(searchOptions).subscribe(result => {
-				this._result = result;
-				this.actionInProcess = false;
-				setTimeout(() => {
-					this.resultVisibility = true;
-				}, 250);
-			});
-		}, 2000);
-		if (this.screenWidth <= this.maxScreenWidth) {
-			this.visibilityHide();
-			this._appSubscriber.closeMenu();
+	// search(searchOptions: SearchFlightDto) {
+	// 	this.resultVisibility = false;
+	// 	this.actionInProcess = true;
+	// 	this.showList();
+	// 	setTimeout(() => {
+	// 		this._vocabulary.searchFlights(searchOptions).subscribe(result => {
+	// 			this._result = result;
+	// 			this.actionInProcess = false;
+	// 			setTimeout(() => {
+	// 				this.resultVisibility = true;
+	// 			}, 250);
+	// 		});
+	// 	}, 2000);
+	// 	if (this.screenWidth <= this.maxScreenWidth) {
+	// 		this.visibilityHide();
+	// 		this._appSubscriber.closeMenu();
+	// 	}
+	// }
+
+	// clearSearch() {
+	// 	this.hideList();
+	// 	this.resultVisibility = false;
+	// }
+
+
+	searchResultVisibilityToggle(): void {
+		if (!this.searchResultVisibility) {
+			this.showSearchResult();
+		} else {
+			this.hideSearchResult();
 		}
 	}
-
-	clearSearch() {
-		this.hideList();
-		this.resultVisibility = false;
+	private showSearchResult() {
+		this.searchResultVisibility = true;
 	}
 
-	private showList() {
-		this.listVisibility = true;
+	private hideSearchResult() {
+		this.searchResultVisibility = false;
 	}
 
-	private hideList() {
-		this.listVisibility = false;
-		//this.resultPanel.visibility = false;
-	}
+
 
 	public ngAfterViewInit(): void {
 		this.queryResultPanels.changes.subscribe((comps: QueryList<H21SearchResultComponent>) =>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatAutocompleteSelectedEvent} from "@angular/material";
 
 const ALL_TAGS: Array<any> = [
@@ -12,11 +12,14 @@ const ALL_TAGS: Array<any> = [
 ];
 
 @Component({
-	selector: 'h21-hotels-filter-panel',
-	templateUrl: './h21-hotels-filter-panel.component.html'
+	selector: 'h21-hotel-filter-panel',
+	templateUrl: './h21-hotel-filter-panel.component.html'
 })
 
-export class H21HotelsFilterPanelComponent {
+export class H21HotelFilterPanelComponent {
+
+	@Input() viewMode: 'list' | 'grid' | 'map';
+	@Output() onChangeViewMode : EventEmitter<string> = new EventEmitter<string>();
 
 	allTags: Array<any>;
 	selectedTags: Array<any>;
@@ -42,6 +45,7 @@ export class H21HotelsFilterPanelComponent {
 	constructor() {
 		this.allTags = ALL_TAGS;
 		this.selectedTags = ALL_TAGS.slice(0, ALL_TAGS.length);
+		this.viewMode = 'list';
 	}
 
 	addTag(event: MatAutocompleteSelectedEvent): void {
@@ -54,5 +58,10 @@ export class H21HotelsFilterPanelComponent {
 		if (index >= 0) {
 			this.selectedTags.splice(index, 1);
 		}
+	}
+
+
+	changeViewMode() {
+		this.onChangeViewMode.emit(this.viewMode);
 	}
 }
