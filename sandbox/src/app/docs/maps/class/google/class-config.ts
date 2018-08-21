@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ConfigMap } from "../../interface/interface-config";
 declare var google: any;
-
+declare var require: any;
 export class Config implements ConfigMap {
     ShowMarker(map: any, obj: any){
         let marker = new google.maps.Marker({

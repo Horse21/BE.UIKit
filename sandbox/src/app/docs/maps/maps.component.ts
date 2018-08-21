@@ -9,7 +9,8 @@ import { MainMap } from './interface/interface-main';
 import { InfoWindowMap } from './interface/interface-infowindow';
 import { MarkerClusterMap } from './interface/interface-markercluster';
 import * as markercluster from "./markercluster.json";
-//
+import * as markers from "./test.marker.json";
+
 
 const url = 'https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js';
 declare var google: any;
@@ -63,7 +64,7 @@ export class MapsComponent implements OnInit {
                 setTimeout(() =>this.loadScript(),2000)  
 
               
-
+                  
                 //"../../class/google/maps.style.json";
                 //setTimeout(() => this.source.config.TrafficLayer(this.source.map,this.source.traffic,true),2000)
 
@@ -84,7 +85,7 @@ export class MapsComponent implements OnInit {
         document.getElementsByTagName('head')[0].appendChild(node);
 
 
-
+        console.log('markers',markers)
         setTimeout(() => this.MarkerCluster(),2000)  
     }
 
