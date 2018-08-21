@@ -9,7 +9,7 @@ import { MainMap } from './interface/interface-main';
 import { InfoWindowMap } from './interface/interface-infowindow';
 import { MarkerClusterMap } from './interface/interface-markercluster';
 import * as markercluster from "./markercluster.json";
-import * as markers from "./test.marker.json";
+import * as markers from "./test.markers.json";
 
 
 const url = 'https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js';
