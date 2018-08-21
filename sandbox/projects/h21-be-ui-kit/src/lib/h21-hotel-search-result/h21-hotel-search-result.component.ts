@@ -1,12 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {ISearchHotelOptions} from "../../dto/i-search-hotel-options";
-
-interface ISortingParameter {
-	alias: string,
-	name: string,
-	direction: 'up' | 'down'
-}
+import {ISearchHotelOptions} from "./../../dto/i-search-hotel-options";
+import {ISortingParameter} from "./../../dto/i-sorting-parameter";
 
 @Component({
 	selector: 'h21-hotel-search-result',
@@ -21,7 +16,7 @@ interface ISortingParameter {
 	]
 })
 
-export class H21HotelSearchResultComponent implements OnInit {
+export class H21HotelSearchResultComponent {
 
 	@Input() viewMode: 'list' | 'grid' | 'map' = 'list';
 
@@ -37,10 +32,6 @@ export class H21HotelSearchResultComponent implements OnInit {
 			{ alias: 'popularity_up', name: 'Popularity', direction: 'up'},
 			{ alias: 'popularity_down', name: 'Popularity', direction: 'down'},
 		];
-	}
-
-	ngOnInit() {
-
 	}
 
 	search(options: ISearchHotelOptions): void {

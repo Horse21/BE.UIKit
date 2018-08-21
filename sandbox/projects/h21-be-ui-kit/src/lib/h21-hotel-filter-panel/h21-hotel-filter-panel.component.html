@@ -1,7 +1,7 @@
 <div class="c-h21-filter-panel">
 
 	<!-- View mode (List, Grid, Map) -->
-	<mat-button-toggle-group class="__primary __w-100 mb-3" [(ngModel)]="viewMode" (change)="changeViewMode()">
+	<mat-button-toggle-group class="__primary __w-100 mb-3" #viewModeGroup="matButtonToggleGroup" [value]="viewMode" (change)="changeViewMode(viewModeGroup.value)">
 		<mat-button-toggle [value]="'list'">List</mat-button-toggle>
 		<mat-divider [vertical]="true"></mat-divider>
 		<mat-button-toggle [value]="'grid'">Grid</mat-button-toggle>

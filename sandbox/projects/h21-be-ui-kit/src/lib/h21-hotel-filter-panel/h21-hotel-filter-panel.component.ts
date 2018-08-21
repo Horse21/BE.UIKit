@@ -60,8 +60,7 @@ export class H21HotelFilterPanelComponent {
 		}
 	}
 
-
-	changeViewMode() {
-		this.onChangeViewMode.emit(this.viewMode);
+	changeViewMode(mode: string): void {
+		this.onChangeViewMode.emit(mode);
 	}
 }
