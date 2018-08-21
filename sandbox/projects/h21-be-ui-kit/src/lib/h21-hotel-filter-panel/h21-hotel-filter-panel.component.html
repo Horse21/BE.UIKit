@@ -15,7 +15,7 @@
 			<mat-panel-title>Tags</mat-panel-title>
 		</mat-expansion-panel-header>
 		<mat-form-field class="c-h21-filter-panel_search-field">
-			<input matInput [matAutocomplete]="tags" />
+			<input matInput [formControl]="tagsSearchControl" [matAutocomplete]="tags" />
 			<mat-icon matSuffix>search</mat-icon>
 		</mat-form-field>
 		<mat-autocomplete #tags="matAutocomplete" (optionSelected)="addTag($event)" class="c-h21-search-panel_autocomplete">

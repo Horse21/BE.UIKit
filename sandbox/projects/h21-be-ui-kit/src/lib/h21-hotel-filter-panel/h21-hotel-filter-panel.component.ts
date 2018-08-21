@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatAutocompleteSelectedEvent} from "@angular/material";
+import {FormControl} from "@angular/forms";
 
 const ALL_TAGS: Array<any> = [
 	{id: 1, name: "Disabled guest"},
@@ -23,6 +24,8 @@ export class H21HotelFilterPanelComponent {
 
 	allTags: Array<any>;
 	selectedTags: Array<any>;
+
+	tagsSearchControl: FormControl = new FormControl();
 
 	matExpansionPanelHeaderDefaultHeight = '44px';
 

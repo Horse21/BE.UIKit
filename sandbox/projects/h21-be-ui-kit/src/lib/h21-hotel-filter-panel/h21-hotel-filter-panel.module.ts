@@ -6,7 +6,7 @@ import {
 	MatButtonToggleModule,
 	MatCheckboxModule,
 	MatChipsModule, MatDividerModule,
-	MatExpansionModule,
+	MatExpansionModule, MatFormFieldControl,
 	MatFormFieldModule, MatIconModule
 } from "@angular/material";
 import {NouisliderModule} from "ng2-nouislider";
