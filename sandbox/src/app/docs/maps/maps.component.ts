@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { GoogleMap } from './class/google/map';
+import { GoogleMap } from './class/google/class-main';
 import { LoadApiMap, InitMap } from "./interface/interface-init";
 import { ConfigMap } from "./interface/interface-config";
 import * as data from "./maps.const.json";
@@ -17,6 +17,8 @@ declare var MarkerClusterer: any;
 declare var BMap: any;
 declare var ymaps: any;
 var source: any;
+
+
 
 @Component({
     selector: 'maps-components-docs',
