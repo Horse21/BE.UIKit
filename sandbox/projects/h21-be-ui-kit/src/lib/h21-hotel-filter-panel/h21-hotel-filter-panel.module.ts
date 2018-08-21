@@ -12,6 +12,7 @@ import {
 import {NouisliderModule} from "ng2-nouislider";
 import {H21RateModule} from "./../h21-rate/h21-rate.module";
 import {H21HotelFilterPanelComponent} from "./h21-hotel-filter-panel.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 	imports: [
@@ -27,6 +28,8 @@ import {H21HotelFilterPanelComponent} from "./h21-hotel-filter-panel.component";
 		MatAutocompleteModule,
 		MatChipsModule,
 		MatIconModule,
+		FormsModule,
+		ReactiveFormsModule,
 	],
 	declarations: [H21HotelFilterPanelComponent],
 	exports: [H21HotelFilterPanelComponent]
