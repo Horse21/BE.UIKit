@@ -1,0 +1,20 @@
+.search-result-item {
+    border-radius: 3px;
+    background-color: white;
+    padding: 15px; 
+    border:1px solid #D6D6D6;
+}
+.search-result-item-inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.search-result-item-picture {
+    width: 131px;
+    img {
+        display: block;
+        width: 100%;
+    }
+}
