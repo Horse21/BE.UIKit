@@ -5,9 +5,12 @@ import {
 	MatButtonModule,
 	MatButtonToggleModule,
 	MatCheckboxModule,
-	MatChipsModule, MatDividerModule,
-	MatExpansionModule, MatFormFieldControl,
-	MatFormFieldModule, MatIconModule
+	MatChipsModule,
+	MatDividerModule,
+	MatExpansionModule,
+	MatFormFieldModule,
+	MatIconModule,
+	MatInputModule
 } from "@angular/material";
 import {NouisliderModule} from "ng2-nouislider";
 import {H21RateModule} from "./../h21-rate/h21-rate.module";
@@ -30,6 +33,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 		MatIconModule,
 		FormsModule,
 		ReactiveFormsModule,
+		MatInputModule
 	],
 	declarations: [H21HotelFilterPanelComponent],
 	exports: [H21HotelFilterPanelComponent]
