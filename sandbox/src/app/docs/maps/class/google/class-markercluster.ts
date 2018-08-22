@@ -5,6 +5,7 @@ import { MarkerClusterMap } from "../../interface/interface-markercluster";
 
 
 export class Markercluster implements MarkerClusterMap {
+    Cluster:any;
     ListenEvent(map: any, eventName: string) {
         throw new Error("Method not implemented.");
     }    

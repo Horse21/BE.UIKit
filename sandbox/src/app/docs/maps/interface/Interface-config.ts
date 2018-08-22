@@ -1,4 +1,5 @@
-export interface ConfigMap {
+export interface MapOptions {
+    ShowMarker(map: any,marker:any,markecluster:any);
     GetZoom(map: any): number;
     SetZoom(map: any, zoom: number);
     SetZoomMin(map: any, zoom: number);
@@ -18,5 +19,4 @@ export interface ConfigMap {
     DrawingShapesMap(map: any, type: string);
     InclusionMarkersRadius(map: any, Lat1: number, Lng1: number, Lat2: number, Lng2: number);
     InclusionMarkersPolygon(coord: any, xp: any, yp: any);
-
 }

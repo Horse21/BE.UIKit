@@ -1,19 +1,35 @@
 import { Injectable } from "@angular/core";
-import { ConfigMap } from "../../interface/interface-config";
+import { MapOptions } from "../../interface/interface-config";
+import { MapsComponent } from "../../maps.component";
 declare var google: any;
 declare var require: any;
-export class Config implements ConfigMap {
-    ShowMarker(map: any, obj: any){
+declare var clearMarkers:any;
+//declare var  Markers:any[];
+
+var Markers = [];
+
+export class Options implements MapOptions {
+    ShowMarker(map: any, obj: any, markercluster:any){
+
+        console.log(obj,'ShowMarker');
         let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(55.753215, 37.622504),
+            position: new google.maps.LatLng(obj.Address.Lat, obj.Address.Lng),
             draggable: false,
             clickable: true,
             icon: { url: require('../../images/icon/icon_hotel.png') },
-            title: 'Hotel Name'
+            title: obj.Hotelname
         });
 
         marker.setMap(map);
-
+        Markers.push(marker);
+        console.log(markercluster);
+       // marker.push()
+       //markercluster.addMarker(marker, true);
+  if(markercluster ! = null){
+    
+  }
+       console.log(Markers,'Markers')
+      
     }
 
     SetZoomLevel(map: any, type: string) {
@@ -38,6 +54,9 @@ export class Config implements ConfigMap {
        
     }
     ClearMap(map: any) {
+        for (var i = 0; i < Markers.length; i++) {
+            Markers[i].setMap(null);
+        }
        
     }
     ResizeMap(map: any) {

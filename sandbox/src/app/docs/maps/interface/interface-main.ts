@@ -1,16 +1,16 @@
-import { InitMap } from "../interface/interface-init";
-import { EventMap } from "../interface/interface-event";
-import { ConfigMap } from "../interface/interface-config";
-import { MarkerMap } from "../interface/interface-marker";
-import { InfoWindowMap } from "../interface/interface-infowindow";
-import { MarkerClusterMap } from "../interface/interface-markercluster";
+import { InitMap } from "./interface-init";
+import { EventMap } from "./interface-event";
+import { MapOptions } from "./interface-config";
+import { MarkerMap } from "./interface-marker";
+import { InfoWindowMap } from "./interface-infowindow";
+import { MarkerClusterMap } from "./interface-markercluster";
 export interface MainMap {
     map: any;
     traffic: any;
     transit: any;
     init: InitMap;
     events: EventMap;
-    config: ConfigMap;
+    config: MapOptions;
     marker: MarkerMap;
     markercluster: MarkerClusterMap
     infowindow: InfoWindowMap;

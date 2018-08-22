@@ -47,8 +47,6 @@ export class Events implements EventMap {
             console.log("zoom_changed");
         })
     }
-
-    //cb: Function
     Click(map: any) {
         this.ListenEvent<any>(map, "click").subscribe((event) => {
             if (event.placeId) {
@@ -58,7 +56,6 @@ export class Events implements EventMap {
             }
             else {
                 console.log(event.latLng)
-               // cb();
             }
         })
     }

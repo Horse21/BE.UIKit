@@ -1,7 +1,9 @@
 import { LoadApiMap,InitMap } from "../../interface/interface-init";
 import * as mapstyle from "../../class/google/maps.style.json";
+import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var google: any;
+declare var require: any;
 export class Initialize implements InitMap {
  
     source: LoadApiMap;
@@ -34,6 +36,16 @@ export class Initialize implements InitMap {
 
 
     Load(): any {
+        let mcOptions = {
+            gridSize: 80, maxZoom: 18, zoomOnClick: true, ignoreHidden: true, styles: [
+                {
+                    textColor: 'black',
+                    url: require('../../images/icon/icon_pointGroup.png'),
+                    anchorText: [0, -2],
+                    height: 44,
+                    width: 44
+                }]
+        };
         let map = new google.maps.Map(document.getElementById('map'), {
             center: new google.maps.LatLng(55.753215, 37.622504),
             zoom: 12,
@@ -44,12 +56,13 @@ export class Initialize implements InitMap {
             disableDoubleClickZoom: true,
             styles: mapstyle.default
         });
-
+        let markers:any[];
         let traffic = new google.maps.TrafficLayer();
         let transit = new google.maps.TransitLayer();
         let geocoder = new google.maps.Geocoder();
         let placesService = new google.maps.places.PlacesService(map);
-        return { map: map, traffic: traffic, transit: transit, geocoder: geocoder, placesService: placesService }
+        let markercluster = new MarkerClusterer(map, markers, mcOptions);       
+        return { map: map, traffic: traffic, transit: transit, geocoder: geocoder, placesService: placesService, markercluster }
     }
 
     Destroy() {
