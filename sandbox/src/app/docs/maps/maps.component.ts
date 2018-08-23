@@ -51,12 +51,12 @@ export class MapsComponent implements OnInit {
 
                 console.log('load', load)
 
-                var Point = [];                
-                
-               var d = markers['default'];
-                console.log(this.source.markercluster,'TESTMARKERS')
-               d.forEach((item, index) => {
-                   this.source.config.ShowMarker(this.source.map,item, load.markercluster)
+                var Point = [];
+
+                var d = markers['default'];
+                console.log(this.source.markercluster, 'TESTMARKERS')
+                d.forEach((item, index) => {
+                    this.source.config.ShowMarker(this.source.map, item, load.markercluster)
 
                     // var obj = new google.maps.Marker({
                     //     position: { lat: item.latitude, lng: item.longitude },
@@ -66,10 +66,12 @@ export class MapsComponent implements OnInit {
                     //     title: item.photo_title
                     // });
                     // Point.push(obj);
-               });
+                });
 
 
-              //  load.markercluster.addMarkers(Point);
+
+
+                //  load.markercluster.addMarkers(Point);
 
 
 
@@ -80,9 +82,29 @@ export class MapsComponent implements OnInit {
     }
 
 
+    public zoomLevel(type) {
+        console.log(type, 'type');
+        this.source.config.SetZoomLevel(this.source.map, type);
+    }
+
+    public drawShape(type) {
+
+        this.source.config.DrawingShapesMap(this.source.map, type);
+    }
+
+    public createMarker(type) {
+
+        this.source.config.SetZoomLevel(this.source.map, 'plus');
+    }
+
+    public loadMarkers() {
+
+        this.source.config.SetZoomLevel(this.source.map, 'plus');
+    }
+
     public loadScript() {
 
-       
+
 
         //  setTimeout(() => this.MarkerCluster(), 2000)
     }
