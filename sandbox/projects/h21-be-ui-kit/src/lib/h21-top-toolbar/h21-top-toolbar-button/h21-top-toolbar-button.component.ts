@@ -4,7 +4,7 @@ import { IToolbarElement } from '../../../dto/i-toolbar-element';
 @Component({
   selector: 'h21-top-toolbar-button',
   templateUrl: './h21-top-toolbar-button.component.html',
-  styleUrls: ['./h21-top-toolbar-button.component.css']
+  styleUrls: []
 })
 export class H21TopToolbarButtonComponent implements OnInit {
 

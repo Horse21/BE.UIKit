@@ -73,8 +73,9 @@ import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table
 import { SearchResultItemComponent } from './docs/search-result-item/search-result-item.component';
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
-import { H21TopToolbarButtonComponent } from './h21-top-toolbar-button/h21-top-toolbar-button.component';
-import { H21TopToolbarButtonContainerComponent } from './h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
+
+import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
+import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 
 
 
