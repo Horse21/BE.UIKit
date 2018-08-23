@@ -50,6 +50,8 @@
 	</ng-container>
 
 	<!-- Profile user card actions -->
+
+	<h21-top-toolbar-button-container [buttonsData]="toolbarButtonsData" [condition]="showProfileUserCardActions"></h21-top-toolbar-button-container>
 	<ng-container *ngIf="showProfileUserCardActions">
 		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>edit</mat-icon>
