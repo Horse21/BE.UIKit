@@ -21,7 +21,7 @@ export class H21TopToolbarComponent implements OnInit {
 
 	@Input() showBreadcrumbs: boolean = false;
 	@Input() breadcrumbsData: Array<IBreadcrumb>;
-	@Input() toolbarButtonsData: Array<IToolbarElement>;
+	@Input() buttonsData: Array<IToolbarElement>;
 	@Input() showSearchResultViewModeToggle: boolean = false;
 
 	@Input() showSidenavToggle: boolean = false;

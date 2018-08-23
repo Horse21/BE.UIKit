@@ -16,8 +16,4 @@ export class H21TopToolbarButtonComponent implements OnInit {
   ngOnInit() {
   }
 
-  buildStringOfStyles() {
-    return this.buttonData.style.join(' ');
-  }
-
 }

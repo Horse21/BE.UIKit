@@ -1,3 +1,3 @@
-<button (click)="buttonData.action" mat-icon-button [matTooltip]="buttonData.tooltip" [class]="buildStringOfStyles()">
+<button (click)="buttonData.action($event)" mat-icon-button matTooltip="{{buttonData.tooltip}}" class="{{buttonData.style.join(' ')}}">
   <mat-icon>{{buttonData.icon}}</mat-icon>
 </button>
