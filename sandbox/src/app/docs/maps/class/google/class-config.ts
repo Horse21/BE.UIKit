@@ -41,7 +41,6 @@ export class Options implements MapOptions {
     DrawingShapesMap(map: any, type: any) {
         console.log('DrawingShapesMap', map, type);
         var drawingMode: any
-       // declare var Radius: any;
         let drawingManager,
         var radius: number = 10000;
         if (this.drawingManager != null) {
@@ -52,13 +51,17 @@ export class Options implements MapOptions {
             this.Radius.setMap(null);
         }
 
-        if (this.PolygonArea != null) {
-            this.PolygonArea.setMap(null);
-        }
+console.log(this.PolygonArea,'PolygonArea')
+
+console.log(this.PolygonArea,'this.PolygonArea')
+
+        // if (this.PolygonArea != null) {
+        //     this.PolygonArea.setMap(null);
+        // }
         var option = {};
 
         var option: any;
-        if (type ==+ 'stop') {
+        if (type == 'stop') {
             this.drawingMode = null;
         }
 
@@ -108,9 +111,15 @@ export class Options implements MapOptions {
                 scrollwheel: false,
                 disableDoubleClickZoom: false
             });
+///
+
+            
+
 
             google.maps.event.addDomListener(map.getDiv(), 'mousedown', function (e) {
                 console.log('mousedown')
+
+                
                 PolygonArea = new google.maps.Polyline({
                     map: map, clickable: false, strokeColor: '#1E90FF',
                     strokeOpacity: 0.9,
@@ -119,13 +128,11 @@ export class Options implements MapOptions {
                     fillOpacity: 0.35,
                 });
 
-                //move-listener
                 var move = google.maps.event.addListener(map, 'mousemove', function (e) {
                     PolygonArea.getPath().push(e.latLng);
-                   
+
                 });
 
-                //mouseup-listener
                 google.maps.event.addListenerOnce(map, 'mouseup', function (e) {
                     console.log('mouseup')
                     google.maps.event.removeListener(move);
