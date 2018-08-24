@@ -1,9 +1,8 @@
 export interface EventMap {
-    Subscribe(map: any);
-
-    ListenEvent(map: any, eventName: string);
-    Idle(map: any);
-    BoundsChange(map: any);
-    ZoomChange(map: any);
-    Click(map: any);
+    subscribe(map: any);
+    listenEvent(map: any, eventName: string);
+    idle(map: any);
+    boundsChange(map: any);
+    zoomChange(map: any);
+    clickMap(map: any);
 }

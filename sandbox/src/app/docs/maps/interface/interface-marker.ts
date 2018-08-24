@@ -1,4 +1,4 @@
 export interface MarkerMap {
-    ListenEvent(map: any, eventName: string);
-    Click(map: any,marker:any);
+    listenEvent(map: any, eventName: string);
+    clickMarker(map: any,marker:any);
 }

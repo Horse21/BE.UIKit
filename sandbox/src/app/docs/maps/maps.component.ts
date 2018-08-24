@@ -10,10 +10,8 @@ import { InfoWindowMap } from './interface/interface-infowindow';
 import { MarkerClusterMap } from './interface/interface-markercluster';
 import * as markercluster from "./markercluster.json";
 import * as markers from "./test.markers.json";
-//import * as MarkerClusterer from '@google/markerclustererplus';
+import { load } from '../../../../node_modules/@angular/core/src/render3/instructions';
 
-declare var google: any;
-var source: any;
 
 @Component({
     selector: 'maps-components-docs',
@@ -22,7 +20,6 @@ var source: any;
 })
 
 export class MapsComponent implements OnInit {
-    point: any[];
     source: MainMap;
     public Init(code: string) {
         switch (code) {
@@ -37,103 +34,43 @@ export class MapsComponent implements OnInit {
             }
             default: {
                 this.source = new GoogleMap();
-
             }
         }
         let dt: LoadApiMap = data['InitList'][code];
-        this.source.init.Init(dt).then(data => {
+        this.source.init.loadScriptMap(dt).then(data => {
             console.log(data, 'data')
             if (data.status === 'Loaded') {
-                let load = this.source.init.Load();
+                let load = this.source.init.initializingMap();         
                 this.source.map = load.map;
-                this.source.traffic = load.traffic;
-                this.source.events.Subscribe(this.source.map);
-
-                console.log('load', load)
-
-                var Point = [];
-
-                var d = markers['default'];
-                console.log(this.source.markercluster, 'TESTMARKERS')
-                d.forEach((item, index) => {
-                    this.source.config.ShowMarker(this.source.map, item, load.markercluster)
-
-                    // var obj = new google.maps.Marker({
-                    //     position: { lat: item.latitude, lng: item.longitude },
-                    //     draggable: false,
-                    //     clickable: true,
-                    //     icon: { url: require('./images/icon/icon_hotel.png') },
-                    //     title: item.photo_title
-                    // });
-                    // Point.push(obj);
-                });
-
-
-
-
-                //  load.markercluster.addMarkers(Point);
-
-
-
-                // setTimeout(() => this.loadScript(), 6000)
+                this.source.cluster = load.markercluster
+                this.source.traffic = load.traffic;          
+                this.source.events.subscribe(this.source.map);
             }
         }).
             catch(error => console.log(error));
     }
 
-
     public zoomLevel(type) {
-        console.log(type, 'type');
-        this.source.config.SetZoomLevel(this.source.map, type);
+        this.source.config.setZoomLevel(this.source.map, type);
     }
 
     public drawShape(type) {
-
-        this.source.config.DrawingShapesMap(this.source.map, type);
+        this.source.config.drawingShapesMap(this.source.map, type);
     }
 
     public createMarker(type) {
-
-        this.source.config.SetZoomLevel(this.source.map, 'plus');
+        this.source.config.setZoomLevel(this.source.map, 'plus');
     }
 
     public loadMarkers() {
-
-        this.source.config.SetZoomLevel(this.source.map, 'plus');
+        
+        let markersArray: any
+        markersArray = markers['default'];
+        this.source.config.setMarkers(this.source.map, markersArray, this.source.cluster);
     }
 
-    public loadScript() {
-
-
-
-        //  setTimeout(() => this.MarkerCluster(), 2000)
-    }
-
-    public MarkerCluster() {
-        // var mcOptions = {
-        //     gridSize: 80, maxZoom: 18, zoomOnClick: true, ignoreHidden: true, styles: [
-        //         {
-        //             textColor: 'black',
-        //             url: require('./images/icon/icon_pointGroup.png'),
-        //             anchorText: [0, -2],
-        //             height: 44,
-        //             width: 44
-        //         }]
-        // };
-
-        // var Point = [];
-        // var d = markercluster['default']['photos'];
-
-
-
-        //  var mc = new MarkerClusterer(this.source.map, Point, mcOptions);
-        // console.log(mc)
-    }
-
-    public TestFuncton() {
-        //setTimeout(() => this.source.config.TrafficLayer(this.source.map,this.source.traffic,true),2000)
-
-        // setTimeout(() => this.source.config.TrafficLayer(this.source.map,this.source.traffic,false),4000)
+    public clearMap() {
+        this.source.config.clearMap(this.source.map);
     }
 
     ngOnInit() {

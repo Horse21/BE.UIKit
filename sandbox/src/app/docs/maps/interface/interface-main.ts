@@ -8,10 +8,11 @@ export interface MainMap {
     map: any;
     traffic: any;
     transit: any;
+    cluster:any;
     init: InitMap;
     events: EventMap;
     config: MapOptions;
     marker: MarkerMap;
-    markercluster: MarkerClusterMap
-    infowindow: InfoWindowMap;
+    markerCluster: MarkerClusterMap;
+    infoWindow: InfoWindowMap;
 }

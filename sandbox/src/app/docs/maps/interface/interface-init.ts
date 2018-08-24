@@ -8,7 +8,7 @@ export interface LoadApiMap {
 
 export interface InitMap {
     source: LoadApiMap;
-    Init (source: LoadApiMap);
-    Load(): any;
-    Destroy();
+    loadScriptMap (source: LoadApiMap);
+    initializingMap(): any;
+    destroyMap();
 }

@@ -7,7 +7,7 @@ declare var require: any;
 export class Initialize implements InitMap {
  
     source: LoadApiMap;
-    public Init(source: LoadApiMap): Promise<any> {
+    public loadScriptMap(source: LoadApiMap): Promise<any> {
         return new Promise((resolve, reject) => {
             this.source = source;
             let script = document.createElement('script');
@@ -35,7 +35,7 @@ export class Initialize implements InitMap {
     }
 
 
-    Load(): any {
+    initializingMap(): any {
         let mcOptions = {
             gridSize: 80, maxZoom: 18, zoomOnClick: true, ignoreHidden: true, styles: [
                 {
@@ -62,10 +62,10 @@ export class Initialize implements InitMap {
         let geocoder = new google.maps.Geocoder();
         let placesService = new google.maps.places.PlacesService(map);
         let markercluster = new MarkerClusterer(map, markers, mcOptions);       
-        return { map: map, traffic: traffic, transit: transit, geocoder: geocoder, placesService: placesService, markercluster }
+        return { map, traffic, transit, geocoder, placesService, markercluster }
     }
 
-    Destroy() {
+    destroyMap() {
         
     }
 }

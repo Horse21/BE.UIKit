@@ -1,4 +1,4 @@
 export interface InfoWindowMap {
-    OpenInfoWindow(map: any);
-    CloseInfoWindow(map: any);
+    openInfoWindow(map: any);
+    closeInfoWindow(map: any);
 }

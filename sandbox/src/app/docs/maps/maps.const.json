@@ -20,6 +20,13 @@
             "key": "",
             "language": "ru_RU",
             "version":""
+        },
+        "leaftlet": {
+            "name": "leaftlet",
+            "url": "https://unpkg.com/leaflet@1.3.4/dist/leaflet.js",
+            "key": "",
+            "language": "ru",
+            "version":""
         }
     }
 }

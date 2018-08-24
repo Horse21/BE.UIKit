@@ -1,218 +1,264 @@
-import { Injectable } from "@angular/core";
 import { MapOptions } from "../../interface/interface-config";
-import { MapsComponent } from "../../maps.component";
+
 declare var google: any;
 declare var require: any;
-declare var clearMarkers: any;
-//declare var  Markers:any[];
-
-var Markers = [];
-var Radius: any;
-var PolygonArea: any;
+var markerCluster: any;
+var markers: any[] = [];
+var radiusObject: any;
+var polygonArea: any[] = [];
 
 export class Options implements MapOptions {
-    ShowMarker(map: any, obj: any, markercluster: any) {
 
-        console.log(obj, 'ShowMarker');
-        let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(obj.Address.Lat, obj.Address.Lng),
-            draggable: false,
-            clickable: true,
-            icon: { url: require('../../images/icon/icon_hotel.png') },
-            title: obj.Hotelname
-        });
-
-        marker.setMap(map);
-        Markers.push(marker);
-        if (markercluster !== null) {
-            markercluster.addMarker(marker, true);
-        }
-    }
-
-    SetZoomLevel(map: any, type: string) {
-        let currentZoom = map.getZoom();
-        if (type === 'plus') {
-            map.setZoom(currentZoom + 1);
-        }
-        else {
-            map.setZoom(currentZoom - 1);
-        }
-    }
-    DrawingShapesMap(map: any, type: any) {
-        console.log('DrawingShapesMap', map, type);
-        var drawingMode: any
-        let drawingManager,
-        var radius: number = 10000;
-        if (this.drawingManager != null) {
-            this.drawingManager.setMap(null);
-        }
-
-        if (this.Radius != null) {
-            this.Radius.setMap(null);
-        }
-
-console.log(this.PolygonArea,'PolygonArea')
-
-console.log(this.PolygonArea,'this.PolygonArea')
-
-        // if (this.PolygonArea != null) {
-        //     this.PolygonArea.setMap(null);
-        // }
-        var option = {};
-
-        var option: any;
-        if (type == 'stop') {
-            this.drawingMode = null;
-        }
-
-        if (type === 'circle') {
-            this.drawingMode = google.maps.drawing.OverlayType.CIRCLE;
-            var center = new google.maps.LatLng({ lat: 55.755814, lng: 37.617635 });
-            option = {
-                strokeColor: '#1E90FF',
-                strokeOpacity: 0.9,
-                strokeWeight: 3.5,
-                fillColor: '#1E90FF',
-                fillOpacity: 0.35,
-                center: center,
-                radius: radius,
-                draggable: true,
-                editable: true,
-            }
-            this.Radius = new google.maps.Circle(option);
-            this.Radius.setMap(map);
-            // for (var i = 0; i < this.PointMap.length; i++) {
-            //     var point = this.PointMap[i];
-            //     var rt = AppMap.Distance(AppMap.Map.SelectMarker.Point.Position.Latitude, AppMap.Map.SelectMarker.Point.Position.Longitude, point.Point.Position.Latitude, point.Point.Position.Longitude);
-            //     console.log(rt)
-            //     if (rt > 10) {
-            //         console.log(point)
-
-            //         // point.setVisible(false);
-            //         point.setMap(null);
-            //         if (markerCluster != null) {
-            //             markerCluster.removeMarker(point);
-
-            //         };
-
-            //     }
-            // }
-            google.maps.event.addListener(this.Radius, 'radius_changed', function (event) {
-                console.log('radius_changed')
-
-            });
-        }
-
-        if (type == 'area') {
-            this.drawingMode = null;
-            var poly: any;
-            map.setOptions({
+    showMarker(map: any, obj: any, markercluster: any) {
+        try {
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(obj.Address.Lat, obj.Address.Lng),
                 draggable: false,
-                scrollwheel: false,
-                disableDoubleClickZoom: false
+                clickable: true,
+                icon: { url: require('../../images/icon/icon_hotel.png') },
+                title: obj.Hotelname
             });
-///
 
-            
+            marker.setMap(map);
+            markers.push(marker);
+            if (markercluster !== null) {
+                markercluster.addMarker(marker, true);
+                markercluster.repaint();
+            }
+            markerCluster = markercluster;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
+    setZoomLevel(map: any, type: string) {
+        try {
+            let currentZoom = map.getZoom();
+            if (type === 'plus') {
+                map.setZoom(currentZoom + 1);
+            }
+            else {
+                map.setZoom(currentZoom - 1);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    drawingShapesMap(map: any, type: any) {
+        try {
+            let drawingMode: any;
+            let drawingManager;
+            var radius: number = 10000;
+            if (drawingManager != null) {
+                drawingManager.setMap(null);
+            }
+            if (radiusObject != null) {
+                radiusObject.setMap(null);
+            }
 
-            google.maps.event.addDomListener(map.getDiv(), 'mousedown', function (e) {
-                console.log('mousedown')
+            if (polygonArea !== null) {
+                polygonArea.forEach((item) => {
+                    item.setMap(null);
+                    item.getPath().clear();
+                });
 
-                
-                PolygonArea = new google.maps.Polyline({
-                    map: map, clickable: false, strokeColor: '#1E90FF',
+            }
+            let option: any;
+            if (type == 'stop') {
+                drawingMode = null;
+            }
+
+            if (type === 'circle') {
+                drawingMode = google.maps.drawing.OverlayType.CIRCLE;
+                var center = new google.maps.LatLng({ lat: 55.755814, lng: 37.617635 });
+                option = {
+                    strokeColor: '#1E90FF',
                     strokeOpacity: 0.9,
                     strokeWeight: 3.5,
                     fillColor: '#1E90FF',
                     fillOpacity: 0.35,
+                    center: center,
+                    radius: radius,
+                    draggable: true,
+                    editable: true,
+                }
+                radiusObject = new google.maps.Circle(option);
+                radiusObject.setMap(map);
+                google.maps.event.addListener(radiusObject, 'radius_changed', function (event) {
+
                 });
+            }
 
-                var move = google.maps.event.addListener(map, 'mousemove', function (e) {
-                    PolygonArea.getPath().push(e.latLng);
-
+            if (type == 'area') {
+                drawingMode = null;
+                var poly: any;
+                map.setOptions({
+                    draggable: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: false
                 });
-
-                google.maps.event.addListenerOnce(map, 'mouseup', function (e) {
-                    console.log('mouseup')
-                    google.maps.event.removeListener(move);
-                    var path = PolygonArea.getPath();
-                    PolygonArea.setMap(null);
-                    PolygonArea = new google.maps.Polygon({
-                        map: map, path: path, strokeColor: '#1E90FF',
+                google.maps.event.addDomListener(map.getDiv(), 'mousedown', function (e) {
+                    poly = new google.maps.Polyline({
+                        map: map,
+                        clickable: false, strokeColor: '#1E90FF',
                         strokeOpacity: 0.9,
                         strokeWeight: 3.5,
                         fillColor: '#1E90FF',
                         fillOpacity: 0.35,
                     });
 
-                    google.maps.event.clearListeners(map.getDiv(), 'mousedown');
-                    map.setOptions({
-                        draggable: true,
-                        scrollwheel: true,
-                        disableDoubleClickZoom: true
+                    polygonArea.push(poly)
+                    var move = google.maps.event.addListener(map, 'mousemove', function (e) {
+                        poly.getPath().push(e.latLng);
+
+                    });
+                    google.maps.event.addListenerOnce(map, 'mouseup', function (e) {
+                        google.maps.event.removeListener(move);
+                        var path = poly.getPath();
+                        poly.setMap(null);
+                        poly = new google.maps.Polygon({
+                            map: map,
+                            path: path, strokeColor: '#1E90FF',
+                            strokeOpacity: 0.9,
+                            strokeWeight: 3.5,
+                            fillColor: '#1E90FF',
+                            fillOpacity: 0.35,
+                        });
+
+                        polygonArea.push(poly)
+                        google.maps.event.clearListeners(map.getDiv(), 'mousedown');               
+                        let array = poly.getPath().getArray();
+                        let x1: any[] = [];
+                        let y1: any[] = [];
+                        array.forEach((item) => {                 
+                            x1.push(item.lat());
+                            y1.push(item.lng());
+
+                        });
+
+                        for (let item of markers) {       
+                           let b = new Options().inclusionMarkersPolygon(item, x1, y1);
+
+                           if(b == false){
+                            item.setMap(null);
+                            markerCluster.removeMarker(item);
+                           }
+
+                        };
+                
+                        map.setOptions({
+                            draggable: true,
+                            scrollwheel: true,
+                            disableDoubleClickZoom: true
+                        });
                     });
                 });
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
 
+    }
+    public inclusionMarkersPolygon(item: any, xp: any[], yp: any[]): boolean {
+        let x = item.position.lat();
+        let y = item.position.lng();
+        let npol = xp.length;
+        let j: any = npol - 1;
+        let c: boolean = false;
+        for (let i = 0; i < npol; i++) {
+            if ((((yp[i] <= y) && (y < yp[j])) || ((yp[j] <= y) && (y < yp[i]))) &&
+                (x > (xp[j] - xp[i]) * (y - yp[i]) / (yp[j] - yp[i]) + xp[i])) {
+                c = !c
+            }
+            j = i;
+        }
+        return c;
+    }
+    inclusionMarkersRadius(map: any, Lat1: number, Lng1: number, Lat2: number, Lng2: number) {
+
+    }
+
+    setZoomMin(map: any, zoom: number) {
+
+    }
+    setZoomMax(map: any, zoom: number) {
+
+    }
+    setMarkers(map: any, markersObj: any[], markerclusterObj: any) {
+        markersObj.forEach((item) => {
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
+                draggable: false,
+                clickable: true,
+                icon: { url: require('../../images/icon/icon_hotel.png') },
+                title: item.Hotelname
             });
 
+            markers.push(marker);
+        });
+        markerclusterObj.addMarkers(markers, true);
+        markerCluster = markerclusterObj;
+        markerclusterObj.repaint();
 
+    }
+    clearMap(map: any) {
+        try {
+            markers.forEach((item) => {
+                item.setMap(null);
+            });
+            if (markerCluster != null) {
+                markerCluster.clearMarkers();
 
+            }
 
+            if (radiusObject != null) {
+                radiusObject.setMap(null);
+
+            }
+            if (polygonArea != null) {
+                polygonArea.forEach((item) => {
+                    item.setMap(null);
+                    item.getPath().clear();
+                });
+
+            }
+        }
+        catch (error) {
+            console.log(error);
         }
 
+    }
+    resizeMap(map: any) {
+        console.log('resizeMap')
+    }
+    routeMap(map: any, start: any, end: any, show: boolean) {
 
     }
-    InclusionMarkersRadius(map: any, Lat1: number, Lng1: number, Lat2: number, Lng2: number) {
+    fitBounds(map: any) {
 
     }
-    InclusionMarkersPolygon(coord: any, xp: any, yp: any) {
+    setCenterMap(map: any) {
 
     }
-    SetZoomMin(map: any, zoom: number) {
+    getBounds(map: any) {
 
     }
-    SetZoomMax(map: any, zoom: number) {
-
-    }
-    SetMarkers(map: any, markers: any[]) {
-
-    }
-    ClearMap(map: any) {
-        for (var i = 0; i < Markers.length; i++) {
-            Markers[i].setMap(null);
-        }
-
-    }
-    ResizeMap(map: any) {
-
-    }
-    RouteMap(map: any, start: any, end: any, show: boolean) {
-
-    }
-    FitBounds(map: any) {
-
-    }
-    SetCenterMap(map: any) {
-
-    }
-    GetBounds(map: any) {
-
-    }
-    ResetMap(map: any) {
+    resetMap(map: any) {
 
     }
 
-    GetZoom(map: any): number {
+    getZoom(map: any): number {
         return map.getZoom();
     }
 
-    SetZoom(map: any, zoom: number) {
+    setZoom(map: any, zoom: number) {
         map.setZoom(zoom);
     }
 
-    TransitLayer(map: any, transit: any, boolean: boolean) {
-
+    transitLayer(map: any, transit: any, boolean: boolean) {
         if (boolean) {
             transit.setMap(map);
         }
@@ -220,8 +266,7 @@ console.log(this.PolygonArea,'this.PolygonArea')
             transit.setMap(null);
         }
     }
-
-    TrafficLayer(map: any, traffic: any, boolean: boolean) {
+    trafficLayer(map: any, traffic: any, boolean: boolean) {
         if (boolean) {
             traffic.setMap(map);
         }
@@ -229,12 +274,11 @@ console.log(this.PolygonArea,'this.PolygonArea')
             traffic.setMap(null);
         }
     }
-    GetAddress(map: any, coord: any) {
+    getAddress(map: any, coord: any) {
 
     }
 
     draggableMap(map: any, boolean: any) {
-
         if (boolean) {
             map.setOptions({
                 draggable: false,
