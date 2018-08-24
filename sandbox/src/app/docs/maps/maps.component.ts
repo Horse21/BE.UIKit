@@ -73,7 +73,7 @@ export class MapsComponent implements OnInit {
     }
 
     ngOnInit() {
-        setTimeout(()=> this.Init('google'), 5000);
+        setTimeout(()=> this.Init('google'), 1000);
         
 
     }
