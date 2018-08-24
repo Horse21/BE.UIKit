@@ -47,8 +47,8 @@ export class Initialize implements InitMap {
                 }]
         };
         let map = new google.maps.Map(document.getElementById('map'), {
-            center: new google.maps.LatLng(55.753215, 37.622504),
-            zoom: 12,
+            center: new google.maps.LatLng(27.215556209029693, 18.45703125),
+            zoom: 3,
             disableDefaultUI: true,
             minZoom: 3,
             scaleControl: true,

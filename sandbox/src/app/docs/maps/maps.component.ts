@@ -40,10 +40,10 @@ export class MapsComponent implements OnInit {
         this.source.init.loadScriptMap(dt).then(data => {
             console.log(data, 'data')
             if (data.status === 'Loaded') {
-                let load = this.source.init.initializingMap();         
+                let load = this.source.init.initializingMap();
                 this.source.map = load.map;
                 this.source.cluster = load.markercluster
-                this.source.traffic = load.traffic;          
+                this.source.traffic = load.traffic;
                 this.source.events.subscribe(this.source.map);
             }
         }).
@@ -63,7 +63,7 @@ export class MapsComponent implements OnInit {
     }
 
     public loadMarkers() {
-        
+
         let markersArray: any
         markersArray = markers['default'];
         this.source.config.setMarkers(this.source.map, markersArray, this.source.cluster);
@@ -74,7 +74,8 @@ export class MapsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.Init('google');
+        setTimeout(()=> this.Init('google'), 2000);
+        
 
     }
 }

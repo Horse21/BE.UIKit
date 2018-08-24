@@ -140,10 +140,10 @@ export class Options implements MapOptions {
 
                         for (let item of markers) {       
                            let b = new Options().inclusionMarkersPolygon(item, x1, y1);
-
                            if(b == false){
                             item.setMap(null);
                             markerCluster.removeMarker(item);
+                            //markerCluster.repaint();
                            }
 
                         };
@@ -188,6 +188,8 @@ export class Options implements MapOptions {
 
     }
     setMarkers(map: any, markersObj: any[], markerclusterObj: any) {
+
+        new Options().clearMap(map);
         markersObj.forEach((item) => {
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
