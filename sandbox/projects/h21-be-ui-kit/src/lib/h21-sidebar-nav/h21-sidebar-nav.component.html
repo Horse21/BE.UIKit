@@ -1,0 +1,12 @@
+<nav class="sidebar_nav">
+	<ng-container *ngFor="let item of tabs;">
+		<button mat-button *ngIf="item.type == 'button'" (click)="select(item.name)" [class.is-active]="selected == item.name && (!disabled || item.disabled)" [disabled]="disabled || item.disabled">
+			<mat-icon>{{item.icon}}</mat-icon>
+			<span>{{item.label}}</span>
+		</button>
+		<a mat-button *ngIf="item.type == 'link'" [routerLink]="[item.url]" (click)="select(item.name)" [class.is-active]="selected == item.name  && (!disabled || item.disabled)" [disabled]="disabled || item.disabled">
+			<mat-icon>{{item.icon}}</mat-icon>
+			<span>{{item.label}}</span>
+		</a>
+	</ng-container>
+</nav>

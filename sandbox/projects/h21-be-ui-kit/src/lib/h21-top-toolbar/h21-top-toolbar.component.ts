@@ -18,20 +18,23 @@ import { IBreadcrumb } from '../../dto/i-breadcrumb';
 
 export class H21TopToolbarComponent implements OnInit {
 
-	@Input() showBreadcrumbs = false;
-	@Input() showProfileUserCardActions = false;
-	@Input() showProfileAgentsActions = false;
-	@Input() showProfileAgentAddActions = false;
-	@Input() showProfileTuneActions = false;
-	@Input() showProfileListActions = false;
-	@Input() showFlightsMapToggleControl = false;
-	@Input() showFlightsMenuToggleControl = false;
-	@Input() showFlightsLanguageControl = false;
-	@Input() showFlightsCurrencyControl = false;
-
+	@Input() showBreadcrumbs: boolean = false;
 	@Input() breadcrumbsData: Array<IBreadcrumb>;
+	@Input() showSearchResultViewModeToggle: boolean = false;
 
-	@Output() onMenuClick: EventEmitter <void> = new EventEmitter<void>();
+	@Input() showSidenavToggle: boolean = false;
+	@Input() sidenavOpened: boolean = false;
+
+	@Input() showLanguageControl = false;
+	@Input() showCurrencyControl = false;
+
+	@Input() showProfileUserCardActions: boolean = false;
+	@Input() showProfileAgentsActions: boolean = false;
+	@Input() showProfileAgentAddActions: boolean = false;
+	@Input() showProfileTuneActions: boolean = false;
+	@Input() showProfileListActions: boolean = false;
+
+	@Output() onSidenavToggle: EventEmitter <void> = new EventEmitter<void>();
 
 	constructor(private _appSubscriber: AppSubscriberService) {
 	}
@@ -45,20 +48,16 @@ export class H21TopToolbarComponent implements OnInit {
 				this.modeVisibility = false;
 			}
 		});
-		this._appSubscriber.closeMenuObservable().subscribe(()=>{
-			this.menuIsOpened = false;
-		});
 	}
 
-	menuIsOpened = true;
 	selectedLanguage = 'eng';
 	selectedCurrency = 'eur';
 	resultsMode = 'list';
 	modeVisibility = false;
 
-	menuClick(): void {
-		this.menuIsOpened = !this.menuIsOpened;
-		this.onMenuClick.emit();
+	sidenavToggle(): void {
+		this.sidenavOpened = !this.sidenavOpened;
+		this.onSidenavToggle.emit();
 	}
 
 	changeResultMode() {

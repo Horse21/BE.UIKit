@@ -18,3 +18,8 @@ export * from './entity';
 export * from './query';
 export * from './i-validation-rule';
 export * from './h21-validator';
+
+export * from './i-sidebar-nav-tab';
+export * from './i-search-hotel-options';
+export * from './i-breadcrumb';
+export * from './i-sorting-parameter';

@@ -6,15 +6,15 @@
 	</ng-container>
 
 	<!--  -->
-	<ng-container *ngIf="showFlightsMenuToggleControl">
-		<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="menuClick()" [class.is-opened]="menuIsOpened" >
+	<ng-container *ngIf="showSidenavToggle">
+		<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="sidenavToggle()" [class.is-opened]="sidenavOpened" >
 			<mat-icon class="c-h21-top-toolbar-menu-btn_open" aria-label="Open">menu</mat-icon>
 			<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
 		</button>
 	</ng-container>
 
 	<!--  -->
-	<ng-container *ngIf="showFlightsMapToggleControl">
+	<ng-container *ngIf="showSearchResultViewModeToggle">
 		<div *ngIf="modeVisibility" [@toggleVisibility]>
 			<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
 				<mat-button-toggle value="list">List</mat-button-toggle>
@@ -27,7 +27,7 @@
 	<div class="w-spacer">&nbsp;</div>
 
 	<!-- -->
-	<ng-container *ngIf="showFlightsLanguageControl">
+	<ng-container *ngIf="showLanguageControl">
 		<mat-form-field appearance="fill">
 			<mat-select [(value)]="selectedLanguage">
 				<mat-option [value]="'deu'">DEU</mat-option>
@@ -39,7 +39,7 @@
 	</ng-container>
 
 	<!-- -->
-	<ng-container *ngIf="showFlightsCurrencyControl">
+	<ng-container *ngIf="showCurrencyControl">
 		<mat-form-field appearance="fill">
 			<mat-select [(value)]="selectedCurrency">
 				<mat-option [value]="'eur'">EUR</mat-option>
