@@ -63,7 +63,6 @@ export class MapsComponent implements OnInit {
     }
 
     public loadMarkers() {
-
         let markersArray: any
         markersArray = markers['default'];
         this.source.config.setMarkers(this.source.map, markersArray, this.source.cluster);
@@ -74,7 +73,7 @@ export class MapsComponent implements OnInit {
     }
 
     ngOnInit() {
-        setTimeout(()=> this.Init('google'), 2000);
+        setTimeout(()=> this.Init('google'), 5000);
         
 
     }
