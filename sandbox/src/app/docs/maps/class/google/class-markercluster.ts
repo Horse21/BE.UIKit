@@ -1,4 +1,4 @@
-import { MarkerClusterMap } from "../../interface/interface-markercluster";
+import { MarkerClusterMap } from "../../interface/i-markercluster";
 
 export class Markercluster implements MarkerClusterMap {
     Cluster:any;

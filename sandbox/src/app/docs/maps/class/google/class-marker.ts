@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer, config } from 'rxjs';
-import { MarkerMap } from "../../interface/interface-marker";
+import { MarkerMap } from "../../interface/i-marker";
 
 declare var google: any;
 declare var require: any;

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core"
-import {IBreadcrumb} from "./../../../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
+import {IBreadcrumb} from "../../../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
 
 const BREADCRUMBS_DATA: IBreadcrumb[] = [
 	{label: "Home", url: "#"},

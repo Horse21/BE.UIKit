@@ -1,4 +1,4 @@
-import { LoadApiMap,InitMap } from "../../interface/interface-init";
+import { LoadApiMap,InitMap } from "../../interface/i-init";
 import * as mapstyle from "../../class/google/maps.style.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
@@ -37,7 +37,7 @@ export class Initialize implements InitMap {
 
     initializingMap(): any {
         let mcOptions = {
-            gridSize: 80, maxZoom: 18, zoomOnClick: true, ignoreHidden: true, styles: [
+            gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
                 {
                     textColor: 'black',
                     url: require('../../images/icon/icon_pointGroup.png'),
