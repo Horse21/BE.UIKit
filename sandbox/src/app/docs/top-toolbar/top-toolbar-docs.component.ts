@@ -23,7 +23,9 @@ const BUTTON_DATA: IToolbarElement = {
 	tooltip: 'lorem',
 	icon: 'person',
 	style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
-	action: (event) => {alert("lorem");}
+	action: (event) => {
+		alert('lorem');
+	}
 };
 
 const BUTTONS_DATA: IToolbarElement[] = [
@@ -32,21 +34,27 @@ const BUTTONS_DATA: IToolbarElement[] = [
 		tooltip: 'lorem',
 		icon: 'edit',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
-		action: (event) => {alert("lorem");}
+		action: (event) => {
+			alert('lorem');
+		}
 	},
 	{
 		condition: 'showProfileTuneActions',
 		tooltip: 'ipsum',
 		icon: 'cancel',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
-		action: (event) => {alert("ipsum");}
+		action: (event) => {
+			alert('ipsum');
+		}
 	},
 	{
 		condition: 'showProfileTuneActions',
 		tooltip: 'help',
 		icon: 'help',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
-		action: (event) => {alert("dolor");}
+		action: (event) => {
+			alert('dolor');
+		}
 	}
 ];
 
@@ -62,8 +70,7 @@ export class TopToolbarDocsComponent implements OnInit {
 	button: IToolbarElement = BUTTON_DATA;
 
 	ngOnInit() {
-		console.log("button", this.button);
-		console.log("buttons", this.buttons);
+		console.log('button', this.button);
+		console.log('buttons', this.buttons);
 	}
-
 }
