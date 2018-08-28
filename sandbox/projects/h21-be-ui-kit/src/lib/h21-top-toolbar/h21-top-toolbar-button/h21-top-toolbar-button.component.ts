@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IToolbarElement } from '../../../dto/i-toolbar-element';
 
 @Component({
@@ -9,15 +9,16 @@ import { IToolbarElement } from '../../../dto/i-toolbar-element';
 export class H21TopToolbarButtonComponent implements OnInit {
 
   @Input() buttonData: IToolbarElement;
+  @Output() action: EventEmitter<any> = new EventEmitter();
+
+  onClick(event) {
+    this.action.emit(this.buttonData.action(event));
+  }
 
   constructor() {
   }
 
   ngOnInit() {
-  }
-
-  buildStringOfStyles() {
-    return this.buttonData.style.join(' ');
   }
 
 }

@@ -51,7 +51,11 @@
 
 	<!-- Profile user card actions -->
 
-	<h21-top-toolbar-button-container [buttonsData]="toolbarButtonsData" [condition]="showProfileUserCardActions"></h21-top-toolbar-button-container>
+	<h21-top-toolbar-button-container [toolbarButtons]="buttonsData"></h21-top-toolbar-button-container>
+
+	<!--
+
+
 	<ng-container *ngIf="showProfileUserCardActions">
 		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>edit</mat-icon>
@@ -70,21 +74,21 @@
 		</button>
 	</ng-container>
 
-	<!-- Profile show list actions -->
+	< Profile show list actions --
 	<ng-container *ngIf="showProfileListActions">
 		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>view_column</mat-icon>
 		</button>
 	</ng-container>
 
-	<!-- Profile agent add actions -->
+	< Profile agent add actions --
 	<ng-container *ngIf="showProfileAgentAddActions">
 		<button mat-icon-button matTooltip="Add agent" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>person_add</mat-icon>
 		</button>
 	</ng-container>
 
-	<!-- Profile agents list actions -->
+	< Profile agents list actions --
 	<ng-container *ngIf="showProfileAgentsActions">
 		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>autorenew</mat-icon>
@@ -94,11 +98,12 @@
 		</button>
 	</ng-container>
 
-	<!-- Profile tune actions -->
+	< Profile tune actions --
 	<ng-container *ngIf="showProfileTuneActions">
 		<button mat-icon-button matTooltip="Settings" class="c-h21-top-toolbar_action-btn">
 			<mat-icon>tune</mat-icon>
 		</button>
 	</ng-container>
 
+-->
 </mat-toolbar>

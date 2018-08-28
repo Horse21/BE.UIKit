@@ -1,9 +1,9 @@
 import { EventEmitter } from "events";
 
 export interface IToolbarElement {
-    condition: boolean;
+    condition: string;
     tooltip: string;
     icon: string;
     style: Array<string>;
-    action: EventEmitter;
+    action: Function;
 };
