@@ -29,7 +29,7 @@ import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib
 import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
 import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
 import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
-import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
+import {H21BreadcrumbsComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
@@ -43,7 +43,6 @@ import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-coun
 import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
 import {H21HistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -62,9 +61,12 @@ import {TooltipsDocsComponent} from './docs/tooltips/tooltips-docs.component';
 import {TypographyDocsComponent} from './docs/typography/typography-docs.component';
 import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month-calendar-docs.component';
 import {CounterInputComponent} from './docs/counter-input/counter-input.component';
-import { count } from '../../node_modules/rxjs/operators';
+import { count } from 'rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
 import { MapsComponent } from './docs/maps/maps.component';
+import { MapToolbarComponent } from './docs/maps/map-toolbar/map-toolbar.component';
+import { MapContainerComponent } from './docs/maps/map-container/map-container.component';
+import { MapSelectorComponent } from './docs/maps/map-selector/map-selector.component';
 import { TopToolbarDocsComponent } from './docs/top-toolbar/top-toolbar-docs.component';
 import { H21TableUsersComponent } from './docs/h21-table-users/h21-table-users.component';
 import { H21TableAgentsComponent } from './docs/h21-table-agents/h21-table-agents.component';
@@ -147,6 +149,9 @@ const routes: Routes = [
 		H21TableProvidersComponent,
 		SearchResultItemComponent,
 		MapsComponent,
+		MapToolbarComponent,
+		MapSelectorComponent,
+		MapContainerComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent
 	],

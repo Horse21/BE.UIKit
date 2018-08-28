@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer, config } from 'rxjs';
-import { EventMap } from "../../interface/interface-event";
+import { EventMap } from "../../interface/i-event";
 declare var require: any;
 declare var placeId: any;
 declare var event: any;

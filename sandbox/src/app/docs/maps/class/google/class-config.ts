@@ -1,4 +1,4 @@
-import { MapOptions } from "../../interface/interface-config";
+import { MapOptions } from "../../interface/i-config";
 
 declare var google: any;
 declare var require: any;
@@ -14,6 +14,7 @@ export class Options implements MapOptions {
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(obj.Address.Lat, obj.Address.Lng),
                 draggable: false,
+                visible: true,
                 clickable: true,
                 icon: { url: require('../../images/icon/icon_hotel.png') },
                 title: obj.Hotelname
@@ -87,18 +88,19 @@ export class Options implements MapOptions {
                 radiusObject = new google.maps.Circle(option);
                 radiusObject.setMap(map);
                 google.maps.event.addListener(radiusObject, 'radius_changed', function (event) {
+                    console.log('radius CHANGE')
+                });
+
+                google.maps.event.addListener(radiusObject, 'dragend', function () {
+                    console.log('dragend')
 
                 });
             }
 
             if (type == 'area') {
                 drawingMode = null;
-                var poly: any;
-                map.setOptions({
-                    draggable: false,
-                    scrollwheel: false,
-                    disableDoubleClickZoom: false
-                });
+                let poly: any;
+                this.draggableMap(map, true);
                 google.maps.event.addDomListener(map.getDiv(), 'mousedown', function (e) {
                     poly = new google.maps.Polyline({
                         map: map,
@@ -110,11 +112,11 @@ export class Options implements MapOptions {
                     });
 
                     polygonArea.push(poly)
-                    var move = google.maps.event.addListener(map, 'mousemove', function (e) {
+                    var move = google.maps.event.addListener(map, 'mousemove', e => {
                         poly.getPath().push(e.latLng);
 
                     });
-                    google.maps.event.addListenerOnce(map, 'mouseup', function (e) {
+                    google.maps.event.addListenerOnce(map, 'mouseup', e => {
                         google.maps.event.removeListener(move);
                         var path = poly.getPath();
                         poly.setMap(null);
@@ -127,42 +129,49 @@ export class Options implements MapOptions {
                             fillOpacity: 0.35,
                         });
 
-                        polygonArea.push(poly)
-                        google.maps.event.clearListeners(map.getDiv(), 'mousedown');               
-                        let array = poly.getPath().getArray();
-                        let x1: any[] = [];
-                        let y1: any[] = [];
-                        array.forEach((item) => {                 
-                            x1.push(item.lat());
-                            y1.push(item.lng());
 
-                        });
-
-                        for (let item of markers) {       
-                           let b = new Options().inclusionMarkersPolygon(item, x1, y1);
-                           if(b == false){
-                            item.setMap(null);
-                            markerCluster.removeMarker(item);
-                            //markerCluster.repaint();
-                           }
-
-                        };
-                
                         map.setOptions({
                             draggable: true,
                             scrollwheel: true,
                             disableDoubleClickZoom: true
                         });
+
+
+                        polygonArea.push(poly);
+                        google.maps.event.clearListeners(map.getDiv(), 'mousedown');
+
+                        let array = poly.getPath().getArray();
+                        let x1: any[] = [];
+                        let y1: any[] = [];
+                        array.forEach((item) => {
+                            x1.push(item.lat());
+                            y1.push(item.lng());
+
+                        });
+                        markers.forEach(item => func(item, x1, y1));
+
                     });
                 });
+            }
+
+            let func = (item, x1, y1) => {
+                let b = this.inclusionMarkersPolygon(item, x1, y1);
+                if (b === false) {
+                    item.setMap(null);
+                    if (markerCluster != null) {
+                        markerCluster.removeMarker(item);
+                        markerCluster.repaint();
+                    }
+
+                }
             }
         }
         catch (error) {
             console.log(error);
         }
-
     }
-    public inclusionMarkersPolygon(item: any, xp: any[], yp: any[]): boolean {
+
+    inclusionMarkersPolygon(item: any, xp: any[], yp: any[]): boolean {
         let x = item.position.lat();
         let y = item.position.lng();
         let npol = xp.length;
@@ -189,12 +198,13 @@ export class Options implements MapOptions {
     }
     setMarkers(map: any, markersObj: any[], markerclusterObj: any) {
 
-        new Options().clearMap(map);
+        this.clearMap(map);
         markersObj.forEach((item) => {
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
                 draggable: false,
                 clickable: true,
+                visible: true,
                 icon: { url: require('../../images/icon/icon_hotel.png') },
                 title: item.Hotelname
             });
@@ -205,6 +215,10 @@ export class Options implements MapOptions {
         markerCluster = markerclusterObj;
         markerclusterObj.repaint();
 
+        google.maps.event.addListener(markerCluster, "clusterclick", function (c) {
+            console.log('clusterclick')
+        });
+
     }
     clearMap(map: any) {
         try {
@@ -213,6 +227,7 @@ export class Options implements MapOptions {
             });
             if (markerCluster != null) {
                 markerCluster.clearMarkers();
+                console.log('markerCluster', markerCluster)
 
             }
 
@@ -227,6 +242,7 @@ export class Options implements MapOptions {
                 });
 
             }
+            markers = [];
         }
         catch (error) {
             console.log(error);
@@ -282,9 +298,9 @@ export class Options implements MapOptions {
 
     draggableMap(map: any, boolean: any) {
         if (boolean) {
+            console.log('grable false')
             map.setOptions({
                 draggable: false,
-                zoomControl: false,
                 scrollwheel: false,
                 disableDoubleClickZoom: false
             });
@@ -292,7 +308,6 @@ export class Options implements MapOptions {
         else {
             map.setOptions({
                 draggable: true,
-                zoomControl: true,
                 scrollwheel: true,
                 disableDoubleClickZoom: true
             });

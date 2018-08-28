@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core"
-import { IBreadcrumb } from "./../../dto/i-breadcrumb";
+import { IBreadcrumb } from "../../dto/i-breadcrumb";
 
 @Component({
 	selector: 'h21-breadcrumbs',

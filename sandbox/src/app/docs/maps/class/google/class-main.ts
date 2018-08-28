@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { LoadApiMap, InitMap } from "../../interface/interface-init";
-import { EventMap } from "../../interface/interface-event";
-import { MapOptions } from "../../interface/interface-config";
-import { MainMap } from "../../interface/interface-main";
-import { MarkerMap } from "../../interface/interface-marker";
-import { InfoWindowMap } from "../../interface/interface-infowindow";
-import { MarkerClusterMap } from "../../interface/interface-markercluster";
+import { LoadApiMap, InitMap } from "../../interface/i-init";
+import { EventMap } from "../../interface/i-event";
+import { MapOptions } from "../../interface/i-config";
+import { MainMap } from "../../interface/i-main";
+import { MarkerMap } from "../../interface/i-marker";
+import { InfoWindowMap } from "../../interface/i-infowindow";
+import { MarkerClusterMap } from "../../interface/i-markercluster";
 import { Options } from "./class-config";
 import { Initialize } from "./class-Initialize";
 import { Events } from "./class-event";
