@@ -64,6 +64,7 @@ import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month
 import {CounterInputComponent} from './docs/counter-input/counter-input.component';
 import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
+import { MapsComponent } from './docs/maps/maps.component';
 import { TopToolbarDocsComponent } from './docs/top-toolbar/top-toolbar-docs.component';
 import { H21TableUsersComponent } from './docs/h21-table-users/h21-table-users.component';
 import { H21TableAgentsComponent } from './docs/h21-table-agents/h21-table-agents.component';
@@ -73,6 +74,9 @@ import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table
 import { SearchResultItemComponent } from './docs/search-result-item/search-result-item.component';
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
+
+import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
+import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 
 
 
@@ -145,8 +149,11 @@ const routes: Routes = [
 		H21TableTravelersComponent,
 		H21TableProvidersComponent,
 		SearchResultItemComponent,
+		MapsComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
+		H21TopToolbarButtonComponent,
+		H21TopToolbarButtonContainerComponent,
 	],
 	imports: [
 		BrowserModule,
