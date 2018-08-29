@@ -12,4 +12,5 @@ export abstract class VocabularyService {
 	abstract searchFlights(options: SearchFlightDto): Observable<SearchResult>;
 
 	abstract searchPassengers(pattern: string): Observable<Passenger[]>;
+
 }
