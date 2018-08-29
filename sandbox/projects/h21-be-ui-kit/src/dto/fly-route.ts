@@ -8,3 +8,4 @@ export class FlyRoute {
 	minDate: Date;
 	rangeDateMode: boolean;
 }
+
