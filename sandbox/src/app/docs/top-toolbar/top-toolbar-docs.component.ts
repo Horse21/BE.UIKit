@@ -10,14 +10,6 @@ const BREADCRUMBS_DATA: IBreadcrumb[] = [
 	{ label: 'My User', url: '#' }
 ];
 
-// export interface IToolbarElement {
-//     condition: boolean;
-//     tooltip: string;
-//     icon: string;
-//     style: Array<string>;
-//     action: EventEmitter;
-// };
-
 const BUTTON_DATA: IToolbarElement = {
 	condition: 'showProfileAgentsActions',
 	tooltip: 'lorem',
@@ -63,7 +55,6 @@ const BUTTONS_DATA: IToolbarElement[] = [
 	templateUrl: './top-toolbar-docs.component.html'
 })
 export class TopToolbarDocsComponent implements OnInit {
-	/** Section title */
 	title = 'Top toolbar component';
 	breadcrumbs: Array<IBreadcrumb> = BREADCRUMBS_DATA;
 	buttons: Array<IToolbarElement> = BUTTONS_DATA;
