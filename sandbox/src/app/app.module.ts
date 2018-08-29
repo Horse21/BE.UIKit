@@ -64,6 +64,7 @@ import {TwoMonthCalendarDocsComponent} from './docs/two-month-calendar/two-month
 import {CounterInputComponent} from './docs/counter-input/counter-input.component';
 import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
+import { MapsComponent } from './docs/maps/maps.component';
 import { TopToolbarDocsComponent } from './docs/top-toolbar/top-toolbar-docs.component';
 import { H21TableUsersComponent } from './docs/h21-table-users/h21-table-users.component';
 import { H21TableAgentsComponent } from './docs/h21-table-agents/h21-table-agents.component';
@@ -148,6 +149,7 @@ const routes: Routes = [
 		H21TableTravelersComponent,
 		H21TableProvidersComponent,
 		SearchResultItemComponent,
+		MapsComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
 		H21TopToolbarButtonComponent,

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 <button (click)="onClick($event)" mat-icon-button [matTooltip]="buttonData.tooltip" [ngClass]="buttonData.style.join(' ')">
+=======
+<button (click)="buttonData.action($event)" mat-icon-button matTooltip="{{buttonData.tooltip}}" class="{{buttonData.style.join(' ')}}">
+>>>>>>> 0f21e1ab2f10d4cd44a4cbe3b505179871a36f86
   <mat-icon>{{buttonData.icon}}</mat-icon>
 </button>
