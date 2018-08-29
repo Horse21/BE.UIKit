@@ -1,4 +1,4 @@
-import { City } from '../dto/city';
+import { City } from './city';
 
 export class FlyRoute {
 	cityFrom: City;
