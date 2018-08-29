@@ -151,7 +151,7 @@ const routes: Routes = [
 		SearchResultItemComponent,
 		MapsComponent,
 		HotelSearchPanelDocsComponent,
-		HotelFilterPanelDocsComponent,
+		HotelFilterPanelDocsComponent
 		H21TopToolbarButtonComponent,
 		H21TopToolbarButtonContainerComponent,
 	],
