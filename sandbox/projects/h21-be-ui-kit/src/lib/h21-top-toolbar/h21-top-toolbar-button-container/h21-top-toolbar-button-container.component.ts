@@ -8,7 +8,6 @@ import { IToolbarElement } from '../../../dto/i-toolbar-element';
 })
 export class H21TopToolbarButtonContainerComponent implements OnInit {
 
-  // @Input() toolbarButton: IToolbarElement;
   @Input() toolbarButtons: Array<IToolbarElement>;
   @Input() condition: string;
 
