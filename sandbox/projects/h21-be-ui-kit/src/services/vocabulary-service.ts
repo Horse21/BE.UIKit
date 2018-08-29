@@ -13,3 +13,4 @@ export abstract class VocabularyService {
 
 	abstract searchPassengers(pattern: string): Observable<Passenger[]>;
 }
+
