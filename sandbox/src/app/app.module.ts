@@ -75,6 +75,9 @@ import { SearchResultItemComponent } from './docs/search-result-item/search-resu
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
 
+import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
+import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
+
 
 
 const routes: Routes = [
@@ -149,6 +152,8 @@ const routes: Routes = [
 		MapsComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent
+		H21TopToolbarButtonComponent,
+		H21TopToolbarButtonContainerComponent,
 	],
 	imports: [
 		BrowserModule,
