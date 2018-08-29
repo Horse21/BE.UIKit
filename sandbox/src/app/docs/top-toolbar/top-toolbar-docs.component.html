@@ -1,15 +1,18 @@
 <section class="docs_section mat-typography">
 	<h1>{{title}}</h1>
-	<!--<h21-top-toolbar [showCurrencyControl]="true"-->
-					 <!--[showLanguageControl]="true"-->
-					 <!--[showFlightsMapToggleControl]="true"-->
-					 <!--[showFlightsMenuToggleControl]="true" class="docs_toolbar-example"></h21-top-toolbar>-->
-
-	<!--<h21-top-toolbar [showProfileAgentAddActions]="true"-->
-					 <!--[showProfileAgentsActions]="true"-->
-					 <!--[showProfileListActions]="true"-->
-					 <!--[showProfileTuneActions]="true"-->
-					 <!--[showProfileUserCardActions]="true"-->
-					 <!--[showBreadcrumbs]="true"-->
-					 <!--[breadcrumbsData]="breadcrumbs" class="docs_toolbar-example"></h21-top-toolbar>-->
+	<h4>test</h4>
+	<span>toolbar here</span>
+	<br>
+	<h21-top-toolbar [showBreadcrumbs]="true" [breadcrumbsData]="breadcrumbs" [buttonsData]="buttons"></h21-top-toolbar>
+	<br>
+	
+	<span>container here</span>
+	<br>
+	<h21-top-toolbar-button-container [toolbarButtons]="buttons"></h21-top-toolbar-button-container>
+	<br>
+	
+	<span>buttons here</span>
+	<br>
+	<br>
+	<h21-top-toolbar-button [buttonData]="button"></h21-top-toolbar-button>
 </section>
