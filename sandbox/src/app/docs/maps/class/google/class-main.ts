@@ -7,7 +7,7 @@ import { MarkerMap } from "../../interface/interface-marker";
 import { InfoWindowMap } from "../../interface/interface-infowindow";
 import { MarkerClusterMap } from "../../interface/interface-markercluster";
 import { Options } from "./class-config";
-import { Initialize } from "./class-Initialize";
+import { Initialize } from "./class-initialize";
 import { Events } from "./class-event";
 import { Marker } from "./class-marker";
 import { Markercluster } from "./class-markercluster";

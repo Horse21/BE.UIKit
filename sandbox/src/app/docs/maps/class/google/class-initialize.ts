@@ -40,7 +40,7 @@ export class Initialize implements InitMap {
             gridSize: 80, maxZoom: 18, zoomOnClick: true, ignoreHidden: true, styles: [
                 {
                     textColor: 'black',
-                    url: require('../../images/icon/icon_pointGroup.png'),
+                    url: require('../../images/icon/icon_pointgroup.png'),
                     anchorText: [0, -2],
                     height: 44,
                     width: 44
