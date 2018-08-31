@@ -60,7 +60,7 @@
 		</ng-container>
 	</div>
 
-	<mat-tab-group *ngIf="searchResultReady">
+	<mat-tab-group *ngIf="searchResultReady" class="mat-tab-group__h21-style-1">
 		<mat-tab label="Search result">
 			<div class="c-h21-hotel-search-result_tab-content">
 				<div class="__text-right">
@@ -75,7 +75,9 @@
 						</mat-select>
 					</mat-form-field>
 				</div>
-				<!-- content -->
+				<ng-container *ngFor="let item of searchResult">
+					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
+				</ng-container>
 			</div>
 		</mat-tab>
 		<mat-tab label="Favorites">
@@ -92,7 +94,9 @@
 						</mat-select>
 					</mat-form-field>
 				</div>
-				<!-- content -->
+				<ng-container *ngFor="let item of searchResult">
+					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
+				</ng-container>
 			</div>
 		</mat-tab>
 		<mat-tab label="Negotiated Rates">
@@ -112,7 +116,9 @@
 						</mat-select>
 					</mat-form-field>
 				</div>
-				<!-- content -->
+				<ng-container *ngFor="let item of searchResult">
+					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
+				</ng-container>
 			</div>
 		</mat-tab>
 	</mat-tab-group>

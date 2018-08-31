@@ -12,8 +12,16 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
 import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
-import {ISearchHotelOptions} from "../../projects/h21-be-ui-kit/src/dto/i-search-hotel-options";
+import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+
+
+
+const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
+	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
+	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
+	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
+];
 
 
 @Component({
@@ -86,10 +94,11 @@ export class AppComponent {
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
 	activeLeftSidenavPanel: string = 'search';
-	sidenavOpened: boolean = true;
+	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;
 	searchResultViewMode: string = 'list';
-	sidebarNavDisabled: boolean = false;
+	sidebarNavDisabled: boolean = true;
+	sidebarNavTabs: Array<ISidebarNavTab> = SIDEBAR_NAV_TABS;
 
 	leftSidenavToggle() {
 		this.leftSidenav.toggle();
@@ -110,8 +119,9 @@ export class AppComponent {
 		this.activeLeftSidenavPanel = tab.name;
 	}
 
-	search(options: ISearchHotelOptions): void {
+	search(options: IHotelSearchOptions): void {
 		this.searchResultVisibility = true;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
 			this.searchResult.search(options);
 		}, 0);
@@ -119,14 +129,11 @@ export class AppComponent {
 
 	clearSearch(): void {
 		this.searchResultVisibility = false;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
 		this.searchResult.clear();
 	}
 
 	changeResultViewMode(mode: string): void {
 		this.searchResultViewMode = mode;
-
-		if (mode == 'map') {
-			this.leftSidenavToggle();
-		}
 	}
 }

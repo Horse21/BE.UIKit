@@ -1,20 +1,25 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxMdModule} from 'ngx-md';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
 import {AppSubscriberService} from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import {OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
-import {FakeVocabularyService} from '../services/fake-vocabulary-service';
 import {VocabularyService} from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
-import {AppComponent} from './app.component';
-import {RouterModule, Routes} from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FakeVocabularyService} from '../services/fake-vocabulary-service';
 import {AppMaterialModule} from './modules/app-material.module';
-import {DocsNavigationComponent} from './docs-navigation/docs-navigation.component';
+import {AppComponent} from './app.component';
+
 import {DocsComponent} from './docs/docs.component';
+import {DocsNavigationComponent} from './docs-navigation/docs-navigation.component';
 import {DocsExampleViewerComponent} from './docs-example-viewer/docs-example-viewer.component';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NouisliderModule} from 'ng2-nouislider';
-import {NgxMdModule} from 'ngx-md';
+
+import {DxDataGridModule,DxTemplateModule} from 'devextreme-angular';
 
 /** Import H21 components */
 import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
@@ -43,7 +48,10 @@ import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-coun
 import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
 import {H21HistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-
+import {H21HotelBookComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-book/h21-hotel-book.component";
+import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
+import {H21HotelSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
+import {H21HotelRoomDetailComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -88,6 +96,7 @@ const routes: Routes = [
 	// 		{path: '', component: H21HistoryPanelComponent, outlet: 'historyPanel'},
 	// 	]},
 	{path: 'demo', component: AppComponent },
+	{path: 'demo/hotel', component: H21HotelBookComponent },
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
@@ -122,6 +131,7 @@ const routes: Routes = [
 		H21HistoryPanelComponent,
 		H21HotelSearchResultComponent,
 		H21SidebarNavComponent,
+		H21HotelBookComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,
@@ -152,6 +162,9 @@ const routes: Routes = [
 		MapsComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
+		H21SlideCarouselComponent,
+		H21HotelSearchResultCardComponent,
+		H21HotelRoomDetailComponent,
 		H21TopToolbarButtonComponent,
 		H21TopToolbarButtonContainerComponent,
 	],
@@ -165,6 +178,8 @@ const routes: Routes = [
 		ReactiveFormsModule,
 		NouisliderModule,
 		NgxMdModule.forRoot(),
+		DxDataGridModule,
+		DxTemplateModule,
 	],
 	providers: [
 		{
@@ -188,3 +203,5 @@ const routes: Routes = [
 export class AppModule {
 
 }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

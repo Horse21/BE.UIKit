@@ -1,7 +1,9 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {ISearchHotelOptions} from "./../../dto/i-search-hotel-options";
+import {IHotelSearchOptions} from "../../dto/i-hotel-search-options";
 import {ISortingParameter} from "./../../dto/i-sorting-parameter";
+import {VocabularyService} from "../../services/vocabulary-service";
+import {IHotelInfo} from "../../dto/i-hotel-info";
 
 @Component({
 	selector: 'h21-hotel-search-result',
@@ -19,13 +21,15 @@ import {ISortingParameter} from "./../../dto/i-sorting-parameter";
 export class H21HotelSearchResultComponent {
 
 	@Input() viewMode: 'list' | 'grid' | 'map' = 'list';
+	@Output() onSearchResultReady: EventEmitter<IHotelInfo[]> = new EventEmitter<IHotelInfo[]>();
 
 	sortParameters: Array<ISortingParameter>;
 	searchInProgress: boolean = false;
 	searchResultReady: boolean = false;
 	showFakeResult: boolean = false;
+	searchResult: Array<IHotelInfo>;
 
-	constructor () {
+	constructor (private _vocabulary: VocabularyService) {
 		this.sortParameters = [
 			{ alias: 'price_up', name: 'Price', direction: 'up'},
 			{ alias: 'price_down', name: 'Price', direction: 'down'},
@@ -34,15 +38,19 @@ export class H21HotelSearchResultComponent {
 		];
 	}
 
-	search(options: ISearchHotelOptions): void {
+	search(options: IHotelSearchOptions): void {
 		this.searchInProgress = true;
 		this.showFakeResult = true;
 		this.searchResultReady = false;
 		setTimeout(() => {
-			this.searchInProgress = false;
-			this.showFakeResult = false;
+			this._vocabulary.searchHotels(options).subscribe(result => {
+				this.searchInProgress = false;
+				this.showFakeResult = false;
+				this.searchResult = result;
+			});
 			setTimeout(() => {
 				this.searchResultReady = true;
+				this.onSearchResultReady.emit(this.searchResult);
 			}, 250);
 		}, 2000);
 	}
@@ -51,5 +59,6 @@ export class H21HotelSearchResultComponent {
 		this.searchInProgress = true;
 		this.showFakeResult = true;
 		this.searchResultReady = false;
+		this.searchResult = [];
 	}
 }
