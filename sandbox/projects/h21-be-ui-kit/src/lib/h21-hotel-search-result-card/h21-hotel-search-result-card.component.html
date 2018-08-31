@@ -1,0 +1,31 @@
+<div class="c-h21-hotel-search-result-card" [class.c-h21-hotel-search-result-card__grid]="gridMode">
+	<div class="c-h21-hotel-search-result-card_inner">
+		<div class="c-h21-hotel-search-result-card_picture">
+			<img src="{{data.photo}}" alt="">
+		</div>
+		<div class="c-h21-hotel-search-result-card_info">
+			<div class="c-h21-hotel-search-result-card_title">{{data.name}} <h21-rate [rate]="data.rate" [size]="'s'"></h21-rate></div>
+			<div class="c-h21-hotel-search-result-card_location">
+				<mat-icon class="__size-s">place</mat-icon>
+				{{data.location}}
+			</div>
+			<div class="c-h21-hotel-search-result-card_options" *ngIf="data.options">
+				<div class="c-h21-hotel-search-result-card_option true" *ngFor="let item of data.options">
+					<mat-icon color="accent" class="__size-s">{{item.icon}}</mat-icon>
+					{{item.name}}
+				</div>
+			</div>
+		</div>
+		<div class="c-h21-hotel-search-result-card_actions">
+			<div class="c-h21-hotel-search-result-card_provider">{{data.provider}}</div>
+			<div class="c-h21-hotel-search-result-card_price">{{data.price | number:'2.1-2'}} {{currencyCode}}</div>
+			<div class="c-h21-hotel-search-result-card_gain">( + {{data.fee | number:'2.1-2'}} {{currencyCode}})</div>
+			<div class="c-h21-hotel-search-result-card_view">
+				<button mat-stroked-button color="primary" class="__size-m">View to book</button>
+			</div>
+		</div>
+		<div class="c-h21-hotel-search-result-card_favorite">
+			<mat-icon [class.is-active]="data.isFavorite">favorite</mat-icon>
+		</div>
+	</div>
+</div>

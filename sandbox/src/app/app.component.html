@@ -49,9 +49,10 @@
 		<div class="col-12 no-gutters __has-sidebar">
 			<h21-sidebar-nav [selected]="'start'"
 							 [disabled]="sidebarNavDisabled"
+							 [(tabs)]="sidebarNavTabs"
 							 (onChanged)="showSidebarPanel($event)"></h21-sidebar-nav>
 			<mat-sidenav-container [hasBackdrop]="false" autosize>
-				<mat-sidenav #leftSidenav mode="over" [opened]="sidenavOpened" class="page_left-sidenav">
+				<mat-sidenav #leftSidenav mode="side" [opened]="sidenavOpened" class="page_left-sidenav">
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
 							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
@@ -63,13 +64,16 @@
 							<h21-history-panel *ngIf="activeLeftSidenavPanel == 'history'"></h21-history-panel>
 						</div>
 						<div class="page_sidenav-search-result" *ngIf="searchResultVisibility"
-							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'" >
+							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'"
+							 [class.page_sidenav-search-result__map]="searchResultViewMode == 'map'">
 							<h21-hotel-search-result [viewMode]="searchResultViewMode" #searchResult></h21-hotel-search-result>
 						</div>
 					</div>
 				</mat-sidenav>
 				<mat-sidenav-content>
-					<div class="map-box"></div>
+					<div class="map-box">
+						<router-outlet></router-outlet>
+					</div>
 				</mat-sidenav-content>
 			</mat-sidenav-container>
 		</div>

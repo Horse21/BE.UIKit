@@ -19,11 +19,7 @@ export class H21SidebarNavComponent {
 	@Output() onChanged: EventEmitter<ISidebarNavTab> = new EventEmitter<ISidebarNavTab>();
 
 	constructor() {
-		this.tabs = [
-			{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
-			{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: false},
-			{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
-		];
+
 	}
 
 	select(name: string): void {

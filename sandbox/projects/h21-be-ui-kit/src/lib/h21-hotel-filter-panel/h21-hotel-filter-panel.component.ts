@@ -1,6 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MatAutocompleteSelectedEvent} from "@angular/material";
+import {
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+} from '@angular/core';
 import {FormControl} from "@angular/forms";
+import {MatAutocompleteSelectedEvent} from "@angular/material";
+import {IHotelFilterOptions} from "../../dto/i-hotel-filter-options";
 
 const ALL_TAGS: Array<any> = [
 	{id: 1, name: "Disabled guest"},
