@@ -50,6 +50,7 @@ export class MapContainerComponent implements OnInit {
             this.source.cluster = load.markercluster
             this.source.traffic = load.traffic;
             this.source.events.subscribe(this.source.map);
+          //  console.log(this.source,'constToolbar')
             
         }
     }).

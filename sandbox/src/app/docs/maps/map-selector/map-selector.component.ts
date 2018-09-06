@@ -13,12 +13,12 @@ export class MapSelectorComponent implements OnInit {
   constructor() { }
 
   public selectMap() {
-
+  console.log('selectMap')
 //console.log(this.mapsEnum)
   }
 
   ngOnInit() {
-
+    console.log('Selector')
   }
 
 }

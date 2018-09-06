@@ -27,6 +27,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-      
+        console.log('Map')
     }
 }

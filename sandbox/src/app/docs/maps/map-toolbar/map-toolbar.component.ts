@@ -19,12 +19,16 @@ import * as markers from "../test.markers.json";
 export class MapToolbarComponent implements OnInit {
   source: MainMap;
 
-  // constructor(s: MainMap) {
-  //  // this.source = s;
-  // }
+  constructor() {
+ // this.source = s;
+
+  //this.source.init.initializingMap();
+ // this.source = new GoogleMap();
+   
+  }
 
   public zoomLevel(type) {
-    console.log('zoomLevel', this.source)
+   // console.log('zoomLevel', this.source)
     //this.source.config.setZoomLevel(this.source.map, type)
   }
 
@@ -47,7 +51,7 @@ export class MapToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log('Toolbar')
     // console.log(this.source.map,'MAP');
   }
 
