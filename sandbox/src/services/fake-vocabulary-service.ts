@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subscriber } from 'rxjs/index';
+import { Subscriber } from 'rxjs';
 import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
 import { City } from '../../projects/h21-be-ui-kit/src/dto/city';
 import { Observable } from 'rxjs';

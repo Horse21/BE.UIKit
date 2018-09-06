@@ -31,7 +31,7 @@ import {
 	MatTabsModule,
 	MatToolbarModule,
 	MatTooltipModule,
-	MatNativeDateModule
+	MatNativeDateModule,
 } from '@angular/material';
 
 const dependencies = [

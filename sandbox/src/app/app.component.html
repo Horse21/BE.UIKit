@@ -1,4 +1,4 @@
-<div class="docs_page-box container-fluid" *ngIf="!isDemo() && !isProfileDemo()">
+<div class="docs_page-box container-fluid" *ngIf="!isDemo()">
 	<div class="docs_sidebar-wrapper row no-gutters">
 		<div class="docs_sidebar" [class.is-opened]="sidebarOpened">
 			<div class="docs_logo-box">
@@ -32,54 +32,47 @@
 </div>
 
 <!-- Demo page -->
-<div class="container-fluid page_box" *ngIf="isDemo()">
+<div class="container-fluid page_box mat-typography" *ngIf="isDemo()">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
 			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
 						[logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
-			<h21-top-toolbar [showFlightsMenuToggleControl]="true"
-							 [showFlightsMapToggleControl]="true"
-							 [showFlightsLanguageControl]="true"
-							 [showFlightsCurrencyControl]="true"
-							 (onMenuClick)="showSidebar()"></h21-top-toolbar>
+			<h21-top-toolbar [showSidenavToggle]="true"
+							 [sidenavOpened]="sidenavOpened"
+							 [showSearchResultViewModeToggle]="true"
+							 [showLanguageControl]="true"
+							 [showCurrencyControl]="true"
+							 (onSidenavToggle)="leftSidenavToggle()"></h21-top-toolbar>
 		</div>
 	</div>
 	<div class="row no-gutters page_content-box">
 		<div class="col-12 no-gutters __has-sidebar">
-			<h21-sidebar></h21-sidebar>
-			<div class="map-box"></div>
+			<h21-sidebar-nav [selected]="'start'"
+							 [disabled]="sidebarNavDisabled"
+							 (onChanged)="showSidebarPanel($event)"></h21-sidebar-nav>
+			<mat-sidenav-container [hasBackdrop]="false" autosize>
+				<mat-sidenav #leftSidenav mode="over" [opened]="sidenavOpened" class="page_left-sidenav">
+					<div class="page_left-sidenav-inner">
+						<div class="page_sidenav-search-actions">
+							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
+													(onSearch)="search($event)"
+													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
+							<h21-hotel-filter-panel *ngIf="activeLeftSidenavPanel == 'filter'"
+													[viewMode]="searchResultViewMode"
+													(onChangeViewMode)="changeResultViewMode($event)"></h21-hotel-filter-panel>
+							<h21-history-panel *ngIf="activeLeftSidenavPanel == 'history'"></h21-history-panel>
+						</div>
+						<div class="page_sidenav-search-result" *ngIf="searchResultVisibility"
+							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'" >
+							<h21-hotel-search-result [viewMode]="searchResultViewMode" #searchResult></h21-hotel-search-result>
+						</div>
+					</div>
+				</mat-sidenav>
+				<mat-sidenav-content>
+					<div class="map-box"></div>
+				</mat-sidenav-content>
+			</mat-sidenav-container>
 		</div>
 	</div>
-	<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>
-</div>
-
-<!-- Profile demo -->
-<div class="container-fluid page_box" *ngIf="isProfileDemo()">
-	<div class="row no-gutters page_header-box">
-		<div class="col-12 no-gutters">
-			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
-						[logotypeUrl]="'/assets/img/logo.svg'"></h21-header>
-			<h21-top-toolbar [showBreadcrumbs]="true" [breadcrumbsData]="breadcrumbsData"
-							 [showProfileUserCardActions]="true"></h21-top-toolbar>
-		</div>
-	</div>
-	<div class="row no-gutters page_content-box">
-		<div class="col-12 no-gutters __has-sidebar">
-			<nav class="sidebar_nav">
-				<a mat-button href="/profile_demo/board" class="is-active">
-					<mat-icon>apps</mat-icon>
-					<span>Board</span>
-				</a>
-				<a mat-button href="/profile_demo/tmc">
-					<mat-icon>domain</mat-icon>
-					<span>TMC</span>
-				</a>
-				<a mat-button href="/profile_demo/users">
-					<mat-icon>person</mat-icon>
-					<span>Users</span>
-				</a>
-			</nav>
-			<div class="page_content"></div>
-		</div>
-	</div>
+	<!--<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>-->
 </div>
