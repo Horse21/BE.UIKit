@@ -1,0 +1,6 @@
+<div class="button-toggle-wrapper">
+  <mat-button-toggle-group class="__primary">
+        <mat-button-toggle [(value)]="item"  [checked]="true" (change)="selectMap(item)">Google</mat-button-toggle>
+        <mat-button-toggle [(value)]="item" (change)="selectMap(item)">OpenStreet</mat-button-toggle>
+  </mat-button-toggle-group>
+</div> 
