@@ -65,12 +65,12 @@
 			<div class="c-h21-hotel-search-result_tab-content">
 				<div class="__text-right">
 					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field">
-						<mat-select>
-							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+					<mat-form-field class="sorting-form-field"
+									[class.sorting-form-field_up]="searchResultSortControl.value && searchResultSortControl.value.direction == 'up'"
+									[class.sorting-form-field_down]="searchResultSortControl.value && searchResultSortControl.value.direction == 'down'">
+						<mat-select [formControl]="searchResultSortControl">
+							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
 								{{item.name}}
-								<span matSuffix><mat-icon class="__size-s" *ngIf="item.direction == 'up'">arrow_upward</mat-icon></span>
-								<span matSuffix><mat-icon class="__size-s" *ngIf="item.direction == 'down'">arrow_downward</mat-icon></span>
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
@@ -84,12 +84,12 @@
 			<div class="c-h21-hotel-search-result_tab-content">
 				<div class="__text-right">
 					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field">
-						<mat-select>
-							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+					<mat-form-field class="sorting-form-field"
+									[class.sorting-form-field_up]="favoritesSortControl.value && favoritesSortControl.value.direction == 'up'"
+									[class.sorting-form-field_down]="favoritesSortControl.value && favoritesSortControl.value.direction == 'down'">
+						<mat-select [formControl]="favoritesSortControl">
+							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
 								{{item.name}}
-								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'up'">close</mat-icon>
-								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'down'">close</mat-icon>
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
@@ -106,12 +106,12 @@
 			<div class="c-h21-hotel-search-result_tab-content">
 				<div class="__text-right">
 					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field">
-						<mat-select>
-							<mat-option *ngFor="let item of sortParameters" value="{{item.name}}">
+					<mat-form-field class="sorting-form-field"
+									[class.sorting-form-field_up]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'up'"
+									[class.sorting-form-field_down]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'down'">
+						<mat-select [formControl]="negotiatedSortControl">
+							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
 								{{item.name}}
-								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'up'">close</mat-icon>
-								<mat-icon matSuffix class="__size-s" *ngIf="item.direction == 'down'">close</mat-icon>
 							</mat-option>
 						</mat-select>
 					</mat-form-field>

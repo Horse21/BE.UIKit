@@ -15,4 +15,8 @@ export class H21HotelSearchResultCardComponent {
 	constructor () {
 
 	}
+
+	openInBook(id: number): void {
+		window.open(`./hotelbook/${id}`);
+	}
 }

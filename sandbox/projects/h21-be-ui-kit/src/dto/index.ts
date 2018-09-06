@@ -30,4 +30,5 @@ export * from './i-hotel-option';
 export * from './i-hotel-room';
 export * from './i-hotel-room-detail';
 
-
+export * from './i-toolbar-element';
+export * from './i-cart-combobox-row';

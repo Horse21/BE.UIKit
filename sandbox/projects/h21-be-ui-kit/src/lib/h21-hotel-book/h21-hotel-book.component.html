@@ -19,7 +19,9 @@
 			<span>Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands</span>
 			<a href="#">Show on map</a>
 		</div>
-		<div class="col-3"></div>
+		<div class="col-3 __text-right">
+			<img src="./assets/samples_img/tripadvizor.png" alt="" />
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-9 c-h21-hotel-book_way-length">
@@ -76,10 +78,16 @@
 					</div>
 
 					<div *dxTemplate="let room of 'expand'">
-						<button mat-icon-button color="primary" *ngIf="!isExpanded(room.data.id)" (click)="expandDetail(room.data.id)">
+						<button mat-icon-button
+								ngClass="h21-data-grid_expand-button"
+								*ngIf="!isExpanded(room.data.id)"
+								(click)="expandDetail(room.data.id)">
 							<mat-icon>chevron_right</mat-icon>
 						</button>
-						<button mat-icon-button color="primary" *ngIf="isExpanded(room.data.id)" (click)="collapseDetail(room.data.id)">
+						<button mat-icon-button
+								ngClass="h21-data-grid_expand-button"
+								*ngIf="isExpanded(room.data.id)"
+								(click)="collapseDetail(room.data.id)">
 							<mat-icon>expand_more</mat-icon>
 						</button>
 					</div>

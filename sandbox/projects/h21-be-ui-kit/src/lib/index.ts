@@ -52,3 +52,6 @@ export * from './h21-hotel-room-detail/h21-hotel-room-detail.module';
 export * from './h21-hotel-room-detail/h21-hotel-room-detail.component';
 export * from './h21-hotel-search-result-card/h21-hotel-search-result-card.module';
 export * from './h21-hotel-search-result-card/h21-hotel-search-result-card.component';
+
+export * from './h21-cart-combobox/h21-cart-combobox.module';
+export * from './h21-cart-combobox/h21-cart-combobox.component';

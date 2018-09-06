@@ -14,10 +14,10 @@ const HOTEL_ROOM_OPTION_DATA = [
 ];
 
 const ROOM_PHOTOS: Array<IPicture> = [
-	{ large: '/assets/samples_img/room/room-1-large.jpg', medium: '/assets/samples_img/room/room-1-medium.jpg', thumbnail: '/assets/samples_img/room/room-1-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/room/room-2-large.jpg', medium: '/assets/samples_img/room/room-2-medium.jpg', thumbnail: '/assets/samples_img/room/room-2-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/room/room-3-large.jpg', medium: '/assets/samples_img/room/room-3-medium.jpg', thumbnail: '/assets/samples_img/room/room-3-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/room/room-4-large.jpg', medium: '/assets/samples_img/room/room-4-medium.jpg', thumbnail: '/assets/samples_img/room/room-4-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/room/room-1-large.jpg', medium: './assets/samples_img/room/room-1-medium.jpg', thumbnail: './assets/samples_img/room/room-1-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/room/room-2-large.jpg', medium: './assets/samples_img/room/room-2-medium.jpg', thumbnail: './assets/samples_img/room/room-2-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/room/room-3-large.jpg', medium: './assets/samples_img/room/room-3-medium.jpg', thumbnail: './assets/samples_img/room/room-3-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/room/room-4-large.jpg', medium: './assets/samples_img/room/room-4-medium.jpg', thumbnail: './assets/samples_img/room/room-4-thumbnail.jpg', altText: ''},
 ];
 
 const HOTEL_ROOM_DATA: IHotelRoomDetail = {
@@ -38,16 +38,16 @@ const HOTEL_DATA: Array<IHotelRoom> = [
 ];
 
 const HOTEL_PHOTOS: Array<IPicture> = [
-	{ large: '/assets/samples_img/hotel/hotel-1-large.jpg', medium: '/assets/samples_img/hotel/hotel-1-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-1-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-2-large.jpg', medium: '/assets/samples_img/hotel/hotel-2-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-2-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-3-large.jpg', medium: '/assets/samples_img/hotel/hotel-3-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-3-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-4-large.jpg', medium: '/assets/samples_img/hotel/hotel-4-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-4-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-5-large.jpg', medium: '/assets/samples_img/hotel/hotel-5-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-5-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-4-large.jpg', medium: '/assets/samples_img/hotel/hotel-4-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-4-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-5-large.jpg', medium: '/assets/samples_img/hotel/hotel-5-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-5-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-2-large.jpg', medium: '/assets/samples_img/hotel/hotel-2-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-2-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-3-large.jpg', medium: '/assets/samples_img/hotel/hotel-3-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-3-thumbnail.jpg', altText: ''},
-	{ large: '/assets/samples_img/hotel/hotel-1-large.jpg', medium: '/assets/samples_img/hotel/hotel-1-medium.jpg', thumbnail: '/assets/samples_img/hotel/hotel-1-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-1-large.jpg', medium: './assets/samples_img/hotel/hotel-1-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-1-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-2-large.jpg', medium: './assets/samples_img/hotel/hotel-2-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-2-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-3-large.jpg', medium: './assets/samples_img/hotel/hotel-3-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-3-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-4-large.jpg', medium: './assets/samples_img/hotel/hotel-4-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-4-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-5-large.jpg', medium: './assets/samples_img/hotel/hotel-5-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-5-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-4-large.jpg', medium: './assets/samples_img/hotel/hotel-4-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-4-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-5-large.jpg', medium: './assets/samples_img/hotel/hotel-5-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-5-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-2-large.jpg', medium: './assets/samples_img/hotel/hotel-2-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-2-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-3-large.jpg', medium: './assets/samples_img/hotel/hotel-3-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-3-thumbnail.jpg', altText: ''},
+	{ large: './assets/samples_img/hotel/hotel-1-large.jpg', medium: './assets/samples_img/hotel/hotel-1-medium.jpg', thumbnail: './assets/samples_img/hotel/hotel-1-thumbnail.jpg', altText: ''},
 ];
 
 
