@@ -25,7 +25,10 @@ export class H21TopToolbarComponent implements OnInit {
 	@Input() buttonsData: Array<IToolbarElement>;
 	@Input() showSearchResultViewModeToggle: boolean = false;
 
+	@Input() showCart: boolean = false;
+
 	@Input() showSidenavToggle: boolean = false;
+	@Input() sidenavToggleDisabled: boolean = false;
 	@Input() sidenavOpened: boolean = false;
 
 	@Input() showLanguageControl = false;

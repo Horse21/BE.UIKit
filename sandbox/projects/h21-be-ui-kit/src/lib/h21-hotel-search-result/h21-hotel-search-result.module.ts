@@ -10,6 +10,7 @@ import {
 } from "@angular/material";
 import {H21HotelSearchResultComponent} from "./h21-hotel-search-result.component";
 import {H21HotelSearchResultCardModule} from "./../h21-hotel-search-result-card/h21-hotel-search-result-card.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 	imports: [
@@ -18,6 +19,8 @@ import {H21HotelSearchResultCardModule} from "./../h21-hotel-search-result-card/
 		MatFormFieldModule,
 		MatSelectModule,
 		MatOptionModule,
+		FormsModule,
+		ReactiveFormsModule,
 		MatIconModule,
 		MatProgressBarModule,
 		H21HotelSearchResultCardModule

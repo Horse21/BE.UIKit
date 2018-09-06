@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
 import {DateAdapter} from '@angular/material';
 import {H21RightOverlayPanelService} from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
 import {IHotelSearchOptions} from "../../dto/i-hotel-search-options";
@@ -26,7 +26,11 @@ export class H21HotelSearchPanelComponent {
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
 	destinations: Array<any> = DESTINATION_ARR;
-	destinationControl: FormControl = new FormControl();
+
+	destinationControl: FormControl = new FormControl('', [Validators.required]);
+	nationalityControl: FormControl = new FormControl('', [Validators.required]);
+
+	@Input() searchMode: 'hotel' | 'room' = 'hotel';
 
 	@Output() onSearch: EventEmitter<IHotelSearchOptions> = new EventEmitter<IHotelSearchOptions>();
 	@Output() onClearSearch: EventEmitter<void> = new EventEmitter<void>();

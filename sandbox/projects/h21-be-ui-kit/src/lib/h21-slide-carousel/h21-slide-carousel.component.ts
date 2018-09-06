@@ -1,20 +1,23 @@
 import {
 	AfterViewInit,
 	OnInit,
+	AfterViewChecked,
 	Component,
-	HostListener,
 	Input,
 	Renderer2,
+	ViewChild,
+	ElementRef,
 } from "@angular/core";
 import {IPicture} from "./../../dto/i-picture";
-
+import {H21SlideCarouselDialogComponent} from "./h21-slide-carousel-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
 	selector: 'h21-slide-carousel',
 	templateUrl: './h21-slide-carousel.component.html'
 })
 
-export class H21SlideCarouselComponent implements AfterViewInit, OnInit {
+export class H21SlideCarouselComponent implements AfterViewInit, OnInit, AfterViewChecked {
 
 	@Input() slideCount: number = 5;
 	@Input() showNavButtons: boolean = true;
@@ -28,11 +31,10 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit {
 	private currentTranslation: number = 0;
 	private currentIndex: number = 0;
 
-	@HostListener('window:resize', ['$event']) onResize(event ?) {
-		this.init();
-	}
+	@ViewChild('H21SlideCarousel') dataGrid: ElementRef;
 
-	constructor (private _renderer: Renderer2) {
+	constructor (private _renderer: Renderer2,
+				 public dialog: MatDialog) {
 
 	}
 
@@ -50,18 +52,29 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit {
 		}
 	}
 
+	ngAfterViewChecked() {
+		if (this.viewPortWidth && this.dataGrid.nativeElement.clientWidth) {
+			if(this.viewPortWidth != this.dataGrid.nativeElement.clientWidth) {
+				this.init();
+			}
+		}
+	}
+
 	init(): void {
 		this.totalSlideCount = this.picturesCollection.length;
 		let element = document.getElementById('H21SC_view_port')
 
 		this.viewPortWidth = element.clientWidth;
 		this.slideWidth = this.viewPortWidth / this.slideCount;
+		this.currentTranslation = this.currentIndex * this.slideWidth;
 
 		let slides = element.children[0].children;
 
 		for (let i = 0; i < slides.length; i++) {
 			this._renderer.setStyle(slides[i], 'width', `${this.slideWidth}px`);
 		}
+
+		this.moveSlide();
 	}
 
 	prevSlide() {
@@ -81,7 +94,13 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit {
 	}
 
 	showLargeImg(url: string): void {
-		alert('in developing');
+		var dialogRef = this.dialog.open(H21SlideCarouselDialogComponent, {
+			panelClass: 'c-h21-slide-carousel_dialog',
+			backdropClass: 'c-h21-slide-carousel_dialog-backdrop',
+			data: {
+				imgUrl: url
+			}
+		});
 	}
 
 	prevPossibility(): boolean {
@@ -92,8 +111,3 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit {
 		return this.currentIndex <= (this.totalSlideCount - this.slideCount - 1);
 	}
 }
-
-
-
-
-

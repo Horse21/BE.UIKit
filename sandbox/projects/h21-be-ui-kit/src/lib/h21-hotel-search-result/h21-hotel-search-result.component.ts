@@ -4,6 +4,7 @@ import {IHotelSearchOptions} from "../../dto/i-hotel-search-options";
 import {ISortingParameter} from "./../../dto/i-sorting-parameter";
 import {VocabularyService} from "../../services/vocabulary-service";
 import {IHotelInfo} from "../../dto/i-hotel-info";
+import {FormControl} from "@angular/forms";
 
 @Component({
 	selector: 'h21-hotel-search-result',
@@ -28,6 +29,10 @@ export class H21HotelSearchResultComponent {
 	searchResultReady: boolean = false;
 	showFakeResult: boolean = false;
 	searchResult: Array<IHotelInfo>;
+
+	searchResultSortControl: FormControl = new FormControl();
+	favoritesSortControl: FormControl = new FormControl();
+	negotiatedSortControl: FormControl = new FormControl();
 
 	constructor (private _vocabulary: VocabularyService) {
 		this.sortParameters = [

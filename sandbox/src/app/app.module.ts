@@ -52,6 +52,7 @@ import {H21HotelBookComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-ho
 import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
 import {H21HotelSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
 import {H21HotelRoomDetailComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
+import {H21CartComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-cart-combobox/h21-cart-combobox.component";
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -85,8 +86,7 @@ import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-fil
 
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
-
-
+import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
 
 const routes: Routes = [
 	{path: '', redirectTo: '/', pathMatch: 'full'},
@@ -97,6 +97,7 @@ const routes: Routes = [
 	// 	]},
 	{path: 'demo', component: AppComponent },
 	{path: 'demo/hotel', component: H21HotelBookComponent },
+	{path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
@@ -167,6 +168,8 @@ const routes: Routes = [
 		H21HotelRoomDetailComponent,
 		H21TopToolbarButtonComponent,
 		H21TopToolbarButtonContainerComponent,
+		H21CartComboboxComponent,
+		H21SlideCarouselDialogComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -197,6 +200,7 @@ const routes: Routes = [
 		H21HeaderSearchSettingsDialogComponent,
 		H21TwoMonthCalendarDialogComponent,
 		H21RightOverlayPanelComponent,
+		H21SlideCarouselDialogComponent,
 	]
 })
 
