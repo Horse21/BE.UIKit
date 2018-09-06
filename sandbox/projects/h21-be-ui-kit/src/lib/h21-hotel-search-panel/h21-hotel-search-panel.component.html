@@ -10,7 +10,7 @@
 			<input matInput placeholder="Destination"
 				   [formControl]="destinationControl"
 				   [matAutocomplete]="destinationAutocomplete"
-				   [(ngModel)]="searchOptions.destination"
+				   [ngModel]="searchOptions.destination"
 				   required
 				   ngDefaultControl/>
 			<mat-icon matSuffix>location_on</mat-icon>
@@ -33,8 +33,12 @@
 		</mat-autocomplete>
 	</ng-container>
 
-	<mat-form-field class="__w-100" [formControl]="nationalityControl">
-		<mat-select placeholder="Nationality" value="american" [required]="true" [ngModel]="searchOptions.nationality">
+	<mat-form-field class="__w-100">
+		<mat-select placeholder="Nationality"
+					value="american"
+					[required]="true"
+					[formControl]="nationalityControl" 
+					[ngModel]="searchOptions.nationality">
 			<mat-option value="American">American</mat-option>
 			<mat-option value="Englishman">Englishman</mat-option>
 			<mat-option value="Frenchman">Frenchman</mat-option>
