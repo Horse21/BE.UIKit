@@ -23,7 +23,9 @@
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",
-              "src/styles.css",
+			  "node_modules/devextreme/dist/css/dx.common.css",
+			  "node_modules/devextreme/dist/css/dx.light.css",
+			  "src/styles.css",
 			  "projects/h21-be-ui-kit/h21-theme.scss",
 			  "src/assets/styles/docs.scss"
             ],

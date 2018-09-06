@@ -2,10 +2,10 @@ import {
 	Component,
 	Input,
 	Output,
-	EventEmitter
+	EventEmitter, OnInit
 } from '@angular/core';
 import {MatDialog} from "@angular/material";
-import {DateAdapter} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
 import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialog.component";
 
 @Component({
@@ -13,7 +13,7 @@ import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialo
 	templateUrl: './h21-two-month-calendar.component.html'
 })
 
-export class H21TwoMonthCalendarComponent {
+export class H21TwoMonthCalendarComponent implements OnInit {
 
 	/** Date selection mode, if true - the date range (the start and end date of the range are selected), if false, one date. */
 	@Input() rangeSelectMode: boolean;
@@ -29,6 +29,8 @@ export class H21TwoMonthCalendarComponent {
 	@Input() fromDateText: string;
 	/** The name of the end date (displayed in the placeholder) */
 	@Input() toDateText: string;
+	/** */ // todo - add description
+	@Input() suffixText: string;
 	/** The selected range start date, if rangeSelectMode is true, then simply the selected date */
 	@Input() selectedFromDate: Date;
 	/** The selected end date of the range, if rangeSelectMode is true, then simply the selected date */
@@ -38,17 +40,29 @@ export class H21TwoMonthCalendarComponent {
 	/** Event for changing the selected end date of the range */
 	@Output() onSelectedToDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 
+	textFieldLabel: string = "";
+
 	constructor(
 		private _dateAdapter: DateAdapter<Date>,
 		public dialog: MatDialog
 	) {
 		this.rangeSelectMode = true;
-		this.fromDateText = "Departure date";
-		this.toDateText = "Return date";
+		this.fromDateText = "Departure";
+		this.toDateText = "Return";
+		this.suffixText = "date";
 		this.startDate = this._dateAdapter.today();
 		this.finishDate = this._dateAdapter.addCalendarYears(this.startDate, 1);
 		this.fromDate = this._dateAdapter.clone(this.startDate);
 		this.toDate = this._dateAdapter.clone(this.finishDate);
+	}
+
+	ngOnInit() {
+		if (!this.rangeSelectMode && this.selectedFromDate) {
+			this.textFieldLabel = this.formatDate(this.selectedFromDate)
+		}
+		if (this.rangeSelectMode && this.selectedFromDate && this.selectedToDate) {
+			this.textFieldLabel = this.formatDate(this.selectedFromDate) + " - " + this.formatDate(this.selectedToDate);
+		}
 	}
 
 	/**
@@ -60,8 +74,8 @@ export class H21TwoMonthCalendarComponent {
 			backdropClass: 'c-h21-two-month-calendar_dialog-backdrop',
 			data: { // we pass the input parameters to initialize the calendar
 				rangeSelectMode: this.rangeSelectMode,
-				fromDateText: this.fromDateText,
-				toDateText: this.toDateText,
+				fromDateText: this.fromDateText + ' ' + this.suffixText,
+				toDateText: this.toDateText + ' ' + this.suffixText,
 				startDate: this.startDate,
 				finishDate: this.finishDate,
 				fromDate: this.fromDate,
@@ -72,10 +86,30 @@ export class H21TwoMonthCalendarComponent {
 		});
 		dialogRef.afterClosed()
 			.subscribe(result => { // subscribe to a dialog close event, get the values selected in the calendar
-				if (result) {
+				if (result && result.selectedFromDate) {
+					console.log(result);
+					this.textFieldLabel = this.rangeSelectMode
+						? this.formatDate(result.selectedFromDate) + " - " + (result.selectedToDate ? this.formatDate(result.selectedToDate) : "")
+						: this.formatDate(result.selectedFromDate);
 					this.onSelectedFromDateChanged.emit(result.selectedFromDate);
 					this.onSelectedToDateChanged.emit(result.selectedToDate);
+				} else {
+					this.textFieldLabel = "";
+					this.onSelectedFromDateChanged.emit(null);
+					this.onSelectedToDateChanged.emit(null);
 				}
 			});
+	}
+
+	formatDate(d: Date): string {
+		return this.padLeft(this._dateAdapter.getMonth(d)) + '.'
+			+ this.padLeft(this._dateAdapter.getDate(d)) + '.'
+			+ (this._dateAdapter.getYear(d) - 2000);
+	}
+
+	padLeft(n: number): string {
+		let str = "" + n;
+		let pad = "00";
+		return pad.substring(0, pad.length - str.length) + str;
 	}
 }

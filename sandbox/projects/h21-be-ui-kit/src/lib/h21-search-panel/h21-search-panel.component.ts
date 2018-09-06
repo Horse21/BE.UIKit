@@ -101,7 +101,6 @@ export class H21SearchPanelComponent implements OnInit {
 	}
 
 	search() {
-		console.log(this.searchOptions);
 		this._appSubscriber.search(this.searchOptions);
 	}
 }
