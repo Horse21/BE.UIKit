@@ -90,6 +90,7 @@ import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-fil
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
+import { MapSearchComponent } from './docs/maps/map-search/map-search.component';
 
 const routes: Routes = [
 	{path: '', redirectTo: '/', pathMatch: 'full'},
@@ -167,6 +168,7 @@ const routes: Routes = [
 		MapToolbarComponent,
 		MapSelectorComponent,
 		MapContainerComponent,
+		MapSearchComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
 		H21SlideCarouselComponent,

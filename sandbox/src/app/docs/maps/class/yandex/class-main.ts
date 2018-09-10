@@ -21,28 +21,29 @@ export interface LatLng {
 }
 
 @Injectable()
-export class GoogleMap implements MainMap {
-    init: InitMap;
+export class YandexMap implements MainMap {
+    traffic: any;
+    transit: any;
+    cluster: any;
+    config: MapOptions;
     events: EventMap;
-    config: Options;
     marker: MarkerMap;
-    infoWindow: InfoWindowMap;
     markerCluster: MarkerClusterMap;
-    public traffic: any;
-    public transit: any;
-    public cluster:any;
+    infoWindow: InfoWindowMap;
+    init: InitMap;
+  
 
     constructor(private objectMap: ObjectMap) {
         this.init = new Initialize();
-        this.events = new Events();
-        this.config = new Options(this.objectMap);
-        this.marker = new Marker();
-        this.infoWindow = new InfoWindow();
-        this.markerCluster = new Markercluster();
+       // this.events = new Events();
+       // this.config = new Options(this.objectMap);
+       // this.marker = new Marker();
+       // this.infoWindow = new InfoWindow();
+       // this.markerCluster = new Markercluster();
 
     }
 
     public showMarkers(markers: any[]){
-        this.config.showMarker(markers, this.markerCluster);
+        //this.config.showMarker(markers, this.markerCluster);
     }
 }

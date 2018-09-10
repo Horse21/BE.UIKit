@@ -1,10 +1,13 @@
+import { MainMap } from "./i-main";
+
 export enum MapType {
     google = 0,
     yandex = 1,
-    leaftlet = 2,
+    leaflet = 2,
     baidu = 3
 }
 export interface MapManager {
-    registrationMap(type: string);
-    resultMap(): any;
+    registrationMap(mapType: MapType):MapManager;
+    load(id:string);
+    resultMap(): MainMap;
 }

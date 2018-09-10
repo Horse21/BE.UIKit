@@ -9,6 +9,6 @@ export interface LoadApiMap {
 export interface InitMap {
     source: LoadApiMap;
     loadScriptMap (source: LoadApiMap);
-    initializingMap(): any;
+    initializingMap(id:string): any;
     destroyMap();
 }

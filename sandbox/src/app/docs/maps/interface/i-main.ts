@@ -4,14 +4,15 @@ import { MapOptions } from "./i-config";
 import { MarkerMap } from "./i-marker";
 import { InfoWindowMap } from "./i-infowindow";
 import { MarkerClusterMap } from "./i-markercluster";
+import { ObjectMap } from "../class/class-objmap";
 export interface MainMap {
-    map: any;
+    //objectMap: ObjectMap;
     traffic: any;
     transit: any;
     cluster:any;
-    init: InitMap;
-    events: EventMap;
+    init: InitMap;   
     config: MapOptions;
+    events: EventMap;
     marker: MarkerMap;
     markerCluster: MarkerClusterMap;
     infoWindow: InfoWindowMap;

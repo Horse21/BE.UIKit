@@ -1,15 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { GoogleMap } from '../class/google/class-main';
-import { LoadApiMap, InitMap } from "../interface/i-init";
-import { MapOptions } from "../interface/i-config";
-import * as data from "./maps.const.json";
-import { MarkerMap } from '../interface/i-marker';
-import { MainMap } from '../interface/i-main';
-import { InfoWindowMap } from '../interface/i-infowindow';
-import { MarkerClusterMap } from '../interface/i-markercluster';
+import { Component, OnInit } from '@angular/core';
 import * as markercluster from "../markercluster.json";
 import * as markers from "../test.markers.json";
+import { Manager } from '../class/class-imap-manager';
 
 @Component({
   selector: 'app-map-toolbar',
@@ -17,42 +9,33 @@ import * as markers from "../test.markers.json";
   styleUrls: ['./map-toolbar.component.css']
 })
 export class MapToolbarComponent implements OnInit {
-  source: MainMap;
 
-  constructor() {
- // this.source = s;
-
-  //this.source.init.initializingMap();
- // this.source = new GoogleMap();
-   
+  constructor(private manager: Manager) {
   }
 
-  public zoomLevel(type) {
-   // console.log('zoomLevel', this.source)
-    //this.source.config.setZoomLevel(this.source.map, type)
+  public zoomLevel(type:string) {
+    console.log('zoomLevel', this.manager.source)
+    this.manager.source.config.setZoomLevel(type)
   }
 
-  public drawShape(type) {
-    //this.source.config.drawingShapesMap(this.source.map, type);
+  public drawShape(type:string) {
+    this.manager.source.config.drawingShapesMap(type);
   }
 
-  public createMarker(type) {
-    // this.source.config.setZoomLevel(this.source.map, 'plus');
+  public createMarker(type:string) {
+    this.manager.source.config.setZoomLevel(type);
   }
 
   public loadMarkers() {
-    // let markersArray: any
-    //markersArray = markers['default'];
-    // this.source.config.setMarkers(this.source.map, markersArray, this.source.cluster);
+    let markersArray: any = markers['default'];
+    this.manager.source.config.setMarkers(markersArray, this.manager.source.cluster);
   }
 
   public clearMap() {
-    //this.source.config.clearMap(this.source.map);
+    this.manager.source.config.clearMap();
   }
 
   ngOnInit() {
     console.log('Toolbar')
-    // console.log(this.source.map,'MAP');
   }
-
 }

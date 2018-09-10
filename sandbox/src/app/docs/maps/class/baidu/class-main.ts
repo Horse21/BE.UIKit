@@ -21,7 +21,7 @@ export interface LatLng {
 }
 
 @Injectable()
-export class GoogleMap implements MainMap {
+export class BaiduMap implements MainMap {
     init: InitMap;
     events: EventMap;
     config: Options;
@@ -34,11 +34,11 @@ export class GoogleMap implements MainMap {
 
     constructor(private objectMap: ObjectMap) {
         this.init = new Initialize();
-        this.events = new Events();
-        this.config = new Options(this.objectMap);
-        this.marker = new Marker();
-        this.infoWindow = new InfoWindow();
-        this.markerCluster = new Markercluster();
+        // this.events = new Events();
+        // this.config = new Options(this.objectMap);
+        // this.marker = new Marker();
+        // this.infoWindow = new InfoWindow();
+        // this.markerCluster = new Markercluster();
 
     }
 
