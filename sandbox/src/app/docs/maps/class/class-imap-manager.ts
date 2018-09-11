@@ -15,23 +15,26 @@ export class Manager implements MapManager {
     source: MainMap;
     mapType: MapType;
 
-    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu:BaiduMap, private leaflet:LeafletMap) { }
+    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet:LeafletMap) { }
 
     registrationMap(mapType: MapType): MapManager {
         this.mapType = mapType;
-
-        switch (mapType) {
+        switch (mapType) {   
             case MapType.google: {
-              //  this.source = this.google;
+               this.source = this.google;
+               break; 
             }
             case MapType.yandex: {
-             //  this.source = this.yandex;
+              this.source = this.yandex;
+             break; 
             }
             case MapType.leaflet: {
-            //  this.source = this.leaflet;
+             this.source = this.leaflet;
+            break; 
             }
             case MapType.baidu: {
-               this.source = this.baidu;
+             this.source = this.baidu;
+            break; 
             }
         }
 
@@ -40,10 +43,8 @@ export class Manager implements MapManager {
 
     load(id:string) {
         let dt: LoadApiMap = data['InitList'][MapType[this.mapType]];
-        console.log(MapType[this.mapType],'MAPTYPE');
         this.source.init.loadScriptMap(dt)
             .then(data => {
-                console.log(data, 'data')
                 if (data.status === 'Loaded') {
                    let load = this.source.init.initializingMap(id);
                    this.objectMap.map = load.map;
@@ -54,6 +55,10 @@ export class Manager implements MapManager {
 
                 }
             }).catch(error => console.log(error));
+    }
+
+    destroy(){
+        this.source.init.destroyMap();
     }
 
     resultMap(): MainMap {

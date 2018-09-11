@@ -4,6 +4,7 @@ import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var L: any;
 declare var require: any;
+var objMap;
 
 export class Initialize implements InitMap {
 
@@ -16,6 +17,7 @@ export class Initialize implements InitMap {
             let url: string;
             url = source.src;
             script.src = url;
+            script.id = 'mapAPI';
             if (script.readyState) {
                 script.onreadystatechange = () => {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -32,6 +34,10 @@ export class Initialize implements InitMap {
             script.onerror = (error: any) => {
                 reject({ loaded: false, status: 'Error' });
             };
+            let ds = document.getElementById('mapAPI');
+            if (ds != null) {
+                ds.remove();
+            }
             document.getElementsByTagName('head')[0].appendChild(script);
         });
     }
@@ -47,14 +53,27 @@ export class Initialize implements InitMap {
             zoomControl: false,
         });
 
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        return { map }
+        objMap = map;
+        return { map };
+
+
 
     }
 
     destroyMap() {
+        let ds = document.getElementById('mapAPI');
+        if (ds != null) {
+            ds.remove();
+        }
+        console.log('leaflet destroy')
+        document.getElementById('map').innerHTML = "";
+        objMap.remove();
+        L = null;
+
 
     }
 }

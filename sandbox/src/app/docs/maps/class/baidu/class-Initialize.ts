@@ -4,6 +4,7 @@ import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var BMap: any;
 declare var require: any;
+var objMap;
 
 export class Initialize implements InitMap {
 
@@ -15,6 +16,7 @@ export class Initialize implements InitMap {
             script.type = 'text/javascript';
             let url: string;
             url = source.src;
+            script.id = 'mapAPI';
             script.src = url;
             if (script.readyState) {
                 script.onreadystatechange = () => {
@@ -25,7 +27,6 @@ export class Initialize implements InitMap {
                 };
             } else {
                 script.onload = () => {
-                    // resolve({ loaded: true, status: 'Loaded' });
                     console.log('script load');
                 };
                 window['APILoaded'] = (ev) => {
@@ -37,6 +38,10 @@ export class Initialize implements InitMap {
             script.onerror = (error: any) => {
                 reject({ loaded: false, status: 'Error' });
             };
+            let ds = document.getElementById('mapAPI');
+            if (ds != null) {
+                ds.remove();
+            }
             document.getElementsByTagName('head')[0].appendChild(script);
         });
     }
@@ -53,13 +58,24 @@ export class Initialize implements InitMap {
             map.enableScrollWheelZoom(true);
             map.disableDoubleClickZoom(false);
             map.setDefaultCursor('');
-
-
+            objMap = map;
             return { map }
         }
     }
 
     destroyMap() {
+        let ds = document.getElementById('mapAPI');
+        if (ds != null) {
+            ds.remove();
+        }
 
+        let scripts = document.querySelectorAll("script[src*='api.map.baidu']");
+        for (var i = 0; i < scripts.length; i++) {
+            scripts[i].parentNode.removeChild(scripts[i]);
+        }
+        console.log('destroy baidu');
+        objMap.reset();
+        document.getElementById('map').innerHTML = "";
+        BMap = null;
     }
 }

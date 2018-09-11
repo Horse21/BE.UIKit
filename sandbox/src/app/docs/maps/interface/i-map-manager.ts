@@ -10,4 +10,5 @@ export interface MapManager {
     registrationMap(mapType: MapType):MapManager;
     load(id:string);
     resultMap(): MainMap;
+    destroy();
 }

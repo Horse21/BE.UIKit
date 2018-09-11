@@ -15,7 +15,7 @@ import { LeafletMap } from './class/leaflet/class-main';
 
 export class MapsComponent implements OnInit, AfterViewInit {
 
-    @Input() userInput: string;
+    // @Input() userInput: string;
 
     ngAfterViewInit() {
 

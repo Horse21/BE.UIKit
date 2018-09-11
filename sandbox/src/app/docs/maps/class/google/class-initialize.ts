@@ -4,6 +4,7 @@ import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var google: any;
 declare var require: any;
+var objMap;
 
 export class Initialize implements InitMap {
 
@@ -16,7 +17,7 @@ export class Initialize implements InitMap {
             let url: string;
             url = source.src + '&key=' + source.key + '&language=' + source.language
             script.src = url;
-
+            script.id = 'mapAPI';
             if (script.readyState) {
                 script.onreadystatechange = () => {
                     if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -73,10 +74,22 @@ export class Initialize implements InitMap {
         let geocoder = new google.maps.Geocoder();
         let placesService = new google.maps.places.PlacesService(map);
         let markercluster = new MarkerClusterer(map, markers, mcOptions);
-        return { map, traffic, transit, geocoder, placesService, markercluster }
+        objMap = map;
+        return { map }
+        // return { map, traffic, transit, geocoder, placesService, markercluster }
     }
 
     destroyMap() {
-
+        console.log('destroy google', objMap)
+        let ds = document.getElementById('mapAPI');
+        if (ds != null) {
+            ds.remove();
+        }
+        var scripts = document.querySelectorAll("script[src*='maps.googleapis.com/maps-api-v3']");
+       // var scripts = document.querySelectorAll("style[src*='fonts.googleapis.com']");
+        for (var i = 0; i < scripts.length; i++) {
+            scripts[i].parentNode.removeChild(scripts[i]);
+        }
+        google = null;
     }
 }

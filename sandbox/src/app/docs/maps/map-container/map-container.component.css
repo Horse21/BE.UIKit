@@ -3,6 +3,13 @@
     height: 800px;
 }
 
+#map{
+    background: #ddd;
+}
+
+.ymaps-2-1-63-gotoymaps {
+    display: none !important;
+}
 
 .leaflet-pane,
 .leaflet-tile,
