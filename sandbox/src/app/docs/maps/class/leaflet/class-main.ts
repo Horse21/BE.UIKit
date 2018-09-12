@@ -34,6 +34,7 @@ export class LeafletMap implements MainMap {
 
     constructor(private objectMap: ObjectMap) {
         this.init = new Initialize();
+        this.config = new Options(this.objectMap);
 
     }
 

@@ -4,10 +4,9 @@ import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var BMap: any;
 declare var require: any;
-var objMap;
+var objMap:any;
 
 export class Initialize implements InitMap {
-
     source: LoadApiMap;
     public loadScriptMap(source: LoadApiMap): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -31,7 +30,6 @@ export class Initialize implements InitMap {
                 };
                 window['APILoaded'] = (ev) => {
                     console.log('baidu maps api loaded');
-                    //resolve(window['google']['maps']);
                     resolve({ loaded: true, status: 'Loaded' });
                 }
             }
@@ -48,18 +46,16 @@ export class Initialize implements InitMap {
 
     initializingMap(id: string): any {
         if (typeof BMap !== "undefined") {
-            let map = new BMap.Map(id, {
+            objMap = new BMap.Map(id, {
                 minZoom: 3,
                 enableMapClick: true,
                 enableAutoResize: false
             });
-
-            map.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
-            map.enableScrollWheelZoom(true);
-            map.disableDoubleClickZoom(false);
-            map.setDefaultCursor('');
-            objMap = map;
-            return { map }
+            objMap.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
+            objMap.enableScrollWheelZoom(true);
+            objMap.disableDoubleClickZoom(false);
+            objMap.setDefaultCursor('');
+            return { objMap }
         }
     }
 
@@ -70,8 +66,16 @@ export class Initialize implements InitMap {
         }
 
         let scripts = document.querySelectorAll("script[src*='api.map.baidu']");
-        for (var i = 0; i < scripts.length; i++) {
+        for (let i = 0; i < scripts.length; i++) {
             scripts[i].parentNode.removeChild(scripts[i]);
+        }
+
+        var style = document.querySelectorAll('style')
+        for (let i = 0; i < style.length; i++) {
+            let remove = false;
+            if (style[i].innerHTML.indexOf(".BMap_mask") != -1) { remove = true; }
+            if (remove) { style[i].parentNode.removeChild(style[i]) };
+
         }
         console.log('destroy baidu');
         objMap.reset();

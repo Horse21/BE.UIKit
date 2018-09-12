@@ -36,7 +36,7 @@ export class YandexMap implements MainMap {
     constructor(private objectMap: ObjectMap) {
         this.init = new Initialize();
        // this.events = new Events();
-       // this.config = new Options(this.objectMap);
+         this.config = new Options(this.objectMap);
        // this.marker = new Marker();
        // this.infoWindow = new InfoWindow();
        // this.markerCluster = new Markercluster();

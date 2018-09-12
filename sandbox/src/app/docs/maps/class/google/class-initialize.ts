@@ -4,7 +4,7 @@ import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
 declare var google: any;
 declare var require: any;
-var objMap;
+var objMap:any;
 
 export class Initialize implements InitMap {
 
@@ -33,7 +33,6 @@ export class Initialize implements InitMap {
 
                 window['APILoaded'] = (ev) => {
                     console.log('google maps api loaded');
-                    //resolve(window['google']['maps']);
                     resolve({ loaded: true, status: 'Loaded' });
                 }
             }
@@ -47,7 +46,6 @@ export class Initialize implements InitMap {
 
 
     initializingMap(id: string): any {
-        console.log(id, 'ID')
         let mcOptions = {
             gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
                 {
@@ -58,38 +56,45 @@ export class Initialize implements InitMap {
                     width: 44
                 }]
         };
-        let map = new google.maps.Map(document.getElementById(id), {
+        objMap = new google.maps.Map(document.getElementById(id), {
             center: new google.maps.LatLng(27.215556209029693, 18.45703125),
-            zoom: 3,
+            zoom: 4,
             disableDefaultUI: true,
             minZoom: 3,
             scaleControl: true,
             draggableCursor: 'default',
             disableDoubleClickZoom: true,
-            styles: mapstyle.default
+           // styles: mapstyle.default
         });
         let markers: any[];
         let traffic = new google.maps.TrafficLayer();
         let transit = new google.maps.TransitLayer();
         let geocoder = new google.maps.Geocoder();
-        let placesService = new google.maps.places.PlacesService(map);
-        let markercluster = new MarkerClusterer(map, markers, mcOptions);
-        objMap = map;
-        return { map }
+        let placesService = new google.maps.places.PlacesService(objMap);
+        let markercluster = new MarkerClusterer(objMap, markers, mcOptions);
+        return { objMap }
         // return { map, traffic, transit, geocoder, placesService, markercluster }
     }
 
     destroyMap() {
-        console.log('destroy google', objMap)
+        google = null;
         let ds = document.getElementById('mapAPI');
         if (ds != null) {
             ds.remove();
         }
-        var scripts = document.querySelectorAll("script[src*='maps.googleapis.com/maps-api-v3']");
-       // var scripts = document.querySelectorAll("style[src*='fonts.googleapis.com']");
+
+        var style = document.querySelectorAll('style')
+        for (let i = 0; i < style.length; i++) {
+            let remove = false;
+            if (style[i].innerHTML.indexOf(".gm-style") != -1) { remove = true; }
+            if (remove) { style[i].parentNode.removeChild(style[i]) };
+
+        }
+        let scripts = document.querySelectorAll("script[src*='maps.googleapis.com']");
         for (var i = 0; i < scripts.length; i++) {
             scripts[i].parentNode.removeChild(scripts[i]);
         }
-        google = null;
+        document.getElementById('map').innerHTML = "";
+        
     }
 }

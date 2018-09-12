@@ -15,49 +15,50 @@ export class Manager implements MapManager {
     source: MainMap;
     mapType: MapType;
 
-    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet:LeafletMap) { }
+    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet: LeafletMap) { }
 
     registrationMap(mapType: MapType): MapManager {
         this.mapType = mapType;
-        switch (mapType) {   
+        switch (mapType) {
             case MapType.google: {
-               this.source = this.google;
-               break; 
+                this.source = this.google;
+                break;
             }
             case MapType.yandex: {
-              this.source = this.yandex;
-             break; 
+                this.source = this.yandex;
+                break;
             }
             case MapType.leaflet: {
-             this.source = this.leaflet;
-            break; 
+                this.source = this.leaflet;
+                break;
             }
             case MapType.baidu: {
-             this.source = this.baidu;
-            break; 
+                this.source = this.baidu;
+                break;
             }
         }
 
         return this;
     }
 
-    load(id:string) {
+    load(id: string) {
         let dt: LoadApiMap = data['InitList'][MapType[this.mapType]];
         this.source.init.loadScriptMap(dt)
             .then(data => {
                 if (data.status === 'Loaded') {
-                   let load = this.source.init.initializingMap(id);
-                   this.objectMap.map = load.map;
-                  // this.source.objectMap = this.objectMap;
-                 //  this.source.cluster = load.markercluster;
-                 //  this.source.traffic = load.traffic;
-                  // this.source.events.subscribe(this.objectMap.map);
+                    let load = this.source.init.initializingMap(id);
+                   // console.log(load.objMap,'objMap')
+                    this.objectMap.map = load.objMap;
+                    // this.source.objectMap = this.objectMap;
+                    //  this.source.cluster = load.markercluster;
+                    //  this.source.traffic = load.traffic;
+                    // this.source.events.subscribe(this.objectMap.map);
 
                 }
             }).catch(error => console.log(error));
     }
 
-    destroy(){
+    destroy() {
         this.source.init.destroyMap();
     }
 

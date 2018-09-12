@@ -1,5 +1,7 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, ElementRef } from '@angular/core';
 import { MapType } from '../interface/i-map-manager';
+import { Manager } from '../class/class-imap-manager';
+
 
 @Component({
   selector: 'app-map-selector',
@@ -7,14 +9,16 @@ import { MapType } from '../interface/i-map-manager';
   styleUrls: ['./map-selector.component.css']
 })
 export class MapSelectorComponent implements OnInit {
-
+  selectedMap = MapType.google
+  @ViewChild('mapContainer') mapContainer: ElementRef;
   mapsEnum: MapType;
+  mapInfo: mapInfoForSelect[];
 
-  constructor() {
-
+  constructor(private manager: Manager) {
+    this.mapInfo = this.mapList('google');
   }
 
-  public mapList() {
+  private mapList(nameMap: string): mapInfoForSelect[] {
     let temp: mapInfoForSelect[] = Object.keys(MapType)
       .filter((type) => isNaN(<any>type))
       .map<mapInfoForSelect>(
@@ -22,8 +26,7 @@ export class MapSelectorComponent implements OnInit {
           let info: mapInfoForSelect = new mapInfoForSelect();
           info.value = type;
           info.name = type[0].toUpperCase() + type.slice(1);
-          info.active = type === 'google' //MapType[MapType.google];
-         // console.log('INFI',info)
+          info.active = type === nameMap; //MapType[MapType.google];
           return info;
         });
 
@@ -31,11 +34,18 @@ export class MapSelectorComponent implements OnInit {
   }
 
   public selectMap(type: string) {
-    console.log('selectMap', type)
+    this.manager.destroy();
+    this.mapInfo = this.mapList(type);
+    this.selectedMap = MapType[type];
+    this.InitMap();
+  }
+
+  public InitMap() {
+    this.manager.registrationMap(this.selectedMap).load('map');
   }
 
   ngOnInit() {
-    console.log('Selector')
+    this.InitMap()
   }
 
 }

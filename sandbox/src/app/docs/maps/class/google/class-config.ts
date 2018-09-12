@@ -1,6 +1,5 @@
 import { MapOptions } from "../../interface/i-config";
 import { ObjectMap } from "../class-objmap";
-
 declare var google: any;
 declare var require: any;
 var markerCluster: any;

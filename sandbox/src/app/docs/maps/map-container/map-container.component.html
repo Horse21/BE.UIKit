@@ -1,16 +1,3 @@
 <div class="content">
-    <div id="map" class="map" #mapContainer>loading</div>
+    <div id="map" class="map" #mapContainer></div>
 </div>
-
-<!-- <button type="button" (click)="onSubmit()" class="btn btn-primary" >Submit</button> -->
-
-<div class="button-toggle-wrapper">
-    <mat-button-toggle-group class="__primary" #group="matButtonToggleGroup">
-          <mat-button-toggle  value="google"  checked="false" (click)="selectMap(group.value)">Google</mat-button-toggle>
-          <mat-button-toggle  value="yandex"  checked="false" (click)="selectMap(group.value)">Yandex</mat-button-toggle>
-          <mat-button-toggle  value="baidu"  checked="true" (click)="selectMap(group.value)">Baidu</mat-button-toggle>
-          <mat-button-toggle  value="leaflet"  checked="false" (click)="selectMap(group.value)">Osm</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div> 
-
-
