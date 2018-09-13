@@ -1,0 +1,86 @@
+<div class="c-h21-account-select"
+	 [@toggleVisibility]="animationState"
+	 (@toggleVisibility.start)="onAnimationStart($event)"
+	 (@toggleVisibility.done)="onAnimationDone($event)">
+
+	<button mat-icon-button class="c-h21-account-select_close-button __size-l">
+		<mat-icon>close</mat-icon>
+	</button>
+
+	<h3>Payment</h3>
+
+	<div class="row">
+		<div class="col-4">Account</div>
+		<div class="col-8">
+			<mat-form-field class="__w-100">
+				<mat-select [value]="'my_name--account_1'">
+					<mat-option value="my_name--account_1">my_name--account_1</mat-option>
+					<mat-option value="my_name--account_2">my_name--account_2</mat-option>
+					<mat-option value="my_name--account_3">my_name--account_3</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">Account name</div>
+		<div class="col-8">
+			<mat-form-field class="__w-100">
+				<input matInput>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">Account number</div>
+		<div class="col-8">
+			<mat-form-field class="__w-100">
+				<input matInput>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">Expire date</div>
+		<div class="col-4">
+
+		</div>
+		<div class="col-4">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">DBI_AE</div>
+		<div class="col-8">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">DBI_AU</div>
+		<div class="col-8">
+
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">DBI_BD</div>
+		<div class="col-8">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">DBI_KS</div>
+		<div class="col-8">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">DBI_RZ</div>
+		<div class="col-8">
+
+		</div>
+	</div>
+
+
+	<div class="__text-right">
+		<button mat-raised-button color="primary">Execute</button>
+	</div>
+
+</div>
