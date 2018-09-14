@@ -1,6 +1,9 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
 import * as mapstyle from "../../class/google/maps.style.json";
-import * as MarkerClusterer from '@google/markerclustererplus';
+import * as MarkerClusterGroup from 'leaflet.markercluster';
+import * as N from 'leaflet';
+import * as mark from "../../test.markers.json";
+import { LeafletMap } from "../../interface/leaflet/i-inner";
 declare var document: any;
 declare var L: any;
 declare var require: any;
@@ -52,12 +55,16 @@ export class Initialize implements InitMap {
     }
 
     initializingMap(id: string): any {
+  console.log(N)
+        
         try {
+
+            
             var coords = { lat: 27.215556209029693, lng: 18.45703125 };
             objMap = L.map(id, {
                 zoom: 3,
                 center: coords,
-                editable: true,
+              //  editable: true,
                 doubleClickZoom: false,
                 minZoom: 3,
                 zoomControl: false,
@@ -65,7 +72,8 @@ export class Initialize implements InitMap {
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(objMap);
+            }).addTo(objMap);      
+            var mcg = L.markerClusterGroup().addTo(objMap);
             return { objMap };
         }
         catch (error) {

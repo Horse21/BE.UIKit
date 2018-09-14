@@ -1,10 +1,12 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
-import * as mapstyle from "../../class/google/maps.style.json";
-import * as MarkerClusterer from '@google/markerclustererplus';
+//import * as mapstyle from "../../class/google/maps.style.json";
+import * as MarkerClusterer from 'bmaplib.markerclusterer';
+import * as mark from "../../test.markers.json";
 declare var document: any;
 declare var BMap: any;
+declare var BMapLib: any;
 declare var require: any;
-var objMap:any;
+var objMap: any;
 
 export class Initialize implements InitMap {
     source: LoadApiMap;
@@ -46,6 +48,27 @@ export class Initialize implements InitMap {
 
     initializingMap(id: string): any {
         if (typeof BMap !== "undefined") {
+            let markers: any[];
+            markers = mark.default;
+            console.log(mark.default)
+            var ma = [];
+            for (let i = 0; i < mark.default.length; i++) {
+                let item = markers[i];
+                let icon = new BMap.Icon(require('../../images/icon/icon_hotel.png'), new BMap.Size(60, 60));
+                let obj = new BMap.Marker(new BMap.Point(item.Address.Lng, item.Address.Lat), {
+                    icon: icon,
+                    title: item.Hotelname,
+                });
+                console.log(obj, 'OBJ')
+                ma.push(obj);
+            }
+
+            let mcOptions = [{
+                url: require('../../images/icon/icon_pointGroup.png'),
+                size: new BMap.Size(44, 44),
+                textColor: 'black',
+                offset: new BMap.Size(1.5, 1),
+            }];
             objMap = new BMap.Map(id, {
                 minZoom: 3,
                 enableMapClick: true,
@@ -55,7 +78,15 @@ export class Initialize implements InitMap {
             objMap.enableScrollWheelZoom(true);
             objMap.disableDoubleClickZoom(false);
             objMap.setDefaultCursor('');
+            let markercluster = new MarkerClusterer(objMap);
+            markercluster.setStyles(mcOptions);
+            markercluster.addMarkers(ma);
+            markercluster.setGridSize(80);
+            markercluster.setMinClusterSize(2);
             return { objMap }
+
+
+
         }
     }
 

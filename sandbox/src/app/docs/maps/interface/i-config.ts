@@ -21,3 +21,4 @@ export interface MapOptions {
     inclusionMarkersPolygon(coord: any, xp: any, yp: any);
     draggableMap(boolean: boolean);
 }
+

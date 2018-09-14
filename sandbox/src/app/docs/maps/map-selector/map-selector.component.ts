@@ -1,6 +1,7 @@
-import { Component, OnInit, Injectable, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Injectable, Input, Output,ViewChild } from '@angular/core';
 import { MapType } from '../interface/i-map-manager';
 import { Manager } from '../class/class-imap-manager';
+//import { MapsComponent} from '../maps.component';
 
 
 @Component({
@@ -10,10 +11,10 @@ import { Manager } from '../class/class-imap-manager';
 })
 export class MapSelectorComponent implements OnInit {
   selectedMap = MapType.google
-  @ViewChild('mapContainer') mapContainer: ElementRef;
+  //@ViewChild(MapsComponent) private counte: MapsComponent;
+
   mapsEnum: MapType;
   mapInfo: mapInfoForSelect[];
-
   constructor(private manager: Manager) {
     this.mapInfo = this.mapList('google');
   }
@@ -26,7 +27,7 @@ export class MapSelectorComponent implements OnInit {
           let info: mapInfoForSelect = new mapInfoForSelect();
           info.value = type;
           info.name = type[0].toUpperCase() + type.slice(1);
-          info.active = type === nameMap; //MapType[MapType.google];
+          info.active = type === nameMap;
           return info;
         });
 
@@ -45,7 +46,8 @@ export class MapSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.InitMap()
+    this.InitMap();
+  
   }
 
 }

@@ -1,10 +1,12 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input,ViewChild } from '@angular/core';
 import { Manager } from './class/class-imap-manager';
 import { GoogleMap } from './class/google/class-main';
 import { ObjectMap } from './class/class-objmap';
 import { YandexMap } from './class/yandex/class-main';
 import { BaiduMap } from './class/baidu/class-main';
 import { LeafletMap } from './class/leaflet/class-main';
+import { MapContainerComponent} from './map-container/map-container.component';
+import { MapSelectorComponent} from './map-selector/map-selector.component';
 
 @Component({
     selector: 'maps-components-docs',
@@ -14,14 +16,20 @@ import { LeafletMap } from './class/leaflet/class-main';
 })
 
 export class MapsComponent implements OnInit, AfterViewInit {
-
-    // @Input() userInput: string;
+@ViewChild(MapContainerComponent) private counterComponent: MapContainerComponent;
+@ViewChild(MapSelectorComponent) private selectorComponent: MapSelectorComponent;
+   
+   
 
     ngAfterViewInit() {
 
     }
+GetNativElement() : any{
+  //  return this.counterComponent.setGMapElement()
+}
+
     ngOnInit() {
-        console.log('Map')
+    //  console.log('Map',this.counterComponent.setGMapElement())
     }
     ngOnDestroy() {
       

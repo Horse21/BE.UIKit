@@ -1,4 +1,5 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
+import { Component, ViewChild,ElementRef } from '@angular/core';
 import * as mapstyle from "../../class/google/maps.style.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
 declare var document: any;
@@ -7,9 +8,9 @@ declare var require: any;
 var objMap:any;
 
 export class Initialize implements InitMap {
-
     source: LoadApiMap;
     public loadScriptMap(source: LoadApiMap): Promise<any> {
+        
         return new Promise((resolve, reject) => {
             this.source = source;
             let script = document.createElement('script');
@@ -42,6 +43,7 @@ export class Initialize implements InitMap {
             document.getElementsByTagName('head')[0].appendChild(script);
 
         });
+
     }
 
 
@@ -72,8 +74,8 @@ export class Initialize implements InitMap {
         let geocoder = new google.maps.Geocoder();
         let placesService = new google.maps.places.PlacesService(objMap);
         let markercluster = new MarkerClusterer(objMap, markers, mcOptions);
-        return { objMap }
-        // return { map, traffic, transit, geocoder, placesService, markercluster }
+      //  return { objMap }
+        return { objMap, traffic, transit, geocoder, placesService, markercluster }
     }
 
     destroyMap() {
