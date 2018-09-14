@@ -32,12 +32,12 @@
 			</mat-option>
 		</mat-autocomplete>
 	</ng-container>
-  
+
 	<mat-form-field class="__w-100">
 		<mat-select placeholder="Nationality"
 					value="american"
 					[required]="true"
-					[formControl]="nationalityControl" 
+					[formControl]="nationalityControl"
 					[ngModel]="searchOptions.nationality">
 			<mat-option value="American">American</mat-option>
 			<mat-option value="Englishman">Englishman</mat-option>
@@ -88,14 +88,14 @@
 		<div class="col-6">
 			<mat-form-field class="__w-100 white-fill-input">
 				<mat-select placeholder="Child 1 age" [(value)]="childAge_1">
-					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n" [disabled]="childAge_2 && (n > childAge_2)">{{n}}</mat-option>
+					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n">{{n}}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 		<div class="col-6">
 			<mat-form-field class="__w-100 white-fill-input">
 				<mat-select placeholder="Child 2 age" [(value)]="childAge_2">
-					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n" [disabled]="childAge_1 && (n < childAge_1)">{{n}}</mat-option>
+					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n">{{n}}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>

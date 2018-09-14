@@ -53,6 +53,11 @@ import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h2
 import {H21HotelSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
 import {H21HotelRoomDetailComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
 import {H21CartComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-cart-combobox/h21-cart-combobox.component";
+import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
+import {H21HotelReservationComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-reservation/h21-hotel-reservation.component";
+import {H21AccountSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select.component";
+import {H21AccountSelectService} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
+
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -83,10 +88,8 @@ import { H21TableProvidersComponent } from './docs/h21-table-providers/h21-table
 import { SearchResultItemComponent } from './docs/search-result-item/search-result-item.component';
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
-
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
-import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
 
 const routes: Routes = [
 	{path: '', redirectTo: '/', pathMatch: 'full'},
@@ -98,6 +101,7 @@ const routes: Routes = [
 	{path: 'demo', component: AppComponent },
 	{path: 'demo/hotel', component: H21HotelBookComponent },
 	{path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
+	{path: 'demo/reservation', component: H21HotelReservationComponent },
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
@@ -170,6 +174,8 @@ const routes: Routes = [
 		H21TopToolbarButtonContainerComponent,
 		H21CartComboboxComponent,
 		H21SlideCarouselDialogComponent,
+		H21HotelReservationComponent,
+		H21AccountSelectComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -190,6 +196,7 @@ const routes: Routes = [
 			useValue: new FakeVocabularyService()
 		},
 		H21RightOverlayPanelService,
+		H21AccountSelectService,
 		AppSubscriberService,
 		OrderService,
 	],
@@ -200,6 +207,7 @@ const routes: Routes = [
 		H21HeaderSearchSettingsDialogComponent,
 		H21TwoMonthCalendarDialogComponent,
 		H21RightOverlayPanelComponent,
+		H21AccountSelectComponent,
 		H21SlideCarouselDialogComponent,
 	]
 })
@@ -208,4 +216,4 @@ export class AppModule {
 
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+//platformBrowserDynamic().bootstrapModule(AppModule);
