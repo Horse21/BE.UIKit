@@ -3,8 +3,7 @@ import { H21AccountSelectComponent } from "./h21-account-select.component";
 import { Subject, Observable } from "rxjs";
 import { take, filter } from "rxjs/operators";
 
-
-export class H21ProfileUserLinksRef {
+export class H21AccountSelectRef {
 
 	private _beforeClose = new Subject<void>();
 	private _afterClosed = new Subject<void>();

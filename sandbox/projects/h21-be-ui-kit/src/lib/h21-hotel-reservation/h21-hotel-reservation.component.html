@@ -7,7 +7,7 @@
 			<span class="h21-flex-grid_cell__w-stretch h21-flex-table_cell__data">{{hotelInfo.name}}</span>
 			<span class="h21-flex-grid_cell__w-64">&nbsp;</span>
 			<span class="h21-flex-grid_cell__w-200 h21-flex-table_cell__header-gray">Class</span>
-			<span class="h21-flex-grid_cell__w-stretch h21-flex-table_cell__data"><h21-rate [rate]="hotelInfo.rate"></h21-rate></span>
+			<span class="h21-flex-grid_cell__w-stretch h21-flex-table_cell__data"><h21-rate [rate]="hotelInfo.class"></h21-rate></span>
 		</div>
 		<div class="h21-flex-grid_row">
 			<span class="h21-flex-grid_cell__w-200 h21-flex-table_cell__header-gray">Country</span>
@@ -193,7 +193,7 @@
 				<mat-form-field class="__w-100">
 					<textarea matInput rows="6"></textarea>
 				</mat-form-field>
-				<mat-checkbox color="primary" class="__text-size-s">I agree that this booking is non-refundable and cannot be cancelled</mat-checkbox>
+				<mat-checkbox color="primary" class="__text-size-xs">I agree that this booking is non-refundable and cannot be cancelled</mat-checkbox>
 			</div>
 			<div class="h21-flex-grid_cell__w-200">&nbsp;</div>
 		</div>
@@ -203,34 +203,14 @@
 	<h2 class="__text-weight-light mb-4">Payment</h2>
 	<mat-button-toggle-group class="__primary c-h21-hotel-reservation_button-toggle"
 							 #paymentMethodGroup="matButtonToggleGroup"
-							 [value]="paymentMethod"
 							 (change)="changePaymentMethod(paymentMethodGroup.value)">
-		<mat-button-toggle value="AirPlus">AirPlus</mat-button-toggle>
-		<mat-divider [vertical]="true"></mat-divider>
-		<mat-button-toggle value="BTA">BTA</mat-button-toggle>
-		<mat-divider [vertical]="true"></mat-divider>
-		<mat-button-toggle value="Invoice">Invoice</mat-button-toggle>
+		<ng-container *ngFor="let item of paymentMethods; let isLast = last;">
+			<mat-button-toggle value="{{item.id}}">{{item.name}}</mat-button-toggle>
+			<mat-divider *ngIf="!isLast" [vertical]="true"></mat-divider>
+		</ng-container>
 	</mat-button-toggle-group>
 
 	<div class="__text-right">
 		<button mat-raised-button color="primary" class="__size-l">Book</button>
 	</div>
 </div>
-
-
-
-<!--<table *ngIf="Data">-->
-	<!--<thead></thead>-->
-	<!--<tbody>-->
-		<!--<tr *ngFor="let item of Data">-->
-			<!--<th>{{item.name}}</th>-->
-			<!--<td>{{item.value}}</td>-->
-		<!--</tr>-->
-	<!--</tbody>-->
-<!--</table>-->
-
-
-
-
-
-

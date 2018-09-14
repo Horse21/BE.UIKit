@@ -199,6 +199,7 @@ $h21-mat-theme: mat-light-theme($h21-mat-primary, $h21-mat-accent, $h21-mat-warn
 
 .h21-theme {
   color: $h21-fg-base;
+  font-family: mat-font-family($h21-mat-typography);
   .mat-drawer,
   .mat-drawer-container {
 	color: $h21-fg-base;
@@ -4630,11 +4631,16 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   padding: 32px;
   box-sizing: border-box;
   min-height: 100%;
+
+  .mat-form-field {
+	font-weight: 300;
+  }
 }
 .c-h21-hotel-reservation_button-toggle {
   .mat-button-toggle-label-content {
 	min-width: 110px;
   }
+  margin-bottom: 48px;
 }
 
 .h21-table-style-1 {
@@ -4781,10 +4787,20 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   background-color: white;
   border-right: 1px solid #d6d6d6;
   box-shadow: 0 2px 8px 0 rgba(0, 68, 214, .20);
-}
-.c-h21-account-select_close-button {
-  position: absolute;
-  top: 32px;
-  right: 32px;
-  color: $h21-fg-ashen-blue;
+  overflow-y: auto;
+
+  .mat-form-field {
+	font-weight: 300;
+  }
+  .c-h21-account-select_close-button {
+	position: absolute;
+	top: 24px;
+	right: 24px;
+	color: $h21-fg-ashen-blue;
+  }
+  .c-h21-account-select_row-header {
+	font-weight: 700;
+	padding-top: 22px;
+	font-size: 14px;
+  }
 }

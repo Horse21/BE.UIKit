@@ -1,6 +1,7 @@
-import { Component, EventEmitter } from "@angular/core";
+import {Component, EventEmitter, Inject} from "@angular/core";
 import { trigger, state, transition, animate, style } from "@angular/animations";
-import { H21ProfileUserLinksRef } from "./h21-account-select-ref";
+import { H21AccountSelectRef } from "./h21-account-select-ref";
+import { ACCOUNTS_DIALOG_DATA } from "./h21-accounts-select.tokens";
 
 @Component ({
 	selector: "h21-account-select",
@@ -19,9 +20,16 @@ export class H21AccountSelectComponent {
 
 	animationState: 'void' | 'enter' | 'leave' = 'enter';
 	animationStateChanged = new EventEmitter<AnimationEvent>();
+	selectedAccount: any;
 
-	constructor (public dialogRef: H21ProfileUserLinksRef) {
+	constructor (public dialogRef: H21AccountSelectRef,
+				 @Inject(ACCOUNTS_DIALOG_DATA) public accounts: any) {
+		this.selectedAccount = accounts[0];
+	}
 
+	changeSelectionAccount(id: number) {
+		let index = this.accounts.findIndex( (item) => { return item.id == id; } );
+		this.selectedAccount = this.accounts[index];
 	}
 
 	close() {
