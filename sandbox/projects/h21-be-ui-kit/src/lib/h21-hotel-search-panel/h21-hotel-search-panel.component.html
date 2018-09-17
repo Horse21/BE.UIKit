@@ -12,7 +12,8 @@
 				   [matAutocomplete]="destinationAutocomplete"
 				   [ngModel]="searchOptions.destination"
 				   required
-				   ngDefaultControl/>
+				   ngDefaultControl
+				   (keyup)="onDestinationEdited($event)"/>
 			<mat-icon matSuffix>location_on</mat-icon>
 			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
 		</mat-form-field>

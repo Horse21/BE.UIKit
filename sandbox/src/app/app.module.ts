@@ -1,3 +1,4 @@
+import { DestinationLoaderService } from './../services/destination-loader.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -199,6 +200,7 @@ const routes: Routes = [
 		H21AccountSelectService,
 		AppSubscriberService,
 		OrderService,
+		DestinationLoaderService
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

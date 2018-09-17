@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { DestinationLoaderService } from './../../../../../src/services/destination-loader.service';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {DateAdapter} from '@angular/material';
@@ -9,7 +11,10 @@ const DESTINATION_ARR: Array<any> = [
 	{id: 2, type: "airport", name: "Amsterdam", description: "Central Station"},
 	{id: 3, type: "station", name: "Amsterdam", description: "(AMS-Schiphol)"},
 	{id: 4, type: "building", name: "Amsterdam", description: "Court Hotel, New York, NY"},
-	{id: 5, type: "building", name: "Amsterdam", description: "City Centre"},
+	{id: 5, type: "building", name: "Fukuoka", description: "City Centre"},
+	{id: 6, type: "building", name: "Fukushima", description: "City Centre"},
+	{id: 7, type: "building", name: "Fukashinai", description: "City Centre"},
+	{id: 8, type: "building", name: "Fuck", description: "City Centre"},
 ];
 
 @Component({
@@ -26,9 +31,12 @@ export class H21HotelSearchPanelComponent {
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
 	destinations: Array<any> = DESTINATION_ARR;
+	filterStartLettersCount = 3;
 
 	destinationControl: FormControl = new FormControl('', [Validators.required]);
 	nationalityControl: FormControl = new FormControl('', [Validators.required]);
+
+	destinationLoader: DestinationLoaderService;
 
 	@Input() searchMode: 'hotel' | 'room' = 'hotel';
 
@@ -48,6 +56,44 @@ export class H21HotelSearchPanelComponent {
 			nightsCount: null,
 			roomCount: 0
 		};
+	}
+
+	ngOnInit(): void {
+		// this.destinationLoader = new DestinationLoaderService();
+		// this.fetchDestinations();
+	}
+
+	fetchDestinations() {
+		this.destinationLoader.getDestinations().subscribe(
+			data => this.destinations = data,
+			error => console.log("fetchDestinations() error", error),
+			() => console.log("successfully fetching destinations")
+		);
+	}
+
+	onDestinationEdited(event) {
+		this.destinations = DESTINATION_ARR;
+		if(event.target.value.length >= this.filterStartLettersCount) {
+			console.log("onDestinationEdited.event.target.value", event.target.value);
+			let destinationsFiltered = this.destinations.filter(value => {
+				console.log("filtered val", value.name);
+				return value.name.toLowerCase().startsWith(event.target.value);
+			});
+			console.log("onDestinationEdited.destinations", destinationsFiltered);
+			this.destinations = destinationsFiltered;
+		}
+		if (event.key === "Backspace" || event.key === "Delete") {
+			console.log("onDestinationEdited.event.target.value", event.target.value);
+			let destinationsFiltered = this.destinations.filter(value => {
+				console.log("filtered val", value.name);
+				return value.name.toLowerCase().startsWith(event.target.value.substr(0, this.filterStartLettersCount - 1));
+			});
+			console.log("onDestinationEdited.destinations", destinationsFiltered);
+			this.destinations = destinationsFiltered;
+		}
+		if (event.target.value === undefined || event.target.value === null || event.target.value === "") {
+			this.destinations = DESTINATION_ARR;
+		}
 	}
 
 	changeCheckInDate($event) {
