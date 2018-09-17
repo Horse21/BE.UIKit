@@ -7,7 +7,11 @@
 
 	<!--  -->
 	<ng-container *ngIf="showSidenavToggle">
-		<button mat-icon-button class="c-h21-top-toolbar-menu-btn" (click)="sidenavToggle()" [class.is-opened]="sidenavOpened" >
+		<button mat-icon-button
+				class="c-h21-top-toolbar-menu-btn"
+				(click)="sidenavToggle()"
+				[class.is-opened]="sidenavOpened"
+				[disabled]="sidenavToggleDisabled">
 			<mat-icon class="c-h21-top-toolbar-menu-btn_open" aria-label="Open">menu</mat-icon>
 			<mat-icon class="c-h21-top-toolbar-menu-btn_close" aria-label="Close">close</mat-icon>
 		</button>
@@ -25,6 +29,11 @@
 	</ng-container>
 
 	<div class="w-spacer">&nbsp;</div>
+
+	<!-- Cart -->
+	<ng-container *ngIf="showCart">
+		<h21-cart-combobox></h21-cart-combobox>
+	</ng-container>
 
 	<!-- -->
 	<ng-container *ngIf="showLanguageControl">
@@ -50,53 +59,6 @@
 	</ng-container>
 
 	<!-- Profile user card actions -->
-	<ng-container *ngIf="showProfileUserCardActions">
-		<button mat-icon-button matTooltip="Edit" class="c-h21-top-toolbar_action-btn">
-			<mat-icon>edit</mat-icon>
-		</button>
-		<button mat-icon-button matTooltip="Update card" class="c-h21-top-toolbar_action-btn" [disabled]="true">
-			<mat-icon>autorenew</mat-icon>
-		</button>
-		<button mat-icon-button matTooltip="Сonfirm email address" class="c-h21-top-toolbar_action-btn" [disabled]="true">
-			<mat-icon>email</mat-icon>
-		</button>
-		<button mat-icon-button matTooltip="Change password" class="c-h21-top-toolbar_action-btn" [disabled]="true">
-			<mat-icon>vpn_key</mat-icon>
-		</button>
-		<button mat-icon-button matTooltip="Block user" class="c-h21-top-toolbar_action-btn c-h21-top-toolbar_action-btn__hover-red">
-			<mat-icon>block</mat-icon>
-		</button>
-	</ng-container>
-
-	<!-- Profile show list actions -->
-	<ng-container *ngIf="showProfileListActions">
-		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
-			<mat-icon>view_column</mat-icon>
-		</button>
-	</ng-container>
-
-	<!-- Profile agent add actions -->
-	<ng-container *ngIf="showProfileAgentAddActions">
-		<button mat-icon-button matTooltip="Add agent" class="c-h21-top-toolbar_action-btn">
-			<mat-icon>person_add</mat-icon>
-		</button>
-	</ng-container>
-
-	<!-- Profile agents list actions -->
-	<ng-container *ngIf="showProfileAgentsActions">
-		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn">
-			<mat-icon>autorenew</mat-icon>
-		</button>
-		<button mat-icon-button matTooltip="" class="c-h21-top-toolbar_action-btn c-h21-top-toolbar_action-btn__hover-red">
-			<mat-icon>delete</mat-icon>
-		</button>
-	</ng-container>
-
-	<!-- Profile tune actions -->
-	<ng-container *ngIf="showProfileTuneActions">
-		<button mat-icon-button matTooltip="Settings" class="c-h21-top-toolbar_action-btn">
-			<mat-icon>tune</mat-icon>
-		</button>
-	</ng-container>
+	<h21-top-toolbar-button-container [toolbarButtons]="buttonsData"></h21-top-toolbar-button-container>
 
 </mat-toolbar>

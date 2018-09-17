@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
 import {DateAdapter} from '@angular/material';
 import {H21RightOverlayPanelService} from "../h21-right-overlay-panel/h21-right-overlay-panel.service";
-import {ISearchHotelOptions} from "../../dto/i-search-hotel-options";
+import {IHotelSearchOptions} from "../../dto/i-hotel-search-options";
 
 const DESTINATION_ARR: Array<any> = [
 	{id: 1, type: "city", name: "Amsterdam", description: "Netherlands"},
@@ -19,22 +19,26 @@ const DESTINATION_ARR: Array<any> = [
 
 export class H21HotelSearchPanelComponent {
 
-	searchOptions: ISearchHotelOptions;
+	searchOptions: IHotelSearchOptions;
 	adultsCount: number = 1;
 	childrenCount: number = 0;
 	childAge_1: number = null;
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
 	destinations: Array<any> = DESTINATION_ARR;
-	destinationControl: FormControl = new FormControl();
 
-	@Output() onSearch: EventEmitter<ISearchHotelOptions> = new EventEmitter<ISearchHotelOptions>();
+	destinationControl: FormControl = new FormControl('', [Validators.required]);
+	nationalityControl: FormControl = new FormControl('', [Validators.required]);
+
+	@Input() searchMode: 'hotel' | 'room' = 'hotel';
+
+	@Output() onSearch: EventEmitter<IHotelSearchOptions> = new EventEmitter<IHotelSearchOptions>();
 	@Output() onClearSearch: EventEmitter<void> = new EventEmitter<void>();
 
 	constructor(private _dateAdapter: DateAdapter<Date>,
 				private _rightPanelDialog: H21RightOverlayPanelService) {
 
-		this.searchOptions = <ISearchHotelOptions> {
+		this.searchOptions = <IHotelSearchOptions> {
 			paymentMethod: 'account',
 			destination: "",
 			hotelName: "",
@@ -85,7 +89,6 @@ export class H21HotelSearchPanelComponent {
 	clearSearch() {
 		this.searchOptions.paymentMethod = 'account';
 		this.searchOptions.destination = "";
-		this.searchOptions.hotelName = "";
 		this.searchOptions.nationality = "";
 		this.searchOptions.checkInDate = null;
 		this.searchOptions.checkOutDate = null;

@@ -5,10 +5,13 @@ import {
 	MatButtonModule,
 	MatIconModule,
 	MatToolbarModule,
-	MatSelectModule, MatButtonToggleModule, MatDividerModule
+	MatSelectModule, MatButtonToggleModule, MatDividerModule, MatTooltipModule, MatOptionModule
 } from "@angular/material";
 import {H21TopToolbarComponent} from "./h21-top-toolbar.component";
 import {H21BreadcrumbsModule} from "../h21-breadcrumbs/h21-breadcrumbs.module";
+import {H21CartComboboxModule} from "../h21-cart-combobox/h21-cart-combobox.module";
+import {H21TopToolbarButtonContainerComponent} from "./h21-top-toolbar-button-container/h21-top-toolbar-button-container.component";
+import {H21TopToolbarButtonComponent} from "./h21-top-toolbar-button/h21-top-toolbar-button.component";
 
 @NgModule({
 	imports: [
@@ -17,15 +20,24 @@ import {H21BreadcrumbsModule} from "../h21-breadcrumbs/h21-breadcrumbs.module";
 		MatIconModule,
 		MatToolbarModule,
 		MatSelectModule,
+		MatOptionModule,
 		MatButtonToggleModule,
 		MatDividerModule,
+		MatTooltipModule,
 		FormsModule,
 		H21BreadcrumbsModule,
+		H21CartComboboxModule,
 	],
 	declarations: [
 		H21TopToolbarComponent,
+		H21TopToolbarButtonContainerComponent,
+		H21TopToolbarButtonComponent
 	],
-	exports: [H21TopToolbarComponent]
+	exports: [
+		H21TopToolbarComponent,
+		H21TopToolbarButtonContainerComponent,
+		H21TopToolbarButtonComponent
+	]
 })
 export class H21TopToolbarModule {
 

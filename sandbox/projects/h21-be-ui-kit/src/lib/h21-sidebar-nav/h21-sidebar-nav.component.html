@@ -1,4 +1,4 @@
-<nav class="sidebar_nav">
+<nav class="c-h21-sidebar_nav">
 	<ng-container *ngFor="let item of tabs;">
 		<button mat-button *ngIf="item.type == 'button'" (click)="select(item.name)" [class.is-active]="selected == item.name && (!disabled || item.disabled)" [disabled]="disabled || item.disabled">
 			<mat-icon>{{item.icon}}</mat-icon>

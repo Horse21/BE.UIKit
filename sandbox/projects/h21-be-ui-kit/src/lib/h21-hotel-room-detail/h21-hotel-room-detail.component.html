@@ -1,0 +1,21 @@
+<div class="c-h21-hotel-room-detail">
+	<div class="c-h21-hotel-room-detail_left-container" *ngIf="data.photos">
+		<div class="c-h21-hotel-room-detail_photo-box">
+			<img src="{{selectedPhotoUrl}}" alt="{{selectedPhotoAltText}}" />
+		</div>
+		<ul class="c-h21-hotel-room-detail_photos-thumbs">
+			<li *ngFor="let item of data.photos">
+				<img src="{{item.thumbnail}}" alt="{{item.altText}}" (click)="changeRoomPhoto(item.medium, item.altText)" />
+			</li>
+		</ul>
+	</div>
+	<div class="c-h21-hotel-room-detail_right-container">
+		<p>{{data.description}}</p>
+		<div class="row no-gutters h21-option-list">
+			<div *ngFor="let option of data.options" class="col-6 h21-option-list_item h21-option-list_item__hotel-room-accent">
+				<mat-icon>{{option.icon}}</mat-icon>
+				<span>{{option.name}}</span>
+			</div>
+		</div>
+	</div>
+</div>

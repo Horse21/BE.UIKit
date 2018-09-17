@@ -2,7 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {
 	MatIconRegistry,
-	MatSidenav
+	MatSidenav,
+	MatSidenavContent
 } from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
@@ -12,8 +13,18 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
 import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
-import {ISearchHotelOptions} from "../../projects/h21-be-ui-kit/src/dto/i-search-hotel-options";
+import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+import {IHotelInfo, IHotelOption} from "../../projects/h21-be-ui-kit/src/dto";
+import { APP_BASE_HREF } from '@angular/common';
+
+
+const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
+	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
+	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
+	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
+	{name: 'test', label: 'Map point', icon: 'not_listed_location', type: 'button', url: null, disabled: false},
+];
 
 
 @Component({
@@ -39,7 +50,8 @@ export class AppComponent {
 		{label: "My User", url: "#"}
 	];
 
-	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
+	constructor(iconReg: MatIconRegistry,
+				sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
 		iconReg.addSvgIcon('logo',						sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
 		iconReg.addSvgIcon('h21_flight_land_blue',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-blue-icon.svg'));
 		iconReg.addSvgIcon('h21_flight_land_green',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-green-icon.svg'));
@@ -83,13 +95,27 @@ export class AppComponent {
 	/* For prototype */
 
 	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
+	@ViewChild('rightSidenav') private rightSidenav: MatSidenav;
+	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
 	activeLeftSidenavPanel: string = 'search';
-	sidenavOpened: boolean = true;
+	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;
 	searchResultViewMode: string = 'list';
-	sidebarNavDisabled: boolean = false;
+	sidebarNavDisabled: boolean = true;
+	sidebarNavTabs: Array<ISidebarNavTab> = SIDEBAR_NAV_TABS;
+
+	/* Left sidenav configuration */
+	leftSidenavOpened: boolean = false;
+	leftSidenavMode: string = ''; // 'side', 'over', 'push'
+
+	/* Right sidenav configuration */
+	rightSidenavOpened: boolean = false;
+	rightSidenavMode: string = ''; // 'side', 'over', 'push'
+
+	/* Sidenav content configuration */
+	contentSidenavHasBackdrop: boolean = false;
 
 	leftSidenavToggle() {
 		this.leftSidenav.toggle();
@@ -110,8 +136,9 @@ export class AppComponent {
 		this.activeLeftSidenavPanel = tab.name;
 	}
 
-	search(options: ISearchHotelOptions): void {
+	search(options: IHotelSearchOptions): void {
 		this.searchResultVisibility = true;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
 			this.searchResult.search(options);
 		}, 0);
@@ -119,14 +146,15 @@ export class AppComponent {
 
 	clearSearch(): void {
 		this.searchResultVisibility = false;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
 		this.searchResult.clear();
 	}
 
 	changeResultViewMode(mode: string): void {
 		this.searchResultViewMode = mode;
+	}
 
-		if (mode == 'map') {
-			this.leftSidenavToggle();
-		}
+	isRoute(route: string){
+		return this.router.url.indexOf(route) >= 0;
 	}
 }
