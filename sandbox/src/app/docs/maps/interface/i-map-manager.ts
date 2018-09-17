@@ -7,8 +7,8 @@ export enum MapType {
     baidu = 3
 }
 export interface MapManager {
-    registrationMap(mapType: MapType):MapManager;
-    load(id:string);
-    resultMap(): MainMap;
-    destroy();
+    registrationMap(mapType: MapType, id: string):MapManager;
+    //load(id:string);
+    getActiveMap(): MainMap;
+    //destroy();
 }

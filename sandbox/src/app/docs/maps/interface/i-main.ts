@@ -4,10 +4,12 @@ import { MapOptions } from "./i-config";
 import { MarkerMap } from "./i-marker";
 import { InfoWindowMap } from "./i-infowindow";
 import { MarkerClusterMap } from "./i-markercluster";
+import { SearchPlacesMap } from "./i-search-places";
 import { ObjectMap } from "../class/class-objmap";
 export interface MainMap {
     //objectMap: ObjectMap;
     traffic: any;
+    search:SearchPlacesMap;
     transit: any;
     cluster:any;
     init: InitMap;   

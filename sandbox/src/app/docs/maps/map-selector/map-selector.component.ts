@@ -9,14 +9,16 @@ import { Manager } from '../class/class-imap-manager';
   templateUrl: './map-selector.component.html',
   styleUrls: ['./map-selector.component.css']
 })
-export class MapSelectorComponent implements OnInit {
+export class MapSelectorComponent {
   selectedMap = MapType.google
   //@ViewChild(MapsComponent) private counte: MapsComponent;
 
   mapsEnum: MapType;
   mapInfo: mapInfoForSelect[];
+
   constructor(private manager: Manager) {
     this.mapInfo = this.mapList('google');
+    this.InitMap(MapType.google);
   }
 
   private mapList(nameMap: string): mapInfoForSelect[] {
@@ -35,21 +37,14 @@ export class MapSelectorComponent implements OnInit {
   }
 
   public selectMap(type: string) {
-    this.manager.destroy();
     this.mapInfo = this.mapList(type);
     this.selectedMap = MapType[type];
-    this.InitMap();
+    this.InitMap(MapType[type]);
   }
 
-  public InitMap() {
-    this.manager.registrationMap(this.selectedMap).load('map');
+  public InitMap(mapType:MapType) {
+    this.manager.registrationMap(mapType, 'map');
   }
-
-  ngOnInit() {
-    this.InitMap();
-  
-  }
-
 }
 
 @Injectable()

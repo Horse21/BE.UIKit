@@ -1,7 +1,6 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
-import * as mapstyle from "../../class/google/maps.style.json";
-import * as MarkerClusterer from '@google/markerclustererplus';
 import { ObjectMap } from "../class-objmap";
+import * as mark from "../../test.markers.json";
 declare var document: any;
 declare var ymaps: any;
 declare var require: any;
@@ -46,8 +45,7 @@ export class Initialize implements InitMap {
     }
 
     initializingMap(id: string): any {
-        try {
-          //  ymaps.ready().then(() => {
+        try {     
                 objMap = new ymaps.Map(id, {
                     center: [27.215556209029693, 18.45703125],
                     behaviors: ['default', 'scrollZoom'],
@@ -57,8 +55,50 @@ export class Initialize implements InitMap {
                 });
                 objMap.options.set('minZoom', 3);
                 objMap.options.set('maxZoom', 22);
+                let markerCluster:any;
+                markerCluster = new ymaps.Clusterer({
+                    clusterIcons: [{
+                        href: require('../../images/icon/icon_pointGroup.png'),
+                        size: [53, 52],
+                        offset: [-20, -20]
+                    }],
+            
+                }),
+
+              markerCluster.options.set({
+                  gridSize: 80,
+                  clusterDisableClickZoom: false,
+                  minClusterSize: 3,
+                  groupByCoordinates: false,
+                  hasBalloon: false,
+              });
+
+              let markers: any[];
+              markers = mark.default;
+              var ma = [];
+              for (let i = 0; i < mark.default.length; i++) {
+                  let item = markers[i];
+                  var obj = new ymaps.GeoObject({
+                    geometry: {
+                        type: "Point",
+                        coordinates: [item.Address.Lat, item.Address.Lng],
+                    },                
+                    properties: {
+                        hintContent: item.Hotelname,
+                    }
+                }, {                                   
+                    iconLayout: 'default#image',
+                    iconImageSize: [30, 42],
+                    iconImageHref: require('../../images/icon/icon_hotel.png'),
+                    hintContent: item.Hotelname
+                })
+                  ma.push(obj);
+              }
+
+              markerCluster.add(ma);
+              objMap.geoObjects.add(markerCluster);
+
                 return { objMap };
-           // });
         }
         catch (error) {
             console.log(error);

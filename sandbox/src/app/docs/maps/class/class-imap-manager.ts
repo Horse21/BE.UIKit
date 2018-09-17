@@ -12,57 +12,50 @@ import { ObjectMap } from "./class-objmap";
 
 @Injectable()
 export class Manager implements MapManager {
-    source: MainMap;
     mapType: MapType;
+    hashtable: { [name: string]: MainMap; } = {};
 
-    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet: LeafletMap) { }
+    constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet: LeafletMap) {
+        this.hashtable[MapType[MapType.google]] = google;
+        this.hashtable[MapType[MapType.yandex]] = yandex;
+        this.hashtable[MapType[MapType.baidu]] = baidu;
+        this.hashtable[MapType[MapType.leaflet]] = leaflet;
+        this.mapType = MapType.google;
+    }
 
-    registrationMap(mapType: MapType): MapManager {
+    registrationMap(mapType: MapType, id: string): MapManager {
+        this.destroy();
         this.mapType = mapType;
-        switch (mapType) {
-            case MapType.google: {
-                this.source = this.google;
-                break;
-            }
-            case MapType.yandex: {
-                this.source = this.yandex;
-                break;
-            }
-            case MapType.leaflet: {
-                this.source = this.leaflet;
-                break;
-            }
-            case MapType.baidu: {
-                this.source = this.baidu;
-                break;
-            }
-        }
-
+        this.load(id);
         return this;
     }
 
-    load(id: string) {
+    private load(id: string) {
         let dt: LoadApiMap = data['InitList'][MapType[this.mapType]];
-        this.source.init.loadScriptMap(dt)
+        let source = this.hashtable[MapType[this.mapType]];
+        source.init.loadScriptMap(dt)
             .then(data => {
                 if (data.status === 'Loaded') {
-                    let load = this.source.init.initializingMap(id);
-                   // console.log(load.objMap,'objMap')
+                    let load = source.init.initializingMap(id);
                     this.objectMap.map = load.objMap;
-                    // this.source.objectMap = this.objectMap;
-                    //  this.source.cluster = load.markercluster;
-                    //  this.source.traffic = load.traffic;
-                    // this.source.events.subscribe(this.objectMap.map);
-
+                    source.events.clickMap(this.objectMap.map);
+                    source.events.boundsChange(this.objectMap.map);
+                    source.events.idle(this.objectMap.map, source.config.setMarkers.bind(this));
+                    source.events.zoomChange(this.objectMap.map);
                 }
             }).catch(error => console.log(error));
+
     }
 
-    destroy() {
-        this.source.init.destroyMap();
+    private destroy() {
+        try {
+            let source = this.hashtable[MapType[this.mapType]]
+            source.init.destroyMap();
+        }
+        catch{ }
     }
 
-    resultMap(): MainMap {
-        return this.source;
+    getActiveMap(): MainMap {
+        return this.hashtable[MapType[this.mapType]];
     }
 }

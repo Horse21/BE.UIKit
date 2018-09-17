@@ -1,8 +1,9 @@
-.map{
+#map{
+    background: #ddd !important;
     width: 100%; 
     height: 800px;
 }
 
-#map{
-    background: #ddd;
+.ymaps-2-1-68-inner-panes {
+    background: red !important;
 }

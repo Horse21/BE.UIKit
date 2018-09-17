@@ -6,6 +6,7 @@ import { MainMap } from "../../interface/i-main";
 import { MarkerMap } from "../../interface/i-marker";
 import { InfoWindowMap } from "../../interface/i-infowindow";
 import { MarkerClusterMap } from "../../interface/i-markercluster";
+import { SearchPlacesMap } from "../../interface/i-search-places";
 import { Options } from "./class-config";
 import { Initialize } from "./class-Initialize";
 import { Events } from "./class-event";
@@ -13,6 +14,7 @@ import { Marker } from "./class-marker";
 import { Markercluster } from "./class-markercluster";
 import { InfoWindow } from "./class-infowindow";
 import { ObjectMap } from "../class-objmap";
+import { Search } from "./class-search-places";
 
 export interface LatLng {
     constructor(lat: number, lng: number): void;
@@ -26,11 +28,12 @@ export class GoogleMap implements MainMap {
     events: EventMap;
     config: Options;
     marker: MarkerMap;
+    search: SearchPlacesMap
     infoWindow: InfoWindowMap;
     markerCluster: MarkerClusterMap;
     public traffic: any;
     public transit: any;
-    public cluster:any;
+    public cluster: any;
 
     constructor(private objectMap: ObjectMap) {
         this.init = new Initialize();
@@ -39,10 +42,11 @@ export class GoogleMap implements MainMap {
         this.marker = new Marker();
         this.infoWindow = new InfoWindow();
         this.markerCluster = new Markercluster();
+        this.search = new Search();
 
     }
 
-    public showMarkers(markers: any[]){
+    public showMarkers(markers: any[]) {
         this.config.showMarker(markers, this.markerCluster);
     }
 }

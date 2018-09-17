@@ -1,14 +1,16 @@
 import { MapOptions } from "../../interface/i-config";
 import { ObjectMap } from "../class-objmap";
+import * as mark from "../../test.markers.json";
+import * as MarkerClusterer from '@google/markerclustererplus';
 declare var google: any;
 declare var require: any;
-var markerCluster: any;
-var markers: any[] = [];
-var radiusObject: any;
-var polygonArea: any[] = [];
+let markerCluster: any;
+let markers: any[] = [];
+let radiusObject: any;
+let polygonArea: any[] = [];
+
 
 export class Options implements MapOptions {
-
     constructor(private objMap: ObjectMap) {
     }
 
@@ -37,7 +39,6 @@ export class Options implements MapOptions {
     }
 
     setZoomLevel(type: string) {
-        console.log("objMap.map", this.objMap.map);
         try {
             let currentZoom = this.objMap.map.getZoom();
             if (type === 'plus') {
@@ -102,6 +103,7 @@ export class Options implements MapOptions {
             if (type == 'area') {
                 let map: any = this.objMap.map;
                 let poly: any;
+                polygonArea = [];
                 this.draggableMap(true);
                 google.maps.event.addDomListener(map.getDiv(), 'mousedown', () => {
                     poly = new google.maps.Polyline({
@@ -138,6 +140,12 @@ export class Options implements MapOptions {
                         polygonArea.push(poly);
                         google.maps.event.clearListeners(map.getDiv(), 'mousedown');
                         let array = poly.getPath().getArray();
+                        let bounds = new google.maps.LatLngBounds();
+                        for (var n = 0; n < array.length; n++) {
+                            bounds.extend(array[n]);
+                        }
+                        map.panToBounds(bounds);
+                        map.fitBounds(bounds);
                         let x1: any[] = [];
                         let y1: any[] = [];
                         array.forEach((item) => {
@@ -154,8 +162,9 @@ export class Options implements MapOptions {
                 if (b === false) {
                     item.setMap(null);
                     if (markerCluster != null) {
-                        markerCluster.removeMarker(item);
-                        markerCluster.repaint();
+                        markerCluster.resetViewport_();
+                        markerCluster.removeMarker(item,false);
+						markerCluster.redraw_();
                     }
 
                 }
@@ -191,31 +200,51 @@ export class Options implements MapOptions {
     setZoomMax(zoom: number) {
 
     }
-    setMarkers(markersObj: any[], markerclusterObj: any) {
 
+    setMarkers = () => {
+        if(polygonArea.length == 0){
+        let mcOptions = {
+            gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
+                {
+                    textColor: 'black',
+                    url: require('../../images/icon/icon_pointGroup.png'),
+                    anchorText: [0, -2],
+                    height: 44,
+                    width: 44
+                }]
+        };
         this.clearMap();
+        let zoom = this.objMap.map.getZoom();
+        var bounds = this.objMap.map.getBounds();
+        let sending = false;
+        if (zoom > 5) {
+            sending = true;
 
-        markersObj.forEach((item) => {
+        }
+        if (zoom == 3) {
+            this.clearMap();
+        }
+        for (let i = 0; i < mark.default.length; i++) {
+            let item = mark.default[i];
             let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
                 draggable: false,
-                clickable: true,
                 visible: true,
+                clickable: true,
                 icon: { url: require('../../images/icon/icon_hotel.png') },
                 title: item.Hotelname
             });
+            if (sending) {
+                if (bounds.contains(marker.getPosition()) === true) {
+                    markers.push(marker);
+                }
+            }
 
-            markers.push(marker);
-        });
-        markerclusterObj.addMarkers(markers, true);
-        markerCluster = markerclusterObj;
-        markerclusterObj.repaint();
-
-        google.maps.event.addListener(markerCluster, "clusterclick", function () {
-            console.log('clusterclick')
-        });
-
+        }
+        markerCluster = new MarkerClusterer(this.objMap.map, markers, mcOptions);
     }
+    }
+
     clearMap() {
         try {
             markers.forEach((item) => {
@@ -223,7 +252,6 @@ export class Options implements MapOptions {
             });
             if (markerCluster != null) {
                 markerCluster.clearMarkers();
-                console.log('markerCluster', markerCluster)
 
             }
 
@@ -236,8 +264,9 @@ export class Options implements MapOptions {
                     item.setMap(null);
                     item.getPath().clear();
                 });
-
+                
             }
+            polygonArea = [];
             markers = [];
         }
         catch (error) {
@@ -289,7 +318,7 @@ export class Options implements MapOptions {
         }
     }
     getAddress(coord: any) {
-
+        console.log('GETADDRESS')
     }
 
     draggableMap(boolean: any) {

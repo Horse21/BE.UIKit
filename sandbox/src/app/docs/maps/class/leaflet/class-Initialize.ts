@@ -1,7 +1,7 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
 import * as mapstyle from "../../class/google/maps.style.json";
-import * as MarkerClusterGroup from 'leaflet.markercluster';
-import * as N from 'leaflet';
+import 'leaflet';
+import 'leaflet.markercluster';
 import * as mark from "../../test.markers.json";
 import { LeafletMap } from "../../interface/leaflet/i-inner";
 declare var document: any;
@@ -30,6 +30,8 @@ export class Initialize implements InitMap {
                 styles.href = 'https://unpkg.com/leaflet@1.3.4/dist/leaflet.css';
                 document.getElementsByTagName('head')[0].appendChild(styles);
 
+                resolve({ loaded: true, status: 'Loaded' });
+
                 if (script.readyState) {
                     script.onreadystatechange = () => {
                         if (script.readyState === "loaded" || script.readyState === "complete") {
@@ -46,7 +48,7 @@ export class Initialize implements InitMap {
                 script.onerror = (error: any) => {
                     reject({ loaded: false, status: 'Error' });
                 };
-                document.getElementsByTagName('head')[0].appendChild(script);
+               // document.getElementsByTagName('head')[0].appendChild(script);
             });
         }
         catch (error) {
@@ -54,9 +56,7 @@ export class Initialize implements InitMap {
         }
     }
 
-    initializingMap(id: string): any {
-  console.log(N)
-        
+    initializingMap(id: string): any {     
         try {
 
             
@@ -64,7 +64,7 @@ export class Initialize implements InitMap {
             objMap = L.map(id, {
                 zoom: 3,
                 center: coords,
-              //  editable: true,
+                editable: true,
                 doubleClickZoom: false,
                 minZoom: 3,
                 zoomControl: false,
@@ -72,8 +72,42 @@ export class Initialize implements InitMap {
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(objMap);      
-            var mcg = L.markerClusterGroup().addTo(objMap);
+            }).addTo(objMap);  
+            
+            let markers: any[];
+            markers = mark.default;
+            let icon = L.icon({
+                iconUrl: require('../../images/icon/icon_hotel.png'),
+            });
+            let markerCluster = L.markerClusterGroup({
+                chunkedLoading: false,
+                maxClusterRadius: 120,
+                iconCreateFunction: function (cluster) {
+                    var markers = cluster.getAllChildMarkers();
+                    var html = '<div class="markerClusLeaftlet">' + markers.length + '</div>';
+                    return L.divIcon({ html: html, className: 'mycluster', iconSize: L.point(44, 44) });
+                },
+            }); 
+            var ma = [];
+            for (let i = 0; i < mark.default.length; i++) {
+                let item = markers[i];
+                var obj = new L.marker([item.Address.Lat, item.Address.Lng], {
+                    position: { lat: item.Address.Lat, lng: item.Address.Lng },
+                    draggable: false,
+                    clickable: true,
+                    zIndex: 9999,
+                    icon: icon,
+                    title: item.Hotelname
+                });
+
+                ma.push(obj);
+                markerCluster.addLayer(obj);
+            }
+          
+            objMap.addLayer(markerCluster);
+                       
+           
+
             return { objMap };
         }
         catch (error) {
@@ -83,7 +117,6 @@ export class Initialize implements InitMap {
 
     destroyMap() {
         try {
-            L = null;
             let ds = document.getElementById('mapAPI');
             if (ds != null) {
                 ds.remove();
@@ -91,7 +124,7 @@ export class Initialize implements InitMap {
             console.log('leaflet destroy')
             document.getElementById('map').innerHTML = "";
             if (objMap != null && objMap != undefined) {
-                objMap.remove();
+                objMap.remove();           
             }
            
         }

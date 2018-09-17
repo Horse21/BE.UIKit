@@ -1,5 +1,4 @@
 import { LoadApiMap, InitMap } from "../../interface/i-init";
-//import * as mapstyle from "../../class/google/maps.style.json";
 import * as MarkerClusterer from 'bmaplib.markerclusterer';
 import * as mark from "../../test.markers.json";
 declare var document: any;
@@ -50,8 +49,7 @@ export class Initialize implements InitMap {
         if (typeof BMap !== "undefined") {
             let markers: any[];
             markers = mark.default;
-            console.log(mark.default)
-            var ma = [];
+            let ma = [];
             for (let i = 0; i < mark.default.length; i++) {
                 let item = markers[i];
                 let icon = new BMap.Icon(require('../../images/icon/icon_hotel.png'), new BMap.Size(60, 60));
@@ -59,7 +57,6 @@ export class Initialize implements InitMap {
                     icon: icon,
                     title: item.Hotelname,
                 });
-                console.log(obj, 'OBJ')
                 ma.push(obj);
             }
 

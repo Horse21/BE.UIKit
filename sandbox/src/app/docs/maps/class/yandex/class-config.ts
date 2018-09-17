@@ -192,30 +192,9 @@ export class Options implements MapOptions {
     setZoomMax(zoom: number) {
 
     }
-    setMarkers(markersObj: any[], markerclusterObj: any) {
-
+    setMarkers() {
         this.clearMap();
-
-        markersObj.forEach((item) => {
-            let marker = new google.maps.Marker({
-                position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
-                draggable: false,
-                clickable: true,
-                visible: true,
-                icon: { url: require('../../images/icon/icon_hotel.png') },
-                title: item.Hotelname
-            });
-
-            markers.push(marker);
-        });
-        markerclusterObj.addMarkers(markers, true);
-        markerCluster = markerclusterObj;
-        markerclusterObj.repaint();
-
-        google.maps.event.addListener(markerCluster, "clusterclick", function () {
-            console.log('clusterclick')
-        });
-
+        
     }
     clearMap() {
         try {

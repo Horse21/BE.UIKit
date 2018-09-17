@@ -9,40 +9,30 @@ declare var google: any;
 declare var addListener: any;
 
 export class Events implements EventMap {
-    subscribe(map: any) {
-        this.clickMap(map);
-        this.boundsChange(map);
-        this.idle(map);
-        this.zoomChange(map);
-    }
 
-    listenEvent<E>(map: any, eventName: string): Observable<E> {
+    listenEvent<E>(objMap: any, eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
-            map.addListener(eventName, (arg: E) => { observer.next(arg); });
+            objMap.addListener(eventName, (arg: E) => { observer.next(arg); });
         });
     }
 
-    idle(map: any) {
+    idle(map: any, callback: () => void) {
         this.listenEvent<void>(map, "idle").subscribe(() => {
-            console.log("idle");
             let bounds = map.getBounds();
+                console.log(bounds,'IDLE')
             if (bounds) {
-                console.log('bounds', bounds);
-                let SW = bounds.getSouthWest();
-                let NE = bounds.getNorthEast();
+                callback();             
             }
         })
     }
 
     boundsChange(map: any) {
         this.listenEvent<void>(map, "bounds_changed").subscribe(() => {
-            console.log("bounds_changed");
         })
     }
 
     zoomChange(map: any) {
         this.listenEvent<void>(map, "zoom_changed").subscribe(() => {
-            console.log("zoom_changed");
         })
     }
     clickMap(map: any) {

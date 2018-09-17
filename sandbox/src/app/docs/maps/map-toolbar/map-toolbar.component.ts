@@ -14,28 +14,26 @@ export class MapToolbarComponent implements OnInit {
   }
 
   public zoomLevel(type:string) {
-    console.log('zoomLevel', this.manager.source)
-    this.manager.source.config.setZoomLevel(type)
+    this.manager.getActiveMap().config.setZoomLevel(type)
   }
 
   public drawShape(type:string) {
-    this.manager.source.config.drawingShapesMap(type);
+    this.manager.getActiveMap().config.drawingShapesMap(type);
   }
 
   public createMarker(type:string) {
-    this.manager.source.config.setZoomLevel(type);
+    this.manager.getActiveMap().config.setZoomLevel(type);
   }
 
   public loadMarkers() {
     let markersArray: any = markers['default'];
-    this.manager.source.config.setMarkers(markersArray, this.manager.source.cluster);
+    this.manager.getActiveMap().config.setMarkers();
   }
 
   public clearMap() {
-    this.manager.source.config.clearMap();
+    this.manager.getActiveMap().config.clearMap();
   }
 
   ngOnInit() {
-    console.log('Toolbar')
   }
 }

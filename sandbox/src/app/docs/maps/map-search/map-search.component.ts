@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Manager } from '../class/class-imap-manager';
 
 @Component({
   selector: 'app-map-search',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private manager: Manager) { }
 
   SearchMap(text:string){
-    console.log('text',text);
+    this.manager.getActiveMap().search.SearchMap(text);
+   // console.log('text',text);
   }
 
   ngOnInit() {

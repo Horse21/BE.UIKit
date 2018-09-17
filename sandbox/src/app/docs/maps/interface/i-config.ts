@@ -7,7 +7,7 @@ export interface MapOptions {
     transitLayer(transit: any, boolean: boolean);
     trafficLayer(transit: any, boolean: boolean);
     getAddress(coord: any);
-    setMarkers(markers: any[],markecluster:any);
+    setMarkers();
     clearMap();
     resizeMap();
     routeMap(start: any, end: any, show: boolean);
