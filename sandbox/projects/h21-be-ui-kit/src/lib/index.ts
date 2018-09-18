@@ -30,7 +30,6 @@ export * from './h21-search-result-row/h21-search-result-row.module';
 export * from './h21-search-result-row/h21-search-result-row.component';
 export * from './h21-top-toolbar/h21-top-toolbar.module';
 export * from './h21-top-toolbar/h21-top-toolbar.component';
-
 export * from './h21-hotel-filter-panel/h21-hotel-filter-panel.module';
 export * from './h21-hotel-filter-panel/h21-hotel-filter-panel.component';
 export * from './h21-hotel-search-result/h21-hotel-search-result.module';
@@ -47,3 +46,12 @@ export * from './h21-sidebar-nav/h21-sidebar-nav.module';
 export * from './h21-sidebar-nav/h21-sidebar-nav.component';
 export * from './h21-breadcrumbs/h21-breadcrumbs.module';
 export * from './h21-breadcrumbs/h21-breadcrumbs.component';
+export * from './h21-hotel-book/h21-hotel-book.module';
+export * from './h21-hotel-book/h21-hotel-book.component';
+export * from './h21-hotel-room-detail/h21-hotel-room-detail.module';
+export * from './h21-hotel-room-detail/h21-hotel-room-detail.component';
+export * from './h21-hotel-search-result-card/h21-hotel-search-result-card.module';
+export * from './h21-hotel-search-result-card/h21-hotel-search-result-card.component';
+
+export * from './h21-cart-combobox/h21-cart-combobox.module';
+export * from './h21-cart-combobox/h21-cart-combobox.component';

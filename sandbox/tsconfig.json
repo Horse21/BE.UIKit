@@ -25,6 +25,9 @@
 	  ],
 	  "h21-be-ui-kit": [
 		"dist/h21-be-ui-kit"
+	  ],
+	  "jszip": [
+		"../node_modules/jszip/dist/jszip.min.js"
 	  ]
     }
   },

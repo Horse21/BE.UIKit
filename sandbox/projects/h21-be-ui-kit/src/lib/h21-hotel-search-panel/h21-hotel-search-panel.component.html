@@ -1,39 +1,45 @@
 <div class="c-h21-search-panel">
 
-	<mat-button-toggle-group class="__primary __w-100 mt-0 mb-3" [value]="searchOptions.paymentMethod">
-		<mat-button-toggle value="account">Payment on account</mat-button-toggle>
-		<mat-button-toggle value="hotel">Payment at hotel</mat-button-toggle>
-	</mat-button-toggle-group>
+	<ng-container *ngIf="searchMode == 'hotel'">
+		<mat-button-toggle-group class="__primary __w-100 mt-0 mb-3" [value]="searchOptions.paymentMethod">
+			<mat-button-toggle value="account">Payment on account</mat-button-toggle>
+			<mat-button-toggle value="hotel">Payment at hotel</mat-button-toggle>
+		</mat-button-toggle-group>
 
-	<mat-form-field color="primary" class="__w-100">
-		<input matInput placeholder="Destination"
-			   [formControl]="destinationControl"
-			   [matAutocomplete]="destinationAutocomplete"
-			   [ngModel]="searchOptions.destination" />
-		<mat-icon matSuffix>location_on</mat-icon>
-	</mat-form-field>
+		<mat-form-field color="primary" class="__w-100">
+			<input matInput placeholder="Destination"
+				   [formControl]="destinationControl"
+				   [matAutocomplete]="destinationAutocomplete"
+				   [ngModel]="searchOptions.destination"
+				   required
+				   ngDefaultControl
+				   (keyup)="onDestinationEdited($event)"/>
+			<mat-icon matSuffix>location_on</mat-icon>
+			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
+		</mat-form-field>
 
-	<mat-autocomplete #destinationAutocomplete="matAutocomplete" [autoActiveFirstOption]="false" class="c-h21-search-panel_autocomplete">
-		<mat-option *ngFor="let item of destinations"
-					[value]="item.name"
-					class="autocomplete_optgroup-label">
-			<ng-container [ngSwitch]="item.type">
-				<mat-icon *ngSwitchCase="'city'" class="__size-s">location_on</mat-icon>
-				<mat-icon *ngSwitchCase="'airport'" class="__size-s">directions_transit</mat-icon>
-				<mat-icon *ngSwitchCase="'station'" class="__size-s">flight</mat-icon>
-				<mat-icon *ngSwitchCase="'building'" class="__size-s">domain</mat-icon>
-			</ng-container>
-			<span class="autocomplete_opt-title">{{ item.name }}</span>
-			<span class="autocomplete_opt-desc">{{ item.description }}</span>
-		</mat-option>
-	</mat-autocomplete>
-
-	<mat-form-field color="primary" class="__w-100">
-		<input matInput placeholder="Hotel name" [ngModel]="searchOptions.hotelName" />
-	</mat-form-field>
+		<mat-autocomplete #destinationAutocomplete="matAutocomplete" [autoActiveFirstOption]="false" class="c-h21-search-panel_autocomplete">
+			<mat-option *ngFor="let item of destinations"
+						[value]="item.name"
+						class="autocomplete_optgroup-label">
+				<ng-container [ngSwitch]="item.type">
+					<mat-icon *ngSwitchCase="'city'" class="__size-s">location_on</mat-icon>
+					<mat-icon *ngSwitchCase="'airport'" class="__size-s">directions_transit</mat-icon>
+					<mat-icon *ngSwitchCase="'station'" class="__size-s">flight</mat-icon>
+					<mat-icon *ngSwitchCase="'building'" class="__size-s">domain</mat-icon>
+				</ng-container>
+				<span class="autocomplete_opt-title">{{ item.name }}</span>
+				<span class="autocomplete_opt-desc">{{ item.description }}</span>
+			</mat-option>
+		</mat-autocomplete>
+	</ng-container>
 
 	<mat-form-field class="__w-100">
-		<mat-select placeholder="Nationality" value="american" [required]="true" [ngModel]="searchOptions.nationality">
+		<mat-select placeholder="Nationality"
+					value="american"
+					[required]="true"
+					[formControl]="nationalityControl"
+					[ngModel]="searchOptions.nationality">
 			<mat-option value="American">American</mat-option>
 			<mat-option value="Englishman">Englishman</mat-option>
 			<mat-option value="Frenchman">Frenchman</mat-option>
@@ -41,6 +47,7 @@
 			<mat-option value="German">German</mat-option>
 			<mat-option value="Italian">Italian</mat-option>
 		</mat-select>
+		<mat-error *ngIf="nationalityControl.hasError('required')">Please choose an nationality</mat-error>
 	</mat-form-field>
 
 	<div class="row">
@@ -82,14 +89,14 @@
 		<div class="col-6">
 			<mat-form-field class="__w-100 white-fill-input">
 				<mat-select placeholder="Child 1 age" [(value)]="childAge_1">
-					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n" [disabled]="childAge_2 && (n > childAge_2)">{{n}}</mat-option>
+					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n">{{n}}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 		<div class="col-6">
 			<mat-form-field class="__w-100 white-fill-input">
 				<mat-select placeholder="Child 2 age" [(value)]="childAge_2">
-					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n" [disabled]="childAge_1 && (n < childAge_1)">{{n}}</mat-option>
+					<mat-option *ngFor="let i of childAgeFakeArray; let n = index;" [value]="n">{{n}}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
@@ -101,8 +108,16 @@
 		</div>
 	</div>
 
-	<div class="c-h21-search-panel_bottom-attached-box">
-		<button mat-button class="__size-l mr-3" (click)="clearSearch()">Clear search</button>
-		<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
-	</div>
+	<ng-container *ngIf="searchMode == 'room'">
+		<div class="c-h21-search-panel_bottom-box">
+			<button mat-raised-button color="primary">Сheck availability</button>
+		</div>
+	</ng-container>
+
+	<ng-container *ngIf="searchMode == 'hotel'">
+		<div class="c-h21-search-panel_bottom-attached-box">
+			<button mat-button class="__size-l mr-3" (click)="clearSearch()">Clear search</button>
+			<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
+		</div>
+	</ng-container>
 </div>
