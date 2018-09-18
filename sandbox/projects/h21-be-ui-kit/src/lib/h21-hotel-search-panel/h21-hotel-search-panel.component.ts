@@ -79,7 +79,6 @@ export class H21HotelSearchPanelComponent {
 	onDestinationEdited(event) {
 		let valueIsEmpty = (!event.target.value || event.target.value === '');
 		let valueIsLessThanStartLettersCount = (event.target.value.length < this.filterStartLettersCount);
-		let valueIsGreaterThanStartLettersCount = (event.target.value.length >= this.filterStartLettersCount);
 		let isLetterRemoved = (event.key === 'Backspace' || event.key === 'Delete');
 		let destinationsEmptyOrOne = (this.destinationsFiltered.length <= 1);
 
