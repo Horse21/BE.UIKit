@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { DestinationLoaderService } from './../../../../../src/services/destination-loader.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material';
 import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
-import value from '*.json';
+import { debounceTime } from 'rxjs/operators';
+import { environment } from '../../../../../src/environments/environment';
 
 @Component({
 	selector: 'h21-hotel-search-panel',
@@ -34,7 +34,6 @@ export class H21HotelSearchPanelComponent {
 	onClearSearch: EventEmitter<void> = new EventEmitter<void>();
 
 	constructor(
-		private _dateAdapter: DateAdapter<Date>,
 		private _rightPanelDialog: H21RightOverlayPanelService,
 		private destinationLoader: DestinationLoaderService
 	) {
@@ -48,10 +47,14 @@ export class H21HotelSearchPanelComponent {
 			nightsCount: null,
 			roomCount: 0
 		};
+
 	}
 
 	ngOnInit(): void {
 		this.fetchDestinations();
+		this.destinationControl.valueChanges
+		.pipe(debounceTime(environment.debouncingTime))
+		.subscribe(event => this.onDestinationEdited(event));
 	}
 
 	fetchDestinations() {
@@ -66,28 +69,23 @@ export class H21HotelSearchPanelComponent {
 	}
 
 	onDestinationEdited(event) {
-		let valueIsEmpty = (!event.target.value || event.target.value === '');
-		let valueIsLessThanStartLettersCount = (event.target.value.length < this.filterStartLettersCount);
-		let isLetterRemoved = (event.key === 'Backspace' || event.key === 'Delete');
+		if(event instanceof Object) {
+			return;
+		}
+		let enteredValue = event.toLowerCase();
+		let valueIsEmpty = (!enteredValue || enteredValue === '');
+		let valueIsLessThanStartLettersCount = (enteredValue.length < this.filterStartLettersCount);
 		let destinationsEmptyOrOne = (this.destinationsFiltered.length <= 1);
 
 		if (valueIsEmpty || valueIsLessThanStartLettersCount || destinationsEmptyOrOne) {
 			this.fetchDestinations();
 			this.destinations = this.destinationsFiltered;
 		} else {
-			console.log('[TYPING] onDestinationEdited.event.target.value', event.target.value);
+			console.log('[TYPING] onDestinationEdited.enteredValue', enteredValue);
 			this.destinations = this.destinationsFiltered.filter((value) => {
 				console.log("[TYPING FILTERING] this.destinations");
-				return value.name.toLowerCase().startsWith(event.target.value);
+				return value.name.toLowerCase().startsWith(enteredValue);
 			});
-			if (isLetterRemoved) {
-				console.log('[REMOVING] onDestinationEdited.event.target.value', event.target.value);
-				this.destinations = this.destinationsFiltered.filter((value) => {
-					let startingLettersOfValue = event.target.value.substr(0, this.filterStartLettersCount - 1);
-					console.log("[REMOVING FILTERING] this.destinations");
-					return value.name.toLowerCase().startsWith(startingLettersOfValue);
-				});
-			}
 		}
 		console.log('onDestinationEdited.destinations', this.destinations);
 	}
