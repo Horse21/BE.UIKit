@@ -69,10 +69,15 @@ export class H21HotelSearchPanelComponent {
 	}
 
 	onDestinationEdited(event) {
+<<<<<<< HEAD
 		if(event instanceof Object) {
 			return;
 		}
 		let enteredValue = event.toLowerCase();
+=======
+		// let enteredValue = event.target.value;
+		let enteredValue = event;
+>>>>>>> f430663fc52e70b5dec20a5246c9d8bca023f0b2
 		let valueIsEmpty = (!enteredValue || enteredValue === '');
 		let valueIsLessThanStartLettersCount = (enteredValue.length < this.filterStartLettersCount);
 		let destinationsEmptyOrOne = (this.destinationsFiltered.length <= 1);
