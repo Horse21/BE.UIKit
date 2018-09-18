@@ -6,7 +6,7 @@
 	{"id": 5, "type": "building", "name": "Fukuoka", "description": "City Centre"},
 	{"id": 6, "type": "building", "name": "Fukushima", "description": "City Centre"},
 	{"id": 7, "type": "building", "name": "Fukashinai", "description": "City Centre"},
-    {"id": 8, "type": "building", "name": "Fuck", "description": "City Centre"},
+    {"id": 8, "type": "building", "name": "Flick", "description": "City Centre"},
     {"id": 9, "type": "city", "name": "London", "description": "City Centre"},
     {"id": 10, "type": "city", "name": "New York", "description": "City Centre"}
 ]
