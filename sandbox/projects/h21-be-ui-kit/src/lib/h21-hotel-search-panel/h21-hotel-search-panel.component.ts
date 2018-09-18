@@ -73,6 +73,7 @@ export class H21HotelSearchPanelComponent {
 			return;
 		}
 		let enteredValue = event.toLowerCase();
+
 		let valueIsEmpty = (!enteredValue || enteredValue === '');
 		let valueIsLessThanStartLettersCount = (enteredValue.length < this.filterStartLettersCount);
 		let destinationsEmptyOrOne = (this.destinationsFiltered.length <= 1);
