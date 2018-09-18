@@ -1,4 +1,4 @@
-export interface MapOptions {
+export interface IMapOptions {
     showMarker(marker:any,markecluster:any);
     getZoom(): number;
     setZoom(zoom: number);

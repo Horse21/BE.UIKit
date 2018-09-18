@@ -1,14 +1,15 @@
-import { LoadApiMap, InitMap } from "../../interface/i-init";
+import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import { ObjectMap } from "../class-objmap";
 import * as mark from "../../test.markers.json";
+import { Injectable } from "@angular/core";
 declare var document: any;
 declare var ymaps: any;
 declare var require: any;
 var objMap: any;
-
-export class Initialize implements InitMap {
-    source: LoadApiMap;
-    public loadScriptMap(source: LoadApiMap): Promise<any> {
+@Injectable()
+export class InitializeYandex implements IInitMap {
+    source: ILoadApiMap;
+    public loadScriptMap(source: ILoadApiMap): Promise<any> {
         try {
             return new Promise((resolve, reject) => {
                 this.source = source;
@@ -105,7 +106,7 @@ export class Initialize implements InitMap {
         }
     }
 
-    destroyMap() {
+    destroyMap():void {
         try {
             ymaps = null;
             let apiScript = document.getElementById('mapAPI');

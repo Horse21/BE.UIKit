@@ -1,4 +1,4 @@
-import { MainMap } from "./i-main";
+import { IMainMap } from "./i-main";
 
 export enum MapType {
     google = 0,
@@ -8,7 +8,5 @@ export enum MapType {
 }
 export interface MapManager {
     registrationMap(mapType: MapType, id: string):MapManager;
-    //load(id:string);
-    getActiveMap(): MainMap;
-    //destroy();
+    getActiveMap(): IMainMap;
 }

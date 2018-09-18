@@ -1,19 +1,19 @@
 import { MapManager, MapType } from "../interface/i-map-manager";
-import { Component, OnInit, inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { GoogleMap } from '../class/google/class-main';
 import { YandexMap } from '../class/yandex/class-main';
 import { BaiduMap } from "../class/baidu/class-main";
 import { LeafletMap } from "../class/leaflet/class-main";
-import { MainMap } from '../interface/i-main';
+import { IMainMap } from '../interface/i-main';
 import * as data from "../maps.const.json";
-import { LoadApiMap } from "../interface/i-init";
+import { ILoadApiMap } from "../interface/i-init";
 import { ObjectMap } from "./class-objmap";
 
 
 @Injectable()
 export class Manager implements MapManager {
     mapType: MapType;
-    hashtable: { [name: string]: MainMap; } = {};
+    hashtable: { [name: string]: IMainMap; } = {};
 
     constructor(private objectMap: ObjectMap, private google: GoogleMap, private yandex: YandexMap, private baidu: BaiduMap, private leaflet: LeafletMap) {
         this.hashtable[MapType[MapType.google]] = google;
@@ -31,7 +31,7 @@ export class Manager implements MapManager {
     }
 
     private load(id: string) {
-        let dt: LoadApiMap = data['InitList'][MapType[this.mapType]];
+        let dt: ILoadApiMap = data['InitList'][MapType[this.mapType]];
         let source = this.hashtable[MapType[this.mapType]];
         source.init.loadScriptMap(dt)
             .then(data => {
@@ -55,7 +55,7 @@ export class Manager implements MapManager {
         catch{ }
     }
 
-    getActiveMap(): MainMap {
+    getActiveMap(): IMainMap {
         return this.hashtable[MapType[this.mapType]];
     }
 }

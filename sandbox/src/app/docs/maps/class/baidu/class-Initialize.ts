@@ -1,15 +1,16 @@
-import { LoadApiMap, InitMap } from "../../interface/i-init";
+import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import * as MarkerClusterer from 'bmaplib.markerclusterer';
 import * as mark from "../../test.markers.json";
+import { Injectable } from "@angular/core";
 declare var document: any;
 declare var BMap: any;
 declare var BMapLib: any;
 declare var require: any;
 var objMap: any;
-
-export class Initialize implements InitMap {
-    source: LoadApiMap;
-    public loadScriptMap(source: LoadApiMap): Promise<any> {
+@Injectable()
+export class InitializeBaidu implements IInitMap {
+    source: ILoadApiMap;
+    public loadScriptMap(source: ILoadApiMap): Promise<any> {
         return new Promise((resolve, reject) => {
             this.source = source;
             let script = document.createElement('script');
@@ -81,9 +82,6 @@ export class Initialize implements InitMap {
             markercluster.setGridSize(80);
             markercluster.setMinClusterSize(2);
             return { objMap }
-
-
-
         }
     }
 

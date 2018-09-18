@@ -1,8 +1,9 @@
-import { SearchPlacesMap } from "../../interface/i-search-places";
+import { ISearchPlacesMap } from "../../interface/i-search-places";
 import { ObjectMap } from "../class-objmap";
+import { Injectable } from "@angular/core";
 declare var google:any;
-
- export class Search implements SearchPlacesMap {
+@Injectable()
+ export class SearchGoogle implements ISearchPlacesMap {
     public SearchMap(text:string){
         var service = new google.maps.places.AutocompleteService();
 

@@ -1,4 +1,6 @@
-export interface LoadApiMap {
+import { Observable } from "rxjs";
+
+export interface ILoadApiMap {
     name: string;
     src: string;
     key: string;
@@ -6,9 +8,9 @@ export interface LoadApiMap {
     version:string;
 }
 
-export interface InitMap {
-    source: LoadApiMap;
-    loadScriptMap (source: LoadApiMap);
+export interface IInitMap {
+    source: ILoadApiMap;
+    loadScriptMap (source: ILoadApiMap):Promise<any>;
     initializingMap(id:string): any;
-    destroyMap();
+    destroyMap():void;
 }

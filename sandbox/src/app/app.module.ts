@@ -91,6 +91,40 @@ import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/l
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
 import { MapSearchComponent } from './docs/maps/map-search/map-search.component';
+import { Manager } from './docs/maps/class/class-imap-manager';
+import { ObjectMap } from './docs/maps/class/class-objmap';
+import { GoogleMap } from './docs/maps/class/google/class-main';
+import { InitializeGoogle } from './docs/maps/class/google/class-initialize';
+import { EventsGoogle } from './docs/maps/class/google/class-event';
+import { OptionsGoogle } from './docs/maps/class/google/class-config';
+import { InfoWindowGoogle } from './docs/maps/class/google/class-infowindow';
+import { MarkerGoogle } from './docs/maps/class/google/class-marker';
+import { MarkerclusterGoogle } from './docs/maps/class/google/class-markercluster';
+import { SearchGoogle } from './docs/maps/class/google/class-search-places';
+import { YandexMap } from './docs/maps/class/yandex/class-main';
+import { InitializeYandex } from './docs/maps/class/yandex/class-initialize';
+import { EventsYandex } from './docs/maps/class/yandex/class-event';
+import { OptionsYandex } from './docs/maps/class/yandex/class-config';
+import { InfoWindowYandex } from './docs/maps/class/yandex/class-infowindow';
+import { MarkerYandex } from './docs/maps/class/yandex/class-marker';
+import { MarkerclusterYandex } from './docs/maps/class/yandex/class-markercluster';
+import { SearchYandex } from './docs/maps/class/yandex/class-search-places';
+import { BaiduMap } from './docs/maps/class/baidu/class-main';
+import { InitializeBaidu } from './docs/maps/class/baidu/class-initialize';
+import { EventsBaidu } from './docs/maps/class/baidu/class-event';
+import { OptionsBaidu } from './docs/maps/class/baidu/class-config';
+import { InfoWindowBaidu } from './docs/maps/class/baidu/class-infowindow';
+import { MarkerBaidu } from './docs/maps/class/baidu/class-marker';
+import { MarkerclusterBaidu } from './docs/maps/class/baidu/class-markercluster';
+import { SearchBaidu } from './docs/maps/class/baidu/class-search-places';
+import { LeafletMap } from './docs/maps/class/leaflet/class-main';
+import { InitializeLeaflet } from './docs/maps/class/leaflet/class-initialize';
+import { EventsLeaflet } from './docs/maps/class/leaflet/class-event';
+import { OptionsLeaflet } from './docs/maps/class/leaflet/class-config';
+import { InfoWindowLeaflet } from './docs/maps/class/leaflet/class-infowindow';
+import { MarkerLeaflet } from './docs/maps/class/leaflet/class-marker';
+import { MarkerclusterLeaflet } from './docs/maps/class/leaflet/class-markercluster';
+import { SearchLeaflet } from './docs/maps/class/leaflet/class-search-places';
 
 const routes: Routes = [
 	{path: '', redirectTo: '/', pathMatch: 'full'},
@@ -200,6 +234,41 @@ const routes: Routes = [
 		H21RightOverlayPanelService,
 		AppSubscriberService,
 		OrderService,
+		Manager,
+		ObjectMap,
+		GoogleMap,
+		InitializeGoogle,
+		EventsGoogle,
+		OptionsGoogle,
+		InfoWindowGoogle,
+		MarkerGoogle,
+		MarkerclusterGoogle,
+		SearchGoogle,
+		YandexMap,
+		InitializeYandex,
+		EventsYandex,
+		OptionsYandex,
+		InfoWindowYandex,
+		MarkerYandex,
+		MarkerclusterYandex,
+		SearchYandex,
+		BaiduMap,
+		InitializeBaidu,
+		EventsBaidu,
+		OptionsBaidu,
+		InfoWindowBaidu,
+		MarkerBaidu,
+		MarkerclusterBaidu,
+		SearchBaidu,
+		LeafletMap,
+		InitializeLeaflet, 
+		EventsLeaflet,
+		OptionsLeaflet,
+		InfoWindowLeaflet,
+		MarkerLeaflet,
+		MarkerclusterLeaflet,
+		SearchLeaflet,
+		
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

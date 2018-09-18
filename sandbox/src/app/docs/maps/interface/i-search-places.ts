@@ -1,3 +1,3 @@
-export interface SearchPlacesMap {
+export interface ISearchPlacesMap {
     SearchMap(type:string);
 }

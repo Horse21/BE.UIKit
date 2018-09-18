@@ -1,18 +1,18 @@
-import { LoadApiMap, InitMap } from "../../interface/i-init";
+import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import * as mapstyle from "../../class/google/maps.style.json";
 import 'leaflet';
 import 'leaflet.markercluster';
 import * as mark from "../../test.markers.json";
 import { LeafletMap } from "../../interface/leaflet/i-inner";
+import { Injectable } from "@angular/core";
 declare var document: any;
 declare var L: any;
 declare var require: any;
 var objMap:any;
-
-export class Initialize implements InitMap {
-
-    source: LoadApiMap;
-    public loadScriptMap(source: LoadApiMap): Promise<any> {
+@Injectable()
+export class InitializeLeaflet implements IInitMap {
+    source: ILoadApiMap;
+    public loadScriptMap(source: ILoadApiMap): Promise<any> {
         try {
             return new Promise((resolve, reject) => {
                 this.source = source;
@@ -23,7 +23,7 @@ export class Initialize implements InitMap {
                 script.src = url;
                 script.id = 'mapAPI';
 
-                var styles = document.createElement('link');
+               var styles = document.createElement('link');
                 styles.rel = 'stylesheet';
                 styles.id = 'mapAPI';
                 styles.type = 'text/css';
@@ -105,17 +105,14 @@ export class Initialize implements InitMap {
             }
           
             objMap.addLayer(markerCluster);
-                       
-           
-
-            return { objMap };
+            return objMap;
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    destroyMap() {
+    destroyMap():void {
         try {
             let ds = document.getElementById('mapAPI');
             if (ds != null) {

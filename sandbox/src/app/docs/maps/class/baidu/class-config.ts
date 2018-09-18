@@ -1,5 +1,6 @@
-import { MapOptions } from "../../interface/i-config";
+import { IMapOptions } from "../../interface/i-config";
 import { ObjectMap } from "../class-objmap";
+import { Injectable } from "@angular/core";
 
 declare var google: any;
 declare var require: any;
@@ -7,8 +8,8 @@ var markerCluster: any;
 var markers: any[] = [];
 var radiusObject: any;
 var polygonArea: any[] = [];
-
-export class Options implements MapOptions {
+@Injectable()
+export class OptionsBaidu implements IMapOptions {
 
     constructor(private objMap: ObjectMap) {
     }

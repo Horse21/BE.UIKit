@@ -1,11 +1,10 @@
-import { MarkerClusterMap } from "../../interface/i-markercluster";
-
-export class Markercluster implements MarkerClusterMap {
-    Cluster:any;
+import { IMarkerClusterMap } from "../../interface/i-markercluster";
+import { Injectable } from "@angular/core";
+@Injectable()
+export class MarkerclusterYandex implements IMarkerClusterMap {
+    Cluster: any;
     listenEvent(map: any, eventName: string) {
-        throw new Error("Method not implemented.");
-    }    
+    }
     clickMarkerCluster(map: any, marker: any) {
-        throw new Error("Method not implemented.");
-    }  
+    }
 }

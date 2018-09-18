@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer, config } from 'rxjs';
-import { MarkerMap } from "../../interface/i-marker";
+import { IMarkerMap } from "../../interface/i-marker";
 
 declare var google: any;
 declare var require: any;
-
-export class Marker implements MarkerMap {
+@Injectable()
+export class MarkerGoogle implements IMarkerMap {
     listenEvent<E>(marker: any, eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
             marker.addListener(eventName, (arg: E) => { observer.next(arg); });

@@ -1,7 +1,8 @@
-import { MapOptions } from "../../interface/i-config";
+import { IMapOptions } from "../../interface/i-config";
 import { ObjectMap } from "../class-objmap";
 import * as mark from "../../test.markers.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
+import { Injectable } from "@angular/core";
 declare var google: any;
 declare var require: any;
 let markerCluster: any;
@@ -9,8 +10,8 @@ let markers: any[] = [];
 let radiusObject: any;
 let polygonArea: any[] = [];
 
-
-export class Options implements MapOptions {
+@Injectable()
+export class OptionsGoogle implements IMapOptions {
     constructor(private objMap: ObjectMap) {
     }
 

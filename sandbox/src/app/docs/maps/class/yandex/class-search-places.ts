@@ -1,7 +1,8 @@
-import { SearchPlacesMap } from "../../interface/i-search-places";
+import { ISearchPlacesMap } from "../../interface/i-search-places";
 import { ObjectMap } from "../class-objmap";
-
- export class Search implements SearchPlacesMap {
+import { Injectable } from "@angular/core";
+@Injectable()
+ export class SearchYandex implements ISearchPlacesMap {
     public SearchMap(text:string){
         console.log('Searchresults',text)
         
