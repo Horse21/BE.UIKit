@@ -1,3 +1,4 @@
+import { IDestinationItem } from './../../dto/i-destination-item';
 import { DestinationLoaderService } from './../../../../../src/services/destination-loader.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -18,8 +19,8 @@ export class H21HotelSearchPanelComponent {
 	childAge_1: number = null;
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
-	destinations: Array<any>;
-	destinationsFiltered: Array<any>;
+	destinations: Array<IDestinationItem>;
+	destinationsFiltered: Array<IDestinationItem>;
 	filterStartLettersCount = 3;
 
 	destinationControl: FormControl = new FormControl('', [Validators.required]);
@@ -62,7 +63,7 @@ export class H21HotelSearchPanelComponent {
 			.url("https://gist.githubusercontent.com/atthealchemist/8c2f402868bd40f4bf167aea495cc2de/raw/3aa308e229cef0b0ed629e3a2bb878813a722918/destinations.json")
 			.getDestinations()
 			.subscribe(
-				(data) => (this.destinationsFiltered = data),
+				(data) => (this.destinationsFiltered = data as Array<IDestinationItem>),
 				(error) => console.log('[FETCHING] Error', error),
 				() => console.log('[FETCHING] Successfully fetching destinations', this.destinationsFiltered)
 			);
