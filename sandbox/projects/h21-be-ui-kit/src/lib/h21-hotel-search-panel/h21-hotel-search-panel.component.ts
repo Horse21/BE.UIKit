@@ -7,17 +7,6 @@ import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-righ
 import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
 import value from '*.json';
 
-// const DESTINATION_ARR: Array<any> = [
-// 	{ id: 1, type: 'city', name: 'Amsterdam', description: 'Netherlands' },
-// 	{ id: 2, type: 'airport', name: 'Amsterdam', description: 'Central Station' },
-// 	{ id: 3, type: 'station', name: 'Amsterdam', description: '(AMS-Schiphol)' },
-// 	{ id: 4, type: 'building', name: 'Amsterdam', description: 'Court Hotel, New York, NY' },
-// 	{ id: 5, type: 'building', name: 'Fukuoka', description: 'City Centre' },
-// 	{ id: 6, type: 'building', name: 'Fukushima', description: 'City Centre' },
-// 	{ id: 7, type: 'building', name: 'Fukashinai', description: 'City Centre' },
-// 	{ id: 8, type: 'building', name: 'Flick', description: 'City Centre' }
-// ];
-
 @Component({
 	selector: 'h21-hotel-search-panel',
 	templateUrl: './h21-hotel-search-panel.component.html'
