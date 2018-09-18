@@ -3,19 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
-  responseType: "json",
-  url: ""
+	responseType: 'json',
+	url: ''
 };
 
 @Injectable({
 	providedIn: 'root'
 })
 export class DestinationLoaderService {
+	constructor(private http: HttpClient) {}
 
-	constructor(private http: HttpClient) {
-
-	}
-	
 	url(url: string): DestinationLoaderService {
 		httpOptions.url = url;
 		return this;
