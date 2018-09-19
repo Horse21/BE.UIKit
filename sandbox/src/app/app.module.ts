@@ -1,4 +1,4 @@
-import { DestinationLoaderService } from './../services/destination-loader.service';
+import { DestinationLoaderService } from './../../projects/h21-be-ui-kit/src/services/destination-loader.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
