@@ -13,7 +13,8 @@
 				   [ngModel]="searchOptions.destination"
 				   required
 				   ngDefaultControl
-				   (keyup)="onDestinationEdited($event)"/>
+				   (keyup)="onDestinationEdited($event)"
+				   (focus)="onDestinationEdited($event)"/>
 			<mat-icon matSuffix>location_on</mat-icon>
 			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
 		</mat-form-field>

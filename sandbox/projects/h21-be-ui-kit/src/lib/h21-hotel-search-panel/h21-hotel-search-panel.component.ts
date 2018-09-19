@@ -7,6 +7,7 @@ import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-righ
 import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
 import { debounceTime } from 'rxjs/operators';
 import { environment } from '../../../../../src/environments/environment';
+import { DateTime } from 'luxon';
 
 @Component({
 	selector: 'h21-hotel-search-panel',
@@ -35,33 +36,33 @@ export class H21HotelSearchPanelComponent {
 	@Output()
 	onClearSearch: EventEmitter<void> = new EventEmitter<void>();
 
-	constructor(
-		private _rightPanelDialog: H21RightOverlayPanelService,
-		private destinationLoader: DestinationLoaderService
-	) {
+	constructor(private _rightPanelDialog: H21RightOverlayPanelService, private destinationLoader: DestinationLoaderService) {
 		this.searchOptions = <IHotelSearchOptions>{
 			paymentMethod: 'account',
 			destination: '',
 			hotelName: '',
 			nationality: this.defaultNationality,
-			checkInDate: new Date(Date.now()),
-			checkOutDate: new Date(new Date(Date.now()).getTime() + 86400000),
+			checkInDate: DateTime.local().toJSDate(),
+			checkOutDate: DateTime.local()
+				.plus({ days: 1 })
+				.toJSDate(),
 			nightsCount: 1,
 			roomCount: 1
 		};
-
 	}
 
 	ngOnInit(): void {
 		this.fetchDestinations();
 		this.destinationControl.valueChanges
-		.pipe(debounceTime(environment.debouncingTime))
-		.subscribe(event => this.onDestinationEdited(event));
+			.pipe(debounceTime(environment.debouncingTime))
+			.subscribe((event) => this.onDestinationEdited(event));
 	}
 
 	fetchDestinations() {
 		this.destinationLoader
-			.url("https://gist.githubusercontent.com/atthealchemist/8c2f402868bd40f4bf167aea495cc2de/raw/3aa308e229cef0b0ed629e3a2bb878813a722918/destinations.json")
+			.url(
+				'https://gist.githubusercontent.com/atthealchemist/8c2f402868bd40f4bf167aea495cc2de/raw/3aa308e229cef0b0ed629e3a2bb878813a722918/destinations.json'
+			)
 			.getDestinations()
 			.subscribe(
 				(data) => (this.destinationsFiltered = data as Array<IDestinationItem>),
@@ -71,14 +72,14 @@ export class H21HotelSearchPanelComponent {
 	}
 
 	onDestinationEdited(event) {
-		if(event instanceof Object) {
+		if (event instanceof Object) {
 			return;
 		}
 		let enteredValue = event.toLowerCase();
 
-		let valueIsEmpty = (!enteredValue || enteredValue === '');
-		let valueIsLessThanStartLettersCount = (enteredValue.length < this.filterStartLettersCount);
-		let destinationsEmptyOrOne = (this.destinationsFiltered.length <= 1);
+		let valueIsEmpty = !enteredValue || enteredValue === '';
+		let valueIsLessThanStartLettersCount = enteredValue.length < this.filterStartLettersCount;
+		let destinationsEmptyOrOne = this.destinationsFiltered.length <= 1;
 
 		if (valueIsEmpty || valueIsLessThanStartLettersCount || destinationsEmptyOrOne) {
 			this.fetchDestinations();
@@ -86,7 +87,7 @@ export class H21HotelSearchPanelComponent {
 		} else {
 			console.log('[TYPING] onDestinationEdited.enteredValue', enteredValue);
 			this.destinations = this.destinationsFiltered.filter((value) => {
-				console.log("[TYPING FILTERING] this.destinations");
+				console.log('[TYPING FILTERING] this.destinations');
 				return value.name.toLowerCase().startsWith(enteredValue);
 			});
 		}
@@ -130,13 +131,16 @@ export class H21HotelSearchPanelComponent {
 	}
 
 	clearSearch() {
+
+		this.destinationControl.setValue('');
+
 		this.searchOptions.paymentMethod = 'account';
 		this.searchOptions.destination = '';
-		this.searchOptions.nationality = '';
+		this.searchOptions.nationality = this.defaultNationality;
 		this.searchOptions.checkInDate = null;
 		this.searchOptions.checkOutDate = null;
-		this.searchOptions.nightsCount = null;
-		this.searchOptions.roomCount = 0;
+		this.searchOptions.nightsCount = 1;
+		this.searchOptions.roomCount = 1;
 
 		this.onClearSearch.emit();
 	}
