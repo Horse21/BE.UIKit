@@ -1,10 +1,12 @@
 import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import * as mapstyle from "../../class/google/maps.style.json";
 import 'leaflet';
+import 'leaflet-css';
 import 'leaflet.markercluster';
 import * as mark from "../../test.markers.json";
 import { LeafletMap } from "../../interface/leaflet/i-inner";
 import { Injectable } from "@angular/core";
+export namespace Map.Leaflet {
 declare var document: any;
 declare var L: any;
 declare var require: any;
@@ -28,9 +30,9 @@ export class InitializeLeaflet implements IInitMap {
                 styles.id = 'mapAPI';
                 styles.type = 'text/css';
                 styles.href = 'https://unpkg.com/leaflet@1.3.4/dist/leaflet.css';
-                document.getElementsByTagName('head')[0].appendChild(styles);
+              //  document.getElementsByTagName('head')[0].appendChild(styles);
 
-                resolve({ loaded: true, status: 'Loaded' });
+               // resolve({ loaded: true, status: 'Loaded' });
 
                 if (script.readyState) {
                     script.onreadystatechange = () => {
@@ -48,7 +50,7 @@ export class InitializeLeaflet implements IInitMap {
                 script.onerror = (error: any) => {
                     reject({ loaded: false, status: 'Error' });
                 };
-               // document.getElementsByTagName('head')[0].appendChild(script);
+                document.getElementsByTagName('head')[0].appendChild(script);
             });
         }
         catch (error) {
@@ -77,7 +79,7 @@ export class InitializeLeaflet implements IInitMap {
             let markers: any[];
             markers = mark.default;
             let icon = L.icon({
-                iconUrl: require('../../images/icon/icon_hotel.png'),
+                iconUrl: './assets/icons_map/icon_hotel.png',
             });
             let markerCluster = L.markerClusterGroup({
                 chunkedLoading: false,
@@ -129,4 +131,5 @@ export class InitializeLeaflet implements IInitMap {
             console.log(error);
         }
     }
+}
 }

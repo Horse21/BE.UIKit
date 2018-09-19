@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-
-@Injectable()
-export class ObjectMap{
-    public map: any;
+export namespace Map {
+    @Injectable()
+    export class ObjectMap {
+        public map: any;
+    }
 }

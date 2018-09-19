@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as markercluster from "../markercluster.json";
 import * as markers from "../test.markers.json";
-import { Manager } from '../class/class-imap-manager';
+import * as Manager  from '../class/class-imap-manager';
 
 @Component({
   selector: 'app-map-toolbar',
@@ -10,7 +10,7 @@ import { Manager } from '../class/class-imap-manager';
 })
 export class MapToolbarComponent implements OnInit {
 
-  constructor(private manager: Manager) {
+  constructor(private manager: Manager.Map.Manager) {
   }
 
   public zoomLevel(type:string) {

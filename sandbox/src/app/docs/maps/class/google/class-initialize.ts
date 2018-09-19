@@ -1,16 +1,16 @@
 import { ILoadApiMap, IInitMap } from "../../interface/i-init";
-import { Component, ViewChild,ElementRef, Injectable } from '@angular/core';
+import { Component, ViewChild, ElementRef, Injectable } from '@angular/core';
 import * as mapstyle from "../../class/google/maps.style.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
+export namespace Map.Google {
 declare var document: any;
 declare var google: any;
 declare var require: any;
-var objMap:any;
+var objMap: any;
 
 export class InitializeGoogle implements IInitMap {
     source: ILoadApiMap;
     public loadScriptMap(source: ILoadApiMap): Promise<any> {
-        
         return new Promise((resolve, reject) => {
             this.source = source;
             let script = document.createElement('script');
@@ -52,7 +52,7 @@ export class InitializeGoogle implements IInitMap {
             gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
                 {
                     textColor: 'black',
-                    url: require('../../images/icon/icon_pointGroup.png'),
+                    url: './assets/icons_map/icon_pointGroup.png',
                     anchorText: [0, -2],
                     height: 44,
                     width: 44
@@ -66,7 +66,7 @@ export class InitializeGoogle implements IInitMap {
             scaleControl: true,
             draggableCursor: 'default',
             disableDoubleClickZoom: true,
-           // styles: mapstyle.default
+            // styles: mapstyle.default
         });
         let markers: any[];
         let traffic = new google.maps.TrafficLayer();
@@ -96,6 +96,7 @@ export class InitializeGoogle implements IInitMap {
             scripts[i].parentNode.removeChild(scripts[i]);
         }
         document.getElementById('map').innerHTML = "";
-        
+
     }
+}
 }

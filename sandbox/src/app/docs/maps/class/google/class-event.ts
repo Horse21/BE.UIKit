@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer, config } from 'rxjs';
 import { IEventMap } from "../../interface/i-event";
-import { Manager } from "../class-imap-manager";
+import * as Manager from "../class-imap-manager";
+export namespace Map.Google {
 declare var require: any;
 declare var placeId: any;
 declare var event: any;
@@ -18,6 +19,30 @@ export class EventsGoogle implements IEventMap {
     }
 
     idle(map: any, callback: () => void) {
+        this.listenEvent<void>(map, "idle").subscribe(() => {
+            let bounds = map.getBounds();
+                console.log(bounds,'IDLE')
+            if (bounds) {
+                callback();             
+            }
+
+
+        })
+    }
+
+    zoomend(map: any, callback: () => void) {
+        this.listenEvent<void>(map, "idle").subscribe(() => {
+            let bounds = map.getBounds();
+                console.log(bounds,'IDLE')
+            if (bounds) {
+                callback();             
+            }
+
+
+        })
+    }
+
+    dragend(map: any, callback: () => void) {
         this.listenEvent<void>(map, "idle").subscribe(() => {
             let bounds = map.getBounds();
                 console.log(bounds,'IDLE')
@@ -50,4 +75,5 @@ export class EventsGoogle implements IEventMap {
             }
         })
     }
+}
 }

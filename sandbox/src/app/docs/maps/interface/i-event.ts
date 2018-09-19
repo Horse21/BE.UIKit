@@ -4,4 +4,6 @@ export interface IEventMap {
     boundsChange(map: any);
     zoomChange(map: any);
     clickMap(map: any);
+    dragend(map: any, callback: () => void);
+    zoomend(map: any, callback: () => void);
 }

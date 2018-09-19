@@ -5,7 +5,7 @@ import { IMarkerMap } from "./i-marker";
 import { IInfoWindowMap } from "./i-infowindow";
 import { IMarkerClusterMap } from "./i-markercluster";
 import { ISearchPlacesMap } from "./i-search-places";
-import { ObjectMap } from "../class/class-objmap";
+import * as ObjectMap  from "../class/class-objmap";
 
 export interface IMainMap {
    search:ISearchPlacesMap;

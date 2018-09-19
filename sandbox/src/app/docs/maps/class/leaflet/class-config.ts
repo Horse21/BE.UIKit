@@ -1,7 +1,7 @@
 import { IMapOptions } from "../../interface/i-config";
-import { ObjectMap } from "../class-objmap";
+import * as  ObjectMap  from "../class-objmap";
 import { Injectable } from "@angular/core";
-
+export namespace Map.Leaflet {
 declare var google: any;
 declare var require: any;
 var markerCluster: any;
@@ -12,7 +12,7 @@ var polygonArea: any[] = [];
 @Injectable()
 export class OptionsLeaflet implements IMapOptions {
 
-    constructor(private objMap: ObjectMap) {
+    constructor(private objMap: ObjectMap.Map.ObjectMap) {
     }
 
     showMarker(obj: any, markercluster: any) {
@@ -293,4 +293,5 @@ export class OptionsLeaflet implements IMapOptions {
             });
         }
     }
+}
 }

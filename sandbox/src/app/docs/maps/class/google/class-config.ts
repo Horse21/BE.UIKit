@@ -1,8 +1,9 @@
 import { IMapOptions } from "../../interface/i-config";
-import { ObjectMap } from "../class-objmap";
+import * as  ObjectMap from "../class-objmap";
 import * as mark from "../../test.markers.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
 import { Injectable } from "@angular/core";
+export namespace Map.Google {
 declare var google: any;
 declare var require: any;
 let markerCluster: any;
@@ -12,7 +13,7 @@ let polygonArea: any[] = [];
 
 @Injectable()
 export class OptionsGoogle implements IMapOptions {
-    constructor(private objMap: ObjectMap) {
+    constructor(private objMap: ObjectMap.Map.ObjectMap) {
     }
 
     showMarker(obj: any, markercluster: any) {
@@ -22,7 +23,7 @@ export class OptionsGoogle implements IMapOptions {
                 draggable: false,
                 visible: true,
                 clickable: true,
-                icon: { url: require('../../images/icon/icon_hotel.png') },
+                icon: { url:'./assets/icons_map/icon_hotel.png' },
                 title: obj.Hotelname
             });
 
@@ -203,12 +204,11 @@ export class OptionsGoogle implements IMapOptions {
     }
 
     setMarkers = () => {
-        if(polygonArea.length == 0){
         let mcOptions = {
             gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
                 {
                     textColor: 'black',
-                    url: require('../../images/icon/icon_pointGroup.png'),
+                    url: './assets/icons_map/icon_pointgroup.png',
                     anchorText: [0, -2],
                     height: 44,
                     width: 44
@@ -232,7 +232,7 @@ export class OptionsGoogle implements IMapOptions {
                 draggable: false,
                 visible: true,
                 clickable: true,
-                icon: { url: require('../../images/icon/icon_hotel.png') },
+                icon: { url:'./assets/icons_map/icon_hotel.png' },
                 title: item.Hotelname
             });
             if (sending) {
@@ -243,7 +243,6 @@ export class OptionsGoogle implements IMapOptions {
 
         }
         markerCluster = new MarkerClusterer(this.objMap.map, markers, mcOptions);
-    }
     }
 
     clearMap() {
@@ -339,4 +338,5 @@ export class OptionsGoogle implements IMapOptions {
             });
         }
     }
+}
 }
