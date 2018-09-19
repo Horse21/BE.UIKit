@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { DestinationLoaderService } from './../../services/destination-loader.service';
 import { IDestinationItem } from './../../dto/i-destination-item';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -6,7 +7,6 @@ import { DateAdapter } from '@angular/material';
 import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
 import { debounceTime } from 'rxjs/operators';
-import { environment } from '../../../../../src/environments/environment';
 import { DateTime } from 'luxon';
 
 @Component({
