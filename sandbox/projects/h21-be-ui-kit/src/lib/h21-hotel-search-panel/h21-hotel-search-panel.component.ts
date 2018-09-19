@@ -25,6 +25,7 @@ export class H21HotelSearchPanelComponent {
 
 	destinationControl: FormControl = new FormControl('', [Validators.required]);
 	nationalityControl: FormControl = new FormControl('', [Validators.required]);
+	defaultNationality: string = 'Russian';
 
 	@Input()
 	searchMode: 'hotel' | 'room' = 'hotel';
@@ -42,11 +43,11 @@ export class H21HotelSearchPanelComponent {
 			paymentMethod: 'account',
 			destination: '',
 			hotelName: '',
-			nationality: '',
-			checkInDate: null,
-			checkOutDate: null,
-			nightsCount: null,
-			roomCount: 0
+			nationality: this.defaultNationality,
+			checkInDate: new Date(Date.now()),
+			checkOutDate: new Date(new Date(Date.now()).getTime() + 86400000),
+			nightsCount: 1,
+			roomCount: 1
 		};
 
 	}
