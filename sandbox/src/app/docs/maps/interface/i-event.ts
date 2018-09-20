@@ -1,9 +1,8 @@
 export interface IEventMap {
-    listenEvent(map: any, eventName: string);
-    idle(map: any, callback: () => void);
-    boundsChange(map: any);
-    zoomChange(map: any);
-    clickMap(map: any);
-    dragend(map: any, callback: () => void);
-    zoomend(map: any, callback: () => void);
+    idle(callback: () => void);
+    boundsChange(callback: () => void);
+    zoomChange(callback: () => void);
+    clickMap(callback: () => void);
+    dragend(callback: () => void);
+    zoomend(callback: () => void);
 }

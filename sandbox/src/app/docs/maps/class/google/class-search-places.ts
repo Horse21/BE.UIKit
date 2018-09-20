@@ -2,10 +2,11 @@ import { ISearchPlacesMap } from "../../interface/i-search-places";
 import * as  ObjectMap from "../class-objmap";
 import { Injectable } from "@angular/core";
 
-export namespace Map.Google {
+export namespace Google {
     declare var google: any;
+
     @Injectable()
-    export class SearchGoogle implements ISearchPlacesMap {
+    export class Search implements ISearchPlacesMap {
         public SearchMap(text: string) {
             var service = new google.maps.places.AutocompleteService();
 

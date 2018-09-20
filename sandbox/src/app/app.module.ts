@@ -93,14 +93,14 @@ import { H21SlideCarouselDialogComponent } from "../../projects/h21-be-ui-kit/sr
 import { MapSearchComponent } from './docs/maps/map-search/map-search.component';
 import * as  Manager from './docs/maps/class/class-imap-manager';
 import * as ObjectMap from './docs/maps/class/class-objmap';
-import * as GoogleMap from './docs/maps/class/google/class-main';
-import * as InitializeGoogle from './docs/maps/class/google/class-initialize';
-import * as EventsGoogle from './docs/maps/class/google/class-event';
-import * as OptionsGoogle from './docs/maps/class/google/class-config';
-import * as InfoWindowGoogle from './docs/maps/class/google/class-infowindow';
-import * as MarkerGoogle from './docs/maps/class/google/class-marker';
-import * as MarkerclusterGoogle from './docs/maps/class/google/class-markercluster';
-import * as SearchGoogle from './docs/maps/class/google/class-search-places';
+import {Google} from './docs/maps/class/google/class-main';
+import * as Init from './docs/maps/class/google/class-initialize';
+import * as Events from './docs/maps/class/google/class-event';
+import * as Option from './docs/maps/class/google/class-config';
+import * as InfoWindow from './docs/maps/class/google/class-infowindow';
+import * as Marker from './docs/maps/class/google/class-marker';
+import * as Markercluster from './docs/maps/class/google/class-markercluster';
+import * as Search from './docs/maps/class/google/class-search-places';
 import * as YandexMap from './docs/maps/class/yandex/class-main';
 import * as InitializeYandex from './docs/maps/class/yandex/class-initialize';
 import * as EventsYandex from './docs/maps/class/yandex/class-event';
@@ -236,14 +236,14 @@ const routes: Routes = [
 		OrderService,
 		Manager.Map.Manager,
 		ObjectMap.Map.ObjectMap,
-		GoogleMap.Map.Google.GoogleMap,
-		InitializeGoogle.Map.Google.InitializeGoogle,
-		EventsGoogle.Map.Google.EventsGoogle,
-		OptionsGoogle.Map.Google.OptionsGoogle,
-		InfoWindowGoogle.Map.Google.InfoWindowGoogle,
-		MarkerGoogle.Map.Google.MarkerGoogle,
-		MarkerclusterGoogle.Map.Google.MarkerclusterGoogle,
-		SearchGoogle.Map.Google.SearchGoogle,
+		Google.Map,
+		Init.Google.Initialize,
+		Events.Google.Events,
+		Option.Google.Options,
+		InfoWindow.Google.InfoWindow,
+		Marker.Google.Marker,
+		Markercluster.Google.Markercluster,
+		Search.Google.Search,
 		YandexMap.Map.Yandex.YandexMap,
 		InitializeYandex.Map.Yandex.InitializeYandex,
 		EventsYandex.Map.Yandex.EventsYandex,

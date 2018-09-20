@@ -1,6 +1,6 @@
 import { MapManager, MapType } from "../interface/i-map-manager";
 import { Injectable } from '@angular/core';
-import * as GoogleMap from '../class/google/class-main';
+import { Google } from '../class/google/class-main';
 import * as YandexMap from '../class/yandex/class-main';
 import * as BaiduMap from "../class/baidu/class-main";
 import * as LeafletMap from "../class/leaflet/class-main";
@@ -16,11 +16,11 @@ export namespace Map {
         hashtable: { [name: string]: IMainMap; } = {};
 
         constructor(private objectMap: ObjectMap.Map.ObjectMap,
-            private google: GoogleMap.Map.Google.GoogleMap,
+            private google: Google.Map,
             private yandex: YandexMap.Map.Yandex.YandexMap,
             private baidu: BaiduMap.Map.Baidu.BaiduMap,
             private leaflet: LeafletMap.Map.Leaflet.LeafletMap
-            ) {
+        ) {
             this.hashtable[MapType[MapType.google]] = google;
             this.hashtable[MapType[MapType.yandex]] = yandex;
             this.hashtable[MapType[MapType.baidu]] = baidu;
@@ -41,15 +41,13 @@ export namespace Map {
             source.init.loadScriptMap(dt)
                 .then(data => {
                     if (data.status === 'Loaded') {
-                        let load = source.init.initializingMap(id);
-                        this.objectMap.map = load.objMap;
-                        source.events.clickMap(this.objectMap.map);
-                        source.events.boundsChange(this.objectMap.map);
-                        source.events.idle(this.objectMap.map, source.config.setMarkers.bind(this));
-                        source.events.dragend(this.objectMap.map, source.config.setMarkers.bind(this));
-                        source.events.zoomend(this.objectMap.map, source.config.setMarkers.bind(this));
-                        source.events.zoomChange(this.objectMap.map);
-
+                        this.objectMap.map = source.init.initializingMap(id);
+                        source.events.clickMap(source.config.getAddress.bind(this));
+                        source.events.boundsChange(source.config.setMarkers.bind(this));
+                        source.events.idle(source.config.setMarkers.bind(this));
+                        source.events.dragend(source.config.setMarkers.bind(this));
+                        source.events.zoomend(source.config.setMarkers.bind(this));
+                        source.events.zoomChange(source.config.setMarkers.bind(this));
                     }
                 }).catch(error => console.log(error));
 

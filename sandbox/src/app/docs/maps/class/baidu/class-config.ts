@@ -1,18 +1,17 @@
 import { IMapOptions } from "../../interface/i-config";
-import * as  ObjectMap  from "../class-objmap";
+import * as  ObjectMap from "../class-objmap";
 import { Injectable } from "@angular/core"
 import * as mark from "../../test.markers.json";
 import * as MarkerClusterer from 'bmaplib.markerclusterer';
 
-
 export namespace Map.Baidu {
     declare var BMap: any;
     declare var BMapLib: any;
-    //declare var MarkerClusterer: any;
-    //var markerCluster: any;
-    var markers: any[] = [];
-    var radiusObject: any;
-    var polygonArea: any[] = [];
+    let markerCluster: any;
+    let markers: any[] = [];
+    let radiusObject: any;
+    let polygonArea: any[] = [];
+    
     @Injectable()
     export class OptionsBaidu implements IMapOptions {
 
@@ -77,16 +76,13 @@ export namespace Map.Baidu {
 
         }
         setMarkers = () => {
-
-            console.log('setMarkers')
-            if (typeof BMap !== "undefined") {
                 let mcOptions = [{
                     url: './assets/icons_map/icon_pointgroup.png',
                     size: new BMap.Size(44, 44),
                     textColor: 'black',
                     offset: new BMap.Size(1.5, 1),
                 }];
-                // this.clearMap();
+                this.clearMap();
                 let zoom = this.objMap.map.getZoom();
                 var bounds = this.objMap.map.getBounds();
                 let sending = false;
@@ -95,7 +91,7 @@ export namespace Map.Baidu {
 
                 }
                 if (zoom == 3) {
-                    // this.clearMap();
+                    this.clearMap();
                 }
 
                 for (let i = 0; i < mark.default.length; i++) {
@@ -110,27 +106,19 @@ export namespace Map.Baidu {
                             markers.push(marker);
                         }
                     }
-
                 }
-                let cluster = new MarkerClusterer(this.objMap.map);
-                // let cluster =  new markerCluster(this.objMap, markers, mcOptions)
-                //  markercluster.setStyles(mcOptions);
-                cluster.addMarkers(markers);
-                // markercluster.setGridSize(80);
-                // markercluster.setMinClusterSize(2);
-            }
-
+                markerCluster = new MarkerClusterer(this.objMap.map);
+                markerCluster.setStyles(mcOptions);
+                markerCluster.addMarkers(markers);
+                markerCluster.setGridSize(80);
+                markerCluster.setMinClusterSize(2);
         }
         clearMap() {
             try {
-                markers.forEach((item) => {
-                    item.setMap(null);
-                });
-                //if (markerCluster != null) {
-                //   markerCluster.clearMarkers();
-                //   console.log('markerCluster', markerCluster)
-
-                //  }
+                this.objMap.map.clearOverlays();
+                if (markerCluster != null) {
+                    markerCluster.clearMarkers();
+                };
 
                 if (radiusObject != null) {
                     radiusObject.setMap(null);
@@ -151,7 +139,6 @@ export namespace Map.Baidu {
 
         }
         resizeMap() {
-            console.log('resizeMap')
         }
         routeMap(start: any, end: any, show: boolean) {
 
@@ -199,7 +186,6 @@ export namespace Map.Baidu {
 
         draggableMap(boolean: any) {
             if (boolean) {
-                console.log('grable false')
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,

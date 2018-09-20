@@ -2,13 +2,12 @@ import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import * as MarkerClusterer from 'bmaplib.markerclusterer';
 import * as mark from "../../test.markers.json";
 import { Injectable } from "@angular/core";
-
+declare var BMapLib: any;
 export namespace Map.Baidu {
     declare var document: any;
     declare var BMap: any;
     declare var BMapLib: any;
-    declare var require: any;
-    var objMap: any;
+    let map: any;
 
     @Injectable()
     export class InitializeBaidu implements IInitMap {
@@ -50,17 +49,17 @@ export namespace Map.Baidu {
         }
 
         initializingMap(id: string): any {
-            if (typeof BMap !== "undefined") {               
-                objMap = new BMap.Map(id, {
+            if (typeof BMap !== "undefined") {
+                map = new BMap.Map(id, {
                     minZoom: 3,
                     enableMapClick: true,
                     enableAutoResize: false
                 });
-                objMap.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
-                objMap.enableScrollWheelZoom(true);
-                objMap.disableDoubleClickZoom(false);
-                objMap.setDefaultCursor('');
-                return objMap
+                map.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
+                map.enableScrollWheelZoom(true);
+                map.disableDoubleClickZoom(false);
+                map.setDefaultCursor('');
+                return map;
             }
         }
 
@@ -82,8 +81,7 @@ export namespace Map.Baidu {
                 if (remove) { style[i].parentNode.removeChild(style[i]) };
 
             }
-            console.log('destroy baidu');
-            objMap.reset();
+            map.reset();
             document.getElementById('map').innerHTML = "";
             BMap = null;
         }

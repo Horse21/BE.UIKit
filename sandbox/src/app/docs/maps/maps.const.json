@@ -3,13 +3,13 @@
         "google": {
             "name": "google",
             "src": "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&callback=APILoaded",    
-            "key": "AIzaSyCb2GKOwMmvcseTS2hbQ_2TFbJKVTA1WBo",
-            "language": "ru",
+            "key": "AIzaSyC7bK1ihkGvGumGoL2_kMR7tiB1CylMuHo",
+            "language": "en",
             "version":"3.30"
         },
         "yandex": {
             "name": "yandex",
-            "src": "https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=APILoaded",
+            "src": "https://api-maps.yandex.ru/2.1/?lang=en_US&onload=APILoaded",
             "key": "",
             "language": "ru_RU",
             "version":""

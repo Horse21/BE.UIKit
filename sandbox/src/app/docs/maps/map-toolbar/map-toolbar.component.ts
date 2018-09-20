@@ -25,11 +25,6 @@ export class MapToolbarComponent implements OnInit {
     this.manager.getActiveMap().config.setZoomLevel(type);
   }
 
-  public loadMarkers() {
-    let markersArray: any = markers['default'];
-    this.manager.getActiveMap().config.setMarkers();
-  }
-
   public clearMap() {
     this.manager.getActiveMap().config.clearMap();
   }

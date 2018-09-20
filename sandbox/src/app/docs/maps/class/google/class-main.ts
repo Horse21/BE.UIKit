@@ -1,24 +1,24 @@
 import { Injectable } from "@angular/core";
 import { IMainMap } from "../../interface/i-main";
-import * as InitializeGoogle from "./class-initialize";
-import * as EventsGoogle from "./class-event";
-import * as OptionsGoogle from "./class-config";
-import * as MarkerGoogle from "./class-marker";
-import * as MarkerclusterGoogle from "./class-markercluster";
-import * as InfoWindowGoogle from "./class-infowindow";
-import * as SearchGoogle from "./class-search-places";
+import * as Initialize from "./class-initialize";
+import * as Events from "./class-event";
+import * as Options from "./class-config";
+import * as Marker from "./class-marker";
+import * as Markercluster from "./class-markercluster";
+import * as InfoWindow from "./class-infowindow";
+import * as Search from "./class-search-places";
 
-export namespace Map.Google {
+export namespace Google {
     @Injectable()
-    export class GoogleMap implements IMainMap {
+    export class Map implements IMainMap {
         constructor(
-            public init: InitializeGoogle.Map.Google.InitializeGoogle,
-            public events: EventsGoogle.Map.Google.EventsGoogle,
-            public config: OptionsGoogle.Map.Google.OptionsGoogle,
-            public marker: MarkerGoogle.Map.Google.MarkerGoogle,
-            public markerCluster: MarkerclusterGoogle.Map.Google.MarkerclusterGoogle,
-            public infoWindow: InfoWindowGoogle.Map.Google.InfoWindowGoogle,
-            public search: SearchGoogle.Map.Google.SearchGoogle
+            public init: Initialize.Google.Initialize,
+            public events: Events.Google.Events,
+            public config: Options.Google.Options,
+            public marker: Marker.Google.Marker,
+            public markerCluster: Markercluster.Google.Markercluster,
+            public infoWindow: InfoWindow.Google.InfoWindow,
+            public search: Search.Google.Search
         ) { }
     }
 }

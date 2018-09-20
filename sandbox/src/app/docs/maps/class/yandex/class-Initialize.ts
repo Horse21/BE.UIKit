@@ -2,11 +2,12 @@ import { ILoadApiMap, IInitMap } from "../../interface/i-init";
 import * as  ObjectMap from "../class-objmap";
 import * as mark from "../../test.markers.json";
 import { Injectable } from "@angular/core";
+
 export namespace Map.Yandex {
     declare var document: any;
     declare var ymaps: any;
-    declare var require: any;
-    var objMap: any;
+    var map: any;
+
     @Injectable()
     export class InitializeYandex implements IInitMap {
         source: ILoadApiMap;
@@ -48,63 +49,20 @@ export namespace Map.Yandex {
 
         initializingMap(id: string): any {
             try {
-                objMap = new ymaps.Map(id, {
+                map = new ymaps.Map(id, {
                     center: [27.215556209029693, 18.45703125],
                     behaviors: ['default', 'scrollZoom'],
                     zoom: 3,
                     controls: []
 
                 });
-                objMap.options.set('minZoom', 3);
-                objMap.options.set('maxZoom', 22);
-                let markerCluster: any;
-                markerCluster = new ymaps.Clusterer({
-                    clusterIcons: [{
-                        href: './assets/icons_map/icon_pointgroup.png',
-                        size: [46, 46],
-                        offset: [-22, -22],
-                    }],
-
-                }),
-
-                    markerCluster.options.set({
-                        gridSize: 140,
-                        clusterDisableClickZoom: false,
-                        minClusterSize: 2,
-                        groupByCoordinates: false,
-                        hasBalloon: false,
-                    });
-
-                let markers: any[];
-                markers = mark.default;
-                var ma = [];
-                for (let i = 0; i < mark.default.length; i++) {
-                    let item = markers[i];
-                    var obj = new ymaps.GeoObject({
-                        geometry: {
-                            type: "Point",
-                            coordinates: [item.Address.Lat, item.Address.Lng],
-                        },
-                        properties: {
-                            hintContent: item.Hotelname,
-                        }
-                    }, {
-                            iconLayout: 'default#image',
-                            iconImageSize: [52, 56],
-                            iconImageHref: './assets/icons_map/icon_hotel.png',
-                            hintContent: item.Hotelname
-                        })
-                    ma.push(obj);
-                }
-
-                markerCluster.add(ma);
-                objMap.geoObjects.add(markerCluster);
-
-                return { objMap };
+                map.options.set('minZoom', 3);
+                map.options.set('maxZoom', 22);          
+                return map;
             }
             catch (error) {
                 console.log(error);
-            }
+            }            
         }
 
         destroyMap(): void {
@@ -119,9 +77,8 @@ export namespace Map.Yandex {
                     style[i].parentNode.removeChild(style[i])
 
                 }
-                console.log('yandex destroy')
-                if (objMap != null && objMap != undefined) {
-                    objMap.destroy();
+                if (map != null && map != undefined) {
+                    map.destroy();
                 }
                 document.getElementById('map').innerHTML = "";
             }

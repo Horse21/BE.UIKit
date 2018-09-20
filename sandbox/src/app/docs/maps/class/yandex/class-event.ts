@@ -1,53 +1,45 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer, config } from 'rxjs';
 import { IEventMap } from "../../interface/i-event";
-
+import * as  ObjectMap from "../class-objmap";
 export namespace Map.Yandex {
-    declare var document: any;
+    declare var get: any;
     @Injectable()
     export class EventsYandex implements IEventMap {
 
-        listenEvent<E>(objMap: any, eventName: string): Observable<E> {
+        constructor(private objMap: ObjectMap.Map.ObjectMap) {
+        }
+        private listenEvent<E>(eventName: string): Observable<E> {
             return new Observable((observer: Observer<E>) => {
-                objMap.addListener(eventName, (arg: E) => { observer.next(arg); });
+                this.objMap.map.events.add(eventName, (arg: E) => { observer.next(arg); });
             });
         }
 
-        idle(map: any) {
+        idle(callback: () => void) {
+
         }
 
-        zoomend(map: any, callback: () => void) {
-            this.listenEvent<void>(map, "idle").subscribe(() => {
-                let bounds = map.getBounds();
-                console.log(bounds, 'IDLE')
-                if (bounds) {
-                    callback();
-                }
+        zoomend(callback: () => void) {
 
+        }
 
+        dragend(callback: () => void) {
+
+        }
+
+        boundsChange(callback: () => void) {
+            this.listenEvent<void>("boundschange").subscribe((event) => {
+                callback();
             })
         }
 
-        dragend(map: any, callback: () => void) {
-            this.listenEvent<void>(map, "idle").subscribe(() => {
-                let bounds = map.getBounds();
-                console.log(bounds, 'IDLE')
-                if (bounds) {
-                    callback();
-                }
+        zoomChange(callback: () => void) {
 
-
+        }
+        clickMap(callback: () => void) {
+            this.listenEvent<void>("click").subscribe((event) => {
+                callback();
             })
-        }
-
-
-        boundsChange(map: any) {
-        }
-        zoomChange(map: any) {
-
-        }
-        clickMap(map: any) {
-
         }
     }
 }
