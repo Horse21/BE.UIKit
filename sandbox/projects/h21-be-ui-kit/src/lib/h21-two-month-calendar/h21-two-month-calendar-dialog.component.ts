@@ -1,12 +1,7 @@
-import {Component, Renderer2, Inject, AfterViewInit, HostListener} from '@angular/core';
-import {Subject} from 'rxjs';
-import {
-	DateAdapter,
-	MAT_DATE_FORMATS,
-	MatDateFormats,
-	MatDialogRef,
-	MAT_DIALOG_DATA
-} from "@angular/material";
+import { Component, Renderer2, Inject, AfterViewInit, HostListener, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 
 export interface DialogData {
 	rangeSelectMode: boolean;
@@ -16,24 +11,15 @@ export interface DialogData {
 	finishDate: Date;
 	fromDate: Date;
 	toDate: Date;
-	selectedFromDate: Date,
-	selectedToDate: Date
+	selectedFromDate: Date;
+	selectedToDate: Date;
 }
-
-// export interface DayCell {
-// 	element: any,
-// 	date: Date,
-// 	arialLabel: string,
-// 	isHover: boolean
-// }
 
 @Component({
 	selector: 'h21-two-month-calendar-dialog',
 	templateUrl: './h21-two-month-calendar-dialog.component.html'
 })
-
-export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
-
+export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit {
 	/** List of month names */
 	monthNames: Array<string>;
 	/** An array of months in the form of objects - {month: "", year: ""} */
@@ -51,45 +37,43 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 	/** The current slider shift relative to the first cell, in pixels */
 	sliderCurrentTranslation: number = 0;
 	/** An array with cells of currently active calendars */
-	dayCells: any[]; // DayCell[]
+	dayCells: any[]; 
 
-	// private screenWidth: number;
-	// private minScreenWidth: number = 768;
-	// tabletView: boolean = false;
-	// showAllCells: boolean = false;
+	calendarForm: FormGroup;
 
-	// @HostListener('window:resize', ['$event']) onResize(event ?) {
-	// 	this.screenWidth = window.innerWidth;
-	// }
-
-	constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,
-				public dialogRef: MatDialogRef<H21TwoMonthCalendarDialogComponent>,
-				private _renderer: Renderer2,
-				@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
-				private _dateAdapter: DateAdapter<Date>
+	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: DialogData,
+		public dialogRef: MatDialogRef<H21TwoMonthCalendarDialogComponent>,
+		private _renderer: Renderer2,
+		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
+		private _dateAdapter: DateAdapter<Date>
 	) {
 		this.monthNames = this._dateAdapter.getMonthNames('long');
 		this.monthList = this.getMonthList();
 		this.sliderItemsCount = this.getMonthList().length;
 		this.dayCells = new Array();
 
-		let startIndex = 0
+		let startIndex = 0;
 		if (this.data.selectedFromDate) {
 			startIndex = this.getMonthNumberInList(this.data.selectedFromDate);
-			startIndex = startIndex == 1 ? 0 :
-				(startIndex == this.monthList.length - 1 ? startIndex - 1 : startIndex);
+			startIndex = startIndex == 1 ? 0 : startIndex == this.monthList.length - 1 ? startIndex - 1 : startIndex;
 		}
 		this.sliderCurrentIndex = startIndex;
-		this.sliderCurrentIndexSubject.subscribe(value => { // subscribe to change the index of the active cell of the slider
+		this.sliderCurrentIndexSubject.subscribe((value) => {
+			// subscribe to change the index of the active cell of the slider
 			setTimeout(() => {
 				this.updateDayCells(); // update the list of cells in the calendar
 			}, 0);
 		});
 
-		// this.onResize();
-		// if (this.screenWidth <= this.minScreenWidth) {
-		// 	this.tabletView = true;
-		// }
+	}
+
+	ngOnInit(): void {
+		this.calendarForm = new FormGroup({
+			dateStart: new FormControl('', []),
+			dateEnd: new FormControl('', [])
+		});
+
 	}
 
 	ngAfterViewInit() {
@@ -120,8 +104,8 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 		let result = [];
 		let tmpDate = this._dateAdapter.clone(this.data.startDate);
 		while (tmpDate <= this.data.finishDate) {
-			result.push({month: tmpDate.getMonth(), year: tmpDate.getFullYear()});
-			tmpDate = this._dateAdapter.addCalendarMonths(tmpDate, 1)
+			result.push({ month: tmpDate.getMonth(), year: tmpDate.getFullYear() });
+			tmpDate = this._dateAdapter.addCalendarMonths(tmpDate, 1);
 		}
 		return result;
 	}
@@ -180,16 +164,15 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 		if (this.dayCells.length > 0) {
 			this.dayCells.length = 0;
 		}
-		this.dayCells = Array.from(document.querySelectorAll('.mat-calendar-body-cell'))
-			.map((x: any) => {
-				let xDate = new Date(x.getAttribute('aria-label'));
-				return {
-					element: x,
-					date: xDate,
-					arialLabel: x.getAttribute('aria-label'),
-					isHover: false
-				};
-			});
+		this.dayCells = Array.from(document.querySelectorAll('.mat-calendar-body-cell')).map((x: any) => {
+			let xDate = new Date(x.getAttribute('aria-label'));
+			return {
+				element: x,
+				date: xDate,
+				arialLabel: x.getAttribute('aria-label'),
+				isHover: false
+			};
+		});
 
 		this.highlightRange();
 		if (this.data.selectedFromDate && this.checkDateInDayCells(this.data.selectedFromDate)) {
@@ -199,15 +182,15 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 			this.markSelectedCell(this.data.selectedToDate);
 		}
 
-		this.dayCells.forEach(item => {
+		this.dayCells.forEach((item) => {
 			item.element.addEventListener('mouseover', () => {
 				this.dynamicHighlight(item.date);
 			});
 		});
 
 		if (this.data.rangeSelectMode) {
-			let elements = Array.from(document.querySelectorAll(".mat-calendar-body"));
-			elements.forEach(item => {
+			let elements = Array.from(document.querySelectorAll('.mat-calendar-body'));
+			elements.forEach((item) => {
 				item.addEventListener('mouseleave', () => {
 					if (this.data.selectedFromDate && !this.data.selectedToDate) {
 						this.clearHighlight();
@@ -244,9 +227,11 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 			});
 			item.element.classList.add('c-h21-two-month-calendar_selected');
 			if (this.data.rangeSelectMode) {
-				item.element.classList.add(d.getTime() == this.data.selectedFromDate.getTime()
-					? 'c-h21-two-month-calendar_selected__start'
-					: 'c-h21-two-month-calendar_selected__finish');
+				item.element.classList.add(
+					d.getTime() == this.data.selectedFromDate.getTime()
+						? 'c-h21-two-month-calendar_selected__start'
+						: 'c-h21-two-month-calendar_selected__finish'
+				);
 			}
 		}
 	}
@@ -272,7 +257,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 	 */
 	private unMarkSelected() {
 		const elements = Array.from(document.querySelectorAll('.c-h21-two-month-calendar_selected'));
-		elements.forEach(item => {
+		elements.forEach((item) => {
 			item.classList.remove('c-h21-two-month-calendar_selected');
 			item.classList.remove('c-h21-two-month-calendar_selected__start');
 			item.classList.remove('c-h21-two-month-calendar_selected__finish');
@@ -283,7 +268,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 	 * Removes highlight from all cells of the calendar.
 	 */
 	private clearHighlight() {
-		this.dayCells.forEach(item => {
+		this.dayCells.forEach((item) => {
 			item.isHover = false;
 			item.element.classList.remove('c-h21-two-month-calendar_range-highlight');
 			item.element.classList.remove('c-h21-two-month-calendar_range-highlight__finish');
@@ -300,7 +285,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 			d = this.data.selectedToDate;
 		}
 		if (this.data.rangeSelectMode && this.data.selectedFromDate && d) {
-			this.dayCells.forEach(item => {
+			this.dayCells.forEach((item) => {
 				if (item.date >= this.data.selectedFromDate && item.date <= d) {
 					item.isHover = true;
 					item.element.classList.add('c-h21-two-month-calendar_range-highlight');
@@ -381,8 +366,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 		if (d >= this.data.fromDate) {
 			this.unMarkSelectedCell(date);
 			date.setDate(date.getDate() - 1);
-			if (this.data.selectedToDate &&
-				this.data.selectedToDate.getTime() == this.data.selectedFromDate.getTime()) {
+			if (this.data.selectedToDate && this.data.selectedToDate.getTime() == this.data.selectedFromDate.getTime()) {
 				this.clearSelection();
 				return;
 			}
@@ -410,8 +394,7 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 		if (d <= this.data.toDate) {
 			this.unMarkSelectedCell(date);
 			date.setDate(date.getDate() + 1);
-			if (this.data.selectedToDate &&
-				this.data.selectedToDate.getTime() == this.data.selectedFromDate.getTime()) {
+			if (this.data.selectedToDate && this.data.selectedToDate.getTime() == this.data.selectedFromDate.getTime()) {
 				this.clearSelection();
 				return;
 			}
@@ -473,10 +456,11 @@ export class H21TwoMonthCalendarDialogComponent implements AfterViewInit {
 		this.clearHighlight();
 	}
 
-	// activateShowAllCells($event) {
-	// 	console.log($event);
-	// 	if (this.tabletView) {
-	// 		this.showAllCells = true;
-	// 	}
-	// }
+	get startDate() {
+		return this.data.selectedFromDate;
+	}
+
+	get endDate() {
+		return this.data.selectedToDate;
+	}
 }
