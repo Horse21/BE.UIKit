@@ -1,19 +1,8 @@
-import { Component, Renderer2, Inject, AfterViewInit, HostListener, OnInit } from '@angular/core';
+import { Component, Renderer2, Inject, AfterViewInit, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { DateAdapter, MAT_DATE_FORMATS, MatDateFormats, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
-
-export interface DialogData {
-	rangeSelectMode: boolean;
-	fromDateText: string;
-	toDateText: string;
-	startDate: Date;
-	finishDate: Date;
-	fromDate: Date;
-	toDate: Date;
-	selectedFromDate: Date;
-	selectedToDate: Date;
-}
+import { DateAdapter, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DialogData } from '../../dto/i-dialog-data';
 
 @Component({
 	selector: 'h21-two-month-calendar-dialog',
@@ -45,7 +34,6 @@ export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit
 		@Inject(MAT_DIALOG_DATA) public data: DialogData,
 		public dialogRef: MatDialogRef<H21TwoMonthCalendarDialogComponent>,
 		private _renderer: Renderer2,
-		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
 		private _dateAdapter: DateAdapter<Date>
 	) {
 		this.monthNames = this._dateAdapter.getMonthNames('long');
@@ -59,7 +47,7 @@ export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit
 			startIndex = startIndex == 1 ? 0 : startIndex == this.monthList.length - 1 ? startIndex - 1 : startIndex;
 		}
 		this.sliderCurrentIndex = startIndex;
-		this.sliderCurrentIndexSubject.subscribe((value) => {
+		this.sliderCurrentIndexSubject.subscribe(() => {
 			// subscribe to change the index of the active cell of the slider
 			setTimeout(() => {
 				this.updateDayCells(); // update the list of cells in the calendar
@@ -456,11 +444,8 @@ export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit
 		this.clearHighlight();
 	}
 
-	get startDate() {
-		return this.data.selectedFromDate;
+	isAllDatesAreSelected() {
+		return (this.data.rangeSelectMode) ? (!this.data.selectedFromDate || !this.data.selectedToDate) : (!this.data.selectedFromDate)
 	}
 
-	get endDate() {
-		return this.data.selectedToDate;
-	}
 }

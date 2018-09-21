@@ -61,6 +61,6 @@
 	</div>
 	<div class="c-h21-two-month-calendar_footer">
 		<button mat-button color="primary" (click)="clearSelection()">Clear selection</button>
-		<button mat-raised-button color="primary" (click)="closeDialog()" [disabled]="(data.rangeSelectMode) ? (!startDate || !endDate) : (!startDate)">Ready</button>
+		<button mat-raised-button color="primary" (click)="closeDialog()" [disabled]="isAllDatesAreSelected()">Ready</button>
 	</div>
 </div>
