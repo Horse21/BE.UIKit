@@ -1,3 +1,7 @@
+import { Point } from "./i-point";
+
 export interface ISearchPlacesMap {
-    SearchMap(type:string);
+    SearchMap(type: string): Point[];
 }
+
+
