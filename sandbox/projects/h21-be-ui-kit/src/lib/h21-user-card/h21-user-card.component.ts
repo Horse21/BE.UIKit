@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Output, Input} from "@angular/core";
 
 @Component ({
 	selector: 'h21-user-card',
@@ -6,9 +6,9 @@ import {Component, EventEmitter, Output} from "@angular/core";
 })
 
 export class H21UserCardComponent {
-	userName =  'Sergey Strovatikov';
-	userEmail =  'darkdes6@gmail.com';
-	userAvatarUrl = '/assets/avatar-picture.png';
+	@Input() userName =  'Sergey Strovatikov';
+	@Input() userEmail =  'darkdes6@gmail.com';
+	@Input() userAvatarUrl = '/assets/avatar-picture.png';
 
 
 	@Output() onLogout: EventEmitter<void> = new EventEmitter();

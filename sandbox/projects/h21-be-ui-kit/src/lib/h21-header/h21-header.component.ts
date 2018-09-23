@@ -13,12 +13,15 @@ export class H21HeaderComponent {
 
 	@Input() showSearch = false;
 	@Input() showServicesMenuBtn = true;
-
-	@Input() username;
 	@Input() logotypeUrl;
 	@Input() isPrototype = false;
 	@Input() showNotifications = true;
 	@Input() notifyList: INotifyItem[];
+
+	@Input() username;
+	@Input() userEmail =  'darkdes6@gmail.com';
+	@Input() userAvatarUrl = '/assets/avatar-picture.png';
+
 	@Output() onPrototypeAuth: EventEmitter<any> = new EventEmitter();
 	@Output() onLogout: EventEmitter<any> = new EventEmitter();
 

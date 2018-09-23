@@ -16,7 +16,7 @@
 		</mat-form-field>
 
 		<nav>
-			<button mat-icon-button>
+			<button mat-icon-button *ngIf="showNotifications">
 				<mat-icon>notifications</mat-icon>
 			</button>
 
@@ -83,7 +83,7 @@
 <!-- User card menu -->
 <mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="c-h21-header-user-card-box">
 	<ng-template matMenuContent>
-		<h21-user-card (onLogout)="logout();"></h21-user-card>
+		<h21-user-card [userName]="username" [userEmail]="userEmail" [userAvatarUrl]="userAvatarUrl" (onLogout)="logout();"></h21-user-card>
 	</ng-template>
 </mat-menu>
 
