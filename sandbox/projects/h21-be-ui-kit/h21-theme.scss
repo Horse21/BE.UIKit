@@ -912,9 +912,12 @@ a:hover {
 	  display: block;
 	  line-height: normal;
 	}
+	&:not(:disabled) .mat-button-focus-overlay {
+	  background-color: rgba(255,255,255,.12);
+	}
   }
   a.mat-button .mat-button-wrapper {
-	padding-top: 15px;
+	padding-top: 21px;
 	display: block;
   }
 }
@@ -970,7 +973,8 @@ a:hover {
   > nav .mat-icon-button:last-child {
 	margin-right: 0;
   }
-  .mat-button {
+  > .mat-button,
+  > nav > .mat-button{
 	.mat-button-wrapper > span {
 	  font-size: 14px;
 	  font-weight: 300;
@@ -979,17 +983,28 @@ a:hover {
 	&:last-child {
 	  padding-right: 16px;
 	}
+	&:not(:disabled) .mat-button-focus-overlay {
+	  background-color: rgba(255,255,255,.12);
+	}
   }
 }
 
 a.c-h21-header_logo {
   text-decoration: none;
   display: inline-block;
+  margin-right: 16px;
 
   img {
 	margin: auto 0;
 	display: block;
   }
+}
+
+a.c-h21-header_title {
+  color: white;
+  font-size: 26px;
+  text-decoration: none;
+  font-weight: 400;
 }
 
 .c-h21-header-user-card-box.mat-menu-panel {
