@@ -8,5 +8,7 @@ export namespace Map.Baidu {
         public SearchMap(text: string):Point[] {
             return null;
         }
+
+        GetDetailsPointAutocomplete(placeid: string) {}
     }
 }

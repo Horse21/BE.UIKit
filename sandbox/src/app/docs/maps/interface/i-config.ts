@@ -1,5 +1,5 @@
 export interface IMapOptions {
-    showMarker(marker:any,markecluster:any);
+    showMarker(marker:any);
     getZoom(): number;
     setZoom(zoom: number);
     setZoomMin(zoom: number);

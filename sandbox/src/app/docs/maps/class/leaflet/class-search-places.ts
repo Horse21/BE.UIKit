@@ -9,5 +9,7 @@ export namespace Map.Leaflet {
             return null;
 
         }
+
+        GetDetailsPointAutocomplete(placeid: string) {}
     }
 }

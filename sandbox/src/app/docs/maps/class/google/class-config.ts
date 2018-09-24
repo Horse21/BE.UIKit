@@ -10,30 +10,37 @@ export namespace Google {
     let markers: any[] = [];
     let radiusObject: any;
     let polygonArea: any[] = [];
+    let loadMarkers = true;
+    let directionsDisplay = null;
+    let selectMarker = null;
 
     @Injectable()
     export class Options implements IMapOptions {
         constructor(private objMap: ObjectMap.Map.ObjectMap) {
         }
 
-        showMarker(obj: any, markercluster: any) {
+        showMarker(point: any) {
+            console.log('showmarker', point)
             try {
                 let marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(obj.Address.Lat, obj.Address.Lng),
+                    position: new google.maps.LatLng(point.Address.Lat, point.Address.Lng),
                     draggable: false,
                     visible: true,
                     clickable: true,
                     icon: { url: './assets/icons_map/icon_hotel.png' },
-                    title: obj.Hotelname
+                    title: ''
                 });
-
+                marker["point"] = point;
                 marker.setMap(this.objMap.map);
                 markers.push(marker);
-                if (markercluster !== null) {
-                    markercluster.addMarker(marker, true);
-                    markercluster.repaint();
+                console.log(markers)
+                loadMarkers = false;
+                if (markerCluster !== null) {
+                    markerCluster.addMarker(marker, true);
+                    markerCluster.repaint();
                 }
-                markerCluster = markercluster;
+
+                this.fitBounds();
             }
             catch (error) {
                 console.log(error);
@@ -204,46 +211,49 @@ export namespace Google {
         }
 
         setMarkers = () => {
-            try {              
-                this.clearMap();
-                let zoom = this.objMap.map.getZoom();
-                var bounds = this.objMap.map.getBounds();
-                let sending = false;
-                if (zoom > 5) {
-                    sending = true;
-
-                }
-                if (zoom == 3) {
+            try {
+                if (loadMarkers) {
                     this.clearMap();
-                }
-                for (let i = 0; i < mark.default.length; i++) {
-                    let item = mark.default[i];
-                    let marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
-                        draggable: false,
-                        visible: true,
-                        clickable: true,
-                        icon: { url: './assets/icons_map/icon_hotel.png' },
-                        title: item.Hotelname
-                    });
-                    if (sending) {
-                        if (bounds.contains(marker.getPosition()) === true) {
-                            markers.push(marker);
-                        }
-                    }
+                    let zoom = this.objMap.map.getZoom();
+                    var bounds = this.objMap.map.getBounds();
+                    let sending = false;
+                    if (zoom > 5) {
+                        sending = true;
 
+                    }
+                    if (zoom == 3) {
+                        this.clearMap();
+                    }
+                    for (let i = 0; i < mark.default.length; i++) {
+                        let item = mark.default[i];
+                        let marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
+                            draggable: false,
+                            visible: true,
+                            clickable: true,
+                            icon: { url: './assets/icons_map/icon_hotel.png' },
+                            title: item.Hotelname
+                        });
+                        marker["point"] = item;
+                        if (sending) {
+                            if (bounds.contains(marker.getPosition()) === true) {
+                                markers.push(marker);
+                            }
+                        }
+
+                    }
+                    let mcOptions = {
+                        gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
+                            {
+                                textColor: 'black',
+                                url: './assets/icons_map/icon_pointgroup.png',
+                                anchorText: [0, -2],
+                                height: 44,
+                                width: 44
+                            }]
+                    };
+                    markerCluster = new MarkerClusterer(this.objMap.map, markers, mcOptions);
                 }
-                let mcOptions = {
-                    gridSize: 100, maxZoom: 19, zoomOnClick: true, ignoreHidden: false, styles: [
-                        {
-                            textColor: 'black',
-                            url: './assets/icons_map/icon_pointgroup.png',
-                            anchorText: [0, -2],
-                            height: 44,
-                            width: 44
-                        }]
-                };
-                markerCluster = new MarkerClusterer(this.objMap.map, markers, mcOptions);
             }
             catch (error) {
                 console.log(error);
@@ -269,24 +279,85 @@ export namespace Google {
                         item.setMap(null);
                         item.getPath().clear();
                     });
-
                 }
+
+                if (directionsDisplay != null) {
+                    directionsDisplay.setMap(null);
+                    directionsDisplay = null;       
+                }
+
                 polygonArea = [];
                 markers = [];
             }
             catch (error) {
                 console.log(error);
             }
-
+            console.log('clearMap')
         }
         resizeMap() {
             console.log('resizeMap')
         }
         routeMap(start: any, end: any, show: boolean) {
+            if(show){
+                let st = new google.maps.LatLng(start.point.Address.Lat, start.point.Address.Lng);
+                let en = new google.maps.LatLng(end.point.Address.Lat, end.point.Address.Lng);
+                let directionsService = new google.maps.DirectionsService();
+                directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(this.objMap.map);
 
+                directionsDisplay.setOptions({
+                    polylineOptions: {
+                        strokeColor: '#007bff',
+                        strokeOpacity: 0.9,
+                        strokeWeight: 5
+                    },
+                    suppressMarkers: true
+                });
+
+                let request = {
+                    origin: st,
+                    destination: en,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    drivingOptions: {
+                        departureTime: new Date(Date.now() + 3000),
+                        trafficModel: google.maps.TrafficModel.PESSIMISTIC
+                    }
+                };
+                directionsService.route(request, function (result, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(result);
+
+                    }    
+                });
+            }
         }
         fitBounds() {
+            try {
+                let bounds = new google.maps.LatLngBounds();
+                for (var i = 0; i < markers.length; i++) {
+                    bounds.extend(markers[i].getPosition());
+                }
+                if (markers.length > 1) {
+                    this.objMap.map.fitBounds(bounds);
+                    this.objMap.map.panToBounds(bounds);
+                }
+                if (markers.length == 1) {
+                    this.objMap.map.setCenter({ lat: markers[0].position.lat(), lng: markers[0].position.lng() });
+                    this.objMap.map.setZoom(16);
+                }
 
+                if (markers.length == 2) {   
+                                            
+                    this.routeMap(markers[0],markers[1], true)    
+                    console.log(markers[0],'point1',markers[1],'point2')       
+                }
+                if (markers[0].getMap()) {
+                    // BoundsLoadMarkers = true;
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
         }
         setCenterMap() {
 

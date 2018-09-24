@@ -15,7 +15,7 @@ export namespace Map.Yandex {
         constructor(private objMap: ObjectMap.Map.ObjectMap) {
         }
 
-        showMarker(obj: any, markercluster: any) {
+        showMarker(obj: any) {
             try {
              
             }

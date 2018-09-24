@@ -8,5 +8,6 @@ export namespace Map.Yandex {
         public SearchMap(text: string):Point[] {
             return null;
         }
+        GetDetailsPointAutocomplete(placeid: string) {}
     }
 }
