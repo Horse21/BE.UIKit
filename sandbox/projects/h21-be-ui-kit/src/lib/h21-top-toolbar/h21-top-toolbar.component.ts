@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { trigger, state, transition, animate, style } from "@angular/animations";
-
 import { IBreadcrumb } from '../../dto/i-breadcrumb';
 import { IToolbarElement } from '../../dto/i-toolbar-element';
-import {IComboboxOption} from "../h21-combobox/h21-combobox.component";
+import { IComboboxOption } from "../../dto/i-combobox-option";
 
 @Component({
 	selector: 'h21-top-toolbar',

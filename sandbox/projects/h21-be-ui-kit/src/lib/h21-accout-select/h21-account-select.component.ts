@@ -27,28 +27,28 @@ export class H21AccountSelectComponent {
 		this.selectedAccount = accounts[0];
 	}
 
-	changeSelectionAccount(id: number) {
+	changeSelectionAccount(id: number): void {
 		let index = this.accounts.findIndex( (item) => { return item.id == id; } );
 		this.selectedAccount = this.accounts[index];
 	}
 
-	close() {
+	close(): void {
 		this.dialogRef.close(null);
 	}
 
-	returnDialog() {
+	returnDialog(): void {
 		this.dialogRef.close(this.selectedAccount);
 	}
 
-	onAnimationStart(event: AnimationEvent) {
+	onAnimationStart(event: AnimationEvent): void {
 		this.animationStateChanged.emit(event);
 	}
 
-	onAnimationDone(event: AnimationEvent) {
+	onAnimationDone(event: AnimationEvent): void {
 		this.animationStateChanged.emit(event);
 	}
 
-	startExitAnimation() {
+	startExitAnimation(): void {
 		this.animationState = 'leave';
 	}
 }

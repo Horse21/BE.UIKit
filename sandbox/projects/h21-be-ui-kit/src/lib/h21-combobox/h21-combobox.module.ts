@@ -5,9 +5,15 @@ import {
 	MatFormFieldModule,
 	MatIconModule,
 	MatInputModule,
+	MatListModule,
 	MatMenuModule,
+	MatTooltipModule,
 } from '@angular/material';
 import {H21ComboboxComponent} from "./h21-combobox.component"
+import {
+	FormsModule,
+	ReactiveFormsModule
+} from "@angular/forms";
 
 @NgModule({
 	imports: [
@@ -16,8 +22,11 @@ import {H21ComboboxComponent} from "./h21-combobox.component"
 		MatIconModule,
 		MatFormFieldModule,
 		MatInputModule,
-		H21ComboboxComponent,
+		FormsModule,
+		ReactiveFormsModule,
 		MatMenuModule,
+		MatListModule,
+		MatTooltipModule,
 	],
 	declarations: [H21ComboboxComponent],
 	exports: [H21ComboboxComponent],

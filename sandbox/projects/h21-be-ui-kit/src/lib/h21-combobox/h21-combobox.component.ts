@@ -1,15 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {FormControl} from "@angular/forms";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {MatMenu, MatMenuTrigger} from "@angular/material";
-
-export interface IComboboxOption  {
-	value: any;
-	valueLabel: string;
-	optionLabel: string;
-}
+import {IComboboxOption} from '../../dto/i-combobox-option';
 
 @Component({
 	selector: 'h21-combobox',
@@ -30,9 +24,6 @@ export class H21ComboboxComponent implements OnInit {
 	filterControl = new FormControl();
 	filteredOptionCount: number;
 	selectedOption: IComboboxOption;
-
-	@ViewChild('dropBox') dropBox: MatMenu;
-	@ViewChild('dropBoxTrigger') dropBoxTrigger: MatMenuTrigger;
 
 	constructor(private _http: HttpClient) {
 
