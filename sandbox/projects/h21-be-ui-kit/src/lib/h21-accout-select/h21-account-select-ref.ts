@@ -44,5 +44,4 @@ export class H21AccountSelectRef {
 	beforeClose(): Observable<void> {
 		return this._beforeClose.asObservable();
 	}
-
 }

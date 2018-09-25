@@ -119,19 +119,19 @@
 					<div class="row">
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<input matInput placeholder="First name" [ngModel]="person.firstName">
+								<input matInput placeholder="First name" [value]="person.firstName">
 							</mat-form-field>
 						</div>
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<input matInput placeholder="Last name" [ngModel]="person.lastName">
+								<input matInput placeholder="Last name" [value]="person.lastName">
 							</mat-form-field>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<mat-select placeholder="Nationality" [ngModel]="person.nationality">
+								<mat-select placeholder="Nationality" [value]="person.nationality">
 									<mat-option value="Frenchman">Frenchman</mat-option>
 									<mat-option value="German">German</mat-option>
 									<mat-option value="Holland">Dutchman</mat-option>
@@ -146,7 +146,7 @@
 					<div class="row">
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<mat-select placeholder="Country" [(ngModel)]="person.country">
+								<mat-select placeholder="Country" [value]="person.country">
 									<mat-option value="France">France</mat-option>
 									<mat-option value="Germany">Germany</mat-option>
 									<mat-option value="Holland">Holland</mat-option>
@@ -158,7 +158,7 @@
 						</div>
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<mat-select placeholder="City" [(ngModel)]="person.city">
+								<mat-select placeholder="City" [value]="person.city">
 									<mat-option value="Paris">Paris</mat-option>
 									<mat-option value="Berlin">Berlin</mat-option>
 									<mat-option value="Amsterdam">Amsterdam</mat-option>
@@ -172,12 +172,12 @@
 					<div class="row">
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<input matInput placeholder="General e-mail" [(ngModel)]="person.email">
+								<input matInput placeholder="General e-mail" [value]="person.email">
 							</mat-form-field>
 						</div>
 						<div class="col-6">
 							<mat-form-field class="__w-100">
-								<input matInput placeholder="Phone" [(ngModel)]="person.phone">
+								<input matInput placeholder="Phone" [value]="person.phone">
 							</mat-form-field>
 						</div>
 					</div>

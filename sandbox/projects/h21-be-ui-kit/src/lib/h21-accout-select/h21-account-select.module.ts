@@ -4,7 +4,9 @@ import {
 	MatButtonModule,
 	MatFormFieldModule,
 	MatIconModule,
-	MatInputModule
+	MatInputModule,
+	MatOptionModule,
+	MatSelectModule
 } from '@angular/material';
 import {H21AccountSelectComponent} from "./h21-account-select.component"
 
@@ -15,7 +17,8 @@ import {H21AccountSelectComponent} from "./h21-account-select.component"
 		MatIconModule,
 		MatFormFieldModule,
 		MatInputModule,
-		H21AccountSelectComponent
+		MatSelectModule,
+		MatOptionModule
 	],
 	declarations: [H21AccountSelectComponent],
 	exports: [H21AccountSelectComponent],
