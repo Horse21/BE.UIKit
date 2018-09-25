@@ -33,7 +33,11 @@ export class H21AccountSelectComponent {
 	}
 
 	close() {
-		this.dialogRef.close();
+		this.dialogRef.close(null);
+	}
+
+	returnDialog() {
+		this.dialogRef.close(this.selectedAccount);
 	}
 
 	onAnimationStart(event: AnimationEvent) {

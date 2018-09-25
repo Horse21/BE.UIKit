@@ -58,7 +58,7 @@ import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/
 import {H21HotelReservationComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-reservation/h21-hotel-reservation.component";
 import {H21AccountSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select.component";
 import {H21AccountSelectService} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
-
+import {H21ComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-combobox/h21-combobox.component";
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -177,6 +177,7 @@ const routes: Routes = [
 		H21SlideCarouselDialogComponent,
 		H21HotelReservationComponent,
 		H21AccountSelectComponent,
+		H21ComboboxComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -217,5 +218,3 @@ const routes: Routes = [
 export class AppModule {
 
 }
-
-//platformBrowserDynamic().bootstrapModule(AppModule);
