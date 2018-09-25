@@ -87,7 +87,6 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 		dialogRef.afterClosed()
 			.subscribe(result => { // subscribe to a dialog close event, get the values selected in the calendar
 				if (result && result.selectedFromDate) {
-					console.log(result);
 					this.textFieldLabel = this.rangeSelectMode
 						? this.formatDate(result.selectedFromDate) + " - " + (result.selectedToDate ? this.formatDate(result.selectedToDate) : "")
 						: this.formatDate(result.selectedFromDate);

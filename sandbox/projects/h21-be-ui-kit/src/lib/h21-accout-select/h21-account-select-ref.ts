@@ -6,7 +6,7 @@ import { take, filter } from "rxjs/operators";
 export class H21AccountSelectRef {
 
 	private _beforeClose = new Subject<void>();
-	private _afterClosed = new Subject<void>();
+	private _afterClosed = new Subject<any>();
 
 	componentInstance: H21AccountSelectComponent;
 
@@ -14,7 +14,7 @@ export class H21AccountSelectRef {
 
 	}
 
-	close(): void {
+	close(data: any = null): void {
 		this.componentInstance.animationStateChanged.pipe(
 			filter((event: any) => event.phaseName === 'start'),
 			take(1)
@@ -29,7 +29,7 @@ export class H21AccountSelectRef {
 			take(1)
 		).subscribe(() => {
 			this.overlayRef.dispose();
-			this._afterClosed.next();
+			this._afterClosed.next(data);
 			this._afterClosed.complete();
 			this.componentInstance = null!;
 		});
@@ -37,7 +37,7 @@ export class H21AccountSelectRef {
 		this.componentInstance.startExitAnimation();
 	}
 
-	afterClosed(): Observable<void> {
+	afterClosed(): Observable<any> {
 		return this._afterClosed.asObservable();
 	}
 

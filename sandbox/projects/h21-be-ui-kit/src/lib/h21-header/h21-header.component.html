@@ -1,12 +1,10 @@
 <div class="c-h21-header">
 	<mat-toolbar class="c-h21-header_toolbar">
-
-		<a class="c-h21-header_logo" href="/">
-			<img src="{{logotypeUrl}}" alt="" />
+		<a class="c-h21-header_logo" href="./" *ngIf="logotypeUrl">
+			<img src="{{logotypeUrl}}" alt="{{title}}" />
 		</a>
-
+		<a mat-button class="c-h21-header_title" href="./" *ngIf="title">{{title}}</a>
 		<div class="w-spacer">&nbsp;</div>
-
 		<mat-form-field class="c-h21-header_search-field" *ngIf="showSearch">
 			<mat-icon matPrefix>search</mat-icon>
 			<input matInput />
@@ -14,16 +12,13 @@
 				<mat-icon>tune</mat-icon>
 			</button>
 		</mat-form-field>
-
 		<nav>
-			<button mat-icon-button>
+			<button mat-icon-button *ngIf="showNotifications"> <!--<button mat-icon-button matBadge="8" [matMenuTriggerFor]="notificationMenu" *ngIf="showNotifications">-->
 				<mat-icon>notifications</mat-icon>
 			</button>
-
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu" *ngIf="showServicesMenuBtn">
 				<mat-icon>apps</mat-icon>
 			</button>
-
 			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !username">
 				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
@@ -31,20 +26,6 @@
 				<mat-icon>person</mat-icon>
 				<span>{{username}}</span>
 			</button>
-
-			<!--<button mat-icon-button matBadge="8" [matMenuTriggerFor]="notificationMenu" *ngIf="showNotifications">-->
-				<!--<mat-icon>notifications</mat-icon>-->
-			<!--</button>-->
-			<!--<button mat-icon-button [matMenuTriggerFor]="servicesMenu">-->
-				<!--<mat-icon>apps</mat-icon>-->
-			<!--</button>-->
-			<!--<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !username">-->
-				<!--<mat-icon aria-label="'Select user'">person_outline</mat-icon>-->
-			<!--</button>-->
-			<!--<button *ngIf="!!username" mat-button [matMenuTriggerFor]="userCardMenu">-->
-				<!--<mat-icon>person</mat-icon>-->
-				<!--<span>{{username}}</span>-->
-			<!--</button>-->
 		</nav>
 	</mat-toolbar>
 </div>
@@ -83,7 +64,7 @@
 <!-- User card menu -->
 <mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="c-h21-header-user-card-box">
 	<ng-template matMenuContent>
-		<h21-user-card (onLogout)="logout();"></h21-user-card>
+		<h21-user-card [userName]="username" [userEmail]="userEmail" [userAvatarUrl]="userAvatarUrl" (onLogout)="logout();"></h21-user-card>
 	</ng-template>
 </mat-menu>
 

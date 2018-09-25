@@ -12,7 +12,9 @@
 				   [matAutocomplete]="destinationAutocomplete"
 				   [ngModel]="searchOptions.destination"
 				   required
-				   ngDefaultControl/>
+				   ngDefaultControl
+				   (keyup)="onDestinationEdited($event)"
+				   (focus)="onDestinationEdited($event)"/>
 			<mat-icon matSuffix>location_on</mat-icon>
 			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
 		</mat-form-field>
@@ -103,7 +105,7 @@
 	<div class="row mb-3 align-items-center">
 		<div class="col-8 __text-weight-light">Amount of rooms</div>
 		<div class="col-4">
-			<h21-counter [value]="searchOptions.roomCount" [max]="99" [min]="0" (onChanged)="searchOptions.roomCount = $event"></h21-counter>
+			<h21-counter [value]="searchOptions.roomCount" [max]="99" [min]="1" (onChanged)="searchOptions.roomCount = $event"></h21-counter>
 		</div>
 	</div>
 
@@ -116,7 +118,7 @@
 	<ng-container *ngIf="searchMode == 'hotel'">
 		<div class="c-h21-search-panel_bottom-attached-box">
 			<button mat-button class="__size-l mr-3" (click)="clearSearch()">Clear search</button>
-			<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
+			<button [disabled]="destinationControl.hasError('required')" mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
 		</div>
 	</ng-container>
 </div>

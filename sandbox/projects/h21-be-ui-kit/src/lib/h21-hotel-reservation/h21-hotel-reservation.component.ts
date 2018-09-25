@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {H21AccountSelectService} from "../h21-accout-select/h21-account-select-service";
-//import {H21AccountSelectRef} from "../h21-accout-select/h21-account-select-ref";
+import {H21AccountSelectRef} from "../h21-accout-select/h21-account-select-ref";
 
 @Component({
 	selector: 'h21-hotel-reservation',
@@ -14,6 +14,7 @@ export class H21HotelReservationComponent {
 	paymentMethods: Array<any>;
 	selectedPaymentMethodId: number;
 	selectedPaymentAccountId: number;
+	private dialogRef: H21AccountSelectRef;
 
 	constructor(private _accountSelect: H21AccountSelectService) {
 		this.testInit();
@@ -23,7 +24,10 @@ export class H21HotelReservationComponent {
 		this.selectedPaymentMethodId = id;
 		let paymentMethod =  this.paymentMethods.find((item) => { return item.id == id; });
 		if (paymentMethod.accounts.length > 1) {
-			this._accountSelect.open(paymentMethod.accounts);
+			this.dialogRef = this._accountSelect.open(paymentMethod.accounts);
+			this.dialogRef.afterClosed().subscribe((data) => {
+				this.selectedPaymentAccountId = data.id;
+			});
 		} else {
 			this.selectedPaymentAccountId = paymentMethod.accounts[0].id;
 		}

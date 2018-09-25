@@ -20,7 +20,9 @@ export class H21AccountSelectService {
 		panelClass: '',
 	};
 
-	open(data: any) {
+	// dialogRef: H21AccountSelectRef;
+
+	open(data: any): H21AccountSelectRef  {
 		const overlayRef = this.overlay.create(this.overlayConfig);
 		const dialogRef = new H21AccountSelectRef(overlayRef);
 		const injectionTokens = new WeakMap();
@@ -30,5 +32,6 @@ export class H21AccountSelectService {
 		const containerPortal = new ComponentPortal(H21AccountSelectComponent, null, injector);
 		const containerRef: ComponentRef<H21AccountSelectComponent> = overlayRef.attach(containerPortal);
 		dialogRef.componentInstance = containerRef.instance;
+		return dialogRef;
 	}
 }

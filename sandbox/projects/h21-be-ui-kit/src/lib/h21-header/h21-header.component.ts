@@ -11,14 +11,18 @@ import {H21HeaderSearchSettingsDialogComponent} from "./h21-header-search-settin
 
 export class H21HeaderComponent {
 
-	@Input() showSearch = false;
-	@Input() showServicesMenuBtn = true;
+	@Input() logotypeUrl: string;
+	@Input() title: string;
 
-	@Input() username;
-	@Input() logotypeUrl;
+	@Input() showSearch: boolean = false;
+	@Input() showServicesMenuBtn: boolean = true;
+	@Input() showNotifications: boolean = true;
+
 	@Input() isPrototype = false;
-	@Input() showNotifications = true;
 	@Input() notifyList: INotifyItem[];
+	@Input() username: string;
+	@Input() userEmail: string =  'darkdes6@gmail.com';
+	@Input() userAvatarUrl: string = './assets/avatar-picture.png';
 	@Output() onPrototypeAuth: EventEmitter<any> = new EventEmitter();
 	@Output() onLogout: EventEmitter<any> = new EventEmitter();
 

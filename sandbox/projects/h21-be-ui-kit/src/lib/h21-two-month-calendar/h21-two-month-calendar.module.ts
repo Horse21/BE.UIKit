@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
@@ -19,7 +20,9 @@ import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialo
 		MatFormFieldModule,
 		MatMenuModule,
 		MatDatepickerModule,
-		MatInputModule
+		MatInputModule,
+		FormsModule,
+		ReactiveFormsModule
 	],
 	declarations: [H21TwoMonthCalendarComponent, H21TwoMonthCalendarDialogComponent],
 	exports: [H21TwoMonthCalendarComponent],
