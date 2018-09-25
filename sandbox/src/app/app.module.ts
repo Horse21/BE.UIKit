@@ -218,5 +218,3 @@ const routes: Routes = [
 export class AppModule {
 
 }
-
-//platformBrowserDynamic().bootstrapModule(AppModule);

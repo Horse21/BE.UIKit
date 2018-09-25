@@ -20,8 +20,6 @@ export class H21AccountSelectService {
 		panelClass: '',
 	};
 
-	// dialogRef: H21AccountSelectRef;
-
 	open(data: any): H21AccountSelectRef  {
 		const overlayRef = this.overlay.create(this.overlayConfig);
 		const dialogRef = new H21AccountSelectRef(overlayRef);
