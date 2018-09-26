@@ -19,7 +19,6 @@ export * from './h21-search-panel/h21-search-panel.module';
 export * from './h21-search-panel/h21-search-panel.component';
 export * from './h21-search-panel/h21-fly-route-selection.component';
 export * from './h21-search-panel/h21-passengers-select.component';
-export * from './h21-user-card/h21-user-card.component';
 export * from './h21-filter-panel/h21-filter-panel.module';
 export * from './h21-filter-panel/h21-filter-panel.component';
 export * from './h21-help/h21-help.module';
@@ -62,4 +61,6 @@ export * from './h21-accout-select/h21-account-select-service';
 export * from './h21-accout-select/h21-account-select-ref';
 export * from './h21-hotel-reservation/h21-hotel-reservation.module';
 export * from './h21-hotel-reservation/h21-hotel-reservation.component';
+export * from './h21-user-card/h21-user-card.module';
+export * from './h21-user-card/h21-user-card.component';
 

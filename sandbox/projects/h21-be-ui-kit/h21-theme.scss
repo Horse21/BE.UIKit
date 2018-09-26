@@ -1081,7 +1081,7 @@ a.c-h21-header_title {
 // h21-user-card component
 
 .c-h21-user-card {
-  padding: 20px 15px !important;
+  padding: 24px 16px !important;
 
   &.mat-card:not([class*=mat-elevation-z]) {
 	@include mat-elevation(0);
@@ -1093,10 +1093,10 @@ a.c-h21-header_title {
 	  background: $h21-bg-dark;
 	}
 	.mat-card-header-text {
-	  margin: 0 0 0 15px;
+	  margin: 0 0 0 16px;
 	}
 	.mat-card-title {
-	  color: $h21-fg-base;
+	  color: $h21-fg-ashen-blue;
 	  font-weight: 300;
 	  font-size: 18px;
 	}
@@ -1110,13 +1110,14 @@ a.c-h21-header_title {
 	.mat-list-item {
 	  height: 32px;
 	  font-size: 13px;
+	  cursor: pointer;
 
 	  &.mat-list-item-with-avatar {
 		height: 32px;
 	  }
 
 	  &:hover {
-		background: $h21-gray-7;
+		background: $h21-bg-ashen-blue-light-2;
 	  }
 	  .mat-icon {
 		color: $h21-fg-ashen-blue;
@@ -1126,6 +1127,12 @@ a.c-h21-header_title {
 	  }
 	  .mat-list-text {
 		padding-left: 0 !important;
+	  }
+	  .mat-ripple {
+		.mat-ripple-element {
+		  background-color: $h21-bg-ashen-blue-dark;
+		  opacity: 0.1;
+		}
 	  }
 	  a {
 		color: $h21-fg-ashen-blue;

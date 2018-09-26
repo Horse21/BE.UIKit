@@ -36,7 +36,6 @@ import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21
 import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
 import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
-import {H21UserCardComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 import {H21HeaderSearchSettingsDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-search-settings-dialog.component';
@@ -59,6 +58,7 @@ import {H21HotelReservationComponent} from "../../projects/h21-be-ui-kit/src/lib
 import {H21AccountSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select.component";
 import {H21AccountSelectService} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
 import {H21ComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-combobox/h21-combobox.component";
+import {H21UserCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component";
 
 /** Import Examples */
 import {ButtonsDocsComponent} from './docs/buttons/buttons-docs.component';
@@ -126,7 +126,6 @@ const routes: Routes = [
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
 		H21HeaderSearchSettingsDialogComponent,
-		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
 		H21PassengersSearchComponent,
 		H21HelpComponent,
@@ -178,6 +177,7 @@ const routes: Routes = [
 		H21HotelReservationComponent,
 		H21AccountSelectComponent,
 		H21ComboboxComponent,
+		H21UserCardComponent,
 	],
 	imports: [
 		BrowserModule,
