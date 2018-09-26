@@ -2,10 +2,10 @@ import {
 	Component,
 	Input,
 	Output,
-	EventEmitter, OnInit
+	EventEmitter, OnInit, Inject
 } from '@angular/core';
 import {MatDialog} from "@angular/material";
-import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MatDateFormats} from "@angular/material";
 import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialog.component";
 
 @Component({
@@ -15,6 +15,7 @@ import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialo
 
 export class H21TwoMonthCalendarComponent implements OnInit {
 
+	@Input() viewMode: 'default' | 'withNights' = 'default';
 	/** Date selection mode, if true - the date range (the start and end date of the range are selected), if false, one date. */
 	@Input() rangeSelectMode: boolean;
 	/** Start date of the range displayed in the calendar */
@@ -43,13 +44,13 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 	textFieldLabel: string = "";
 
 	constructor(
+		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
 		private _dateAdapter: DateAdapter<Date>,
 		public dialog: MatDialog
 	) {
 		this.rangeSelectMode = true;
-		this.fromDateText = "Departure";
-		this.toDateText = "Return";
-		this.suffixText = "date";
+		this.toDateText = "Departure date";
+		this.toDateText = "Return date";
 		this.startDate = this._dateAdapter.today();
 		this.finishDate = this._dateAdapter.addCalendarYears(this.startDate, 1);
 		this.fromDate = this._dateAdapter.clone(this.startDate);
@@ -74,8 +75,8 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 			backdropClass: 'c-h21-two-month-calendar_dialog-backdrop',
 			data: { // we pass the input parameters to initialize the calendar
 				rangeSelectMode: this.rangeSelectMode,
-				fromDateText: this.fromDateText + ' ' + this.suffixText,
-				toDateText: this.toDateText + ' ' + this.suffixText,
+				fromDateText: this.fromDateText,
+				toDateText: this.toDateText,
 				startDate: this.startDate,
 				finishDate: this.finishDate,
 				fromDate: this.fromDate,

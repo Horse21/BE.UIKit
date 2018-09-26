@@ -19,12 +19,12 @@
 			<button mat-icon-button [matMenuTriggerFor]="servicesMenu" *ngIf="showServicesMenuBtn">
 				<mat-icon>apps</mat-icon>
 			</button>
-			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !username">
+			<button mat-icon-button (click)="openDialog();" *ngIf="isPrototype && !userName">
 				<mat-icon aria-label="'Select user'">person_outline</mat-icon>
 			</button>
-			<button *ngIf="!!username" mat-button [matMenuTriggerFor]="userCardMenu">
+			<button *ngIf="!!userName" mat-button [matMenuTriggerFor]="userCardMenu">
 				<mat-icon>person</mat-icon>
-				<span>{{username}}</span>
+				<span>{{userName}}</span>
 			</button>
 		</nav>
 	</mat-toolbar>
@@ -64,7 +64,7 @@
 <!-- User card menu -->
 <mat-menu #userCardMenu="matMenu" yPosition="below" [overlapTrigger]="false" class="c-h21-header-user-card-box">
 	<ng-template matMenuContent>
-		<h21-user-card [userName]="username" [userEmail]="userEmail" [userAvatarUrl]="userAvatarUrl" (onLogout)="logout();"></h21-user-card>
+		<h21-user-card [data]="userCardData" (onAction)="userCardAction($event);" (onLogout)="logout();"></h21-user-card>
 	</ng-template>
 </mat-menu>
 
