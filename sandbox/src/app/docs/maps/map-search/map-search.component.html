@@ -1,17 +1,17 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="From" aria-label="From" [matAutocomplete]="auto" [formControl]="stateCtrl" (input)="ChangeInputFrom($event.target.value)">
+    <input matInput placeholder="From" aria-label="From" [matAutocomplete]="auto" [formControl]="stateCtrl" (input)="ChangeInput($event.target.value)">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let state of SearchPoint | async" [value]="state.Hotelname" (onSelectionChange)="SelectAutocompleteFrom(state.placeId)">
+      <mat-option *ngFor="let state of SearchPoint | async" [value]="state.Hotelname" (onSelectionChange)="SelectAutocomplete(state.placeId)">
         <span>{{state.Hotelname}}</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
   <span style="padding-right: 10px;"></span>
   <mat-form-field class="example-full-width" #prod>
-    <input matInput placeholder="To" aria-label="To" [matAutocomplete]="auto" [formControl]="stateCtrl" (input)="ChangeInputTo($event.target.value)">
+    <input matInput placeholder="To" aria-label="To" [matAutocomplete]="auto" [formControl]="stateCtrl" (input)="ChangeInput($event.target.value)">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let state of SearchPoint | async" [value]="state.Hotelname" (onSelectionChange)="SelectAutocompleteTo(state.placeId)">
+      <mat-option *ngFor="let state of SearchPoint | async" [value]="state.Hotelname" (onSelectionChange)="SelectAutocomplete(state.placeId)">
         <span>{{state.Hotelname}}</span>
       </mat-option>
     </mat-autocomplete>

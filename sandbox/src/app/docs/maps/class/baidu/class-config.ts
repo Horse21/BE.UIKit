@@ -11,7 +11,7 @@ export namespace Map.Baidu {
     let markers: any[] = [];
     let radiusObject: any;
     let polygonArea: any[] = [];
-    
+
     @Injectable()
     export class OptionsBaidu implements IMapOptions {
 
@@ -76,42 +76,42 @@ export namespace Map.Baidu {
 
         }
         setMarkers = () => {
-                let mcOptions = [{
-                    url: './assets/icons_map/icon_pointgroup.png',
-                    size: new BMap.Size(44, 44),
-                    textColor: 'black',
-                    offset: new BMap.Size(1.5, 1),
-                }];
+            let mcOptions = [{
+                url: './assets/icons_map/icon_pointgroup.png',
+                size: new BMap.Size(44, 44),
+                textColor: 'black',
+                offset: new BMap.Size(1.5, 1),
+            }];
+            this.clearMap();
+            let zoom = this.objMap.map.getZoom();
+            let bounds = this.objMap.map.getBounds();
+            let sending = false;
+            if (zoom > 5) {
+                sending = true;
+
+            }
+            if (zoom == 3) {
                 this.clearMap();
-                let zoom = this.objMap.map.getZoom();
-                var bounds = this.objMap.map.getBounds();
-                let sending = false;
-                if (zoom > 5) {
-                    sending = true;
+            }
 
-                }
-                if (zoom == 3) {
-                    this.clearMap();
-                }
-
-                for (let i = 0; i < mark.default.length; i++) {
-                    let item = mark.default[i];
-                    var icon = new BMap.Icon('./assets/icons_map/icon_hotel.png', new BMap.Size(60, 60));
-                    var marker = new BMap.Marker(new BMap.Point(item.Address.Lng, item.Address.Lat), {
-                        icon: icon,
-                        title: item.Hotelnam,
-                    });
-                    if (sending) {
-                        if (bounds.containsPoint(marker.getPosition())) {
-                            markers.push(marker);
-                        }
+            for (let i = 0; i < mark.default.length; i++) {
+                let item = mark.default[i];
+                var icon = new BMap.Icon('./assets/icons_map/icon_hotel.png', new BMap.Size(60, 60));
+                var marker = new BMap.Marker(new BMap.Point(item.Address.Lng, item.Address.Lat), {
+                    icon: icon,
+                    title: item.Hotelname,
+                });
+                if (sending) {
+                    if (bounds.containsPoint(marker.getPosition())) {
+                        markers.push(marker);
                     }
                 }
-                markerCluster = new MarkerClusterer(this.objMap.map);
-                markerCluster.setStyles(mcOptions);
-                markerCluster.addMarkers(markers);
-                markerCluster.setGridSize(80);
-                markerCluster.setMinClusterSize(2);
+            }
+            markerCluster = new MarkerClusterer(this.objMap.map);
+            markerCluster.setStyles(mcOptions);
+            markerCluster.addMarkers(markers);
+            markerCluster.setGridSize(80);
+            markerCluster.setMinClusterSize(2);
         }
         clearMap() {
             try {
@@ -164,21 +164,11 @@ export namespace Map.Baidu {
             this.objMap.map.setZoom(zoom);
         }
 
-        transitLayer(transit: any, boolean: boolean) {
-            if (boolean) {
-                transit.setMap(this.objMap.map);
-            }
-            else {
-                transit.setMap(null);
-            }
+        transitLayer(show: boolean) {
+
         }
-        trafficLayer(traffic: any, boolean: boolean) {
-            if (boolean) {
-                traffic.setMap(this.objMap.map);
-            }
-            else {
-                traffic.setMap(null);
-            }
+        trafficLayer(show: boolean) {
+
         }
         getAddress(coord: any) {
 

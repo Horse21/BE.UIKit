@@ -13,20 +13,28 @@ export class MapToolbarComponent implements OnInit {
   constructor(private manager: Manager.Map.Manager) {
   }
 
-  public zoomLevel(type:string) {
+  private zoomLevel(type:string) {
     this.manager.getActiveMap().config.setZoomLevel(type)
   }
 
-  public drawShape(type:string) {
+  private drawShape(type:string) {
     this.manager.getActiveMap().config.drawingShapesMap(type);
   }
 
-  public createMarker(type:string) {
+  private createMarker(type:string) {
     this.manager.getActiveMap().config.setZoomLevel(type);
   }
 
-  public clearMap() {
+  private clearMap() {
     this.manager.getActiveMap().config.clearMap();
+  }
+
+  private transitLayer(){
+    this.manager.getActiveMap().config.transitLayer(true)
+  }
+
+  private trafficLayer(){
+    this.manager.getActiveMap().config.trafficLayer(true);
   }
 
   ngOnInit() {

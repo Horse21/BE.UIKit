@@ -4,8 +4,8 @@ export interface IMapOptions {
     setZoom(zoom: number);
     setZoomMin(zoom: number);
     setZoomMax(zoom: number);
-    transitLayer(transit: any, boolean: boolean);
-    trafficLayer(transit: any, boolean: boolean);
+    transitLayer(show: boolean);
+    trafficLayer(show: boolean);
     getAddress(coord: any);
     setMarkers();
     clearMap();

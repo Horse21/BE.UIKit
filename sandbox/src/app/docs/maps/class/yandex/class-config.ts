@@ -170,21 +170,11 @@ export namespace Map.Yandex {
             this.objMap.map.setZoom(zoom);
         }
 
-        transitLayer(transit: any, boolean: boolean) {
-            if (boolean) {
-                transit.setMap(this.objMap.map);
-            }
-            else {
-                transit.setMap(null);
-            }
+        transitLayer(show: boolean) {
+        
         }
-        trafficLayer(traffic: any, boolean: boolean) {
-            if (boolean) {
-                traffic.setMap(this.objMap.map);
-            }
-            else {
-                traffic.setMap(null);
-            }
+        trafficLayer(show: boolean) {
+           
         }
         getAddress(coord: any) {
 

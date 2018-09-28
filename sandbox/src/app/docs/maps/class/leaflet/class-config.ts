@@ -155,21 +155,11 @@ export namespace Map.Leaflet {
             this.objMap.map.setZoom(zoom);
         }
 
-        transitLayer(transit: any, boolean: boolean) {
-            if (boolean) {
-                transit.setMap(this.objMap.map);
-            }
-            else {
-                transit.setMap(null);
-            }
+        transitLayer(show: boolean) {
+           
         }
-        trafficLayer(traffic: any, boolean: boolean) {
-            if (boolean) {
-                traffic.setMap(this.objMap.map);
-            }
-            else {
-                traffic.setMap(null);
-            }
+        trafficLayer(show: boolean) {
+           
         }
         getAddress(coord: any) {
 
@@ -177,7 +167,6 @@ export namespace Map.Leaflet {
 
         draggableMap(boolean: any) {
             if (boolean) {
-                console.log('grable false')
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,

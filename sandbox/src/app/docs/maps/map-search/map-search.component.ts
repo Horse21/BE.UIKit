@@ -6,9 +6,6 @@ import * as Manager from '../class/class-imap-manager';
 import { Point } from "../interface/i-point";
 import { MatAutocompleteTrigger } from '@angular/material';
 
-let From = null;
-let To = null;
-
 @Component({
   selector: 'app-map-search',
   templateUrl: './map-search.component.html',
@@ -20,60 +17,44 @@ export class MapSearchComponent  {
     this.SearchPoint = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
-        map(state => state ? this._filterStates(state) : this.states.slice())
+        map(state => state ? this.filterListAutocomplete(state) : this.ListAutocomplete.slice())
       );
   }
 
-  
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
-
+  
   stateCtrl = new FormControl();
   SearchPoint: Observable<any[]>;
-  states: Point[] = [];
+  ListAutocomplete: Point[] = [];
  
   private ChangeInputFrom(value: string) {
-    console.log(value)
     if (value.length > 1) {
       let result = this.manager.getActiveMap().search.SearchMap(value);
-      this.states = result;
+      this.ListAutocomplete = result;
     }
     if (value.length == 0) {
       this.autocomplete.closePanel();
-      this.states = [];
-      To = null;
+      this.ListAutocomplete = [];
       
     }
   }
 
-  private ChangeInputTo(value: string) {
+  private ChangeInput(value: string) {
     if (value.length > 1) {
       let result = this.manager.getActiveMap().search.SearchMap(value);
-      this.states = result;
+      this.ListAutocomplete = result;
     }
     if (value.length == 0) {
       this.autocomplete.closePanel();
-      this.states = [];
-      From = null;
+      this.ListAutocomplete = [];
     }
   }
 
-  
-
-  private SelectAutocompleteFrom(value: any) {
-    
-    //this.manager.getActiveMap().search.GetDetailsPointAutocomplete(value);
-    console.log(value,'FROM')
-
+  private SelectAutocomplete(value: any) {
+    this.manager.getActiveMap().search.GetDetailsPointAutocomplete(value);
   }
-
-  private SelectAutocompleteTo(value: any) {
-    To = value;
-   // this.manager.getActiveMap().search.GetDetailsPointAutocomplete(value);
-   console.log(value,'To')
-  }
-
-  private _filterStates(value: string): Point[] {
-    return this.states.filter(state => state.Hotelname);
+  private filterListAutocomplete(value: string): Point[] {
+    return this.ListAutocomplete.filter(state => state.Hotelname);
   }
 
 }

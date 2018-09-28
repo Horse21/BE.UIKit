@@ -1,20 +1,21 @@
-import { Component, OnInit, Injectable, Input, Output, ViewChild } from '@angular/core';
-import { MapType } from '../interface/i-map-manager';
-import * as  Manager from '../class/class-imap-manager';
+import { Component, Injectable  } from '@angular/core';
+import { MapType } from '../new/enum/e-map-type';
+import {MapManager} from '../new/entity/map-manager';
+import { GoogleMap } from '../new/providers/google/map';
 
 @Component({
   selector: 'app-map-selector',
   templateUrl: './map-selector.component.html',
-  styleUrls: ['./map-selector.component.css']
+  styleUrls: ['./map-selector.component.css'],
 })
 export class MapSelectorComponent {
-  selectedMap = MapType.google
+  selectedMap = MapType.GOOGLE
   mapsEnum: MapType;
   mapInfo: mapInfoForSelect[];
 
-  constructor(private manager: Manager.Map.Manager) {
+  constructor(private manager: MapManager) {
     this.mapInfo = this.mapList('google');
-    this.InitMap(MapType.google);
+   // this.InitMap(MapType.GOOGLE);
   }
 
   private mapList(nameMap: string): mapInfoForSelect[] {
@@ -39,9 +40,17 @@ export class MapSelectorComponent {
   }
 
   public InitMap(mapType: MapType) {
-    this.manager.registrationMap(mapType, 'map');
+    console.log(document.getElementById('map'),'document')
+   this.manager.register(mapType, document.getElementById('map'));
   }
+
+  ngAfterViewInit(): void {
+    this.InitMap(MapType.GOOGLE);
+    
+  }
+
 }
+
 
 @Injectable()
 export class mapInfoForSelect {

@@ -125,6 +125,14 @@ import * as InfoWindowLeaflet from './docs/maps/class/leaflet/class-infowindow';
 import * as MarkerLeaflet from './docs/maps/class/leaflet/class-marker';
 import * as MarkerclusterLeaflet from './docs/maps/class/leaflet/class-markercluster';
 import * as SearchLeaflet from './docs/maps/class/leaflet/class-search-places';
+//import * as  GoogleMap from './docs/maps/new/providers/google/map';
+import { MapManager } from './docs/maps/new/entity/map-manager';
+import { GoogleMap } from './docs/maps/new/providers/google/map';
+import {GoogleMarkerCluster} from './docs/maps/new/providers/google/cluster';
+import {GoogleEvent} from './docs/maps/new/providers/google/event';
+import {GoogleConfig} from './docs/maps/new/providers/google/config';
+import {GoogleRouteBuilder} from './docs/maps/new/providers/google/route';
+import {GoogleMarker} from './docs/maps/new/providers/google/marker';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -268,7 +276,13 @@ const routes: Routes = [
 		MarkerLeaflet.Map.Leaflet.MarkerLeaflet,
 		MarkerclusterLeaflet.Map.Leaflet.MarkerclusterLeaflet,
 		SearchLeaflet.Map.Leaflet.SearchLeaflet,
-
+		MapManager,
+		GoogleMap,
+		GoogleMarkerCluster,
+		GoogleEvent,
+		GoogleConfig,
+		GoogleRouteBuilder,
+		GoogleMarker,
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

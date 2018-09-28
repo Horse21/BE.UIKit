@@ -64,6 +64,8 @@ export namespace Google {
 
         drawingShapesMap(type: any) {
             try {
+
+                //map clearing
                 let drawingManager;
                 var radius: number = 10000;
                 if (drawingManager != null) {
@@ -81,8 +83,13 @@ export namespace Google {
 
                 }
                 let option: any;
+
+                // type 'stop'
                 if (type == 'stop') {
                 }
+
+                // type 'circle'
+                // drawCircle()
 
                 if (type === 'circle') {
                     var center = new google.maps.LatLng({ lat: 55.755814, lng: 37.617635 });
@@ -109,7 +116,11 @@ export namespace Google {
                     });
                 }
 
+                //type 'area'
+                // drawPolygon()
+
                 if (type == 'area') {
+                    loadMarkers = false;
                     let map: any = this.objMap.map;
                     let poly: any;
                     polygonArea = [];
@@ -135,7 +146,8 @@ export namespace Google {
                             poly.setMap(null);
                             poly = new google.maps.Polygon({
                                 map: map,
-                                path: path, strokeColor: '#1E90FF',
+                                path: path,
+                                strokeColor: '#1E90FF',
                                 strokeOpacity: 0.9,
                                 strokeWeight: 3.5,
                                 fillColor: '#1E90FF',
@@ -166,8 +178,10 @@ export namespace Google {
                     });
                 }
 
+                //check inclusion of markers in polygon
                 let func = (item, x1, y1) => {
                     let b = this.inclusionMarkersPolygon(item, x1, y1);
+                    //remove all that poly not contains
                     if (b === false) {
                         item.setMap(null);
                         if (markerCluster != null) {
@@ -182,6 +196,7 @@ export namespace Google {
             catch (error) {
                 console.log(error);
             }
+            loadMarkers = false;
         }
 
         inclusionMarkersPolygon(item: any, xp: any[], yp: any[]): boolean {
@@ -236,7 +251,7 @@ export namespace Google {
                         });
                         marker["point"] = item;
                         if (sending) {
-                            if (bounds.contains(marker.getPosition()) === true) {
+                            if (bounds.contains(marker.getPosition())) {
                                 markers.push(marker);
                             }
                         }
@@ -283,7 +298,7 @@ export namespace Google {
 
                 if (directionsDisplay != null) {
                     directionsDisplay.setMap(null);
-                    directionsDisplay = null;       
+                    directionsDisplay = null;
                 }
 
                 polygonArea = [];
@@ -292,13 +307,12 @@ export namespace Google {
             catch (error) {
                 console.log(error);
             }
-            console.log('clearMap')
         }
         resizeMap() {
-            console.log('resizeMap')
+           
         }
         routeMap(start: any, end: any, show: boolean) {
-            if(show){
+            if (show) {
                 let st = new google.maps.LatLng(start.point.Address.Lat, start.point.Address.Lng);
                 let en = new google.maps.LatLng(end.point.Address.Lat, end.point.Address.Lng);
                 let directionsService = new google.maps.DirectionsService();
@@ -327,7 +341,7 @@ export namespace Google {
                     if (status == google.maps.DirectionsStatus.OK) {
                         directionsDisplay.setDirections(result);
 
-                    }    
+                    }
                 });
             }
         }
@@ -346,14 +360,12 @@ export namespace Google {
                     this.objMap.map.setZoom(16);
                 }
 
-                if (markers.length == 2) {   
-                                            
-                    this.routeMap(markers[0],markers[1], true)    
-                    console.log(markers[0],'point1',markers[1],'point2')       
+                if (markers.length == 2) {
+
+                    this.routeMap(markers[0], markers[1], true)
+                    console.log(markers[0], 'point1', markers[1], 'point2')
                 }
-                if (markers[0].getMap()) {
-                    // BoundsLoadMarkers = true;
-                }
+               
             }
             catch (error) {
                 console.log(error);
@@ -377,29 +389,20 @@ export namespace Google {
             this.objMap.map.setZoom(zoom);
         }
 
-        transitLayer(transit: any, boolean: boolean) {
-            if (boolean) {
-                transit.setMap(this.objMap.map);
-            }
-            else {
-                transit.setMap(null);
-            }
+        transitLayer(show: boolean) {
+            let transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(show ? this.objMap.map : null);
+
         }
-        trafficLayer(traffic: any, boolean: boolean) {
-            if (boolean) {
-                traffic.setMap(this.objMap.map);
-            }
-            else {
-                traffic.setMap(null);
-            }
+        trafficLayer(show: boolean) {
+            let trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(show ? this.objMap.map : null);
         }
         getAddress(coord: any) {
-            console.log('GETADDRESS')
         }
 
         draggableMap(boolean: any) {
             if (boolean) {
-                console.log('grable false')
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,
