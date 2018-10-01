@@ -1,9 +1,10 @@
-import {ILoadApiMap, IInitMap } from "../../interface/i-init";
-import {Injectable } from '@angular/core';
+import { ILoadApiMap, IInitMap } from "../../interface/i-init";
+import { Injectable } from '@angular/core';
 import * as MarkerClusterer from '@google/markerclustererplus';
 import { Observable, Observer } from "rxjs";
 import { LoadStatus } from "../../enum/e-loadstatus";
-import {MapOptions} from "../../interface/google/i-inner";
+import { MapOptions } from "../../interface/google/i-inner";
+import { ReadyState } from "../../enum/e-readyState"
 
 export namespace Google {
     declare var document: any;
@@ -16,28 +17,26 @@ export namespace Google {
 
         public loadScriptMap(source: ILoadApiMap): Observable<LoadStatus> {
             return new Observable((observer: Observer<LoadStatus>) => {
-                this.source = source;
-                let script = document.createElement('script');
-                script.type = 'text/javascript';
                 let url: string;
+                let script = document.createElement('script');
+                this.source = source;
+                script.type = 'text/javascript';
                 url = source.src + '&key=' + source.key + '&language=' + source.language
                 script.src = url;
                 script.id = 'mapAPI';
                 if (script.readyState) {
                     script.onreadystatechange = () => {
-                        if (script.readyState === "loaded" || script.readyState === "complete") {
+                        if (script.readyState === ReadyState.loaded || script.readyState === ReadyState.complete) {
                             script.onreadystatechange = null;
                             observer.next(LoadStatus.loaded);
                         }
                     };
                 } else {
                     script.onload = () => {
-                        console.log('scriptLoad')
 
                     };
 
                     window['APILoaded'] = (ev) => {
-                        console.log('google maps api loaded');
                         observer.next(LoadStatus.loaded);
                     }
                 }
@@ -59,7 +58,7 @@ export namespace Google {
                 scaleControl: true,
                 draggableCursor: 'default',
                 disableDoubleClickZoom: true,
-            });       
+            });
         }
 
         destroyMap() {

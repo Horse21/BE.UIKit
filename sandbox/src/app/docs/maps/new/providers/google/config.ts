@@ -7,8 +7,9 @@ import { IPoint } from '../../interfaces/i-point';
 import { GoogleMarkerOptions } from './entity/google-marker-options';
 import { GoogleMarker } from './marker';
 import { IPolylineOptions } from '../../interfaces/i-polyline-options';
+import { Injectable } from '@angular/core';
 declare var google;
-
+@Injectable()
 export class GoogleConfig extends AbstractConfig {
     
     showMarker(point: IPoint) {

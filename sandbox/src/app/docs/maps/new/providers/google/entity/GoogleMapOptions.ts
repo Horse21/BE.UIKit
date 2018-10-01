@@ -19,7 +19,6 @@ export class GoogleMapOptions implements IMapOptions {
     draggable: boolean;
     
     constructor() {
-        this.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
         this.zoom = 8;
     }
 }

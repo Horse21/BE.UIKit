@@ -24,6 +24,7 @@ export namespace Google {
                         point.placeId = place.place_id;
                         point.Address.Lng =place.geometry.location.lng();
                         point.Address.Lat = place.geometry.location.lat();    
+                        this.config.clearMap();
                         this.config.showMarker(point)
                     }
                 }

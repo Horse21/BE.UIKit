@@ -1,12 +1,14 @@
 import { AbstractEvent } from "../../abstract/abstract-event";
 import { GoogleMap } from "./map";
 import { Observable, Observer } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class GoogleEvent extends AbstractEvent {
 
-    listen<E>(map: GoogleMap, eventName: string): Observable<E> {
+    listen<E>(eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
-          //  map.addListener(eventName, (arg: E) => { observer.next(arg); });
+            this.map.api.addListener(eventName, (arg: E) => { observer.next(arg); });
         });
     }
 
@@ -33,6 +35,4 @@ export class GoogleEvent extends AbstractEvent {
     zoomChanged(): void {
         throw new Error("Method not implemented.");
     }
-
-
 }

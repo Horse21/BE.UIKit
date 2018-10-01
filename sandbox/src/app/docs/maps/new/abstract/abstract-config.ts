@@ -13,7 +13,6 @@ import { TrafficMode } from '../enum/e-traffic-mode';
 import { GeoContainer } from '../entity/geo-container';
 import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
-import { AbstractEvent } from './abstract-event';
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -21,7 +20,6 @@ export abstract class AbstractConfig implements IConfig {
 
     map: AbstractMap;
     geo: GeoContainer;
-    events: AbstractEvent;
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;

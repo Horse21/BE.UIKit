@@ -82,20 +82,19 @@ export namespace Map.Leaflet {
                 sending = true;
 
             }
-            if (zoom == 3) {
+            if (zoom < 3) {
                 this.clearMap();
             }
+            if (sending) {
             for (let i = 0; i < jsonMarkers.default.length; i++) {
                 let item = jsonMarkers.default[i];
                 let marker = new L.marker([item.Address.Lat, item.Address.Lng], {
                     draggable: false,
                     clickable: true,
-                    zIndex: 9999,
                     icon: L.icon({ iconUrl: './assets/icons_map/icon_hotel.png' }),
                     title: item.Hotelname
                 });
 
-                if (sending) {
                     markers.push(marker);
                 }
 
@@ -165,8 +164,8 @@ export namespace Map.Leaflet {
 
         }
 
-        draggableMap(boolean: any) {
-            if (boolean) {
+        draggableMap(enabled: boolean) {
+            if (enabled) {
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,

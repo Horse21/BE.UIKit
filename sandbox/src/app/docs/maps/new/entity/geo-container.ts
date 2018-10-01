@@ -9,9 +9,8 @@ export class GeoContainer {
     markers: Array<BaseMarker>;
     clusters: Array<AbstractMarkerCluster>;
 
-    private clearArray(array: Array<any>) {
-        while(array.length)
-            array.pop();
+    private clearArray<T>(array: Array<T>) {
+        array = [];
     }
 
     clearPolygons(): void {

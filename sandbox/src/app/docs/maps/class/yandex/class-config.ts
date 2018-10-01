@@ -17,7 +17,7 @@ export namespace Map.Yandex {
 
         showMarker(obj: any) {
             try {
-             
+
             }
             catch (error) {
                 console.log(error);
@@ -41,7 +41,7 @@ export namespace Map.Yandex {
 
         drawingShapesMap(type: any) {
             try {
-               
+
             }
             catch (error) {
                 console.log(error);
@@ -74,7 +74,7 @@ export namespace Map.Yandex {
 
         }
         setMarkers = () => {
-            try {        
+            try {
                 this.clearMap();
                 let zoom = this.objMap.map.getZoom();
                 let sending = false;
@@ -82,32 +82,31 @@ export namespace Map.Yandex {
                     sending = true;
 
                 }
-                if (zoom == 3) {
-                   this.clearMap();
+                if (zoom < 3) {
+                    this.clearMap();
                 }
-                for (let i = 0; i < mark.default.length; i++) {
-                    let item = mark.default[i];
-                    let marker = new ymaps.GeoObject({
-                    geometry: {
-                        type: "Point",
-                        coordinates: [item.Address.Lat, item.Address.Lng],
-                    },                
-                    properties: {
-                        hintContent: item.Hotelname
-                    }
-                }, {                                   
-                    iconLayout: 'default#image',
-                    iconImageSize: [52, 56],
-                    iconImageHref: './assets/icons_map/icon_hotel.png',
-                    hintContent: item.Hotelname
-                })
-                marker["point"] = item;
-                    if (sending) {
+                if (sending) {
+                    for (let i = 0; i < mark.default.length; i++) {
+                        let item = mark.default[i];
+                        let marker = new ymaps.GeoObject({
+                            geometry: {
+                                type: "Point",
+                                coordinates: [item.Address.Lat, item.Address.Lng],
+                            },
+                            properties: {
+                                hintContent: item.Hotelname
+                            }
+                        }, {
+                                iconLayout: 'default#image',
+                                iconImageSize: [52, 56],
+                                iconImageHref: './assets/icons_map/icon_hotel.png',
+                                hintContent: item.Hotelname
+                            })
+                        marker["point"] = item;
                         if (ymaps.util.bounds.containsPoint(this.objMap.map.getBounds(), marker.geometry.getCoordinates())) {
                             markers.push(marker);
                         }
                     }
-
                 }
 
                 markerCluster = new ymaps.Clusterer({
@@ -118,13 +117,13 @@ export namespace Map.Yandex {
                     }],
                 }),
 
-                markerCluster.options.set({
-                    gridSize: 140,
-                    clusterDisableClickZoom: false,
-                    minClusterSize: 3,
-                    groupByCoordinates: false,
-                    hasBalloon: false,
-                });
+                    markerCluster.options.set({
+                        gridSize: 140,
+                        clusterDisableClickZoom: false,
+                        minClusterSize: 3,
+                        groupByCoordinates: false,
+                        hasBalloon: false,
+                    });
 
                 markerCluster.add(markers);
                 this.objMap.map.geoObjects.add(markerCluster);
@@ -134,7 +133,7 @@ export namespace Map.Yandex {
             }
         }
         clearMap() {
-            try {         
+            try {
                 this.objMap.map.geoObjects.removeAll();
                 markers = [];
             }
@@ -171,18 +170,17 @@ export namespace Map.Yandex {
         }
 
         transitLayer(show: boolean) {
-        
+
         }
         trafficLayer(show: boolean) {
-           
+
         }
         getAddress(coord: any) {
 
         }
 
-        draggableMap(boolean: any) {
-            if (boolean) {
-                console.log('grable false')
+        draggableMap(enabled: boolean) {
+            if (enabled) {
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,

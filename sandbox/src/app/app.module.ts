@@ -133,6 +133,7 @@ import {GoogleEvent} from './docs/maps/new/providers/google/event';
 import {GoogleConfig} from './docs/maps/new/providers/google/config';
 import {GoogleRouteBuilder} from './docs/maps/new/providers/google/route';
 import {GoogleMarker} from './docs/maps/new/providers/google/marker';
+import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/GoogleMapOptions';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -283,6 +284,7 @@ const routes: Routes = [
 		GoogleConfig,
 		GoogleRouteBuilder,
 		GoogleMarker,
+		GoogleMapOptions
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

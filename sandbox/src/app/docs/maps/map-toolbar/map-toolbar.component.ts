@@ -29,13 +29,14 @@ export class MapToolbarComponent implements OnInit {
     this.manager.getActiveMap().config.clearMap();
   }
 
-  private transitLayer(){
-    this.manager.getActiveMap().config.transitLayer(true)
+  private onChangeTransit(event:any){
+    this.manager.getActiveMap().config.transitLayer(event.checked)
   }
 
-  private trafficLayer(){
-    this.manager.getActiveMap().config.trafficLayer(true);
-  }
+  private onChangeTraffic(event:any){
+    this.manager.getActiveMap().config.trafficLayer(event.checked)
+  
+    }
 
   ngOnInit() {
   }

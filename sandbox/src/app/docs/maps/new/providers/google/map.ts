@@ -5,56 +5,38 @@ import { Observable, Observer } from "rxjs";
 import { IApiSettings } from "../../interfaces/i-api-settings";
 import { GoogleMapOptions } from "./entity/GoogleMapOptions";
 import { Injectable } from "@angular/core";
+import { GoogleEvent } from "./event";
+import { GoogleConfig } from "./config";
 
 declare var google;
 declare var document;
 
 @Injectable()
 export class GoogleMap extends AbstractMap {
-   
-   apiSettings: IApiSettings;
-   googleMap: AbstractMap;
-    
-   constructor(container: HTMLElement, mapOptions: GoogleMapOptions) {
-       super(container, mapOptions);
-       this.init();
-   }
+    public get scriptSelector(): string{
+        return "script[src*='maps.googleapis.com']";
+    };
 
-    init(): AbstractMap {
-      return this.googleMap = new google.maps.Map(this.container, this.options);
+    public get styleSelector(): string {
+        return ".gm-style";
     }
 
-    destroy(): void {
-        google = null;
-
-        let apiScript = document.getElementById('mapAPI');
-        let mapContainer = document.getElementById('map');
-
-        if (apiScript) apiScript.remove();
-
-        let styles = document.querySelectorAll('style');
-        styles.forEach(style => {
-            let isGoogleMapStyle = style.innerHTML.indexOf(".gm-style") > -1;
-            if (isGoogleMapStyle) style.remove();
-        });
-
-        let scripts = document.querySelectorAll("script[src*='maps.googleapis.com']");
-        scripts.forEach(script => {
-            script.remove();
-        });
-
-        mapContainer.innerHTML = "";
+    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent) {
+        super(mapOptions, config, events);
     }
 
-    onDataFetched(status: FetchStatus): Observable<FetchStatus> {
+    init(): void {
+        this.api = new google.maps.Map(this.container, this.options);
+    }
+
+
+    onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
         return new Observable((observer: Observer<FetchStatus>) => {
             let apiScript = document.createElement('script');
             let headElement = document.getElementsByTagName('head')[0];
-
-            apiScript.type = 'text/javascript';
-
             let apiUrl: string;
-            apiUrl = `${this.apiSettings.url}&key=${this.apiSettings.key}&language=${this.apiSettings.language}`;
+            apiScript.type = 'text/javascript';
+            apiUrl = settings.url + '&key=' + settings.key + '&language=' + settings.language
 
             apiScript.src = apiUrl;
             apiScript.id = 'mapAPI';
@@ -63,12 +45,12 @@ export class GoogleMap extends AbstractMap {
                 apiScript.onreadystatechange = () => {
                     if (apiScript.readyState === "loaded" || apiScript.readyState === "complete") {
                         apiScript.onreadystatechange = null;
-                        observer.next(FetchStatus.SUCCESS);
                     }
                 };
             } else {
                 window['APILoaded'] = () => {
                     console.log('GoogleMap.fetchData.APILoaded', FetchStatus.SUCCESS);
+                    this.setCenter();
                     observer.next(FetchStatus.SUCCESS);
                 }
             }
@@ -80,6 +62,10 @@ export class GoogleMap extends AbstractMap {
             headElement.appendChild(apiScript);
 
         });
+    }
+
+    private setCenter(): void {
+        this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
     }
 
 }

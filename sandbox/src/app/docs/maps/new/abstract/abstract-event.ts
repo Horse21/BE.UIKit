@@ -2,11 +2,9 @@ import {AbstractMap} from '../abstract/abstract-map';
 import { Observable } from 'rxjs';
 
 export abstract class AbstractEvent {
-    
-
     map: AbstractMap;
 
-    abstract listen<E>(map: AbstractMap, eventName: string): Observable<E>;
+    abstract listen<E>(eventName: string): Observable<E>;
 
     abstract idle(onIdle: () => void): void;
 

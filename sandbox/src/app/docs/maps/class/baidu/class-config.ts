@@ -90,10 +90,10 @@ export namespace Map.Baidu {
                 sending = true;
 
             }
-            if (zoom == 3) {
+            if (zoom < 3) {
                 this.clearMap();
             }
-
+            if (sending) {
             for (let i = 0; i < mark.default.length; i++) {
                 let item = mark.default[i];
                 var icon = new BMap.Icon('./assets/icons_map/icon_hotel.png', new BMap.Size(60, 60));
@@ -101,7 +101,7 @@ export namespace Map.Baidu {
                     icon: icon,
                     title: item.Hotelname,
                 });
-                if (sending) {
+               
                     if (bounds.containsPoint(marker.getPosition())) {
                         markers.push(marker);
                     }
@@ -174,8 +174,8 @@ export namespace Map.Baidu {
 
         }
 
-        draggableMap(boolean: any) {
-            if (boolean) {
+        draggableMap(enabled: boolean) {
+            if (enabled) {
                 this.objMap.map.setOptions({
                     draggable: false,
                     scrollwheel: false,

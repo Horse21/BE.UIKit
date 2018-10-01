@@ -15,7 +15,6 @@ export class MapSelectorComponent {
 
   constructor(private manager: MapManager) {
     this.mapInfo = this.mapList('google');
-   // this.InitMap(MapType.GOOGLE);
   }
 
   private mapList(nameMap: string): mapInfoForSelect[] {
@@ -41,14 +40,12 @@ export class MapSelectorComponent {
 
   public InitMap(mapType: MapType) {
     console.log(document.getElementById('map'),'document')
-   this.manager.register(mapType, document.getElementById('map'));
+   this.manager.selectMap(mapType);
   }
 
   ngAfterViewInit(): void {
-    this.InitMap(MapType.GOOGLE);
-    
+    this.InitMap(MapType.GOOGLE);    
   }
-
 }
 
 
