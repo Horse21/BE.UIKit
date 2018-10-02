@@ -39,7 +39,6 @@ export class MapSelectorComponent {
   }
 
   public InitMap(mapType: MapType) {
-    console.log(document.getElementById('map'),'document')
    this.manager.selectMap(mapType);
   }
 

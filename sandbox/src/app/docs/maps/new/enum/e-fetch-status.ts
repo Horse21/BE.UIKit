@@ -1,4 +1,4 @@
 export enum FetchStatus {
-    ERROR = 0,
-    SUCCESS = 1
+    ERROR = 'ERROR',
+    SUCCESS = 'SUCCESS'
 }

@@ -1,10 +1,13 @@
 import { AbstractEvent } from "../../abstract/abstract-event";
-import { GoogleMap } from "./map";
 import { Observable, Observer } from "rxjs";
 import { Injectable } from "@angular/core";
+import { IEventClikMap } from "./interfaces/i-event-clik-map";
 
 @Injectable()
 export class GoogleEvent extends AbstractEvent {
+    constructor() {
+        super();
+    }
 
     listen<E>(eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
@@ -12,27 +15,34 @@ export class GoogleEvent extends AbstractEvent {
         });
     }
 
-    idle(): void {
-        throw new Error("Method not implemented.");
+    idle(callback: () => void) {
+        this.listen<void>("idle").subscribe(() => {
+            let bounds = this.map.api.getBounds();
+            if (bounds) {
+                callback();
+            }
+        })
     }
 
-    mapClicked(): void {
-        throw new Error("Method not implemented.");
+    mapClicked(callback: (event) => void) {
+        this.listen<IEventClikMap>("click").subscribe((event) => {
+            callback(event);
+        })
     }
 
     zoomFinished(): void {
-        throw new Error("Method not implemented.");
+
     }
 
     dragFinished(): void {
-        throw new Error("Method not implemented.");
+
     }
 
     boundsChanged(): void {
-        throw new Error("Method not implemented.");
+
     }
 
     zoomChanged(): void {
-        throw new Error("Method not implemented.");
+
     }
 }

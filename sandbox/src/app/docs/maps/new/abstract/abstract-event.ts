@@ -1,10 +1,14 @@
-import {AbstractMap} from '../abstract/abstract-map';
+import { AbstractMap } from '../abstract/abstract-map';
 import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { IInitMap } from '../interfaces/i-init-map';
 
-export abstract class AbstractEvent {
+@Injectable()
+export abstract class AbstractEvent implements IInitMap {
+    
     map: AbstractMap;
 
-    abstract listen<E>(eventName: string): Observable<E>;
+    protected abstract listen<E>(eventName: string): Observable<E>;
 
     abstract idle(onIdle: () => void): void;
 
@@ -17,5 +21,8 @@ export abstract class AbstractEvent {
     abstract boundsChanged(onBoundsChanged: () => void): void;
 
     abstract zoomChanged(onZoomChanged: () => void): void;
-    
+
+    initMap(map: AbstractMap): void {
+        this.map = map;
+    }
 }

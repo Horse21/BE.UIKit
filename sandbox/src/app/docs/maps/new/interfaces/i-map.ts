@@ -6,7 +6,6 @@ import { FetchStatus } from "../enum/e-fetch-status";
 export interface IMap {
 
     source: IApiSettings;
-
     instance: AbstractMap;
     config: AbstractConfig;
 

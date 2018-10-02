@@ -8,11 +8,26 @@ import { GoogleMarkerOptions } from './entity/google-marker-options';
 import { GoogleMarker } from './marker';
 import { IPolylineOptions } from '../../interfaces/i-polyline-options';
 import { Injectable } from '@angular/core';
+import { AbstractMap } from '../../abstract/abstract-map';
+import { IEventClikMap } from './interfaces/i-event-clik-map';
 declare var google;
+let transitLayer;
+let trafficLayer;
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
-    
+
+    onClickMap(event: IEventClikMap) {
+
+        if (event.placeId) {
+            console.log('GETDETAILSPLACEID',event.placeId)
+            event.stop();
+        }
+        else {
+            console.log('GETADRESSLATLNG', event.latLng.lat(),event.latLng.lng())
+        }
+    }
     showMarker(point: IPoint) {
+
         let googleMarkerOptions: GoogleMarkerOptions = {
             draggable: true,
             clickable: true,
@@ -32,7 +47,7 @@ export class GoogleConfig extends AbstractConfig {
         let circle = new google.maps.Circle(options);
         circle.setMap(this.map);
     }
-    
+
     drawPolyline(options: IPolylineOptions): void {
         let polyline = new google.maps.Polyline();
         polyline.setMap(this.map);
@@ -48,11 +63,17 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     toggleTrafficJamLayer(show?: boolean): void {
-        throw new Error("Method not implemented.");
+        if (trafficLayer == null) {
+            trafficLayer = new google.maps.TrafficLayer();
+        }
+        trafficLayer.setMap(show ? this.map.api : null);
     }
 
     toggleTransitLayer(show?: boolean): void {
-        throw new Error("Method not implemented.");
+        if (transitLayer == null) {
+            transitLayer = new google.maps.TransitLayer();
+        }
+        transitLayer.setMap(show ? this.map.api : null);
     }
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {

@@ -93,7 +93,7 @@ import { H21SlideCarouselDialogComponent } from "../../projects/h21-be-ui-kit/sr
 import { MapSearchComponent } from './docs/maps/map-search/map-search.component';
 import * as  Manager from './docs/maps/class/class-imap-manager';
 import * as ObjectMap from './docs/maps/class/class-objmap';
-import {Google} from './docs/maps/class/google/class-main';
+import { Google } from './docs/maps/class/google/class-main';
 import * as Init from './docs/maps/class/google/class-initialize';
 import * as Events from './docs/maps/class/google/class-event';
 import * as Option from './docs/maps/class/google/class-config';
@@ -128,12 +128,13 @@ import * as SearchLeaflet from './docs/maps/class/leaflet/class-search-places';
 //import * as  GoogleMap from './docs/maps/new/providers/google/map';
 import { MapManager } from './docs/maps/new/entity/map-manager';
 import { GoogleMap } from './docs/maps/new/providers/google/map';
-import {GoogleMarkerCluster} from './docs/maps/new/providers/google/cluster';
-import {GoogleEvent} from './docs/maps/new/providers/google/event';
-import {GoogleConfig} from './docs/maps/new/providers/google/config';
-import {GoogleRouteBuilder} from './docs/maps/new/providers/google/route';
-import {GoogleMarker} from './docs/maps/new/providers/google/marker';
-import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/GoogleMapOptions';
+import { GoogleMarkerCluster } from './docs/maps/new/providers/google/cluster';
+import { GoogleEvent } from './docs/maps/new/providers/google/event';
+import { GoogleConfig } from './docs/maps/new/providers/google/config';
+import { GoogleRouteBuilder } from './docs/maps/new/providers/google/route';
+import { GoogleMarker } from './docs/maps/new/providers/google/marker';
+import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/google-map-options';
+import { AbstractMap } from './docs/maps/new/abstract/abstract-map'
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -284,7 +285,7 @@ const routes: Routes = [
 		GoogleConfig,
 		GoogleRouteBuilder,
 		GoogleMarker,
-		GoogleMapOptions
+		GoogleMapOptions,
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

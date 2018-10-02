@@ -10,6 +10,10 @@ export interface IMapOptions {
     allowZooming: boolean;
     enableScaling: boolean;
     enableZoomByDoubleClick: boolean;
+    disableDoubleClickZoom: boolean;
+    scaleControl: boolean;
     editable: boolean;
     draggable: boolean;
+    disableDefaultUI:boolean;
+    draggableCursor:string;
 }

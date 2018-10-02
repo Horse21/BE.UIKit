@@ -4,6 +4,7 @@ import { BaseMarker } from "../entity/base-marker";
 import { IRouteInfo } from "./i-route-info";
 import { IPolygonOptions } from "./i-polygon";
 import { IPosition } from "./i-position";
+import { IEventClikMap } from "../providers/google/interfaces/i-event-clik-map";
 
 export interface IConfig {
 
@@ -24,5 +25,6 @@ export interface IConfig {
     toggleMapDragging(enabled?: boolean);
     toggleTrafficJamLayer(show?: boolean);
     toggleTransitLayer(show?: boolean);
+    onClickMap(event:IEventClikMap):void;
     
 }

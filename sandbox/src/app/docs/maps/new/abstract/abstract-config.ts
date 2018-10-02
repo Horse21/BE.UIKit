@@ -14,11 +14,18 @@ import { GeoContainer } from '../entity/geo-container';
 import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
 import { Injectable } from "@angular/core";
+import { IInitMap } from '../interfaces/i-init-map';
+import * as marker from "../../test.markers.json";
+import { IEventClikMap } from '../providers/google/interfaces/i-event-clik-map';
 
 @Injectable()
-export abstract class AbstractConfig implements IConfig {
-
+export abstract class AbstractConfig implements IConfig, IInitMap {
     map: AbstractMap;
+
+    initMap(map: AbstractMap): void {
+        this.map = map;
+    }
+
     geo: GeoContainer;
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
@@ -48,24 +55,21 @@ export abstract class AbstractConfig implements IConfig {
     drawMarkersOnMap(): void {
         try {
             if (this.loadMarkers) {
-
                 this.clearMap();
                 let zoom = this.getZoom();
                 let bounds = this.getBounds();
 
                 let markersVisible = false;
 
-                if (zoom > 5) {
-                    markersVisible = true;
-                }
-
                 if (zoom <= 3) {
                     this.clearMap();
                 }
-
-                for (let marker of this.geo.markers) {
-                    marker["geoPoint"] = marker.point;
-                    if (markersVisible) {
+                if (zoom > 5) {
+                    markersVisible = true;
+                }
+                if (markersVisible) {
+                    for (let marker of this.geo.markers) {
+                        marker["geoPoint"] = marker.point;
                         if (bounds.contains(marker.point.position)) {
                             this.geo.markers.push(marker);
                         }
@@ -87,8 +91,6 @@ export abstract class AbstractConfig implements IConfig {
 
     drawShapeOnMap(type: ShapeType): void {
         try {
-
-            
             let path;
             let circleOptions: ICircleOptions = {
                 strokeColor: "#000000",
@@ -146,8 +148,8 @@ export abstract class AbstractConfig implements IConfig {
         this.loadMarkers = false;
     }
 
-    getAddress(position: Position): any[] {
-        throw new Error("Method not implemented.");
+    getAddress(position: Position): IPoint[] {
+        return null;
     }
 
     getZoom(): number {
@@ -222,13 +224,13 @@ export abstract class AbstractConfig implements IConfig {
     abstract routeInfo(): IRouteInfo;
 
     zoomIn(): void {
-        let currentZoom = this.map.options.zoom;
-        this.map.setZoom(currentZoom + 1);
+        let currentZoom = this.map.api.getZoom();
+        this.map.api.setZoom(currentZoom + 1);
     }
 
     zoomOut(): void {
-        let currentZoom = this.map.options.zoom;
-        this.map.setZoom(currentZoom - 1);
+        let currentZoom = this.map.api.getZoom();
+        this.map.api.setZoom(currentZoom - 1);
     }
 
     showMarker(point: IPoint): void {
@@ -268,6 +270,9 @@ export abstract class AbstractConfig implements IConfig {
             this.map.options.draggable = true;
         }
     }
+
+
+    onClickMap(event: IEventClikMap): void {}
 
     abstract toggleTrafficJamLayer(show?: boolean): void;
     abstract toggleTransitLayer(show?: boolean): void;

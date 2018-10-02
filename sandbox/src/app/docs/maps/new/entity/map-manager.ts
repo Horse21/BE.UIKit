@@ -1,7 +1,6 @@
 import { AbstractMap } from "../abstract/abstract-map";
 import { MapType } from "../enum/e-map-type";
 import { FetchStatus } from "../enum/e-fetch-status";
-import { IMap } from "../interfaces/i-map";
 import { Injectable } from "@angular/core";
 import { GoogleMap } from "../providers/google/map";
 import * as data from "../../maps.const.json";
@@ -13,9 +12,7 @@ export class MapManager {
     hashtable: { [name: string]: AbstractMap; } = {};
 
     constructor(private googleMap: GoogleMap) {
-        this.register(MapType.GOOGLE, googleMap)
-        
-        
+        this.register(MapType.GOOGLE, googleMap);
         this.changeType(MapType.GOOGLE);
     }
 
@@ -37,10 +34,9 @@ export class MapManager {
     load(): void {
         this.currentMap.onDataFetched(data["InitList"][this.mapType])
             .subscribe(status => {
-                console.log(status);
                 if (status == FetchStatus.SUCCESS) {
                     this.currentMap.init();
-                    this.currentMap.events.mapClicked(this.currentMap.config.getAddress.bind(this));
+                    this.currentMap.events.mapClicked(this.currentMap.config.onClickMap.bind(this));
                     this.currentMap.events.boundsChanged(this.currentMap.config.drawMarkersOnMap.bind(this));
                     this.currentMap.events.idle(this.currentMap.config.drawMarkersOnMap.bind(this));
                     this.currentMap.events.dragFinished(this.currentMap.config.drawMarkersOnMap.bind(this));
@@ -50,8 +46,11 @@ export class MapManager {
             })
     }
 
-    destroy(): void {
-       
+    destroy(): void { 
+        try {
+            this.currentMap.destroy();
+        }
+        catch{ }      
     }
 
     public changeType(type: MapType): void{

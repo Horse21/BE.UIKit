@@ -3,6 +3,7 @@ import * as  ObjectMap from "../class-objmap";
 import * as mark from "../../test.markers.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
 import { Injectable } from "@angular/core";
+import { IEventClikMap } from "../../new/providers/google/interfaces/i-event-clik-map";
 
 export namespace Google {
     declare var google: any;
@@ -392,6 +393,11 @@ export namespace Google {
             }
             trafficLayer.setMap(show ? this.objMap.map : null);
         }
+
+        onClickMap(event: IEventClikMap){
+   console.log('onClickMap')
+        }
+
         getAddress(coord: any) {
         }
 
