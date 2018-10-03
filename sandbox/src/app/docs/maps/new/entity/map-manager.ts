@@ -4,11 +4,12 @@ import { FetchStatus } from "../enum/e-fetch-status";
 import { Injectable } from "@angular/core";
 import { GoogleMap } from "../providers/google/map";
 import * as data from "../../maps.const.json";
+import { IEventClikMap } from "../providers/google/interfaces/i-event-clik-map";
 
 @Injectable()
 export class MapManager {
     mapType: MapType;
-    map: AbstractMap;
+    private map: AbstractMap;
     hashtable: { [name: string]: AbstractMap; } = {};
 
     constructor(private googleMap: GoogleMap) {
@@ -36,24 +37,28 @@ export class MapManager {
             .subscribe(status => {
                 if (status == FetchStatus.SUCCESS) {
                     this.currentMap.init();
-                    this.currentMap.events.mapClicked(this.currentMap.config.onClickMap.bind(this));
-                    this.currentMap.events.boundsChanged(this.currentMap.config.drawMarkersOnMap.bind(this));
-                    this.currentMap.events.idle(this.currentMap.config.drawMarkersOnMap.bind(this));
-                    this.currentMap.events.dragFinished(this.currentMap.config.drawMarkersOnMap.bind(this));
-                    this.currentMap.events.zoomFinished(this.currentMap.config.drawMarkersOnMap.bind(this));
-                    this.currentMap.events.zoomChanged(this.currentMap.config.drawMarkersOnMap.bind(this));
+                    this.currentMap.events.idle<void>().subscribe(() => {
+                        this.currentMap.config.drawMarkersOnMap();
+                    });
+                    this.currentMap.events.mapClicked<IEventClikMap>().subscribe((IEventClikMap) => {
+                        this.currentMap.config.onClickMap(IEventClikMap)
+                    });
                 }
             })
     }
 
-    destroy(): void { 
+    destroy(): void {
         try {
             this.currentMap.destroy();
         }
-        catch{ }      
+        catch{ }
     }
 
-    public changeType(type: MapType): void{
+    public changeType(type: MapType): void {
         this.mapType = type;
+    }
+
+    public getActiveMap(): any {
+        return this.map;
     }
 }

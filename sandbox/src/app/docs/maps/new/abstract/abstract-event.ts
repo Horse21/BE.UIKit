@@ -5,22 +5,17 @@ import { IInitMap } from '../interfaces/i-init-map';
 
 @Injectable()
 export abstract class AbstractEvent implements IInitMap {
-    
+
     map: AbstractMap;
 
     protected abstract listen<E>(eventName: string): Observable<E>;
 
-    abstract idle(onIdle: () => void): void;
-
-    abstract mapClicked(onMapClicked: () => void): void;
-
-    abstract zoomFinished(onZoomFinished: () => void): void;
-
-    abstract dragFinished(onDragFinished: () => void): void;
-
-    abstract boundsChanged(onBoundsChanged: () => void): void;
-
-    abstract zoomChanged(onZoomChanged: () => void): void;
+    abstract idle<E>(): Observable<E>;
+    abstract mapClicked<IEventClikMap>(): Observable<IEventClikMap>;
+    abstract zoomFinished<E>(): Observable<E>;
+    abstract dragFinished<E>(): Observable<E>;
+    abstract boundsChanged<E>(): Observable<E>;
+    abstract zoomChanged<E>(): Observable<E>;
 
     initMap(map: AbstractMap): void {
         this.map = map;

@@ -1,7 +1,6 @@
 import { IMapOptions } from "../../interface/i-config";
 import * as  ObjectMap from "../class-objmap";
-import { Injectable } from "@angular/core"
-import * as mark from "../../test.markers.json";
+import { Injectable } from "@angular/core";
 import * as MarkerClusterer from 'bmaplib.markerclusterer';
 
 export namespace Map.Baidu {
@@ -93,20 +92,7 @@ export namespace Map.Baidu {
             if (zoom < 3) {
                 this.clearMap();
             }
-            if (sending) {
-            for (let i = 0; i < mark.default.length; i++) {
-                let item = mark.default[i];
-                var icon = new BMap.Icon('./assets/icons_map/icon_hotel.png', new BMap.Size(60, 60));
-                var marker = new BMap.Marker(new BMap.Point(item.Address.Lng, item.Address.Lat), {
-                    icon: icon,
-                    title: item.Hotelname,
-                });
-               
-                    if (bounds.containsPoint(marker.getPosition())) {
-                        markers.push(marker);
-                    }
-                }
-            }
+            
             markerCluster = new MarkerClusterer(this.objMap.map);
             markerCluster.setStyles(mcOptions);
             markerCluster.addMarkers(markers);

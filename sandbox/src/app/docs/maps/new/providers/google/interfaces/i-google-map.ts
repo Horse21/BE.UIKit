@@ -2,7 +2,7 @@ import {IMap} from "../../../interfaces/i-map";
 import { IMapOptions } from "../../../interfaces/i-map-options";
 import { GoogleConfig } from "../config";
 import { GoogleEvent } from "../event";
-import { GoogleMap } from "../../../../../layout/maps/interface/google/i-inner";
+import { GoogleMap } from "../../../providers/google/interfaces/i-inner";
 import { GoogleMarker } from "../marker";
 import {GoogleMarkerCluster} from "../cluster";
 

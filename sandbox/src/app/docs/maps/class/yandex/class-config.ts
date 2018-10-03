@@ -1,7 +1,6 @@
 import { IMapOptions } from "../../interface/i-config";
 import * as  ObjectMap from "../class-objmap";
 import { Injectable } from "@angular/core";
-import * as mark from "../../test.markers.json";
 
 export namespace Map.Yandex {
     declare var ymaps: any;
@@ -85,30 +84,7 @@ export namespace Map.Yandex {
                 if (zoom < 3) {
                     this.clearMap();
                 }
-                if (sending) {
-                    for (let i = 0; i < mark.default.length; i++) {
-                        let item = mark.default[i];
-                        let marker = new ymaps.GeoObject({
-                            geometry: {
-                                type: "Point",
-                                coordinates: [item.Address.Lat, item.Address.Lng],
-                            },
-                            properties: {
-                                hintContent: item.Hotelname
-                            }
-                        }, {
-                                iconLayout: 'default#image',
-                                iconImageSize: [52, 56],
-                                iconImageHref: './assets/icons_map/icon_hotel.png',
-                                hintContent: item.Hotelname
-                            })
-                        marker["point"] = item;
-                        if (ymaps.util.bounds.containsPoint(this.objMap.map.getBounds(), marker.geometry.getCoordinates())) {
-                            markers.push(marker);
-                        }
-                    }
-                }
-
+                
                 markerCluster = new ymaps.Clusterer({
                     clusterIcons: [{
                         href: './assets/icons_map/icon_pointgroup.png',

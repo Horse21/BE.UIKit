@@ -2,7 +2,6 @@ import { IMapOptions } from "../../interface/i-config";
 import * as  ObjectMap from "../class-objmap";
 import { Injectable } from "@angular/core";
 import 'leaflet.markercluster';
-import * as jsonMarkers from "../../test.markers.json";
 export namespace Map.Leaflet {
     declare var L: any;
     let markerCluster: any;
@@ -85,20 +84,7 @@ export namespace Map.Leaflet {
             if (zoom < 3) {
                 this.clearMap();
             }
-            if (sending) {
-            for (let i = 0; i < jsonMarkers.default.length; i++) {
-                let item = jsonMarkers.default[i];
-                let marker = new L.marker([item.Address.Lat, item.Address.Lng], {
-                    draggable: false,
-                    clickable: true,
-                    icon: L.icon({ iconUrl: './assets/icons_map/icon_hotel.png' }),
-                    title: item.Hotelname
-                });
-
-                    markers.push(marker);
-                }
-
-            }
+           
             markerCluster = L.markerClusterGroup({
                 chunkedLoading: false,
                 maxClusterRadius: 120,

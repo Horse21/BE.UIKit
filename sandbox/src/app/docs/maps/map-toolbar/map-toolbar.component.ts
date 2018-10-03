@@ -8,14 +8,14 @@ import { MapManager } from '../new/entity/map-manager';
 })
 export class MapToolbarComponent {
 
-  constructor(private manager: MapManager) {}
+  constructor(private manager: MapManager) { }
 
   private zoomLevel(type: string) {
-    if(type === 'plus'){
-      this.manager.map.config.zoomIn();
+    if (type === 'plus') {
+      this.manager.getActiveMap().config.zoomIn();
     }
-    else{
-      this.manager.map.config.zoomOut();
+    else {
+      this.manager.getActiveMap().config.zoomOut();
     }
   }
 
@@ -29,11 +29,12 @@ export class MapToolbarComponent {
   }
 
   private onChangeTransit(event: any) {
-    this.manager.map.config.toggleTransitLayer(event.checked);
+
+    this.manager.getActiveMap().config.toggleTransitLayer(event.checked);
   }
 
   private onChangeTraffic(event: any) {
-    this.manager.map.config.toggleTrafficJamLayer(event.checked);
+    this.manager.getActiveMap().config.toggleTrafficJamLayer(event.checked);
   }
 
 }

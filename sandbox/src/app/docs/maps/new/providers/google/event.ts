@@ -15,34 +15,27 @@ export class GoogleEvent extends AbstractEvent {
         });
     }
 
-    idle(callback: () => void) {
-        this.listen<void>("idle").subscribe(() => {
-            let bounds = this.map.api.getBounds();
-            if (bounds) {
-                callback();
-            }
-        })
+    idle<E>(): Observable<E> {
+        return this.listen<E>('idle');
     }
 
-    mapClicked(callback: (event) => void) {
-        this.listen<IEventClikMap>("click").subscribe((event) => {
-            callback(event);
-        })
+    mapClicked<E>(): Observable<E> {
+        return this.listen<E>('click');
     }
 
-    zoomFinished(): void {
-
+    zoomFinished<E>(): Observable<E> {
+        return this.listen<E>('zoomend');
     }
 
-    dragFinished(): void {
-
+    dragFinished<E>(): Observable<E> {
+        return this.listen<E>('dragend');
     }
 
-    boundsChanged(): void {
-
+    boundsChanged<E>(): Observable<E> {
+        return this.listen<E>('boundscnhage');
     }
 
-    zoomChanged(): void {
-
+    zoomChanged <E>(): Observable<E> {
+        return this.listen<E>('zoomstart');
     }
 }

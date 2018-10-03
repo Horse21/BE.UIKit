@@ -43,7 +43,7 @@ export abstract class AbstractMap {
         this.removeCurrentMapScriptContainer();
         this.clearCurrentMapStyles();
         this.clearCurrentMapScripts();
-        this.container.innerHTML = "";    
+        this.container.innerHTML = "";
     }
 
     private removeCurrentMapScriptContainer(): void {

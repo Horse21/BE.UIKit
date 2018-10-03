@@ -1,6 +1,6 @@
 import { IMapOptions } from "../../interface/i-config";
 import * as  ObjectMap from "../class-objmap";
-import * as mark from "../../test.markers.json";
+//import * as mark from "../../test.markers.json";
 import * as MarkerClusterer from '@google/markerclustererplus';
 import { Injectable } from "@angular/core";
 import { IEventClikMap } from "../../new/providers/google/interfaces/i-event-clik-map";
@@ -226,24 +226,7 @@ export namespace Google {
                     if (zoom < 3) {
                         this.clearMap();
                     }
-                    if (sending) {
-                        for (let i = 0; i < mark.default.length; i++) {
-                            let item = mark.default[i];
-                            let marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(item.Address.Lat, item.Address.Lng),
-                                draggable: false,
-                                visible: true,
-                                clickable: true,
-                                icon: { url: './assets/icons_map/icon_hotel.png' },
-                                title: item.Hotelname
-                            });
-                            marker["point"] = item;
-                            if (bounds.contains(marker.getPosition())) {
-                                markers.push(marker);
-                            }
-                        }
 
-                    }
                     let mcOptions = {
                         gridSize: 100,
                         maxZoom: 19,
@@ -394,8 +377,8 @@ export namespace Google {
             trafficLayer.setMap(show ? this.objMap.map : null);
         }
 
-        onClickMap(event: IEventClikMap){
-   console.log('onClickMap')
+        onClickMap(event: IEventClikMap) {
+            console.log('onClickMap')
         }
 
         getAddress(coord: any) {

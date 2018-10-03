@@ -15,10 +15,13 @@ import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
 import { Injectable } from "@angular/core";
 import { IInitMap } from '../interfaces/i-init-map';
-import * as marker from "../../test.markers.json";
+import * as markers from "../../test.markers.json";
 import { IEventClikMap } from '../providers/google/interfaces/i-event-clik-map';
 
+declare var google;
+
 @Injectable()
+
 export abstract class AbstractConfig implements IConfig, IInitMap {
     map: AbstractMap;
 
@@ -58,7 +61,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 this.clearMap();
                 let zoom = this.getZoom();
                 let bounds = this.getBounds();
-
+                console.log(zoom,bounds)
                 let markersVisible = false;
 
                 if (zoom <= 3) {
@@ -68,14 +71,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                     markersVisible = true;
                 }
                 if (markersVisible) {
-                    for (let marker of this.geo.markers) {
-                        marker["geoPoint"] = marker.point;
-                        if (bounds.contains(marker.point.position)) {
-                            this.geo.markers.push(marker);
-                        }
-                    }
+
                 }
-            }
+           }
         }
         catch (error) {
             console.log(error);
@@ -152,17 +150,13 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         return null;
     }
 
-    getZoom(): number {
-        return this.map.options.zoom;
-    }
-
-    setZoom(zoom: number): void {
-        this.map.options.zoom = zoom;
-    }
+    getZoom(): number { return null }
 
     markersFitsBounds(): void {
         throw new Error("Method not implemented.");
     }
+
+    onClickMap(event: IEventClikMap) { }
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
@@ -223,16 +217,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract routeInfo(): IRouteInfo;
 
-    zoomIn(): void {
-        let currentZoom = this.map.api.getZoom();
-        this.map.api.setZoom(currentZoom + 1);
-    }
-
-    zoomOut(): void {
-        let currentZoom = this.map.api.getZoom();
-        this.map.api.setZoom(currentZoom - 1);
-    }
-
     showMarker(point: IPoint): void {
         try {
             let marker = new BaseMarker({
@@ -246,6 +230,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 visible: true
             });
             this.marker.point = marker.point;
+            marker = new google.maps.Marker(marker);
+            console.log(marker, 'Marker')
+            this.map.api.setMap(marker)
 
             if (this.markerCluster) {
                 this.markerCluster.addMarker(marker, true);
@@ -257,6 +244,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             console.log(error);
         }
     }
+
+    setZoom(zoom: number): void { }
 
     toggleMapDragging(enabled?: boolean) {
         if (enabled) {
@@ -271,10 +260,13 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         }
     }
 
-
-    onClickMap(event: IEventClikMap): void {}
-
     abstract toggleTrafficJamLayer(show?: boolean): void;
+
     abstract toggleTransitLayer(show?: boolean): void;
+
+    abstract zoomIn(): void;
+
+    abstract zoomOut(): void;
+
 
 }

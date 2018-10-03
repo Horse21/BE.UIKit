@@ -67,6 +67,7 @@ export class GoogleMap extends AbstractMap {
     }
 
     destroy(): void {
+        
         super.destroy();
         google = null;
 
