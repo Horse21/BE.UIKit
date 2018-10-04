@@ -1,4 +1,4 @@
 export enum ZoomType {
-    In = 'in',
-    Out = 'out',
+    In = 'In',
+    Out = 'Out',
 }

@@ -4,7 +4,7 @@ import { FetchStatus } from "../enum/e-fetch-status";
 import { Injectable } from "@angular/core";
 import { GoogleMap } from "../providers/google/map";
 import * as data from "../../maps.const.json";
-import { IEventClikMap } from "../providers/google/interfaces/i-event-clik-map";
+import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
 
 @Injectable()
 export class MapManager {
@@ -40,7 +40,7 @@ export class MapManager {
                     this.currentMap.events.idle<void>().subscribe(() => {
                         this.currentMap.config.drawMarkersOnMap();
                     });
-                    this.currentMap.events.mapClicked<IEventClikMap>().subscribe((IEventClikMap) => {
+                    this.currentMap.events.mapClicked<IEventClickMap>().subscribe((IEventClikMap) => {
                         this.currentMap.config.onClickMap(IEventClikMap)
                     });
                 }

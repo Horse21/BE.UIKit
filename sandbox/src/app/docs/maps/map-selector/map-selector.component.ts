@@ -14,10 +14,11 @@ export class MapSelectorComponent {
   mapInfo: mapInfoForSelect[];
 
   constructor(private manager: MapManager) {
-    this.mapInfo = this.mapList('google');
+    this.mapInfo = this.mapList('GOOGLE');
   }
 
   private mapList(nameMap: string): mapInfoForSelect[] {
+    
     let temp: mapInfoForSelect[] = Object.keys(MapType)
       .filter((type) => isNaN(<any>type))
       .map<mapInfoForSelect>(
@@ -33,16 +34,20 @@ export class MapSelectorComponent {
   }
 
   public selectMap(type: string) {
+
     this.mapInfo = this.mapList(type);
     this.selectedMap = MapType[type];
     this.InitMap(MapType[type]);
   }
 
   public InitMap(mapType: MapType) {
+
    this.manager.selectMap(mapType);
   }
 
   ngAfterViewInit(): void {
+
+
     this.InitMap(MapType.GOOGLE);    
   }
 }

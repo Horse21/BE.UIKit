@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
-import { IMainMap } from '../interface/i-main';
-import { MapSelectorComponent} from '../map-selector/map-selector.component';
+import { Component, OnInit, Input } from '@angular/core';
+import { MapManager } from '../new/entity/map-manager';
+
 
 @Component({
     selector: 'app-map-container',
@@ -8,12 +8,18 @@ import { MapSelectorComponent} from '../map-selector/map-selector.component';
     styleUrls: ['./map-container.component.css']
 })
 export class MapContainerComponent implements OnInit {
-    source: IMainMap;
-    constructor() { 
-       
-    }
+
+    constructor(private manager: MapManager) {}
+
+    @Input() private latitude: number;
+    @Input() private longitude: number;
+    @Input() private zoom: number;
+    @Input() private minZoom: number;
+
     ngOnInit() {
-        
+        setTimeout(() => {
+            this.manager.getActiveMap().config.setMinZoom(3);
+        }, 300);
     }
 }
 

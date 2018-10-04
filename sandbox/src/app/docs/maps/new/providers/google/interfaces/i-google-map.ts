@@ -7,7 +7,7 @@ import { GoogleMarker } from "../marker";
 import {GoogleMarkerCluster} from "../cluster";
 
 export interface IGoogleMap {
-
+    
     instance: GoogleMap;   
     config: GoogleConfig;
     events: GoogleEvent;

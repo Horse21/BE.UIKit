@@ -3,7 +3,8 @@ import { IPrice } from "./i-price";
 import { IPosition } from "./i-position";
 import { IIcon } from "./i-icon";
 
-export interface IPoint {
+export class IPoint {
+    
     title: string;
     name: string;
     photos: Array<IIcon>;

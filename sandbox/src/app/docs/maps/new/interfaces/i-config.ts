@@ -4,15 +4,16 @@ import { BaseMarker } from "../entity/base-marker";
 import { IRouteInfo } from "./i-route-info";
 import { IPolygonOptions } from "./i-polygon";
 import { IPosition } from "./i-position";
-import { IEventClikMap } from "../providers/google/interfaces/i-event-clik-map";
+import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
 
 export interface IConfig {
-
+    
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void;
     clearMap(): void;
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
     getAddress(position: Position): Array<IPoint>;
+    getDetailsPoint(placeId:string): Array<IPoint>;
     getZoom(): number;
     markersFitsBounds(): void;
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean;
@@ -21,10 +22,13 @@ export interface IConfig {
     zoomIn(): void;
     zoomOut(): void;
     setZoom(zoomLevel: number);
+    setMinZoom(zoom: number): void;
+    setMaxZoom(zoom: number): void;
+    setCenter(position: IPosition): void;
     showMarker(point: IPoint): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficJamLayer(show?: boolean);
     toggleTransitLayer(show?: boolean);
-    onClickMap(event:IEventClikMap):void;
-    
+    onClickMap(event: IEventClickMap): void;
+
 }

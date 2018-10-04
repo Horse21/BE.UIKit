@@ -1,6 +1,6 @@
 import { ILatLng } from "./i-latlng";
 
-export interface IEventClikMap {
+export interface IEventClickMap {
     latLng: ILatLng;
     placeId: string;
     stop():void;

@@ -13,7 +13,6 @@ export namespace Google {
         }
         GetDetailsPointAutocomplete(placeid: string) {
             let placesService = new google.maps.places.PlacesService(this.objMap.map);
-            let point: Point = new Point();
             placesService.getDetails({ placeId: placeid }, (place, status) => {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     if (place) {

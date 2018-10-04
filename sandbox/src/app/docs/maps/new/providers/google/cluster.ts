@@ -25,7 +25,7 @@ export class GoogleMarkerCluster extends AbstractMarkerCluster {
                     width: 44
                 }]
         };
-        //this.googleCluster = new MarkerClusterer(this.objMap.map, [], mcOptions);
+        this.googleCluster = new MarkerClusterer(this.map.api, [], mcOptions);
     }
 
     addMarker(marker: BaseMarker, show?: boolean): void {

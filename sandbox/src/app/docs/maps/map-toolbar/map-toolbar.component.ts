@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MapManager } from '../new/entity/map-manager';
+import { ZoomType } from '../new/enum/e-zoom-type';
 
 @Component({
   selector: 'app-map-toolbar',
@@ -11,7 +12,8 @@ export class MapToolbarComponent {
   constructor(private manager: MapManager) { }
 
   private zoomLevel(type: string) {
-    if (type === 'plus') {
+    
+    if (type === ZoomType.In) {
       this.manager.getActiveMap().config.zoomIn();
     }
     else {
@@ -34,7 +36,10 @@ export class MapToolbarComponent {
   }
 
   private onChangeTraffic(event: any) {
+
     this.manager.getActiveMap().config.toggleTrafficJamLayer(event.checked);
   }
+
+
 
 }

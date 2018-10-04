@@ -15,14 +15,18 @@ import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
 import { Injectable } from "@angular/core";
 import { IInitMap } from '../interfaces/i-init-map';
-import * as markers from "../../test.markers.json";
-import { IEventClikMap } from '../providers/google/interfaces/i-event-clik-map';
+import * as mark from "../../test.markers.json";
+import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map';
 
 declare var google;
 
 @Injectable()
 
 export abstract class AbstractConfig implements IConfig, IInitMap {
+    getDetailsPoint(placeId: string): IPoint[] {
+        throw new Error("Method not implemented.");
+    }
+    
     map: AbstractMap;
 
     initMap(map: AbstractMap): void {
@@ -52,34 +56,31 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     clearMap(): void {
+
         this.map.geo.clearAll();
     }
 
     drawMarkersOnMap(): void {
+
         try {
-            if (this.loadMarkers) {
-                this.clearMap();
                 let zoom = this.getZoom();
-                let bounds = this.getBounds();
-                console.log(zoom,bounds)
-                let markersVisible = false;
+                let bounds = this.getBounds();            
+                let markersVisible = false;     
 
                 if (zoom <= 3) {
                     this.clearMap();
                 }
                 if (zoom > 5) {
                     markersVisible = true;
-                }
-                if (markersVisible) {
-
-                }
-           }
+                }              
+           
         }
         catch (error) {
             console.log(error);
         }
     }
     getBounds(): any {
+
         throw new Error("Method not implemented.");
     }
 
@@ -88,6 +89,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract drawPolygon(options: IPolygonOptions): void;
 
     drawShapeOnMap(type: ShapeType): void {
+
         try {
             let path;
             let circleOptions: ICircleOptions = {
@@ -147,7 +149,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     getAddress(position: Position): IPoint[] {
+
         return null;
+
     }
 
     getZoom(): number { return null }
@@ -156,7 +160,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         throw new Error("Method not implemented.");
     }
 
-    onClickMap(event: IEventClikMap) { }
+    abstract onClickMap(event: IEventClickMap);
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
@@ -218,35 +222,32 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract routeInfo(): IRouteInfo;
 
     showMarker(point: IPoint): void {
+
         try {
             let marker = new BaseMarker({
                 title: point.title,
                 icon: {
-                    url: point.photos[0].url,
+                    url: './assets/icons_map/icon_hotel.png',
                     title: ""
                 },
                 clickable: true,
-                draggable: true,
+                draggable: false,
                 visible: true
             });
-            this.marker.point = marker.point;
-            marker = new google.maps.Marker(marker);
-            console.log(marker, 'Marker')
-            this.map.api.setMap(marker)
-
-            if (this.markerCluster) {
-                this.markerCluster.addMarker(marker, true);
-            }
-
-            this.markersFitsBounds();
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    setZoom(zoom: number): void { }
+    abstract setZoom(zoom: number): void;
 
+    abstract setMinZoom(zoom: number): void;
+       
+    abstract setMaxZoom(zoom: number): void; 
+        
+    abstract setCenter(position: IPosition):void;
+    
     toggleMapDragging(enabled?: boolean) {
         if (enabled) {
             this.map.options.allowScrolling = false;
@@ -267,6 +268,5 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract zoomIn(): void;
 
     abstract zoomOut(): void;
-
 
 }

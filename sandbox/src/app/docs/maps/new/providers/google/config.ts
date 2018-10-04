@@ -9,9 +9,11 @@ import { GoogleMarker } from './marker';
 import { IPolylineOptions } from '../../interfaces/i-polyline-options';
 import { Injectable } from '@angular/core';
 import { AbstractMap } from '../../abstract/abstract-map';
-import { IEventClikMap } from './interfaces/i-event-clik-map';
-import * as markers from "../../../test.markers.json";
+import { IEventClickMap } from './interfaces/i-event-clik-map';
+import * as mark from "../../../test.markers.json";
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
+import { IPosition } from '../../interfaces/i-position';
+import { ResponseStatus } from './enum/i-status-response ';
 
 declare var google;
 let transitLayer;
@@ -20,31 +22,51 @@ let trafficLayer;
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
 
-    onClickMap(event: IEventClikMap) {
+    getDetailsPoint(placeId: string): IPoint[] {
+        let placesService = new google.maps.places.PlacesService(this.map.api);
+
+        placesService.getDetails({ placeId: placeId }, function (place, status) {
+
+            if (status == ResponseStatus.OK) {
+                console.log(place, status)
+            }
+        });
+        return null;
+    }
+
+    onClickMap(event: IEventClickMap) {
 
         if (event.placeId) {
-            console.log('gETDETAILSPLACEID', event.placeId);
             event.stop();
+            this.getDetailsPoint(event.placeId);
         }
         else {
-            console.log('gETADRESSLATLNG', event.latLng.lat(), event.latLng.lng());
+            let latLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+            this.getAddress(latLng);
         }
     }
 
     zoomIn(): void {
 
         let currentZoom = this.getZoom();
-        this.map.api.setZoom(currentZoom + 1);
+        this.setZoom(currentZoom + 1);
     }
 
     zoomOut(): void {
 
         let currentZoom = this.getZoom();
-        this.map.api.setZoom(currentZoom - 1);
+        this.setZoom(currentZoom - 1);
     }
 
     getAddress(coord: Position): IPoint[] {
 
+        let geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'latLng': coord },
+            function (results, status) {
+                if (status == ResponseStatus.OK) {
+                    console.log(results[0], status)
+                }
+            });
         return null
     }
 
@@ -63,6 +85,21 @@ export class GoogleConfig extends AbstractConfig {
         this.map.api.setZoom(zoom);
     }
 
+    setMinZoom(zoom: number): void {
+
+        this.map.api.setOptions({ minZoom: zoom });
+    }
+
+    setMaxZoom(zoom: number): void {
+
+        this.map.api.setOptions({ maxZoom: zoom });
+    }
+
+    setCenter(position: IPosition): void {
+        
+        this.map.api.setCenter({ lat: position.latitude, lng: position.longitude });
+    }
+
     showMarker(point: IPoint) {
 
         let googleMarkerOptions: GoogleMarkerOptions = {
@@ -70,21 +107,32 @@ export class GoogleConfig extends AbstractConfig {
             clickable: true,
             visible: true,
             title: point.title,
-            position: new google.maps.LatLng(point.position.latitude, point.position.latitude),
+            position: new google.maps.LatLng(point.position.latitude, point.position.longitude),
             icon: {
                 title: 'picture',
                 url: './assets/icons_map/icon_hotel.png'
             },
-            zIndex: 1
+            zIndex: 1,
+
         };
         let marker = new google.maps.Marker(googleMarkerOptions);
-        this.map.api.setMap(marker)
-
-        super.showMarker(marker);
+        super.showMarker(marker)
     }
 
     drawMarkersOnMap(): void {
+        let pl: IPoint = new IPoint();
 
+        for (let i = 0; i < mark.default.length; i++) {
+            let item = mark.default[i];
+            let point: IPoint = new IPoint();
+            point.position = new IPosition();
+            point.position.longitude = item.Address.Lng;
+            point.position.latitude = item.Address.Lat;
+
+            item["point"] = point
+            this.showMarker(point);
+
+        }
     }
 
     drawCircle(options: ICircleOptions): void {
@@ -111,7 +159,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     toggleTrafficJamLayer(show?: boolean): void {
-
+        
         if (trafficLayer == null) {
             trafficLayer = new google.maps.TrafficLayer();
         }
