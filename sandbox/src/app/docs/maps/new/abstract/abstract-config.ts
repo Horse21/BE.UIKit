@@ -20,6 +20,7 @@ import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map'
 import { IMapOptions } from '../interfaces/i-map-options';
 import { Position } from '../entity/position';
 import { Point } from '../entity/point';
+import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 
 declare var google;
 
@@ -73,15 +74,12 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 for (let i = 0; i < mark.default.length; i++) {
                     let item = mark.default[i];
                     let point: Point = new Point();
-                     point.position = new Position();
-                     point.position.latitude = item.Address.Lat; 
-                     point.position.longitude = item.Address.Lng; 
-                     if(this.boundsContainsMarker(point)){
+                    point.position = new Position();
+                    point.position.latitude = item.Address.Lat;
+                    point.position.longitude = item.Address.Lng;
+                    if (this.boundsContainsMarker(point)) {
 
-console.log(this.marker,'this.marker')
-
-                        this.geo.pushMarkers(this.marker);
-                     }                 
+                    }
                 }
             }
 
