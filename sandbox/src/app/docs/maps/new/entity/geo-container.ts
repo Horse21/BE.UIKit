@@ -7,7 +7,7 @@ export class GeoContainer {
 
     polygons: Array<IPolygonOptions>;
     routes: Array<IRouteInfo>;
-    markers: Array<BaseMarker>;
+    private markers: Array<BaseMarker>;
     clusters: Array<AbstractMarkerCluster>;
 
     private clearArray<T>(array: Array<T>) {

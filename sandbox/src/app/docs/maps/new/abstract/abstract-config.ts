@@ -17,16 +17,15 @@ import { Injectable } from "@angular/core";
 import { IInitMap } from '../interfaces/i-init-map';
 import * as mark from "../../test.markers.json";
 import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map';
+import { IMapOptions } from '../interfaces/i-map-options';
+import { Position } from '../entity/position';
+import { Point } from '../entity/point';
 
 declare var google;
 
 @Injectable()
-
 export abstract class AbstractConfig implements IConfig, IInitMap {
-    getDetailsPoint(placeId: string): IPoint[] {
-        throw new Error("Method not implemented.");
-    }
-    
+
     map: AbstractMap;
 
     initMap(map: AbstractMap): void {
@@ -43,7 +42,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
         if (show) {
             let routeOptions;
-
             let route = this.routeBuilder
                 .setMap(this.map)
                 .setOptions(routeOptions)
@@ -56,24 +54,37 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     clearMap(): void {
-
         this.map.geo.clearAll();
     }
 
     drawMarkersOnMap(): void {
-
         try {
-                let zoom = this.getZoom();
-                let bounds = this.getBounds();            
-                let markersVisible = false;     
 
-                if (zoom <= 3) {
-                    this.clearMap();
+            let zoom = this.getZoom();
+            let markersVisible = false;
+            if (zoom <= 3) {
+                this.clearMap();
+            }
+            if (zoom > 5) {
+                markersVisible = true;
+            }
+
+            if (markersVisible) {
+                for (let i = 0; i < mark.default.length; i++) {
+                    let item = mark.default[i];
+                    let point: Point = new Point();
+                     point.position = new Position();
+                     point.position.latitude = item.Address.Lat; 
+                     point.position.longitude = item.Address.Lng; 
+                     if(this.boundsContainsMarker(point)){
+
+console.log(this.marker,'this.marker')
+
+                        this.geo.pushMarkers(this.marker);
+                     }                 
                 }
-                if (zoom > 5) {
-                    markersVisible = true;
-                }              
-           
+            }
+
         }
         catch (error) {
             console.log(error);
@@ -83,7 +94,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
         throw new Error("Method not implemented.");
     }
-
+    abstract getDetailsPoint(placeId: string): IPoint[]
     abstract drawCircle(options: ICircleOptions): void;
     abstract drawPolyline(options: IPolylineOptions): void;
     abstract drawPolygon(options: IPolygonOptions): void;
@@ -161,6 +172,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     abstract onClickMap(event: IEventClickMap);
+
+    abstract boundsContainsMarker(point: IPoint): boolean;
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
@@ -243,12 +256,12 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract setZoom(zoom: number): void;
 
     abstract setMinZoom(zoom: number): void;
-       
-    abstract setMaxZoom(zoom: number): void; 
-        
-    abstract setCenter(position: IPosition):void;
-    
-    toggleMapDragging(enabled?: boolean) {
+
+    abstract setMaxZoom(zoom: number): void;
+
+    abstract setCenter(position: IPosition): void;
+
+    toggleMapDragging(enabled: boolean) {
         if (enabled) {
             this.map.options.allowScrolling = false;
             this.map.options.enableZoomByDoubleClick = true;
@@ -261,9 +274,14 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         }
     }
 
-    abstract toggleTrafficJamLayer(show?: boolean): void;
+    getMapOptions(): IMapOptions {
 
-    abstract toggleTransitLayer(show?: boolean): void;
+        return this.map.options;
+    }
+
+    abstract toggleTrafficLayer(show: boolean): void;
+
+    abstract toggleTransitLayer(show: boolean): void;
 
     abstract zoomIn(): void;
 

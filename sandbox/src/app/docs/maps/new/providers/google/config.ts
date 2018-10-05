@@ -14,6 +14,9 @@ import * as mark from "../../../test.markers.json";
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
 import { IPosition } from '../../interfaces/i-position';
 import { ResponseStatus } from './enum/i-status-response ';
+import { IMapOptions } from '../../../interface/i-config';
+import { Position } from '../../entity/position';
+import { ILatLngBounds } from './interfaces/i-latln-bounds';
 
 declare var google;
 let transitLayer;
@@ -22,16 +25,9 @@ let trafficLayer;
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
 
-    getDetailsPoint(placeId: string): IPoint[] {
-        let placesService = new google.maps.places.PlacesService(this.map.api);
+    boundsContainsMarker(point: IPoint): boolean {
 
-        placesService.getDetails({ placeId: placeId }, function (place, status) {
-
-            if (status == ResponseStatus.OK) {
-                console.log(place, status)
-            }
-        });
-        return null;
+        return this.getBounds().contains(new google.maps.LatLng(point.position.latitude, point.position.longitude));
     }
 
     onClickMap(event: IEventClickMap) {
@@ -59,10 +55,10 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     getAddress(coord: Position): IPoint[] {
-
+        let latLng = new google.maps.LatLng(coord.latitude, coord.longitude);
         let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'latLng': coord },
-            function (results, status) {
+        geocoder.geocode({ 'latLng': latLng },
+            (results, status) => {
                 if (status == ResponseStatus.OK) {
                     console.log(results[0], status)
                 }
@@ -70,12 +66,24 @@ export class GoogleConfig extends AbstractConfig {
         return null
     }
 
+    getDetailsPoint(placeId: string): IPoint[] {
+        let placesService = new google.maps.places.PlacesService(this.map.api);
+
+        placesService.getDetails({ placeId: placeId },
+            (place, status) => {
+                if (status == ResponseStatus.OK) {
+                    console.log(place, status)
+                }
+            });
+        return null;
+    }
+
     getZoom(): number {
 
         return this.map.api.getZoom();
     }
 
-    getBounds(): any {
+    getBounds(): ILatLngBounds {
 
         return this.map.api.getBounds();
     }
@@ -96,43 +104,84 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     setCenter(position: IPosition): void {
-        
+
         this.map.api.setCenter({ lat: position.latitude, lng: position.longitude });
     }
 
+
+    toggleMapDragging(enabled: boolean) {
+
+        let currentMapOptions = super.getMapOptions();
+
+        if (enabled) {
+            this.map.api.setOptions({
+                draggable: currentMapOptions.draggable = false,
+                scrollwheel: currentMapOptions.scrollwheel = false,
+                disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = false,
+            });
+        }
+        else {
+            this.map.api.setOptions({
+                draggable: currentMapOptions.draggable = true,
+                scrollwheel: currentMapOptions.scrollwheel = true,
+                disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = true,
+            });
+        }
+    }
+
+
     showMarker(point: IPoint) {
+
+        super.showMarker(point);
 
         let googleMarkerOptions: GoogleMarkerOptions = {
             draggable: true,
             clickable: true,
             visible: true,
-            title: point.title,
+            title: '',
             position: new google.maps.LatLng(point.position.latitude, point.position.longitude),
             icon: {
                 title: 'picture',
                 url: './assets/icons_map/icon_hotel.png'
             },
-            zIndex: 1,
+            zIndex: 100,
 
         };
+
         let marker = new google.maps.Marker(googleMarkerOptions);
-        super.showMarker(marker)
+     //   marker.getPosition()
+
+       // console.log(marker.getPosition(),'getPosition')
+        //   console.log(marker)
+        //  marker.setMap(this.map.api)
+
+
+
+
     }
 
     drawMarkersOnMap(): void {
-        let pl: IPoint = new IPoint();
 
-        for (let i = 0; i < mark.default.length; i++) {
-            let item = mark.default[i];
-            let point: IPoint = new IPoint();
-            point.position = new IPosition();
-            point.position.longitude = item.Address.Lng;
-            point.position.latitude = item.Address.Lat;
+        super.drawMarkersOnMap();
 
-            item["point"] = point
-            this.showMarker(point);
 
-        }
+
+        // console.log('Выполнение уже здесь! в конкретной карте')
+
+
+        // let pl: IPoint = new IPoint();
+
+        // for (let i = 0; i < mark.default.length; i++) {
+        //     let item = mark.default[i];
+        //     let point: IPoint = new IPoint();
+        //     point.position = new Position();
+        //     point.position.longitude = item.Address.Lng;
+        //     point.position.latitude = item.Address.Lat;
+
+        //     item["point"] = point
+        //     this.showMarker(point);
+
+        // }
     }
 
     drawCircle(options: ICircleOptions): void {
@@ -158,15 +207,15 @@ export class GoogleConfig extends AbstractConfig {
         throw new Error("Method not implemented.");
     }
 
-    toggleTrafficJamLayer(show?: boolean): void {
-        
+    toggleTrafficLayer(show: boolean): void {
+
         if (trafficLayer == null) {
             trafficLayer = new google.maps.TrafficLayer();
         }
         trafficLayer.setMap(show ? this.map.api : null);
     }
 
-    toggleTransitLayer(show?: boolean): void {
+    toggleTransitLayer(show: boolean): void {
 
         if (transitLayer == null) {
             transitLayer = new google.maps.TransitLayer();

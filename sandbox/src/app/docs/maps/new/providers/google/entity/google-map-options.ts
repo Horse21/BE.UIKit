@@ -21,6 +21,7 @@ export class GoogleMapOptions implements IMapOptions {
     draggable: boolean;
     disableDefaultUI: boolean;
     draggableCursor:string;
+    scrollwheel:false;
 
     constructor() {
         this.minZoom = 3;

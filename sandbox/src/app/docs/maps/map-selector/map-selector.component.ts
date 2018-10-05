@@ -1,7 +1,7 @@
-import { Component, Injectable  } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { MapType } from '../new/enum/e-map-type';
-import {MapManager} from '../new/entity/map-manager';
-import { GoogleMap } from '../new/providers/google/map';
+import { MapManager } from '../new/entity/map-manager';
+import { mapInfoForSelect } from '../new/entity/map-info-select';
 
 @Component({
   selector: 'app-map-selector',
@@ -18,16 +18,17 @@ export class MapSelectorComponent {
   }
 
   private mapList(nameMap: string): mapInfoForSelect[] {
-    
+
     let temp: mapInfoForSelect[] = Object.keys(MapType)
       .filter((type) => isNaN(<any>type))
       .map<mapInfoForSelect>(
         (type) => {
           let info: mapInfoForSelect = new mapInfoForSelect();
           info.value = type;
-          info.name = type[0].toUpperCase() + type.slice(1);
+          info.name = type.toLowerCase();
           info.active = type === nameMap;
           return info;
+         
         });
 
     return temp;
@@ -38,24 +39,17 @@ export class MapSelectorComponent {
     this.mapInfo = this.mapList(type);
     this.selectedMap = MapType[type];
     this.InitMap(MapType[type]);
+    
   }
 
   public InitMap(mapType: MapType) {
 
-   this.manager.selectMap(mapType);
+    this.manager.selectMap(mapType);
   }
 
   ngAfterViewInit(): void {
 
+    this.InitMap(MapType.GOOGLE);
 
-    this.InitMap(MapType.GOOGLE);    
   }
-}
-
-
-@Injectable()
-export class mapInfoForSelect {
-  public value: string;
-  public name: string;
-  public active: boolean;
 }

@@ -1,5 +1,4 @@
-export class IPosition {
-    
+export interface IPosition {
     latitude: number;
     longitude: number;
 }

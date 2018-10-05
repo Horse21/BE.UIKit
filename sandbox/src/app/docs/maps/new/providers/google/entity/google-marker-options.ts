@@ -7,7 +7,6 @@ import { AbstractMap } from "../../../abstract/abstract-map";
 
 @Injectable()
 export class GoogleMarkerOptions implements IBaseMarkerOptions {
-
     draggable: boolean;
     visible: boolean;
     clickable: boolean;

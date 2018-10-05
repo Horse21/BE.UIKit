@@ -16,4 +16,5 @@ export interface IMapOptions {
     draggable: boolean;
     disableDefaultUI:boolean;
     draggableCursor:string;
+    scrollwheel:boolean;
 }
