@@ -1,24 +1,24 @@
 <mat-card class="c-h21-user-card">
 	<mat-card-header>
-		<img mat-card-avatar src="{{userAvatarUrl}}" alt="" />
-		<mat-card-title>{{userName}}</mat-card-title>
-		<mat-card-subtitle>{{userEmail}}</mat-card-subtitle>
+		<img mat-card-avatar src="{{data.user.avatarUrl}}" alt="" />
+		<mat-card-title>{{data.user.name}}</mat-card-title>
+		<mat-card-subtitle>{{data.user.email}}</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-actions>
 		<mat-nav-list>
-			<mat-list-item>
-				<mat-icon mat-list-icon>person</mat-icon>
-				<a matLine href="#">My profile</a>
+			<mat-list-item *ngFor="let action of data.actions">
+				<mat-icon mat-list-icon>{{action.icon}}</mat-icon>
+				<a matLine
+				   *ngIf="action.type == 'link'"
+				   [routerLink]="[action.route]">{{action.label}}</a>
+				<a matLine
+				   *ngIf="action.type == 'button'"
+				   (click)="action(action.name)">{{action.label}}</a>
+				<mat-divider></mat-divider>
 			</mat-list-item>
-			<mat-divider></mat-divider>
-			<mat-list-item>
-				<mat-icon mat-list-icon>insert_drive_file</mat-icon>
-				<a matLine href="#">Orders</a>
-			</mat-list-item>
-			<mat-divider></mat-divider>
 			<mat-list-item>
 				<mat-icon mat-list-icon>exit_to_app</mat-icon>
-				<a matLine href="#" (click)="logout(); false;">Exit</a>
+				<a matLine (click)="logout(); false;">Exit</a>
 			</mat-list-item>
 		</mat-nav-list>
 	</mat-card-actions>

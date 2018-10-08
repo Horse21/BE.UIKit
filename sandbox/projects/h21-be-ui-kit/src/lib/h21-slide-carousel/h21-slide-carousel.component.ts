@@ -31,7 +31,7 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit, AfterVi
 	private currentTranslation: number = 0;
 	private currentIndex: number = 0;
 
-	@ViewChild('H21SlideCarousel') dataGrid: ElementRef;
+	@ViewChild('H21SlideCarousel') carousel: ElementRef;
 
 	constructor (private _renderer: Renderer2,
 				 public dialog: MatDialog) {
@@ -53,8 +53,8 @@ export class H21SlideCarouselComponent implements AfterViewInit, OnInit, AfterVi
 	}
 
 	ngAfterViewChecked() {
-		if (this.viewPortWidth && this.dataGrid.nativeElement.clientWidth) {
-			if(this.viewPortWidth != this.dataGrid.nativeElement.clientWidth) {
+		if (this.viewPortWidth && this.carousel.nativeElement.clientWidth) {
+			if(this.viewPortWidth != this.carousel.nativeElement.clientWidth) {
 				this.init();
 			}
 		}

@@ -35,27 +35,18 @@
 		<h21-cart-combobox></h21-cart-combobox>
 	</ng-container>
 
-	<!-- -->
+	<!-- Select language combobox -->
 	<ng-container *ngIf="showLanguageControl">
-		<mat-form-field appearance="fill">
-			<mat-select [(value)]="selectedLanguage">
-				<mat-option [value]="'deu'">DEU</mat-option>
-				<mat-option [value]="'eng'">ENG</mat-option>
-				<mat-option [value]="'fra'">FRA</mat-option>
-				<mat-option [value]="'rus'">RUS</mat-option>
-			</mat-select>
-		</mat-form-field>
+		<h21-combobox [options]="languageOptions"
+					  [tooltipText]="languageOptionsTooltipText"
+					  [value]="selectedLanguage"></h21-combobox>
 	</ng-container>
 
-	<!-- -->
+	<!-- Select currency combobox -->
 	<ng-container *ngIf="showCurrencyControl">
-		<mat-form-field appearance="fill">
-			<mat-select [(value)]="selectedCurrency">
-				<mat-option [value]="'eur'">EUR</mat-option>
-				<mat-option [value]="'rub'">RUR</mat-option>
-				<mat-option [value]="'usd'">USD</mat-option>
-			</mat-select>
-		</mat-form-field>
+		<h21-combobox [options]="currencyOptions"
+					  [tooltipText]="currencyOptionsTooltipText"
+					  [value]="selectedCurrency"></h21-combobox>
 	</ng-container>
 
 	<!-- Profile user card actions -->

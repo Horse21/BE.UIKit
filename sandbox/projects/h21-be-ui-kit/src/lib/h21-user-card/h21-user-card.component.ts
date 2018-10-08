@@ -1,4 +1,10 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {
+	Component,
+	EventEmitter,
+	Output,
+	Input
+} from "@angular/core";
+import {IUserCardData} from "../../dto/i-user-card-data";
 
 @Component ({
 	selector: 'h21-user-card',
@@ -6,12 +12,18 @@ import {Component, EventEmitter, Output} from "@angular/core";
 })
 
 export class H21UserCardComponent {
-	userName =  'Sergey Strovatikov';
-	userEmail =  'darkdes6@gmail.com';
-	userAvatarUrl = '/assets/avatar-picture.png';
-
-
+	@Input() data: IUserCardData;
+	@Output() onAction: EventEmitter<string> = new EventEmitter();
 	@Output() onLogout: EventEmitter<void> = new EventEmitter();
+
+	constructor () {
+
+	}
+
+	action(actionName: string): void {
+		console.log('test');
+		this.onAction.emit(actionName);
+	}
 
 	logout(): void {
 		this.onLogout.emit();
