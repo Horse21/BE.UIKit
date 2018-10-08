@@ -8,6 +8,9 @@ import { Injectable } from "@angular/core";
 import { GoogleEvent } from "./event";
 import { GoogleConfig } from "./config";
 import { ReadyStateScript } from "../../enum/e-ready-state-script";
+import { AbstractMarkerCluster } from "../../abstract/abstract-marker-cluster";
+import { GoogleMarkerCluster } from "./cluster";
+import { GeoContainer } from "../../entity/geo-container";
 
 declare var google;
 declare var document;
@@ -22,15 +25,20 @@ export class GoogleMap extends AbstractMap {
         return ".gm-style";
     }
 
-    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent) {
-        super(mapOptions, config, events);
+    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent, cluster: GoogleMarkerCluster, geo:GeoContainer ) {
+        super(mapOptions, config, events, cluster, geo);
+        
     }
 
     init(): void {
+
         this.api = new google.maps.Map(this.container, this.options);
+        this.geo = this.geo;
+
     }
 
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
+
         return new Observable((observer: Observer<FetchStatus>) => {
             let apiScript = document.createElement('script');
             let headElement = document.getElementsByTagName('head')[0];
@@ -67,7 +75,7 @@ export class GoogleMap extends AbstractMap {
     }
 
     destroy(): void {
-        
+
         super.destroy();
         google = null;
 

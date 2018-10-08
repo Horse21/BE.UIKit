@@ -1,7 +1,8 @@
 import { AbstractMarkerCluster } from "../../abstract/abstract-marker-cluster";
 import { BaseMarker } from "../../entity/base-marker";
-import { MarkerClusterer } from '@google/markerclustererplus';
+import * as MarkerClusterer from '@google/markerclustererplus';
 import { Injectable } from "@angular/core";
+import { IPoint } from "../../interfaces/i-point";
 
 @Injectable()
 export class GoogleMarkerCluster extends AbstractMarkerCluster {
@@ -9,14 +10,18 @@ export class GoogleMarkerCluster extends AbstractMarkerCluster {
     googleCluster: MarkerClusterer;
 
     constructor() {
+
         super();
+    }
+
+    initMarkerCluster(): void {
 
         let mcOptions = {
-            gridSize: 100, 
-            maxZoom: 19, 
+            gridSize: 100,
+            maxZoom: 19,
             zoomOnClick: true,
             ignoreHidden: false,
-             styles: [
+            styles: [
                 {
                     textColor: 'black',
                     url: './assets/icons_map/icon_pointgroup.png',
@@ -29,18 +34,36 @@ export class GoogleMarkerCluster extends AbstractMarkerCluster {
     }
 
     addMarker(marker: BaseMarker, show?: boolean): void {
+
         this.googleCluster.addMarker(marker, show);
+
+    }
+
+    addMarkers(markers: Array<IPoint>, show?: boolean): void {
+
+        this.googleCluster.addMarker(markers, show);
     }
 
     refreshMarkers(): void {
+
         this.googleCluster.redraw_();
+
     }
 
     removeMarker(marker: BaseMarker) {
+
         this.googleCluster.removeMarker(marker, false);
+
+    }
+
+    removeMarkers() {
+
+        this.googleCluster.clearMarkers();
+
     }
 
     resetViewport(): void {
+
         this.googleCluster.resetViewport_();
     }
 

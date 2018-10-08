@@ -21,6 +21,7 @@ import { IMapOptions } from '../interfaces/i-map-options';
 import { Position } from '../entity/position';
 import { Point } from '../entity/point';
 import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
+import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 
 declare var google;
 
@@ -40,6 +41,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     loadMarkers: boolean;
     routeBuilder: AbstractRouteBuilder;
 
+
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
         if (show) {
             let routeOptions;
@@ -54,32 +56,69 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         }
     }
 
-    clearMap(): void {
-        this.map.geo.clearAll();
+    clearAllMap(): void {
+
+        this.map.geo.clearAllMap();
     }
+
+    clearClusters(): void {
+
+        this.map.geo.clearClusters();
+    }
+
+    clearMarkers(): void {
+
+        this.map.geo.clearMarkers();
+    }
+
+    clearRoutes(): void {
+
+        this.map.geo.clearRoutes();
+    }
+
+    clearPolygons(): void {
+
+        this.map.geo.clearPolygons();
+    }
+
 
     drawMarkersOnMap(): void {
         try {
-
+            this.clearAllMap();
             let zoom = this.getZoom();
             let markersVisible = false;
+
             if (zoom <= 3) {
-                this.clearMap();
+
+                this.clearAllMap();
             }
             if (zoom > 5) {
+
                 markersVisible = true;
             }
 
             if (markersVisible) {
                 for (let i = 0; i < mark.default.length; i++) {
                     let item = mark.default[i];
-                    let point: Point = new Point();
-                    point.position = new Position();
-                    point.position.latitude = item.Address.Lat;
-                    point.position.longitude = item.Address.Lng;
-                    if (this.boundsContainsMarker(point)) {
+                    let marker = new BaseMarker({
+                        title: '',
+                        icon: {
+                            url: './assets/icons_map/icon_hotel.png',
+                            title: ""
+                        },
+                        clickable: true,
+                        draggable: false,
+                        visible: true
 
-                    }
+
+                    });
+                    marker.point = new Position();
+                    marker.point.latitude = item.Address.Lat;
+                    marker.point.longitude = item.Address.Lng;
+
+                    this.boundsContainsMarker(marker);
+
+
                 }
             }
 
@@ -134,7 +173,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 fillOpacity: 0.35,
             };
 
-            this.clearMap();
+            this.clearAllMap();
 
             switch (type) {
                 case ShapeType.CIRCLE:
@@ -165,18 +204,16 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     getZoom(): number { return null }
 
-    markersFitsBounds(): void {
-        throw new Error("Method not implemented.");
-    }
-
+    abstract markersFitsBounds(): void ;
+    
     abstract onClickMap(event: IEventClickMap);
 
-    abstract boundsContainsMarker(point: IPoint): boolean;
+    abstract boundsContainsMarker(marker: BaseMarker): boolean;
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
-        let markerLatitude = marker.point.position.latitude;
-        let markerLongitude = marker.point.position.longitude;
+        let markerLatitude = marker.point.latitude;
+        let markerLongitude = marker.point.longitude;
 
         let polygonPointsLatitude = polygon.path.map(val => {
             return val.position.latitude;
@@ -210,8 +247,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         let circleCenterLatitude = position.latitude;
         let circleCenterLongitude = position.longitude;
 
-        let pointLatitude = marker.point.position.latitude;
-        let pointLongitude = marker.point.position.longitude;
+        let pointLatitude = marker.point.latitude;
+        let pointLongitude = marker.point.longitude;
 
         let radiansCircleCenterLatitude = circleCenterLatitude * (Math.PI / 180);
         let radiansCircleCenterLongitude = circleCenterLongitude * (Math.PI / 180);
@@ -260,6 +297,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract setCenter(position: IPosition): void;
 
     toggleMapDragging(enabled: boolean) {
+
         if (enabled) {
             this.map.options.allowScrolling = false;
             this.map.options.enableZoomByDoubleClick = true;
@@ -285,4 +323,5 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract zoomOut(): void;
 
+    abstract boundsExtend(bounds: ILatLngBounds): void;
 }

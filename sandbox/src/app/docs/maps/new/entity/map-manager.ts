@@ -43,6 +43,9 @@ export class MapManager {
                     this.currentMap.events.mapClicked<IEventClickMap>().subscribe((IEventClikMap) => {
                         this.currentMap.config.onClickMap(IEventClikMap)
                     });
+
+                    this.currentMap.cluster.initMarkerCluster();
+                    
                 }
             })
     }

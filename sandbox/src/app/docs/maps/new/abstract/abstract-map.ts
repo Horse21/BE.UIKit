@@ -6,6 +6,7 @@ import { IApiSettings } from '../interfaces/i-api-settings';
 import { Observable } from 'rxjs';
 import { AbstractEvent } from './abstract-event';
 import { Injectable } from '@angular/core';
+import { AbstractMarkerCluster } from './abstract-marker-cluster';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -13,7 +14,6 @@ export abstract class AbstractMap {
      * Map-specific API object
      */
     api: any;
-    geo: GeoContainer;
 
     public get container(): HTMLElement {
         return document.getElementById('map');
@@ -23,9 +23,12 @@ export abstract class AbstractMap {
 
     public abstract get scriptSelector(): string;
 
-    constructor(public options: IMapOptions, public config: AbstractConfig, public events: AbstractEvent) {
+    constructor(public options: IMapOptions, public config: AbstractConfig, public events: AbstractEvent, public cluster: AbstractMarkerCluster, public geo: GeoContainer) {
+
         this.events.initMap(this);
+        this.cluster.initMap(this);
         this.config.initMap(this);
+
     }
 
     /**

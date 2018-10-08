@@ -135,6 +135,7 @@ import { GoogleRouteBuilder } from './docs/maps/new/providers/google/route';
 import { GoogleMarker } from './docs/maps/new/providers/google/marker';
 import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/google-map-options';
 import { AbstractMap } from './docs/maps/new/abstract/abstract-map'
+import { GeoContainer } from './docs/maps/new/entity/geo-container'
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -286,6 +287,7 @@ const routes: Routes = [
 		GoogleRouteBuilder,
 		GoogleMarker,
 		GoogleMapOptions,
+		GeoContainer,
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [

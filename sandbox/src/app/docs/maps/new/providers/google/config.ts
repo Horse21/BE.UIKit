@@ -17,6 +17,8 @@ import { ResponseStatus } from './enum/i-status-response ';
 import { IMapOptions } from '../../../interface/i-config';
 import { Position } from '../../entity/position';
 import { ILatLngBounds } from './interfaces/i-latln-bounds';
+import { Point } from '../../entity/point';
+import { marker } from 'leaflet';
 
 declare var google;
 let transitLayer;
@@ -25,9 +27,89 @@ let trafficLayer;
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
 
-    boundsContainsMarker(point: IPoint): boolean {
+    markersFitsBounds(): void {
 
-        return this.getBounds().contains(new google.maps.LatLng(point.position.latitude, point.position.longitude));
+        var bounds = new google.maps.LatLngBounds();
+
+        for (var i = 0; i < this.map.geo.markers.length; i++) {
+           console.log(this.map.geo.markers[i],'ITEM')
+
+        }
+        if (this.map.geo.markers.length > 1) {         
+                 
+        }
+        if (this.map.geo.markers.length == 1) {
+           
+        }
+		
+    }
+
+    boundsExtend(bounds: ILatLngBounds): void {
+
+        throw new Error("Method not implemented.");
+    }
+
+    boundsContainsMarker(marker: BaseMarker): boolean {
+
+        let googleMarkerOptions: GoogleMarkerOptions = {
+            draggable: true,
+            clickable: true,
+            visible: true,
+            title: '',
+            position: new google.maps.LatLng(marker.point.latitude, marker.point.longitude),
+            icon: {
+                title: 'picture',
+                url: './assets/icons_map/icon_hotel.png'
+            },
+            zIndex: 10,
+
+        };
+
+        let googlemarker = new google.maps.Marker(googleMarkerOptions);
+
+        if (this.getBounds().contains(googlemarker.getPosition())) {
+
+            this.map.geo.pushMarkers(googlemarker);
+            this.map.cluster.addMarker(googlemarker, true);
+
+            this.markersFitsBounds();
+            console.log(this.map,'THIS MAP')
+
+        }
+
+        return true;
+
+    }
+
+
+    clearAllMap(): void {
+
+        this.clearClusters();
+        super.clearAllMap();
+
+    }
+
+    clearClusters(): void {
+
+        if (this.map.cluster.googleCluster != null) {
+            this.map.cluster.removeMarkers();
+        }
+        super.clearClusters();
+    }
+
+    clearMarkers(): void {
+
+        super.clearMarkers();
+    }
+
+    clearRoutes(): void {
+
+        super.clearRoutes();
+    }
+
+    clearPolygons(): void {
+
+        super.clearPolygons();
     }
 
     onClickMap(event: IEventClickMap) {
@@ -55,6 +137,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     getAddress(coord: Position): IPoint[] {
+
         let latLng = new google.maps.LatLng(coord.latitude, coord.longitude);
         let geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'latLng': latLng },
@@ -67,6 +150,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     getDetailsPoint(placeId: string): IPoint[] {
+
         let placesService = new google.maps.places.PlacesService(this.map.api);
 
         placesService.getDetails({ placeId: placeId },
@@ -149,14 +233,11 @@ export class GoogleConfig extends AbstractConfig {
         };
 
         let marker = new google.maps.Marker(googleMarkerOptions);
-     //   marker.getPosition()
 
-       // console.log(marker.getPosition(),'getPosition')
-        //   console.log(marker)
-        //  marker.setMap(this.map.api)
-
-
-
+        if (this.map.cluster.googleCluster != null) {
+            this.map.cluster.addMarker(marker, true);
+            this.map.geo.pushMarkers(marker)
+        }
 
     }
 
@@ -164,24 +245,6 @@ export class GoogleConfig extends AbstractConfig {
 
         super.drawMarkersOnMap();
 
-
-
-        // console.log('Выполнение уже здесь! в конкретной карте')
-
-
-        // let pl: IPoint = new IPoint();
-
-        // for (let i = 0; i < mark.default.length; i++) {
-        //     let item = mark.default[i];
-        //     let point: IPoint = new IPoint();
-        //     point.position = new Position();
-        //     point.position.longitude = item.Address.Lng;
-        //     point.position.latitude = item.Address.Lat;
-
-        //     item["point"] = point
-        //     this.showMarker(point);
-
-        // }
     }
 
     drawCircle(options: ICircleOptions): void {

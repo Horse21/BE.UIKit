@@ -29,6 +29,7 @@ export abstract class AbstractRouteBuilder {
     }
 
     setMap(map: AbstractMap): AbstractRouteBuilder {
+        console.log('setMap')
         this.map = map;
         return this;
     }

@@ -7,17 +7,22 @@ import { ZoomType } from '../new/enum/e-zoom-type';
   templateUrl: './map-toolbar.component.html',
   styleUrls: ['./map-toolbar.component.css']
 })
+
 export class MapToolbarComponent {
 
   constructor(private manager: MapManager) { }
 
   private zoomLevel(type: string) {
-    
+
     if (type === ZoomType.In) {
+
       this.manager.getActiveMap().config.zoomIn();
+
     }
     else {
+
       this.manager.getActiveMap().config.zoomOut();
+
     }
   }
 
@@ -28,6 +33,9 @@ export class MapToolbarComponent {
   }
 
   private clearMap() {
+
+    this.manager.getActiveMap().config.clearAllMap();
+
   }
 
   private onChangeTransit(event: any) {
@@ -37,7 +45,8 @@ export class MapToolbarComponent {
 
   private onChangeTraffic(event: any) {
 
-    this.manager.getActiveMap().config.toggleTrafficJamLayer(event.checked);
+    this.manager.getActiveMap().config.toggleTrafficLayer(event.checked);
+
   }
 
 

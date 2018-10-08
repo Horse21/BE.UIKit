@@ -1,12 +1,13 @@
 import { AbstractEvent } from "../../abstract/abstract-event";
 import { Observable, Observer } from "rxjs";
 import { Injectable } from "@angular/core";
-import { IEventClickMap } from "./interfaces/i-event-clik-map";
 
 @Injectable()
 export class GoogleEvent extends AbstractEvent {
-    constructor() {
+    constructor() { 
+
         super();
+        
     }
 
     listen<E>(eventName: string): Observable<E> {
