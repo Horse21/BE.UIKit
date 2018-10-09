@@ -11,6 +11,7 @@ import {MatDialog} from "@angular/material";
 import {DateAdapter, MAT_DATE_FORMATS, MatDateFormats} from "@angular/material";
 import {H21TwoMonthCalendarDialogComponent} from "./h21-two-month-calendar-dialog.component";
 import {FormControl, Validators} from "@angular/forms";
+import {H21TwoMonthCalendarRangeViewMode} from "./h21-two-month-calendar-range-view-mode.enum";
 import {formatDate} from "@angular/common";
 
 @Component({
@@ -22,7 +23,8 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 
 	@Input() required: boolean = false;
 	@Input() requiredErrorText: string = 'You must chose date';
-	@Input() rangeViewMode: 'joint' | 'divided' = 'joint';
+	checkRangeViewModeType: any = H21TwoMonthCalendarRangeViewMode;
+	@Input() rangeViewMode: H21TwoMonthCalendarRangeViewMode = H21TwoMonthCalendarRangeViewMode.Joint;
 	@Input() showWeekdayHint: boolean = false;
 
 	/** Date selection mode, if true - the date range (the start and end date of the range are selected), if false, one date. */
@@ -139,7 +141,7 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 
 	setFieldsValue(): void {
 		if (this.rangeSelectMode) {
-			if (this.rangeViewMode == 'joint') {
+			if (this.rangeViewMode == H21TwoMonthCalendarRangeViewMode.Joint) {
 				const dateStr: string =
 					(this.selectedFromDate ? formatDate(this.selectedFromDate, 'MM.dd.yy', this._locale) : '') +
 					(this.selectedFromDate || this.selectedToDate ? ' - ' : '') +

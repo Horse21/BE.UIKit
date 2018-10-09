@@ -3,7 +3,7 @@
 	<!-- Range mode form field -->
 	<ng-container *ngIf="rangeSelectMode">
 
-		<ng-container *ngIf="rangeViewMode == 'joint'">
+		<ng-container *ngIf="rangeViewMode === checkRangeViewModeType.Joint">
 			<mat-form-field (click)="openDialog()" class="h21-form-field">
 				<input matInput type="text"
 					   [formControl]="fromFormControl"
@@ -16,7 +16,7 @@
 			</mat-form-field>
 		</ng-container>
 
-		<ng-container *ngIf="rangeViewMode == 'divided'">
+		<ng-container *ngIf="rangeViewMode === checkRangeViewModeType.Divided">
 			<div class="c-h21-two-month-calendar_field-flex">
 				<mat-form-field (click)="openDialog()" class="h21-form-field">
 					<input matInput type="text"

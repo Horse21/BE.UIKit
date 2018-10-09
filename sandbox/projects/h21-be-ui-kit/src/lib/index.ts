@@ -13,6 +13,7 @@ export * from './h21-top-toolbar/h21-top-toolbar.component';
 export * from './h21-two-month-calendar/h21-two-month-calendar.module';
 export * from './h21-two-month-calendar/h21-two-month-calendar.component';
 export * from './h21-two-month-calendar/h21-two-month-calendar-dialog.component';
+export * from './h21-two-month-calendar/h21-two-month-calendar-range-view-mode.enum';
 export * from './h21-search-result/h21-search-result.module';
 export * from './h21-search-result/h21-search-result.component';
 export * from './h21-search-panel/h21-search-panel.module';

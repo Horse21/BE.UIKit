@@ -1,12 +1,13 @@
-import { IDestinationItem } from './../../dto/i-destination-item';
-import { HttpClientService } from "../../services/http-client.service";
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
-import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
-import { H21TwoMonthCalendarComponent } from '../h21-two-month-calendar/h21-two-month-calendar.component';
-import { Observable } from "rxjs/index";
-import { startWith, map } from "rxjs/internal/operators";
+import {IDestinationItem} from './../../dto/i-destination-item';
+import {HttpClientService} from "../../services/http-client.service";
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {H21RightOverlayPanelService} from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
+import {IHotelSearchOptions} from '../../dto/i-hotel-search-options';
+import {H21TwoMonthCalendarComponent} from '../h21-two-month-calendar/h21-two-month-calendar.component';
+import {Observable} from "rxjs/index";
+import {startWith, map } from "rxjs/internal/operators";
+import {H21TwoMonthCalendarRangeViewMode} from "../h21-two-month-calendar/h21-two-month-calendar-range-view-mode.enum";
 
 const PREFERRED_CLASS: string[] = [
 	'Economy',
@@ -21,6 +22,8 @@ const PREFERRED_CLASS: string[] = [
 })
 
 export class H21HotelSearchPanelComponent {
+
+	calendarRangeViewMode: H21TwoMonthCalendarRangeViewMode = H21TwoMonthCalendarRangeViewMode.Divided;
 
 	@Input() searchMode: 'hotel' | 'room' = 'hotel';
 	@Output() onSearch: EventEmitter<IHotelSearchOptions> = new EventEmitter<IHotelSearchOptions>();
