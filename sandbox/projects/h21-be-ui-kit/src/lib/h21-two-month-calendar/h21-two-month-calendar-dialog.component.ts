@@ -2,7 +2,7 @@ import { Component, Renderer2, Inject, AfterViewInit, OnInit } from '@angular/co
 import { Subject } from 'rxjs';
 import { DateAdapter, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DialogData } from '../../dto/i-dialog-data';
+import { ITwoMonthCalendarDialogData } from './dto/i-two-month-calendar-dialog-data';
 
 @Component({
 	selector: 'h21-two-month-calendar-dialog',
@@ -26,12 +26,12 @@ export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit
 	/** The current slider shift relative to the first cell, in pixels */
 	sliderCurrentTranslation: number = 0;
 	/** An array with cells of currently active calendars */
-	dayCells: any[]; 
+	dayCells: any[];
 
 	calendarForm: FormGroup;
 
 	constructor(
-		@Inject(MAT_DIALOG_DATA) public data: DialogData,
+		@Inject(MAT_DIALOG_DATA) public data: ITwoMonthCalendarDialogData,
 		public dialogRef: MatDialogRef<H21TwoMonthCalendarDialogComponent>,
 		private _renderer: Renderer2,
 		private _dateAdapter: DateAdapter<Date>
@@ -444,8 +444,13 @@ export class H21TwoMonthCalendarDialogComponent implements OnInit, AfterViewInit
 		this.clearHighlight();
 	}
 
-	isAllDatesAreSelected() {
-		return (this.data.rangeSelectMode) ? (!this.data.selectedFromDate || !this.data.selectedToDate) : (!this.data.selectedFromDate)
+	checkCompletePossibility(): boolean {
+		if (this.data.required) {
+			return (this.data.rangeSelectMode)
+				? (this.data.selectedFromDate != null && this.data.selectedToDate != null)
+				: (this.data.selectedFromDate != null);
+		}
+		return true;
 	}
 
 }
