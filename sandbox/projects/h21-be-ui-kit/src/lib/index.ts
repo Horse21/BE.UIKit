@@ -63,4 +63,7 @@ export * from './h21-hotel-reservation/h21-hotel-reservation.module';
 export * from './h21-hotel-reservation/h21-hotel-reservation.component';
 export * from './h21-user-card/h21-user-card.module';
 export * from './h21-user-card/h21-user-card.component';
+export * from './h21-user-card/dto/i-user-card-data';
+export * from './h21-user-card/dto/i-user-card-user';
+export * from './h21-user-card/dto/i-user-card-action';
 

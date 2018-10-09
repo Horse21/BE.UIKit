@@ -4,7 +4,7 @@ import {
 	Output,
 	Input
 } from "@angular/core";
-import {IUserCardData} from "../../dto/i-user-card-data";
+import {IUserCardData} from "./dto/i-user-card-data";
 
 @Component ({
 	selector: 'h21-user-card',
