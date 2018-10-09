@@ -15,8 +15,7 @@ import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/ap
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
 import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-import {IHotelInfo, IHotelOption} from "../../projects/h21-be-ui-kit/src/dto";
-import { APP_BASE_HREF } from '@angular/common';
+import {IUserCardData} from "../../projects/h21-be-ui-kit/src/dto/i-user-card-data";
 
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
@@ -26,6 +25,29 @@ const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
 	{name: 'test', label: 'Map point', icon: 'not_listed_location', type: 'button', url: null, disabled: false},
 ];
 
+const USER_CARD_DATA: IUserCardData = {
+	user: {
+		name: 'Sergey Strovatikov',
+		email: 'darkdes6@gmail.com',
+		avatarUrl: './assets/avatar-picture.png',
+	},
+	actions: [
+		{
+			name: 'profile',
+			label: 'My Profile',
+			icon: 'person',
+			route: 'demo/hotel',
+			type: 'link'
+		},
+		{
+			name: 'orders',
+			label: 'Orders',
+			icon: 'insert_drive_file',
+			route: 'demo/reservation',
+			type: 'link'
+		},
+	]
+};
 
 @Component({
   selector: 'app-root',
@@ -98,6 +120,7 @@ export class AppComponent {
 	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
+	userCardData: IUserCardData = USER_CARD_DATA;
 	activeLeftSidenavPanel: string = 'search';
 	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;

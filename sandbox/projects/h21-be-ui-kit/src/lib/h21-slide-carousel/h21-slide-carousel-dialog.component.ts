@@ -1,9 +1,8 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {DialogData} from "../h21-two-month-calendar/h21-two-month-calendar-dialog.component";
 
 @Component({
-	selector: '',
+	selector: 'h21-slide-carousel-dialog',
 	template: `
 	<div>
 		<img src="{{url}}" alt="" />

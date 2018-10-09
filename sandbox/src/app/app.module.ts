@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { NgxMdModule } from 'ngx-md';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import { DestinationLoaderService } from './../../projects/h21-be-ui-kit/src/services/destination-loader.service';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxMdModule} from 'ngx-md';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AppSubscriberService } from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import { OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
 import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/vocabulary-service';
@@ -22,37 +23,42 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { DxDataGridModule, DxTemplateModule } from 'devextreme-angular';
 
 /** Import H21 components */
-import { H21HeaderComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
-import { H21TopToolbarComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
-import { H21SidebarNavComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar-nav/h21-sidebar-nav.component';
-import { H21SidebarComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
-import { H21SearchPanelComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
-import { H21HotelSearchPanelComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-panel/h21-hotel-search-panel.component';
-import { H21HotelFilterPanelComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel.component';
-import { H21FlyRouteSelectionComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
-import { H21PassengersSelectComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
-import { H21SearchResultComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
-import { H21SearchResultRowComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
-import { H21FilterPanelComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
-import { H21BreadcrumbsComponent } from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
-import { H21UserCardComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component';
-import { H21RightOverlayPanelComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
-import { H21HeaderUserSelectorDialogComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
-import { H21HeaderSearchSettingsDialogComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-search-settings-dialog.component';
-import { H21PassengersSearchComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
-import { H21HelpComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
-import { H21TwoMonthCalendarComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
-import { H21TwoMonthCalendarDialogComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar-dialog.component";
-import { H21RightOverlayPanelService } from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
-import { H21CounterComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-counter/h21-counter.component";
-import { H21RateComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
-import { H21HistoryPanelComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
-import { H21HotelSearchResultComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-import { H21HotelBookComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-book/h21-hotel-book.component";
-import { H21SlideCarouselComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
-import { H21HotelSearchResultCardComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
-import { H21HotelRoomDetailComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
-import { H21CartComboboxComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-cart-combobox/h21-cart-combobox.component";
+import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header.component';
+import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
+import {H21SidebarNavComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar-nav/h21-sidebar-nav.component';
+import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
+import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
+import {H21HotelSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-panel/h21-hotel-search-panel.component';
+import {H21HotelFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel.component';
+import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
+import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
+import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
+import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
+import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
+import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
+import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
+import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
+import {H21HeaderSearchSettingsDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-search-settings-dialog.component';
+import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
+import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
+import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
+import {H21TwoMonthCalendarDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar-dialog.component";
+import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
+import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-counter/h21-counter.component";
+import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
+import {H21HistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
+import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+import {H21HotelBookComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-book/h21-hotel-book.component";
+import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
+import {H21HotelSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
+import {H21HotelRoomDetailComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
+import {H21CartComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-cart-combobox/h21-cart-combobox.component";
+import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
+import {H21HotelReservationComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-reservation/h21-hotel-reservation.component";
+import {H21AccountSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select.component";
+import {H21AccountSelectService} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
+import {H21ComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-combobox/h21-combobox.component";
+import {H21UserCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component";
 
 /** Import Examples */
 import { ButtonsDocsComponent } from './docs/buttons/buttons-docs.component';
@@ -135,7 +141,15 @@ import { GoogleRouteBuilder } from './docs/maps/new/providers/google/route';
 import { GoogleMarker } from './docs/maps/new/providers/google/marker';
 import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/google-map-options';
 import { AbstractMap } from './docs/maps/new/abstract/abstract-map'
+<<<<<<< HEAD
 import { GeoContainer } from './docs/maps/new/entity/geo-container'
+=======
+import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
+import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
+import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
+import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
+
+>>>>>>> a584266bfb46be2f3695502d50f3933906a5c8d4
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -144,13 +158,15 @@ const routes: Routes = [
 	// 		//{path: '', component: H21FilterPanelComponent, outlet: 'filterPanel'},
 	// 		{path: '', component: H21HistoryPanelComponent, outlet: 'historyPanel'},
 	// 	]},
-	{ path: 'demo', component: AppComponent },
-	{ path: 'demo/hotel', component: H21HotelBookComponent },
-	{ path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
-	{ path: 'docs', component: DocsComponent },
-	{ path: 'style/:', component: DocsNavigationComponent },
-	{ path: 'components/:', component: DocsNavigationComponent },
-	{ path: '**', redirectTo: '/' }
+
+	{path: 'demo', component: AppComponent },
+	{path: 'demo/hotel', component: H21HotelBookComponent },
+	{path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
+	{path: 'demo/reservation', component: H21HotelReservationComponent },
+	{path: 'docs', component: DocsComponent },
+	{path: 'style/:', component: DocsNavigationComponent },
+	{path: 'components/:', component: DocsNavigationComponent },
+	{path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
@@ -170,7 +186,6 @@ const routes: Routes = [
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
 		H21HeaderSearchSettingsDialogComponent,
-		H21UserCardComponent,
 		H21RightOverlayPanelComponent,
 		H21PassengersSearchComponent,
 		H21HelpComponent,
@@ -223,6 +238,10 @@ const routes: Routes = [
 		H21TopToolbarButtonContainerComponent,
 		H21CartComboboxComponent,
 		H21SlideCarouselDialogComponent,
+		H21HotelReservationComponent,
+		H21AccountSelectComponent,
+		H21ComboboxComponent,
+		H21UserCardComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -243,6 +262,7 @@ const routes: Routes = [
 			useValue: new FakeVocabularyService()
 		},
 		H21RightOverlayPanelService,
+		H21AccountSelectService,
 		AppSubscriberService,
 		OrderService,
 		Manager.Map.Manager,
@@ -287,7 +307,11 @@ const routes: Routes = [
 		GoogleRouteBuilder,
 		GoogleMarker,
 		GoogleMapOptions,
+<<<<<<< HEAD
 		GeoContainer,
+=======
+		DestinationLoaderService
+>>>>>>> a584266bfb46be2f3695502d50f3933906a5c8d4
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
@@ -296,6 +320,7 @@ const routes: Routes = [
 		H21HeaderSearchSettingsDialogComponent,
 		H21TwoMonthCalendarDialogComponent,
 		H21RightOverlayPanelComponent,
+		H21AccountSelectComponent,
 		H21SlideCarouselDialogComponent,
 	]
 })
@@ -303,5 +328,3 @@ const routes: Routes = [
 export class AppModule {
 
 }
-
-//platformBrowserDynamic().bootstrapModule(AppModule);

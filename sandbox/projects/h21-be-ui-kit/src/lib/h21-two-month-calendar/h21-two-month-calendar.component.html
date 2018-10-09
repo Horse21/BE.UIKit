@@ -1,7 +1,7 @@
 <div class="c-h21-two-month-calendar_field">
 	<!-- Range mode form field -->
 	<mat-form-field *ngIf="rangeSelectMode">
-		<input matInput placeholder="{{fromDateText}}/{{toDateText}} {{suffixText}}" value="{{textFieldLabel}}" [readonly]="true" />
+		<input matInput placeholder="{{fromDateText}}/{{toDateText}} {{suffixText}}" value="{{selectedFromDate | date: 'MM.dd.yy' }}  - {{selectedToDate | date: 'MM.dd.yy' }}" [readonly]="true" (click)="openDialog()"/>
 		<button mat-icon-button matSuffix (click)="openDialog()">
 			<mat-icon>date_range</mat-icon>
 		</button>
@@ -9,7 +9,7 @@
 
 	<!-- Single mode form field -->
 	<mat-form-field *ngIf="!rangeSelectMode">
-		<input type="text" matInput placeholder="{{fromDateText}} {{suffixText}}" value="{{textFieldLabel}}" [readonly]="true" />
+		<input type="text" matInput placeholder="{{fromDateText}} {{suffixText}}" value="{{selectedFromDate | date: 'MM.dd.yy' }}" [readonly]="true" (click)="openDialog()"/>
 		<button mat-icon-button matSuffix (click)="openDialog()">
 			<mat-icon>date_range</mat-icon>
 		</button>
