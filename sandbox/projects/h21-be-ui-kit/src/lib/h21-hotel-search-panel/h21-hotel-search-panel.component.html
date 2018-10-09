@@ -15,15 +15,16 @@
 				   required
 				   ngDefaultControl
 				   [formControl]="destinationControl"
-				   [matAutocomplete]="destinationAutocomplete"
-				   (keyup)="onDestinationEdited($event)"
-				   (focus)="onDestinationEdited($event)"/>
+				   [matAutocomplete]="destinationAutocomplete"/>
 			<mat-icon matSuffix>location_on</mat-icon>
 			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
-			<mat-autocomplete #destinationAutocomplete="matAutocomplete" [autoActiveFirstOption]="false" class="c-h21-search-panel_autocomplete">
-				<mat-option *ngFor="let item of destinations"
+			<mat-autocomplete #destinationAutocomplete="matAutocomplete"
+							  [autoActiveFirstOption]="false"
+							  class="c-h21-search-panel_autocomplete">
+				<mat-option *ngFor="let item of destinationListFiltered | async"
 							[value]="item.name"
-							class="autocomplete_optgroup-label">
+							class="autocomplete_optgroup-label"
+							(onSelectionChange)="selectDestination(item.id)">
 					<ng-container [ngSwitch]="item.type">
 						<mat-icon *ngSwitchCase="'city'" class="__size-s">location_on</mat-icon>
 						<mat-icon *ngSwitchCase="'airport'" class="__size-s">directions_transit</mat-icon>
@@ -162,7 +163,7 @@
 	<!-- Hotel search action buttons -->
 	<ng-container *ngIf="searchMode == 'hotel'">
 		<div class="c-h21-search-panel_bottom-attached-box">
-			<button mat-button class="__size-l mr-3" [disabled]="disabledClearBtn()" (click)="clearSearch()">Clear search</button>
+			<button mat-button class="__size-l mr-3" (click)="clearSearch()">Clear search</button>
 			<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
 		</div>
 	</ng-container>

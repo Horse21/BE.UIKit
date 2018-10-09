@@ -1,12 +1,12 @@
-import { environment } from './../../environments/environment';
-import { DestinationLoaderService } from './../../services/destination-loader.service';
 import { IDestinationItem } from './../../dto/i-destination-item';
+import { HttpClientService } from "../../services/http-client.service";
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
 import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
 import { H21TwoMonthCalendarComponent } from '../h21-two-month-calendar/h21-two-month-calendar.component';
-import { debounceTime } from 'rxjs/operators';
+import { Observable } from "rxjs/index";
+import { startWith, map } from "rxjs/internal/operators";
 
 const PREFERRED_CLASS: string[] = [
 	'Economy',
@@ -31,17 +31,18 @@ export class H21HotelSearchPanelComponent {
 	poiControl: FormControl = new FormControl('', [Validators.required]);
 	@ViewChild('calendar') calendarControl: H21TwoMonthCalendarComponent;
 
+	selectedDestinationId: number = 0;
+	@Input() destinationList: IDestinationItem[];
+	@Input() destinationListUrl: string;
+	destinationListFiltered: Observable<IDestinationItem[]>;
+
 	searchOptions: IHotelSearchOptions;
 	adultsCount: number = 1;
 	childrenCount: number = 0;
 	childAge_1: number = null;
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
-	destinations: Array<IDestinationItem>;
-	destinationsFiltered: Array<IDestinationItem>;
-	filterStartLettersCount: number = 3;
 	preferredClass: string[] = PREFERRED_CLASS;
-
 	paymentMethod: 'account' | 'hotel' = 'account';
 	destination: string = '';
 	nationality: string = '';
@@ -52,55 +53,17 @@ export class H21HotelSearchPanelComponent {
 	roomsType: string[];
 
 	constructor(private _rightPanelDialog: H21RightOverlayPanelService,
-				private destinationLoader: DestinationLoaderService) {
+				private _httpClientService: HttpClientService) {
 		this.roomsType = [ this.preferredClass ? this.preferredClass[0] : '' ];
 	}
 
-	disabledClearBtn(): boolean {
-		return false;
-	}
-
 	ngOnInit(): void {
-		this.fetchDestinations();
-		this.destinationControl.valueChanges
-			.pipe(debounceTime(environment.debouncingTime))
-			.subscribe((event) => this.onDestinationEdited(event));
-	}
-
-	fetchDestinations() {
-		this.destinationLoader
-			.url(
-				'https://gist.githubusercontent.com/atthealchemist/8c2f402868bd40f4bf167aea495cc2de/raw/3aa308e229cef0b0ed629e3a2bb878813a722918/destinations.json'
-			)
-			.getDestinations()
-			.subscribe(
-				(data) => (this.destinationsFiltered = data as Array<IDestinationItem>),
-				(error) => console.log('[FETCHING] Error', error),
-				() => console.log('[FETCHING] Successfully fetching destinations', this.destinationsFiltered)
-			);
-	}
-
-	onDestinationEdited(event) {
-		if (event instanceof Object) {
-			return;
+		if(!this.destinationList && this.destinationListUrl) {
+			this.fillDestinationList();
 		}
-		let enteredValue = event.toLowerCase();
-
-		let valueIsEmpty = !enteredValue || enteredValue === '';
-		let valueIsLessThanStartLettersCount = enteredValue.length < this.filterStartLettersCount;
-		let destinationsEmptyOrOne = this.destinationsFiltered ? this.destinationsFiltered.length <= 1 : false;
-
-		if (valueIsEmpty || valueIsLessThanStartLettersCount || destinationsEmptyOrOne) {
-			this.fetchDestinations();
-			this.destinations = this.destinationsFiltered;
-		} else {
-			console.log('[TYPING] onDestinationEdited.enteredValue', enteredValue);
-			this.destinations = this.destinationsFiltered.filter((value) => {
-				console.log('[TYPING FILTERING] this.destinations');
-				return value.name.toLowerCase().startsWith(enteredValue);
-			});
-		}
-		console.log('onDestinationEdited.destinations', this.destinations);
+		this.destinationListFiltered = this.destinationControl.valueChanges.pipe(
+			startWith(''),
+			map(value => this._destinationFilter(value)));
 	}
 
 	changeCheckInDate($event) {
@@ -150,6 +113,29 @@ export class H21HotelSearchPanelComponent {
 
 	showTravelers(): void {
 		this._rightPanelDialog.open('h21-selected-passengers');
+	}
+
+	fillDestinationList(): void {
+		this._httpClientService.get(this.destinationListUrl, { withCredentials: false }).subscribe(
+			(data) => (this.destinationList = data as IDestinationItem[]),
+			(error) => console.log('[FETCHING] Error', error));
+	}
+
+	private _destinationFilter(value: string): IDestinationItem[] {
+		this.clearDestination();
+		if (value.length > 2) {
+			const filterValue = value.toString().toLowerCase();
+			return this.destinationList.filter(item => item.name.toLowerCase().includes(filterValue));
+		}
+		return [];
+	}
+
+	selectDestination(id: number): void {
+		this.selectedDestinationId = id;
+	}
+
+	clearDestination(): void {
+		this.selectedDestinationId = 0;
 	}
 
 	clearSearch() {
