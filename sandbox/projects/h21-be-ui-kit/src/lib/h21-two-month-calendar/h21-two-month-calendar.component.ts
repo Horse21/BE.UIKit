@@ -23,7 +23,6 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 
 	@Input() required: boolean = false;
 	@Input() requiredErrorText: string = 'You must chose date';
-	checkRangeViewModeType: any = H21TwoMonthCalendarRangeViewMode;
 	@Input() rangeViewMode: H21TwoMonthCalendarRangeViewMode = H21TwoMonthCalendarRangeViewMode.Joint;
 	@Input() showWeekdayHint: boolean = false;
 

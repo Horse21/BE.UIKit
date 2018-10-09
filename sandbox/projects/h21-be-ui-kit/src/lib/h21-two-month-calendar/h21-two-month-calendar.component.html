@@ -3,7 +3,7 @@
 	<!-- Range mode form field -->
 	<ng-container *ngIf="rangeSelectMode">
 
-		<ng-container *ngIf="rangeViewMode === checkRangeViewModeType.Joint">
+		<ng-container *ngIf="rangeViewMode == 'JOINT'">
 			<mat-form-field (click)="openDialog()" class="h21-form-field">
 				<input matInput type="text"
 					   [formControl]="fromFormControl"
@@ -11,12 +11,12 @@
 					   [readonly]="true"
 					   [required]="required"/>
 				<mat-error *ngIf="required && fromFormControl.hasError('required')">{{requiredErrorText}}</mat-error>
-				<mat-hint *ngIf="showWeekdayHint">{{selectedFromDate | date: 'EEEE' }} / {{selectedToDate | date: 'EEEE' }}</mat-hint>
+				<mat-hint *ngIf="showWeekdayHint">{{selectedFromDate | date: 'EEEE / ' }}  {{selectedToDate | date: 'EEEE' }}</mat-hint>
 				<mat-icon matSuffix>date_range</mat-icon>
 			</mat-form-field>
 		</ng-container>
 
-		<ng-container *ngIf="rangeViewMode === checkRangeViewModeType.Divided">
+		<ng-container *ngIf="rangeViewMode == 'DIVIDED'">
 			<div class="c-h21-two-month-calendar_field-flex">
 				<mat-form-field (click)="openDialog()" class="h21-form-field">
 					<input matInput type="text"

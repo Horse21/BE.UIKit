@@ -1,4 +1,4 @@
 export enum H21TwoMonthCalendarRangeViewMode {
-	Joint,
-	Divided
+	Joint = "JOINT",
+	Divided = "DIVIDED"
 }
