@@ -4999,7 +4999,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 	  .mat-list-text {
 		padding: 0 !important;
 	  }
-	  &:hover {
+	  &:hover,
+	  &:focus {
 		background-color: $h21-bg-ashen-blue-light-1;
 	  }
 	  &.__is-selected {
