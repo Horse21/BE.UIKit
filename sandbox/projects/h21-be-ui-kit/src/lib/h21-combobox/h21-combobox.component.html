@@ -17,18 +17,24 @@
 		  [overlapTrigger]="false"
 		  (closed)="dropBoxClosed($event)">
 	<ng-template matMenuContent>
-		<mat-form-field class="c-h21-combobox_drop-box-filter-input" (click)="$event.stopPropagation()">
-			<input type="text" matInput [formControl]="filterControl" [autofocus]="true" />
-			<mat-icon matSuffix>search</mat-icon>
-		</mat-form-field>
-		<mat-selection-list role="listbox">
-			<mat-list-option *ngFor="let item of filteredOptions | async"
-							 (click)="selectOption(item.value); $event.stopPropagation();"
-							 [class.__is-selected]="item.value == selectedOption.value">{{item.optionLabel}}</mat-list-option>
-		</mat-selection-list>
-		<div class="c-h21-combobox_drop-box-no-matches" *ngIf="filteredOptionCount == 0">
-			<mat-icon class="__size-l">block</mat-icon>
-			<span>No matches</span>
+		<div (keydown.tab)="$event.stopPropagation()">
+			<mat-form-field class="c-h21-combobox_drop-box-filter-input"
+							(click)="$event.stopPropagation()"
+							[tabindex]="1000">
+				<input type="text" matInput [formControl]="filterControl" [autofocus]="true" />
+				<mat-icon matSuffix>search</mat-icon>
+			</mat-form-field>
+			<mat-selection-list role="listbox">
+				<mat-list-option *ngFor="let item of filteredOptions | async;"
+								 (click)="selectOption(item.value)"
+								 (keydown.enter)="selectOption(item.value)"
+								 [class.__is-selected]="item.value == selectedOption.value"
+				>{{item.optionLabel}}</mat-list-option>
+			</mat-selection-list>
+			<div class="c-h21-combobox_drop-box-no-matches" *ngIf="filteredOptionCount == 0">
+				<mat-icon class="__size-l">block</mat-icon>
+				<span>No matches</span>
+			</div>
 		</div>
 	</ng-template>
 </mat-menu>

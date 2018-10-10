@@ -1,4 +1,3 @@
-
 import { DestinationLoaderService } from './../../projects/h21-be-ui-kit/src/services/destination-loader.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -14,7 +13,6 @@ import { VocabularyService } from '../../projects/h21-be-ui-kit/src/services/voc
 import { FakeVocabularyService } from '../services/fake-vocabulary-service';
 import { AppMaterialModule } from './modules/app-material.module';
 import { AppComponent } from './app.component';
-
 import { DocsComponent } from './docs/docs.component';
 import { DocsNavigationComponent } from './docs-navigation/docs-navigation.component';
 import { DocsExampleViewerComponent } from './docs-example-viewer/docs-example-viewer.component';
@@ -141,13 +139,20 @@ import { GoogleRouteBuilder } from './docs/maps/new/providers/google/route';
 import { GoogleMarker } from './docs/maps/new/providers/google/marker';
 import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/google-map-options';
 import { AbstractMap } from './docs/maps/new/abstract/abstract-map'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d0a49a50c4a89d4f0f7a7ff2408e8c79fb7d289
 import { GeoContainer } from './docs/maps/new/entity/geo-container'
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d0a49a50c4a89d4f0f7a7ff2408e8c79fb7d289
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
 	// {path: 'demo', component: HomeComponent, children: [
@@ -306,6 +311,10 @@ const routes: Routes = [
 		GoogleMapOptions,
 		GeoContainer,
 		DestinationLoaderService
+<<<<<<< HEAD
+=======
+		OrderService
+>>>>>>> 3d0a49a50c4a89d4f0f7a7ff2408e8c79fb7d289
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
