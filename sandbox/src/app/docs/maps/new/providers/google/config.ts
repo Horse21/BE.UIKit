@@ -22,6 +22,10 @@ import { Point } from '../../entity/point';
 declare var google;
 let transitLayer;
 let trafficLayer;
+let markers: any[] = [];
+let polygons: any[] = [];
+let selectMarker = null;
+let route = null;
 
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
@@ -66,9 +70,20 @@ export class GoogleConfig extends AbstractConfig {
 
         let googlemarker = new google.maps.Marker(googleMarkerOptions);
 
+        googlemarker["geoPoint"] = marker;
+
+        google.maps.event.addListener(googlemarker, 'click', (event) => {
+
+            selectMarker = googlemarker;
+            console.log('MarkerClick', event, googlemarker);
+
+        });
+
         if (this.getBounds().contains(googlemarker.getPosition())) {
 
             this.map.geo.pushMarkers(googlemarker);
+
+            markers.push(googlemarker);
 
             this.map.cluster.addMarker(googlemarker, true);
 
@@ -80,6 +95,8 @@ export class GoogleConfig extends AbstractConfig {
     clearAllMap(): void {
 
         this.clearClusters();
+        this.clearPolygons();
+        this.clearMarkers();
         super.clearAllMap();
 
     }
@@ -95,16 +112,31 @@ export class GoogleConfig extends AbstractConfig {
     clearMarkers(): void {
 
         super.clearMarkers();
+
+        markers.forEach((item) => {
+            item.setMap(null);
+        });
     }
 
     clearRoutes(): void {
 
         super.clearRoutes();
+
+        if (route != null) {
+            route = null;
+        }
+
     }
 
     clearPolygons(): void {
 
         super.clearPolygons();
+
+        polygons.forEach((item) => {
+            item.setMap(null);
+        });
+
+
     }
 
     onClickMap(event: IEventClickMap) {
@@ -141,7 +173,7 @@ export class GoogleConfig extends AbstractConfig {
                     console.log(results[0], status)
                 }
             });
-        return null
+        return null;
     }
 
     getDetailsPoint(placeId: string): IPoint[] {
@@ -229,11 +261,21 @@ export class GoogleConfig extends AbstractConfig {
 
         let marker = new google.maps.Marker(googleMarkerOptions);
 
+        google.maps.event.addListener(marker, 'click', (event) => {
+
+            selectMarker = marker;
+            console.log('MarkerClick', event);
+
+        });
+
+        marker["geoPoint"] = point;
+        markers.push(marker);
+
         if (this.map.cluster.googleCluster != null) {
             this.map.cluster.addMarker(marker, true);
             this.map.geo.pushMarkers(marker)
-        }
 
+        }
 
         this.markersFitsBounds();
 
@@ -247,18 +289,38 @@ export class GoogleConfig extends AbstractConfig {
 
     drawCircle(options: ICircleOptions): void {
 
-        console.log('drawCircle',options)
-        let circle = new google.maps.Circle(options);
-        
-        let center = new google.maps.LatLng({ lat: 55.755814, lng: 37.617635 });
+
+console.log(selectMarker)
+
+        let center = new google.maps.LatLng({ lat: selectMarker.position.lat(), lng: selectMarker.position.lng() });
+
         options.center = center;
+
+        let circle = new google.maps.Circle(options);
 
         circle.setMap(this.map.api);
 
-        google.maps.event.addListener(circle, 'radius_changed',  () => {
-            console.log('radius_changed',circle)
+        google.maps.event.addListener(circle, 'radius_changed', () => {
+
         });
+
+        google.maps.event.addListener(circle, 'dragend', () => {
+
+        });
+
+        this.map.geo.pushPolygons(circle);
+
+        polygons.push(circle);
+
     }
+
+    drawPolygon(options: IPolygonOptions): void {
+
+        let polyline = new google.maps.Polyline();
+
+        polyline.setMap(this.map.api);
+    }
+
 
     drawPolyline(options: IPolylineOptions): void {
 
@@ -267,11 +329,57 @@ export class GoogleConfig extends AbstractConfig {
         polyline.setMap(this.map.api);
     }
 
-    drawPolygon(options: IPolygonOptions): void {
+    drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void {
 
-        let polygon = new google.maps.Polygon(options);
+        let shaping: any;
+        polygons = [];
 
-        polygon.setMap(this.map.api);
+        this.toggleMapDragging(true);
+
+        google.maps.event.addDomListener(this.map.api.getDiv(), 'mousedown', () => {
+
+            shaping = new google.maps.Polyline(optionsPolyline);
+
+            shaping.setMap(this.map.api);
+
+            polygons.push(shaping)
+
+            let move = google.maps.event.addListener(this.map.api, 'mousemove', event => {
+
+                shaping.getPath().push(event.latLng);
+
+            });
+
+            google.maps.event.addListenerOnce(this.map.api, 'mouseup', () => {
+
+                google.maps.event.removeListener(move);
+
+                let path = shaping.getPath();
+
+                shaping.setMap(null);
+
+                optionsPolygon.path = path;
+
+                shaping = new google.maps.Polygon(optionsPolygon);
+
+                shaping.setMap(this.map.api);
+
+                this.toggleMapDragging(false);
+
+                polygons.push(shaping);
+
+                google.maps.event.clearListeners(this.map.api.getDiv(), 'mousedown');
+
+                let array = shaping.getPath().getArray();
+                let bounds = new google.maps.LatLngBounds();
+                for (var n = 0; n < array.length; n++) {
+                    bounds.extend(array[n]);
+                }
+                this.map.api.panToBounds(bounds);
+                this.map.api.fitBounds(bounds);
+
+            });
+        });
     }
 
     routeInfo(): IRouteInfo {

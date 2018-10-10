@@ -27,6 +27,8 @@ export class MapToolbarComponent {
   }
 
   private drawShape(type: string) {
+
+    this.manager.getActiveMap().config.drawShapeOnMap(type);
   }
 
   private createMarker(type: string) {

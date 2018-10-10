@@ -82,17 +82,17 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     drawMarkersOnMap(): void {
-       
+
         try {
-           this.clearAllMap()
+
+            this.clearAllMap()
 
             let markersVisible = false;
 
             if (this.getZoom() <= 3) {
 
-                this.drawShapeOnMap(ShapeType.CIRCLE);
-
                 this.clearAllMap();
+
             }
             if (this.getZoom() > 5) {
 
@@ -118,7 +118,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                     marker.point.latitude = item.Address.Lat;
                     marker.point.longitude = item.Address.Lng;
 
-                    this.boundsContainsMarker(marker);  
+                    this.boundsContainsMarker(marker);
 
                 }
             }
@@ -137,18 +137,22 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract drawPolyline(options: IPolylineOptions): void;
 
+    abstract drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void;
+
+
     abstract drawPolygon(options: IPolygonOptions): void;
 
     drawShapeOnMap(type: ShapeType): void {
 
         try {
-            let path;
+            let path: any = [];
+
             let circleOptions: ICircleOptions = {
-                strokeColor: "#000000",
-                strokeOpacity: 1.0,
-                strokeWeight: 0.5,
-                fillColor: "#298BEA",
-                fillOpacity: 1.0,
+                strokeColor: "#1E90FF",
+                strokeOpacity: 0.9,
+                strokeWeight: 3.5,
+                fillColor: "#1E90FF",
+                fillOpacity: 0.35,
                 center: {
                     latitude: 0.0,
                     longitude: 0.0
@@ -176,17 +180,15 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 fillOpacity: 0.35,
             };
 
-            this.clearAllMap();
+            this.clearPolygons();
 
             switch (type) {
                 case ShapeType.CIRCLE:
                     this.drawCircle(circleOptions);
                     break;
-
                 case ShapeType.AREA:
-                    this.drawPolygon(polygonOptions);
+                    this.drawArea(polylineOptions, polygonOptions);
                     break;
-
                 default:
                 case ShapeType.STOP:
                     break;
@@ -203,7 +205,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getZoom(): number;
 
-    abstract getLatLngBounds():ILatLngBounds;
+    abstract getLatLngBounds(): ILatLngBounds;
 
     markersFitsBounds(): void {
 
@@ -212,7 +214,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
                 for (var i = 0; i < this.map.geo.markers.length; i++) {
 
-                    this.boundsExtend(this.map.geo.markers[i],this.getLatLngBounds());
+                    this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
                 }
             }
         }

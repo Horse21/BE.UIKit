@@ -60,4 +60,14 @@ export class GeoContainer {
 
         this.markers.push(markers);
     }
+
+    pushPolygons(polygons: IPolygonOptions) {
+
+        if (this.polygons == null) {
+            this.polygons = new Array<IPolygonOptions>();
+        }
+
+        this.polygons.push(polygons);
+    }
+
 }
