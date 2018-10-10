@@ -14,11 +14,10 @@ import * as mark from "../../../test.markers.json";
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
 import { IPosition } from '../../interfaces/i-position';
 import { ResponseStatus } from './enum/i-status-response ';
-import { IMapOptions } from '../../../interface/i-config';
 import { Position } from '../../entity/position';
 import { ILatLngBounds } from './interfaces/i-latln-bounds';
 import { Point } from '../../entity/point';
-import { marker } from 'leaflet';
+
 
 declare var google;
 let transitLayer;
@@ -29,25 +28,25 @@ export class GoogleConfig extends AbstractConfig {
 
     markersFitsBounds(): void {
 
-        var bounds = new google.maps.LatLngBounds();
+        super.markersFitsBounds();
 
-        for (var i = 0; i < this.map.geo.markers.length; i++) {
-          
-
-        }
-        if (this.map.geo.markers.length > 1) {         
-                 
-        }
-        if (this.map.geo.markers.length == 1) {
-           
-        }
-		
     }
 
-    boundsExtend(bounds: ILatLngBounds): void {
+    boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
 
-        throw new Error("Method not implemented.");
+        let LatLng = new google.maps.LatLng({ lat: marker.point.latitude, lng: marker.point.longitude });
+
+        bounds.extend(LatLng);
+
+        this.map.api.fitBounds(bounds);
+
     }
+
+    getLatLngBounds(): ILatLngBounds {
+
+        return new google.maps.LatLngBounds();
+
+    };
 
     boundsContainsMarker(marker: BaseMarker): boolean {
 
@@ -70,17 +69,13 @@ export class GoogleConfig extends AbstractConfig {
         if (this.getBounds().contains(googlemarker.getPosition())) {
 
             this.map.geo.pushMarkers(googlemarker);
-            this.map.cluster.addMarker(googlemarker, true);
 
-            this.markersFitsBounds();
-            console.log(this.map,'THIS MAP')
+            this.map.cluster.addMarker(googlemarker, true);
 
         }
 
         return true;
-
     }
-
 
     clearAllMap(): void {
 
@@ -239,6 +234,9 @@ export class GoogleConfig extends AbstractConfig {
             this.map.geo.pushMarkers(marker)
         }
 
+
+        this.markersFitsBounds();
+
     }
 
     drawMarkersOnMap(): void {
@@ -249,20 +247,31 @@ export class GoogleConfig extends AbstractConfig {
 
     drawCircle(options: ICircleOptions): void {
 
+        console.log('drawCircle',options)
         let circle = new google.maps.Circle(options);
-        circle.setMap(this.map);
+        
+        let center = new google.maps.LatLng({ lat: 55.755814, lng: 37.617635 });
+        options.center = center;
+
+        circle.setMap(this.map.api);
+
+        google.maps.event.addListener(circle, 'radius_changed',  () => {
+            console.log('radius_changed',circle)
+        });
     }
 
     drawPolyline(options: IPolylineOptions): void {
 
         let polyline = new google.maps.Polyline();
-        polyline.setMap(this.map);
+
+        polyline.setMap(this.map.api);
     }
 
     drawPolygon(options: IPolygonOptions): void {
 
         let polygon = new google.maps.Polygon(options);
-        polygon.setMap(this.map);
+
+        polygon.setMap(this.map.api);
     }
 
     routeInfo(): IRouteInfo {
@@ -275,6 +284,7 @@ export class GoogleConfig extends AbstractConfig {
         if (trafficLayer == null) {
             trafficLayer = new google.maps.TrafficLayer();
         }
+
         trafficLayer.setMap(show ? this.map.api : null);
     }
 
@@ -283,6 +293,7 @@ export class GoogleConfig extends AbstractConfig {
         if (transitLayer == null) {
             transitLayer = new google.maps.TransitLayer();
         }
+
         transitLayer.setMap(show ? this.map.api : null);
     }
 

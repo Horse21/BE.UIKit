@@ -28,6 +28,7 @@ export class MapManager {
     }
 
     register(type: MapType, map: AbstractMap): MapManager {
+        
         this.hashtable[type] = map;
         return this;
     }

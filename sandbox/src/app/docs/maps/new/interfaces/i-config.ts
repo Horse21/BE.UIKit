@@ -15,11 +15,12 @@ export interface IConfig {
     getAddress(position: IPosition): Array<IPoint>;
     getDetailsPoint(placeId: string): Array<IPoint>;
     getZoom(): number;
+    getLatLngBounds(): ILatLngBounds;
     markersFitsBounds(): void;
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean;
     radiusContainsMarker(marker: BaseMarker, position: IPosition): number;
     boundsContainsMarker(marker: BaseMarker): boolean;
-    boundsExtend(bounds: ILatLngBounds, marker: BaseMarker): void;
+    boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
     routeInfo(): IRouteInfo;
     zoomIn(): void;
     zoomOut(): void;

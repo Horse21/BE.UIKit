@@ -14,5 +14,5 @@ export class GoogleMarkerOptions implements IBaseMarkerOptions {
     title: string;
     zIndex: number;
     position: IPosition;
-    
+
 }

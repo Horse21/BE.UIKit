@@ -1,7 +1,6 @@
 import { ILatLng } from "./i-latlng";
 import { ILatLngBoundsLiteral } from "./i-latlng-bounds-literal";
 
-
 export interface ILatLngBounds {
     contains(latLng: ILatLng): boolean;
     equals(other: ILatLngBounds|ILatLngBoundsLiteral): boolean;

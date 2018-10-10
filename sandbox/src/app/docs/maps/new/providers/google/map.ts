@@ -11,6 +11,7 @@ import { ReadyStateScript } from "../../enum/e-ready-state-script";
 import { AbstractMarkerCluster } from "../../abstract/abstract-marker-cluster";
 import { GoogleMarkerCluster } from "./cluster";
 import { GeoContainer } from "../../entity/geo-container";
+import { GoogleSearchMap } from "./search";
 
 declare var google;
 declare var document;
@@ -25,15 +26,14 @@ export class GoogleMap extends AbstractMap {
         return ".gm-style";
     }
 
-    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent, cluster: GoogleMarkerCluster, geo:GeoContainer ) {
-        super(mapOptions, config, events, cluster, geo);
-        
+    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent, cluster: GoogleMarkerCluster, geo: GeoContainer, search: GoogleSearchMap) {
+        super(mapOptions, config, events, cluster, geo, search);
+
     }
 
     init(): void {
 
         this.api = new google.maps.Map(this.container, this.options);
-        this.geo = this.geo;
 
     }
 

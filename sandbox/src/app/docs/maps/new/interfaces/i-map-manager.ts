@@ -1,4 +1,4 @@
-import { MapType } from "../../interface/i-map-manager";
+import { MapType } from "../enum/e-map-type";
 
 export interface IMapManager {
     register(type: MapType, container: HTMLElement): void;

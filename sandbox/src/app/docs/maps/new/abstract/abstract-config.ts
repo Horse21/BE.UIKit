@@ -31,6 +31,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     map: AbstractMap;
 
     initMap(map: AbstractMap): void {
+
         this.map = map;
     }
 
@@ -40,7 +41,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     radiusShape: ShapeType;
     loadMarkers: boolean;
     routeBuilder: AbstractRouteBuilder;
-
 
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
         if (show) {
@@ -81,18 +81,20 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.map.geo.clearPolygons();
     }
 
-
     drawMarkersOnMap(): void {
+       
         try {
-            this.clearAllMap();
-            let zoom = this.getZoom();
+           this.clearAllMap()
+
             let markersVisible = false;
 
-            if (zoom <= 3) {
+            if (this.getZoom() <= 3) {
+
+                this.drawShapeOnMap(ShapeType.CIRCLE);
 
                 this.clearAllMap();
             }
-            if (zoom > 5) {
+            if (this.getZoom() > 5) {
 
                 markersVisible = true;
             }
@@ -116,8 +118,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                     marker.point.latitude = item.Address.Lat;
                     marker.point.longitude = item.Address.Lng;
 
-                    this.boundsContainsMarker(marker);
-
+                    this.boundsContainsMarker(marker);  
 
                 }
             }
@@ -127,13 +128,15 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             console.log(error);
         }
     }
-    getBounds(): any {
 
-        throw new Error("Method not implemented.");
-    }
+    abstract getBounds(): ILatLngBounds;
+
     abstract getDetailsPoint(placeId: string): IPoint[]
+
     abstract drawCircle(options: ICircleOptions): void;
+
     abstract drawPolyline(options: IPolylineOptions): void;
+
     abstract drawPolygon(options: IPolygonOptions): void;
 
     drawShapeOnMap(type: ShapeType): void {
@@ -196,16 +199,29 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.loadMarkers = false;
     }
 
-    getAddress(position: Position): IPoint[] {
+    abstract getAddress(position: Position): IPoint[];
 
-        return null;
+    abstract getZoom(): number;
 
+    abstract getLatLngBounds():ILatLngBounds;
+
+    markersFitsBounds(): void {
+
+        try {
+            if (this.map.geo.markers != null && this.map.geo.markers.length > 0) {
+
+                for (var i = 0; i < this.map.geo.markers.length; i++) {
+
+                    this.boundsExtend(this.map.geo.markers[i],this.getLatLngBounds());
+                }
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
-    getZoom(): number { return null }
 
-    abstract markersFitsBounds(): void ;
-    
     abstract onClickMap(event: IEventClickMap);
 
     abstract boundsContainsMarker(marker: BaseMarker): boolean;
@@ -313,6 +329,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     getMapOptions(): IMapOptions {
 
         return this.map.options;
+
     }
 
     abstract toggleTrafficLayer(show: boolean): void;
@@ -323,5 +340,5 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract zoomOut(): void;
 
-    abstract boundsExtend(bounds: ILatLngBounds): void;
+    abstract boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
 }
