@@ -32,7 +32,7 @@ export class GoogleConfig extends AbstractConfig {
         var bounds = new google.maps.LatLngBounds();
 
         for (var i = 0; i < this.map.geo.markers.length; i++) {
-           console.log(this.map.geo.markers[i],'ITEM')
+          
 
         }
         if (this.map.geo.markers.length > 1) {         

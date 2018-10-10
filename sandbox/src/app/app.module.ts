@@ -141,15 +141,12 @@ import { GoogleRouteBuilder } from './docs/maps/new/providers/google/route';
 import { GoogleMarker } from './docs/maps/new/providers/google/marker';
 import { GoogleMapOptions } from './docs/maps/new/providers/google/entity/google-map-options';
 import { AbstractMap } from './docs/maps/new/abstract/abstract-map'
-<<<<<<< HEAD
 import { GeoContainer } from './docs/maps/new/entity/geo-container'
-=======
 import {HotelSearchPanelDocsComponent} from './docs/hotel-search-panel/hotel-search-panel-docs.component';
 import {HotelFilterPanelDocsComponent} from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
 
->>>>>>> a584266bfb46be2f3695502d50f3933906a5c8d4
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
@@ -307,11 +304,8 @@ const routes: Routes = [
 		GoogleRouteBuilder,
 		GoogleMarker,
 		GoogleMapOptions,
-<<<<<<< HEAD
 		GeoContainer,
-=======
 		DestinationLoaderService
->>>>>>> a584266bfb46be2f3695502d50f3933906a5c8d4
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
