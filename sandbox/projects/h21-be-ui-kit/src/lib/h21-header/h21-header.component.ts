@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {H21HeaderUserSelectorDialogComponent} from "./h21-header-user-selector-dialog.component";
 import {H21HeaderSearchSettingsDialogComponent} from "./h21-header-search-settings-dialog.component";
 import {INotifyItem} from '../../dto/inotifyItem';
-import {IUserCardData} from "../../dto/i-user-card-data";
+import {IUserCardData} from "../h21-user-card/dto/i-user-card-data";
 
 
 @Component({

@@ -15,7 +15,7 @@ import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/ap
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
 import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-import {IUserCardData} from "../../projects/h21-be-ui-kit/src/dto/i-user-card-data";
+import {IUserCardData} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
 
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
@@ -169,7 +169,9 @@ export class AppComponent {
 	clearSearch(): void {
 		this.searchResultVisibility = false;
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
-		this.searchResult.clear();
+		if (this.searchResult) {
+			this.searchResult.clear();
+		}
 	}
 
 	changeResultViewMode(mode: string): void {

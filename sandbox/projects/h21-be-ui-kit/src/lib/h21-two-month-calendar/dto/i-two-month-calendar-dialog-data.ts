@@ -1,4 +1,4 @@
-export interface DialogData {
+export interface ITwoMonthCalendarDialogData {
 	rangeSelectMode: boolean;
 	fromDateText: string;
 	toDateText: string;
@@ -8,4 +8,5 @@ export interface DialogData {
 	toDate: Date;
 	selectedFromDate: Date;
 	selectedToDate: Date;
+	required: boolean;
 }

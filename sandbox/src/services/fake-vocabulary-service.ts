@@ -8,8 +8,8 @@ import { SearchFlightDto } from '../../projects/h21-be-ui-kit/src/dto/search-fli
 import { SearchResult } from '../../projects/h21-be-ui-kit/src/dto/search-result';
 import { FlightItemGroup } from '../../projects/h21-be-ui-kit/src/dto/flight-item-group';
 import { Passenger } from '../../projects/h21-be-ui-kit/src/dto/passenger';
-import {IHotelInfo, IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto";
-import {IHotelOption} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-option";
+import { IHotelInfo, IHotelSearchOptions } from "../../projects/h21-be-ui-kit/src/dto";
+import { IHotelOption } from "../../projects/h21-be-ui-kit/src/dto/i-hotel-option";
 
 @Injectable()
 export class FakeVocabularyService implements VocabularyService {
