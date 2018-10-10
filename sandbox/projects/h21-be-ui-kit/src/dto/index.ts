@@ -33,5 +33,5 @@ export * from './i-hotel-room-detail';
 export * from './i-toolbar-element';
 export * from './i-cart-combobox-row';
 export * from './i-combobox-option';
-export * from './i-user-card-data';
-
+export * from '../lib/h21-user-card/dto/i-user-card-data';
+export * from './i-destination-item';

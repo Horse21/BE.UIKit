@@ -1,151 +1,193 @@
-import { environment } from './../../environments/environment';
-import { DestinationLoaderService } from './../../services/destination-loader.service';
-import { IDestinationItem } from './../../dto/i-destination-item';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { DateAdapter } from '@angular/material';
-import { H21RightOverlayPanelService } from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
-import { IHotelSearchOptions } from '../../dto/i-hotel-search-options';
-import { debounceTime } from 'rxjs/operators';
-import { DateTime } from 'luxon';
+import {IDestinationItem} from './../../dto/i-destination-item';
+import {HttpClientService} from "../../services/http-client.service";
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {H21RightOverlayPanelService} from '../h21-right-overlay-panel/h21-right-overlay-panel.service';
+import {IHotelSearchOptions} from '../../dto/i-hotel-search-options';
+import {H21TwoMonthCalendarComponent} from '../h21-two-month-calendar/h21-two-month-calendar.component';
+import {Observable} from "rxjs/index";
+import {startWith, map } from "rxjs/internal/operators";
+
+const PREFERRED_CLASS: string[] = [
+	'Economy',
+	'Premium economy',
+	'Business',
+	'First class'
+];
 
 @Component({
 	selector: 'h21-hotel-search-panel',
 	templateUrl: './h21-hotel-search-panel.component.html'
 })
+
 export class H21HotelSearchPanelComponent {
+
+	@Input() searchMode: 'hotel' | 'room' = 'hotel';
+	@Output() onSearch: EventEmitter<IHotelSearchOptions> = new EventEmitter<IHotelSearchOptions>();
+	@Output() onClearSearch: EventEmitter<void> = new EventEmitter<void>();
+
+	destinationControl: FormControl = new FormControl('', [Validators.required]);
+	nationalityControl: FormControl = new FormControl('', [Validators.required]);
+	poiControl: FormControl = new FormControl('', [Validators.required]);
+	@ViewChild('calendar') calendarControl: H21TwoMonthCalendarComponent;
+
+	selectedDestinationId: number = 0;
+	@Input() destinationList: IDestinationItem[];
+	@Input() destinationListUrl: string;
+	destinationListFiltered: Observable<IDestinationItem[]>;
+
 	searchOptions: IHotelSearchOptions;
 	adultsCount: number = 1;
 	childrenCount: number = 0;
 	childAge_1: number = null;
 	childAge_2: number = null;
 	childAgeFakeArray: Array<any> = new Array(18);
-	destinations: Array<IDestinationItem>;
-	destinationsFiltered: Array<IDestinationItem>;
-	filterStartLettersCount = 3;
+	preferredClass: string[] = PREFERRED_CLASS;
+	paymentMethod: 'account' | 'hotel' = 'account';
+	destination: string = '';
+	nationality: string = '';
+	checkInDate: Date = null;
+	checkOutDate: Date = null;
+	nightsCount: number = 0;
+	roomsCount: number = 1;
+	roomsType: string[];
 
-	destinationControl: FormControl = new FormControl('', [Validators.required]);
-	nationalityControl: FormControl = new FormControl('', [Validators.required]);
-	defaultNationality: string = 'Russian';
-
-	@Input()
-	searchMode: 'hotel' | 'room' = 'hotel';
-
-	@Output()
-	onSearch: EventEmitter<IHotelSearchOptions> = new EventEmitter<IHotelSearchOptions>();
-	@Output()
-	onClearSearch: EventEmitter<void> = new EventEmitter<void>();
-
-	constructor(private _rightPanelDialog: H21RightOverlayPanelService, private destinationLoader: DestinationLoaderService) {
-		this.searchOptions = <IHotelSearchOptions>{
-			paymentMethod: 'account',
-			destination: '',
-			hotelName: '',
-			nationality: this.defaultNationality,
-			checkInDate: DateTime.local().toJSDate(),
-			checkOutDate: DateTime.local()
-				.plus({ days: 1 })
-				.toJSDate(),
-			nightsCount: 1,
-			roomCount: 1
-		};
+	constructor(private _rightPanelDialog: H21RightOverlayPanelService,
+				private _httpClientService: HttpClientService) {
+		this.roomsType = [ this.preferredClass ? this.preferredClass[0] : '' ];
 	}
 
 	ngOnInit(): void {
-		this.fetchDestinations();
-		this.destinationControl.valueChanges
-			.pipe(debounceTime(environment.debouncingTime))
-			.subscribe((event) => this.onDestinationEdited(event));
-	}
-
-	fetchDestinations() {
-		this.destinationLoader
-			.url(
-				'https://gist.githubusercontent.com/atthealchemist/8c2f402868bd40f4bf167aea495cc2de/raw/3aa308e229cef0b0ed629e3a2bb878813a722918/destinations.json'
-			)
-			.getDestinations()
-			.subscribe(
-				(data) => (this.destinationsFiltered = data as Array<IDestinationItem>),
-				(error) => console.log('[FETCHING] Error', error),
-				() => console.log('[FETCHING] Successfully fetching destinations', this.destinationsFiltered)
-			);
-	}
-
-	onDestinationEdited(event) {
-		if (event instanceof Object) {
-			return;
+		if(!this.destinationList && this.destinationListUrl) {
+			this.fillDestinationList();
 		}
-		let enteredValue = event.toLowerCase();
-
-		let valueIsEmpty = !enteredValue || enteredValue === '';
-		let valueIsLessThanStartLettersCount = enteredValue.length < this.filterStartLettersCount;
-		let destinationsEmptyOrOne = this.destinationsFiltered.length <= 1;
-
-		if (valueIsEmpty || valueIsLessThanStartLettersCount || destinationsEmptyOrOne) {
-			this.fetchDestinations();
-			this.destinations = this.destinationsFiltered;
-		} else {
-			console.log('[TYPING] onDestinationEdited.enteredValue', enteredValue);
-			this.destinations = this.destinationsFiltered.filter((value) => {
-				console.log('[TYPING FILTERING] this.destinations');
-				return value.name.toLowerCase().startsWith(enteredValue);
-			});
-		}
-		console.log('onDestinationEdited.destinations', this.destinations);
+		this.destinationListFiltered = this.destinationControl.valueChanges.pipe(
+			startWith(''),
+			map(value => this._destinationFilter(value)));
 	}
 
 	changeCheckInDate($event) {
-		this.searchOptions.checkInDate = $event;
+		this.checkInDate = $event;
 		this.setNightsCount();
 	}
 
 	changeCheckOutDate($event) {
-		this.searchOptions.checkOutDate = $event;
+		this.checkOutDate = $event;
 		this.setNightsCount();
 	}
 
 	setNightsCount() {
-		if (this.searchOptions.checkInDate && this.searchOptions.checkOutDate) {
+		if (this.checkInDate && this.checkOutDate) {
 			const oneDayTime = 86400000; // let oneDayTime = 24 * 60 * 60 * 1000;
-			let diffTime = this.searchOptions.checkOutDate.getTime() - this.searchOptions.checkInDate.getTime();
-			this.searchOptions.nightsCount = diffTime / oneDayTime;
+			let diffTime = this.checkOutDate.getTime() - this.checkInDate.getTime();
+			this.nightsCount = diffTime / oneDayTime;
 		} else {
-			this.searchOptions.nightsCount = null;
+			this.nightsCount = null;
 		}
 	}
 
-	changeAdultsCount($event) {
-		if ($event < this.adultsCount) {
+	changeAdultsCount(count: number): void {
+		if (count < this.adultsCount) {
 			this.showTravelers();
 		} else {
-			this.adultsCount = $event;
+			this.adultsCount = count;
 		}
 	}
 
-	addTraveler() {
+	changeRoomsCount(count: number): void {
+		this.roomsCount = count;
+		if (this.roomsType.length < count) {
+			while(this.roomsType.length < count) {
+				this.roomsType.push(this.preferredClass ? this.preferredClass[0] : '');
+			}
+		} else {
+			while(this.roomsType.length > count) {
+				this.roomsType.pop();
+			}
+		}
+	}
+
+	addTraveler(): void {
 		this._rightPanelDialog.open('h21-selected-passengers');
 	}
 
-	showTravelers() {
+	showTravelers(): void {
 		this._rightPanelDialog.open('h21-selected-passengers');
+	}
+
+	fillDestinationList(): void {
+		this._httpClientService.get(this.destinationListUrl, { withCredentials: false }).subscribe(
+			(data) => (this.destinationList = data as IDestinationItem[]),
+			(error) => console.log('[FETCHING] Error', error));
+	}
+
+	private _destinationFilter(value: string): IDestinationItem[] {
+		this.clearDestination();
+		if (value.length > 2) {
+			const filterValue = value.toString().toLowerCase();
+			return this.destinationList.filter(item => item.name.toLowerCase().includes(filterValue));
+		}
+		return [];
+	}
+
+	selectDestination(id: number): void {
+		this.selectedDestinationId = id;
+	}
+
+	clearDestination(): void {
+		this.selectedDestinationId = 0;
 	}
 
 	clearSearch() {
-
 		this.destinationControl.setValue('');
-
-		this.searchOptions.paymentMethod = 'account';
-		this.searchOptions.destination = '';
-		this.searchOptions.nationality = this.defaultNationality;
-		this.searchOptions.checkInDate = null;
-		this.searchOptions.checkOutDate = null;
-		this.searchOptions.nightsCount = 1;
-		this.searchOptions.roomCount = 1;
+		this.paymentMethod = 'account';
+		this.destination = '';
+		this.nationality = '';
+		this.checkInDate = null;
+		this.checkOutDate = null;
+		this.nightsCount = 0;
+		this.roomsCount = 1;
+		this.roomsType = [this.preferredClass ? this.preferredClass[0] : ''];
+		this.adultsCount = 1;
+		this.childrenCount = 0;
+		this.childAge_1 = null;
+		this.childAge_2 = null;
+		this.nationalityControl.setValue('');
+		this.poiControl.setValue('');
+		this.destinationControl.markAsUntouched();
+		this.nationalityControl.markAsUntouched();
+		this.poiControl.markAsUntouched();
+		this.calendarControl.clear();
 
 		this.onClearSearch.emit();
 	}
 
-	search() {
-		this.onSearch.emit(this.searchOptions);
+	search(): void {
+		this.destinationControl.updateValueAndValidity();
+		this.nationalityControl.updateValueAndValidity();
+		this.poiControl.updateValueAndValidity();
+		this.calendarControl.validate();
+		this.destinationControl.markAsTouched();
+		this.nationalityControl.markAsTouched();
+		this.poiControl.markAsTouched();
+
+		if (this.destinationControl.invalid
+			|| this.nationalityControl.invalid
+			|| this.poiControl.invalid
+			|| this.calendarControl.invalid) {
+			return;
+		}
+
+		this.onSearch.emit({
+				paymentMethod: this.paymentMethod,
+				destination: this.destinationControl.value,
+				nationality: this.nationalityControl.value,
+				poi: this.poiControl.value,
+				checkInDate: this.checkInDate,
+				checkOutDate: this.checkOutDate,
+				nightsCount: this.nightsCount,
+				roomsCount: this.roomsCount,
+				roomsType: this.roomsType
+			});
 	}
 }

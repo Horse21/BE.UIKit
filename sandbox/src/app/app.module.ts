@@ -1,4 +1,3 @@
-import { DestinationLoaderService } from './../../projects/h21-be-ui-kit/src/services/destination-loader.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -6,7 +5,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxMdModule} from 'ngx-md';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {AppSubscriberService} from '../../projects/h21-be-ui-kit/src/services/app-subscriber-service';
 import {OrderService } from '../../projects/h21-be-ui-kit/src/services/order-service';
@@ -200,8 +198,7 @@ const routes: Routes = [
 		H21RightOverlayPanelService,
 		H21AccountSelectService,
 		AppSubscriberService,
-		OrderService,
-		DestinationLoaderService
+		OrderService
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
