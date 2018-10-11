@@ -3076,23 +3076,29 @@ a.c-h21-header_title {
 
 .c-h21-breadcrumbs {
   display: inline-block;
-
-
+  white-space: nowrap;
+  line-height: normal;
+  > * {
+	vertical-align: middle !important;
+  }
+  > span {
+	color: $h21-fg-ashen-blue;
+	display: inline-block;
+	font-size: 13px;
+  }
   .mat-button {
 	min-width: auto;
-	padding: 4px;
-	line-height: normal;
 	font-size: 13px;
+	padding: 4px;
 	color: mat-color($h21-mat-primary, 400);
 	text-decoration: underline;
-
+	line-height: normal;
+	.mat-button-focus-overlay {
+	  background: none;
+	}
 	&:hover {
 	  text-decoration: none;
-	  .mat-button-focus-overlay {
-		background: none;
-	  }
 	}
-
 	.mat-ripple {
 	  .mat-ripple-element {
 		background-color: mat-color($h21-mat-primary, 400);
@@ -3100,15 +3106,7 @@ a.c-h21-header_title {
 	  }
 	}
   }
-
-  > span {
-	color: $h21-fg-ashen-blue;
-	display: inline-block;
-	font-size: 13px;
-  }
-
   .mat-icon {
-	vertical-align: middle;
 	color: $h21-fg-gray;
   }
 }
@@ -4991,10 +4989,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 	  line-height: 36px;
 	  padding: 0;
 	  .mat-list-item-content {
-		padding: 0 16px !important;;
+		padding: 0 16px !important;
 	  }
 	  .mat-pseudo-checkbox {
-		display: none !important;;
+		display: none !important;
 	  }
 	  .mat-list-text {
 		padding: 0 !important;

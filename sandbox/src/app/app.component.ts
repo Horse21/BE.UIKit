@@ -10,7 +10,7 @@ import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.compone
 import {Router} from '@angular/router';
 import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
-import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
+import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/dto/i-breadcrumb";
 import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
 import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";

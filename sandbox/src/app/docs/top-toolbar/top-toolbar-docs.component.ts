@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBreadcrumb } from './../../../../projects/h21-be-ui-kit/src/dto/i-breadcrumb';
+import { IBreadcrumb } from '../../../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/dto/i-breadcrumb';
 import { IToolbarElement } from '../../../../projects/h21-be-ui-kit/src/dto/i-toolbar-element';
 import { EventEmitter } from 'events';
 
@@ -11,8 +11,8 @@ const BREADCRUMBS_DATA: IBreadcrumb[] = [
 ];
 
 const BUTTON_DATA: IToolbarElement = {
-	condition: 'showProfileAgentsActions',
 	tooltip: 'lorem',
+	disabled: false,
 	icon: 'person',
 	style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
 	action: (event) => {
@@ -22,8 +22,8 @@ const BUTTON_DATA: IToolbarElement = {
 
 const BUTTONS_DATA: IToolbarElement[] = [
 	{
-		condition: 'showProfileAgentsActions',
 		tooltip: 'lorem',
+		disabled: false,
 		icon: 'edit',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
 		action: (event) => {
@@ -31,8 +31,8 @@ const BUTTONS_DATA: IToolbarElement[] = [
 		}
 	},
 	{
-		condition: 'showProfileTuneActions',
 		tooltip: 'ipsum',
+		disabled: true,
 		icon: 'cancel',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
 		action: (event) => {
@@ -40,8 +40,8 @@ const BUTTONS_DATA: IToolbarElement[] = [
 		}
 	},
 	{
-		condition: 'showProfileTuneActions',
 		tooltip: 'help',
+		disabled: false,
 		icon: 'help',
 		style: ['c-h21-top-toolbar_action-btn', 'c-h21-top-toolbar_action-btn__hover-red'],
 		action: (event) => {

@@ -46,6 +46,7 @@ export * from './h21-sidebar-nav/h21-sidebar-nav.module';
 export * from './h21-sidebar-nav/h21-sidebar-nav.component';
 export * from './h21-breadcrumbs/h21-breadcrumbs.module';
 export * from './h21-breadcrumbs/h21-breadcrumbs.component';
+export * from './h21-breadcrumbs/dto/i-breadcrumb';
 export * from './h21-hotel-book/h21-hotel-book.module';
 export * from './h21-hotel-book/h21-hotel-book.component';
 export * from './h21-hotel-room-detail/h21-hotel-room-detail.module';
