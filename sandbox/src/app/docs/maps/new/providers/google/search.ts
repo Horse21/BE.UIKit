@@ -1,47 +1,51 @@
 import { AbstractSearch } from "../../abstract/abstract-search";
 import { Injectable } from "@angular/core";
-import { Point } from "./interfaces/i-inner";
 import { IPoint } from "../../interfaces/i-point";
-import { ResponseStatus } from "./enum/i-status-response ";
+import { ResponseStatus } from "./enum/e-status-response ";
+import { Point } from "../../entity/point";
+import { Position } from "../../entity/position";
+import { Address } from "../../classes/address";
 
 declare var google;
 
 @Injectable()
 export class GoogleSearchMap extends AbstractSearch {
 
-    details(placeId: string): IPoint {
-
-        let placesService = new google.maps.places.PlacesService(this.map.api);
-        placesService.getDetails({ placeId: placeId }, (place, status) => {
-
-            if (status == ResponseStatus.OK) {
-
-                if (place) {
-
-                }
-            }
-
-        });
-
-        return null;
-    }
-
     search(query: string): Array<IPoint> {
+
+        let result = [];
+        let point: Point = new Point();
+        point.position = new Position();
+        point.address = new Address();
+
         let service = new google.maps.places.AutocompleteService();
         let request = {
             input: query,
             language: 'en'
         };
-        let result = [];
+
         service.getPlacePredictions(request, function (results, status) {
 
             if (status == ResponseStatus.OK) {
-                console.log(results);
+
+                for (var i = 0; i < results.length; i++) {
+                    let place = results[i];
+                    point.id = place.place_id;
+                    point.name = place.description;
+                    point.googlePlaceId = place.place_id;
+                    point.subtype = place.types[0];
+                    point.title = place.formatted_address;
+                    point.type = 'internet'
+                    point.source = 'google';
+                    
+                    result.push(point)
+                }
+
             }
         }
 
         );
-        return null;
+        return result;
     }
 
 

@@ -4,7 +4,7 @@ import { IPosition } from "../interfaces/i-position";
 import { IPrice } from "../interfaces/i-price";
 import { IAddress } from "../interfaces/i-address";
 
-export class Point implements IPoint  {
+export class Point implements IPoint {
     title: string;
     name: string;
     photos: Array<IIcon>;
@@ -16,4 +16,8 @@ export class Point implements IPoint  {
     extras: string;
     tmcAgencyMargin: string;
     id: string;
+    googlePlaceId: string;
+    type: string;
+    subtype: string;
+    source: string;
 }

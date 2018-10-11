@@ -22,6 +22,7 @@ import { Position } from '../entity/position';
 import { Point } from '../entity/point';
 import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
+import { ILatLng } from '../providers/google/interfaces/i-latlng';
 
 declare var google;
 
@@ -42,7 +43,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     loadMarkers: boolean;
     routeBuilder: AbstractRouteBuilder;
 
+
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
+
         if (show) {
             let routeOptions;
             let route = this.routeBuilder
@@ -61,10 +64,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.map.geo.clearAllMap();
     }
 
-    clearClusters(): void {
-
-        this.map.geo.clearClusters();
-    }
 
     clearMarkers(): void {
 
@@ -81,48 +80,60 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.map.geo.clearPolygons();
     }
 
+    clearCircle(): void {
+
+        this.map.geo.clearCircle();
+
+    }
+
     drawMarkersOnMap(): void {
 
+        this.loadMarkers = true;
+
         try {
+            if (this.loadMarkers) {
 
-            this.clearAllMap()
+              //  this.clearAllMap()
 
-            let markersVisible = false;
+                let markersVisible = false;
 
-            if (this.getZoom() <= 3) {
+                if (this.getZoom() <= 3) {
 
-                this.clearAllMap();
-
-            }
-            if (this.getZoom() > 5) {
-
-                markersVisible = true;
-            }
-
-            if (markersVisible) {
-                for (let i = 0; i < mark.default.length; i++) {
-                    let item = mark.default[i];
-                    let marker = new BaseMarker({
-                        title: '',
-                        icon: {
-                            url: './assets/icons_map/icon_hotel.png',
-                            title: ""
-                        },
-                        clickable: true,
-                        draggable: false,
-                        visible: true
-
-
-                    });
-                    marker.point = new Position();
-                    marker.point.latitude = item.Address.Lat;
-                    marker.point.longitude = item.Address.Lng;
-
-                    this.boundsContainsMarker(marker);
+               //     this.clearAllMap();
 
                 }
-            }
+                if (this.getZoom() > 5) {
 
+                    markersVisible = true;
+                }
+
+                if (markersVisible) {
+                    for (let i = 0; i < mark.default.length; i++) {
+                        let item = mark.default[i];
+                        let marker = new BaseMarker({
+                            title: '',
+                            icon: {
+                                url: './assets/icons_map/icon_hotel.png',
+                                title: ""
+                            },
+                            clickable: true,
+                            draggable: false,
+                            visible: true
+
+
+                        });
+
+                        marker.point = new Point();
+                        marker.point.position = new Position();
+                        marker.point.position.latitude = item.Address.Lat;
+                        marker.point.position.longitude = item.Address.Lng;
+                        marker.point.title = item.Hotelname;
+
+                        this.boundsContainsMarker(marker);
+
+                    }
+                }
+            }
         }
         catch (error) {
             console.log(error);
@@ -145,7 +156,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     drawShapeOnMap(type: ShapeType): void {
 
         try {
-            let path: any = [];
+
+            let path;
 
             let circleOptions: ICircleOptions = {
                 strokeColor: "#1E90FF",
@@ -198,10 +210,11 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         catch (error) {
             console.log(error);
         }
+
         this.loadMarkers = false;
     }
 
-    abstract getAddress(position: Position): IPoint[];
+    abstract getAddress(position: ILatLng): IPoint[];
 
     abstract getZoom(): number;
 
@@ -214,7 +227,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
                 for (var i = 0; i < this.map.geo.markers.length; i++) {
 
-                    this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
+                    //this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
                 }
             }
         }
@@ -230,8 +243,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
-        let markerLatitude = marker.point.latitude;
-        let markerLongitude = marker.point.longitude;
+        let markerLatitude = marker.point.position.latitude;
+        let markerLongitude = marker.point.position.longitude;
 
         let polygonPointsLatitude = polygon.path.map(val => {
             return val.position.latitude;
@@ -265,8 +278,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         let circleCenterLatitude = position.latitude;
         let circleCenterLongitude = position.longitude;
 
-        let pointLatitude = marker.point.latitude;
-        let pointLongitude = marker.point.longitude;
+        let pointLatitude = marker.point.position.latitude;
+        let pointLongitude = marker.point.position.longitude;
 
         let radiansCircleCenterLatitude = circleCenterLatitude * (Math.PI / 180);
         let radiansCircleCenterLongitude = circleCenterLongitude * (Math.PI / 180);
@@ -305,6 +318,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             console.log(error);
         }
     }
+
+    abstract draggableMarker(enabled: boolean): void;
 
     abstract setZoom(zoom: number): void;
 

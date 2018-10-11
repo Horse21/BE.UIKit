@@ -31,7 +31,18 @@ export class MapToolbarComponent {
     this.manager.getActiveMap().config.drawShapeOnMap(type);
   }
 
+  private onChangeDraggableMarker(event: any) {
+
+    this.manager.getActiveMap().config.draggableMarker(event.checked);
+  }
+
+  private onChangeClearObject(event: any) {
+
+    this.manager.getActiveMap().config.loadMarkers = event.checked;
+  }
+
   private createMarker(type: string) {
+
   }
 
   private clearMap() {

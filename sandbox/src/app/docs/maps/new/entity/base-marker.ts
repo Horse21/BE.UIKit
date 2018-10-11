@@ -8,7 +8,7 @@ import { ILatLng } from "../providers/google/interfaces/i-latlng";
 export class BaseMarker {
 
     map: AbstractMap;
-    point: IPosition;
+    point: IPoint;
     options: IBaseMarkerOptions;
 
     constructor(options: IBaseMarkerOptions) {

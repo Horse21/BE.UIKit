@@ -6,13 +6,14 @@ import { IPolygonOptions } from "./i-polygon";
 import { IPosition } from "./i-position";
 import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
 import { ILatLngBounds } from "../providers/google/interfaces/i-latln-bounds";
+import { ILatLng } from "../providers/google/interfaces/i-latlng";
 
 export interface IConfig {
 
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void;
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
-    getAddress(position: IPosition): Array<IPoint>;
+    getAddress(position: ILatLng): Array<IPoint>;
     getDetailsPoint(placeId: string): Array<IPoint>;
     getZoom(): number;
     getLatLngBounds(): ILatLngBounds;
@@ -34,7 +35,6 @@ export interface IConfig {
     toggleTransitLayer(show?: boolean);
     onClickMap(event: IEventClickMap): void;
     clearAllMap(): void;
-    clearClusters(): void;
     clearMarkers(): void;
     clearRoutes(): void;
     clearPolygons(): void;

@@ -13,19 +13,26 @@ import { IEventClickMap } from './interfaces/i-event-clik-map';
 import * as mark from "../../../test.markers.json";
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
 import { IPosition } from '../../interfaces/i-position';
-import { ResponseStatus } from './enum/i-status-response ';
+import { ResponseStatus } from './enum/e-status-response ';
 import { Position } from '../../entity/position';
 import { ILatLngBounds } from './interfaces/i-latln-bounds';
 import { Point } from '../../entity/point';
+import { EventType } from '../../enum/e-event-type';
+import { OptionType } from '../../enum/e-option';
+import { Address } from '../../classes/address';
+import { AddressType } from './enum/e-adress-type';
+import { AddressTypeName } from './enum/e-address-type-name';
+import { AddressSettings } from './classes/address-settings';
 
 
 declare var google;
 let transitLayer;
 let trafficLayer;
-let markers: any[] = [];
-let polygons: any[] = [];
+let polygonsStorage: any[] = [];
+let markersStorage: any[] = [];
+let circleStorage = null;
 let selectMarker = null;
-let route = null;
+let routeStorage = null;
 
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
@@ -38,7 +45,7 @@ export class GoogleConfig extends AbstractConfig {
 
     boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
 
-        let LatLng = new google.maps.LatLng({ lat: marker.point.latitude, lng: marker.point.longitude });
+        let LatLng = new google.maps.LatLng({ lat: marker.point.position.latitude, lng: marker.point.position.longitude });
 
         bounds.extend(LatLng);
 
@@ -55,11 +62,11 @@ export class GoogleConfig extends AbstractConfig {
     boundsContainsMarker(marker: BaseMarker): boolean {
 
         let googleMarkerOptions: GoogleMarkerOptions = {
-            draggable: true,
+            draggable: false,
             clickable: true,
             visible: true,
-            title: '',
-            position: new google.maps.LatLng(marker.point.latitude, marker.point.longitude),
+            title: marker.point.title,
+            position: new google.maps.LatLng(marker.point.position.latitude, marker.point.position.longitude),
             icon: {
                 title: 'picture',
                 url: './assets/icons_map/icon_hotel.png'
@@ -72,10 +79,9 @@ export class GoogleConfig extends AbstractConfig {
 
         googlemarker["geoPoint"] = marker;
 
-        google.maps.event.addListener(googlemarker, 'click', (event) => {
+        google.maps.event.addListener(googlemarker, EventType.click, (event) => {
 
             selectMarker = googlemarker;
-            console.log('MarkerClick', event, googlemarker);
 
         });
 
@@ -83,7 +89,7 @@ export class GoogleConfig extends AbstractConfig {
 
             this.map.geo.pushMarkers(googlemarker);
 
-            markers.push(googlemarker);
+            markersStorage.push(googlemarker);
 
             this.map.cluster.addMarker(googlemarker, true);
 
@@ -94,26 +100,24 @@ export class GoogleConfig extends AbstractConfig {
 
     clearAllMap(): void {
 
-        this.clearClusters();
         this.clearPolygons();
         this.clearMarkers();
+        this.clearCircle();
         super.clearAllMap();
 
     }
 
-    clearClusters(): void {
+
+    clearMarkers(): void {
 
         if (this.map.cluster.googleCluster != null) {
             this.map.cluster.removeMarkers();
         }
-        super.clearClusters();
-    }
-
-    clearMarkers(): void {
+        super.clearMarkers();
 
         super.clearMarkers();
 
-        markers.forEach((item) => {
+        markersStorage.forEach((item) => {
             item.setMap(null);
         });
     }
@@ -122,8 +126,8 @@ export class GoogleConfig extends AbstractConfig {
 
         super.clearRoutes();
 
-        if (route != null) {
-            route = null;
+        if (routeStorage != null) {
+            routeStorage = null;
         }
 
     }
@@ -132,10 +136,21 @@ export class GoogleConfig extends AbstractConfig {
 
         super.clearPolygons();
 
-        polygons.forEach((item) => {
+        polygonsStorage.forEach((item) => {
             item.setMap(null);
         });
 
+
+    }
+
+
+    clearCircle(): void {
+
+        super.clearCircle();
+
+        if (circleStorage != null) {
+            circleStorage.setMap(null);
+        }
 
     }
 
@@ -147,6 +162,7 @@ export class GoogleConfig extends AbstractConfig {
         }
         else {
             let latLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+
             this.getAddress(latLng);
         }
     }
@@ -163,30 +179,174 @@ export class GoogleConfig extends AbstractConfig {
         this.setZoom(currentZoom - 1);
     }
 
-    getAddress(coord: Position): IPoint[] {
+    getAddress(coordinates: ILatLng): IPoint[] {
 
-        let latLng = new google.maps.LatLng(coord.latitude, coord.longitude);
         let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'latLng': latLng },
+
+        let result = [];
+
+        let componentAddress = this.getAddressSettings();
+
+        geocoder.geocode({ 'latLng': coordinates },
+
             (results, status) => {
                 if (status == ResponseStatus.OK) {
-                    console.log(results[0], status)
+
+                    var place = results[0];
+
+                    let point: Point = new Point();
+                    point.position = new Position();
+                    point.address = new Address();
+
+                    for (let i = 0; i < place.address_components.length; i++) {
+
+                        let addressType = place.address_components[i].types[0];
+
+                        if (componentAddress[addressType]) {
+
+                            let addressValue = place.address_components[i][componentAddress[addressType]];
+
+                            if (addressType == 'country') {
+
+                                point.address.country = addressValue;
+                            }
+
+
+                            if (addressType == 'locality' || addressType == 'postal_town') {
+
+                                point.address.city = addressValue;
+                            }
+
+                            if (addressType == 'administrative_area_level_1' || addressType == 'administrative_area_level_2') {
+
+                                point.address.district = addressValue;
+                            }
+
+                            if (addressType == 'route') {
+
+                                point.address.street = addressValue;
+                            }
+
+                            if (addressType == 'street_number') {
+
+                                point.address.house = addressValue;
+                            }
+
+                            if (addressType == 'postal_code') {
+
+                                point.address.postCode = addressValue;
+                            }
+                        }
+
+                    }
+
+                    point.position.latitude = place.geometry.location.lat();
+                    point.position.longitude = place.geometry.location.lng();
+                    point.name = place.formatted_address;
+                    point.googlePlaceId = place.place_id;
+                    point.id = place.place_id;
+                    point.subtype = place.types[0];
+                    point.title = place.formatted_address;
+                    point.type = 'internet'
+                    point.source = 'google';
+                    result.push(point)
+
+                    this.showMarker(point);
                 }
             });
-        return null;
+
+        return result;
     }
 
     getDetailsPoint(placeId: string): IPoint[] {
 
         let placesService = new google.maps.places.PlacesService(this.map.api);
 
+        let result = [];
+
+        let componentAddress = this.getAddressSettings();
+
         placesService.getDetails({ placeId: placeId },
-            (place, status) => {
+
+            (results, status) => {
                 if (status == ResponseStatus.OK) {
-                    console.log(place, status)
+
+                    let place = results;
+                    let point: Point = new Point();
+                    point.position = new Position();
+                    point.address = new Address();
+
+                    for (let i = 0; i < place.address_components.length; i++) {
+
+                        let addressType = place.address_components[i].types[0];
+
+                        if (componentAddress[addressType]) {
+
+                            let addressValue = place.address_components[i][componentAddress[addressType]];
+
+
+                            if (addressType == AddressType.country) {
+
+
+                                point.address.country = addressValue;
+                            }
+
+
+                            if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
+
+                                point.address.city = addressValue;
+                            }
+
+                            if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
+
+                                point.address.district = addressValue;
+                            }
+
+                            if (addressType == AddressType.route) {
+
+                                point.address.street = addressValue;
+                            }
+
+                            if (addressType == AddressType.street_number) {
+
+                                point.address.house = addressValue;
+                            }
+
+                            if (addressType == AddressType.postal_code) {
+
+                                point.address.postCode = addressValue;
+                            }
+                        }
+
+
+                    }
+
+                    point.position.latitude = place.geometry.location.lat();
+                    point.position.longitude = place.geometry.location.lng();
+
+                    if (place.photos !== undefined) {
+                        if ("photos" in place) {
+                            if (place.photos.length > 0) {
+                                point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
+                            }
+                        }
+                    }
+
+                    point.name = place.formatted_address;
+                    point.googlePlaceId = place.place_id;
+                    point.id = place.place_id;
+                    point.subtype = place.types[0];
+                    point.type = 'internet'
+                    point.source = 'google';
+
+
+                    result.push(point)
                 }
             });
-        return null;
+        console.log(result, 'GETDETAILS')
+
+        return result;
+
     }
 
     getZoom(): number {
@@ -197,6 +357,21 @@ export class GoogleConfig extends AbstractConfig {
     getBounds(): ILatLngBounds {
 
         return this.map.api.getBounds();
+    }
+
+    private getAddressSettings(): AddressSettings {
+
+        let AdressSettings = new AddressSettings();
+        AdressSettings.country = AddressTypeName.long_name;
+        AdressSettings.route = AddressTypeName.long_name;
+        AdressSettings.locality = AddressTypeName.long_name;
+        AdressSettings.postal_town = AddressTypeName.long_name;
+        AdressSettings.administrative_area_level_1 = AddressTypeName.short_name;
+        AdressSettings.sublocality_level_1 = AddressTypeName.long_name;
+        AdressSettings.street_number = AddressTypeName.short_name;
+        AdressSettings.postal_code = AddressTypeName.short_name;
+
+        return AdressSettings;
     }
 
     setZoom(zoom: number): void {
@@ -243,13 +418,14 @@ export class GoogleConfig extends AbstractConfig {
 
     showMarker(point: IPoint) {
 
-        super.showMarker(point);
+
+        console.log(point)
 
         let googleMarkerOptions: GoogleMarkerOptions = {
-            draggable: true,
+            draggable: false,
             clickable: true,
             visible: true,
-            title: '',
+            title: point.title,
             position: new google.maps.LatLng(point.position.latitude, point.position.longitude),
             icon: {
                 title: 'picture',
@@ -261,18 +437,19 @@ export class GoogleConfig extends AbstractConfig {
 
         let marker = new google.maps.Marker(googleMarkerOptions);
 
-        google.maps.event.addListener(marker, 'click', (event) => {
+        google.maps.event.addListener(marker, EventType.click, (event) => {
 
             selectMarker = marker;
-            console.log('MarkerClick', event);
 
         });
 
         marker["geoPoint"] = point;
-        markers.push(marker);
+
+        markersStorage.push(marker);
 
         if (this.map.cluster.googleCluster != null) {
             this.map.cluster.addMarker(marker, true);
+            this.map.cluster.refreshMarkers();
             this.map.geo.pushMarkers(marker)
 
         }
@@ -287,10 +464,41 @@ export class GoogleConfig extends AbstractConfig {
 
     }
 
+    draggableMarker(enabled: boolean): void {
+
+        try {
+
+            this.loadMarkers = false;
+
+            selectMarker.setDraggable(enabled);
+
+            if (enabled) {
+
+                if (this.map.geo.circle != null) {
+
+                    circleStorage.bindTo(OptionType.center, selectMarker, OptionType.position);
+                }
+
+            }
+
+            google.maps.event.addListener(selectMarker, EventType.dragend, (event) => {
+
+            });
+
+        } catch (error) {
+
+        }
+
+    }
+
     drawCircle(options: ICircleOptions): void {
 
+        if (circleStorage != null) {
 
-console.log(selectMarker)
+            circleStorage.setMap(null);
+
+            this.clearCircle();
+        }
 
         let center = new google.maps.LatLng({ lat: selectMarker.position.lat(), lng: selectMarker.position.lng() });
 
@@ -300,17 +508,17 @@ console.log(selectMarker)
 
         circle.setMap(this.map.api);
 
-        google.maps.event.addListener(circle, 'radius_changed', () => {
+        google.maps.event.addListener(circle, EventType.radius_changed, () => {
 
         });
 
-        google.maps.event.addListener(circle, 'dragend', () => {
+        google.maps.event.addListener(circle, EventType.dragend, () => {
 
         });
 
-        this.map.geo.pushPolygons(circle);
+        this.map.geo.pushCircle(circle);
 
-        polygons.push(circle);
+        circleStorage = circle;
 
     }
 
@@ -332,25 +540,25 @@ console.log(selectMarker)
     drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void {
 
         let shaping: any;
-        polygons = [];
+        polygonsStorage = [];
 
         this.toggleMapDragging(true);
 
-        google.maps.event.addDomListener(this.map.api.getDiv(), 'mousedown', () => {
+        google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mousedown, () => {
 
             shaping = new google.maps.Polyline(optionsPolyline);
 
             shaping.setMap(this.map.api);
 
-            polygons.push(shaping)
+            polygonsStorage.push(shaping)
 
-            let move = google.maps.event.addListener(this.map.api, 'mousemove', event => {
+            let move = google.maps.event.addListener(this.map.api, EventType.mousemove, event => {
 
                 shaping.getPath().push(event.latLng);
 
             });
 
-            google.maps.event.addListenerOnce(this.map.api, 'mouseup', () => {
+            google.maps.event.addListenerOnce(this.map.api, EventType.mouseup, () => {
 
                 google.maps.event.removeListener(move);
 
@@ -366,16 +574,19 @@ console.log(selectMarker)
 
                 this.toggleMapDragging(false);
 
-                polygons.push(shaping);
+                polygonsStorage.push(shaping);
 
-                google.maps.event.clearListeners(this.map.api.getDiv(), 'mousedown');
+                google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mousedown);
 
                 let array = shaping.getPath().getArray();
                 let bounds = new google.maps.LatLngBounds();
+
                 for (var n = 0; n < array.length; n++) {
+
                     bounds.extend(array[n]);
                 }
                 this.map.api.panToBounds(bounds);
+                
                 this.map.api.fitBounds(bounds);
 
             });

@@ -15,4 +15,8 @@ export interface IPoint {
     extras: string;
     tmcAgencyMargin: string;
     id: string;
+    googlePlaceId: string;
+    type: string;
+    source: string;
+    subtype: string;
 }

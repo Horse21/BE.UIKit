@@ -27,14 +27,17 @@ export class MapSearchComponent {
   private ChangeInput(value: string) {
 
     if (value.length > 1) {
-     this.manager.getActiveMap().search.search(value)
+      
+     let searchresult =  this.manager.getActiveMap().search.search(value);
+
+     console.log(searchresult,'searchresult')
     
     }
   }
 
   private SelectAutocomplete(placeid: any) {
     
-    this.manager.getActiveMap().search.details(placeid);
+    this.manager.getActiveMap().config.getDetailsPoint(placeid);
   }
 
 }

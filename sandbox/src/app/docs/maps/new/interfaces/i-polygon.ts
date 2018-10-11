@@ -1,7 +1,7 @@
 import { IPoint } from "./i-point";
 
 export interface IPolygonOptions {
-    path: Array<any>;
+    path: Array<IPoint>;
     strokeColor: string;
     strokeOpacity: number;
     strokeWeight: number;

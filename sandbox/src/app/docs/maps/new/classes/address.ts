@@ -1,4 +1,6 @@
-export interface IAddress {
+import { IAddress } from "../interfaces/i-address";
+
+export class Address implements IAddress {
     country: string;
     city: string;
     house: string;
