@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatIconModule} from "@angular/material";
+import {MatButtonModule, MatIconModule} from "@angular/material";
 import {H21BreadcrumbsComponent} from "./h21-breadcrumbs.component";
 import {RouterModule} from "@angular/router";
 
 @NgModule({
 	imports: [
 		CommonModule,
+		MatButtonModule,
 		MatIconModule,
 		RouterModule
 	],

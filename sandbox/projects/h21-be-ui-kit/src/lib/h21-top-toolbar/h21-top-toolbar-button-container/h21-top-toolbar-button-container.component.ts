@@ -1,20 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IToolbarElement } from '../../../dto/i-toolbar-element';
+import {Component, Input} from '@angular/core';
+import {IToolbarElement} from '../../../dto/i-toolbar-element';
 
 @Component({
-  selector: 'h21-top-toolbar-button-container',
-  templateUrl: './h21-top-toolbar-button-container.component.html',
+	selector: 'h21-top-toolbar-button-container',
+	templateUrl: './h21-top-toolbar-button-container.component.html',
 })
-export class H21TopToolbarButtonContainerComponent implements OnInit {
+export class H21TopToolbarButtonContainerComponent {
 
-  @Input() toolbarButtons: Array<IToolbarElement>;
-  @Input() condition: string;
+	@Input() buttons: IToolbarElement[];
 
-  constructor() {
-	  this.toolbarButtons = new Array<IToolbarElement>();
-  }
-
-  ngOnInit() {
-
-  }
+	constructor() {
+		this.buttons = [];
+	}
 }

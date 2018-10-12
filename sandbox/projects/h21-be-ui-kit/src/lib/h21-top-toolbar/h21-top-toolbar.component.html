@@ -2,7 +2,7 @@
 
 	<!-- Breadcrumbs -->
 	<ng-container *ngIf="showBreadcrumbs">
-		<h21-breadcrumbs [breadcrumbsData]="breadcrumbsData" [linkMode]="'routerLink'"></h21-breadcrumbs>
+		<h21-breadcrumbs [breadcrumbsData]="breadcrumbsData" [linkMode]="'ROUTER_LINK'"></h21-breadcrumbs>
 	</ng-container>
 
 	<!--  -->
@@ -50,6 +50,6 @@
 	</ng-container>
 
 	<!-- Profile user card actions -->
-	<h21-top-toolbar-button-container [toolbarButtons]="buttonsData"></h21-top-toolbar-button-container>
+	<h21-top-toolbar-button-container [buttons]="buttonsData"></h21-top-toolbar-button-container>
 
 </mat-toolbar>

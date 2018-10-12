@@ -19,7 +19,6 @@ export * from './query';
 export * from './i-validation-rule';
 export * from './h21-validator';
 export * from './i-sidebar-nav-tab';
-export * from './i-breadcrumb';
 export * from './i-sorting-parameter';
 
 export * from './i-picture';
@@ -33,5 +32,4 @@ export * from './i-hotel-room-detail';
 export * from './i-toolbar-element';
 export * from './i-cart-combobox-row';
 export * from './i-combobox-option';
-export * from '../lib/h21-user-card/dto/i-user-card-data';
 export * from './i-destination-item';

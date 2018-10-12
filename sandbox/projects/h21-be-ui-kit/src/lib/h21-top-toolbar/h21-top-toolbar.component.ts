@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AppSubscriberService } from '../../services/app-subscriber-service';
 import { trigger, state, transition, animate, style } from "@angular/animations";
-import { IBreadcrumb } from '../../dto/i-breadcrumb';
+import { IBreadcrumb } from '../h21-breadcrumbs/dto/i-breadcrumb';
 import { IToolbarElement } from '../../dto/i-toolbar-element';
 import { IComboboxOption } from "../../dto/i-combobox-option";
 

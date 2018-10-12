@@ -129,4 +129,8 @@ export class H21HotelBookComponent implements OnInit {
 		let rows = this.dataGrid.instance.getRowElement(index);
 		rows[0].classList.remove('h21-data-grid_expanded-detail-row');
 	}
+
+	init() {
+
+	}
 }
