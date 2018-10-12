@@ -23,6 +23,7 @@ import { Point } from '../entity/point';
 import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
+import { MapToolbarComponent } from '../../map-toolbar/map-toolbar.component';
 
 declare var google;
 
@@ -37,12 +38,20 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     geo: GeoContainer;
+    toolbar: MapToolbarComponent;
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;
     loadMarkers: boolean;
+    ClikMap: boolean;
     routeBuilder: AbstractRouteBuilder;
 
+
+    constructor() {
+
+        this.loadMarkers = true;
+        this.ClikMap = false;
+    }
 
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
 
@@ -87,19 +96,17 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     drawMarkersOnMap(): void {
-
-        this.loadMarkers = true;
-
+        
         try {
             if (this.loadMarkers) {
 
-              //  this.clearAllMap()
+                this.clearAllMap()
 
                 let markersVisible = false;
 
                 if (this.getZoom() <= 3) {
 
-               //     this.clearAllMap();
+                    this.clearAllMap();
 
                 }
                 if (this.getZoom() > 5) {
@@ -142,7 +149,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getBounds(): ILatLngBounds;
 
-    abstract getDetailsPoint(placeId: string): IPoint[]
+    abstract getDetailsPoint(placeId: string): IPoint;
 
     abstract drawCircle(options: ICircleOptions): void;
 
@@ -227,7 +234,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
                 for (var i = 0; i < this.map.geo.markers.length; i++) {
 
-                    //this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
+                    this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
                 }
             }
         }
@@ -327,7 +334,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract setMaxZoom(zoom: number): void;
 
-    abstract setCenter(position: IPosition): void;
+    abstract setCenter(position: ILatLng): void;
 
     toggleMapDragging(enabled: boolean) {
 

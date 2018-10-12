@@ -14,21 +14,20 @@ export class GoogleSearchMap extends AbstractSearch {
     search(query: string): Array<IPoint> {
 
         let result = [];
-        let point: Point = new Point();
-        point.position = new Position();
-        point.address = new Address();
-
         let service = new google.maps.places.AutocompleteService();
         let request = {
             input: query,
             language: 'en'
         };
 
-        service.getPlacePredictions(request, function (results, status) {
+        service.getPlacePredictions(request, (results, status) => {
 
             if (status == ResponseStatus.OK) {
 
                 for (var i = 0; i < results.length; i++) {
+                    let point: Point = new Point();
+                    point.position = new Position();
+                    point.address = new Address();
                     let place = results[i];
                     point.id = place.place_id;
                     point.name = place.description;
@@ -37,7 +36,7 @@ export class GoogleSearchMap extends AbstractSearch {
                     point.title = place.formatted_address;
                     point.type = 'internet'
                     point.source = 'google';
-                    
+
                     result.push(point)
                 }
 
@@ -47,8 +46,5 @@ export class GoogleSearchMap extends AbstractSearch {
         );
         return result;
     }
-
-
-
 
 }

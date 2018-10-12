@@ -8,6 +8,8 @@ import { AbstractEvent } from './abstract-event';
 import { Injectable } from '@angular/core';
 import { AbstractMarkerCluster } from './abstract-marker-cluster';
 import { AbstractSearch } from './abstract-search';
+import { GoogleRouteBuilder } from '../providers/google/route';
+import { AbstractRouteBuilder } from './abstract-route-builder';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -24,12 +26,13 @@ export abstract class AbstractMap {
 
     public abstract get scriptSelector(): string;
 
-    constructor(public options: IMapOptions, public config: AbstractConfig, public events: AbstractEvent, public cluster: AbstractMarkerCluster, public geo: GeoContainer, public search: AbstractSearch) {
+    constructor(public options: IMapOptions, public config: AbstractConfig, public events: AbstractEvent, public cluster: AbstractMarkerCluster, public geo: GeoContainer, public search: AbstractSearch, public route: AbstractRouteBuilder) {
 
         this.events.initMap(this);
         this.cluster.initMap(this);
         this.config.initMap(this);
         this.search.initMap(this);
+        this.route.initMap(this);
 
     }
 

@@ -1,23 +1,41 @@
-<div>To load points, increase the zoom</div>
-<div class="buttons-row">
-  <button mat-button (click)="zoomLevel('In')" color="primary">Zoom Level +</button>
-  <button mat-button (click)="zoomLevel('Out')" color="primary">Zoom Level-</button>
-  <button mat-button (click)="drawShape('CIRCLE')" color="primary">Draw radius</button>
-  <button mat-button (click)="drawShape('AREA')" color="primary">Draw area</button>
-  <button mat-button (click)="clearMap()" color="primary">ClearMap</button>
-  
-</div>
+
 <section class="example-section">
   <mat-checkbox class="example-margin" (change)="onChangeTransit($event)" [(ngModel)]="checkboxTransit">Transit Layer</mat-checkbox>
 </section>
 <section class="example-section">
-  <mat-checkbox class="example-margin" (change)="onChangeTraffic($event)"  [(ngModel)]="checkboxTraffic">Traffic Layer</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="onChangeTraffic($event)" [(ngModel)]="checkboxTraffic">Traffic Layer</mat-checkbox>
 </section>
 
 <section class="example-section">
-  <mat-checkbox class="example-margin" (change)="onChangeClearObject($event)"  [(ngModel)]="checkboxClearObject">ClearObject</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="onChangeLoadMarkers($event)" [(ngModel)]="checked">Load Markers</mat-checkbox>
 </section>
 
 <section class="example-section">
-  <mat-checkbox class="example-margin" (change)="onChangeDraggableMarker($event)"  [(ngModel)]="checkboxDraggable">DraggableMarker</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="onChangeDraggableMarker($event)" [(ngModel)]="checkboxDraggable">DraggableMarker</mat-checkbox>
+</section>
+
+<section class="example-section">
+  <mat-checkbox class="example-margin" (change)="onChangeClikMap($event)" [(ngModel)]="checkboxClikMap">Click Map</mat-checkbox>
+</section>
+
+<section class="example-section">
+  <mat-checkbox class="example-margin" (change)="onChangeShowRoute($event)" [(ngModel)]="checkhowRoute">Show Route</mat-checkbox>
+</section>
+
+<section class="example-section button-toolbar">
+  <button mat-raised-button (click)="zoomLevel('In')">
+    <mat-icon>zoom_in </mat-icon>
+  </button>
+  <button mat-raised-button (click)="zoomLevel('Out')">
+    <mat-icon>zoom_out</mat-icon>
+  </button>
+  <button mat-raised-button (click)="drawShape('AREA')">
+    <mat-icon>timeline</mat-icon>
+  </button>
+  <button mat-raised-button (click)="drawShape('CIRCLE')">
+    <mat-icon>touch_app</mat-icon>
+  </button>
+  <button mat-raised-button (click)="clearMap()">
+    <mat-icon>clear </mat-icon>
+  </button>
 </section>

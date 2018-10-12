@@ -12,6 +12,7 @@ import { AbstractMarkerCluster } from "../../abstract/abstract-marker-cluster";
 import { GoogleMarkerCluster } from "./cluster";
 import { GeoContainer } from "../../entity/geo-container";
 import { GoogleSearchMap } from "./search";
+import { GoogleRouteBuilder } from "./route";
 
 declare var google;
 declare var document;
@@ -26,8 +27,8 @@ export class GoogleMap extends AbstractMap {
         return ".gm-style";
     }
 
-    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent, cluster: GoogleMarkerCluster, geo: GeoContainer, search: GoogleSearchMap) {
-        super(mapOptions, config, events, cluster, geo, search);
+    constructor(mapOptions: GoogleMapOptions, config: GoogleConfig, events: GoogleEvent, cluster: GoogleMarkerCluster, geo: GeoContainer, search: GoogleSearchMap, route: GoogleRouteBuilder) {
+        super(mapOptions, config, events, cluster, geo, search, route);
 
     }
 
@@ -40,6 +41,7 @@ export class GoogleMap extends AbstractMap {
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
 
         return new Observable((observer: Observer<FetchStatus>) => {
+
             let apiScript = document.createElement('script');
             let headElement = document.getElementsByTagName('head')[0];
             let apiUrl: string;

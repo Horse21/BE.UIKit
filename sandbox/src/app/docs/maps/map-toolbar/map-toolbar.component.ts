@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MapManager } from '../new/entity/map-manager';
 import { ZoomType } from '../new/enum/e-zoom-type';
+import { Injectable } from "@angular/core";
 
 @Component({
   selector: 'app-map-toolbar',
@@ -8,7 +9,10 @@ import { ZoomType } from '../new/enum/e-zoom-type';
   styleUrls: ['./map-toolbar.component.css']
 })
 
+
+@Injectable()
 export class MapToolbarComponent {
+  checked = true;
 
   constructor(private manager: MapManager) { }
 
@@ -36,9 +40,11 @@ export class MapToolbarComponent {
     this.manager.getActiveMap().config.draggableMarker(event.checked);
   }
 
-  private onChangeClearObject(event: any) {
+  private onChangeLoadMarkers(event: any) {
 
     this.manager.getActiveMap().config.loadMarkers = event.checked;
+    this.manager.getActiveMap().loadMarkers = event.checked;
+    this.manager.getActiveMap().config.clearAllMap();
   }
 
   private createMarker(type: string) {
@@ -62,6 +68,14 @@ export class MapToolbarComponent {
 
   }
 
+  public onChangeShowRoute(event: any) {
+
+  }
+  private onChangeClikMap(event: any) {
+
+    this.manager.getActiveMap().ClikMap = event.checked;
+    this.manager.getActiveMap().config.ClikMap = event.checked;
+  }
 
 
 }

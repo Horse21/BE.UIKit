@@ -43,7 +43,6 @@ export class GeoContainer {
     clearMarkers(): void {
 
         this.clearArray(this.markers);
-
     }
 
    

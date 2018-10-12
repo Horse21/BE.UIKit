@@ -44,4 +44,9 @@ export abstract class AbstractRouteBuilder {
         return this;
     }
 
+    initMap(map: AbstractMap): void {
+
+        this.map = map;
+    }
+
 }

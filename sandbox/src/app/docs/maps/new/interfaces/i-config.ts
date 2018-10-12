@@ -14,7 +14,7 @@ export interface IConfig {
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
     getAddress(position: ILatLng): Array<IPoint>;
-    getDetailsPoint(placeId: string): Array<IPoint>;
+    getDetailsPoint(placeId: string): IPoint;
     getZoom(): number;
     getLatLngBounds(): ILatLngBounds;
     markersFitsBounds(): void;
@@ -28,7 +28,7 @@ export interface IConfig {
     setZoom(zoomLevel: number);
     setMinZoom(zoom: number): void;
     setMaxZoom(zoom: number): void;
-    setCenter(position: IPosition): void;
+    setCenter(position: ILatLng): void;
     showMarker(point: IPoint): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficLayer(show?: boolean);
