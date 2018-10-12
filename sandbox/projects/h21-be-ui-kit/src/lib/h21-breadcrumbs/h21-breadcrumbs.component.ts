@@ -27,11 +27,18 @@ export class H21BreadcrumbsComponent {
 		this.linkMode = H21BreadcrumbsLinkMode.RouterLink;
 	}
 
-	showHrefLinkButton(isLast: boolean): boolean {
-		return this.linkMode == H21BreadcrumbsLinkMode.Href && (!isLast || this.lastIsLink);
+	showHrefLinkButton(): boolean {
+		return this.linkMode == H21BreadcrumbsLinkMode.Href;
 	}
 
-	showRouterLinkButton(isLast: boolean): boolean {
-		return this.linkMode == H21BreadcrumbsLinkMode.RouterLink && (!isLast || this.lastIsLink);
+	showRouterLinkButton(): boolean {
+		return this.linkMode == H21BreadcrumbsLinkMode.RouterLink;
+	}
+
+	isLink(isLast: boolean): boolean {
+		return !isLast || this.lastIsLink;
+	}
+	isText(isLast: boolean): boolean {
+		return isLast && !this.lastIsLink;
 	}
 }

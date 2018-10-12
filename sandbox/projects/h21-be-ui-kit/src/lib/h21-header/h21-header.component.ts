@@ -52,14 +52,13 @@ export class H21HeaderComponent {
 
 	openSearchSettingsDialog(): void { // todo: need to finish the popup
 		return;
-
-		let dialogRef = this.dialog.open(H21HeaderSearchSettingsDialogComponent, {
-			width: '500px'
-		});
-		dialogRef.afterClosed().subscribe(result => {
-
-			// Here, the processing of the dialog data returned
-
-		});
+		// let dialogRef = this.dialog.open(H21HeaderSearchSettingsDialogComponent, {
+		// 	width: '500px'
+		// });
+		// dialogRef.afterClosed().subscribe(result => {
+        //
+		// 	// Here, the processing of the dialog data returned
+        //
+		// });
 	}
 }

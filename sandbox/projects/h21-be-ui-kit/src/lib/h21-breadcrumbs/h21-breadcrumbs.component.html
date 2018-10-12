@@ -2,13 +2,13 @@
 	<ng-container *ngFor="let item of breadcrumbsData; let last = last;">
 		<a mat-button
 		   href="{{item.url}}"
-		   *ngIf="showHrefLinkButton(last)"
+		   *ngIf="showHrefLinkButton() && isLink(last)"
 		>{{item.label}}</a>
 		<a mat-button
 		   [routerLink]="[item.url]"
-		   *ngIf="showRouterLinkButton(last)"
+		   *ngIf="showRouterLinkButton() && isLink(last)"
 		>{{item.label}}</a>
 		<mat-icon *ngIf="!last">chevron_right</mat-icon>
-		<span *ngIf="last && !lastIsLink">{{item.label}}</span>
+		<span *ngIf="isText(last)">{{item.label}}</span>
 	</ng-container>
 </nav>
