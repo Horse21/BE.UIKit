@@ -237,8 +237,6 @@ export class GoogleConfig extends AbstractConfig {
                 }
             }
         }
-        // console.log(pointAddress, 'addresstype')
-
         return resultAddress
     }
 
@@ -261,10 +259,6 @@ export class GoogleConfig extends AbstractConfig {
                 if (status == ResponseStatus.OK) {
 
                     var place = results[0];
-
-                    for (let i = 0; i < place.address_components.length; i++) {
-
-                    }
 
                     for (let i = 0; i < place.address_components.length; i++) {
 
