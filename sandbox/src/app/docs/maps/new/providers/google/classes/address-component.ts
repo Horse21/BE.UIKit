@@ -1,4 +1,4 @@
 export class AddressComponent {
-    typeName: string;
+    type: string;
     value: string;
 }

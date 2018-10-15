@@ -24,6 +24,7 @@ import { AddressSettings } from "./classes/address-settings";
 import { PointAddress } from './enum/e-point-address';
 import { Observable, Observer } from 'rxjs';
 import { AddressComponent } from './classes/address-component';
+import { PointAddressType } from './enum/e-point-address-type'
 
 declare var google;
 let transitLayer;
@@ -187,67 +188,65 @@ export class GoogleConfig extends AbstractConfig {
 
         for (let i = 0; i < place.length; i++) {
 
-            let parseaddress = new AddressComponent();
-            let addresstype = new PointAddress();
+            let parseAddress = new AddressComponent();
+            let nameType = new PointAddress();
             let addressType = place[i].types[0];
             if (componentAddress[addressType]) {
 
                 let addressValue = place[i][componentAddress[addressType]];
-                addresstype.type = addressType;
-                addresstype.value = addressValue;
-                pointAddress.push(addresstype);
+
+                nameType.type = addressType;
+                nameType.value = addressValue;
+                pointAddress.push(nameType);
 
                 if (addressType == AddressType.country) {
 
-                    parseaddress.typeName = 'country';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.COUNTRY;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
                 if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
 
-                    parseaddress.typeName = 'city';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.CITY;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
 
                 if (addressType == AddressType.street_number) {
 
-                    parseaddress.typeName = 'house';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.HOUSE;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
 
                 if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
 
-                    parseaddress.typeName = 'district';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.DISTRICT;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
 
                 if (addressType == AddressType.route) {
-                    parseaddress.typeName = 'street';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.STREET;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
 
                 if (addressType == AddressType.postal_code) {
-                    parseaddress.typeName = 'postCode';
-                    parseaddress.value = addressValue;
-                    resultAddress.push(parseaddress)
+                    parseAddress.type = PointAddressType.POSTCODE;
+                    parseAddress.value = addressValue;
+                    resultAddress.push(parseAddress)
                 }
             }
         }
         return resultAddress
     }
 
-
     getAddress(coordinates: ILatLng): IPoint[] {
 
         let geocoder = new google.maps.Geocoder();
 
         let result = [];
-
-        let componentAddress = this.getAddressSettings();
 
         let point: Point = new Point();
         point.position = new Position();
@@ -260,50 +259,37 @@ export class GoogleConfig extends AbstractConfig {
 
                     var place = results[0];
 
-                    for (let i = 0; i < place.address_components.length; i++) {
+                    let typeAddress = this.getDetailedAddress(place.address_components);
 
-                        let addressType = place.address_components[i].types[0];
+                    for (let i = 0; i < typeAddress.length; i++) {
 
-                        if (componentAddress[addressType]) {
+                        let item = typeAddress[i];
 
-                            let addressValue = place.address_components[i][componentAddress[addressType]];
+                        if (item.type == PointAddressType.COUNTRY) {
+                            point.address.country = item.value
+                        }
+                        if (item.type === PointAddressType.CITY) {
+                            point.address.city = item.value
+                        }
 
+                        if (item.type === PointAddressType.DISTRICT) {
+                            point.address.district = item.value
+                        }
 
-                            if (addressType == AddressType.country) {
+                        if (item.type === PointAddressType.STREET) {
+                            point.address.street = item.value
+                        }
 
-
-                                point.address.country = addressValue;
-                            }
-
-
-                            if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
-
-                                point.address.city = addressValue;
-                            }
-
-                            if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
-
-                                point.address.district = addressValue;
-                            }
-
-                            if (addressType == AddressType.route) {
-
-                                point.address.street = addressValue;
-                            }
-
-                            if (addressType == AddressType.street_number) {
-
-                                point.address.house = addressValue;
-                            }
-
-                            if (addressType == AddressType.postal_code) {
-
-                                point.address.postCode = addressValue;
-                            }
+                        if (item.type === PointAddressType.HOUSE) {
+                            point.address.house = item.value
+                        }
+                        if (item.type === PointAddressType.POSTCODE) {
+                            point.address.postCode = item.value
                         }
 
                     }
 
+                    point.address.countryCode = point.address.country.substring(0,2).toUpperCase();
                     point.address.description = place.formatted_address;
                     point.position.latitude = place.geometry.location.lat();
                     point.position.longitude = place.geometry.location.lng();
@@ -329,13 +315,13 @@ export class GoogleConfig extends AbstractConfig {
         return new Observable((observer: Observer<IPoint>) => {
 
             let placesService = new google.maps.places.PlacesService(this.map.api);
-            let componentAddress = this.getAddressSettings();
 
             placesService.getDetails({ placeId: placeId },
 
                 (result, status) => {
 
                     if (status == ResponseStatus.OK) {
+
                         if (result) {
                             let point: Point = new Point();
                             point.position = new Position();
@@ -343,50 +329,37 @@ export class GoogleConfig extends AbstractConfig {
 
                             let place = result;
 
-                            for (let i = 0; i < place.address_components.length; i++) {
+                            let typeAddres = this.getDetailedAddress(place.address_components);
 
-                                let addressType = place.address_components[i].types[0];
+                            for (let i = 0; i < typeAddres.length; i++) {
 
-                                if (componentAddress[addressType]) {
+                                let item = typeAddres[i];
 
-                                    let addressValue = place.address_components[i][componentAddress[addressType]];
+                                if (item.type == PointAddressType.COUNTRY) {
+                                    point.address.country = item.value
+                                }
+                                if (item.type == PointAddressType.CITY) {
+                                    point.address.city = item.value
+                                }
 
+                                if (item.type == PointAddressType.DISTRICT) {
+                                    point.address.district = item.value
+                                }
 
-                                    if (addressType == AddressType.country) {
+                                if (item.type == PointAddressType.STREET) {
+                                    point.address.street = item.value
+                                }
 
-
-                                        point.address.country = addressValue;
-                                    }
-
-
-                                    if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
-
-                                        point.address.city = addressValue;
-                                    }
-
-                                    if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
-
-                                        point.address.district = addressValue;
-                                    }
-
-                                    if (addressType == AddressType.route) {
-
-                                        point.address.street = addressValue;
-                                    }
-
-                                    if (addressType == AddressType.street_number) {
-
-                                        point.address.house = addressValue;
-                                    }
-
-                                    if (addressType == AddressType.postal_code) {
-
-                                        point.address.postCode = addressValue;
-                                    }
+                                if (item.type == PointAddressType.HOUSE) {
+                                    point.address.house = item.value
+                                }
+                                if (item.type == PointAddressType.POSTCODE) {
+                                    point.address.postCode = item.value
                                 }
 
                             }
 
+                            point.address.countryCode = point.address.country.substring(0,2).toUpperCase();
                             point.position.latitude = place.geometry.location.lat();
                             point.position.longitude = place.geometry.location.lng();
 
