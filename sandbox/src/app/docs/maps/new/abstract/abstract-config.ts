@@ -109,6 +109,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 if (markersVisible) {
                     for (let i = 0; i < mark.default.length; i++) {
                         let item = mark.default[i];
+
                         let marker = new BaseMarker({
                             title: '',
                             icon: {
@@ -122,12 +123,13 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
                         });
 
+                       
+
                         marker.point = new Point();
                         marker.point.position = new Position();
                         marker.point.position.latitude = item.Address.Lat;
                         marker.point.position.longitude = item.Address.Lng;
                         marker.point.title = item.Hotelname;
-
                         this.boundsContainsMarker(marker);
 
                     }
@@ -240,10 +242,17 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract boundsContainsMarker(marker: BaseMarker): boolean;
 
+    private getPointPosition(marker: BaseMarker): Position {
+   
+        return marker.point.position;
+    }
+
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
-        let markerLatitude = marker.point.position.latitude;
-        let markerLongitude = marker.point.position.longitude;
+        let positionmarker = this.getPointPosition(marker);
+
+        let markerLatitude = positionmarker.latitude;
+        let markerLongitude = positionmarker.longitude;
 
         let polygonPointsLatitude = polygon.path.map(val => {
             return val.position.latitude;
@@ -274,11 +283,14 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     radiusContainsMarker(marker: BaseMarker, position: IPosition): number {
+
         let circleCenterLatitude = position.latitude;
         let circleCenterLongitude = position.longitude;
 
-        let pointLatitude = marker.point.position.latitude;
-        let pointLongitude = marker.point.position.longitude;
+        let positionmarker = this.getPointPosition(marker);
+
+        let pointLatitude = positionmarker.latitude;
+        let pointLongitude = positionmarker.longitude;
 
         let radiansCircleCenterLatitude = circleCenterLatitude * (Math.PI / 180);
         let radiansCircleCenterLongitude = circleCenterLongitude * (Math.PI / 180);
@@ -312,6 +324,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 draggable: false,
                 visible: true
             });
+
+            console.log(marker)
         }
         catch (error) {
             console.log(error);

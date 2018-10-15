@@ -20,9 +20,10 @@ import { OptionType } from '../../enum/e-option';
 import { Address } from '../../classes/address';
 import { AddressType } from './enum/e-adress-type';
 import { AddressTypeName } from './enum/e-address-type-name';
-import { AddressSettings } from './classes/address-settings';
+import { AddressSettings } from "./classes/address-settings";
 import { PointAddress } from './enum/e-point-address';
 import { Observable, Observer } from 'rxjs';
+import { AddressComponent } from './classes/address-component';
 
 declare var google;
 let transitLayer;
@@ -162,6 +163,8 @@ export class GoogleConfig extends AbstractConfig {
                 this.getAddress(latLng);
             }
         }
+        console.log(this.map, 'THIS MAP')
+
     }
 
     zoomIn(): void {
@@ -180,8 +183,11 @@ export class GoogleConfig extends AbstractConfig {
 
         let componentAddress = this.getAddressSettings();
         let pointAddress = [];
+        let resultAddress = [];
 
         for (let i = 0; i < place.length; i++) {
+
+            let parseaddress = new AddressComponent();
             let addresstype = new PointAddress();
             let addressType = place[i].types[0];
             if (componentAddress[addressType]) {
@@ -190,10 +196,50 @@ export class GoogleConfig extends AbstractConfig {
                 addresstype.type = addressType;
                 addresstype.value = addressValue;
                 pointAddress.push(addresstype);
+
+                if (addressType == AddressType.country) {
+
+                    parseaddress.typeName = 'country';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
+                if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
+
+                    parseaddress.typeName = 'city';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
+
+                if (addressType == AddressType.street_number) {
+
+                    parseaddress.typeName = 'house';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
+
+                if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
+
+                    parseaddress.typeName = 'district';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
+
+                if (addressType == AddressType.route) {
+                    parseaddress.typeName = 'street';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
+
+                if (addressType == AddressType.postal_code) {
+                    parseaddress.typeName = 'postCode';
+                    parseaddress.value = addressValue;
+                    resultAddress.push(parseaddress)
+                }
             }
         }
-        console.log(pointAddress, 'addresstype')
+        // console.log(pointAddress, 'addresstype')
 
+        return resultAddress
     }
 
 
@@ -216,11 +262,9 @@ export class GoogleConfig extends AbstractConfig {
 
                     var place = results[0];
 
-                    console.log(place)
+                    for (let i = 0; i < place.address_components.length; i++) {
 
-                    let f = this.getDetailedAddress(place.address_components);
-
-                    console.log(f)
+                    }
 
                     for (let i = 0; i < place.address_components.length; i++) {
 
@@ -265,6 +309,8 @@ export class GoogleConfig extends AbstractConfig {
                         }
 
                     }
+
+                    point.address.description = place.formatted_address;
                     point.position.latitude = place.geometry.location.lat();
                     point.position.longitude = place.geometry.location.lng();
                     point.name = place.formatted_address;
@@ -290,7 +336,7 @@ export class GoogleConfig extends AbstractConfig {
 
             let placesService = new google.maps.places.PlacesService(this.map.api);
             let componentAddress = this.getAddressSettings();
-            
+
             placesService.getDetails({ placeId: placeId },
 
                 (result, status) => {
@@ -448,6 +494,11 @@ export class GoogleConfig extends AbstractConfig {
     showMarker(point: IPoint) {
 
         try {
+            super.showMarker(point);
+
+
+            console.log(point)
+
 
             let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);
 
@@ -473,6 +524,9 @@ export class GoogleConfig extends AbstractConfig {
             });
 
             this.map.selectedMarker = marker;
+
+
+
             marker["point"] = point;
 
             if (this.map.cluster.googleCluster != null) {
