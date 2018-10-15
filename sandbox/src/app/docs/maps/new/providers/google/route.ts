@@ -15,13 +15,7 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
     showRoute(): void {
         
         try {
-
-console.log(this.map,'MAP')
-
-         //   this.map.config.showMarker(this.map.geo.markers[0].point)
-           // this.map.config.showMarker(this.map.geo.markers[1].point);
-           
-                var directionsService = new google.maps.DirectionsService();
+            var directionsService = new google.maps.DirectionsService();
                 var pOptions = {
                     strokeColor: "#007bff",
                     strokeOpacity: 0.9,

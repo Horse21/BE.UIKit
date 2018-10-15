@@ -10,6 +10,7 @@ import { AbstractMarkerCluster } from './abstract-marker-cluster';
 import { AbstractSearch } from './abstract-search';
 import { GoogleRouteBuilder } from '../providers/google/route';
 import { AbstractRouteBuilder } from './abstract-route-builder';
+import { BaseMarker } from '../entity/base-marker';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -17,6 +18,9 @@ export abstract class AbstractMap {
      * Map-specific API object
      */
     api: any;
+    loadMarkers: boolean = true;
+    clickMap: boolean = false;
+    selectedMarker: BaseMarker;
 
     public get container(): HTMLElement {
         return document.getElementById('map');

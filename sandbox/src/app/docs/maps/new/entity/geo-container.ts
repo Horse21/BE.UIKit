@@ -25,24 +25,28 @@ export class GeoContainer {
     clearPolygons(): void {
 
         this.clearArray(this.polygons);
+        this.polygons = [];
 
     }
 
     clearRoutes(): void {
 
         this.clearArray(this.routes);
+        this.routes = [];
 
     }
 
     clearCircle(): void {
 
         this.clearArray(this.circle);
+        this.circle = [];
 
     }
 
     clearMarkers(): void {
 
         this.clearArray(this.markers);
+        this.markers = [];
     }
 
    

@@ -1,7 +1,7 @@
 import { BaseMarker } from "../../entity/base-marker";
-import { IIcon } from "../../interfaces/i-icon";
 import { GoogleMarkerOptions } from "./entity/google-marker-options";
 import { Injectable } from "@angular/core";
+import { AbstractMap } from "../../abstract/abstract-map";
 
 @Injectable()
 export class GoogleMarker extends BaseMarker {
@@ -14,5 +14,13 @@ export class GoogleMarker extends BaseMarker {
 
     markerClicked(): void {
         throw new Error("Method not implemented.");
+    }
+
+    setMap(map: AbstractMap): void {
+        this.map = map;
+    }
+
+    setDraggable(draggable: boolean): void{
+        
     }
 }

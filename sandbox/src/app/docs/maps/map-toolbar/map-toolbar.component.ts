@@ -42,7 +42,6 @@ export class MapToolbarComponent {
 
   private onChangeLoadMarkers(event: any) {
 
-    this.manager.getActiveMap().config.loadMarkers = event.checked;
     this.manager.getActiveMap().loadMarkers = event.checked;
     this.manager.getActiveMap().config.clearAllMap();
   }
@@ -73,8 +72,7 @@ export class MapToolbarComponent {
   }
   private onChangeClikMap(event: any) {
 
-    this.manager.getActiveMap().ClikMap = event.checked;
-    this.manager.getActiveMap().config.ClikMap = event.checked;
+    this.manager.getActiveMap().clickMap = event.checked;
   }
 
 

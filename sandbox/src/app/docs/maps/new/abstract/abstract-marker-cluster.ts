@@ -28,6 +28,7 @@ export abstract class AbstractMarkerCluster {
     abstract resetViewport(): void;
 
     initMap(map: AbstractMap): void {
+        
         this.map = map;
     }
 

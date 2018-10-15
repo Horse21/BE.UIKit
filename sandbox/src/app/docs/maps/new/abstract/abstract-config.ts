@@ -24,6 +24,7 @@ import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
 import { MapToolbarComponent } from '../../map-toolbar/map-toolbar.component';
+import { Observable } from 'rxjs';
 
 declare var google;
 
@@ -42,16 +43,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;
-    loadMarkers: boolean;
-    ClikMap: boolean;
     routeBuilder: AbstractRouteBuilder;
-
-
-    constructor() {
-
-        this.loadMarkers = true;
-        this.ClikMap = false;
-    }
 
     buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
 
@@ -96,9 +88,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     drawMarkersOnMap(): void {
-        
+
         try {
-            if (this.loadMarkers) {
+            if (this.map.loadMarkers) {
 
                 this.clearAllMap()
 
@@ -149,7 +141,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getBounds(): ILatLngBounds;
 
-    abstract getDetailsPoint(placeId: string): IPoint;
+    abstract getDetailsPoint(placeId: string): Observable<IPoint>;
 
     abstract drawCircle(options: ICircleOptions): void;
 
@@ -218,7 +210,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             console.log(error);
         }
 
-        this.loadMarkers = false;
+        this.map.loadMarkers = false;
     }
 
     abstract getAddress(position: ILatLng): IPoint[];

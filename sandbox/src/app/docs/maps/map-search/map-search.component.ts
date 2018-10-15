@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -84,22 +84,18 @@ export class MapSearchComponent {
         break
     }
 
-    this.manager.getActiveMap().config.getDetailsPoint(placeid);
-    this.manager.getActiveMap().config.loadMarkers = false;
+    this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
+      this.manager.getActiveMap().config.showMarker(point);
+    
+    });
     this.manager.getActiveMap().loadMarkers = false;
     this.manager.getActiveMap().config.clearAllMap();
     this.ListAutocomplete = [];
-
-    this.ShowRouteMap();
   }
 
   private ShowRouteMap() {
 
-    if (pointFrom == true && pointTo == true) {
-
       this.manager.getActiveMap().route.showRoute();
-
-    }
 
   }
 

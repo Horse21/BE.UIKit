@@ -7,6 +7,7 @@ import { IPosition } from "./i-position";
 import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
 import { ILatLngBounds } from "../providers/google/interfaces/i-latln-bounds";
 import { ILatLng } from "../providers/google/interfaces/i-latlng";
+import { Observable } from "rxjs";
 
 export interface IConfig {
 
@@ -14,7 +15,7 @@ export interface IConfig {
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
     getAddress(position: ILatLng): Array<IPoint>;
-    getDetailsPoint(placeId: string): IPoint;
+    getDetailsPoint(placeId: string): Observable<IPoint>;
     getZoom(): number;
     getLatLngBounds(): ILatLngBounds;
     markersFitsBounds(): void;
