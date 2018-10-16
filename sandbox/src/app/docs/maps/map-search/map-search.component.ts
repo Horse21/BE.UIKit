@@ -86,19 +86,16 @@ export class MapSearchComponent {
 
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
       this.manager.getActiveMap().config.showMarker(point);
-
     });
+
     this.manager.getActiveMap().loadMarkers = false;
     this.manager.getActiveMap().config.clearAllMap();
     this.ListAutocomplete = [];
   }
 
   private ShowRouteMap() {
-
     this.manager.getActiveMap().route.showRoute();
-
   }
-
   private filterListAutocomplete(value: string): Point[] {
     return this.ListAutocomplete.filter(point => point.name);
   }
