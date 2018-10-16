@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MapManager } from '../new/entity/map-manager';
-import { ZoomType } from '../new/enum/e-zoom-type';
+import { MapManager } from '../entity/map-manager';
+import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
 
 @Component({

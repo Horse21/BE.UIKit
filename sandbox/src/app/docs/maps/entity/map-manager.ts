@@ -3,8 +3,10 @@ import { MapType } from "../enum/e-map-type";
 import { FetchStatus } from "../enum/e-fetch-status";
 import { Injectable } from "@angular/core";
 import { GoogleMap } from "../providers/google/map";
-import * as data from "../../maps.const.json";
+import { BaiduMap } from "../providers/baidu/map";
+import * as data from "./../maps.const.json";
 import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
+
 
 @Injectable()
 export class MapManager {
@@ -28,12 +30,14 @@ export class MapManager {
     }
 
     register(type: MapType, map: AbstractMap): MapManager {
-        
+
         this.hashtable[type] = map;
         return this;
     }
 
     load(): void {
+
+        console.log(data["InitList"][this.mapType],'InitList')
         this.currentMap.onDataFetched(data["InitList"][this.mapType])
             .subscribe(status => {
                 if (status == FetchStatus.SUCCESS) {
@@ -46,7 +50,7 @@ export class MapManager {
                     });
 
                     this.currentMap.cluster.initMarkerCluster();
-                    
+
                 }
             })
     }

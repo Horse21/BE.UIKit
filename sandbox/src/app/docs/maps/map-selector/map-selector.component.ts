@@ -1,7 +1,7 @@
 import { Component, Injectable } from '@angular/core';
-import { MapType } from '../new/enum/e-map-type';
-import { MapManager } from '../new/entity/map-manager';
-import { mapInfoForSelect } from '../new/entity/map-info-select';
+import { MapType } from '../enum/e-map-type';
+import { MapManager } from '../entity/map-manager';
+import { mapInfoForSelect } from '../entity/map-info-select';
 
 @Component({
   selector: 'app-map-selector',

@@ -15,7 +15,7 @@ import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
 import { Injectable } from "@angular/core";
 import { IInitMap } from '../interfaces/i-init-map';
-import * as mark from "../../test.markers.json";
+import * as mark from "../test.markers.json";
 import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map';
 import { IMapOptions } from '../interfaces/i-map-options';
 import { Position } from '../entity/position';
@@ -23,7 +23,7 @@ import { Point } from '../entity/point';
 import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
-import { MapToolbarComponent } from '../../map-toolbar/map-toolbar.component';
+import { MapToolbarComponent } from './../map-toolbar/map-toolbar.component';
 import { Observable } from 'rxjs';
 
 declare var google;

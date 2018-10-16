@@ -2,9 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MapManager } from '../new/entity/map-manager';
+import { MapManager } from '../entity/map-manager';
 import { MatAutocompleteTrigger } from '@angular/material';
-import { Point } from '../new/entity/point';
+import { Point } from '../entity/point';
 
 let pointFrom: boolean = false;
 let pointTo: boolean = false;

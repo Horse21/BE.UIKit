@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MapManager } from '../new/entity/map-manager';
+import { MapManager } from '../entity/map-manager';
 
 
 @Component({
@@ -9,17 +9,17 @@ import { MapManager } from '../new/entity/map-manager';
 })
 export class MapContainerComponent implements OnInit {
 
-    constructor(private manager: MapManager) {}
+    constructor(private manager: MapManager) {
+      
+    }
 
     @Input() private latitude: number;
     @Input() private longitude: number;
     @Input() private zoom: number;
     @Input() private minZoom: number;
 
-    ngOnInit() {
-        setTimeout(() => {
-            this.manager.getActiveMap().OnReady(this.latitude,this.longitude);
-        }, 500);
-    }
+    ngOnInit() {}
+
+    ngAfterViewInit() {}
 }
 
