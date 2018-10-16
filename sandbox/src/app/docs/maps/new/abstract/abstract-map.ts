@@ -11,6 +11,7 @@ import { AbstractSearch } from './abstract-search';
 import { GoogleRouteBuilder } from '../providers/google/route';
 import { AbstractRouteBuilder } from './abstract-route-builder';
 import { BaseMarker } from '../entity/base-marker';
+import { BaseLayer } from '../entity/base-layer';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -21,6 +22,8 @@ export abstract class AbstractMap {
     loadMarkers: boolean = true;
     clickMap: boolean = false;
     selectedMarker: BaseMarker;
+    transitLayer: BaseLayer;
+    trafficLayer: BaseLayer;
 
     public get container(): HTMLElement {
         return document.getElementById('map');

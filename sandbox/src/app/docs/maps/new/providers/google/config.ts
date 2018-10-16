@@ -5,11 +5,9 @@ import { ICircleOptions } from '../../interfaces/i-circle-options';
 import { IRouteInfo } from '../../interfaces/i-route-info';
 import { IPoint } from '../../interfaces/i-point';
 import { GoogleMarkerOptions } from './entity/google-marker-options';
-import { GoogleMarker } from './marker';
 import { IPolylineOptions } from '../../interfaces/i-polyline-options';
 import { Injectable } from '@angular/core';
 import { IEventClickMap } from './interfaces/i-event-clik-map';
-import * as mark from "../../../test.markers.json";
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
 import { ResponseStatus } from './enum/e-status-response ';
 import { Position } from '../../entity/position';
@@ -21,17 +19,15 @@ import { Address } from '../../classes/address';
 import { AddressType } from './enum/e-adress-type';
 import { AddressTypeName } from './enum/e-address-type-name';
 import { AddressSettings } from "./classes/address-settings";
-import { PointAddress } from './enum/e-point-address';
+import { PointAddress } from './classes/point-address';
 import { Observable, Observer } from 'rxjs';
 import { AddressComponent } from './classes/address-component';
 import { PointAddressType } from './enum/e-point-address-type'
+import { GoogleAddressType } from './classes/google-address-type';
 
 declare var google;
-let transitLayer;
-let trafficLayer;
 let polygonsStorage: any[] = [];
 let circleStorage = null;
-
 
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
@@ -121,7 +117,6 @@ export class GoogleConfig extends AbstractConfig {
 
     }
 
-
     clearMarkers(): void {
 
         if (this.map.cluster.googleCluster != null) {
@@ -149,13 +144,12 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     onClickMap(event: IEventClickMap) {
-
+        event.stop();
         if (this.map.clickMap) {
 
             this.map.loadMarkers = !this.map.clickMap;
 
             if (event.placeId) {
-                event.stop();
                 this.getDetailsPoint(event.placeId);
             }
             else {
@@ -180,7 +174,7 @@ export class GoogleConfig extends AbstractConfig {
         this.setZoom(currentZoom - 1);
     }
 
-    private getDetailedAddress(place: Array<any>): any {
+    private getDetailedAddress(place: Array<GoogleAddressType>): Array<PointAddress> {
 
         let componentAddress = this.getAddressSettings();
         let pointAddress = [];
@@ -205,21 +199,21 @@ export class GoogleConfig extends AbstractConfig {
                     parseAddress.value = addressValue;
                     resultAddress.push(parseAddress)
                 }
-                if (addressType == AddressType.locality || addressType == AddressType.postal_town) {
+                if (addressType == AddressType.locality || addressType == AddressType.postalTown) {
 
                     parseAddress.type = PointAddressType.CITY;
                     parseAddress.value = addressValue;
                     resultAddress.push(parseAddress)
                 }
 
-                if (addressType == AddressType.street_number) {
+                if (addressType == AddressType.streetNumber) {
 
                     parseAddress.type = PointAddressType.HOUSE;
                     parseAddress.value = addressValue;
                     resultAddress.push(parseAddress)
                 }
 
-                if (addressType == AddressType.administrative_area_level_1 || addressType == AddressType.administrative_area_level_2) {
+                if (addressType == AddressType.administrativeAreaLevel1 || addressType == AddressType.administrativeAreaLevel2) {
 
                     parseAddress.type = PointAddressType.DISTRICT;
                     parseAddress.value = addressValue;
@@ -232,13 +226,14 @@ export class GoogleConfig extends AbstractConfig {
                     resultAddress.push(parseAddress)
                 }
 
-                if (addressType == AddressType.postal_code) {
+                if (addressType == AddressType.postalCode) {
                     parseAddress.type = PointAddressType.POSTCODE;
                     parseAddress.value = addressValue;
                     resultAddress.push(parseAddress)
                 }
             }
         }
+        console.log(resultAddress);
         return resultAddress
     }
 
@@ -289,7 +284,7 @@ export class GoogleConfig extends AbstractConfig {
 
                     }
 
-                    point.address.countryCode = point.address.country.substring(0,2).toUpperCase();
+                    point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
                     point.address.description = place.formatted_address;
                     point.position.latitude = place.geometry.location.lat();
                     point.position.longitude = place.geometry.location.lng();
@@ -308,7 +303,6 @@ export class GoogleConfig extends AbstractConfig {
             });
         return null;
     }
-
 
     getDetailsPoint(placeId: string): Observable<IPoint> {
 
@@ -359,7 +353,7 @@ export class GoogleConfig extends AbstractConfig {
 
                             }
 
-                            point.address.countryCode = point.address.country.substring(0,2).toUpperCase();
+                            point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
                             point.position.latitude = place.geometry.location.lat();
                             point.position.longitude = place.geometry.location.lng();
 
@@ -401,14 +395,14 @@ export class GoogleConfig extends AbstractConfig {
 
         let AdressSettings = new AddressSettings();
 
-        AdressSettings.country = AddressTypeName.long_name;
-        AdressSettings.route = AddressTypeName.long_name;
-        AdressSettings.locality = AddressTypeName.long_name;
-        AdressSettings.postal_town = AddressTypeName.long_name;
-        AdressSettings.administrative_area_level_1 = AddressTypeName.short_name;
-        AdressSettings.sublocality_level_1 = AddressTypeName.long_name;
-        AdressSettings.street_number = AddressTypeName.short_name;
-        AdressSettings.postal_code = AddressTypeName.short_name;
+        AdressSettings.country = AddressTypeName.longName;
+        AdressSettings.route = AddressTypeName.longName;
+        AdressSettings.locality = AddressTypeName.longName;
+        AdressSettings.postal_town = AddressTypeName.longName;
+        AdressSettings.administrative_area_level_1 = AddressTypeName.shortName;
+        AdressSettings.sublocality_level_1 = AddressTypeName.longName;
+        AdressSettings.street_number = AddressTypeName.shortName;
+        AdressSettings.postal_code = AddressTypeName.shortName;
 
         return AdressSettings;
     }
@@ -455,17 +449,10 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-
-
-
     showMarker(point: IPoint) {
 
         try {
             super.showMarker(point);
-
-
-            console.log(point)
-
 
             let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);
 
@@ -491,8 +478,6 @@ export class GoogleConfig extends AbstractConfig {
             });
 
             this.map.selectedMarker = marker;
-
-
 
             marker["point"] = point;
 
@@ -546,17 +531,17 @@ export class GoogleConfig extends AbstractConfig {
 
     drawCircle(options: ICircleOptions): void {
 
-        if (circleStorage != null) {
-
-            circleStorage.setMap(null);
+        if (this.map.geo.circle != null) {
 
             this.clearCircle();
         }
+
 
         let center = new google.maps.LatLng({ lat: this.map.selectedMarker.point.position.latitude, lng: this.map.selectedMarker.point.position.longitude });
 
         options.center = center;
 
+    
         let circle = new google.maps.Circle(options);
 
         circle.setMap(this.map.api);
@@ -657,20 +642,23 @@ export class GoogleConfig extends AbstractConfig {
 
     toggleTrafficLayer(show: boolean): void {
 
-        if (trafficLayer == null) {
-            trafficLayer = new google.maps.TrafficLayer();
+        if (this.map.trafficLayer == null) {
+
+            this.map.trafficLayer = new google.maps.TrafficLayer();
+
         }
 
-        trafficLayer.setMap(show ? this.map.api : null);
+        this.map.trafficLayer.setMap(show ? this.map.api : null);
     }
 
     toggleTransitLayer(show: boolean): void {
 
-        if (transitLayer == null) {
-            transitLayer = new google.maps.TransitLayer();
+        if (this.map.transitLayer == null) {
+
+            this.map.transitLayer = new google.maps.TransitLayer();
         }
 
-        transitLayer.setMap(show ? this.map.api : null);
+        this.map.transitLayer.setMap(show ? this.map.api : null);
     }
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {

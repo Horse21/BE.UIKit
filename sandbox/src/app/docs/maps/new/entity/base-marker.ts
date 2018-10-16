@@ -12,17 +12,13 @@ export class BaseMarker {
         this.options = options;
     }
 
-    markerClicked(): void {
-
-    }
+    markerClicked(): void { }
 
     setMap(map: AbstractMap): void {
 
         this.map = map;
     }
 
-    setDraggable(draggable: boolean): void{
-        
-    }
+    setDraggable(draggable: boolean): void { }
 
 }

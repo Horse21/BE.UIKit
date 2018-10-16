@@ -18,8 +18,8 @@ export class MapContainerComponent implements OnInit {
 
     ngOnInit() {
         setTimeout(() => {
-            this.manager.getActiveMap().config.setMinZoom(3);
-        }, 300);
+            this.manager.getActiveMap().OnReady(this.latitude,this.longitude);
+        }, 500);
     }
 }
 

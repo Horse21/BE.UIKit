@@ -86,7 +86,7 @@ export class MapSearchComponent {
 
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
       this.manager.getActiveMap().config.showMarker(point);
-    
+
     });
     this.manager.getActiveMap().loadMarkers = false;
     this.manager.getActiveMap().config.clearAllMap();
@@ -95,7 +95,7 @@ export class MapSearchComponent {
 
   private ShowRouteMap() {
 
-      this.manager.getActiveMap().route.showRoute();
+    this.manager.getActiveMap().route.showRoute();
 
   }
 
