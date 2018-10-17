@@ -7,6 +7,7 @@ declare var BMap;
 
 @Injectable()
 export class BaiduMapOptions implements IMapOptions {
+    disableDoubleClickZoom: boolean;
     center: IPoint;
     zoom: number;
     minZoom: number;
@@ -16,7 +17,6 @@ export class BaiduMapOptions implements IMapOptions {
     allowZooming: boolean;
     enableScaling: boolean;
     enableZoomByDoubleClick: boolean;
-    disableDoubleClickZoom: boolean;
     scaleControl: boolean;
     editable: boolean;
     draggable: boolean;
@@ -26,8 +26,9 @@ export class BaiduMapOptions implements IMapOptions {
 
     constructor() {
         this.minZoom = 3;
-        this.enableMapClick = true,
-            this.enableAutoResize = true
-        this.zoom = 4
+        this.enableMapClick = true;
+        this.enableZoomByDoubleClick = false;
+        this.enableAutoResize = true;
+        this.zoom = 4;
     }
 }

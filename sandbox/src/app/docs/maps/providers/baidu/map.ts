@@ -19,11 +19,11 @@ declare var document;
 @Injectable()
 export class BaiduMap extends AbstractMap {
     public get scriptSelector(): string {
-        return "script[src*='maps.googleapis.com']";
+        return "script[src*='api.map.baidu']";
     };
 
     public get styleSelector(): string {
-        return ".gm-style";
+        return ".BMap_mask";
     }
 
     constructor(mapOptions: BaiduMapOptions, config: BaiduConfig, events: BaiduEvent, cluster: BaiduMarkerCluster, geo: GeoContainer, search: BaiduSearchMap, route: BaiduRouteBuilder) {
@@ -35,6 +35,9 @@ export class BaiduMap extends AbstractMap {
 
         this.api = new BMap.Map(this.container, this.options);
         this.api.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
+        this.api.enableScrollWheelZoom();
+        this.api.disableDoubleClickZoom(false);
+        this.api.setDefaultCursor('');
 
     }
 

@@ -12,11 +12,12 @@ export class BaiduEvent extends AbstractEvent {
 
     listen<E>(eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
-            this.map.api.addListener(eventName, (arg: E) => { observer.next(arg); });
+            this.map.api.addEventListener(eventName, (arg: E) => { observer.next(arg); });
         });
     }
 
     idle<E>(): Observable<E> {
+        
         return this.listen<E>('idle');
     }
 
@@ -25,10 +26,12 @@ export class BaiduEvent extends AbstractEvent {
     }
 
     zoomFinished<E>(): Observable<E> {
+        console.log('zoomend')
         return this.listen<E>('zoomend');
     }
 
     dragFinished<E>(): Observable<E> {
+        console.log('dragend')
         return this.listen<E>('dragend');
     }
 

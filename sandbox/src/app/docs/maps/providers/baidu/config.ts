@@ -24,9 +24,12 @@ import { Observable, Observer } from 'rxjs';
 import { AddressComponent } from './classes/address-component';
 import { PointAddressType } from './enum/e-point-address-type'
 import { GoogleAddressType } from './classes/google-address-type';
+import { BasePolygon } from '../../entity/base-polygon';
+import { BasePolyline } from '../../entity/base-polyline';
+import { BaseCicle } from '../../entity/base-circle';
 
 declare var google;
-let polygonsStorage: any[] = [];
+//let polygonsStorage: any[] = [];
 let circleStorage = null;
 
 @Injectable()
@@ -529,74 +532,45 @@ export class BaiduConfig extends AbstractConfig {
 
     }
 
-    drawCircle(options: ICircleOptions): void {
+    drawCircle(circle: BaseCicle): void {
 
-        if (this.map.geo.circle != null) {
-
-            this.clearCircle();
-        }
-
-
-        let center = new google.maps.LatLng({ lat: this.map.selectedMarker.point.position.latitude, lng: this.map.selectedMarker.point.position.longitude });
-
-        options.center = center;
-
-    
-        let circle = new google.maps.Circle(options);
-
-        circle.setMap(this.map.api);
-
-        google.maps.event.addListener(circle, EventType.radius_changed, () => {
-
-            console.log(circle, 'radius_changed')
-
-        });
-
-        google.maps.event.addListener(circle, EventType.dragend, () => {
-
-            console.log(circle, 'dragend')
-
-        });
-
-        this.map.geo.pushCircle(circle);
-
-        circleStorage = circle;
-
+   
     }
 
-    drawPolygon(options: IPolygonOptions): void {
+    drawPolygon(polygon: BasePolygon): void {
 
-        let polyline = new google.maps.Polyline();
+        polygon = new google.maps.Polyline();
+
+        polygon.setMap(this.map.api);
+    }
+
+
+    drawPolyline(polyline: BasePolyline): void {
+
+        polyline = new google.maps.Polyline();
 
         polyline.setMap(this.map.api);
     }
 
+    drawArea(polyline: BasePolyline, polygon: BasePolygon): void {
 
-    drawPolyline(options: IPolylineOptions): void {
-
-        let polyline = new google.maps.Polyline();
-
-        polyline.setMap(this.map.api);
-    }
-
-    drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void {
-
-        let shaping: any;
-        polygonsStorage = [];
+        let drawShaping: any;
+        // polygonsStorage = [];
 
         this.toggleMapDragging(true);
 
         google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mousedown, () => {
 
-            shaping = new google.maps.Polyline(optionsPolyline);
+            drawShaping = new google.maps.Polyline(polyline.options);
 
-            shaping.setMap(this.map.api);
+            drawShaping.setMap(this.map.api);
+            this.map.geo.pushPolygons(drawShaping);
 
-            polygonsStorage.push(shaping)
+            //polygonsStorage.push(shaping)
 
             let move = google.maps.event.addListener(this.map.api, EventType.mousemove, event => {
 
-                shaping.getPath().push(event.latLng);
+                drawShaping.getPath().push(event.latLng);
 
             });
 
@@ -604,23 +578,23 @@ export class BaiduConfig extends AbstractConfig {
 
                 google.maps.event.removeListener(move);
 
-                let path = shaping.getPath();
+                let path = drawShaping.getPath();
 
-                shaping.setMap(null);
+                drawShaping.setMap(null);
 
-                optionsPolygon.path = path;
+                polygon.options.path = path;
+                drawShaping = new google.maps.Polygon(polygon.options);
 
-                shaping = new google.maps.Polygon(optionsPolygon);
-
-                shaping.setMap(this.map.api);
+                drawShaping.setMap(this.map.api);
 
                 this.toggleMapDragging(false);
 
-                polygonsStorage.push(shaping);
+                //  polygonsStorage.push(shaping);
+                this.map.geo.pushPolygons(drawShaping)
 
                 google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mousedown);
 
-                let array = shaping.getPath().getArray();
+                let array = drawShaping.getPath().getArray();
                 let bounds = new google.maps.LatLngBounds();
 
                 for (var n = 0; n < array.length; n++) {

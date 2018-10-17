@@ -25,6 +25,9 @@ import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
 import { MapToolbarComponent } from './../map-toolbar/map-toolbar.component';
 import { Observable } from 'rxjs';
+import { BaseCicle } from '../entity/base-circle';
+import { BasePolygon } from '../entity/base-polygon';
+import { BasePolyline } from '../entity/base-polyline';
 
 declare var google;
 
@@ -110,26 +113,13 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                     for (let i = 0; i < mark.default.length; i++) {
                         let item = mark.default[i];
 
-                        let marker = new BaseMarker({
-                            title: '',
-                            icon: {
-                                url: './assets/icons_map/icon_hotel.png',
-                                title: ""
-                            },
-                            clickable: true,
-                            draggable: false,
-                            visible: true
-
-
-                        });
-
-                       
-
+                        let marker = this.getBaseMarker(item);
                         marker.point = new Point();
                         marker.point.position = new Position();
                         marker.point.position.latitude = item.Address.Lat;
                         marker.point.position.longitude = item.Address.Lng;
                         marker.point.title = item.Hotelname;
+
                         this.boundsContainsMarker(marker);
 
                     }
@@ -145,19 +135,17 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getDetailsPoint(placeId: string): Observable<IPoint>;
 
-    abstract drawCircle(options: ICircleOptions): void;
+    abstract drawCircle(cicle: BaseCicle): void;
 
-    abstract drawPolyline(options: IPolylineOptions): void;
+    abstract drawPolyline(polyline: BasePolyline): void;
 
-    abstract drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void;
+    abstract drawArea(polyline: BasePolyline, polygon: BasePolygon): void;
 
-
-    abstract drawPolygon(options: IPolygonOptions): void;
+    abstract drawPolygon(polygon: BasePolygon): void;
 
     drawShapeOnMap(type: ShapeType): void {
 
         try {
-
             let path;
 
             let circleOptions: ICircleOptions = {
@@ -175,6 +163,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 editable: true
             };
 
+            let circle = new BaseCicle(circleOptions);
+
             let polygonOptions: IPolygonOptions = {
                 path: path,
                 strokeColor: '#1E90FF',
@@ -183,6 +173,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 fillColor: '#1E90FF',
                 fillOpacity: 0.35,
             };
+
+            let polygon = new BasePolygon(polygonOptions);
 
             let polylineOptions: IPolylineOptions = {
                 clickable: false,
@@ -193,14 +185,16 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 fillOpacity: 0.35,
             };
 
+            let polyline = new BasePolyline(polylineOptions);
+
             this.clearPolygons();
 
             switch (type) {
                 case ShapeType.CIRCLE:
-                    this.drawCircle(circleOptions);
+                    this.drawCircle(circle);
                     break;
                 case ShapeType.AREA:
-                    this.drawArea(polylineOptions, polygonOptions);
+                    this.drawArea(polyline, polygon);
                     break;
                 default:
                 case ShapeType.STOP:
@@ -243,7 +237,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract boundsContainsMarker(marker: BaseMarker): boolean;
 
     private getPointPosition(marker: BaseMarker): Position {
-   
+
         return marker.point.position;
     }
 
@@ -311,26 +305,22 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract routeInfo(): IRouteInfo;
 
-    showMarker(point: IPoint): void {
+    getBaseMarker(point: IPoint): BaseMarker {
 
-        try {
-            let marker = new BaseMarker({
-                title: point.title,
-                icon: {
-                    url: './assets/icons_map/icon_hotel.png',
-                    title: ""
-                },
-                clickable: true,
-                draggable: false,
-                visible: true
-            });
-
-            console.log(marker)
-        }
-        catch (error) {
-            console.log(error);
-        }
+        return new BaseMarker({
+            title: point.title,
+            icon: {
+                url: './assets/icons_map/icon_hotel.png',
+                title: ""
+            },
+            clickable: true,
+            draggable: false,
+            visible: true,
+           
+        });
     }
+
+    abstract showMarker(point: IPoint): void
 
     abstract draggableMarker(enabled: boolean): void;
 

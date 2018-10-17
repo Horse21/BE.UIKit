@@ -24,10 +24,11 @@ import { Observable, Observer } from 'rxjs';
 import { AddressComponent } from './classes/address-component';
 import { PointAddressType } from './enum/e-point-address-type'
 import { GoogleAddressType } from './classes/google-address-type';
+import { BaseCicle } from '../../entity/base-circle';
+import { BasePolyline } from '../../entity/base-polyline';
+import { BasePolygon } from '../../entity/base-polygon';
 
 declare var google;
-let polygonsStorage: any[] = [];
-let circleStorage = null;
 
 @Injectable()
 export class GoogleConfig extends AbstractConfig {
@@ -94,8 +95,6 @@ export class GoogleConfig extends AbstractConfig {
 
         });
 
-
-
         if (this.getBounds().contains(googleMarker.getPosition())) {
 
             this.map.geo.pushMarkers(googleMarker);
@@ -105,7 +104,6 @@ export class GoogleConfig extends AbstractConfig {
 
         return true;
     }
-
 
 
     clearAllMap(): void {
@@ -144,6 +142,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     onClickMap(event: IEventClickMap) {
+
         event.stop();
         if (this.map.clickMap) {
 
@@ -452,7 +451,8 @@ export class GoogleConfig extends AbstractConfig {
     showMarker(point: IPoint) {
 
         try {
-            super.showMarker(point);
+
+            let baseMarker = this.getBaseMarker(point);
 
             let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);
 
@@ -478,7 +478,6 @@ export class GoogleConfig extends AbstractConfig {
             });
 
             this.map.selectedMarker = marker;
-
             marker["point"] = point;
 
             if (this.map.cluster.googleCluster != null) {
@@ -514,9 +513,9 @@ export class GoogleConfig extends AbstractConfig {
 
                 if (this.map.geo.circle != null) {
 
-                    circleStorage.bindTo(OptionType.center, this.map.selectedMarker, OptionType.position);
-                }
+                    this.map.geo.circle.bindTo(OptionType.center, this.map.selectedMarker, OptionType.position);
 
+                }
             }
 
             google.maps.event.addListener(this.map.selectedMarker, EventType.dragend, (event) => {
@@ -529,22 +528,22 @@ export class GoogleConfig extends AbstractConfig {
 
     }
 
-    drawCircle(options: ICircleOptions): void {
+    drawCircle(cicle: BaseCicle): void {
 
         if (this.map.geo.circle != null) {
 
             this.clearCircle();
         }
 
-
         let center = new google.maps.LatLng({ lat: this.map.selectedMarker.point.position.latitude, lng: this.map.selectedMarker.point.position.longitude });
 
-        options.center = center;
+        cicle.options.center = center;
 
-    
-        let circle = new google.maps.Circle(options);
+        let circle = new google.maps.Circle(cicle.options);
 
         circle.setMap(this.map.api);
+
+        this.map.geo.circle = circle;
 
         google.maps.event.addListener(circle, EventType.radius_changed, () => {
 
@@ -558,45 +557,40 @@ export class GoogleConfig extends AbstractConfig {
 
         });
 
-        this.map.geo.pushCircle(circle);
-
-        circleStorage = circle;
-
     }
 
-    drawPolygon(options: IPolygonOptions): void {
+    drawPolygon(polyline: BasePolygon): void {
 
-        let polyline = new google.maps.Polyline();
+        polyline = new google.maps.Polyline(polyline.options);
 
         polyline.setMap(this.map.api);
     }
 
 
-    drawPolyline(options: IPolylineOptions): void {
+    drawPolyline(polygon: BasePolyline): void {
 
-        let polyline = new google.maps.Polyline();
+        let polyline = new google.maps.Polyline(polygon.options);
 
         polyline.setMap(this.map.api);
     }
 
-    drawArea(optionsPolyline: IPolylineOptions, optionsPolygon: IPolygonOptions): void {
+    drawArea(polyline: BasePolyline, polygon: BasePolygon): void {
 
-        let shaping: any;
-        polygonsStorage = [];
+        let drawShaping: any;
 
         this.toggleMapDragging(true);
 
         google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mousedown, () => {
 
-            shaping = new google.maps.Polyline(optionsPolyline);
+            drawShaping = new google.maps.Polyline(polyline.options);
 
-            shaping.setMap(this.map.api);
+            drawShaping.setMap(this.map.api);
 
-            polygonsStorage.push(shaping)
+            this.map.geo.pushPolygons(drawShaping)
 
             let move = google.maps.event.addListener(this.map.api, EventType.mousemove, event => {
 
-                shaping.getPath().push(event.latLng);
+                drawShaping.getPath().push(event.latLng);
 
             });
 
@@ -604,23 +598,23 @@ export class GoogleConfig extends AbstractConfig {
 
                 google.maps.event.removeListener(move);
 
-                let path = shaping.getPath();
+                let path = drawShaping.getPath();
 
-                shaping.setMap(null);
+                drawShaping.setMap(null);
 
-                optionsPolygon.path = path;
+                polygon.options.path = path;
 
-                shaping = new google.maps.Polygon(optionsPolygon);
+                drawShaping = new google.maps.Polygon(polygon.options);
 
-                shaping.setMap(this.map.api);
+                drawShaping.setMap(this.map.api);
 
                 this.toggleMapDragging(false);
 
-                polygonsStorage.push(shaping);
+                this.map.geo.pushPolygons(drawShaping)
 
                 google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mousedown);
 
-                let array = shaping.getPath().getArray();
+                let array = drawShaping.getPath().getArray();
                 let bounds = new google.maps.LatLngBounds();
 
                 for (var n = 0; n < array.length; n++) {

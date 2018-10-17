@@ -12,7 +12,7 @@ export class BaseCicle {
 
     setMap(map: AbstractMap): void { }
     setOptions(options: ICircleOptions): void { }
+    bindTo(key: string, target: any, targetKey: string): void { }
     setRadius(radius: number): void { }
     setVisible(visible: boolean): void { }
-
 }

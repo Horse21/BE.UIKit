@@ -5,16 +5,17 @@ import { IPolygonOptions } from "../interfaces/i-polygon";
 import { Injectable } from "@angular/core";
 import { AbstractMap } from "../abstract/abstract-map";
 import { ICircleOptions } from "../interfaces/i-circle-options";
+import { BaseCicle } from "./base-circle";
 
 @Injectable()
 export class GeoContainer {
-    
+
     map: AbstractMap;
     polygons: Array<IPolygonOptions>;
     routes: Array<IRouteInfo>;
     markers: Array<BaseMarker>;
     clusters: Array<AbstractMarkerCluster>;
-    circle: Array<ICircleOptions>;
+    circle: BaseCicle;
 
     private clearArray<T>(array: Array<T>) {
 
@@ -38,9 +39,10 @@ export class GeoContainer {
 
     clearCircle(): void {
 
-        this.clearArray(this.circle);
-        this.circle = [];
-
+        if (this.circle != null) {
+            this.circle.setMap(null);
+            this.circle = null;
+        }
     }
 
     clearMarkers(): void {
@@ -49,7 +51,7 @@ export class GeoContainer {
         this.markers = [];
     }
 
-   
+
     clearAllMap(): void {
 
         this.clearPolygons();
@@ -77,13 +79,5 @@ export class GeoContainer {
         this.polygons.push(polygons);
     }
 
-    pushCircle(circle: ICircleOptions) {
-
-        if (this.circle == null) {
-            this.circle = new Array<ICircleOptions>();
-        }
-
-        this.circle.push(circle);
-    }
 
 }

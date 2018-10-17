@@ -6,6 +6,8 @@ declare var google;
 
 @Injectable()
 export class GoogleMapOptions implements IMapOptions {
+    enableZoomByDoubleClick: boolean;
+    disableDoubleClickZoom: boolean;
     center: IPoint;
     zoom: number;
     minZoom: number;
@@ -14,8 +16,6 @@ export class GoogleMapOptions implements IMapOptions {
     allowScrolling: boolean;
     allowZooming: boolean;
     enableScaling: boolean;
-    enableZoomByDoubleClick: boolean;
-    disableDoubleClickZoom: boolean;
     scaleControl: boolean;
     editable: boolean;
     draggable: boolean;

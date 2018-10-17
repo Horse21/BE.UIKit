@@ -5,7 +5,7 @@ import { AbstractMap } from "../../abstract/abstract-map";
 
 @Injectable()
 export class GoogleMarker extends BaseMarker {
-    
+
     options: GoogleMarkerOptions;
 
     constructor(options: GoogleMarkerOptions) {
@@ -16,11 +16,7 @@ export class GoogleMarker extends BaseMarker {
         throw new Error("Method not implemented.");
     }
 
-    setMap(map: AbstractMap): void {
-        this.map = map;
-    }
+    setMap(map: AbstractMap): void {}
 
-    setDraggable(draggable: boolean): void{
-        
-    }
+    setDraggable(draggable: boolean): void {}
 }
