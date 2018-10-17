@@ -26,9 +26,8 @@ export class BaiduMapOptions implements IMapOptions {
 
     constructor() {
         this.minZoom = 3;
-        this.zoom = 4;
-        this.scaleControl = true;
-        this.disableDefaultUI = true;
-        this.draggableCursor = "default";
+        this.enableMapClick = true,
+            this.enableAutoResize = true
+        this.zoom = 4
     }
 }

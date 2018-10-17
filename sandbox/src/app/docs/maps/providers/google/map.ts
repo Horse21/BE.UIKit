@@ -33,6 +33,7 @@ export class GoogleMap extends AbstractMap {
     }
 
     init(): void {
+        
         this.api = new google.maps.Map(this.container, this.options);
     }
 
@@ -71,6 +72,7 @@ export class GoogleMap extends AbstractMap {
 
     private setCenter(): void {
         this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
+        console.log(this.options.center,'center')
     }
 
     private OnReady(latitude: number, longitude: number){

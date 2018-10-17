@@ -8,13 +8,12 @@ import { Injectable } from "@angular/core";
 import { BaiduEvent } from "./event";
 import { BaiduConfig } from "./config";
 import { ReadyStateScript } from "../../enum/e-ready-state-script";
-import { AbstractMarkerCluster } from "../../abstract/abstract-marker-cluster";
 import { BaiduMarkerCluster } from "./cluster";
 import { GeoContainer } from "../../entity/geo-container";
 import { BaiduSearchMap } from "./search";
 import { BaiduRouteBuilder } from "./route";
 
-declare var google;
+declare var BMap;
 declare var document;
 
 @Injectable()
@@ -34,11 +33,13 @@ export class BaiduMap extends AbstractMap {
 
     init(): void {
 
-     this.api = new google.maps.Map(this.container, this.options);
+        this.api = new BMap.Map(this.container, this.options);
+        this.api.centerAndZoom(new BMap.Point(18.45703125, 27.215556209029693), 4);
+
     }
 
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
-      
+
         return new Observable((observer: Observer<FetchStatus>) => {
 
             let apiScript = document.createElement('script');
@@ -57,7 +58,7 @@ export class BaiduMap extends AbstractMap {
                 };
             } else {
                 window['APILoaded'] = () => {
-                  //  this.setCenter();
+                    this.setCenter();
                     observer.next(FetchStatus.SUCCESS);
                 }
             }
@@ -71,16 +72,18 @@ export class BaiduMap extends AbstractMap {
     }
 
     private setCenter(): void {
-        this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
+
+        this.options.center = new BMap.Point(18.45703125, 27.215556209029693);
+
     }
 
-    public OnReady(latitude: number, longitude: number){
-        this.options.center = new google.maps.LatLng(latitude, longitude);
+    public OnReady(latitude: number, longitude: number) {
+
     }
 
     destroy(): void {
         super.destroy();
-        google = null;
+        BMap = null;
 
     }
 

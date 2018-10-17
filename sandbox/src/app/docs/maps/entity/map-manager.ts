@@ -14,8 +14,11 @@ export class MapManager {
     private map: AbstractMap;
     hashtable: { [name: string]: AbstractMap; } = {};
 
-    constructor(private googleMap: GoogleMap) {
+    constructor(
+        private googleMap: GoogleMap,
+        private baiduMap: BaiduMap) {
         this.register(MapType.GOOGLE, googleMap);
+        this.register(MapType.BAIDU, baiduMap);
         this.changeType(MapType.GOOGLE);
     }
 
@@ -36,8 +39,6 @@ export class MapManager {
     }
 
     load(): void {
-
-        console.log(data["InitList"][this.mapType],'InitList')
         this.currentMap.onDataFetched(data["InitList"][this.mapType])
             .subscribe(status => {
                 if (status == FetchStatus.SUCCESS) {
@@ -63,6 +64,7 @@ export class MapManager {
     }
 
     public changeType(type: MapType): void {
+
         this.mapType = type;
     }
 

@@ -35,9 +35,10 @@ export class MapSelectorComponent {
   }
 
   public selectMap(type: string) {
-
+    
     this.mapInfo = this.mapList(type);
     this.selectedMap = MapType[type];
+    this.manager.changeType(MapType[type]);
     this.InitMap(MapType[type]);
     
   }
