@@ -5,6 +5,7 @@ import {ISortingParameter} from "./../../dto/i-sorting-parameter";
 import {VocabularyService} from "../../services/vocabulary-service";
 import {IHotelInfo} from "../../dto/i-hotel-info";
 import {FormControl} from "@angular/forms";
+import {H21HotelFilterPanelViewMode} from "../h21-hotel-filter-panel/h21-hotel-filter-panel-view-mode.enum";
 
 @Component({
 	selector: 'h21-hotel-search-result',
@@ -21,20 +22,28 @@ import {FormControl} from "@angular/forms";
 
 export class H21HotelSearchResultComponent {
 
-	@Input() viewMode: 'list' | 'grid' | 'map' = 'list';
-	@Output() onSearchResultReady: EventEmitter<IHotelInfo[]> = new EventEmitter<IHotelInfo[]>();
+	@Input() viewMode: H21HotelFilterPanelViewMode;
+	@Output() onSearchResultReady: EventEmitter<IHotelInfo[]>;
 
-	sortParameters: Array<ISortingParameter>;
-	searchInProgress: boolean = false;
-	searchResultReady: boolean = false;
-	showFakeResult: boolean = false;
+	searchInProgress: boolean;
+	searchResultReady: boolean;
+	showFakeResult: boolean;
 	searchResult: Array<IHotelInfo>;
-
+	sortParameters: Array<ISortingParameter>;
 	searchResultSortControl: FormControl = new FormControl();
 	favoritesSortControl: FormControl = new FormControl();
 	negotiatedSortControl: FormControl = new FormControl();
 
 	constructor (private _vocabulary: VocabularyService) {
+		this.init();
+	}
+
+	init() {
+		this.viewMode = H21HotelFilterPanelViewMode.List;
+		this.onSearchResultReady = new EventEmitter<IHotelInfo[]>();
+		this.searchInProgress = false;
+		this.searchResultReady = false;
+		this.showFakeResult = false;
 		this.sortParameters = [
 			{ alias: 'price_up', name: 'Price', direction: 'up'},
 			{ alias: 'price_down', name: 'Price', direction: 'down'},

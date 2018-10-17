@@ -1,14 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { FlightItem } from '../../dto/flight-item';
-import { FlightItemGroup } from '../../dto/flight-item-group';
+import {Component, Input} from '@angular/core';
+import {FlightItem} from '../../dto/flight-item';
+import {FlightItemGroup} from '../../dto/flight-item-group';
 
-@Component ({
-	selector: "h21-search-result-row",
-	templateUrl: "./h21-search-result-row.component.html"
+@Component({
+	selector: "h21-air-search-result-card",
+	templateUrl: "./h21-air-search-result-card.component.html"
 })
 
-export class H21SearchResultRowComponent {
-	@Input() group: FlightItemGroup;
+export class H21AirSearchResultCardComponent {
+
+	@Input() data: FlightItemGroup;
 
 	getTimeString(item: FlightItem): string {
 		let result = "";
@@ -27,7 +28,6 @@ export class H21SearchResultRowComponent {
 				result += "(" + item.transfers.length + " stops)";
 			}
 		}
-
 		return result.trim();
 	}
 }

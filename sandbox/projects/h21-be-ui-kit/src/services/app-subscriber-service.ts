@@ -57,14 +57,14 @@ export class AppSubscriberService {
 
 	/* route dates */
 
-	private _arrivalDate = new Subject<any>();
+	private _departureDate = new Subject<any>();
 
-	arrivalDateChanged(data: any) {
-		return this._arrivalDate.next(data);
+	departureDateChanged(data: any) {
+		return this._departureDate.next(data);
 	}
 
-	arrivalDateObservable(): Observable<any> {
-		return this._arrivalDate.asObservable();
+	departureDateObservable(): Observable<any> {
+		return this._departureDate.asObservable();
 	}
 
 	/* menu close */

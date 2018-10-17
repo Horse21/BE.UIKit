@@ -78,9 +78,9 @@ export class H21TwoMonthCalendarComponent implements OnInit {
 
 	get invalid(): boolean {
 		if (this.rangeSelectMode) {
-			return this.fromFormControl.invalid || this.toFormControl.invalid;
+			return this.selectedFromDate == null || this.selectedToDate == null;
 		} else {
-			return this.fromFormControl.invalid;
+			return this.selectedFromDate == null;
 		}
 	}
 

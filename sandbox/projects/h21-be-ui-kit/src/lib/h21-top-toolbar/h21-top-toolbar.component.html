@@ -17,17 +17,6 @@
 		</button>
 	</ng-container>
 
-	<!--  -->
-	<ng-container *ngIf="showSearchResultViewModeToggle">
-		<div *ngIf="modeVisibility" [@toggleVisibility]>
-			<mat-button-toggle-group class="__primary" [(ngModel)]="resultsMode" (change)="changeResultMode()">
-				<mat-button-toggle value="list">List</mat-button-toggle>
-				<mat-divider [vertical]="true"></mat-divider>
-				<mat-button-toggle value="map">Map</mat-button-toggle>
-			</mat-button-toggle-group>
-		</div>
-	</ng-container>
-
 	<div class="w-spacer">&nbsp;</div>
 
 	<!-- Cart -->

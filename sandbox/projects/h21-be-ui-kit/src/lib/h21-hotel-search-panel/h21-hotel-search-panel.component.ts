@@ -28,7 +28,7 @@ export class H21HotelSearchPanelComponent {
 
 	destinationControl: FormControl = new FormControl('', [Validators.required]);
 	nationalityControl: FormControl = new FormControl('', [Validators.required]);
-	poiControl: FormControl = new FormControl('', [Validators.required]);
+	poiControl: FormControl = new FormControl('');
 	@ViewChild('calendar') calendarControl: H21TwoMonthCalendarComponent;
 
 	selectedDestinationId: number = 0;
@@ -165,15 +165,12 @@ export class H21HotelSearchPanelComponent {
 	search(): void {
 		this.destinationControl.updateValueAndValidity();
 		this.nationalityControl.updateValueAndValidity();
-		this.poiControl.updateValueAndValidity();
 		this.calendarControl.validate();
 		this.destinationControl.markAsTouched();
 		this.nationalityControl.markAsTouched();
-		this.poiControl.markAsTouched();
 
 		if (this.destinationControl.invalid
 			|| this.nationalityControl.invalid
-			|| this.poiControl.invalid
 			|| this.calendarControl.invalid) {
 			return;
 		}

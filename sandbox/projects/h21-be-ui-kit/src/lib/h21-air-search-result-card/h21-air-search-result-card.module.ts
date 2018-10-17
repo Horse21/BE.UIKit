@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {
 	MatButtonModule, MatDividerModule, MatIconModule
 } from "@angular/material";
-import {H21SearchResultRowComponent} from './h21-search-result-row.component';
+import {H21AirSearchResultCardComponent} from './h21-air-search-result-card.component';
 
 @NgModule({
 	imports: [
@@ -13,8 +13,8 @@ import {H21SearchResultRowComponent} from './h21-search-result-row.component';
 		MatDividerModule,
 		MatIconModule
 	],
-	declarations: [H21SearchResultRowComponent],
-	exports: [H21SearchResultRowComponent]
+	declarations: [H21AirSearchResultCardComponent],
+	exports: [H21AirSearchResultCardComponent]
 })
-export class H21SearchResultRowModule {
+export class H21AirSearchResultCardModule {
 }

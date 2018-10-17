@@ -1,4 +1,4 @@
-<div class="c-h21-hotel-search-result" [class.__grid-view]="viewMode == 'grid'">
+<div class="c-h21-hotel-search-result h21-search-result" [class.__grid-view]="viewMode == 'GRID'">
 
 	<mat-progress-bar *ngIf="searchInProgress" [@toggleVisibility] mode="indeterminate"></mat-progress-bar>
 
@@ -16,7 +16,7 @@
 		</div>
 		<div class="fake_divider fake_divider__bold"></div>
 		<div class="fake_line"></div>
-		<ng-container *ngIf="viewMode != 'grid'">
+		<ng-container *ngIf="viewMode != 'GRID'">
 			<div class="fake_box" *ngFor="let i of [1,2,3]">
 				<div class="row">
 					<div class="col-3">
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 		</ng-container>
-		<ng-container *ngIf="viewMode == 'grid'">
+		<ng-container *ngIf="viewMode == 'GRID'">
 			<div class="fake_box" *ngFor="let i of [1,2]">
 				<div class="fake_img"></div>
 				<div class="fake_line"></div>
@@ -62,64 +62,58 @@
 
 	<mat-tab-group *ngIf="searchResultReady" class="mat-tab-group__h21-style-1">
 		<mat-tab label="Search result">
-			<div class="c-h21-hotel-search-result_tab-content">
-				<div class="__text-right">
-					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field"
-									[class.sorting-form-field_up]="searchResultSortControl.value && searchResultSortControl.value.direction == 'up'"
-									[class.sorting-form-field_down]="searchResultSortControl.value && searchResultSortControl.value.direction == 'down'">
-						<mat-select [formControl]="searchResultSortControl">
-							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
-								{{item.name}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-				<ng-container *ngFor="let item of searchResult">
-					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
-				</ng-container>
+			<div class="__text-right">
+				<span class="__text-size-s">Sort by:</span>
+				<mat-form-field class="sorting-form-field"
+								[class.sorting-form-field_up]="searchResultSortControl.value && searchResultSortControl.value.direction == 'up'"
+								[class.sorting-form-field_down]="searchResultSortControl.value && searchResultSortControl.value.direction == 'down'">
+					<mat-select [formControl]="searchResultSortControl">
+						<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
+			<ng-container *ngFor="let item of searchResult">
+				<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'GRID'"></h21-hotel-search-result-card>
+			</ng-container>
 		</mat-tab>
 		<mat-tab label="Favorites">
-			<div class="c-h21-hotel-search-result_tab-content">
-				<div class="__text-right">
-					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field"
-									[class.sorting-form-field_up]="favoritesSortControl.value && favoritesSortControl.value.direction == 'up'"
-									[class.sorting-form-field_down]="favoritesSortControl.value && favoritesSortControl.value.direction == 'down'">
-						<mat-select [formControl]="favoritesSortControl">
-							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
-								{{item.name}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-				<ng-container *ngFor="let item of searchResult">
-					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
-				</ng-container>
+			<div class="__text-right">
+				<span class="__text-size-s">Sort by:</span>
+				<mat-form-field class="sorting-form-field"
+								[class.sorting-form-field_up]="favoritesSortControl.value && favoritesSortControl.value.direction == 'up'"
+								[class.sorting-form-field_down]="favoritesSortControl.value && favoritesSortControl.value.direction == 'down'">
+					<mat-select [formControl]="favoritesSortControl">
+						<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
+			<ng-container *ngFor="let item of searchResult">
+				<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'GRID'"></h21-hotel-search-result-card>
+			</ng-container>
 		</mat-tab>
 		<mat-tab label="Negotiated Rates">
 			<ng-template mat-tab-label>
-				Negotiated <ng-container *ngIf="viewMode != 'grid'">Rates</ng-container>
+				Negotiated <ng-container *ngIf="viewMode != 'GRID'">Rates</ng-container>
 			</ng-template>
-			<div class="c-h21-hotel-search-result_tab-content">
-				<div class="__text-right">
-					<span class="__text-size-s">Sort by:</span>
-					<mat-form-field class="sorting-form-field"
-									[class.sorting-form-field_up]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'up'"
-									[class.sorting-form-field_down]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'down'">
-						<mat-select [formControl]="negotiatedSortControl">
-							<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
-								{{item.name}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-				<ng-container *ngFor="let item of searchResult">
-					<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'grid'"></h21-hotel-search-result-card>
-				</ng-container>
+			<div class="__text-right">
+				<span class="__text-size-s">Sort by:</span>
+				<mat-form-field class="sorting-form-field"
+								[class.sorting-form-field_up]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'up'"
+								[class.sorting-form-field_down]="negotiatedSortControl.value && negotiatedSortControl.value.direction == 'down'">
+					<mat-select [formControl]="negotiatedSortControl">
+						<mat-option *ngFor="let item of sortParameters" [value]="item" ngClass="sorting-form-field_{{item.direction}}">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
+			<ng-container *ngFor="let item of searchResult">
+				<h21-hotel-search-result-card [data]="item" [gridMode]="viewMode == 'GRID'"></h21-hotel-search-result-card>
+			</ng-container>
 		</mat-tab>
 	</mat-tab-group>
 </div>

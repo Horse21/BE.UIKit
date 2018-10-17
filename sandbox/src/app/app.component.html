@@ -1,4 +1,4 @@
-<div class="docs_page-box container-fluid" *ngIf="!isDemo()">
+<div class="docs_page-box container-fluid" *ngIf="!isDemoHotel() && !isDemoAirBe()">
 	<div class="docs_sidebar-wrapper row no-gutters">
 		<div class="docs_sidebar" [class.is-opened]="sidebarOpened">
 			<div class="docs_logo-box">
@@ -31,8 +31,8 @@
 	</div>
 </div>
 
-<!-- Demo page -->
-<div class="container-fluid page_box mat-typography" *ngIf="isDemo()">
+<!-- Demo Hotel page -->
+<div class="container-fluid page_box mat-typography" *ngIf="isDemoHotel()">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
 			<h21-header [userName]="'Horse B.V. | Serhey Strovatikov'"
@@ -63,44 +63,107 @@
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
 							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search' && !isRoute('hotelbook')"
-													(onSearch)="search($event)"
-													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
+													(onSearch)="hotelSearch($event)"
+													(onClearSearch)="hotelClearSearch()"></h21-hotel-search-panel>
 							<h21-hotel-search-panel *ngIf="isRoute('hotelbook')"
 													[searchMode]="'room'"
-													(onSearch)="search($event)"
-													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
+													(onSearch)="hotelSearch($event)"
+													(onClearSearch)="hotelClearSearch()"></h21-hotel-search-panel>
 							<h21-hotel-filter-panel *ngIf="activeLeftSidenavPanel == 'filter'"
-													[viewMode]="searchResultViewMode"
-													(onChangeViewMode)="changeResultViewMode($event)"></h21-hotel-filter-panel>
-							<h21-history-panel *ngIf="activeLeftSidenavPanel == 'history'"></h21-history-panel>
-
-
-						</div>
-						<div class="page_sidenav-search-result" *ngIf="searchResultVisibility"
-							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'"
-							 [class.page_sidenav-search-result__map]="searchResultViewMode == 'map'">
-							<h21-hotel-search-result [viewMode]="searchResultViewMode" #searchResult></h21-hotel-search-result>
+													[viewMode]="hotelSearchResultViewMode"
+													(onChangeViewMode)="hotelChangeResultViewMode($event)"></h21-hotel-filter-panel>
+							<h21-search-history-panel *ngIf="activeLeftSidenavPanel == 'history'"
+													  [data]="this.searchHistoryData"
+							></h21-search-history-panel>
 						</div>
 					</div>
 				</mat-sidenav>
 
-				<mat-sidenav #rightSidenav
-							 position="end"
-							 [mode]="rightSidenavMode"
-							 [opened]="rightSidenavOpened"
-							 [fixedInViewport]="true"
-							 [fixedTopGap]="0"
-							 [fixedBottomGap]="0"
-							 class="page_right-sidenav">
-				</mat-sidenav>
+				<!--<mat-sidenav #rightSidenav-->
+							 <!--position="end"-->
+							 <!--[mode]="rightSidenavMode"-->
+							 <!--[opened]="rightSidenavOpened"-->
+							 <!--[fixedInViewport]="true"-->
+							 <!--[fixedTopGap]="0"-->
+							 <!--[fixedBottomGap]="0"-->
+							 <!--class="page_right-sidenav">-->
+				<!--</mat-sidenav>-->
 
 				<mat-sidenav-content #contentSidenav>
-					<div class="map-box">
+					<div class="page_content">
 						<!--<router-outlet></router-outlet>-->
+					</div>
+					<div class="page_sidenav-search-result"
+						 [class.__is-active]="searchResultVisibility"
+						 [class.page_sidenav-search-result__grid]="hotelSearchResultViewMode == 'GRID'"
+						 [class.page_sidenav-search-result__map]="hotelSearchResultViewMode == 'MAP'">
+						<h21-hotel-search-result *ngIf="searchResultVisibility"
+												 [viewMode]="hotelSearchResultViewMode"
+												 #hotelSearchResult></h21-hotel-search-result>
 					</div>
 				</mat-sidenav-content>
 			</mat-sidenav-container>
 		</div>
 	</div>
-	<!--<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>-->
+	<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>
+</div>
+
+<!-- Demo AirBe page -->
+<div class="container-fluid page_box mat-typography" *ngIf="isDemoAirBe()">
+	<div class="row no-gutters page_header-box">
+		<div class="col-12 no-gutters">
+			<h21-header [userName]="'Horse B.V. | Serhey Strovatikov'"
+						[logotypeUrl]="'/assets/img/logo.svg'"
+						[userCardData]="userCardData"></h21-header>
+			<h21-top-toolbar [showSidenavToggle]="true"
+							 [sidenavToggleDisabled]="false"
+							 [sidenavOpened]="sidenavOpened"
+							 [showCart]="false"
+							 [showLanguageControl]="true"
+							 [showCurrencyControl]="true"
+							 (onSidenavToggle)="leftSidenavToggle()"></h21-top-toolbar>
+		</div>
+	</div>
+	<div class="row no-gutters page_content-box">
+		<div class="col-12 no-gutters __has-sidebar">
+			<h21-sidebar-nav [selected]="'start'"
+							 [disabled]="sidebarNavDisabled"
+							 [(tabs)]="sidebarNavTabs"
+							 (onChanged)="showSidebarPanel($event)"></h21-sidebar-nav>
+			<mat-sidenav-container [hasBackdrop]="contentSidenavHasBackdrop">
+
+				<mat-sidenav #leftSidenav
+							 position="start"
+							 [mode]="'side'"
+							 [opened]="leftSidenavOpened"
+							 class="page_left-sidenav">
+					<div class="page_left-sidenav-inner">
+						<div class="page_sidenav-search-actions">
+							<h21-air-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
+												  (onSearch)="airbeSearch($event)"
+												  (onClearSearch)="airbeClearSearch()"></h21-air-search-panel>
+							<h21-air-filter-panel *ngIf="activeLeftSidenavPanel == 'filter'"
+												  [viewMode]="airbeSearchResultViewMode"
+												  (onChangeViewMode)="airbeChangeResultViewMode($event)"></h21-air-filter-panel>
+							<h21-search-history-panel *ngIf="activeLeftSidenavPanel == 'history'"
+													  [data]="this.searchHistoryData"
+							></h21-search-history-panel>
+						</div>
+					</div>
+				</mat-sidenav>
+
+				<mat-sidenav-content #contentSidenav>
+					<div class="page_content">
+						<!--<router-outlet></router-outlet>-->
+					</div>
+					<div class="page_sidenav-search-result"
+						 [class.__is-active]="searchResultVisibility"
+						 [class.page_sidenav-search-result__map]="airbeSearchResultViewMode == 'MAP'">
+						<h21-air-search-result *ngIf="searchResultVisibility" #airbeSearchResult></h21-air-search-result>
+					</div>
+				</mat-sidenav-content>
+			</mat-sidenav-container>
+		</div>
+	</div>
+	<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>
 </div>
