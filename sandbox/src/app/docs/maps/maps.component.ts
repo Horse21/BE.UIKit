@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
     providers: []
 })
 
-export class MapsComponent {
-    
-}
+export class MapsComponent {}
 

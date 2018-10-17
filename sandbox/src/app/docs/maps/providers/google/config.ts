@@ -452,6 +452,8 @@ export class GoogleConfig extends AbstractConfig {
 
         try {
 
+console.log(point,'POINT')
+
             let baseMarker = this.getBaseMarker(point);
 
             let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);

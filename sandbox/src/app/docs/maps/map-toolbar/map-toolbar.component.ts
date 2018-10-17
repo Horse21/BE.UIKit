@@ -75,4 +75,8 @@ export class MapToolbarComponent {
     this.manager.getActiveMap().clickMap = event.checked;
   }
 
+  private GetDistance() {
+    this.manager.getActiveMap().route.getDistanse();
+  }
+
 }
