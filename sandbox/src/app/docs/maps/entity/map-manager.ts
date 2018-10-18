@@ -6,6 +6,7 @@ import { GoogleMap } from "../providers/google/map";
 import { BaiduMap } from "../providers/baidu/map";
 import * as data from "./../maps.const.json";
 import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
+import { YandexMap } from "../providers/yandex/map";
 
 
 @Injectable()
@@ -16,9 +17,12 @@ export class MapManager {
 
     constructor(
         private googleMap: GoogleMap,
-        private baiduMap: BaiduMap) {
+        private baiduMap: BaiduMap,
+        private yandexMap: YandexMap
+    ) {
         this.register(MapType.GOOGLE, googleMap);
         this.register(MapType.BAIDU, baiduMap);
+        this.register(MapType.YANDEX, yandexMap);
         this.changeType(MapType.GOOGLE);
     }
 

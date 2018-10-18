@@ -3,20 +3,24 @@ import { IPosition } from "../../interfaces/i-position";
 import { TravelMode } from "./enum/e-travel-mode";
 import { RouteInfo } from "../../classes/route-info";
 import { RouteTextValue } from "../../classes/route-text-value";
+import { IPoint } from "../../interfaces/i-point";
 
 declare var google;
 
 export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     showStartPoint(): void {
-        throw new Error("Method not implemented.");
+        this.map.config.showMarker(this.map.route.startPoint);
     }
 
     showFinishPoint(): void {
-        throw new Error("Method not implemented.");
+        this.map.config.showMarker(this.map.route.finishPoint);
     }
 
     showRoute(): void {
+
+        this.showStartPoint();
+        this.showFinishPoint();
 
         try {
             var directionsService = new google.maps.DirectionsService();
@@ -37,6 +41,9 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                 },
                 suppressMarkers: true
             });
+
+            this.getDistanse(TravelMode.DRIVING);
+
             var start = new google.maps.LatLng(this.map.geo.markers[0].point.position.latitude, this.map.geo.markers[0].point.position.longitude);
             var end = new google.maps.LatLng(this.map.geo.markers[1].point.position.latitude, this.map.geo.markers[1].point.position.longitude);
 
@@ -48,9 +55,7 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     }
 
-    getDistanse(position: IPosition, typeTravelMode: string): void {
-
-        console.log('getDistanse', 'typeTravelMode', typeTravelMode)
+    getDistanse(typeTravelMode: string): void {
 
         let travelMode = TravelMode.DRIVING;
 
@@ -92,7 +97,6 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
             if (status == google.maps.DirectionsStatus.OK) {
 
                 let info = result['routes'][0].legs[0];
-
                 let routeInfo = new RouteInfo();
 
                 routeInfo.distance = new RouteTextValue();
@@ -106,9 +110,6 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
                 routeInfo.timeTraffic.text = info.duration_in_traffic.text;
                 routeInfo.timeTraffic.value = info.duration_in_traffic.value;
-
-
-                console.log(routeInfo, 'routeInfo');
 
             } else {
 

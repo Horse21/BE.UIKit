@@ -2,7 +2,7 @@ import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
 
 declare var google;
 
-export class BaiduRouteBuilder extends AbstractRouteBuilder {
+export class YandexRouteBuilder extends AbstractRouteBuilder {
 
     showStartPoint(): void {
         throw new Error("Method not implemented.");

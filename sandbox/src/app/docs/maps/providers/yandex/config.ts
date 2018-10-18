@@ -14,7 +14,7 @@ import { BaseCicle } from '../../entity/base-circle';
 
 
 @Injectable()
-export class BaiduConfig extends AbstractConfig {
+export class YandexConfig extends AbstractConfig {
     getBounds(): ILatLngBounds {
         throw new Error("Method not implemented.");
     }

@@ -54,7 +54,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
-
+ 
         let LatLng = new google.maps.LatLng({ lat: marker.point.position.latitude, lng: marker.point.position.longitude });
 
         bounds.extend(LatLng);

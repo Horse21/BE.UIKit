@@ -4,7 +4,7 @@ import { IPoint } from "../../interfaces/i-point";
 
 
 @Injectable()
-export class BaiduSearchMap extends AbstractSearch {
+export class YandexSearchMap extends AbstractSearch {
 
     search(query: string): IPoint[] {
         throw new Error("Method not implemented.");

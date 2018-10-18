@@ -4,20 +4,21 @@ import { IRouteOptions } from "../interfaces/i-route-options";
 import { AbstractMap } from "./abstract-map";
 import { IPoint } from "../interfaces/i-point";
 import { Injectable } from "@angular/core";
+import { RouteInfo } from "../classes/route-info";
 
 @Injectable()
 export abstract class AbstractRouteBuilder {
-    
-    map: AbstractMap;
 
+    map: AbstractMap;
+    routeInfo: RouteInfo
     startPoint: IPoint;
     finishPoint: IPoint;
-
     routeOptions: IRouteOptions;
 
     abstract showStartPoint(): void;
     abstract showFinishPoint(): void;
     abstract showRoute(): void;
+    abstract getDistanse(typeTravelMode: string):void;
 
     build(): AbstractRouteBuilder {
         return this;

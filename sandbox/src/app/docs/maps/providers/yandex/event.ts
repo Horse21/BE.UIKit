@@ -3,7 +3,7 @@ import { Observable, Observer } from "rxjs";
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class BaiduEvent extends AbstractEvent {
+export class YandexEvent extends AbstractEvent {
     constructor() { 
 
         super();
@@ -12,7 +12,7 @@ export class BaiduEvent extends AbstractEvent {
 
     listen<E>(eventName: string): Observable<E> {
         return new Observable((observer: Observer<E>) => {
-            this.map.api.addEventListener(eventName, (arg: E) => { observer.next(arg); });
+            this.map.api.events.add(eventName, (arg: E) => { observer.next(arg); });
         });
     }
 

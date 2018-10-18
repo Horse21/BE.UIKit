@@ -113,6 +113,15 @@ import { BaiduRouteBuilder } from './docs/maps/providers/baidu/route';
 import { BaiduMarker } from './docs/maps/providers/baidu/marker';
 import { BaiduMapOptions } from './docs/maps/providers/baidu/entity/baidu-map-options';
 import { BaiduSearchMap } from './docs/maps/providers/baidu/search';
+import { YandexMap } from './docs/maps/providers/yandex/map';
+import { YandexMarkerCluster } from './docs/maps/providers/yandex/cluster';
+import { YandexEvent } from './docs/maps/providers/yandex/event';
+import { YandexConfig } from './docs/maps/providers/yandex/config';
+import { YandexRouteBuilder } from './docs/maps/providers/yandex/route';
+import { YandexMarker } from './docs/maps/providers/yandex/marker';
+import { YandexMapOptions } from './docs/maps/providers/yandex/entity/yandex-map-options';
+import { YandexSearchMap } from './docs/maps/providers/yandex/search';
+
 
 
 const routes: Routes = [
@@ -248,7 +257,15 @@ const routes: Routes = [
 		BaiduMarker,
 		BaiduMapOptions,
 		BaiduSearchMap,
-		
+		YandexMap,
+		YandexMarkerCluster,
+		YandexEvent,
+		YandexConfig,
+		YandexRouteBuilder,
+		YandexMarker,
+		YandexMapOptions,
+		YandexSearchMap,
+
 
 	],
 	bootstrap: [AppComponent],
