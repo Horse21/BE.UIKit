@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { OrderService } from '../../services/order-service';
-import { VocabularyService } from '../../services/vocabulary-service';
-import { Passenger } from '../../dto/passenger';
-import { AppSubscriberService } from '../../services/app-subscriber-service';
-import { MatSnackBar } from "@angular/material"
+import {Component, Input, OnInit } from '@angular/core';
+import {OrderService} from '../../services/order-service';
+import {VocabularyService} from '../../services/vocabulary-service';
+import {Passenger} from '../../dto/passenger';
+import {AppSubscriberService} from '../../services/app-subscriber-service';
+import {MatIconRegistry, MatSnackBar} from "@angular/material"
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component ({
 	selector: 'h21-passengers-search',
@@ -15,8 +16,12 @@ export class H21PassengersSearchComponent implements OnInit {
 		private _appSubscriber: AppSubscriberService,
 		public snackBar: MatSnackBar,
 		private _vocabulary: VocabularyService,
-		private _orderService: OrderService
+		private _orderService: OrderService,
+		private _iconReg: MatIconRegistry,
+		private _sanitizer: DomSanitizer
 	) {
+		_iconReg.addSvgIcon('h21_back_to_list',
+			_sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
 	}
 
 	passengers: Passenger[] = [];
@@ -25,7 +30,6 @@ export class H21PassengersSearchComponent implements OnInit {
 	public ngOnInit(): void {
 		if (this.onlySelected) {
 			var selectedPassengers = this._orderService.getPassengers();
-			console.log(selectedPassengers)
 			this.passengers = selectedPassengers.map(x => x);
 		}
 	}
@@ -63,10 +67,15 @@ export class H21PassengersSearchComponent implements OnInit {
 			if (this.onlySelected) {
 				this.passengers = this.passengers.filter(x => x.id != passenger.id);
 			}
-		}
-		else {
-			var selectedPassengers = this._orderService.getPassengers();
-			if (selectedPassengers.length == 1 && passenger.firstName == 'no name') {
+		} else {
+			let selectedPassengers = this._orderService.getPassengers();
+			let selectedAdultsCount = 0
+			selectedPassengers.forEach((item: Passenger) => {
+				if (item.type == 'adult') {
+					selectedAdultsCount += 1;
+				}
+			});
+			if (selectedAdultsCount == 1 && passenger.firstName == 'No name adult') {
 				this.snackBar.open('Traveler can not been removed', '', {
 					duration: 1000,
 					panelClass: 'c-h21-passengers-error_snackbar'

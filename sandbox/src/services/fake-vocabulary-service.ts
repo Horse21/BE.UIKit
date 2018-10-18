@@ -17,7 +17,24 @@ export class FakeVocabularyService implements VocabularyService {
 		var data = [
 			<City>{
 				id: 1,
-				name: "Moscow"
+				name: "Moscow",
+				code: 'MOS',
+				countryCode: null,
+				isTransient: false,
+				airports: [
+					{
+						code: "VKO",
+						name: "Vnukovo"
+					},
+					{
+						code: "SVO",
+						name: "Sheremetyevo"
+					},
+					{
+						code: "DME",
+						name: "Domodedovo"
+					}
+				]
 			},
 			<City>{
 				id: 2,

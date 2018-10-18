@@ -1,9 +1,9 @@
-import { City } from './city';
+import {City} from './city';
 
 export class FlyRoute {
 	cityFrom: City;
 	cityTo: City;
-	arrivalDate: Date;
+	departureDate: Date;
 	returnDate: Date;
 	minDate: Date;
 	rangeDateMode: boolean;

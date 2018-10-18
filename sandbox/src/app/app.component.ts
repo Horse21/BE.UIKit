@@ -3,7 +3,6 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {
 	MatIconRegistry,
 	MatSidenav,
-	MatSidenavContent
 } from '@angular/material';
 import {DocsComponent} from "./docs/docs.component";
 import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
@@ -16,13 +15,25 @@ import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav
 import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
 import {IUserCardData} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
+import {ISearchHistoryCard} from "../../projects/h21-be-ui-kit/src/lib/h21-search-history-panel/dto/i-search-history-card";
+import {H21AirSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib";
+import {SearchFlightDto} from "../../projects/h21-be-ui-kit/src/dto";
+import {H21AirFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-air-filter-panel/h21-air-filter-panel-view-mode.enum";
+import {H21HotelFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel-view-mode.enum";
 
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
 	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
-	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
+	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: false},
 	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
 	{name: 'test', label: 'Map point', icon: 'not_listed_location', type: 'button', url: null, disabled: false},
+];
+
+const SEARCH_HISTORY_DATA: ISearchHistoryCard[] = [
+	{ id: 1, payment: 'Payment on account', destination: 'Amsterdam, Netherlands', adultCount: 2, roomCount: 1 },
+	{ id: 2, payment: 'Payment on account', destination: 'Amsterdam, Netherlands', adultCount: 2, roomCount: 1 },
+	{ id: 3, payment: 'Payment on account', destination: 'Amsterdam, Netherlands', adultCount: 2, roomCount: 1 },
+	{ id: 4, payment: 'Payment on account', destination: 'Amsterdam, Netherlands', adultCount: 2, roomCount: 1 }
 ];
 
 const USER_CARD_DATA: IUserCardData = {
@@ -65,12 +76,10 @@ export class AppComponent {
 	subscription: any;
 	sidebarOpened = false;
 
-	breadcrumbsData: Array<IBreadcrumb> = [
-		{label: "Home", url: "#"},
-		{label: "Company", url: "#"},
-		{label: "My Company", url: "#"},
-		{label: "My User", url: "#"}
-	];
+
+	// test data
+	searchHistoryData: ISearchHistoryCard[];
+	breadcrumbsData: IBreadcrumb[];
 
 	constructor(iconReg: MatIconRegistry,
 				sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
@@ -88,6 +97,8 @@ export class AppComponent {
 		iconReg.addSvgIcon('h21_no_luggage',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-luggage-gray.svg'));
 		iconReg.addSvgIcon('h21_night',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-night-blue.svg'));
 		iconReg.addSvgIcon('h21_back_to_list',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
+
+		this.init();
 	}
 
 	ngOnInit() {
@@ -101,8 +112,12 @@ export class AppComponent {
 		this.sidebarOpened = !this.sidebarOpened;
 	}
 
-	isDemo(): boolean {
-		return this.router.url.indexOf('/demo') == 0;
+	isDemoHotel(): boolean {
+		return this.router.url.indexOf('/demo/hotel') == 0;
+	}
+
+	isDemoAirBe(): boolean {
+		return this.router.url.indexOf('/demo/airbe') == 0;
 	}
 
 	changeComponent(event): void {
@@ -119,15 +134,17 @@ export class AppComponent {
 	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
 	@ViewChild('rightSidenav') private rightSidenav: MatSidenav;
 	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
-	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
+	@ViewChild('hotelSearchResult') private hotelSearchResult: H21HotelSearchResultComponent;
+	@ViewChild('airbeSearchResult') private airbeSearchResult: H21AirSearchResultComponent;
 
 	userCardData: IUserCardData = USER_CARD_DATA;
 	activeLeftSidenavPanel: string = 'search';
 	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;
-	searchResultViewMode: string = 'list';
+	hotelSearchResultViewMode: H21HotelFilterPanelViewMode =  H21HotelFilterPanelViewMode.List;
+	airbeSearchResultViewMode: H21AirFilterPanelViewMode = H21AirFilterPanelViewMode.List;
 	sidebarNavDisabled: boolean = true;
-	sidebarNavTabs: Array<ISidebarNavTab> = SIDEBAR_NAV_TABS;
+	sidebarNavTabs: ISidebarNavTab[];
 
 	/* Left sidenav configuration */
 	leftSidenavOpened: boolean = false;
@@ -144,7 +161,8 @@ export class AppComponent {
 		this.leftSidenav.toggle();
 		if (this.leftSidenav.opened) {
 			this.sidebarNavDisabled = false;
-			this.searchResultViewMode = 'list';
+			this.hotelSearchResultViewMode = H21HotelFilterPanelViewMode.List;
+			this.airbeSearchResultViewMode = H21AirFilterPanelViewMode.List;
 			this.sidenavOpened = true;
 		} else {
 			this.sidebarNavDisabled = true;
@@ -159,27 +177,52 @@ export class AppComponent {
 		this.activeLeftSidenavPanel = tab.name;
 	}
 
-	search(options: IHotelSearchOptions): void {
+	hotelSearch(options: IHotelSearchOptions): void {
 		this.searchResultVisibility = true;
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
-			this.searchResult.search(options);
+			this.hotelSearchResult.search(options);
 		}, 0);
 	}
 
-	clearSearch(): void {
+	hotelClearSearch(): void {
 		this.searchResultVisibility = false;
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
-		if (this.searchResult) {
-			this.searchResult.clear();
+		if (this.hotelSearchResult) {
+			this.hotelSearchResult.clear();
 		}
 	}
 
-	changeResultViewMode(mode: string): void {
-		this.searchResultViewMode = mode;
+	airbeSearch(options: SearchFlightDto): void {
+		this.searchResultVisibility = true;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
+		setTimeout(() => {
+			this.airbeSearchResult.search(options);
+		}, 0);
+	}
+
+	airbeClearSearch(): void {
+		this.searchResultVisibility = false;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
+		if (this.airbeSearchResult) {
+			this.airbeSearchResult.clear();
+		}
+	}
+
+	hotelChangeResultViewMode(mode: H21HotelFilterPanelViewMode): void {
+		this.hotelSearchResultViewMode = mode;
+	}
+
+	airbeChangeResultViewMode(mode: H21AirFilterPanelViewMode): void {
+		this.airbeSearchResultViewMode = mode;
 	}
 
 	isRoute(route: string){
 		return this.router.url.indexOf(route) >= 0;
+	}
+
+	init() {
+		this.searchHistoryData = SEARCH_HISTORY_DATA;
+		this.sidebarNavTabs = SIDEBAR_NAV_TABS;
 	}
 }

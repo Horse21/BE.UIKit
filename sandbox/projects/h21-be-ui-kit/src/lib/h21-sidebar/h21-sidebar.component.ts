@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {SearchResult} from '../../dto/search-result';
 import {AppSubscriberService} from '../../services/app-subscriber-service';
-import {H21SearchResultComponent} from '../h21-search-result/h21-search-result.component';
+import {H21AirSearchResultComponent} from '../h21-air-search-result/h21-air-search-result.component';
 import {VocabularyService} from '../../services/vocabulary-service';
 
 @Component({
@@ -23,7 +23,7 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 	searchResultVisibility = false;
 	actionInProcess = false;
 
-	@ViewChildren(H21SearchResultComponent) private queryResultPanels: QueryList<H21SearchResultComponent>;
+	@ViewChildren(H21AirSearchResultComponent) private queryResultPanels: QueryList<H21AirSearchResultComponent>;
 	private _result: SearchResult;
 
 	private screenWidth: number;
@@ -117,13 +117,13 @@ export class H21SidebarComponent implements OnInit, AfterViewInit {
 
 
 	public ngAfterViewInit(): void {
-		this.queryResultPanels.changes.subscribe((comps: QueryList<H21SearchResultComponent>) =>
-		{
-			let resultPanel = comps.toArray()[0];
-			if(resultPanel) {
-				console.log(this.actionInProcess);
-				resultPanel.setResult(this._result);
-			}
-		});
+		// this.queryResultPanels.changes.subscribe((comps: QueryList<H21AirSearchResultComponent>) =>
+		// {
+		// 	let resultPanel = comps.toArray()[0];
+		// 	if(resultPanel) {
+		// 		console.log(this.actionInProcess);
+		// 		resultPanel.setResult(this._result);
+		// 	}
+		// });
 	}
 }

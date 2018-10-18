@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {H21SearchPanelComponent} from "./h21-search-panel.component";
+import {H21AirSearchPanelComponent} from "./h21-air-search-panel.component";
 import {
 	MatAutocompleteModule,
 	MatButtonModule,
@@ -14,6 +14,7 @@ import {H21RightOverlayPanelModule} from "../h21-right-overlay-panel/h21-right-o
 import {H21FlyRouteSelectionComponent} from "./h21-fly-route-selection.component";
 import {H21PassengersSelectComponent} from "./h21-passengers-select.component";
 import {H21TwoMonthCalendarModule} from "../h21-two-month-calendar/h21-two-month-calendar.module";
+import {H21CounterModule} from "../h21-counter/h21-counter.module";
 
 @NgModule({
 	imports: [
@@ -33,15 +34,16 @@ import {H21TwoMonthCalendarModule} from "../h21-two-month-calendar/h21-two-month
 		MatMenuModule,
 		H21RightOverlayPanelModule,
 		H21TwoMonthCalendarModule,
+		H21CounterModule,
 		MatInputModule
 	],
 	declarations: [
-		H21SearchPanelComponent,
+		H21AirSearchPanelComponent,
 		H21FlyRouteSelectionComponent,
 		H21PassengersSelectComponent
 	],
-	exports: [H21SearchPanelComponent]
+	exports: [H21AirSearchPanelComponent]
 })
-export class H21SearchPanelModule {
+export class H21AirSearchPanelModule {
 
 }

@@ -1,4 +1,4 @@
-<div class="c-h21-search-panel">
+<div class="c-h21-hotel-search-panel h21-search-panel">
 
 	<!-- Only hotel search -->
 	<ng-container *ngIf="searchMode == 'hotel'">
@@ -20,7 +20,7 @@
 			<mat-error *ngIf="destinationControl.hasError('required')">Please choose an destination</mat-error>
 			<mat-autocomplete #destinationAutocomplete="matAutocomplete"
 							  [autoActiveFirstOption]="false"
-							  class="c-h21-search-panel_autocomplete">
+							  class="h21-search-panel_autocomplete">
 				<mat-option *ngFor="let item of destinationListFiltered | async"
 							[value]="item.name"
 							class="autocomplete_optgroup-label"
@@ -35,6 +35,21 @@
 					<span class="autocomplete_opt-desc">{{item.description}}</span>
 				</mat-option>
 			</mat-autocomplete>
+		</mat-form-field>
+
+		<!-- POI -->
+		<mat-form-field color="primary" class="__w-100 h21-mb-1 h21-form-field">
+			<mat-select placeholder="POI"
+						panelClass="h21-mat-select"
+						[formControl]="poiControl"
+						[value]="nationality">
+				<mat-option value="Amsterdam">Amsterdam</mat-option>
+				<mat-option value="Amsterdam">Berlin</mat-option>
+				<mat-option value="Amsterdam">London</mat-option>
+				<mat-option value="Amsterdam">Paris</mat-option>
+				<mat-option value="Amsterdam">Rome</mat-option>
+				<mat-option value="Amsterdam">Moscow</mat-option>
+			</mat-select>
 		</mat-form-field>
 	</ng-container>
 
@@ -76,7 +91,7 @@
 	<div class="row h21-mb-2 align-items-center">
 		<div class="col-6 __text-weight-light">Adults</div>
 		<div class="col-2 __text-right">
-			<button mat-icon-button class="c-h21-search-panel_add-traveler-button" (click)="addTraveler()">
+			<button mat-icon-button class="h21-search-panel_add-traveler-button" (click)="addTraveler()">
 				<mat-icon>person_add</mat-icon>
 			</button>
 		</div>
@@ -136,34 +151,17 @@
 		</div>
 	</div>
 
-	<!-- POI -->
-	<mat-form-field color="primary" class="__w-100 h21-mb-1 h21-form-field">
-		<mat-select placeholder="POI"
-					panelClass="h21-mat-select"
-					[required]="true"
-					[formControl]="poiControl"
-					[value]="nationality">
-			<mat-option value="Amsterdam">Amsterdam</mat-option>
-			<mat-option value="Amsterdam">Berlin</mat-option>
-			<mat-option value="Amsterdam">London</mat-option>
-			<mat-option value="Amsterdam">Paris</mat-option>
-			<mat-option value="Amsterdam">Rome</mat-option>
-			<mat-option value="Amsterdam">Moscow</mat-option>
-		</mat-select>
-		<mat-error *ngIf="nationalityControl.hasError('required')">Please choose an POI</mat-error>
-	</mat-form-field>
-
 	<!-- Room availability action buttons -->
 	<ng-container *ngIf="searchMode == 'room'">
-		<div class="c-h21-search-panel_bottom-box">
+		<div class="h21-search-panel_bottom-box">
 			<button mat-raised-button color="primary">Сheck availability</button>
 		</div>
 	</ng-container>
 
 	<!-- Hotel search action buttons -->
 	<ng-container *ngIf="searchMode == 'hotel'">
-		<div class="c-h21-search-panel_bottom-attached-box">
-			<button mat-button class="__size-l mr-3" (click)="clearSearch()">Clear search</button>
+		<div class="h21-search-panel_bottom-attached-box">
+			<button mat-button class="__size-l h21-mr-2" (click)="clearSearch()">Clear search</button>
 			<button mat-raised-button class="__size-l" color="primary" (click)="search()">Search</button>
 		</div>
 	</ng-container>

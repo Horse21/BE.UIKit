@@ -25,26 +25,26 @@ import {H21HeaderComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-heade
 import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar.component';
 import {H21SidebarNavComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar-nav/h21-sidebar-nav.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
-import {H21SearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-search-panel.component';
+import {H21AirSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-air-search-panel.component';
 import {H21HotelSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-panel/h21-hotel-search-panel.component';
 import {H21HotelFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel.component';
-import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-fly-route-selection.component";
-import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-panel/h21-passengers-select.component";
-import {H21SearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result/h21-search-result.component";
-import {H21SearchResultRowComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-result-row/h21-search-result-row.component";
-import {H21FilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-filter-panel/h21-filter-panel.component';
+import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-fly-route-selection.component";
+import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-passengers-select.component";
+import {H21AirSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-result/h21-air-search-result.component";
+import {H21AirSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-result-card/h21-air-search-result-card.component";
+import {H21AirFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-air-filter-panel/h21-air-filter-panel.component';
 import {H21BreadcrumbsComponent} from './../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/h21-breadcrumbs.component';
 import {H21RightOverlayPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.component';
 import {H21HeaderUserSelectorDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-user-selector-dialog.component';
 import {H21HeaderSearchSettingsDialogComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-header/h21-header-search-settings-dialog.component';
-import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-passengers-search/h21-passengers-search.component';
+import {H21PassengersSearchComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-traveler-search/h21-passengers-search.component';
 import {H21HelpComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-help/h21-help.component";
 import {H21TwoMonthCalendarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar.component";
 import {H21TwoMonthCalendarDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-two-month-calendar/h21-two-month-calendar-dialog.component";
 import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
 import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-counter/h21-counter.component";
 import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
-import {H21HistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-history-panel/h21-history-panel.component";
+import {H21SearchHistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-history-panel/h21-search-history-panel.component";
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
 import {H21HotelBookComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-book/h21-hotel-book.component";
 import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
@@ -93,11 +93,12 @@ import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-
 const routes: Routes = [
 	{path: '', redirectTo: '/', pathMatch: 'full'},
 	// {path: 'demo', component: HomeComponent, children: [
-	// 		{path: '', component: H21SearchPanelComponent, outlet: 'searchPanel'},
-	// 		//{path: '', component: H21FilterPanelComponent, outlet: 'filterPanel'},
-	// 		{path: '', component: H21HistoryPanelComponent, outlet: 'historyPanel'},
+	// 		{path: '', component: H21AirSearchPanelComponent, outlet: 'searchPanel'},
+	// 		//{path: '', component: H21AirFilterPanelComponent, outlet: 'filterPanel'},
+	// 		{path: '', component: H21SearchHistoryPanelComponent, outlet: 'historyPanel'},
 	// 	]},
 	{path: 'demo', component: AppComponent },
+	{path: 'demo/airbe', component: AppComponent },
 	{path: 'demo/hotel', component: H21HotelBookComponent },
 	{path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
 	{path: 'demo/reservation', component: H21HotelReservationComponent },
@@ -113,14 +114,14 @@ const routes: Routes = [
 		H21HeaderComponent,
 		H21TopToolbarComponent,
 		H21SidebarComponent,
-		H21SearchPanelComponent,
+		H21AirSearchPanelComponent,
 		H21HotelSearchPanelComponent,
 		H21HotelFilterPanelComponent,
-		H21SearchResultComponent,
-		H21SearchResultRowComponent,
+		H21AirSearchResultComponent,
+		H21AirSearchResultCardComponent,
 		H21FlyRouteSelectionComponent,
 		H21PassengersSelectComponent,
-		H21FilterPanelComponent,
+		H21AirFilterPanelComponent,
 		H21BreadcrumbsComponent,
 		H21HeaderUserSelectorDialogComponent,
 		H21HeaderSearchSettingsDialogComponent,
@@ -131,7 +132,7 @@ const routes: Routes = [
 		H21TwoMonthCalendarDialogComponent,
 		H21CounterComponent,
 		H21RateComponent,
-		H21HistoryPanelComponent,
+		H21SearchHistoryPanelComponent,
 		H21HotelSearchResultComponent,
 		H21SidebarNavComponent,
 		H21HotelBookComponent,
