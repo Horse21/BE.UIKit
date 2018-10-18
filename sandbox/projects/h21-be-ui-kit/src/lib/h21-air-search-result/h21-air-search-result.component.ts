@@ -9,6 +9,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 @Component ({
 	selector: "h21-air-search-result",
 	templateUrl: "./h21-air-search-result.component.html",
+	viewProviders: [MatIconRegistry],
 	animations: [
 		trigger('toggleVisibility', [
 			state('void', style({ opacity: 0 })),

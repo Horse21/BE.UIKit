@@ -22,6 +22,7 @@ export * from './h21-air-search-panel/h21-fly-route-selection.component';
 export * from './h21-air-search-panel/h21-passengers-select.component';
 export * from './h21-air-filter-panel/h21-air-filter-panel.module';
 export * from './h21-air-filter-panel/h21-air-filter-panel.component';
+export * from './h21-air-filter-panel/h21-air-filter-panel-view-mode.enum';
 export * from './h21-help/h21-help.module';
 export * from './h21-help/h21-help.component';
 export * from './h21-traveler-search/h21-passengers-search.module';
