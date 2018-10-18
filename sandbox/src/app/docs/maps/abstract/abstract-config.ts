@@ -28,6 +28,7 @@ import { Observable } from 'rxjs';
 import { BaseCicle } from '../entity/base-circle';
 import { BasePolygon } from '../entity/base-polygon';
 import { BasePolyline } from '../entity/base-polyline';
+import { TypeRoute } from '../enum/e-type-route';
 
 declare var google;
 
@@ -48,7 +49,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     radiusShape: ShapeType;
     routeBuilder: AbstractRouteBuilder;
 
-    buildRoute(from: IPoint, to: IPoint, show?: boolean): void {
+    buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void {
 
         if (show) {
             let routeOptions;
@@ -58,8 +59,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 .setStartPoint(from)
                 .setFinishPoint(to)
                 .build();
-
-            route.showRoute();
         }
     }
 
@@ -215,6 +214,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getLatLngBounds(): ILatLngBounds;
 
+    abstract getCenter(): ILatLng;
+
     markersFitsBounds(): void {
 
         try {
@@ -316,11 +317,11 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             clickable: true,
             draggable: false,
             visible: true,
-           
+
         });
     }
 
-    abstract showMarker(point: IPoint): void
+    abstract showMarker(point: IPoint, setStartRoutePoint: boolean, setFinishPoint:boolean, onSelectedpoint: boolean): void
 
     abstract draggableMarker(enabled: boolean): void;
 

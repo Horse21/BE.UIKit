@@ -54,7 +54,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
- 
+
         let LatLng = new google.maps.LatLng({ lat: marker.point.position.latitude, lng: marker.point.position.longitude });
 
         bounds.extend(LatLng);
@@ -248,10 +248,10 @@ export class GoogleConfig extends AbstractConfig {
 
         geocoder.geocode({ 'latLng': coordinates },
 
-            (results, status) => {
+            (response, status) => {
                 if (status == ResponseStatus.OK) {
 
-                    var place = results[0];
+                    var place = response[0];
 
                     let typeAddress = this.getDetailedAddress(place.address_components);
 
@@ -296,7 +296,7 @@ export class GoogleConfig extends AbstractConfig {
                     point.source = 'google';
                     result.push(point)
 
-                    this.showMarker(point);
+                    this.showMarker(point, false, false, false);
 
                 }
             });
@@ -311,16 +311,16 @@ export class GoogleConfig extends AbstractConfig {
 
             placesService.getDetails({ placeId: placeId },
 
-                (result, status) => {
+                (response, status) => {
 
                     if (status == ResponseStatus.OK) {
 
-                        if (result) {
+                        if (response) {
                             let point: Point = new Point();
                             point.position = new Position();
                             point.address = new Address();
 
-                            let place = result;
+                            let place = response;
 
                             let typeAddres = this.getDetailedAddress(place.address_components);
 
@@ -390,6 +390,11 @@ export class GoogleConfig extends AbstractConfig {
         return this.map.api.getBounds();
     }
 
+    getCenter(): ILatLng {
+
+        return this.map.api.getCenter();
+    }
+
     private getAddressSettings(): AddressSettings {
 
         let AdressSettings = new AddressSettings();
@@ -448,11 +453,11 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-    showMarker(point: IPoint) {
+    showMarker(point: IPoint, setStartRoutePoint?: boolean, setFinishPoint?:boolean, onSelectedpoint?: boolean) {
 
         try {
 
-console.log(point,'POINT')
+            console.log(point, 'POINT')
 
             let baseMarker = this.getBaseMarker(point);
 
@@ -479,7 +484,22 @@ console.log(point,'POINT')
 
             });
 
-            this.map.selectedMarker = marker;
+            if (setStartRoutePoint) {
+
+                this.map.route.setStartPoint(point);
+
+            }
+
+            if(setFinishPoint){
+
+                this.map.route.setFinishPoint(point);
+            }
+
+            if (onSelectedpoint) {
+
+                this.map.selectedMarker = marker;
+            }
+
             marker["point"] = point;
 
             if (this.map.cluster.googleCluster != null) {
@@ -520,7 +540,7 @@ console.log(point,'POINT')
                 }
             }
 
-            google.maps.event.addListener(this.map.selectedMarker, EventType.dragend, (event) => {
+            google.maps.event.addListener(this.map.selectedMarker, EventType.dragEnd, (event) => {
 
             });
 
@@ -547,13 +567,13 @@ console.log(point,'POINT')
 
         this.map.geo.circle = circle;
 
-        google.maps.event.addListener(circle, EventType.radius_changed, () => {
+        google.maps.event.addListener(circle, EventType.radiusChanged, () => {
 
             console.log(circle, 'radius_changed')
 
         });
 
-        google.maps.event.addListener(circle, EventType.dragend, () => {
+        google.maps.event.addListener(circle, EventType.dragEnd, () => {
 
             console.log(circle, 'dragend')
 
@@ -582,7 +602,7 @@ console.log(point,'POINT')
 
         this.toggleMapDragging(true);
 
-        google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mousedown, () => {
+        google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mouseDown, () => {
 
             drawShaping = new google.maps.Polyline(polyline.options);
 
@@ -590,13 +610,13 @@ console.log(point,'POINT')
 
             this.map.geo.pushPolygons(drawShaping)
 
-            let move = google.maps.event.addListener(this.map.api, EventType.mousemove, event => {
+            let move = google.maps.event.addListener(this.map.api, EventType.mouseMove, event => {
 
                 drawShaping.getPath().push(event.latLng);
 
             });
 
-            google.maps.event.addListenerOnce(this.map.api, EventType.mouseup, () => {
+            google.maps.event.addListenerOnce(this.map.api, EventType.mouseUp, () => {
 
                 google.maps.event.removeListener(move);
 
@@ -614,7 +634,7 @@ console.log(point,'POINT')
 
                 this.map.geo.pushPolygons(drawShaping)
 
-                google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mousedown);
+                google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mouseDown);
 
                 let array = drawShaping.getPath().getArray();
                 let bounds = new google.maps.LatLngBounds();
@@ -660,5 +680,27 @@ console.log(point,'POINT')
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
         return super.polygonsContainsMarker(marker, polygon);
+    }
+
+    panTo(latLng: ILatLng): void {
+
+        this.map.api.panTo(latLng);
+    }
+
+    ResizeMap(onCenter: boolean) {
+        try {
+            if (onCenter) {
+                google.maps.event.trigger(this.map.api, EventType.resize);
+                this.setZoom(10);
+                this.panTo(this.getCenter());
+            }
+            else {
+                google.maps.event.trigger(this.map.api, EventType.resize);
+                this.setZoom(this.getZoom());
+            }
+
+        } catch (error) {
+
+        }
     }
 }

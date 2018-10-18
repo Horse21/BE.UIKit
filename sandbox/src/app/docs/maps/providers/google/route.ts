@@ -1,38 +1,34 @@
 import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
-import { IPosition } from "../../interfaces/i-position";
 import { TravelMode } from "./enum/e-travel-mode";
 import { RouteInfo } from "../../classes/route-info";
 import { RouteTextValue } from "../../classes/route-text-value";
-import { IPoint } from "../../interfaces/i-point";
+import { Observable, Observer } from "rxjs";
+import { TypeRoute } from "../../enum/e-type-route";
 
 declare var google;
 
 export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     showStartPoint(): void {
-        this.map.config.showMarker(this.map.route.startPoint);
+
+        this.map.config.showMarker(this.startPoint, false, false, false);
     }
 
     showFinishPoint(): void {
-        this.map.config.showMarker(this.map.route.finishPoint);
+
+        this.map.config.showMarker(this.finishPoint, false, false, false);
+
     }
 
-    showRoute(): void {
-
-        this.showStartPoint();
-        this.showFinishPoint();
-
+    showRoute(typeRoute: string): void {
         try {
-            var directionsService = new google.maps.DirectionsService();
-            var pOptions = {
-                strokeColor: "#007bff",
-                strokeOpacity: 0.9,
-                strokeWeight: 12,
-            };
+
+            this.map.config.clearAllMap();
+            this.showStartPoint();
+            this.showFinishPoint();
+
             let directionsDisplay = new google.maps.DirectionsRenderer();
-
             directionsDisplay.setMap(this.map.api);
-
             directionsDisplay.setOptions({
                 polylineOptions: {
                     strokeColor: '#007bff',
@@ -42,82 +38,103 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                 suppressMarkers: true
             });
 
-            this.getDistanse(TravelMode.DRIVING);
+            this.map.geo.routes.push(directionsDisplay);
 
-            var start = new google.maps.LatLng(this.map.geo.markers[0].point.position.latitude, this.map.geo.markers[0].point.position.longitude);
-            var end = new google.maps.LatLng(this.map.geo.markers[1].point.position.latitude, this.map.geo.markers[1].point.position.longitude);
-
-
-        } catch (err) {
-            console.log(err)
+            this.getInfoRoute(TravelMode.DRIVING).subscribe(response => {
+                switch (typeRoute) {
+                    case TypeRoute.CAR:
+                        directionsDisplay.setDirections(response);
+                        break;
+                    case TypeRoute.FLY:
+                        response[response.length] = new google.maps.Polyline({
+                            path: [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude), new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude)],
+                            geodesic: true,
+                            strokeColor: '#007bff',
+                            strokeOpacity: 0.9,
+                            strokeWeight: 3,
+                            map: this.map.api
+                        });
+                        break;
+                }
+            });
         }
-
-
+        catch (error) {
+            console.log(error)
+        }
     }
 
-    getDistanse(typeTravelMode: string): void {
+    getInfoRoute(typeTravelMode: string): Observable<any> {
 
-        let travelMode = TravelMode.DRIVING;
+        try {
+            return new Observable((observer: Observer<any>) => {
 
-        switch (typeTravelMode) {
-            case TravelMode.DRIVING:
-                travelMode = TravelMode.DRIVING;
-                break;
-            case TravelMode.BICYCLING:
-                travelMode = TravelMode.DRIVING;
-                break;
-            case TravelMode.WALKING:
-                travelMode = TravelMode.WALKING;
-                break;
-            case TravelMode.TRANSIT:
-                travelMode = TravelMode.TRANSIT;
-                break;
-            default:
-            case TravelMode.DRIVING:
-                break;
+                let travelMode = TravelMode.DRIVING;
+
+                switch (typeTravelMode) {
+                    case TravelMode.BICYCLING:
+                        travelMode = TravelMode.BICYCLING;
+                        break;
+                    case TravelMode.WALKING:
+                        travelMode = TravelMode.WALKING;
+                        break;
+                    case TravelMode.TRANSIT:
+                        travelMode = TravelMode.TRANSIT;
+                        break;
+                }
+
+                let directionsService = new google.maps.DirectionsService();
+                let start = new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude);
+                let end = new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude);
+
+                let request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: travelMode,
+                    drivingOptions: {
+                        departureTime: new Date(Date.now() + 3000),
+                        trafficModel: google.maps.TrafficModel.PESSIMISTIC
+                    }
+
+                };
+                directionsService.route(request, (response, status) => {
+
+                    if (status == google.maps.DirectionsStatus.OK) {
+
+                        let info = response['routes'][0].legs[0];
+                        let typeMode = response.request.travelMode;
+                        let routeInfo = new RouteInfo();
+
+                        routeInfo.distance = new RouteTextValue();
+                        routeInfo.distance.text = info.distance.text;
+                        routeInfo.distance.value = info.distance.value;
+
+                        routeInfo.time = new RouteTextValue();
+                        routeInfo.time.text = info.duration.text;
+                        routeInfo.time.value = info.duration.value;
+                        routeInfo.timeTraffic = new RouteTextValue();
+
+                        routeInfo.timeTraffic.text = info.duration_in_traffic.text;
+                        routeInfo.timeTraffic.value = info.duration_in_traffic.value;
+                        routeInfo.staticMapUrl = '';
+                        routeInfo.type = typeMode;
+                        this.map.route.routeInfo = routeInfo;
+
+                        observer.next(response);
+
+                    } else {
+
+                    }
+                });
+            });
         }
+        catch (error) {
+            console.log(error)
+        }
+    }
 
-        let directionsService = new google.maps.DirectionsService();
+    getInfoDistance(): RouteInfo {
 
-        let start = new google.maps.LatLng(55.755826, 37.617299900000035);
-        let end = new google.maps.LatLng(55.340396, 38.29176510000002);
-
-        let request = {
-            origin: start,
-            destination: end,
-            travelMode: travelMode,
-            drivingOptions: {
-                departureTime: new Date(Date.now() + 3000),
-                trafficModel: google.maps.TrafficModel.PESSIMISTIC
-            }
-
-        };
-        directionsService.route(request, (result, status) => {
-
-            if (status == google.maps.DirectionsStatus.OK) {
-
-                let info = result['routes'][0].legs[0];
-                let routeInfo = new RouteInfo();
-
-                routeInfo.distance = new RouteTextValue();
-                routeInfo.distance.text = info.distance.text;
-                routeInfo.distance.value = info.distance.value;
-
-                routeInfo.time = new RouteTextValue();
-                routeInfo.time.text = info.duration.text;
-                routeInfo.time.value = info.duration.value;
-                routeInfo.timeTraffic = new RouteTextValue();
-
-                routeInfo.timeTraffic.text = info.duration_in_traffic.text;
-                routeInfo.timeTraffic.value = info.duration_in_traffic.value;
-
-            } else {
-
-            }
-        });
-
-        return null;
-
+        return this.map.route.routeInfo;
     }
 
 }

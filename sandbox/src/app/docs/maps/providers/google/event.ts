@@ -4,10 +4,10 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class GoogleEvent extends AbstractEvent {
-    constructor() { 
+    constructor() {
 
         super();
-        
+
     }
 
     listen<E>(eventName: string): Observable<E> {
@@ -36,7 +36,7 @@ export class GoogleEvent extends AbstractEvent {
         return this.listen<E>('boundscnhage');
     }
 
-    zoomChanged <E>(): Observable<E> {
+    zoomChanged<E>(): Observable<E> {
         return this.listen<E>('zoomstart');
     }
 }

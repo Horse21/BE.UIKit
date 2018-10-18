@@ -1,8 +1,13 @@
 import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
+import { RouteInfo } from "../../classes/route-info";
 
 declare var google;
 
 export class YandexRouteBuilder extends AbstractRouteBuilder {
+    
+    getInfoDistance():RouteInfo {
+        throw new Error("Method not implemented.");
+    }
 
     showStartPoint(): void {
         throw new Error("Method not implemented.");
@@ -10,14 +15,7 @@ export class YandexRouteBuilder extends AbstractRouteBuilder {
     showFinishPoint(): void {
         throw new Error("Method not implemented.");
     }
-    showRoute(): void {
+    showRoute(typeRoute: string): void {
         throw new Error("Method not implemented.");
     }
-    getDistanse(typeTravelMode: string): void {
-        throw new Error("Method not implemented.");
-    }
-
-
-
-
 }

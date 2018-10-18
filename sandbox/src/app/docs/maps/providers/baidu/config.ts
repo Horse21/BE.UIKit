@@ -15,6 +15,9 @@ import { BaseCicle } from '../../entity/base-circle';
 
 @Injectable()
 export class BaiduConfig extends AbstractConfig {
+    getCenter(): ILatLng {
+        throw new Error("Method not implemented.");
+    }
     getBounds(): ILatLngBounds {
         throw new Error("Method not implemented.");
     }
@@ -51,7 +54,7 @@ export class BaiduConfig extends AbstractConfig {
     routeInfo(): IRouteInfo {
         throw new Error("Method not implemented.");
     }
-    showMarker(point: IPoint): void {
+    showMarker(point: IPoint, setStartRoutePoint: boolean, setFinishPoint:boolean, onSelectedpoint: boolean): void {
         throw new Error("Method not implemented.");
     }
     draggableMarker(enabled: boolean): void {

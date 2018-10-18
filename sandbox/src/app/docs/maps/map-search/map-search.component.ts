@@ -5,6 +5,7 @@ import { map, startWith } from 'rxjs/operators';
 import { MapManager } from '../entity/map-manager';
 import { MatAutocompleteTrigger } from '@angular/material';
 import { Point } from '../entity/point';
+import { TypeRoute } from '../enum/e-type-route';
 
 let pointFrom: boolean = false;
 let pointTo: boolean = false;
@@ -67,7 +68,6 @@ export class MapSearchComponent {
       this.ListAutocomplete = searchresult;
     }
 
-    this.ShowRouteMap();
 
   }
 
@@ -85,7 +85,9 @@ export class MapSearchComponent {
     }
 
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
-      this.manager.getActiveMap().config.showMarker(point);
+      this.manager.getActiveMap().config.showMarker(point, true, false);
+      this.manager.getActiveMap().config.showMarker(point, false, true);
+      
     });
 
     this.manager.getActiveMap().loadMarkers = false;
@@ -93,9 +95,6 @@ export class MapSearchComponent {
     this.ListAutocomplete = [];
   }
 
-  private ShowRouteMap() {
-    this.manager.getActiveMap().route.showRoute();
-  }
   private filterListAutocomplete(value: string): Point[] {
     return this.ListAutocomplete.filter(point => point.name);
   }

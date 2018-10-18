@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MapManager } from '../entity/map-manager';
 import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
+import { TypeRoute } from '../enum/e-type-route';
 
 @Component({
   selector: 'app-map-toolbar',
@@ -76,7 +77,7 @@ export class MapToolbarComponent {
   }
 
   private GetDistance() {
-    this.manager.getActiveMap().route.getDistanse();
+    this.manager.getActiveMap().route.showRoute(TypeRoute.CAR);
   }
 
 }

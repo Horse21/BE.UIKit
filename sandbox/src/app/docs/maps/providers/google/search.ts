@@ -20,15 +20,15 @@ export class GoogleSearchMap extends AbstractSearch {
             language: 'en'
         };
 
-        service.getPlacePredictions(request, (results, status) => {
+        service.getPlacePredictions(request, (response, status) => {
 
             if (status == ResponseStatus.OK) {
 
-                for (var i = 0; i < results.length; i++) {
+                for (var i = 0; i < response.length; i++) {
                     let point: Point = new Point();
                     point.position = new Position();
                     point.address = new Address();
-                    let place = results[i];
+                    let place = response[i];
                     point.id = place.place_id;
                     point.name = place.description;
                     point.googlePlaceId = place.place_id;

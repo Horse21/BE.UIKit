@@ -5,6 +5,7 @@ import { AbstractMap } from "./abstract-map";
 import { IPoint } from "../interfaces/i-point";
 import { Injectable } from "@angular/core";
 import { RouteInfo } from "../classes/route-info";
+import { TypeRoute } from "../enum/e-type-route";
 
 @Injectable()
 export abstract class AbstractRouteBuilder {
@@ -17,8 +18,10 @@ export abstract class AbstractRouteBuilder {
 
     abstract showStartPoint(): void;
     abstract showFinishPoint(): void;
-    abstract showRoute(): void;
-    abstract getDistanse(typeTravelMode: string):void;
+    abstract showRoute(routeType: string): void;
+    abstract getInfoDistance(): RouteInfo;
+
+
 
     build(): AbstractRouteBuilder {
         return this;
@@ -30,6 +33,7 @@ export abstract class AbstractRouteBuilder {
     }
 
     setMap(map: AbstractMap): AbstractRouteBuilder {
+
         this.map = map;
         return this;
     }

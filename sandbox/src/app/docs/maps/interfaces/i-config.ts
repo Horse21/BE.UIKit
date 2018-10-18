@@ -7,11 +7,11 @@ import { IPosition } from "./i-position";
 import { IEventClickMap } from "../providers/google/interfaces/i-event-clik-map";
 import { ILatLngBounds } from "../providers/google/interfaces/i-latln-bounds";
 import { ILatLng } from "../providers/google/interfaces/i-latlng";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs";;
 
 export interface IConfig {
 
-    buildRoute(from: IPoint, to: IPoint, show?: boolean): void;
+    buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void;
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
     getAddress(position: ILatLng): Array<IPoint>;
@@ -30,7 +30,7 @@ export interface IConfig {
     setMinZoom(zoom: number): void;
     setMaxZoom(zoom: number): void;
     setCenter(position: ILatLng): void;
-    showMarker(point: IPoint): void;
+    showMarker(point: IPoint, setStartRoutePoint?: boolean, setFinishPoint?:boolean, onSelectedpoint?: boolean): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficLayer(show?: boolean);
     toggleTransitLayer(show?: boolean);
