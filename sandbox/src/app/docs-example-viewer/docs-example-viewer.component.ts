@@ -2,7 +2,7 @@ import {Component, AfterViewInit, Input} from "@angular/core";
 import {Observable} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {catchError, map} from 'rxjs/operators';
-import {throwError} from "rxjs/index";
+import {throwError} from "rxjs";
 
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-css';

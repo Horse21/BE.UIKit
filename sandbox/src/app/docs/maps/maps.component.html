@@ -1,12 +1,4 @@
-<div class="content">
-    <div class="buttons-row">
-            <button mat-raised-button color="primary" (click)="zoomLevel('plus')">Zoom Level +</button>
-            <button mat-raised-button color="primary" (click)="zoomLevel('minus')">Zoom Level -</button>
-            <button mat-raised-button color="primary" (click)="drawShape('circle')">Draw radius</button>
-            <button mat-raised-button color="primary" (click)="drawShape('area')">Draw area</button>
-            <button mat-raised-button color="primary" (click)="clearMap()">Clear Map</button>
-            <button mat-raised-button color="primary" (click)="loadMarkers()">Load Markers</button>
-    </div>
-    
-    <div id="map" style="width: 100%; height: 800px;">loading</div>
-</div>
+<app-map-selector></app-map-selector>
+<app-map-search></app-map-search>
+<app-map-toolbar></app-map-toolbar>
+<app-map-container [latitude]="27.215556209029693" [longitude]="18.45703125" [zoom]="5" [minZoom]="3"></app-map-container>

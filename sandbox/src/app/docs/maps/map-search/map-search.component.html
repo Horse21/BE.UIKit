@@ -1,0 +1,19 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="From" aria-label="From" [matAutocomplete]="auto" [formControl]="pointInput" (input)="ChangeInput($event.target.value,'from')">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId,'from')">
+        <span>{{point.name}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <span style="padding-right: 10px;"></span>
+  <mat-form-field class="example-full-width" #prod>
+    <input matInput placeholder="To" aria-label="To" [matAutocomplete]="auto" [formControl]="pointInput" (input)="ChangeInput($event.target.value,'to')">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId,'to')">
+        <span>{{point.name}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

@@ -72,8 +72,7 @@ export class AppComponent {
 		{label: "My User", url: "#"}
 	];
 
-	constructor(iconReg: MatIconRegistry,
-				sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
+	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
 		iconReg.addSvgIcon('logo',						sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
 		iconReg.addSvgIcon('h21_flight_land_blue',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-blue-icon.svg'));
 		iconReg.addSvgIcon('h21_flight_land_green',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-green-icon.svg'));
@@ -177,6 +176,10 @@ export class AppComponent {
 
 	changeResultViewMode(mode: string): void {
 		this.searchResultViewMode = mode;
+
+		if (mode == 'map') {
+			this.leftSidenavToggle();
+		}
 	}
 
 	isRoute(route: string){

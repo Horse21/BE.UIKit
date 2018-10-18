@@ -23,11 +23,11 @@
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",
-			  "node_modules/devextreme/dist/css/dx.common.css",
-			  "node_modules/devextreme/dist/css/dx.light.css",
-			  "src/styles.css",
-			  "projects/h21-be-ui-kit/h21-theme.scss",
-			  "src/assets/styles/docs.scss"
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "src/styles.css",
+              "projects/h21-be-ui-kit/h21-theme.scss",
+              "src/assets/styles/docs.scss"      
             ],
             "scripts": []
           },
@@ -79,7 +79,7 @@
             "styles": [
               "node_modules/normalize.css/normalize.css",
               "src/styles.css",
-			  "projects/h21-be-ui-kit/h21-theme.scss"
+              "projects/h21-be-ui-kit/h21-theme.scss"
             ],
             "assets": [
               "src/assets",
@@ -120,45 +120,45 @@
             "tsConfig": [
               "e2e/tsconfig.e2e.json"
             ],
-			"exclude": [
-			  "**/node_modules/**"
-			]
-		  }
-		}
-	  }
-	},
-	"h21-be-ui-kit": {
-	  "root": "projects/h21-be-ui-kit",
-	  "sourceRoot": "projects/h21-be-ui-kit/src",
-	  "projectType": "library",
-	  "prefix": "lib",
-	  "architect": {
-		"build": {
-		  "builder": "@angular-devkit/build-ng-packagr:build",
-		  "options": {
-			"project": "projects/h21-be-ui-kit/ng-package.json"
-		  },
-		  "configurations": {
-			"production": {
-			  "project": "projects/h21-be-ui-kit/ng-package.prod.json"
-			}
-		  }
-		},
-		"test": {
-		  "builder": "@angular-devkit/build-angular:karma",
-		  "options": {
-			"main": "projects/h21-be-ui-kit/src/test.ts",
-			"tsConfig": "projects/h21-be-ui-kit/tsconfig.spec.json",
-			"karmaConfig": "projects/h21-be-ui-kit/karma.conf.js"
-		  }
-		},
-		"lint": {
-		  "builder": "@angular-devkit/build-angular:tslint",
-		  "options": {
-			"tsConfig": [
-			  "projects/h21-be-ui-kit/tsconfig.lib.json",
-			  "projects/h21-be-ui-kit/tsconfig.spec.json"
-			],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "h21-be-ui-kit": {
+      "root": "projects/h21-be-ui-kit",
+      "sourceRoot": "projects/h21-be-ui-kit/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "projects/h21-be-ui-kit/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/h21-be-ui-kit/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/h21-be-ui-kit/src/test.ts",
+            "tsConfig": "projects/h21-be-ui-kit/tsconfig.spec.json",
+            "karmaConfig": "projects/h21-be-ui-kit/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/h21-be-ui-kit/tsconfig.lib.json",
+              "projects/h21-be-ui-kit/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
