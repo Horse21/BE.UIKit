@@ -11,12 +11,12 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     showStartPoint(): void {
 
-        this.map.config.showMarker(this.startPoint, false, false, false);
+        this.map.config.showMarker(this.startPoint, false);
     }
 
     showFinishPoint(): void {
 
-        this.map.config.showMarker(this.finishPoint, false, false, false);
+        this.map.config.showMarker(this.finishPoint, false);
 
     }
 

@@ -54,7 +54,7 @@ export class YandexConfig extends AbstractConfig {
     routeInfo(): IRouteInfo {
         throw new Error("Method not implemented.");
     }
-    showMarker(point: IPoint, setStartRoutePoint?: boolean, setFinishPoint?:boolean, onSelectedpoint?: boolean): void {
+    showMarker(point: IPoint, onSelectedpoint?: boolean): void {
         throw new Error("Method not implemented.");
     }
     draggableMarker(enabled: boolean): void {

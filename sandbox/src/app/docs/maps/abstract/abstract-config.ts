@@ -321,7 +321,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         });
     }
 
-    abstract showMarker(point: IPoint, setStartRoutePoint: boolean, setFinishPoint:boolean, onSelectedpoint: boolean): void
+    abstract showMarker(point: IPoint, onSelectedpoint: boolean): void
 
     abstract draggableMarker(enabled: boolean): void;
 

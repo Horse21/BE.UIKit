@@ -296,7 +296,7 @@ export class GoogleConfig extends AbstractConfig {
                     point.source = 'google';
                     result.push(point)
 
-                    this.showMarker(point, false, false, false);
+                    this.showMarker(point, false);
 
                 }
             });
@@ -453,7 +453,7 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-    showMarker(point: IPoint, setStartRoutePoint?: boolean, setFinishPoint?:boolean, onSelectedpoint?: boolean) {
+    showMarker(point: IPoint, onSelectedpoint?: boolean) {
 
         try {
 
@@ -484,17 +484,7 @@ export class GoogleConfig extends AbstractConfig {
 
             });
 
-            if (setStartRoutePoint) {
-
-                this.map.route.setStartPoint(point);
-
-            }
-
-            if(setFinishPoint){
-
-                this.map.route.setFinishPoint(point);
-            }
-
+            
             if (onSelectedpoint) {
 
                 this.map.selectedMarker = marker;

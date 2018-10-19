@@ -1,17 +1,19 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="From" aria-label="From" [matAutocomplete]="auto" [formControl]="pointInput" (input)="ChangeInput($event.target.value,'from')">
+    <input matInput placeholder="From" aria-label="From" name='from' [matAutocomplete]="auto" [formControl]="pointInput"
+      (input)="ChangeInput($event.target.value, $event)">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId,'from')">
+      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" [attr.data-col]="ddd" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId, $event)">
         <span>{{point.name}}</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
   <span style="padding-right: 10px;"></span>
   <mat-form-field class="example-full-width" #prod>
-    <input matInput placeholder="To" aria-label="To" [matAutocomplete]="auto" [formControl]="pointInput" (input)="ChangeInput($event.target.value,'to')">
+    <input matInput placeholder="To" aria-label="To" name="to" [matAutocomplete]="auto" [formControl]="pointInput"
+      (input)="ChangeInput($event.target.value,$event.target.name)">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId,'to')">
+      <mat-option *ngFor="let point of SearchPoint | async" [value]="point.name" (onSelectionChange)="SelectAutocomplete(point.googlePlaceId, $event.target)">
         <span>{{point.name}}</span>
       </mat-option>
     </mat-autocomplete>

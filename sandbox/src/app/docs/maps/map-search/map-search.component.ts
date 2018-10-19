@@ -67,11 +67,9 @@ export class MapSearchComponent {
       let searchresult = this.manager.getActiveMap().search.search(value);
       this.ListAutocomplete = searchresult;
     }
-
-
   }
 
-  private SelectAutocomplete(placeid: string, type: string) {
+  private SelectAutocomplete(placeid: string, type: any) {
 
     switch (type) {
       case 'from':
@@ -85,9 +83,9 @@ export class MapSearchComponent {
     }
 
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
-      this.manager.getActiveMap().config.showMarker(point, true, false);
-      this.manager.getActiveMap().config.showMarker(point, false, true);
-      
+      this.manager.getActiveMap().config.showMarker(point, true);
+      this.manager.getActiveMap().config.showMarker(point, false);
+
     });
 
     this.manager.getActiveMap().loadMarkers = false;
