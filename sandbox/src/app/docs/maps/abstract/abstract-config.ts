@@ -29,6 +29,8 @@ import { BaseCicle } from '../entity/base-circle';
 import { BasePolygon } from '../entity/base-polygon';
 import { BasePolyline } from '../entity/base-polyline';
 import { TypeRoute } from '../enum/e-type-route';
+import { IRouteOptions } from '../interfaces/i-route-options';
+import { IH21DateTime } from '../../../../../projects/h21-be-ui-kit/src/dto';
 
 declare var google;
 
@@ -47,18 +49,47 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;
-    routeBuilder: AbstractRouteBuilder;
 
     buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void {
 
+        console.log(typeRoute,show,'buildRoute');
+
         if (show) {
-            let routeOptions;
-            let route = this.routeBuilder
-                .setMap(this.map)
+
+            let IH21DateTime: IH21DateTime = {
+                year: 2018,
+                month: 10,
+                day: 10,
+                hour: 14,
+                minute: 10,
+                second: 10,
+                time: '14',
+                date: '19.10.2018',
+            }
+
+            let polyLineOptions: IPolylineOptions = {
+                clickable: true,
+                fillColor: "",
+                fillOpacity: 0,
+                strokeColor: '',
+                strokeOpacity: 0,
+                strokeWeight: 0,
+            }
+         
+            let routeOptions: IRouteOptions = {
+                travelMode: TravelMode.TRAIN,
+                trafficModel: TrafficMode.PESSIMISTIC,
+                departureTime: IH21DateTime,
+                estimatedTimeArrival: IH21DateTime,
+                polylineOptions: polyLineOptions,
+
+            };
+            this.map.route
                 .setOptions(routeOptions)
                 .setStartPoint(from)
                 .setFinishPoint(to)
-                .build();
+                .build()             
+            
         }
     }
 

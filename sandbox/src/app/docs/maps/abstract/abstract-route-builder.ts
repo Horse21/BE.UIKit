@@ -18,14 +18,8 @@ export abstract class AbstractRouteBuilder {
 
     abstract showStartPoint(): void;
     abstract showFinishPoint(): void;
-    abstract showRoute(routeType: string): void;
     abstract getInfoDistance(): RouteInfo;
-
-
-
-    build(): AbstractRouteBuilder {
-        return this;
-    }
+    abstract build(): void;
 
     setOptions(routeOptions: IRouteOptions): AbstractRouteBuilder {
         this.routeOptions = routeOptions;

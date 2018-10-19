@@ -20,43 +20,23 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     }
 
-    showRoute(typeRoute: string): void {
+    build(): void {
+
+        let typeRoute: TypeRoute;
+
         try {
 
             this.map.config.clearAllMap();
             this.showStartPoint();
             this.showFinishPoint();
 
-            let directionsDisplay = new google.maps.DirectionsRenderer();
-            directionsDisplay.setMap(this.map.api);
-            directionsDisplay.setOptions({
-                polylineOptions: {
-                    strokeColor: '#007bff',
-                    strokeOpacity: 0.9,
-                    strokeWeight: 5
-                },
-                suppressMarkers: true
-            });
-
-            this.map.geo.routes.push(directionsDisplay);
-
-            this.getInfoRoute(TravelMode.DRIVING).subscribe(response => {
-                switch (typeRoute) {
-                    case TypeRoute.CAR:
-                        directionsDisplay.setDirections(response);
-                        break;
-                    case TypeRoute.FLY:
-                        response[response.length] = new google.maps.Polyline({
-                            path: [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude), new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude)],
-                            geodesic: true,
-                            strokeColor: '#007bff',
-                            strokeOpacity: 0.9,
-                            strokeWeight: 3,
-                            map: this.map.api
-                        });
-                        break;
-                }
-            });
+            switch (typeRoute) {
+                case TypeRoute.CAR:
+                    this.showRouteCar();
+                    break;
+                case TypeRoute.FLY:
+                    this.showRouteFly();
+            }
         }
         catch (error) {
             console.log(error)
@@ -68,7 +48,7 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         try {
             return new Observable((observer: Observer<any>) => {
 
-                let travelMode = TravelMode.DRIVING;
+                let travelMode = typeTravelMode;
 
                 switch (typeTravelMode) {
                     case TravelMode.BICYCLING:
@@ -83,20 +63,25 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                 }
 
                 let directionsService = new google.maps.DirectionsService();
+
                 let start = new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude);
                 let end = new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude);
+
 
                 let request = {
                     origin: start,
                     destination: end,
-                    travelMode: travelMode,
+                    travelMode: TravelMode.DRIVING,
                     drivingOptions: {
                         departureTime: new Date(Date.now() + 3000),
                         trafficModel: google.maps.TrafficModel.PESSIMISTIC
                     }
 
                 };
+
                 directionsService.route(request, (response, status) => {
+
+                    console.log(status, 'status')
 
                     if (status == google.maps.DirectionsStatus.OK) {
 
@@ -135,6 +120,40 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
     getInfoDistance(): RouteInfo {
 
         return this.map.route.routeInfo;
+    }
+
+    private showRouteFly(): void {
+        let directionsDisplay = new google.maps.Polyline({
+            path: [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude), new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude)],
+            geodesic: true,
+            strokeColor: '#007bff',
+            strokeOpacity: 0.9,
+            strokeWeight: 3,
+            map: this.map.api
+        });
+
+        this.map.geo.pushRoutes(directionsDisplay);
+    }
+
+    private showRouteCar(): void {
+        
+        let directionsDisplay = new google.maps.DirectionsRenderer();
+
+        directionsDisplay.setMap(this.map.api);
+        this.map.geo.pushRoutes(directionsDisplay);
+
+        directionsDisplay.setOptions({
+            polylineOptions: {
+                strokeColor: '#007bff',
+                strokeOpacity: 0.9,
+                strokeWeight: 5
+            },
+            suppressMarkers: true
+        });
+        this.getInfoRoute(TravelMode.DRIVING).subscribe(response => {
+            directionsDisplay.setDirections(response);
+
+        });
     }
 
 }

@@ -1,11 +1,9 @@
 import { AbstractConfig } from '../../abstract/abstract-config';
 import { BaseMarker } from '../../entity/base-marker';
 import { IPolygonOptions } from '../../interfaces/i-polygon';
-import { ICircleOptions } from '../../interfaces/i-circle-options';
 import { IRouteInfo } from '../../interfaces/i-route-info';
 import { IPoint } from '../../interfaces/i-point';
 import { GoogleMarkerOptions } from './entity/google-marker-options';
-import { IPolylineOptions } from '../../interfaces/i-polyline-options';
 import { Injectable } from '@angular/core';
 import { IEventClickMap } from './interfaces/i-event-clik-map';
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
@@ -27,6 +25,7 @@ import { GoogleAddressType } from './classes/google-address-type';
 import { BaseCicle } from '../../entity/base-circle';
 import { BasePolyline } from '../../entity/base-polyline';
 import { BasePolygon } from '../../entity/base-polygon';
+import { AdditionalInformation } from '../../entity/point-additional-information';
 
 declare var google;
 
@@ -89,10 +88,8 @@ export class GoogleConfig extends AbstractConfig {
 
         googleMarker["point"] = marker;
 
-        google.maps.event.addListener(googleMarker, EventType.click, (event) => {
-
+        google.maps.event.addListener(googleMarker, EventType.click, () => {
             this.map.selectedMarker = googleMarker;
-
         });
 
         if (this.getBounds().contains(googleMarker.getPosition())) {
@@ -106,12 +103,19 @@ export class GoogleConfig extends AbstractConfig {
     }
 
 
+    buildRoute(from: IPoint, to: IPoint, typeRoute: string, show: boolean) {
+
+        super.buildRoute(from, to, typeRoute, show);
+
+    }
+
     clearAllMap(): void {
 
         this.clearPolygons();
         this.clearMarkers();
         this.clearCircle();
         super.clearAllMap();
+        this.map.selectedMarker = null;
 
     }
 
@@ -126,6 +130,10 @@ export class GoogleConfig extends AbstractConfig {
     clearRoutes(): void {
 
         super.clearRoutes();
+        if (this.map.geo.routes != null) {
+            this.map.geo.routes[0].setMap(null);
+
+        }
 
     }
 
@@ -138,6 +146,11 @@ export class GoogleConfig extends AbstractConfig {
     clearCircle(): void {
 
         super.clearCircle();
+
+        if (this.map.geo.circle != null) {
+            this.map.geo.circle.setMap(null);
+
+        }
 
     }
 
@@ -232,7 +245,6 @@ export class GoogleConfig extends AbstractConfig {
                 }
             }
         }
-        console.log(resultAddress);
         return resultAddress
     }
 
@@ -319,6 +331,7 @@ export class GoogleConfig extends AbstractConfig {
                             let point: Point = new Point();
                             point.position = new Position();
                             point.address = new Address();
+                            point.additionalInformation = new AdditionalInformation();
 
                             let place = response;
 
@@ -364,9 +377,13 @@ export class GoogleConfig extends AbstractConfig {
                                 }
                             }
 
-                            point.name = place.formatted_address;
+                            point.address.description = place.formatted_address;
+                            point.name = place.name;
+                            point.additionalInformation.rating = place.rating;
+                            point.additionalInformation.webSite = place.website;
+                            point.additionalInformation.phone = place.international_phone_number;
                             point.googlePlaceId = place.place_id;
-                            point.id = place.place_id;
+                            point.id = place.id;
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
@@ -457,10 +474,6 @@ export class GoogleConfig extends AbstractConfig {
 
         try {
 
-            console.log(point, 'POINT')
-
-            let baseMarker = this.getBaseMarker(point);
-
             let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);
 
             let googleMarkerOptions: GoogleMarkerOptions = {
@@ -479,12 +492,11 @@ export class GoogleConfig extends AbstractConfig {
 
             let marker = new google.maps.Marker(googleMarkerOptions);
 
-            google.maps.event.addListener(marker, EventType.click, (event) => {
-                console.log(this.map.selectedMarker, 'selectPoint')
-
+            google.maps.event.addListener(marker, EventType.click, () => {
+                console.log(this.map.selectedMarker, 'selectPoint');
             });
 
-            
+
             if (onSelectedpoint) {
 
                 this.map.selectedMarker = marker;
@@ -530,8 +542,7 @@ export class GoogleConfig extends AbstractConfig {
                 }
             }
 
-            google.maps.event.addListener(this.map.selectedMarker, EventType.dragEnd, (event) => {
-
+            google.maps.event.addListener(this.map.selectedMarker, EventType.dragEnd, () => {
             });
 
         } catch (error) {

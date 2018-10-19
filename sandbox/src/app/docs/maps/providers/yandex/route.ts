@@ -4,6 +4,9 @@ import { RouteInfo } from "../../classes/route-info";
 declare var google;
 
 export class YandexRouteBuilder extends AbstractRouteBuilder {
+    build(): void {
+        throw new Error("Method not implemented.");
+    }
     
     getInfoDistance():RouteInfo {
         throw new Error("Method not implemented.");

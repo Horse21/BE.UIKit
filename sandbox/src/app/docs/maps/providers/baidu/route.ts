@@ -4,6 +4,10 @@ import { RouteInfo } from "../../classes/route-info";
 declare var google;
 
 export class BaiduRouteBuilder extends AbstractRouteBuilder {
+    build(): void {
+        throw new Error("Method not implemented.");
+    }
+
     getInfoDistance(): RouteInfo {
         throw new Error("Method not implemented.");
     }
@@ -12,9 +16,6 @@ export class BaiduRouteBuilder extends AbstractRouteBuilder {
         throw new Error("Method not implemented.");
     }
     showFinishPoint(): void {
-        throw new Error("Method not implemented.");
-    }
-    showRoute(typeRoute: string): void {
         throw new Error("Method not implemented.");
     }
 

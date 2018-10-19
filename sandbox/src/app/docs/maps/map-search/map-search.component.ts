@@ -1,14 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MapManager } from '../entity/map-manager';
-import { MatAutocompleteTrigger } from '@angular/material';
+import { MatAutocompleteTrigger, MatAutocompleteSelectedEvent } from '@angular/material';
 import { Point } from '../entity/point';
 import { TypeRoute } from '../enum/e-type-route';
+import { EventEmitter } from 'events';
+import { IPoint } from '../interfaces/i-point';
 
-let pointFrom: boolean = false;
-let pointTo: boolean = false;
+let pointFrom: IPoint;
+let pointTo: IPoint;
 
 
 @Component({
@@ -17,7 +19,11 @@ let pointTo: boolean = false;
   styleUrls: ['./map-search.component.css']
 })
 
+
+
 export class MapSearchComponent {
+
+
 
   constructor(private manager: MapManager) {
     this.SearchPoint = this.pointInput.valueChanges
@@ -27,11 +33,14 @@ export class MapSearchComponent {
       );
   }
 
+
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
+
 
   pointInput = new FormControl();
   SearchPoint: Observable<any[]>;
   ListAutocomplete: Point[] = [];
+
 
 
   private ChangeInput(value: string, type: string) {
@@ -39,24 +48,24 @@ export class MapSearchComponent {
     switch (type) {
       case 'from':
         if (value.length == 0) {
-          pointFrom = false;
+          //    pointFrom = false;
           this.manager.getActiveMap().config.clearAllMap();
           this.ListAutocomplete = [];
         }
         else {
-          pointFrom = true;
+          //  pointFrom = true;
         }
         break
 
       case 'to':
 
         if (value.length == 0) {
-          pointTo = false;
+          //   pointTo = false;
           this.manager.getActiveMap().config.clearAllMap();
           this.ListAutocomplete = [];
         }
         else {
-          pointTo = true;
+          //   pointTo = true;
         }
 
       default:
@@ -69,22 +78,21 @@ export class MapSearchComponent {
     }
   }
 
-  private SelectAutocomplete(placeid: string, type: any) {
-
-    switch (type) {
-      case 'from':
-        pointFrom = true;
-        break
-
-      case 'to':
-        pointTo = true;
-      default:
-        break
-    }
-
+  private SelectAutocomplete(placeid, type) {
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
       this.manager.getActiveMap().config.showMarker(point, true);
-      this.manager.getActiveMap().config.showMarker(point, false);
+      switch (type) {
+        case 'from':
+          pointFrom = point;
+          break
+
+        case 'to':
+          pointTo = point;
+        default:
+          break
+      }
+
+      this.ShowRoute();
 
     });
 
@@ -97,4 +105,12 @@ export class MapSearchComponent {
     return this.ListAutocomplete.filter(point => point.name);
   }
 
+  private ShowRoute() {
+
+    if (pointTo != null && pointFrom != null || pointFrom != null && pointTo != null) {
+
+      this.manager.getActiveMap().config.buildRoute(pointFrom, pointTo, TypeRoute.CAR, true);
+
+    }
+  }
 }

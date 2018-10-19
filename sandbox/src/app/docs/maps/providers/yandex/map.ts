@@ -19,11 +19,11 @@ declare var document;
 @Injectable()
 export class YandexMap extends AbstractMap {
     public get scriptSelector(): string {
-        return "script[src*='api.map.baidu']";
+        return "script[src*='api-maps']";
     };
 
     public get styleSelector(): string {
-        return ".BMap_mask";
+        return ".style[data-ymaps]";
     }
 
     constructor(mapOptions: YandexMapOptions, config: YandexConfig, events: YandexEvent, cluster: YandexMarkerCluster, geo: GeoContainer, search: YandexSearchMap, route: YandexRouteBuilder) {
@@ -86,7 +86,7 @@ export class YandexMap extends AbstractMap {
     destroy(): void {
         super.destroy();
         ymaps = null;
-
+        this.api.destroy();
     }
 
 }

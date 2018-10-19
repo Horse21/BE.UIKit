@@ -86,6 +86,7 @@ export class BaiduMap extends AbstractMap {
 
     destroy(): void {
         super.destroy();
+        this.api.reset();
         BMap = null;
 
     }
