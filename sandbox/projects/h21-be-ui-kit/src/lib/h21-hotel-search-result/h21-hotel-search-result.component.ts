@@ -56,17 +56,15 @@ export class H21HotelSearchResultComponent {
 		this.searchInProgress = true;
 		this.showFakeResult = true;
 		this.searchResultReady = false;
-		setTimeout(() => {
-			this._vocabulary.searchHotels(options).subscribe(result => {
-				this.searchInProgress = false;
-				this.showFakeResult = false;
-				this.searchResult = result;
-			});
+		this._vocabulary.searchHotels(options).subscribe(result => {
+			this.searchInProgress = false;
+			this.showFakeResult = false;
+			this.searchResult = result;
 			setTimeout(() => {
 				this.searchResultReady = true;
 				this.onSearchResultReady.emit(this.searchResult);
 			}, 250);
-		}, 2000);
+		});
 	}
 
 	clear(): void {

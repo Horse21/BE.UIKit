@@ -16,7 +16,7 @@ import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-
 import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
 import {IUserCardData} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
 import {ISearchHistoryCard} from "../../projects/h21-be-ui-kit/src/lib/h21-search-history-panel/dto/i-search-history-card";
-import {H21AirSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib";
+import {H21AirSearchResultComponent, IProviderDataLoadingStatistic} from "../../projects/h21-be-ui-kit/src/lib";
 import {SearchFlightDto} from "../../projects/h21-be-ui-kit/src/dto";
 import {H21AirFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-air-filter-panel/h21-air-filter-panel-view-mode.enum";
 import {H21HotelFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel-view-mode.enum";
@@ -157,6 +157,8 @@ export class AppComponent {
 	/* Sidenav content configuration */
 	contentSidenavHasBackdrop: boolean = false;
 
+	providerDataLoadingStatistic: IProviderDataLoadingStatistic;
+
 	leftSidenavToggle() {
 		this.leftSidenav.toggle();
 		if (this.leftSidenav.opened) {
@@ -179,14 +181,27 @@ export class AppComponent {
 
 	hotelSearch(options: IHotelSearchOptions): void {
 		this.searchResultVisibility = true;
+		this.providerDataLoadingStatistic = { loaded: 0, total: 10 }
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
 			this.hotelSearchResult.search(options);
+
 		}, 0);
+	}
+
+	updateProviderDataLoading() {
+		this.providerDataLoadingStatistic.loaded = 1;
+
+		for(let i = 2; i <= 10; i++) {
+			setTimeout(() => {
+				this.providerDataLoadingStatistic.loaded += 1;
+			}, i * 1000);
+		}
 	}
 
 	hotelClearSearch(): void {
 		this.searchResultVisibility = false;
+		this.providerDataLoadingStatistic = null;
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
 		if (this.hotelSearchResult) {
 			this.hotelSearchResult.clear();

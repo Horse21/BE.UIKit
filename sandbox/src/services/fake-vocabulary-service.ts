@@ -238,9 +238,12 @@ export class FakeVocabularyService implements VocabularyService {
 				fee: 1.54,
 			},
 		];
+
 		return Observable.create((observer: Subscriber<any>) => {
-			observer.next(data);
-			observer.complete();
+			setTimeout(() => {
+				observer.next(data);
+				observer.complete();
+			}, 2000);
 		});
 	}
 }

@@ -44,6 +44,8 @@
 							 [showCart]="true"
 							 [showLanguageControl]="true"
 							 [showCurrencyControl]="true"
+							 [showProviderDataLoading]="searchResultVisibility"
+							 [providerDataLoadingStatistic]="providerDataLoadingStatistic"
 							 (onSidenavToggle)="leftSidenavToggle()"></h21-top-toolbar>
 		</div>
 	</div>
@@ -99,6 +101,7 @@
 						 [class.page_sidenav-search-result__map]="hotelSearchResultViewMode == 'MAP'">
 						<h21-hotel-search-result *ngIf="searchResultVisibility"
 												 [viewMode]="hotelSearchResultViewMode"
+												 (onSearchResultReady)="updateProviderDataLoading()"
 												 #hotelSearchResult></h21-hotel-search-result>
 					</div>
 				</mat-sidenav-content>

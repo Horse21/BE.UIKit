@@ -10,6 +10,7 @@ export * from './h21-right-overlay-panel/h21-right-overlay-panel-ref';
 export * from './h21-right-overlay-panel/h21-right-overlay-panel.service';
 export * from './h21-top-toolbar/h21-top-toolbar.module';
 export * from './h21-top-toolbar/h21-top-toolbar.component';
+export * from './h21-top-toolbar/dto/i-provider-data-loading-statistic';
 export * from './h21-two-month-calendar/h21-two-month-calendar.module';
 export * from './h21-two-month-calendar/h21-two-month-calendar.component';
 export * from './h21-two-month-calendar/h21-two-month-calendar-dialog.component';
@@ -29,8 +30,6 @@ export * from './h21-traveler-search/h21-passengers-search.module';
 export * from './h21-traveler-search/h21-passengers-search.component';
 export * from './h21-air-search-result-card/h21-air-search-result-card.module';
 export * from './h21-air-search-result-card/h21-air-search-result-card.component';
-export * from './h21-top-toolbar/h21-top-toolbar.module';
-export * from './h21-top-toolbar/h21-top-toolbar.component';
 export * from './h21-hotel-filter-panel/h21-hotel-filter-panel.module';
 export * from './h21-hotel-filter-panel/h21-hotel-filter-panel.component';
 export * from './h21-hotel-search-result/h21-hotel-search-result.module';
@@ -62,15 +61,11 @@ export * from './h21-accout-select/h21-account-select-service';
 export * from './h21-accout-select/h21-account-select-ref';
 export * from './h21-hotel-reservation/h21-hotel-reservation.module';
 export * from './h21-hotel-reservation/h21-hotel-reservation.component';
-
-/* h21-user-card */
 export * from './h21-user-card/h21-user-card.module';
 export * from './h21-user-card/h21-user-card.component';
 export * from './h21-user-card/dto/i-user-card-data';
 export * from './h21-user-card/dto/i-user-card-user';
 export * from './h21-user-card/dto/i-user-card-action';
-
-/* h21-search-history-panel */
 export * from './h21-search-history-panel/h21-search-history-panel.module';
 export * from './h21-search-history-panel/h21-search-history-panel.component';
 export * from './h21-search-history-panel/dto/i-search-history-card';
