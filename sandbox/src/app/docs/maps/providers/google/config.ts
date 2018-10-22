@@ -26,6 +26,7 @@ import { BaseCicle } from '../../entity/base-circle';
 import { BasePolyline } from '../../entity/base-polyline';
 import { BasePolygon } from '../../entity/base-polygon';
 import { AdditionalInformation } from '../../entity/point-additional-information';
+import { TypeRoute } from '../../enum/e-type-route';
 
 declare var google;
 
@@ -103,7 +104,7 @@ export class GoogleConfig extends AbstractConfig {
     }
 
 
-    buildRoute(from: IPoint, to: IPoint, typeRoute: string, show: boolean) {
+    buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show: boolean) {
 
         super.buildRoute(from, to, typeRoute, show);
 
@@ -114,6 +115,7 @@ export class GoogleConfig extends AbstractConfig {
         this.clearPolygons();
         this.clearMarkers();
         this.clearCircle();
+        this.clearRoutes();
         super.clearAllMap();
         this.map.selectedMarker = null;
 
@@ -129,12 +131,14 @@ export class GoogleConfig extends AbstractConfig {
 
     clearRoutes(): void {
 
-        super.clearRoutes();
-        if (this.map.geo.routes != null) {
-            this.map.geo.routes[0].setMap(null);
+        if (this.map.geo.routes != undefined && this.map.geo.routes[0] != null) {
 
+            this.map.geo.routes.forEach((item) => {
+                item.setMap(null);
+            });
+            
+            super.clearRoutes();
         }
-
     }
 
     clearPolygons(): void {
@@ -145,10 +149,9 @@ export class GoogleConfig extends AbstractConfig {
 
     clearCircle(): void {
 
-        super.clearCircle();
-
         if (this.map.geo.circle != null) {
             this.map.geo.circle.setMap(null);
+            super.clearCircle();
 
         }
 

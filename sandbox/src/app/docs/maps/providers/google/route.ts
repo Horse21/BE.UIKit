@@ -1,8 +1,8 @@
 import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
-import { TravelMode } from "./enum/e-travel-mode";
 import { RouteInfo } from "../../classes/route-info";
 import { RouteTextValue } from "../../classes/route-text-value";
 import { Observable, Observer } from "rxjs";
+import { TravelMode } from "../../enum/e-travel-mode";
 import { TypeRoute } from "../../enum/e-type-route";
 
 declare var google;
@@ -22,20 +22,20 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     build(): void {
 
-        let typeRoute: TypeRoute;
-
         try {
 
             this.map.config.clearAllMap();
             this.showStartPoint();
             this.showFinishPoint();
 
-            switch (typeRoute) {
-                case TypeRoute.CAR:
-                    this.showRouteCar();
-                    break;
-                case TypeRoute.FLY:
-                    this.showRouteFly();
+            if (this.routeOptions.showOnMap) {
+                switch (this.routeOptions.typeRoute) {
+                    case TypeRoute.CAR:
+                        this.showRouteCar();
+                        break;
+                    case TypeRoute.FLY:
+                        this.showRouteFly();
+                }
             }
         }
         catch (error) {
@@ -43,16 +43,16 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         }
     }
 
-    getInfoRoute(typeTravelMode: string): Observable<any> {
+    getInfoRoute(): Observable<any> {
 
         try {
             return new Observable((observer: Observer<any>) => {
 
-                let travelMode = typeTravelMode;
+                let travelMode = this.routeOptions.travelMode;
 
-                switch (typeTravelMode) {
-                    case TravelMode.BICYCLING:
-                        travelMode = TravelMode.BICYCLING;
+                switch (this.routeOptions.travelMode) {
+                    case TravelMode.DRIVING:
+                        travelMode = TravelMode.DRIVING;
                         break;
                     case TravelMode.WALKING:
                         travelMode = TravelMode.WALKING;
@@ -71,12 +71,11 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                 let request = {
                     origin: start,
                     destination: end,
-                    travelMode: TravelMode.DRIVING,
+                    travelMode: this.routeOptions.travelMode,
                     drivingOptions: {
                         departureTime: new Date(Date.now() + 3000),
-                        trafficModel: google.maps.TrafficModel.PESSIMISTIC
+                        trafficModel: this.routeOptions.trafficModel
                     }
-
                 };
 
                 directionsService.route(request, (response, status) => {
@@ -123,34 +122,32 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
     }
 
     private showRouteFly(): void {
-        let directionsDisplay = new google.maps.Polyline({
-            path: [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude), new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude)],
-            geodesic: true,
-            strokeColor: '#007bff',
-            strokeOpacity: 0.9,
-            strokeWeight: 3,
-            map: this.map.api
-        });
+
+        this.routeOptions.polylineOptions.path = [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude),
+        new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude)];
+
+        let directionsDisplay = new google.maps.Polyline(this.routeOptions.polylineOptions);
+
+        directionsDisplay.setMap(this.map.api);
 
         this.map.geo.pushRoutes(directionsDisplay);
     }
 
     private showRouteCar(): void {
-        
+
         let directionsDisplay = new google.maps.DirectionsRenderer();
 
         directionsDisplay.setMap(this.map.api);
         this.map.geo.pushRoutes(directionsDisplay);
 
+        this.routeOptions.polylineOptions.strokeWeight = 4;
+
         directionsDisplay.setOptions({
-            polylineOptions: {
-                strokeColor: '#007bff',
-                strokeOpacity: 0.9,
-                strokeWeight: 5
-            },
+            polylineOptions: this.routeOptions.polylineOptions,
             suppressMarkers: true
         });
-        this.getInfoRoute(TravelMode.DRIVING).subscribe(response => {
+
+        this.getInfoRoute().subscribe(response => {
             directionsDisplay.setDirections(response);
 
         });

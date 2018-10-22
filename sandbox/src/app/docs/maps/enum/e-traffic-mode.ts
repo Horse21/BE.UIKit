@@ -1,5 +1,5 @@
 export enum TrafficMode {
-    PESSIMISTIC,
-    BEST_GUESS,
-    OPTIMISTIC,
+    PESSIMISTIC = 'pessimistic',
+    BEST_GUESS = 'bestguess',
+    OPTIMISTIC = 'optimistic',
 }

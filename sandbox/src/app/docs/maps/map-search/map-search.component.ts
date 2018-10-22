@@ -12,18 +12,13 @@ import { IPoint } from '../interfaces/i-point';
 let pointFrom: IPoint;
 let pointTo: IPoint;
 
-
 @Component({
   selector: 'app-map-search',
   templateUrl: './map-search.component.html',
   styleUrls: ['./map-search.component.css']
 })
 
-
-
 export class MapSearchComponent {
-
-
 
   constructor(private manager: MapManager) {
     this.SearchPoint = this.pointInput.valueChanges
@@ -33,41 +28,28 @@ export class MapSearchComponent {
       );
   }
 
-
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
-
 
   pointInput = new FormControl();
   SearchPoint: Observable<any[]>;
   ListAutocomplete: Point[] = [];
-
-
 
   private ChangeInput(value: string, type: string) {
 
     switch (type) {
       case 'from':
         if (value.length == 0) {
-          //    pointFrom = false;
           this.manager.getActiveMap().config.clearAllMap();
           this.ListAutocomplete = [];
-        }
-        else {
-          //  pointFrom = true;
         }
         break
 
       case 'to':
 
         if (value.length == 0) {
-          //   pointTo = false;
           this.manager.getActiveMap().config.clearAllMap();
           this.ListAutocomplete = [];
         }
-        else {
-          //   pointTo = true;
-        }
-
       default:
         break
     }
@@ -81,6 +63,7 @@ export class MapSearchComponent {
   private SelectAutocomplete(placeid, type) {
     this.manager.getActiveMap().config.getDetailsPoint(placeid).subscribe(point => {
       this.manager.getActiveMap().config.showMarker(point, true);
+
       switch (type) {
         case 'from':
           pointFrom = point;

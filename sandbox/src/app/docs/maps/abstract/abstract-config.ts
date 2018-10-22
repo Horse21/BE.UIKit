@@ -28,9 +28,9 @@ import { Observable } from 'rxjs';
 import { BaseCicle } from '../entity/base-circle';
 import { BasePolygon } from '../entity/base-polygon';
 import { BasePolyline } from '../entity/base-polyline';
-import { TypeRoute } from '../enum/e-type-route';
 import { IRouteOptions } from '../interfaces/i-route-options';
 import { IH21DateTime } from '../../../../../projects/h21-be-ui-kit/src/dto';
+import { TypeRoute } from '../enum/e-type-route';
 
 declare var google;
 
@@ -50,47 +50,49 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;
 
-    buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void {
+    buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show?: boolean): void {
 
-        console.log(typeRoute,show,'buildRoute');
-
-        if (show) {
-
-            let IH21DateTime: IH21DateTime = {
-                year: 2018,
-                month: 10,
-                day: 10,
-                hour: 14,
-                minute: 10,
-                second: 10,
-                time: '14',
-                date: '19.10.2018',
-            }
-
-            let polyLineOptions: IPolylineOptions = {
-                clickable: true,
-                fillColor: "",
-                fillOpacity: 0,
-                strokeColor: '',
-                strokeOpacity: 0,
-                strokeWeight: 0,
-            }
-         
-            let routeOptions: IRouteOptions = {
-                travelMode: TravelMode.TRAIN,
-                trafficModel: TrafficMode.PESSIMISTIC,
-                departureTime: IH21DateTime,
-                estimatedTimeArrival: IH21DateTime,
-                polylineOptions: polyLineOptions,
-
-            };
-            this.map.route
-                .setOptions(routeOptions)
-                .setStartPoint(from)
-                .setFinishPoint(to)
-                .build()             
-            
+     console.log(show,'show')
+        let IH21DateTime: IH21DateTime = {
+            year: 2018,
+            month: 10,
+            day: 10,
+            hour: 14,
+            minute: 10,
+            second: 10,
+            time: '14',
+            date: '19.10.2018',
         }
+
+        let path;
+
+        let polyLineOptions: IPolylineOptions = {
+            geodesic: true,
+            path: path,
+            clickable: false,
+            fillColor: "",
+            fillOpacity: 0,
+            strokeColor: '#007bff',
+            strokeOpacity: 0.9,
+            strokeWeight: 3,
+        }
+
+        let routeOptions: IRouteOptions = {
+            travelMode: TravelMode.DRIVING,
+            typeRoute: typeRoute,
+            trafficModel: TrafficMode.PESSIMISTIC,
+            departureTime: IH21DateTime,
+            estimatedTimeArrival: IH21DateTime,
+            polylineOptions: polyLineOptions,
+            showOnMap: show,
+
+        };
+        this.map.route
+            .setOptions(routeOptions)
+            .setStartPoint(from)
+            .setFinishPoint(to)
+            .build()
+
     }
 
     clearAllMap(): void {
@@ -207,6 +209,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             let polygon = new BasePolygon(polygonOptions);
 
             let polylineOptions: IPolylineOptions = {
+                geodesic: false,
+                path: path,
                 clickable: false,
                 strokeColor: '#1E90FF',
                 strokeOpacity: 0.9,

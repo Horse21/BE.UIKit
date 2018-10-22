@@ -15,6 +15,7 @@ export abstract class AbstractRouteBuilder {
     startPoint: IPoint;
     finishPoint: IPoint;
     routeOptions: IRouteOptions;
+    selectedTypeRoute: string;
 
     abstract showStartPoint(): void;
     abstract showFinishPoint(): void;
