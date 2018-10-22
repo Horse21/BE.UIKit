@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AppSubscriberService } from '../../services/app-subscriber-service';
-import { IBreadcrumb } from '../h21-breadcrumbs/dto/i-breadcrumb';
-import { IToolbarElement } from '../../dto/i-toolbar-element';
-import { IComboboxOption } from "../../dto/i-combobox-option";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AppSubscriberService} from '../../services/app-subscriber-service';
+import {IBreadcrumb} from '../h21-breadcrumbs/dto/i-breadcrumb';
+import {IToolbarElement} from '../../dto/i-toolbar-element';
+import {IComboboxOption} from "../../dto/i-combobox-option";
+import {IProviderDataLoadingStatistic} from "./dto/i-provider-data-loading-statistic";
 
 @Component({
 	selector: 'h21-top-toolbar',
@@ -10,50 +11,56 @@ import { IComboboxOption } from "../../dto/i-combobox-option";
 })
 
 export class H21TopToolbarComponent {
-	@Input() showBreadcrumbs: boolean = false;
+	@Input() showBreadcrumbs: boolean;
 	@Input() breadcrumbsData: Array<IBreadcrumb>;
 	@Input() buttonsData: Array<IToolbarElement>;
-	@Input() showCart: boolean = false;
-	@Input() showSidenavToggle: boolean = false;
-	@Input() sidenavToggleDisabled: boolean = false;
-	@Input() sidenavOpened: boolean = false;
-	@Input() showLanguageControl = false;
-	@Input() showCurrencyControl = false;
-	@Input() showProfileUserCardActions: boolean = false;
-	@Input() showProfileAgentsActions: boolean = false;
-	@Input() showProfileAgentAddActions: boolean = false;
-	@Input() showProfileTuneActions: boolean = false;
-	@Input() showProfileListActions: boolean = false;
-	@Output() onSidenavToggle: EventEmitter <void> = new EventEmitter<void>();
+	@Input() showCart: boolean;
+	@Input() showSidenavToggle: boolean;
+	@Input() sidenavToggleDisabled: boolean;
+	@Input() sidenavOpened: boolean;
+	@Input() showLanguageControl: boolean;
+	@Input() showCurrencyControl: boolean;
+	@Input() showProviderDataLoading: boolean;
+	@Input() providerDataLoadingStatistic: IProviderDataLoadingStatistic;
 
-	languageOptions: IComboboxOption[];
-	currencyOptions: IComboboxOption[];
+	@Output() onSidenavToggle: EventEmitter<void>;
+	@Output() onUpdateSearchResultClick: EventEmitter<void>;
+
 	languageOptionsTooltipText: string;
 	currencyOptionsTooltipText: string;
 	selectedLanguage: any;
 	selectedCurrency: any;
+	languageOptions: IComboboxOption[];
+	currencyOptions: IComboboxOption[];
 
 	constructor(private _appSubscriber: AppSubscriberService) {
-		this.testInit();
+		this.init();
+	}
+
+	init() {
+		this.showProviderDataLoading = false;
+		this.showBreadcrumbs = false;
+		this.showCart = false;
+		this.showSidenavToggle = false;
+		this.sidenavToggleDisabled = false;
+		this.sidenavOpened = false;
+		this.showLanguageControl = false;
+		this.showCurrencyControl = false;
+		this.onSidenavToggle = new EventEmitter<void>();
+		this.onUpdateSearchResultClick = new EventEmitter<void>();
+
 		this.languageOptionsTooltipText = 'Select language';
 		this.currencyOptionsTooltipText = 'Select currency';
 		this.selectedLanguage = 2;
 		this.selectedCurrency = 978;
-	}
-
-	sidenavToggle(): void {
-		this.sidenavOpened = !this.sidenavOpened;
-		this.onSidenavToggle.emit();
-	}
-
-	testInit() {
+		// todo: Do download data from an external source
 		this.languageOptions = [
 			{value: 1, valueLabel: 'DEU', optionLabel: 'German (Deutsch)'},
 			{value: 2, valueLabel: 'ENG', optionLabel: 'English (English)'},
 			{value: 3, valueLabel: 'FRA', optionLabel: 'French (Français)'},
 			{value: 4, valueLabel: 'RUS', optionLabel: 'Russian (Русский)'}
 		];
-
+		// todo: Do download data from an external source
 		this.currencyOptions = [
 			{value: 978, valueLabel: 'EUR', optionLabel: 'EUR (Euro)'},
 			{value: 840, valueLabel: 'USD', optionLabel: 'USD (US Dollar)'},
@@ -62,5 +69,15 @@ export class H21TopToolbarComponent {
 			{value: 392, valueLabel: 'JPY', optionLabel: 'JPY (Japanese Yen)'},
 			{value: 710, valueLabel: 'ZAR', optionLabel: 'ZAR (South African Rand)'},
 		];
+
+	}
+
+	updateSearchResult(): void {
+		this.onUpdateSearchResultClick.emit();
+	}
+
+	sidenavToggle(): void {
+		this.sidenavOpened = !this.sidenavOpened;
+		this.onSidenavToggle.emit();
 	}
 }

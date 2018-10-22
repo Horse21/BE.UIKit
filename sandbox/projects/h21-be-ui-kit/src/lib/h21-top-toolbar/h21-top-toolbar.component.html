@@ -19,6 +19,21 @@
 
 	<div class="w-spacer">&nbsp;</div>
 
+	<!-- Providers data loading indicator -->
+	<div class="h21-providers-data-loading" *ngIf="showProviderDataLoading && providerDataLoadingStatistic">
+		<div class="h21-providers-data-loading_activity-indicator"
+			 [class.__is-active]="providerDataLoadingStatistic.loaded < providerDataLoadingStatistic.total"></div>
+		<div class="h21-providers-data-loading_state">
+			<div class="h21-providers-data-loading_state-label">Providers:</div>
+			<div class="h21-providers-data-loading_state-statistic">
+				<b class="__text-color-ui-primary">{{providerDataLoadingStatistic.loaded}}</b> | {{providerDataLoadingStatistic.total}}
+			</div>
+		</div>
+		<button mat-stroked-button color="primary"
+				[disabled]="providerDataLoadingStatistic.loaded == 0"
+				(click)="updateSearchResult()">Update result</button>
+	</div>
+
 	<!-- Cart -->
 	<ng-container *ngIf="showCart">
 		<h21-cart-combobox></h21-cart-combobox>
