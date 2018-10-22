@@ -52,7 +52,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show?: boolean): void {
 
-     console.log(show,'show')
         let IH21DateTime: IH21DateTime = {
             year: 2018,
             month: 10,
@@ -165,7 +164,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract getBounds(): ILatLngBounds;
 
-    abstract getDetailsPoint(placeId: string): Observable<IPoint>;
+    abstract getDetailsPoint(placeId: string): void;
 
     abstract drawCircle(cicle: BaseCicle): void;
 
@@ -243,7 +242,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.map.loadMarkers = false;
     }
 
-    abstract getAddress(position: ILatLng): IPoint[];
+    abstract getAddress(position: IPosition): IPoint[];
 
     abstract getZoom(): number;
 

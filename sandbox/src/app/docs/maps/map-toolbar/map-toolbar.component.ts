@@ -3,6 +3,8 @@ import { MapManager } from '../entity/map-manager';
 import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
 import { TypeRoute } from '../enum/e-type-route';
+import { EventsMapEmitter } from '../entity/event-emitter';
+
 
 @Component({
   selector: 'app-map-toolbar',
@@ -13,6 +15,7 @@ import { TypeRoute } from '../enum/e-type-route';
 
 @Injectable()
 export class MapToolbarComponent {
+
   checked = true;
 
   constructor(private manager: MapManager) { }
@@ -30,6 +33,7 @@ export class MapToolbarComponent {
 
     }
   }
+
 
   private drawShape(type: string) {
 
@@ -77,7 +81,7 @@ export class MapToolbarComponent {
   }
 
   private GetDistance() {
-    this.manager.getActiveMap().route.showRoute(TypeRoute.CAR);
+
   }
 
 }

@@ -1,12 +1,11 @@
-import { Component, ViewChild, Output } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MapManager } from '../entity/map-manager';
-import { MatAutocompleteTrigger, MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteTrigger } from '@angular/material';
 import { Point } from '../entity/point';
 import { TypeRoute } from '../enum/e-type-route';
-import { EventEmitter } from 'events';
 import { IPoint } from '../interfaces/i-point';
 
 let pointFrom: IPoint;
@@ -68,7 +67,6 @@ export class MapSearchComponent {
         case 'from':
           pointFrom = point;
           break
-
         case 'to':
           pointTo = point;
         default:

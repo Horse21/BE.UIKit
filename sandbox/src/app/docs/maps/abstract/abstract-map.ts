@@ -11,6 +11,7 @@ import { AbstractSearch } from './abstract-search';
 import { AbstractRouteBuilder } from './abstract-route-builder';
 import { BaseMarker } from '../entity/base-marker';
 import { BaseLayer } from '../entity/base-layer';
+import { EventsMapEmitter } from '../entity/event-emitter';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -23,6 +24,7 @@ export abstract class AbstractMap {
     selectedMarker: BaseMarker;
     transitLayer: BaseLayer;
     trafficLayer: BaseLayer;
+    callbackMap: EventsMapEmitter;
 
     public get container(): HTMLElement {
         return document.getElementById('map');
@@ -32,7 +34,13 @@ export abstract class AbstractMap {
 
     public abstract get scriptSelector(): string;
 
-    constructor(public options: IMapOptions, public config: AbstractConfig, public events: AbstractEvent, public cluster: AbstractMarkerCluster, public geo: GeoContainer, public search: AbstractSearch, public route: AbstractRouteBuilder) {
+    constructor(public options: IMapOptions,
+        public config: AbstractConfig,
+        public events: AbstractEvent,
+        public cluster: AbstractMarkerCluster,
+        public geo: GeoContainer,
+        public search: AbstractSearch,
+        public route: AbstractRouteBuilder) {
 
         this.events.initMap(this);
         this.cluster.initMap(this);

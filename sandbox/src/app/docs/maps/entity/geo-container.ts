@@ -1,18 +1,17 @@
 import { AbstractMarkerCluster } from "../abstract/abstract-marker-cluster";
 import { BaseMarker } from "./base-marker";
-import { IRouteInfo } from "../interfaces/i-route-info";
 import { IPolygonOptions } from "../interfaces/i-polygon";
 import { Injectable } from "@angular/core";
 import { AbstractMap } from "../abstract/abstract-map";
-import { ICircleOptions } from "../interfaces/i-circle-options";
 import { BaseCicle } from "./base-circle";
 import { BaseRoute } from "./base-route";
+import { BasePolygon } from "./base-polygon";
 
 @Injectable()
 export class GeoContainer {
 
     map: AbstractMap;
-    polygons: Array<IPolygonOptions>;
+    polygons: Array<BasePolygon>;
     routes: Array<BaseRoute>;
     markers: Array<BaseMarker>;
     clusters: Array<AbstractMarkerCluster>;
@@ -70,13 +69,13 @@ export class GeoContainer {
         this.markers.push(markers);
     }
 
-    pushPolygons(polygons: IPolygonOptions) {
+    pushPolygons(polygon: BasePolygon) {
 
         if (this.polygons == null) {
-            this.polygons = new Array<IPolygonOptions>();
+            this.polygons = new Array<BasePolygon>();
         }
 
-        this.polygons.push(polygons);
+        this.polygons.push(polygon);
     }
 
     pushRoutes(routes: BaseRoute) {

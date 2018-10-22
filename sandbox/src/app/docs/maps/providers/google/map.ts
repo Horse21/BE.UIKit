@@ -72,7 +72,6 @@ export class GoogleMap extends AbstractMap {
 
     private setCenter(): void {
         this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
-        console.log(this.options.center, 'center')
     }
 
     private OnReady(latitude: number, longitude: number) {

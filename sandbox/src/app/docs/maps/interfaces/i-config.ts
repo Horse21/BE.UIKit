@@ -14,8 +14,8 @@ export interface IConfig {
     buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void;
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
-    getAddress(position: ILatLng): Array<IPoint>;
-    getDetailsPoint(placeId: string): Observable<IPoint>;
+    getAddress(position: IPosition): Array<IPoint>;
+    getDetailsPoint(placeId: string): void;
     getZoom(): number;
     getLatLngBounds(): ILatLngBounds;
     markersFitsBounds(): void;

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { BasePolygon } from '../../entity/base-polygon';
 import { BasePolyline } from '../../entity/base-polyline';
 import { BaseCicle } from '../../entity/base-circle';
+import { IPosition } from '../../interfaces/i-position';
 
 
 
@@ -36,7 +37,7 @@ export class BaiduConfig extends AbstractConfig {
     drawPolygon(polygon: BasePolygon): void {
         throw new Error("Method not implemented.");
     }
-    getAddress(position: ILatLng): IPoint[] {
+    getAddress(position: IPosition): IPoint[] {
         throw new Error("Method not implemented.");
     }
     getZoom(): number {

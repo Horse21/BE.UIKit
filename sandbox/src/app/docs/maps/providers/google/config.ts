@@ -27,13 +27,17 @@ import { BasePolyline } from '../../entity/base-polyline';
 import { BasePolygon } from '../../entity/base-polygon';
 import { AdditionalInformation } from '../../entity/point-additional-information';
 import { TypeRoute } from '../../enum/e-type-route';
+import { EventsMapEmitter } from '../../entity/event-emitter';
+import { IPosition } from '../../interfaces/i-position';
 
 declare var google;
 
 @Injectable()
+
 export class GoogleConfig extends AbstractConfig {
 
     markersFitsBounds(): void {
+
 
         let bounds = new google.maps.LatLngBounds();
 
@@ -136,14 +140,20 @@ export class GoogleConfig extends AbstractConfig {
             this.map.geo.routes.forEach((item) => {
                 item.setMap(null);
             });
-            
+
             super.clearRoutes();
         }
     }
 
     clearPolygons(): void {
 
-        super.clearPolygons();
+        if (this.map.geo.polygons != undefined && this.map.geo.polygons[0] != null) {
+            this.map.geo.polygons.forEach((item) => {
+                item.setMap(null);
+            });
+            super.clearPolygons();
+        }
+
     }
 
 
@@ -160,21 +170,26 @@ export class GoogleConfig extends AbstractConfig {
     onClickMap(event: IEventClickMap) {
 
         event.stop();
+
         if (this.map.clickMap) {
 
             this.map.loadMarkers = !this.map.clickMap;
 
             if (event.placeId) {
-                this.getDetailsPoint(event.placeId);
+
+                this.map.callbackMap.emit('onclickMapPlaceId', event.placeId);
             }
             else {
-                let latLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
 
-                this.getAddress(latLng);
+                let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
+
+                this.map.callbackMap.emit('onclickMapGetAddress', LatLng);
             }
+
+
+
         }
         console.log(this.map, 'THIS MAP')
-
     }
 
     zoomIn(): void {
@@ -188,6 +203,13 @@ export class GoogleConfig extends AbstractConfig {
         let currentZoom = this.getZoom();
         this.setZoom(currentZoom - 1);
     }
+
+
+    getLoadCountMarker(): number {
+
+        return this.map.geo.markers.length;
+    }
+
 
     private getDetailedAddress(place: Array<GoogleAddressType>): Array<PointAddress> {
 
@@ -251,7 +273,9 @@ export class GoogleConfig extends AbstractConfig {
         return resultAddress
     }
 
-    getAddress(coordinates: ILatLng): IPoint[] {
+    getAddress(position: IPosition): IPoint[] {
+
+        let LatLng = new google.maps.LatLng({ lat: position.latitude, lng: position.longitude });
 
         let geocoder = new google.maps.Geocoder();
 
@@ -261,7 +285,7 @@ export class GoogleConfig extends AbstractConfig {
         point.position = new Position();
         point.address = new Address();
 
-        geocoder.geocode({ 'latLng': coordinates },
+        geocoder.geocode({ 'latLng': LatLng },
 
             (response, status) => {
                 if (status == ResponseStatus.OK) {
@@ -309,10 +333,8 @@ export class GoogleConfig extends AbstractConfig {
                     point.title = place.formatted_address;
                     point.type = 'internet'
                     point.source = 'google';
-                    result.push(point)
-
-                    this.showMarker(point, false);
-
+                    result.push(point);
+                    this.map.callbackMap.emit('getAddressPoint', point);
                 }
             });
         return null;
@@ -390,6 +412,8 @@ export class GoogleConfig extends AbstractConfig {
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
+
+                            this.map.callbackMap.emit('getDetailsPoint', point);
                             observer.next(point);
 
                         }
