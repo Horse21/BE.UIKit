@@ -8,8 +8,6 @@ import { SearchFlightDto } from '../../projects/h21-be-ui-kit/src/dto/search-fli
 import { SearchResult } from '../../projects/h21-be-ui-kit/src/dto/search-result';
 import { FlightItemGroup } from '../../projects/h21-be-ui-kit/src/dto/flight-item-group';
 import { Passenger } from '../../projects/h21-be-ui-kit/src/dto/passenger';
-import { IHotelInfo, IHotelSearchOptions } from "../../projects/h21-be-ui-kit/src/dto";
-import { IHotelOption } from "../../projects/h21-be-ui-kit/src/dto/i-hotel-option";
 
 @Injectable()
 export class FakeVocabularyService implements VocabularyService {
@@ -168,75 +166,6 @@ export class FakeVocabularyService implements VocabularyService {
 				firstName: "Hussein",
 				company: "No Dictator"
 			}
-		];
-		return Observable.create((observer: Subscriber<any>) => {
-			observer.next(data);
-			observer.complete();
-		});
-	}
-
-	public searchHotels(options: IHotelSearchOptions): Observable<IHotelInfo[]> {
-		var data = [
-			<IHotelInfo> {
-				id: 1,
-				photo: '/assets/samples_img/hotel_card/hotel-1.jpg',
-				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
-				rate: 5,
-				isFavorite: false,
-				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
-				options: [
-					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
-					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
-				],
-				provider: 'GTA',
-				price: 175.24,
-				fee: 1.54,
-			},
-			<IHotelInfo> {
-				id: 2,
-				photo: '/assets/samples_img/hotel_card/hotel-2.jpg',
-				name: 'NH Amsterdam Schiller',
-				rate: 4,
-				isFavorite: true,
-				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
-				options: [
-					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
-					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
-				],
-				provider: 'GTA',
-				price: 275.24,
-				fee: 1.54,
-			},
-			<IHotelInfo> {
-				id: 3,
-				photo: '/assets/samples_img/hotel_card/hotel-1.jpg',
-				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
-				rate: 5,
-				isFavorite: false,
-				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
-				options: [
-					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
-					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
-				],
-				provider: 'GTA',
-				price: 375.24,
-				fee: 1.54,
-			},
-			<IHotelInfo> {
-				id: 4,
-				photo: '/assets/samples_img/hotel_card/hotel-2.jpg',
-				name: 'NH Amsterdam Schiller',
-				rate: 3,
-				isFavorite: false,
-				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
-				options: [
-					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
-					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
-				],
-				provider: 'GTA',
-				price: 475.24,
-				fee: 1.54,
-			},
 		];
 		return Observable.create((observer: Subscriber<any>) => {
 			observer.next(data);

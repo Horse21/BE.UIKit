@@ -12,15 +12,11 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/lib/h21-breadcrumbs/dto/i-breadcrumb";
 import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
 import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
-import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
-import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
 import {IUserCardData} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
 import {ISearchHistoryCard} from "../../projects/h21-be-ui-kit/src/lib/h21-search-history-panel/dto/i-search-history-card";
 import {H21AirSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib";
 import {SearchFlightDto} from "../../projects/h21-be-ui-kit/src/dto";
 import {H21AirFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-air-filter-panel/h21-air-filter-panel-view-mode.enum";
-import {H21HotelFilterPanelViewMode} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel-view-mode.enum";
-
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
 	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
@@ -134,14 +130,12 @@ export class AppComponent {
 	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
 	@ViewChild('rightSidenav') private rightSidenav: MatSidenav;
 	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
-	@ViewChild('hotelSearchResult') private hotelSearchResult: H21HotelSearchResultComponent;
 	@ViewChild('airbeSearchResult') private airbeSearchResult: H21AirSearchResultComponent;
 
 	userCardData: IUserCardData = USER_CARD_DATA;
 	activeLeftSidenavPanel: string = 'search';
 	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;
-	hotelSearchResultViewMode: H21HotelFilterPanelViewMode =  H21HotelFilterPanelViewMode.List;
 	airbeSearchResultViewMode: H21AirFilterPanelViewMode = H21AirFilterPanelViewMode.List;
 	sidebarNavDisabled: boolean = true;
 	sidebarNavTabs: ISidebarNavTab[];
@@ -161,7 +155,6 @@ export class AppComponent {
 		this.leftSidenav.toggle();
 		if (this.leftSidenav.opened) {
 			this.sidebarNavDisabled = false;
-			this.hotelSearchResultViewMode = H21HotelFilterPanelViewMode.List;
 			this.airbeSearchResultViewMode = H21AirFilterPanelViewMode.List;
 			this.sidenavOpened = true;
 		} else {
@@ -175,22 +168,6 @@ export class AppComponent {
 			this.leftSidenavToggle();
 		}
 		this.activeLeftSidenavPanel = tab.name;
-	}
-
-	hotelSearch(options: IHotelSearchOptions): void {
-		this.searchResultVisibility = true;
-		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
-		setTimeout(() => {
-			this.hotelSearchResult.search(options);
-		}, 0);
-	}
-
-	hotelClearSearch(): void {
-		this.searchResultVisibility = false;
-		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
-		if (this.hotelSearchResult) {
-			this.hotelSearchResult.clear();
-		}
 	}
 
 	airbeSearch(options: SearchFlightDto): void {
@@ -207,10 +184,6 @@ export class AppComponent {
 		if (this.airbeSearchResult) {
 			this.airbeSearchResult.clear();
 		}
-	}
-
-	hotelChangeResultViewMode(mode: H21HotelFilterPanelViewMode): void {
-		this.hotelSearchResultViewMode = mode;
 	}
 
 	airbeChangeResultViewMode(mode: H21AirFilterPanelViewMode): void {

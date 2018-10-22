@@ -4,7 +4,6 @@ import {SearchFlightDto} from '../dto/search-flight-dto';
 import {Observable} from 'rxjs';
 import {City} from '../dto/city';
 import {Injectable} from '@angular/core'
-import {IHotelInfo, IHotelSearchOptions} from "../dto";
 
 @Injectable()
 
@@ -15,6 +14,4 @@ export abstract class VocabularyService {
 	abstract searchFlights(options: SearchFlightDto): Observable<SearchResult>;
 
 	abstract searchPassengers(pattern: string): Observable<Passenger[]>;
-
-	abstract searchHotels(options: IHotelSearchOptions): Observable<IHotelInfo[]>;
 }

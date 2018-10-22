@@ -26,8 +26,6 @@ import {H21TopToolbarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-t
 import {H21SidebarNavComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar-nav/h21-sidebar-nav.component';
 import {H21SidebarComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component';
 import {H21AirSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-air-search-panel.component';
-import {H21HotelSearchPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-panel/h21-hotel-search-panel.component';
-import {H21HotelFilterPanelComponent} from '../../projects/h21-be-ui-kit/src/lib/h21-hotel-filter-panel/h21-hotel-filter-panel.component';
 import {H21FlyRouteSelectionComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-fly-route-selection.component";
 import {H21PassengersSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-panel/h21-passengers-select.component";
 import {H21AirSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-air-search-result/h21-air-search-result.component";
@@ -45,14 +43,9 @@ import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/
 import {H21CounterComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-counter/h21-counter.component";
 import {H21RateComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-rate/h21-rate.component";
 import {H21SearchHistoryPanelComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-search-history-panel/h21-search-history-panel.component";
-import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-import {H21HotelBookComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-book/h21-hotel-book.component";
 import {H21SlideCarouselComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel.component";
-import {H21HotelSearchResultCardComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result-card/h21-hotel-search-result-card.component";
-import {H21HotelRoomDetailComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-room-detail/h21-hotel-room-detail.component";
 import {H21CartComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-cart-combobox/h21-cart-combobox.component";
 import {H21SlideCarouselDialogComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-slide-carousel/h21-slide-carousel-dialog.component";
-import {H21HotelReservationComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-reservation/h21-hotel-reservation.component";
 import {H21AccountSelectComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select.component";
 import {H21AccountSelectService} from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
 import {H21ComboboxComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-combobox/h21-combobox.component";
@@ -99,9 +92,6 @@ const routes: Routes = [
 	// 	]},
 	{path: 'demo', component: AppComponent },
 	{path: 'demo/airbe', component: AppComponent },
-	{path: 'demo/hotel', component: H21HotelBookComponent },
-	{path: 'demo/hotelbook/:id', component: H21HotelBookComponent },
-	{path: 'demo/reservation', component: H21HotelReservationComponent },
 	{path: 'docs', component: DocsComponent },
 	{path: 'style/:', component: DocsNavigationComponent },
 	{path: 'components/:', component: DocsNavigationComponent },
@@ -115,8 +105,6 @@ const routes: Routes = [
 		H21TopToolbarComponent,
 		H21SidebarComponent,
 		H21AirSearchPanelComponent,
-		H21HotelSearchPanelComponent,
-		H21HotelFilterPanelComponent,
 		H21AirSearchResultComponent,
 		H21AirSearchResultCardComponent,
 		H21FlyRouteSelectionComponent,
@@ -133,9 +121,7 @@ const routes: Routes = [
 		H21CounterComponent,
 		H21RateComponent,
 		H21SearchHistoryPanelComponent,
-		H21HotelSearchResultComponent,
 		H21SidebarNavComponent,
-		H21HotelBookComponent,
 		DocsNavigationComponent,
 		DocsComponent,
 		DocsExampleViewerComponent,
@@ -167,13 +153,10 @@ const routes: Routes = [
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
 		H21SlideCarouselComponent,
-		H21HotelSearchResultCardComponent,
-		H21HotelRoomDetailComponent,
 		H21TopToolbarButtonComponent,
 		H21TopToolbarButtonContainerComponent,
 		H21CartComboboxComponent,
 		H21SlideCarouselDialogComponent,
-		H21HotelReservationComponent,
 		H21AccountSelectComponent,
 		H21ComboboxComponent,
 		H21UserCardComponent,
