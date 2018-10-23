@@ -159,6 +159,10 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         catch (error) {
             console.log(error);
         }
+
+        if (this.map.geo.markers != null) {
+            this.map.callbackMap.emit('countLoadMarkers', this.map.geo.markers.length);
+        }
     }
 
     abstract getBounds(): ILatLngBounds;
@@ -241,7 +245,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         this.map.loadMarkers = false;
     }
 
-    abstract getAddress(position: IPosition): IPoint[];
+    abstract getAddress(position: IPosition): void;
 
     abstract getZoom(): number;
 
@@ -266,12 +270,25 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
 
+    polygonsFitsBounds(): void {
+        try {
+            if (this.map.geo.polygons != null && this.map.geo.polygons.length > 0) {
+                for (var i = 0; i < this.map.geo.polygons.length; i++) {
+
+                }
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+
     abstract onClickMap(event: IEventClickMap);
 
     abstract boundsContainsMarker(marker: BaseMarker): boolean;
 
     private getPointPosition(marker: BaseMarker): Position {
-
         return marker.point.position;
     }
 
@@ -395,4 +412,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract zoomOut(): void;
 
     abstract boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
+
+    abstract boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void;
 }

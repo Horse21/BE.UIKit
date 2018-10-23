@@ -157,6 +157,7 @@ export class GoogleSearchMap extends AbstractSearch {
                 nameType.type = addressType;
                 nameType.value = addressValue;
                 pointAddress.push(nameType);
+                
                 switch (addressType) {
                     case AddressType.country:
                         parseAddress.type = PointAddressType.COUNTRY;

@@ -14,7 +14,7 @@ export interface IConfig {
     buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void;
     drawMarkersOnMap(): void;
     drawShapeOnMap(type: ShapeType): void;
-    getAddress(position: IPosition): Array<IPoint>;
+    getAddress(position: IPosition): void;
     getDetailsPoint(placeId: string): void;
     getZoom(): number;
     getLatLngBounds(): ILatLngBounds;

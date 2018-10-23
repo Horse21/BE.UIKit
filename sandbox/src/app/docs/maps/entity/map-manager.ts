@@ -79,7 +79,7 @@ export class MapManager {
         this.mapType = type;
     }
 
-    public getActiveMap(): any {
+    public getActiveMap(): AbstractMap {
         return this.map;
     }
 }

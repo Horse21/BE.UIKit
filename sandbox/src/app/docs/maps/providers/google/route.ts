@@ -4,6 +4,7 @@ import { RouteTextValue } from "../../classes/route-text-value";
 import { Observable, Observer } from "rxjs";
 import { TravelMode } from "../../enum/e-travel-mode";
 import { TypeRoute } from "../../enum/e-type-route";
+import { ResponseStatus } from "../baidu/enum/e-status-response ";
 
 declare var google;
 
@@ -48,25 +49,10 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         try {
             return new Observable((observer: Observer<any>) => {
 
-                let travelMode = this.routeOptions.travelMode;
-
-                switch (this.routeOptions.travelMode) {
-                    case TravelMode.DRIVING:
-                        travelMode = TravelMode.DRIVING;
-                        break;
-                    case TravelMode.WALKING:
-                        travelMode = TravelMode.WALKING;
-                        break;
-                    case TravelMode.TRANSIT:
-                        travelMode = TravelMode.TRANSIT;
-                        break;
-                }
-
                 let directionsService = new google.maps.DirectionsService();
 
                 let start = new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude);
                 let end = new google.maps.LatLng(this.map.route.finishPoint.position.latitude, this.map.route.finishPoint.position.longitude);
-
 
                 let request = {
                     origin: start,
@@ -80,7 +66,7 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
                 directionsService.route(request, (response, status) => {
 
-                    if (status == google.maps.DirectionsStatus.OK) {
+                    if (status == ResponseStatus.OK) {
 
                         let info = response['routes'][0].legs[0];
                         let typeMode = response.request.travelMode;
@@ -104,7 +90,7 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                         observer.next(response);
 
                     } else {
-
+                        this.map.callbackMap.emit('errorMap', status);
                     }
                 });
             });

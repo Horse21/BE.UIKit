@@ -29,6 +29,7 @@ import { AdditionalInformation } from '../../entity/point-additional-information
 import { TypeRoute } from '../../enum/e-type-route';
 import { EventsMapEmitter } from "../../entity/event-emitter";
 import { IPosition } from '../../interfaces/i-position';
+import { IAddress } from "../../interfaces/i-address";
 
 declare var google;
 
@@ -38,43 +39,31 @@ export class GoogleConfig extends AbstractConfig {
 
     markersFitsBounds(): void {
 
-
-        let bounds = new google.maps.LatLngBounds();
-
-        if (this.map.geo.markers != null && this.map.geo.markers.length > 0) {
-
-            for (var i = 0; i < this.map.geo.markers.length; i++) {
-
-                let item = this.map.geo.markers[i];
-
-                let LatLng = new google.maps.LatLng({ lat: item.point.position.latitude, lng: item.point.position.longitude });
-
-                bounds.extend(LatLng);
-            }
-        }
-
-        this.map.api.fitBounds(bounds);
-
+        super.markersFitsBounds();
     }
 
     boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
-
         let LatLng = new google.maps.LatLng({ lat: marker.point.position.latitude, lng: marker.point.position.longitude });
 
         bounds.extend(LatLng);
 
         this.map.api.fitBounds(bounds);
+    }
 
+
+    boundsExtend(polygon: BasePolygon, bounds: ILatLngBounds): void {
+       // let LatLng = new google.maps.LatLng({ lat: polygon.position.latitude, lng: marker.point.position.longitude });
+
+        //bounds.extend(LatLng);
+
+        //this.map.api.fitBounds(bounds);
     }
 
     getLatLngBounds(): ILatLngBounds {
-
         return new google.maps.LatLngBounds();
-
     };
 
     boundsContainsMarker(marker: BaseMarker): boolean {
-
         let googleMarkerOptions: GoogleMarkerOptions = {
             draggable: false,
             clickable: true,
@@ -82,26 +71,23 @@ export class GoogleConfig extends AbstractConfig {
             title: marker.point.title,
             position: new google.maps.LatLng(marker.point.position.latitude, marker.point.position.longitude),
             icon: {
-                title: 'picture',
+                title: 'hotel',
                 url: './assets/icons_map/icon_hotel.png'
             },
-            zIndex: 10,
-
+            zIndex: 10
         };
 
         let googleMarker = new google.maps.Marker(googleMarkerOptions);
 
-        googleMarker["point"] = marker;
+        googleMarker["point"] = marker.point;
 
         google.maps.event.addListener(googleMarker, EventType.click, () => {
             this.map.selectedMarker = googleMarker;
         });
 
         if (this.getBounds().contains(googleMarker.getPosition())) {
-
             this.map.geo.pushMarkers(googleMarker);
             this.map.cluster.addMarker(googleMarker, true);
-
         }
 
         return true;
@@ -109,9 +95,7 @@ export class GoogleConfig extends AbstractConfig {
 
 
     buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show: boolean) {
-
         super.buildRoute(from, to, typeRoute, show);
-
     }
 
     clearAllMap(): void {
@@ -126,7 +110,6 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     clearMarkers(): void {
-
         if (this.map.cluster.googleCluster != null) {
             this.map.cluster.removeMarkers();
         }
@@ -134,7 +117,6 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     clearRoutes(): void {
-
         if (this.map.geo.routes != undefined && this.map.geo.routes[0] != null) {
 
             this.map.geo.routes.forEach((item) => {
@@ -168,22 +150,14 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     onClickMap(event: IEventClickMap) {
-
         event.stop();
-
         if (this.map.clickMap) {
-
             this.map.loadMarkers = !this.map.clickMap;
-
             if (event.placeId) {
-
                 this.map.callbackMap.emit('onclickMapPlaceId', event.placeId);
-
             }
             else {
-
                 let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
-
                 this.map.callbackMap.emit('onclickMapGetAddress', LatLng)
             }
 
@@ -192,26 +166,22 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     zoomIn(): void {
-
         let currentZoom = this.getZoom();
         this.setZoom(currentZoom + 1);
     }
 
     zoomOut(): void {
-
         let currentZoom = this.getZoom();
         this.setZoom(currentZoom - 1);
     }
 
 
     getLoadCountMarker(): number {
-
         return this.map.geo.markers.length;
     }
 
 
     private getDetailedAddress(place: Array<GoogleAddressType>): Array<PointAddress> {
-
         let componentAddress = this.getAddressSettings();
         let pointAddress = [];
         let resultAddress = [];
@@ -252,10 +222,6 @@ export class GoogleConfig extends AbstractConfig {
                         resultAddress.push(parseAddress);
                         break;
                     case AddressType.administrativeAreaLevel1:
-                        parseAddress.type = PointAddressType.DISTRICT;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
                     case AddressType.administrativeAreaLevel2:
                         parseAddress.type = PointAddressType.DISTRICT;
                         parseAddress.value = addressValue;
@@ -277,31 +243,24 @@ export class GoogleConfig extends AbstractConfig {
         return resultAddress
     }
 
-    getAddress(position: IPosition): IPoint[] {
+    getAddress(position: IPosition): void {
 
         let LatLng = new google.maps.LatLng({ lat: position.latitude, lng: position.longitude });
 
         let geocoder = new google.maps.Geocoder();
-
-        let result = [];
-
         let point: Point = new Point();
         point.position = new Position();
         point.address = new Address();
 
         geocoder.geocode({ 'latLng': LatLng },
-
             (response, status) => {
                 if (status == ResponseStatus.OK) {
-
                     var place = response[0];
-
                     let typeAddress = this.getDetailedAddress(place.address_components);
 
                     for (let i = 0; i < typeAddress.length; i++) {
 
                         let item = typeAddress[i];
-
                         switch (item.type) {
                             case PointAddressType.COUNTRY:
                                 point.address.country = item.value;
@@ -335,27 +294,21 @@ export class GoogleConfig extends AbstractConfig {
                     point.title = place.formatted_address;
                     point.type = 'internet'
                     point.source = 'google';
-                    result.push(point);
                     this.map.callbackMap.emit('getAddressPoint', point);
                 }
+
+                this.map.callbackMap.emit('responseMap', status);
             });
-        return null;
     }
 
     getDetailsPoint(placeId: string): void {
-
         let placesService = new google.maps.places.PlacesService(this.map.api);
 
         placesService.getDetails({ placeId: placeId },
-
             (response, status) => {
-
                 if (status == ResponseStatus.OK) {
-
                     if (response) {
                         let point: Point = new Point();
-                        point.position = new Position();
-                        point.address = new Address();
                         point.additionalInformation = new AdditionalInformation();
 
                         let place = response;
@@ -388,23 +341,26 @@ export class GoogleConfig extends AbstractConfig {
                             }
                         }
 
-                        point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
-                        point.position.latitude = place.geometry.location.lat();
-                        point.position.longitude = place.geometry.location.lng();
-
-                        if (place.photos !== undefined) {
-                            if ("photos" in place) {
-                                if (place.photos.length > 0) {
-                                    point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
-                                }
-                            }
+                        point.address = <IAddress>{
+                            countryCode: point.address.country.substring(0, 2).toUpperCase(),
+                            description: place.formatted_address
+                        }
+                        point.position = {
+                            latitude: place.geometry.location.lat(),
+                            longitude: place.geometry.location.lng()
                         }
 
-                        point.address.description = place.formatted_address;
+                        if (this.placeHasPhoto(place)) {
+                            point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
+                        }
+
+
                         point.name = place.name;
-                        point.additionalInformation.rating = place.rating;
-                        point.additionalInformation.webSite = place.website;
-                        point.additionalInformation.phone = place.international_phone_number;
+                        point.additionalInformation = {
+                            webSite: place.website,
+                            rating: place.rating,
+                            phone: place.international_phone_number
+                        };
                         point.googlePlaceId = place.place_id;
                         point.id = place.id;
                         point.subtype = place.types[0];
@@ -416,6 +372,7 @@ export class GoogleConfig extends AbstractConfig {
                     }
                 }
 
+                this.map.callbackMap.emit('responseMap', status);
             });
     }
 
@@ -446,34 +403,27 @@ export class GoogleConfig extends AbstractConfig {
         AdressSettings.sublocality_level_1 = AddressTypeName.longName;
         AdressSettings.street_number = AddressTypeName.shortName;
         AdressSettings.postal_code = AddressTypeName.shortName;
-
         return AdressSettings;
     }
 
     setZoom(zoom: number): void {
-
         this.map.api.setZoom(zoom);
     }
 
     setMinZoom(zoom: number): void {
-
         this.map.api.setOptions({ minZoom: zoom });
     }
 
     setMaxZoom(zoom: number): void {
-
         this.map.api.setOptions({ maxZoom: zoom });
     }
 
     setCenter(position: ILatLng): void {
-
         this.map.api.setCenter(position)
-
     }
 
 
     toggleMapDragging(enabled: boolean) {
-
         let currentMapOptions = super.getMapOptions();
 
         if (enabled) {
@@ -515,7 +465,8 @@ export class GoogleConfig extends AbstractConfig {
             let marker = new google.maps.Marker(googleMarkerOptions);
 
             google.maps.event.addListener(marker, EventType.click, () => {
-                console.log(this.map.selectedMarker, 'selectPoint');
+
+                this.map.callbackMap.emit('markerClick', this.map.selectedMarker);
             });
 
 
@@ -551,7 +502,6 @@ export class GoogleConfig extends AbstractConfig {
     draggableMarker(enabled: boolean): void {
 
         try {
-
             this.map.loadMarkers = !enabled;
             this.map.selectedMarker.setDraggable(enabled);
 
@@ -591,15 +541,11 @@ export class GoogleConfig extends AbstractConfig {
         this.map.geo.circle = circle;
 
         google.maps.event.addListener(circle, EventType.radiusChanged, () => {
-
-            console.log(circle, 'radius_changed')
-
+            this.map.callbackMap.emit('radiusChanged', circle);
         });
 
         google.maps.event.addListener(circle, EventType.dragEnd, () => {
-
-            console.log(circle, 'dragend')
-
+            this.map.callbackMap.emit('radiusChangedDragend', circle);
         });
 
     }
@@ -660,6 +606,8 @@ export class GoogleConfig extends AbstractConfig {
                 google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mouseDown);
 
                 let array = drawShaping.getPath().getArray();
+
+
                 let bounds = new google.maps.LatLngBounds();
 
                 for (var n = 0; n < array.length; n++) {
@@ -725,5 +673,9 @@ export class GoogleConfig extends AbstractConfig {
         } catch (error) {
 
         }
+    }
+
+    private placeHasPhoto(place): boolean {
+        return place.photos !== undefined && "photos" in place && place.photos.length > 0
     }
 }

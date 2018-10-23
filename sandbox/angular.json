@@ -74,7 +74,7 @@
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            "tsConfig": "src/tsconfig.app.json",
             "scripts": [],
             "styles": [
               "node_modules/normalize.css/normalize.css",
@@ -92,8 +92,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "src/tsconfig.app.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -148,7 +147,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/h21-be-ui-kit/src/test.ts",
-            "tsConfig": "projects/h21-be-ui-kit/tsconfig.spec.json",
+            "tsConfig": "projects/h21-be-ui-kit/tsconfig.app.json",
             "karmaConfig": "projects/h21-be-ui-kit/karma.conf.js"
           }
         },
@@ -157,7 +156,7 @@
           "options": {
             "tsConfig": [
               "projects/h21-be-ui-kit/tsconfig.lib.json",
-              "projects/h21-be-ui-kit/tsconfig.spec.json"
+              "projects/h21-be-ui-kit/tsconfig.app.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -4,6 +4,7 @@ import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
 import { TypeRoute } from '../enum/e-type-route';
 import { EventsMapEmitter } from "../entity/event-emitter";
+import { ShapeType } from '../enum/e-shape-type';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class MapToolbarComponent {
   }
 
 
-  private drawShape(type: string) {
+  private drawShape(type: ShapeType) {
 
     this.manager.getActiveMap().config.drawShapeOnMap(type);
   }
