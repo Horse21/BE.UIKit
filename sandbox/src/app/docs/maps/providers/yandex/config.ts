@@ -22,7 +22,7 @@ export class YandexConfig extends AbstractConfig {
     getBounds(): ILatLngBounds {
         throw new Error("Method not implemented.");
     }
-    getDetailsPoint(placeId: string): Observable<IPoint> {
+    getDetailsPoint(placeId: string): void {
         throw new Error("Method not implemented.");
     }
     drawCircle(cicle: BaseCicle): void {

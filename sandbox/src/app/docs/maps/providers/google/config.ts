@@ -27,7 +27,7 @@ import { BasePolyline } from '../../entity/base-polyline';
 import { BasePolygon } from '../../entity/base-polygon';
 import { AdditionalInformation } from '../../entity/point-additional-information';
 import { TypeRoute } from '../../enum/e-type-route';
-import { EventsMapEmitter } from '../../entity/event-emitter';
+import { EventsMapEmitter } from "../../entity/event-emitter";
 import { IPosition } from '../../interfaces/i-position';
 
 declare var google;
@@ -178,15 +178,14 @@ export class GoogleConfig extends AbstractConfig {
             if (event.placeId) {
 
                 this.map.callbackMap.emit('onclickMapPlaceId', event.placeId);
+
             }
             else {
 
                 let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
 
-                this.map.callbackMap.emit('onclickMapGetAddress', LatLng);
+                this.map.callbackMap.emit('onclickMapGetAddress', LatLng)
             }
-
-
 
         }
         console.log(this.map, 'THIS MAP')
@@ -222,6 +221,7 @@ export class GoogleConfig extends AbstractConfig {
             let parseAddress = new AddressComponent();
             let nameType = new PointAddress();
             let addressType = place[i].types[0];
+
             if (componentAddress[addressType]) {
 
                 let addressValue = place[i][componentAddress[addressType]];
@@ -230,43 +230,47 @@ export class GoogleConfig extends AbstractConfig {
                 nameType.value = addressValue;
                 pointAddress.push(nameType);
 
-                if (addressType == AddressType.country) {
-
-                    parseAddress.type = PointAddressType.COUNTRY;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
-                }
-                if (addressType == AddressType.locality || addressType == AddressType.postalTown) {
-
-                    parseAddress.type = PointAddressType.CITY;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
-                }
-
-                if (addressType == AddressType.streetNumber) {
-
-                    parseAddress.type = PointAddressType.HOUSE;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
-                }
-
-                if (addressType == AddressType.administrativeAreaLevel1 || addressType == AddressType.administrativeAreaLevel2) {
-
-                    parseAddress.type = PointAddressType.DISTRICT;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
-                }
-
-                if (addressType == AddressType.route) {
-                    parseAddress.type = PointAddressType.STREET;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
-                }
-
-                if (addressType == AddressType.postalCode) {
-                    parseAddress.type = PointAddressType.POSTCODE;
-                    parseAddress.value = addressValue;
-                    resultAddress.push(parseAddress)
+                switch (addressType) {
+                    case AddressType.country:
+                        parseAddress.type = PointAddressType.COUNTRY;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.locality:
+                        parseAddress.type = PointAddressType.CITY;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.postalTown:
+                        parseAddress.type = PointAddressType.CITY;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.streetNumber:
+                        parseAddress.type = PointAddressType.HOUSE;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.administrativeAreaLevel1:
+                        parseAddress.type = PointAddressType.DISTRICT;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.administrativeAreaLevel2:
+                        parseAddress.type = PointAddressType.DISTRICT;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.route:
+                        parseAddress.type = PointAddressType.STREET;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress)
+                        break;
+                    case AddressType.postalCode:
+                        parseAddress.type = PointAddressType.POSTCODE;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress)
+                        break;
                 }
             }
         }
@@ -298,28 +302,26 @@ export class GoogleConfig extends AbstractConfig {
 
                         let item = typeAddress[i];
 
-                        if (item.type == PointAddressType.COUNTRY) {
-                            point.address.country = item.value
+                        switch (item.type) {
+                            case PointAddressType.COUNTRY:
+                                point.address.country = item.value;
+                                break;
+                            case PointAddressType.CITY:
+                                point.address.city = item.value;
+                                break;
+                            case PointAddressType.DISTRICT:
+                                point.address.district = item.value;
+                                break;
+                            case PointAddressType.STREET:
+                                point.address.street = item.value;
+                                break;
+                            case PointAddressType.HOUSE:
+                                point.address.house = item.value;
+                                break;
+                            case PointAddressType.POSTCODE:
+                                point.address.postCode = item.value;
+                                break;
                         }
-                        if (item.type === PointAddressType.CITY) {
-                            point.address.city = item.value
-                        }
-
-                        if (item.type === PointAddressType.DISTRICT) {
-                            point.address.district = item.value
-                        }
-
-                        if (item.type === PointAddressType.STREET) {
-                            point.address.street = item.value
-                        }
-
-                        if (item.type === PointAddressType.HOUSE) {
-                            point.address.house = item.value
-                        }
-                        if (item.type === PointAddressType.POSTCODE) {
-                            point.address.postCode = item.value
-                        }
-
                     }
 
                     point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
@@ -340,88 +342,81 @@ export class GoogleConfig extends AbstractConfig {
         return null;
     }
 
-    getDetailsPoint(placeId: string): Observable<IPoint> {
+    getDetailsPoint(placeId: string): void {
 
-        return new Observable((observer: Observer<IPoint>) => {
+        let placesService = new google.maps.places.PlacesService(this.map.api);
 
-            let placesService = new google.maps.places.PlacesService(this.map.api);
+        placesService.getDetails({ placeId: placeId },
 
-            placesService.getDetails({ placeId: placeId },
+            (response, status) => {
 
-                (response, status) => {
+                if (status == ResponseStatus.OK) {
 
-                    if (status == ResponseStatus.OK) {
+                    if (response) {
+                        let point: Point = new Point();
+                        point.position = new Position();
+                        point.address = new Address();
+                        point.additionalInformation = new AdditionalInformation();
 
-                        if (response) {
-                            let point: Point = new Point();
-                            point.position = new Position();
-                            point.address = new Address();
-                            point.additionalInformation = new AdditionalInformation();
+                        let place = response;
 
-                            let place = response;
+                        let typeAddres = this.getDetailedAddress(place.address_components);
 
-                            let typeAddres = this.getDetailedAddress(place.address_components);
+                        for (let i = 0; i < typeAddres.length; i++) {
 
-                            for (let i = 0; i < typeAddres.length; i++) {
+                            let item = typeAddres[i];
 
-                                let item = typeAddres[i];
-
-                                if (item.type == PointAddressType.COUNTRY) {
-                                    point.address.country = item.value
-                                }
-                                if (item.type == PointAddressType.CITY) {
-                                    point.address.city = item.value
-                                }
-
-                                if (item.type == PointAddressType.DISTRICT) {
-                                    point.address.district = item.value
-                                }
-
-                                if (item.type == PointAddressType.STREET) {
-                                    point.address.street = item.value
-                                }
-
-                                if (item.type == PointAddressType.HOUSE) {
-                                    point.address.house = item.value
-                                }
-                                if (item.type == PointAddressType.POSTCODE) {
-                                    point.address.postCode = item.value
-                                }
-
+                            switch (item.type) {
+                                case PointAddressType.COUNTRY:
+                                    point.address.country = item.value;
+                                    break;
+                                case PointAddressType.CITY:
+                                    point.address.city = item.value;
+                                    break;
+                                case PointAddressType.DISTRICT:
+                                    point.address.district = item.value;
+                                    break;
+                                case PointAddressType.STREET:
+                                    point.address.street = item.value;
+                                    break;
+                                case PointAddressType.HOUSE:
+                                    point.address.house = item.value;
+                                    break;
+                                case PointAddressType.POSTCODE:
+                                    point.address.postCode = item.value;
+                                    break;
                             }
-
-                            point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
-                            point.position.latitude = place.geometry.location.lat();
-                            point.position.longitude = place.geometry.location.lng();
-
-                            if (place.photos !== undefined) {
-                                if ("photos" in place) {
-                                    if (place.photos.length > 0) {
-                                        point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
-                                    }
-                                }
-                            }
-
-                            point.address.description = place.formatted_address;
-                            point.name = place.name;
-                            point.additionalInformation.rating = place.rating;
-                            point.additionalInformation.webSite = place.website;
-                            point.additionalInformation.phone = place.international_phone_number;
-                            point.googlePlaceId = place.place_id;
-                            point.id = place.id;
-                            point.subtype = place.types[0];
-                            point.type = 'internet'
-                            point.source = 'google';
-
-                            this.map.callbackMap.emit('getDetailsPoint', point);
-                            observer.next(point);
-
                         }
+
+                        point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
+                        point.position.latitude = place.geometry.location.lat();
+                        point.position.longitude = place.geometry.location.lng();
+
+                        if (place.photos !== undefined) {
+                            if ("photos" in place) {
+                                if (place.photos.length > 0) {
+                                    point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
+                                }
+                            }
+                        }
+
+                        point.address.description = place.formatted_address;
+                        point.name = place.name;
+                        point.additionalInformation.rating = place.rating;
+                        point.additionalInformation.webSite = place.website;
+                        point.additionalInformation.phone = place.international_phone_number;
+                        point.googlePlaceId = place.place_id;
+                        point.id = place.id;
+                        point.subtype = place.types[0];
+                        point.type = 'internet'
+                        point.source = 'google';
+
+                        this.map.callbackMap.emit('getDetailsPoint', point);
+
                     }
+                }
 
-                });
-
-        });
+            });
     }
 
     getZoom(): number {
@@ -681,7 +676,7 @@ export class GoogleConfig extends AbstractConfig {
 
     routeInfo(): IRouteInfo {
 
-        throw new Error("Method not implemented.");
+        return this.map.route.routeInfo;
     }
 
     toggleTrafficLayer(show: boolean): void {

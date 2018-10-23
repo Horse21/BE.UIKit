@@ -2,7 +2,7 @@ import { AbstractMap } from '../abstract/abstract-map';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { IInitMap } from '../interfaces/i-init-map';
-import { EventsMapEmitter } from '../entity/event-emitter';
+import { EventsMapEmitter } from "../entity/event-emitter";
 
 @Injectable()
 export abstract class AbstractEvent implements IInitMap {
@@ -19,7 +19,9 @@ export abstract class AbstractEvent implements IInitMap {
     abstract zoomChanged<E>(): Observable<E>;
 
     initMap(map: AbstractMap): void {
+
         this.map = map;
+        
         this.map.callbackMap = new EventsMapEmitter();
     }
 }

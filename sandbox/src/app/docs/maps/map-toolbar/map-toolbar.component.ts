@@ -3,7 +3,7 @@ import { MapManager } from '../entity/map-manager';
 import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
 import { TypeRoute } from '../enum/e-type-route';
-import { EventsMapEmitter } from '../entity/event-emitter';
+import { EventsMapEmitter } from "../entity/event-emitter";
 
 
 @Component({

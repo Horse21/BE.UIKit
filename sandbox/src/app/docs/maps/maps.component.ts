@@ -15,7 +15,6 @@ export class MapsComponent implements OnInit {
     constructor(private manager: MapManager) { }
 
     ngOnInit() {
-
         setTimeout(() => {
             this.manager.getActiveMap().callbackMap.on('onclickMapPlaceId', (placeId) => {
 
@@ -32,12 +31,14 @@ export class MapsComponent implements OnInit {
 
             });
 
+            this.manager.getActiveMap().callbackMap.on('initMap', () => {});
+
             this.manager.getActiveMap().callbackMap.on('getAddressPoint', (point) => {
 
                 this.manager.getActiveMap().config.showMarker(point, false);
 
             });
-        }, 1000);
+        }, 100);
 
     }
 }

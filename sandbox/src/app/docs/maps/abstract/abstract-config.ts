@@ -24,7 +24,6 @@ import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
 import { MapToolbarComponent } from './../map-toolbar/map-toolbar.component';
-import { Observable } from 'rxjs';
 import { BaseCicle } from '../entity/base-circle';
 import { BasePolygon } from '../entity/base-polygon';
 import { BasePolyline } from '../entity/base-polyline';

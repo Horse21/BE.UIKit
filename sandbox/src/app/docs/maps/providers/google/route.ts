@@ -80,8 +80,6 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
                 directionsService.route(request, (response, status) => {
 
-                    console.log(status, 'status')
-
                     if (status == google.maps.DirectionsStatus.OK) {
 
                         let info = response['routes'][0].legs[0];

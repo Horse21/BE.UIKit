@@ -11,7 +11,8 @@ import { AbstractSearch } from './abstract-search';
 import { AbstractRouteBuilder } from './abstract-route-builder';
 import { BaseMarker } from '../entity/base-marker';
 import { BaseLayer } from '../entity/base-layer';
-import { EventsMapEmitter } from '../entity/event-emitter';
+import { EventsMapEmitter } from "../entity/event-emitter";
+import { EventEmitter } from 'events';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -24,7 +25,7 @@ export abstract class AbstractMap {
     selectedMarker: BaseMarker;
     transitLayer: BaseLayer;
     trafficLayer: BaseLayer;
-    callbackMap: EventsMapEmitter;
+    callbackMap: EventEmitter;
 
     public get container(): HTMLElement {
         return document.getElementById('map');

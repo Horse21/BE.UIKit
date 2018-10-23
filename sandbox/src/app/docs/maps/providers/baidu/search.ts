@@ -10,4 +10,6 @@ export class BaiduSearchMap extends AbstractSearch {
         throw new Error("Method not implemented.");
     }
 
+    
+
 }

@@ -35,6 +35,7 @@ export class GoogleMap extends AbstractMap {
     init(): void {
 
         this.api = new google.maps.Map(this.container, this.options);
+        this.callbackMap.emit('initMap');
     }
 
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
