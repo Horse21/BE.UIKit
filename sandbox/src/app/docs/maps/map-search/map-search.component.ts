@@ -34,7 +34,6 @@ export class MapSearchComponent {
   ListAutocomplete: Point[] = [];
 
   private ChangeInput(value: string, type: string) {
-
     switch (type) {
       case 'from':
         if (value.length == 0) {
@@ -89,9 +88,7 @@ export class MapSearchComponent {
   private ShowRoute() {
 
     if (pointTo != null && pointFrom != null || pointFrom != null && pointTo != null) {
-
-      this.manager.getActiveMap().config.buildRoute(pointFrom, pointTo, TypeRoute.CAR, true);
-
+      this.manager.getActiveMap().config.buildRoute(pointFrom, pointTo, TypeRoute.FLY, true);
     }
   }
 }

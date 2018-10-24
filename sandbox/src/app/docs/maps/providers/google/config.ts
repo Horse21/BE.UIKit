@@ -43,20 +43,16 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
+        
         let LatLng = new google.maps.LatLng({ lat: marker.point.position.latitude, lng: marker.point.position.longitude });
-
         bounds.extend(LatLng);
-
         this.map.api.fitBounds(bounds);
     }
 
 
-    boundsExtend(polygon: BasePolygon, bounds: ILatLngBounds): void {
-       // let LatLng = new google.maps.LatLng({ lat: polygon.position.latitude, lng: marker.point.position.longitude });
+    boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void {
 
-        //bounds.extend(LatLng);
-
-        //this.map.api.fitBounds(bounds);
+        this.map.api.fitBounds(bounds);
     }
 
     getLatLngBounds(): ILatLngBounds {
@@ -106,7 +102,6 @@ export class GoogleConfig extends AbstractConfig {
         this.clearRoutes();
         super.clearAllMap();
         this.map.selectedMarker = null;
-
     }
 
     clearMarkers(): void {
@@ -118,35 +113,28 @@ export class GoogleConfig extends AbstractConfig {
 
     clearRoutes(): void {
         if (this.map.geo.routes != undefined && this.map.geo.routes[0] != null) {
-
             this.map.geo.routes.forEach((item) => {
                 item.setMap(null);
             });
-
             super.clearRoutes();
         }
     }
 
     clearPolygons(): void {
-
         if (this.map.geo.polygons != undefined && this.map.geo.polygons[0] != null) {
             this.map.geo.polygons.forEach((item) => {
                 item.setMap(null);
             });
             super.clearPolygons();
         }
-
     }
 
 
     clearCircle(): void {
-
         if (this.map.geo.circle != null) {
             this.map.geo.circle.setMap(null);
             super.clearCircle();
-
         }
-
     }
 
     onClickMap(event: IEventClickMap) {
@@ -207,10 +195,6 @@ export class GoogleConfig extends AbstractConfig {
                         resultAddress.push(parseAddress);
                         break;
                     case AddressType.locality:
-                        parseAddress.type = PointAddressType.CITY;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
                     case AddressType.postalTown:
                         parseAddress.type = PointAddressType.CITY;
                         parseAddress.value = addressValue;
@@ -316,7 +300,6 @@ export class GoogleConfig extends AbstractConfig {
                         let typeAddres = this.getDetailedAddress(place.address_components);
 
                         for (let i = 0; i < typeAddres.length; i++) {
-
                             let item = typeAddres[i];
 
                             switch (item.type) {
@@ -471,7 +454,6 @@ export class GoogleConfig extends AbstractConfig {
 
 
             if (onSelectedpoint) {
-
                 this.map.selectedMarker = marker;
             }
 
@@ -606,7 +588,6 @@ export class GoogleConfig extends AbstractConfig {
                 google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mouseDown);
 
                 let array = drawShaping.getPath().getArray();
-
 
                 let bounds = new google.maps.LatLngBounds();
 

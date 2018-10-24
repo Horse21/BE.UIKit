@@ -257,9 +257,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
         try {
             if (this.map.geo.markers != null && this.map.geo.markers.length > 0) {
-
                 for (var i = 0; i < this.map.geo.markers.length; i++) {
-
                     this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
                 }
             }

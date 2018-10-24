@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { MapManager } from './entity/map-manager';
 import { Injectable } from "@angular/core";
 import { Subject } from 'rxjs/internal/Subject';
+import { ILatLng } from './providers/google/interfaces/i-latlng';
 
 @Component({
     selector: 'maps-components-docs',
@@ -14,15 +15,26 @@ import { Subject } from 'rxjs/internal/Subject';
 export class MapsComponent implements OnInit {
 
     @Output() AfterMapInit: Subject<boolean>;
+    @Output() OnclickMapPlaceId: Subject<string>;
+    @Output() onclickMapGetAddress: Subject<ILatLng>;
 
-    constructor(public manager: MapManager) { }
+    constructor(public manager: MapManager) {
+
+        this.AfterMapInit = new Subject<boolean>();
+        this.OnclickMapPlaceId = new Subject<string>();
+        this.onclickMapGetAddress = new Subject<ILatLng>();
+    }
+
+
 
     ngOnInit() {
         setTimeout(() => {
             this.manager.getActiveMap().callbackMap.on('onclickMapPlaceId', (placeId) => {
                 this.manager.getActiveMap().config.getDetailsPoint(placeId);
+                this.OnclickMapPlaceId.next(placeId);
             });
             this.manager.getActiveMap().callbackMap.on('onclickMapGetAddress', (position) => {
+                this.onclickMapGetAddress.next(position);
                 this.manager.getActiveMap().config.getAddress(position);
             });
 
@@ -31,7 +43,7 @@ export class MapsComponent implements OnInit {
             });
 
             this.manager.getActiveMap().callbackMap.on('initMap', () => {
-                this.AfterMapInit.next();
+                this.AfterMapInit.next(true);
             });
 
             this.manager.getActiveMap().callbackMap.on('responseMap', (status) => { });

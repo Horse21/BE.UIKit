@@ -40,7 +40,6 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
             }
         }
         catch (error) {
-            console.log(error)
         }
     }
 

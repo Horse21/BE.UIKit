@@ -16,6 +16,9 @@ import { IPosition } from '../../interfaces/i-position';
 
 @Injectable()
 export class BaiduConfig extends AbstractConfig {
+    boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void {
+        throw new Error("Method not implemented.");
+    }
     getCenter(): ILatLng {
         throw new Error("Method not implemented.");
     }

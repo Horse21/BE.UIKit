@@ -59,6 +59,7 @@ import { H21AccountSelectComponent } from "../../projects/h21-be-ui-kit/src/lib/
 import { H21AccountSelectService } from "../../projects/h21-be-ui-kit/src/lib/h21-accout-select/h21-account-select-service";
 import { H21ComboboxComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-combobox/h21-combobox.component";
 import { H21UserCardComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/h21-user-card.component";
+import { H21MapsComponent } from "./docs/maps/h21-maps/h21-maps.component";
 
 /** Import Examples */
 import { ButtonsDocsComponent } from './docs/buttons/buttons-docs.component';
@@ -77,7 +78,6 @@ import { TooltipsDocsComponent } from './docs/tooltips/tooltips-docs.component';
 import { TypographyDocsComponent } from './docs/typography/typography-docs.component';
 import { TwoMonthCalendarDocsComponent } from './docs/two-month-calendar/two-month-calendar-docs.component';
 import { CounterInputComponent } from './docs/counter-input/counter-input.component';
-import { count } from '../../node_modules/rxjs/operators';
 import { DashboardComponent } from './docs/dashboard/dashboard.component';
 import { MapsComponent } from './docs/maps/maps.component';
 import { MapToolbarComponent } from './docs/maps/map-toolbar/map-toolbar.component';
@@ -214,6 +214,7 @@ const routes: Routes = [
 		H21AccountSelectComponent,
 		H21ComboboxComponent,
 		H21UserCardComponent,
+		H21MapsComponent
 
 	],
 	imports: [
