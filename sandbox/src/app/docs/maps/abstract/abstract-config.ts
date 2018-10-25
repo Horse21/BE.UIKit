@@ -163,6 +163,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         if (this.map.geo.markers != null) {
             this.map.callbackMap.emit('countLoadMarkers', this.map.geo.markers.length);
         }
+
     }
 
     abstract getBounds(): ILatLngBounds;
@@ -371,8 +372,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract showMarker(point: IPoint, onSelectedpoint: boolean): void
 
-    abstract draggableMarker(enabled: boolean): void;
-
     abstract setZoom(zoom: number): void;
 
     abstract setMinZoom(zoom: number): void;
@@ -412,4 +411,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
 
     abstract boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void;
+
+    abstract onEventIdle(): void;
+
+    abstract setDraggableMarker(enabled: boolean): void;
 }

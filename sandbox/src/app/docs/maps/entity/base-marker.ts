@@ -1,6 +1,8 @@
 import { AbstractMap } from "../abstract/abstract-map";
 import { IPoint } from "../interfaces/i-point";
 import { IBaseMarkerOptions } from "../interfaces/i-base-marker-options";
+import { LatLng } from "leaflet";
+import { ILatLng } from "../providers/google/interfaces/i-latlng";
 
 export class BaseMarker {
 
@@ -20,5 +22,9 @@ export class BaseMarker {
     }
 
     setDraggable(draggable: boolean): void { }
+
+    getPosition(): ILatLng{
+        return;
+    }
 
 }

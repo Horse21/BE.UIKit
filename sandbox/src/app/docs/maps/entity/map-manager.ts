@@ -48,15 +48,9 @@ export class MapManager {
                 if (status == FetchStatus.SUCCESS) {
                     this.currentMap.init();
                     this.currentMap.events.idle<void>().subscribe(() => {
-                        this.currentMap.config.drawMarkersOnMap();
+                        this.currentMap.config.onEventIdle();
                     });
-                    this.currentMap.events.dragFinished<void>().subscribe(() => {
-                        this.currentMap.config.drawMarkersOnMap();
-                    });
-                    this.currentMap.events.zoomFinished<void>().subscribe(() => {
-                        this.currentMap.config.drawMarkersOnMap();
-                    });
-
+                   
                     this.currentMap.events.mapClicked<IEventClickMap>().subscribe((IEventClikMap) => {
                         this.currentMap.config.onClickMap(IEventClikMap)
                     });

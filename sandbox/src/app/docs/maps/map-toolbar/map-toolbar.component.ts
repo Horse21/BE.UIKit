@@ -43,7 +43,7 @@ export class MapToolbarComponent {
 
   private onChangeDraggableMarker(event: any) {
 
-    this.manager.getActiveMap().config.draggableMarker(event.checked);
+    this.manager.getActiveMap().config.setDraggableMarker(event.checked);
   }
 
   private onChangeLoadMarkers(event: any) {

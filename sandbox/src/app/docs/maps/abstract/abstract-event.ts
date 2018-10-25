@@ -21,7 +21,6 @@ export abstract class AbstractEvent implements IInitMap {
     initMap(map: AbstractMap): void {
 
         this.map = map;
-        
-        this.map.callbackMap = new EventsMapEmitter();
+       
     }
 }

@@ -15,4 +15,6 @@ export class BaseCicle {
     bindTo(key: string, target: any, targetKey: string): void { }
     setRadius(radius: number): void { }
     setVisible(visible: boolean): void { }
+    setDraggable(draggable: boolean): void {}
+    setEditable(editable: boolean): void {}
 }

@@ -95,32 +95,7 @@ import { HotelSearchPanelDocsComponent } from './docs/hotel-search-panel/hotel-s
 import { HotelFilterPanelDocsComponent } from './docs/hotel-filter-panel/hotel-filter-panel-docs.component';
 import { H21TopToolbarButtonComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button/h21-top-toolbar-button.component';
 import { H21TopToolbarButtonContainerComponent } from '../../projects/h21-be-ui-kit/src/lib/h21-top-toolbar/h21-top-toolbar-button-container/h21-top-toolbar-button-container.component';
-import { MapManager } from './docs/maps/entity/map-manager';
-import { GoogleMap } from './docs/maps/providers/google/map';
-import { GoogleMarkerCluster } from './docs/maps/providers/google/cluster';
-import { GoogleEvent } from './docs/maps/providers/google/event';
-import { GoogleConfig } from './docs/maps/providers/google/config';
-import { GoogleRouteBuilder } from './docs/maps/providers/google/route';
-import { GoogleMarker } from './docs/maps/providers/google/marker';
-import { GoogleMapOptions } from './docs/maps/providers/google/entity/google-map-options';
-import { GeoContainer } from './docs/maps/entity/geo-container';
-import { GoogleSearchMap } from './docs/maps/providers/google/search';
-import { BaiduMap } from './docs/maps/providers/baidu/map';
-import { BaiduMarkerCluster } from './docs/maps/providers/baidu/cluster';
-import { BaiduEvent } from './docs/maps/providers/baidu/event';
-import { BaiduConfig } from './docs/maps/providers/baidu/config';
-import { BaiduRouteBuilder } from './docs/maps/providers/baidu/route';
-import { BaiduMarker } from './docs/maps/providers/baidu/marker';
-import { BaiduMapOptions } from './docs/maps/providers/baidu/entity/baidu-map-options';
-import { BaiduSearchMap } from './docs/maps/providers/baidu/search';
-import { YandexMap } from './docs/maps/providers/yandex/map';
-import { YandexMarkerCluster } from './docs/maps/providers/yandex/cluster';
-import { YandexEvent } from './docs/maps/providers/yandex/event';
-import { YandexConfig } from './docs/maps/providers/yandex/config';
-import { YandexRouteBuilder } from './docs/maps/providers/yandex/route';
-import { YandexMarker } from './docs/maps/providers/yandex/marker';
-import { YandexMapOptions } from './docs/maps/providers/yandex/entity/yandex-map-options';
-import { YandexSearchMap } from './docs/maps/providers/yandex/search';
+import { H21MapsModule } from './docs/maps/h21-maps/h21-maps.module';
 
 
 
@@ -196,11 +171,6 @@ const routes: Routes = [
 		H21TableTravelersComponent,
 		H21TableProvidersComponent,
 		SearchResultItemComponent,
-		MapsComponent,
-		MapToolbarComponent,
-		MapSelectorComponent,
-		MapContainerComponent,
-		MapSearchComponent,
 		HotelSearchPanelDocsComponent,
 		HotelFilterPanelDocsComponent,
 		H21SlideCarouselComponent,
@@ -214,7 +184,6 @@ const routes: Routes = [
 		H21AccountSelectComponent,
 		H21ComboboxComponent,
 		H21UserCardComponent,
-		H21MapsComponent
 
 	],
 	imports: [
@@ -229,6 +198,7 @@ const routes: Routes = [
 		NgxMdModule.forRoot(),
 		DxDataGridModule,
 		DxTemplateModule,
+		H21MapsModule,
 	],
 	providers: [
 		{
@@ -240,35 +210,7 @@ const routes: Routes = [
 		AppSubscriberService,
 		OrderService,
 		//DestinationLoaderService,
-		MapManager,
-		GoogleMap,
-		GoogleMarkerCluster,
-		GoogleEvent,
-		GoogleConfig,
-		GoogleRouteBuilder,
-		GoogleMarker,
-		GoogleMapOptions,
-		GeoContainer,
-		GoogleSearchMap,
-		BaiduMap,
-		BaiduMarkerCluster,
-		BaiduEvent,
-		BaiduConfig,
-		BaiduRouteBuilder,
-		BaiduMarker,
-		BaiduMapOptions,
-		BaiduSearchMap,
-		YandexMap,
-		YandexMarkerCluster,
-		YandexEvent,
-		YandexConfig,
-		YandexRouteBuilder,
-		YandexMarker,
-		YandexMapOptions,
-		YandexSearchMap,
-
-
-	],
+	 ],
 	bootstrap: [AppComponent],
 	entryComponents: [
 		IconExampleDialogComponent,

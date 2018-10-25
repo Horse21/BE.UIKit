@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { H21MapsComponent } from './h21-maps.component';
 import { MapsComponent } from '../maps.component';
@@ -32,19 +32,39 @@ import { YandexRouteBuilder } from '../providers/yandex/route';
 import { YandexMarker } from '../providers/yandex/marker';
 import { YandexMapOptions } from '../providers/yandex/entity/yandex-map-options';
 import { YandexSearchMap } from '../providers/yandex/search';
-
+import { AppMaterialModule } from '../../../modules/app-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AppMaterialModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppMaterialModule,
+
   ],
-  declarations: [H21MapsComponent],
-  providers: [
+  exports: [
+    H21MapsComponent,
     MapsComponent,
     MapToolbarComponent,
     MapSelectorComponent,
     MapContainerComponent,
     MapSearchComponent,
+
+  ],
+  declarations: [
+    H21MapsComponent,
+    MapsComponent,
+    MapToolbarComponent,
+    MapSelectorComponent,
+    MapContainerComponent,
+    MapSearchComponent,
+  ],
+
+  providers: [
     MapManager,
     GoogleMap,
     GoogleMarkerCluster,

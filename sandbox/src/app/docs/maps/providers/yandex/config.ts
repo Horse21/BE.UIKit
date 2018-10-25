@@ -16,6 +16,12 @@ import { IPosition } from '../../interfaces/i-position';
 
 @Injectable()
 export class YandexConfig extends AbstractConfig {
+    setDraggableMarker(enabled: boolean): void {
+        throw new Error("Method not implemented.");
+    }
+    onEventIdle(): void {
+        throw new Error("Method not implemented.");
+    }
     boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void {
         throw new Error("Method not implemented.");
     }

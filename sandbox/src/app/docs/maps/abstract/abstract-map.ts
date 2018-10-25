@@ -13,6 +13,7 @@ import { BaseMarker } from '../entity/base-marker';
 import { BaseLayer } from '../entity/base-layer';
 import { EventsMapEmitter } from "../entity/event-emitter";
 import { EventEmitter } from 'events';
+import { SubjectSubscriber, Subject } from 'rxjs/internal/Subject';
 
 @Injectable()
 export abstract class AbstractMap {
@@ -25,7 +26,7 @@ export abstract class AbstractMap {
     selectedMarker: BaseMarker;
     transitLayer: BaseLayer;
     trafficLayer: BaseLayer;
-    callbackMap: EventEmitter;
+    callbackMap: EventEmitter = new EventEmitter();
 
     public get container(): HTMLElement {
         return document.getElementById('map');

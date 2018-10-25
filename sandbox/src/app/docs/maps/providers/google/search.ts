@@ -127,7 +127,7 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
-
+                            console.log(point)
                             this.map.callbackMap.emit('getDetailsPoint', point);
                             observer.next(point);
 
