@@ -6,5 +6,4 @@ export interface IBaseMarkerOptions {
     clickable: boolean;
     icon: IIcon;
     title: string;
-    
 }

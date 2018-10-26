@@ -13,7 +13,7 @@ export interface IConfig {
 
     buildRoute(from: IPoint, to: IPoint, typeRoute: string, show?: boolean): void;
     drawMarkersOnMap(): void;
-    drawShapeOnMap(type: ShapeType): void;
+    drawShapeOnMap(type: ShapeType, radius?: number, center?: IPosition): void;
     getAddress(position: IPosition): void;
     getDetailsPoint(placeId: string): void;
     getZoom(): number;
@@ -22,7 +22,7 @@ export interface IConfig {
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean;
     radiusContainsMarker(marker: BaseMarker, position: IPosition): number;
     boundsContainsMarker(marker: BaseMarker): boolean;
-    boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
+    boundsExtend(position: IPosition, bounds: ILatLngBounds): void;
     routeInfo(): IRouteInfo;
     zoomIn(): void;
     zoomOut(): void;
@@ -30,7 +30,7 @@ export interface IConfig {
     setMinZoom(zoom: number): void;
     setMaxZoom(zoom: number): void;
     setCenter(position: ILatLng): void;
-    showMarker(point: IPoint, onSelectedpoint?: boolean): void;
+    showMarker(point: IPoint, onSelectedpoint?: boolean, fitbounds?: boolean): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficLayer(show?: boolean);
     toggleTransitLayer(show?: boolean);
@@ -39,5 +39,4 @@ export interface IConfig {
     clearMarkers(): void;
     clearRoutes(): void;
     clearPolygons(): void;
-
 }

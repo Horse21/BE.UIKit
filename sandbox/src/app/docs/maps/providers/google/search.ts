@@ -32,11 +32,8 @@ export class GoogleSearchMap extends AbstractSearch {
         service.getPlacePredictions(request, (response, status) => {
 
             if (status == ResponseStatus.OK) {
-
                 for (var i = 0; i < response.length; i++) {
                     let point: Point = new Point();
-                    point.position = new Position();
-                    point.address = new Address();
                     let place = response[i];
                     point.id = place.place_id;
                     point.name = place.description;
@@ -48,24 +45,23 @@ export class GoogleSearchMap extends AbstractSearch {
 
                     result.push(point)
                 }
-
             }
+            this.map.callbackMap.emit('responseMapError', status);
         }
 
         );
+
+        this.map.callbackMap.emit('searchResult', result);
         return result;
     }
 
     searchDetails(placeId: string): Observable<IPoint> {
 
         return new Observable((observer: Observer<IPoint>) => {
-
             let placesService = new google.maps.places.PlacesService(this.map.api);
 
             placesService.getDetails({ placeId: placeId },
-
                 (response, status) => {
-
                     if (status == ResponseStatus.OK) {
 
                         if (response) {
@@ -75,13 +71,10 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.additionalInformation = new AdditionalInformation();
 
                             let place = response;
-
                             let typeAddres = this.getDetailedAddress(place.address_components);
 
                             for (let i = 0; i < typeAddres.length; i++) {
-
                                 let item = typeAddres[i];
-
                                 switch (item.type) {
                                     case PointAddressType.COUNTRY:
                                         point.address.country = item.value;
@@ -102,9 +95,7 @@ export class GoogleSearchMap extends AbstractSearch {
                                         point.address.postCode = item.value;
                                         break;
                                 }
-
                             }
-
                             point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
                             point.position.latitude = place.geometry.location.lat();
                             point.position.longitude = place.geometry.location.lng();
@@ -127,11 +118,11 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
-                            console.log(point)
-                            this.map.callbackMap.emit('getDetailsPoint', point);
+                            this.map.callbackMap.emit('searchDetailsResult', point);
                             observer.next(point);
-
                         }
+
+                        this.map.callbackMap.emit('responseMapError', status);
                     }
 
                 });
@@ -157,7 +148,7 @@ export class GoogleSearchMap extends AbstractSearch {
                 nameType.type = addressType;
                 nameType.value = addressValue;
                 pointAddress.push(nameType);
-                
+
                 switch (addressType) {
                     case AddressType.country:
                         parseAddress.type = PointAddressType.COUNTRY;

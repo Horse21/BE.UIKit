@@ -94,7 +94,7 @@ export class BaiduConfig extends AbstractConfig {
     zoomOut(): void {
         throw new Error("Method not implemented.");
     }
-    boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void {
+    boundsExtend(position: IPosition, bounds: ILatLngBounds): void {
         throw new Error("Method not implemented.");
     }
 

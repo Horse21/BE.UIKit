@@ -4,7 +4,6 @@ import { BaseMarker } from '../entity/base-marker';
 import { IPoint } from '../interfaces/i-point';
 import { ShapeType } from '../enum/e-shape-type';
 import { IPolygonOptions } from '../interfaces/i-polygon';
-import { AbstractRouteBuilder } from './abstract-route-builder';
 import { IRouteInfo } from '../interfaces/i-route-info';
 import { IPosition } from '../interfaces/i-position';
 import { AbstractMap } from './abstract-map';
@@ -20,7 +19,6 @@ import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map'
 import { IMapOptions } from '../interfaces/i-map-options';
 import { Position } from '../entity/position';
 import { Point } from '../entity/point';
-import { IBaseMarkerOptions } from '../interfaces/i-base-marker-options';
 import { ILatLngBounds } from '../providers/google/interfaces/i-latln-bounds';
 import { ILatLng } from '../providers/google/interfaces/i-latlng';
 import { MapToolbarComponent } from './../map-toolbar/map-toolbar.component';
@@ -31,7 +29,6 @@ import { IRouteOptions } from '../interfaces/i-route-options';
 import { IH21DateTime } from '../../../../../projects/h21-be-ui-kit/src/dto';
 import { TypeRoute } from '../enum/e-type-route';
 
-declare var google;
 
 @Injectable()
 export abstract class AbstractConfig implements IConfig, IInitMap {
@@ -105,34 +102,28 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     }
 
     clearRoutes(): void {
-
         this.map.geo.clearRoutes();
     }
 
     clearPolygons(): void {
-
         this.map.geo.clearPolygons();
     }
 
     clearCircle(): void {
-
         this.map.geo.clearCircle();
-
     }
 
     drawMarkersOnMap(): void {
-
         try {
             if (this.map.loadMarkers) {
 
-                this.clearAllMap()
+                this.clearAllMap();
 
                 let markersVisible = false;
 
                 if (this.getZoom() <= 3) {
 
                     this.clearAllMap();
-
                 }
                 if (this.getZoom() > 5) {
 
@@ -145,6 +136,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
                         let marker = this.getBaseMarker(item);
                         marker.point = new Point();
+                        marker.point.id = '';
                         marker.point.position = new Position();
                         marker.point.position.latitude = item.Address.Lat;
                         marker.point.position.longitude = item.Address.Lng;
@@ -178,10 +170,22 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract drawPolygon(polygon: BasePolygon): void;
 
-    drawShapeOnMap(type: ShapeType): void {
+    drawShapeOnMap(type: ShapeType, radius?: number, center?: IPosition): void {
 
         try {
+
             let path;
+
+            if (radius == null) {
+                radius = 10000
+            }
+
+            if (center == null) {
+                center = {
+                    latitude: 0.0,
+                    longitude: 0.0
+                }
+            }
 
             let circleOptions: ICircleOptions = {
                 strokeColor: "#1E90FF",
@@ -189,11 +193,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 strokeWeight: 3.5,
                 fillColor: "#1E90FF",
                 fillOpacity: 0.35,
-                center: {
-                    latitude: 0.0,
-                    longitude: 0.0
-                },
-                radius: 10000,
+                center: center,
+                radius: radius,
                 draggable: true,
                 editable: true
             };
@@ -237,7 +238,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 case ShapeType.STOP:
                     break;
             }
-
         }
         catch (error) {
             console.log(error);
@@ -259,7 +259,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         try {
             if (this.map.geo.markers != null && this.map.geo.markers.length > 0) {
                 for (var i = 0; i < this.map.geo.markers.length; i++) {
-                    this.boundsExtend(this.map.geo.markers[i], this.getLatLngBounds());
+                    this.boundsExtend(this.map.geo.markers[i].point.position, this.getLatLngBounds());
                 }
             }
         }
@@ -267,7 +267,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
             console.log(error);
         }
     }
-
 
     polygonsFitsBounds(): void {
         try {
@@ -282,14 +281,9 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         }
     }
 
-
     abstract onClickMap(event: IEventClickMap);
 
     abstract boundsContainsMarker(marker: BaseMarker): boolean;
-
-    private getPointPosition(marker: BaseMarker): Position {
-        return marker.point.position;
-    }
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
 
@@ -370,7 +364,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         });
     }
 
-    abstract showMarker(point: IPoint, onSelectedpoint: boolean): void
+    abstract showMarker(point: IPoint, onSelectedpoint?: boolean, fitBounds?: boolean): void
 
     abstract setZoom(zoom: number): void;
 
@@ -408,11 +402,16 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract zoomOut(): void;
 
-    abstract boundsExtend(marker: BaseMarker, bounds: ILatLngBounds): void;
+    abstract boundsExtend(position: IPosition, bounds: ILatLngBounds): void;
 
     abstract boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void;
 
     abstract onEventIdle(): void;
 
     abstract setDraggableMarker(enabled: boolean): void;
+
+    private getPointPosition(marker: BaseMarker): Position {
+        return marker.point.position;
+    }
+
 }

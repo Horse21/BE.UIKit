@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { MapManager } from '../entity/map-manager';
 import { ZoomType } from '../enum/e-zoom-type';
 import { Injectable } from "@angular/core";
-import { TypeRoute } from '../enum/e-type-route';
-import { EventsMapEmitter } from "../entity/event-emitter";
 import { ShapeType } from '../enum/e-shape-type';
+import { Position } from '../entity/position';
 
 
 @Component({
@@ -38,7 +37,11 @@ export class MapToolbarComponent {
 
   private drawShape(type: ShapeType) {
 
-    this.manager.getActiveMap().config.drawShapeOnMap(type);
+    let center = <Position>{
+      latitude: 55.755814,
+      longitude: 37.617635
+    }
+    this.manager.getActiveMap().config.drawShapeOnMap(type, 10000, center);
   }
 
   private onChangeDraggableMarker(event: any) {
