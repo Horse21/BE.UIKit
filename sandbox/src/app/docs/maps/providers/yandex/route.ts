@@ -1,7 +1,7 @@
 import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
 import { RouteInfo } from "../../classes/route-info";
 
-declare var google;
+declare var ymaps;
 
 export class YandexRouteBuilder extends AbstractRouteBuilder {
     build(): void {

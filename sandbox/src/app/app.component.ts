@@ -1,28 +1,30 @@
-import {Component, ViewChild} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Component, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
 	MatIconRegistry,
 	MatSidenav,
 	MatSidenavContent
 } from '@angular/material';
-import {DocsComponent} from "./docs/docs.component";
-import {DocsNavigationComponent} from "./docs-navigation/docs-navigation.component";
-import {Router} from '@angular/router';
-import {H21SidebarComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
-import {H21RightOverlayPanelService} from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
-import {IBreadcrumb} from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
-import {AppSubscriberService} from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
-import {ISidebarNavTab} from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
-import {IHotelSearchOptions} from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
-import {H21HotelSearchResultComponent} from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
-import {IUserCardData} from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
+import { DocsComponent } from "./docs/docs.component";
+import { DocsNavigationComponent } from "./docs-navigation/docs-navigation.component";
+import { Router } from '@angular/router';
+import { H21SidebarComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-sidebar/h21-sidebar.component";
+import { H21RightOverlayPanelService } from "../../projects/h21-be-ui-kit/src/lib/h21-right-overlay-panel/h21-right-overlay-panel.service";
+import { IBreadcrumb } from "../../projects/h21-be-ui-kit/src/dto/i-breadcrumb";
+import { AppSubscriberService } from "../../projects/h21-be-ui-kit/src/services/app-subscriber-service";
+import { ISidebarNavTab } from "../../projects/h21-be-ui-kit/src/dto/i-sidebar-nav-tab";
+import { IHotelSearchOptions } from "../../projects/h21-be-ui-kit/src/dto/i-hotel-search-options";
+import { H21HotelSearchResultComponent } from "../../projects/h21-be-ui-kit/src/lib/h21-hotel-search-result/h21-hotel-search-result.component";
+import { IUserCardData } from "../../projects/h21-be-ui-kit/src/lib/h21-user-card/dto/i-user-card-data";
+
+//G:\Git\BE.UIKit\sandbox\src\app\docs\maps\h21-maps
 
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
-	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
-	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
-	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
-	{name: 'test', label: 'Map point', icon: 'not_listed_location', type: 'button', url: null, disabled: false},
+	{ name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false },
+	{ name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true },
+	{ name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false },
+	{ name: 'test', label: 'Map point', icon: 'not_listed_location', type: 'button', url: null, disabled: false },
 ];
 
 const USER_CARD_DATA: IUserCardData = {
@@ -50,10 +52,10 @@ const USER_CARD_DATA: IUserCardData = {
 };
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  viewProviders: [MatIconRegistry],
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css'],
+	viewProviders: [MatIconRegistry],
 })
 
 export class AppComponent {
@@ -66,27 +68,27 @@ export class AppComponent {
 	sidebarOpened = false;
 
 	breadcrumbsData: Array<IBreadcrumb> = [
-		{label: "Home", url: "#"},
-		{label: "Company", url: "#"},
-		{label: "My Company", url: "#"},
-		{label: "My User", url: "#"}
+		{ label: "Home", url: "#" },
+		{ label: "Company", url: "#" },
+		{ label: "My Company", url: "#" },
+		{ label: "My User", url: "#" }
 	];
 
 	constructor(iconReg: MatIconRegistry, sanitizer: DomSanitizer, public router: Router, private rightPanelDialog: H21RightOverlayPanelService, private _appSubscriber: AppSubscriberService) {
-		iconReg.addSvgIcon('logo',						sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
-		iconReg.addSvgIcon('h21_flight_land_blue',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-blue-icon.svg'));
-		iconReg.addSvgIcon('h21_flight_land_green',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-green-icon.svg'));
-		iconReg.addSvgIcon('h21_flight_land_red',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-red-icon.svg'));
-		iconReg.addSvgIcon('h21_flight_takeoff_blue',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-blue-icon.svg'));
-		iconReg.addSvgIcon('h21_flight_takeoff_green',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-green-icon.svg'));
-		iconReg.addSvgIcon('h21_flight_takeoff_red',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-red-icon.svg'));
+		iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
+		iconReg.addSvgIcon('h21_flight_land_blue', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-blue-icon.svg'));
+		iconReg.addSvgIcon('h21_flight_land_green', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-green-icon.svg'));
+		iconReg.addSvgIcon('h21_flight_land_red', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-land-red-icon.svg'));
+		iconReg.addSvgIcon('h21_flight_takeoff_blue', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-blue-icon.svg'));
+		iconReg.addSvgIcon('h21_flight_takeoff_green', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-green-icon.svg'));
+		iconReg.addSvgIcon('h21_flight_takeoff_red', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-flight-takeoff-red-icon.svg'));
 
-		iconReg.addSvgIcon('h21_baggage',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-baggage-blue.svg'));
-		iconReg.addSvgIcon('h21_no_baggage', 	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-baggage-gray.svg'));
-		iconReg.addSvgIcon('h21_luggage',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-luggage-blue.svg'));
-		iconReg.addSvgIcon('h21_no_luggage',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-luggage-gray.svg'));
-		iconReg.addSvgIcon('h21_night',		sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-night-blue.svg'));
-		iconReg.addSvgIcon('h21_back_to_list',	sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
+		iconReg.addSvgIcon('h21_baggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-baggage-blue.svg'));
+		iconReg.addSvgIcon('h21_no_baggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-baggage-gray.svg'));
+		iconReg.addSvgIcon('h21_luggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-luggage-blue.svg'));
+		iconReg.addSvgIcon('h21_no_luggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-luggage-gray.svg'));
+		iconReg.addSvgIcon('h21_night', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-night-blue.svg'));
+		iconReg.addSvgIcon('h21_back_to_list', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-back-to-list-gray.svg'));
 	}
 
 	ngOnInit() {
@@ -97,6 +99,7 @@ export class AppComponent {
 	}
 
 	toggleSidebarOpened() {
+
 		this.sidebarOpened = !this.sidebarOpened;
 	}
 
@@ -182,7 +185,7 @@ export class AppComponent {
 		}
 	}
 
-	isRoute(route: string){
+	isRoute(route: string) {
 		return this.router.url.indexOf(route) >= 0;
 	}
 }

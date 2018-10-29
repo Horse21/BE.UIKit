@@ -66,7 +66,6 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                 directionsService.route(request, (response, status) => {
 
                     if (status == ResponseStatus.OK) {
-
                         let info = response['routes'][0].legs[0];
                         let typeMode = response.request.travelMode;
                         let routeInfo = new RouteInfo();
@@ -85,6 +84,8 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
                         routeInfo.staticMapUrl = '';
                         routeInfo.type = typeMode;
                         this.map.route.routeInfo = routeInfo;
+
+                        this.map.callbackMap.emit('infoRoute', routeInfo);
 
                         observer.next(response);
 

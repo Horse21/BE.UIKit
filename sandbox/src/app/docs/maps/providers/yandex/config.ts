@@ -16,6 +16,9 @@ import { IPosition } from '../../interfaces/i-position';
 
 @Injectable()
 export class YandexConfig extends AbstractConfig {
+    getRouteInfo(): IRouteInfo {
+        throw new Error("Method not implemented.");
+    }
     setDraggableMarker(enabled: boolean): void {
         throw new Error("Method not implemented.");
     }

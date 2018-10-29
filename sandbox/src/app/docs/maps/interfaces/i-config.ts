@@ -23,13 +23,13 @@ export interface IConfig {
     radiusContainsMarker(marker: BaseMarker, position: IPosition): number;
     boundsContainsMarker(marker: BaseMarker): boolean;
     boundsExtend(position: IPosition, bounds: ILatLngBounds): void;
-    routeInfo(): IRouteInfo;
+    getRouteInfo(): IRouteInfo;
     zoomIn(): void;
     zoomOut(): void;
     setZoom(zoomLevel: number);
     setMinZoom(zoom: number): void;
     setMaxZoom(zoom: number): void;
-    setCenter(position: ILatLng): void;
+    setCenter(position: IPosition): void;
     showMarker(point: IPoint, onSelectedpoint?: boolean, fitbounds?: boolean): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficLayer(show?: boolean);

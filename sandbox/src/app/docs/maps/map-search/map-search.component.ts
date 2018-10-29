@@ -88,7 +88,7 @@ export class MapSearchComponent {
   private ShowRoute() {
 
     if (pointTo != null && pointFrom != null || pointFrom != null && pointTo != null) {
-      this.manager.getActiveMap().config.buildRoute(pointFrom, pointTo, TypeRoute.FLY, true);
+      this.manager.getActiveMap().config.buildRoute(pointFrom, pointTo, TypeRoute.CAR, true);
     }
   }
 }

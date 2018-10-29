@@ -32,7 +32,7 @@ import { TypeRoute } from '../enum/e-type-route';
 
 @Injectable()
 export abstract class AbstractConfig implements IConfig, IInitMap {
-
+  
     map: AbstractMap;
 
     initMap(map: AbstractMap): void {
@@ -347,7 +347,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         return length;
     }
 
-    abstract routeInfo(): IRouteInfo;
+    abstract getRouteInfo(): IRouteInfo;
 
     getBaseMarker(point: IPoint): BaseMarker {
 
@@ -372,7 +372,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
 
     abstract setMaxZoom(zoom: number): void;
 
-    abstract setCenter(position: ILatLng): void;
+    abstract setCenter(position: IPosition): void;
 
     toggleMapDragging(enabled: boolean) {
 

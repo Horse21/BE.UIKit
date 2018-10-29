@@ -14,6 +14,7 @@ import { AddressComponent } from "./classes/address-component";
 import { AddressSettings } from "./classes/address-settings";
 import { AddressTypeName } from "./enum/e-address-type-name";
 import { AddressType } from "./enum/e-adress-type";
+import { CallbackName } from "../../enum/e-callback-name";
 
 declare var google;
 
@@ -46,12 +47,12 @@ export class GoogleSearchMap extends AbstractSearch {
                     result.push(point)
                 }
             }
-            this.map.callbackMap.emit('responseMapError', status);
+            this.map.callbackMap.emit(CallbackName.responseMapError, status);
         }
 
         );
 
-        this.map.callbackMap.emit('searchResult', result);
+        this.map.callbackMap.emit(CallbackName.searchResult, result);
         return result;
     }
 
@@ -118,11 +119,11 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
-                            this.map.callbackMap.emit('searchDetailsResult', point);
+                            this.map.callbackMap.emit(CallbackName.searchDetailsResult, point);
                             observer.next(point);
                         }
 
-                        this.map.callbackMap.emit('responseMapError', status);
+                        this.map.callbackMap.emit(CallbackName.responseMapError, status);
                     }
 
                 });

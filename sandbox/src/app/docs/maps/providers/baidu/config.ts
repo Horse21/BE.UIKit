@@ -16,6 +16,10 @@ import { IPosition } from '../../interfaces/i-position';
 
 @Injectable()
 export class BaiduConfig extends AbstractConfig {
+    getRouteInfo(): IRouteInfo {
+        throw new Error("Method not implemented.");
+    }
+
     setDraggableMarker(enabled: boolean): void {
         throw new Error("Method not implemented.");
     }
@@ -79,7 +83,7 @@ export class BaiduConfig extends AbstractConfig {
     setMaxZoom(zoom: number): void {
         throw new Error("Method not implemented.");
     }
-    setCenter(position: ILatLng): void {
+    setCenter(position: IPosition): void {
         throw new Error("Method not implemented.");
     }
     toggleTrafficLayer(show: boolean): void {

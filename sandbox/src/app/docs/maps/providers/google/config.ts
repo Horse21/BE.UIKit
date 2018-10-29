@@ -28,12 +28,18 @@ import { AdditionalInformation } from '../../entity/point-additional-information
 import { TypeRoute } from '../../enum/e-type-route';
 import { IPosition } from '../../interfaces/i-position';
 import { BoundsMap } from './classes/bounds-map';
+import { CallbackCicleInfo } from '../../classes/callback-cicle-radius';
+import { CallbackName } from '../../enum/e-callback-name';
 
 declare var google;
 
 @Injectable()
 
 export class GoogleConfig extends AbstractConfig {
+
+    getRouteInfo(): IRouteInfo {
+        return this.map.route.routeInfo;
+    }
 
     markersFitsBounds(): void {
 
@@ -78,7 +84,7 @@ export class GoogleConfig extends AbstractConfig {
         googleMarker["point"] = marker.point;
 
         google.maps.event.addListener(googleMarker, EventType.click, () => {
-            this.map.selectedMarker = googleMarker;
+            this.setSelectedMarker(googleMarker)
             console.log(googleMarker)
             this.map.callbackMap.emit('markerClick', 'id');
         });
@@ -89,6 +95,10 @@ export class GoogleConfig extends AbstractConfig {
         }
 
         return true;
+    }
+
+    private setSelectedMarker(marker) {
+        this.map.selectedMarker = marker;
     }
 
 
@@ -148,7 +158,7 @@ export class GoogleConfig extends AbstractConfig {
             }
             else {
                 let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
-                this.map.callbackMap.emit('onclickMapGetAddress', LatLng);
+                this.map.callbackMap.emit(CallbackName.onclickMapCoordinates, LatLng);
             }
         }
         console.log(this.map, 'THIS MAP')
@@ -280,7 +290,7 @@ export class GoogleConfig extends AbstractConfig {
                     point.type = 'internet'
                     point.source = 'google';
 
-                    this.map.callbackMap.emit('geocoderAddressResultPoint', point);
+                    this.map.callbackMap.emit('geocoderAddressResult', point);
                 }
 
                 this.map.callbackMap.emit('responseMapError', status);
@@ -375,8 +385,6 @@ export class GoogleConfig extends AbstractConfig {
         return this.map.api.getCenter();
     }
 
-
-
     setZoom(zoom: number): void {
         this.map.api.setZoom(zoom);
     }
@@ -389,8 +397,9 @@ export class GoogleConfig extends AbstractConfig {
         this.map.api.setOptions({ maxZoom: zoom });
     }
 
-    setCenter(position: ILatLng): void {
-        this.map.api.setCenter(position);
+    setCenter(position: IPosition): void {
+
+        this.map.api.setCenter(this.generateCoordinates(position));
     }
 
 
@@ -416,15 +425,12 @@ export class GoogleConfig extends AbstractConfig {
     showMarker(point: IPoint, onSelectedpoint: boolean, fitBounds: boolean) {
 
         try {
-
-            let position = new google.maps.LatLng(point.position.latitude, point.position.longitude);
-
             let googleMarkerOptions: GoogleMarkerOptions = {
                 draggable: false,
                 clickable: true,
                 visible: true,
                 title: point.name,
-                position: position,
+                position: this.generateCoordinates(point.position),
                 icon: {
                     title: point.name,
                     url: './assets/icons_map/icon_flag.png'
@@ -436,11 +442,8 @@ export class GoogleConfig extends AbstractConfig {
             let marker = new google.maps.Marker(googleMarkerOptions);
 
             google.maps.event.addListener(marker, EventType.click, () => {
-                let position = new Position();
-                position.latitude = this.map.selectedMarker.getPosition().lat();
-                position.longitude = this.map.selectedMarker.getPosition().lng();
-                console.log('marker', marker)
-                this.map.callbackMap.emit('markerClick', 'id');
+                let position = this.getPosition(this.map.selectedMarker);
+                this.map.callbackMap.emit(CallbackName.markerClick, position);
             });
 
 
@@ -486,17 +489,13 @@ export class GoogleConfig extends AbstractConfig {
         try {
             this.map.loadMarkers = !enabled;
             if (this.map.selectedMarker != null) {
-                this.map.callbackMap.emit('markerDraggable', '', enabled);
+                this.map.callbackMap.emit(CallbackName.markerDraggable, '', enabled);
                 this.map.selectedMarker.setDraggable(enabled);
             }
 
             google.maps.event.addListener(this.map.selectedMarker, EventType.dragEnd, () => {
-
-                let position = new Position();
-                position.latitude = this.map.selectedMarker.getPosition().lat();
-                position.longitude = this.map.selectedMarker.getPosition().lng();
-
-                this.map.callbackMap.emit('markerDraggableEnd', position);
+                let position = this.getPosition(this.map.selectedMarker);
+                this.map.callbackMap.emit(CallbackName.markerDraggableEnd, position);
             });
 
         } catch (error) {
@@ -507,7 +506,6 @@ export class GoogleConfig extends AbstractConfig {
     drawCircle(cicle: BaseCicle): void {
 
         if (this.map.geo.circle != null) {
-
             this.clearCircle();
         }
 
@@ -519,34 +517,28 @@ export class GoogleConfig extends AbstractConfig {
         );
         let circle = new google.maps.Circle(cicle.options);
 
-        let position = new Position();
-        position.latitude = circle.getCenter().lat();
-        position.longitude = circle.getCenter().lng();
-
         circle.setMap(this.map.api);
-        this.map.callbackMap.emit('createRadius', position, circle.getRadius());
+
+        let infoCicle = this.getCicleInfo(circle);
+        this.map.callbackMap.emit(CallbackName.createRadius, infoCicle);
 
         this.map.geo.circle = circle;
 
         google.maps.event.addListener(circle, EventType.radiusChanged, () => {
-
-            position.latitude = circle.getCenter().lat();
-            position.longitude = circle.getCenter().lng();
-
-            this.map.callbackMap.emit('radiusChanged', position, circle.getRadius());
+            let infoCicle = this.getCicleInfo(circle);
+            this.map.callbackMap.emit(CallbackName.radiusChanged, infoCicle);
         });
 
         google.maps.event.addListener(circle, EventType.dragEnd, () => {
 
-            position.latitude = circle.getCenter().lat();
-            position.longitude = circle.getCenter().lng();
-
-            this.map.callbackMap.emit('radiusDragEnd', position, circle.getRadius());
+            let infoCicle = this.getCicleInfo(circle);
+            this.map.callbackMap.emit(CallbackName.radiusDragEnd, infoCicle);
 
             this.setCircleDraggable(false)
         });
 
     }
+
 
     setCircleEditable(enabled: boolean) {
         this.map.geo.circle.setEditable(enabled);
@@ -587,7 +579,6 @@ export class GoogleConfig extends AbstractConfig {
 
     drawArea(polyline: BasePolyline, polygon: BasePolygon): void {
         let drawShaping: any;
-
         this.toggleMapDragging(true);
 
         google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mouseDown, () => {
@@ -600,7 +591,7 @@ export class GoogleConfig extends AbstractConfig {
                 drawShaping.getPath().push(event.latLng);
 
                 let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray());
-                this.map.callbackMap.emit('drawAreasDragMove', convertCoordinates);
+                this.map.callbackMap.emit(CallbackName.drawAreasDragMove, convertCoordinates);
 
             });
 
@@ -626,7 +617,7 @@ export class GoogleConfig extends AbstractConfig {
 
                 let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray())
 
-                this.map.callbackMap.emit('drawAreaDragEnd', convertCoordinates);
+                this.map.callbackMap.emit(CallbackName.drawAreaDragEnd, convertCoordinates);
 
 
                 this.fitBoundsArrayCoordinates(drawShaping.getPath().getArray());
@@ -635,11 +626,6 @@ export class GoogleConfig extends AbstractConfig {
         });
     }
 
-
-    routeInfo(): IRouteInfo {
-
-        return this.map.route.routeInfo;
-    }
 
     toggleTrafficLayer(show: boolean): void {
 
@@ -666,7 +652,7 @@ export class GoogleConfig extends AbstractConfig {
         this.map.api.panTo(latLng);
     }
 
-    ResizeMap(onCenter: boolean) {
+    resizeMap(onCenter: boolean) {
         try {
             if (onCenter) {
                 google.maps.event.trigger(this.map.api, EventType.resize);
@@ -685,6 +671,30 @@ export class GoogleConfig extends AbstractConfig {
 
     onEventIdle() {
         this.changedBoundsMap();
+    }
+
+    private generateCoordinates(position) {
+        return new google.maps.LatLng(position.latitude, position.longitude);
+    }
+
+    private getCicleInfo(circle): CallbackCicleInfo {
+
+        let position = new Position();
+        position.latitude = circle.getCenter().lat();
+        position.longitude = circle.getCenter().lng();
+
+        let infoCicle = <CallbackCicleInfo>{
+            radius: circle.getRadius(),
+            position: position
+        }
+        return infoCicle;
+    }
+
+    private getPosition(marker): IPosition {
+        let position = new Position();
+        position.latitude = marker.getPosition().lat();
+        position.longitude = marker.getPosition().lng();
+        return position;
     }
 
     private getConvertArrayPolygons(arrayCoordinates): Array<Position> {
@@ -718,7 +728,6 @@ export class GoogleConfig extends AbstractConfig {
         return place.photos !== undefined && "photos" in place && place.photos.length > 0
     }
     private changedBoundsMap(): void {
-
         let bounds = this.getBounds();
         if (bounds) {
             let SW = bounds.getSouthWest();
@@ -731,16 +740,13 @@ export class GoogleConfig extends AbstractConfig {
             currentBounds.sw.latitude = SW.lat();
             currentBounds.sw.longitude = NE.lng();
 
-            this.map.callbackMap.emit('changedBoundsMap', currentBounds);
-
+            this.map.callbackMap.emit(CallbackName.changedBoundsMap, currentBounds);
             this.drawMarkersOnMap();
         }
     }
 
     private getAddressSettings(): AddressSettings {
-
         let AdressSettings = new AddressSettings();
-
         AdressSettings.country = AddressTypeName.longName;
         AdressSettings.route = AddressTypeName.longName;
         AdressSettings.locality = AddressTypeName.longName;
