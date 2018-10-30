@@ -1,4 +1,4 @@
-import { NgModule, Injectable } from '@angular/core';
+import { NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { H21MapsComponent } from './h21-maps.component';
 import { MapsComponent } from '../maps.component';

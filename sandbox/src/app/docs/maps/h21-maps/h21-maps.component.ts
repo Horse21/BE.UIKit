@@ -1,12 +1,12 @@
-import { Component, OnInit, Output, Injectable } from '@angular/core';
+import { Component, OnInit, Output, Injectable, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ILatLng } from '../providers/google/interfaces/i-latlng';
 import { MapManager } from '../entity/map-manager';
 import { IPoint } from '../interfaces/i-point';
 import { IPosition } from '../interfaces/i-position';
 import { BoundsMap } from '../providers/google/classes/bounds-map';
 import { CallbackName } from '../enum/e-callback-name';
 import { MapType } from '../enum/e-map-type';
+import { Position } from '../entity/position';
 
 
 @Component({
@@ -17,6 +17,13 @@ import { MapType } from '../enum/e-map-type';
 
 @Injectable()
 export class H21MapsComponent implements OnInit {
+
+    constructor(public manager: MapManager) { }
+
+    @Input() private latitude: number;
+    @Input() private longitude: number;
+    @Input() private minZoom: number;
+    @Input() private zoom: number;
 
     @Output() afterMapInit: Subject<boolean> = new Subject<boolean>();
     @Output() onclickMapPlaceId: Subject<IPosition> = new Subject<IPosition>();
@@ -38,22 +45,26 @@ export class H21MapsComponent implements OnInit {
     @Output() countLoadsMarkers: Subject<number> = new Subject<number>();
     @Output() infoRoute: Subject<number> = new Subject<number>();
 
-    constructor(public manager: MapManager) { }
-
 
     public InitMap(mapType: MapType) {
-
         this.manager.selectMap(mapType);
-      }
-    
-      ngAfterViewInit(): void {
-    
+    }
+
+    ngAfterViewInit(): void {
         this.InitMap(MapType.GOOGLE);
-    
-      }
+    }
 
     ngOnInit() {
+        let position = <Position>{
+            latitude: this.latitude,
+            longitude: this.longitude
+        }
+
         setTimeout(() => {
+            this.manager.getActiveMap().config.setCenter(position);
+            this.manager.getActiveMap().config.setMinZoom(this.minZoom);
+            this.manager.getActiveMap().config.setZoom(this.zoom);
+
             this.manager.getActiveMap().callbackMap.on(CallbackName.onclickMapPlaceId, (placeId) => {
                 this.onclickMapPlaceId.next(placeId);
             });
@@ -116,6 +127,6 @@ export class H21MapsComponent implements OnInit {
             this.manager.getActiveMap().callbackMap.on(CallbackName.infoRoute, (infoRoute) => {
                 this.infoRoute.next(infoRoute);
             });
-        }, 500);
+        }, 170);
     }
 }

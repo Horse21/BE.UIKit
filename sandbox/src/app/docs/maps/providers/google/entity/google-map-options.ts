@@ -1,8 +1,8 @@
 import { IMapOptions } from "../../../interfaces/i-map-options";
 import { IPoint } from "../../../interfaces/i-point";
 import { Injectable } from "@angular/core";
-declare var google;
-
+import * as styleMap from "../../google/style-map.json";
+import { IMapTypeStyle } from "../interfaces/i-map-type-style";
 
 @Injectable()
 export class GoogleMapOptions implements IMapOptions {
@@ -22,6 +22,7 @@ export class GoogleMapOptions implements IMapOptions {
     disableDefaultUI: boolean;
     draggableCursor: string;
     scrollwheel: false;
+    styles?: IMapTypeStyle[];
 
     constructor() {
         this.minZoom = 3;
@@ -29,5 +30,6 @@ export class GoogleMapOptions implements IMapOptions {
         this.scaleControl = true;
         this.disableDefaultUI = true;
         this.draggableCursor = "default";
+        this.styles = styleMap['default'];
     }
 }

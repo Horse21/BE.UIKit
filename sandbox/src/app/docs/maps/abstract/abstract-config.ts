@@ -14,7 +14,7 @@ import { ICircleOptions } from '../interfaces/i-circle-options';
 import { IPolylineOptions } from '../interfaces/i-polyline-options';
 import { Injectable } from "@angular/core";
 import { IInitMap } from '../interfaces/i-init-map';
-import * as mark from "../test.markers.json";
+import * as point from "../test.markers.json";
 import { IEventClickMap } from '../providers/google/interfaces/i-event-clik-map';
 import { IMapOptions } from '../interfaces/i-map-options';
 import { Position } from '../entity/position';
@@ -131,8 +131,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 }
 
                 if (markersVisible) {
-                    for (let i = 0; i < mark.default.length; i++) {
-                        let item = mark.default[i];
+                    for (let i = 0; i < point.default.length; i++) {
+                        let item = point.default[i];
 
                         let marker = this.getBaseMarker(item);
                         marker.point = new Point();
@@ -255,7 +255,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     abstract getCenter(): ILatLng;
 
     markersFitsBounds(): void {
-
         try {
             if (this.map.geo.markers != null && this.map.geo.markers.length > 0) {
                 for (var i = 0; i < this.map.geo.markers.length; i++) {

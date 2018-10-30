@@ -1,9 +1,7 @@
 import { IMapOptions } from "../../../interfaces/i-map-options";
 import { IPoint } from "../../../interfaces/i-point";
 import { Injectable } from "@angular/core";
-
-declare var BMap;
-
+import { MapTypeStyle } from "../../google/interfaces/i-inner";
 
 @Injectable()
 export class BaiduMapOptions implements IMapOptions {
@@ -23,6 +21,7 @@ export class BaiduMapOptions implements IMapOptions {
     disableDefaultUI: boolean;
     draggableCursor: string;
     scrollwheel: false;
+    style?: MapTypeStyle[];
 
     constructor() {
         this.minZoom = 3;

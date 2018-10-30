@@ -42,22 +42,16 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     markersFitsBounds(): void {
-
         super.markersFitsBounds();
     }
 
     boundsExtend(position: IPosition, bounds: ILatLngBounds): void {
-
-        console.log('boundsExtend', position)
-        let LatLng = new google.maps.LatLng({ lat: position.latitude, lng: position.longitude });
-        bounds.extend(LatLng);
+        bounds.extend(this.generateCoordinates(position));
         this.map.api.fitBounds(bounds);
         this.map.api.panToBounds(bounds);
     }
 
-
     boundsExtendPolygon(polygon: BasePolygon, bounds: ILatLngBounds): void {
-
         this.map.api.fitBounds(bounds);
     }
 
@@ -71,7 +65,7 @@ export class GoogleConfig extends AbstractConfig {
             clickable: marker.options.clickable,
             visible: marker.options.visible,
             title: marker.point.title,
-            position: new google.maps.LatLng(marker.point.position.latitude, marker.point.position.longitude),
+            position: this.generateCoordinates(marker.point.position),
             icon: {
                 title: 'hotel',
                 url: './assets/icons_map/icon_hotel.png'
@@ -80,34 +74,25 @@ export class GoogleConfig extends AbstractConfig {
         };
 
         let googleMarker = new google.maps.Marker(googleMarkerOptions);
-
         googleMarker["point"] = marker.point;
-
         google.maps.event.addListener(googleMarker, EventType.click, () => {
-            this.setSelectedMarker(googleMarker)
-            console.log(googleMarker)
-            this.map.callbackMap.emit('markerClick', 'id');
+            this.setSelectedMarker(googleMarker);
+            this.map.callbackMap.emit('markerClick', googleMarker.point.id);
         });
 
         if (this.getBounds().contains(googleMarker.getPosition())) {
             this.map.geo.pushMarkers(googleMarker);
-            this.map.cluster.addMarker(googleMarker, true);
+            this.map.cluster.addMarker(googleMarker, false);
         }
 
         return true;
     }
-
-    private setSelectedMarker(marker) {
-        this.map.selectedMarker = marker;
-    }
-
 
     buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show: boolean) {
         super.buildRoute(from, to, typeRoute, show);
     }
 
     clearAllMap(): void {
-
         this.clearPolygons();
         this.clearMarkers();
         this.clearCircle();
@@ -141,7 +126,6 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-
     clearCircle(): void {
         if (this.map.geo.circle != null) {
             this.map.geo.circle.setMap(null);
@@ -150,169 +134,56 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     onClickMap(event: IEventClickMap) {
-        event.stop();
-        if (this.map.clickMap) {
-            this.map.loadMarkers = !this.map.clickMap;
-            if (event.placeId) {
-                this.map.callbackMap.emit('onclickMapPlaceId', event.placeId);
+        try {
+            event.stop();
+            if (this.map.clickMap) {
+                this.map.loadMarkers = !this.map.clickMap;
+                if (event.placeId) {
+                    this.map.callbackMap.emit(CallbackName.onclickMapPlaceId, event.placeId);
+                }
+                else {
+                    let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
+                    this.map.callbackMap.emit(CallbackName.onclickMapCoordinates, LatLng);
+                }
             }
-            else {
-                let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
-                this.map.callbackMap.emit(CallbackName.onclickMapCoordinates, LatLng);
-            }
-        }
-        console.log(this.map, 'THIS MAP')
+        } catch (error) { }
     }
 
     zoomIn(): void {
-        let currentZoom = this.getZoom();
-        this.setZoom(currentZoom + 1);
+        try {
+            let currentZoom = this.getZoom();
+            this.setZoom(currentZoom + 1);
+        } catch (error) { }
     }
 
     zoomOut(): void {
-        let currentZoom = this.getZoom();
-        this.setZoom(currentZoom - 1);
+        try {
+            let currentZoom = this.getZoom();
+            this.setZoom(currentZoom - 1);
+        } catch (error) { }
     }
-
 
     getLoadCountMarker(): number {
-        return this.map.geo.markers.length;
-    }
-
-
-    private getDetailedAddress(place: Array<GoogleAddressType>): Array<PointAddress> {
-        let componentAddress = this.getAddressSettings();
-        let pointAddress = [];
-        let resultAddress = [];
-
-        for (let i = 0; i < place.length; i++) {
-
-            let parseAddress = new AddressComponent();
-            let nameType = new PointAddress();
-            let addressType = place[i].types[0];
-
-            if (componentAddress[addressType]) {
-
-                let addressValue = place[i][componentAddress[addressType]];
-
-                nameType.type = addressType;
-                nameType.value = addressValue;
-                pointAddress.push(nameType);
-
-                switch (addressType) {
-                    case AddressType.country:
-                        parseAddress.type = PointAddressType.COUNTRY;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
-                    case AddressType.locality:
-                    case AddressType.postalTown:
-                        parseAddress.type = PointAddressType.CITY;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
-                    case AddressType.streetNumber:
-                        parseAddress.type = PointAddressType.HOUSE;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
-                    case AddressType.administrativeAreaLevel1:
-                    case AddressType.administrativeAreaLevel2:
-                        parseAddress.type = PointAddressType.DISTRICT;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress);
-                        break;
-                    case AddressType.route:
-                        parseAddress.type = PointAddressType.STREET;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress)
-                        break;
-                    case AddressType.postalCode:
-                        parseAddress.type = PointAddressType.POSTCODE;
-                        parseAddress.value = addressValue;
-                        resultAddress.push(parseAddress)
-                        break;
-                }
-            }
-        }
-        return resultAddress
+        try {
+            return this.map.geo.markers.length;
+        } catch (error) { }
     }
 
     getAddress(position: IPosition): void {
+        try {
+            let geocoder = new google.maps.Geocoder();
+            let point: Point = new Point();
+            point.position = new Position();
+            point.address = new Address();
 
-        let LatLng = new google.maps.LatLng({ lat: position.latitude, lng: position.longitude });
+            geocoder.geocode({ 'latLng': this.generateCoordinates(position) },
+                (response, status) => {
+                    if (status == ResponseStatus.OK) {
+                        var place = response[0];
+                        let typeAddress = this.getDetailedAddress(place.address_components);
 
-        let geocoder = new google.maps.Geocoder();
-        let point: Point = new Point();
-        point.position = new Position();
-        point.address = new Address();
-
-        geocoder.geocode({ 'latLng': LatLng },
-            (response, status) => {
-                if (status == ResponseStatus.OK) {
-                    var place = response[0];
-                    let typeAddress = this.getDetailedAddress(place.address_components);
-
-                    for (let i = 0; i < typeAddress.length; i++) {
-                        let item = typeAddress[i];
-
-                        switch (item.type) {
-                            case PointAddressType.COUNTRY:
-                                point.address.country = item.value;
-                                break;
-                            case PointAddressType.CITY:
-                                point.address.city = item.value;
-                                break;
-                            case PointAddressType.DISTRICT:
-                                point.address.district = item.value;
-                                break;
-                            case PointAddressType.STREET:
-                                point.address.street = item.value;
-                                break;
-                            case PointAddressType.HOUSE:
-                                point.address.house = item.value;
-                                break;
-                            case PointAddressType.POSTCODE:
-                                point.address.postCode = item.value;
-                                break;
-                        }
-                    }
-
-                    point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
-                    point.address.description = place.formatted_address;
-                    point.position.latitude = place.geometry.location.lat();
-                    point.position.longitude = place.geometry.location.lng();
-                    point.name = place.formatted_address;
-                    point.googlePlaceId = place.place_id;
-                    point.id = place.place_id;
-                    point.subtype = place.types[0];
-                    point.title = place.formatted_address;
-                    point.type = 'internet'
-                    point.source = 'google';
-
-                    this.map.callbackMap.emit('geocoderAddressResult', point);
-                }
-
-                this.map.callbackMap.emit('responseMapError', status);
-            });
-    }
-
-    getDetailsPoint(placeId: string): void {
-        let placesService = new google.maps.places.PlacesService(this.map.api);
-
-        placesService.getDetails({ placeId: placeId },
-            (response, status) => {
-                if (status == ResponseStatus.OK) {
-                    if (response) {
-                        let point: Point = new Point();
-                        point.address = new Address();
-                        point.additionalInformation = new AdditionalInformation();
-
-                        let place = response;
-                        let typeAddres = this.getDetailedAddress(place.address_components);
-
-                        for (let i = 0; i < typeAddres.length; i++) {
-                            let item = typeAddres[i];
+                        for (let i = 0; i < typeAddress.length; i++) {
+                            let item = typeAddress[i];
 
                             switch (item.type) {
                                 case PointAddressType.COUNTRY:
@@ -335,95 +206,166 @@ export class GoogleConfig extends AbstractConfig {
                                     break;
                             }
                         }
-
-                        point.address.description = place.formatted_address;
                         point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
-
-                        point.position = {
-                            latitude: place.geometry.location.lat(),
-                            longitude: place.geometry.location.lng()
-                        }
-
-                        if (this.placeHasPhoto(place)) {
-                            point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
-                        }
-
-
-                        point.name = place.name;
-                        point.additionalInformation = {
-                            webSite: place.website,
-                            rating: place.rating,
-                            phone: place.international_phone_number
-                        };
+                        point.address.description = place.formatted_address;
+                        point.position.latitude = place.geometry.location.lat();
+                        point.position.longitude = place.geometry.location.lng();
+                        point.name = place.formatted_address;
                         point.googlePlaceId = place.place_id;
-                        point.id = place.id;
+                        point.id = place.place_id;
                         point.subtype = place.types[0];
+                        point.title = place.formatted_address;
                         point.type = 'internet'
                         point.source = 'google';
-
-                        this.map.callbackMap.emit('detailsAddressResultPoint', point);
-
+                        this.map.callbackMap.emit('geocoderAddressResult', point);
                     }
-                }
 
-                this.map.callbackMap.emit('responseMapError', status);
-            });
+                    this.map.callbackMap.emit('responseMapError', status);
+                });
+
+        } catch (error) {
+
+        }
+    }
+
+    getDetailsPoint(placeId: string): void {
+        try {
+            let placesService = new google.maps.places.PlacesService(this.map.api);
+            placesService.getDetails({ placeId: placeId },
+                (response, status) => {
+                    if (status == ResponseStatus.OK) {
+                        if (response) {
+                            let point: Point = new Point();
+                            point.address = new Address();
+                            point.additionalInformation = new AdditionalInformation();
+
+                            let place = response;
+                            let typeAddres = this.getDetailedAddress(place.address_components);
+
+                            for (let i = 0; i < typeAddres.length; i++) {
+                                let item = typeAddres[i];
+
+                                switch (item.type) {
+                                    case PointAddressType.COUNTRY:
+                                        point.address.country = item.value;
+                                        break;
+                                    case PointAddressType.CITY:
+                                        point.address.city = item.value;
+                                        break;
+                                    case PointAddressType.DISTRICT:
+                                        point.address.district = item.value;
+                                        break;
+                                    case PointAddressType.STREET:
+                                        point.address.street = item.value;
+                                        break;
+                                    case PointAddressType.HOUSE:
+                                        point.address.house = item.value;
+                                        break;
+                                    case PointAddressType.POSTCODE:
+                                        point.address.postCode = item.value;
+                                        break;
+                                }
+                            }
+
+                            point.address.description = place.formatted_address;
+                            point.address.countryCode = point.address.country.substring(0, 2).toUpperCase();
+                            point.position = {
+                                latitude: place.geometry.location.lat(),
+                                longitude: place.geometry.location.lng()
+                            }
+
+                            if (this.placeHasPhoto(place)) {
+                                point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
+                            }
+
+                            point.additionalInformation = {
+                                webSite: place.website,
+                                rating: place.rating,
+                                phone: place.international_phone_number
+                            };
+                            point.name = place.name;
+                            point.googlePlaceId = place.place_id;
+                            point.id = place.id;
+                            point.subtype = place.types[0];
+                            point.type = 'internet'
+                            point.source = 'google';
+                            this.map.callbackMap.emit('detailsAddressResultPoint', point);
+                        }
+                    }
+
+                    this.map.callbackMap.emit('responseMapError', status);
+                });
+        } catch (error) { }
     }
 
     getZoom(): number {
-
-        return this.map.api.getZoom();
+        try {
+            return this.map.api.getZoom();
+        } catch (error) { }
     }
 
     getBounds(): ILatLngBounds {
-
-        return this.map.api.getBounds();
+        try {
+            return this.map.api.getBounds();
+        } catch (error) { }
     }
 
     getCenter(): ILatLng {
-
-        return this.map.api.getCenter();
+        try {
+            return this.map.api.getCenter();
+        } catch (error) { }
     }
 
     setZoom(zoom: number): void {
-        this.map.api.setZoom(zoom);
+        try {
+            this.map.api.setZoom(zoom);
+        } catch (error) { }
     }
 
     setMinZoom(zoom: number): void {
-        this.map.api.setOptions({ minZoom: zoom });
+        try {
+            this.map.api.setOptions({ minZoom: zoom });
+        } catch (error) { }
     }
 
     setMaxZoom(zoom: number): void {
-        this.map.api.setOptions({ maxZoom: zoom });
+        try {
+            this.map.api.setOptions({ maxZoom: zoom });
+        } catch (error) {
+        }
     }
 
     setCenter(position: IPosition): void {
-
-        this.map.api.setCenter(this.generateCoordinates(position));
+        try {
+            this.map.api.setCenter(this.generateCoordinates(position));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-
     toggleMapDragging(enabled: boolean) {
-        let currentMapOptions = super.getMapOptions();
-
-        if (enabled) {
-            this.map.api.setOptions({
-                draggable: currentMapOptions.draggable = false,
-                scrollwheel: currentMapOptions.scrollwheel = false,
-                disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = false,
-            });
-        }
-        else {
-            this.map.api.setOptions({
-                draggable: currentMapOptions.draggable = true,
-                scrollwheel: currentMapOptions.scrollwheel = true,
-                disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = true,
-            });
+        try {
+            let currentMapOptions = super.getMapOptions();
+            if (enabled) {
+                this.map.api.setOptions({
+                    draggable: currentMapOptions.draggable = false,
+                    scrollwheel: currentMapOptions.scrollwheel = false,
+                    disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = false,
+                });
+            }
+            else {
+                this.map.api.setOptions({
+                    draggable: currentMapOptions.draggable = true,
+                    scrollwheel: currentMapOptions.scrollwheel = true,
+                    disableDoubleClickZoom: currentMapOptions.disableDoubleClickZoom = true,
+                });
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
     showMarker(point: IPoint, onSelectedpoint: boolean, fitBounds: boolean) {
-
         try {
             let googleMarkerOptions: GoogleMarkerOptions = {
                 draggable: false,
@@ -440,19 +382,16 @@ export class GoogleConfig extends AbstractConfig {
             };
 
             let marker = new google.maps.Marker(googleMarkerOptions);
-
             google.maps.event.addListener(marker, EventType.click, () => {
                 let position = this.getPosition(this.map.selectedMarker);
                 this.map.callbackMap.emit(CallbackName.markerClick, position);
             });
-
 
             if (onSelectedpoint) {
                 this.map.selectedMarker = marker;
             }
 
             marker["point"] = point;
-            console.log(marker)
 
             if (this.map.cluster.googleCluster != null) {
                 this.map.geo.pushMarkers(marker)
@@ -460,29 +399,15 @@ export class GoogleConfig extends AbstractConfig {
                 this.map.cluster.refreshMarkers();
             }
 
-
-            this.fitBounds();
+            this.markersFitsBounds();
 
         } catch (error) {
-
             console.log(error);
-
         }
     }
 
     drawMarkersOnMap(): void {
         super.drawMarkersOnMap();
-    }
-
-
-    private fitBounds() {
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = 0; i < this.map.geo.markers.length; i++) {
-            bounds.extend(this.map.geo.markers[i].getPosition());
-        }
-
-        this.map.api.fitBounds(bounds);
-        this.map.api.panToBounds(bounds);
     }
 
     setDraggableMarker(enabled: boolean): void {
@@ -504,39 +429,39 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     drawCircle(cicle: BaseCicle): void {
-
-        if (this.map.geo.circle != null) {
-            this.clearCircle();
-        }
-
-        cicle.options.center = new google.maps.LatLng(
-            {
-                lat: cicle.options.center.latitude,
-                lng: cicle.options.center.longitude
+        try {
+            if (this.map.geo.circle != null) {
+                this.clearCircle();
             }
-        );
-        let circle = new google.maps.Circle(cicle.options);
+            cicle.options.center = new google.maps.LatLng(
+                {
+                    lat: cicle.options.center.latitude,
+                    lng: cicle.options.center.longitude
+                }
+            );
+            let circle = new google.maps.Circle(cicle.options);
 
-        circle.setMap(this.map.api);
-
-        let infoCicle = this.getCicleInfo(circle);
-        this.map.callbackMap.emit(CallbackName.createRadius, infoCicle);
-
-        this.map.geo.circle = circle;
-
-        google.maps.event.addListener(circle, EventType.radiusChanged, () => {
-            let infoCicle = this.getCicleInfo(circle);
-            this.map.callbackMap.emit(CallbackName.radiusChanged, infoCicle);
-        });
-
-        google.maps.event.addListener(circle, EventType.dragEnd, () => {
+            circle.setMap(this.map.api);
 
             let infoCicle = this.getCicleInfo(circle);
-            this.map.callbackMap.emit(CallbackName.radiusDragEnd, infoCicle);
+            this.map.callbackMap.emit(CallbackName.createRadius, infoCicle);
 
-            this.setCircleDraggable(false)
-        });
+            this.map.geo.circle = circle;
 
+            google.maps.event.addListener(circle, EventType.radiusChanged, () => {
+                let infoCicle = this.getCicleInfo(circle);
+                this.map.callbackMap.emit(CallbackName.radiusChanged, infoCicle);
+            });
+
+            google.maps.event.addListener(circle, EventType.dragEnd, () => {
+                let infoCicle = this.getCicleInfo(circle);
+                this.map.callbackMap.emit(CallbackName.radiusDragEnd, infoCicle);
+
+                this.setCircleDraggable(false)
+            });
+        } catch (error) {
+
+        }
     }
 
 
@@ -578,78 +503,70 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     drawArea(polyline: BasePolyline, polygon: BasePolygon): void {
-        let drawShaping: any;
-        this.toggleMapDragging(true);
-
-        google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mouseDown, () => {
-            drawShaping = new google.maps.Polyline(polyline.options);
-
-            drawShaping.setMap(this.map.api);
-            this.map.geo.pushPolygons(drawShaping);
-
-            let move = google.maps.event.addListener(this.map.api, EventType.mouseMove, event => {
-                drawShaping.getPath().push(event.latLng);
-
-                let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray());
-                this.map.callbackMap.emit(CallbackName.drawAreasDragMove, convertCoordinates);
-
-            });
-
-            google.maps.event.addListenerOnce(this.map.api, EventType.mouseUp, () => {
-
-                google.maps.event.removeListener(move);
-
-                let path = drawShaping.getPath();
-
-                drawShaping.setMap(null);
-
-                polygon.options.path = path;
-
-                drawShaping = new google.maps.Polygon(polygon.options);
+        try {
+            let drawShaping: any;
+            this.toggleMapDragging(true);
+            google.maps.event.addDomListener(this.map.api.getDiv(), EventType.mouseDown, () => {
+                drawShaping = new google.maps.Polyline(polyline.options);
 
                 drawShaping.setMap(this.map.api);
+                this.map.geo.pushPolygons(drawShaping);
 
-                this.toggleMapDragging(false);
+                let move = google.maps.event.addListener(this.map.api, EventType.mouseMove, event => {
+                    drawShaping.getPath().push(event.latLng);
 
-                this.map.geo.pushPolygons(drawShaping)
+                    let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray());
+                    this.map.callbackMap.emit(CallbackName.drawAreasDragMove, convertCoordinates);
 
-                google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mouseDown);
+                });
 
-                let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray())
+                google.maps.event.addListenerOnce(this.map.api, EventType.mouseUp, () => {
+                    google.maps.event.removeListener(move);
+                    let path = drawShaping.getPath();
+                    drawShaping.setMap(null);
+                    polygon.options.path = path;
+                    drawShaping = new google.maps.Polygon(polygon.options);
+                    drawShaping.setMap(this.map.api);
+                    this.toggleMapDragging(false);
+                    this.map.geo.pushPolygons(drawShaping)
 
-                this.map.callbackMap.emit(CallbackName.drawAreaDragEnd, convertCoordinates);
+                    google.maps.event.clearListeners(this.map.api.getDiv(), EventType.mouseDown);
+                    let convertCoordinates = this.getConvertArrayPolygons(drawShaping.getPath().getArray())
+                    this.map.callbackMap.emit(CallbackName.drawAreaDragEnd, convertCoordinates);
+                    this.fitBoundsArrayCoordinates(drawShaping.getPath().getArray());
 
-
-                this.fitBoundsArrayCoordinates(drawShaping.getPath().getArray());
-
+                });
             });
-        });
+        } catch (error) {
+
+        }
     }
 
-
     toggleTrafficLayer(show: boolean): void {
+        try {
+            if (this.map.trafficLayer == null) {
+                this.map.trafficLayer = new google.maps.TrafficLayer();
+            }
 
-        if (this.map.trafficLayer == null) {
-            this.map.trafficLayer = new google.maps.TrafficLayer();
+            this.map.trafficLayer.setMap(show ? this.map.api : null);
+        } catch (error) {
+
         }
-
-        this.map.trafficLayer.setMap(show ? this.map.api : null);
     }
 
     toggleTransitLayer(show: boolean): void {
+        try {
+            if (this.map.transitLayer == null) {
+                this.map.transitLayer = new google.maps.TransitLayer();
+            }
+            this.map.transitLayer.setMap(show ? this.map.api : null);
+        } catch (error) {
 
-        if (this.map.transitLayer == null) {
-            this.map.transitLayer = new google.maps.TransitLayer();
         }
-        this.map.transitLayer.setMap(show ? this.map.api : null);
     }
 
     polygonsContainsMarker(marker: BaseMarker, polygon: IPolygonOptions): boolean {
         return super.polygonsContainsMarker(marker, polygon);
-    }
-
-    panTo(latLng: ILatLng): void {
-        this.map.api.panTo(latLng);
     }
 
     resizeMap(onCenter: boolean) {
@@ -665,7 +582,6 @@ export class GoogleConfig extends AbstractConfig {
             }
 
         } catch (error) {
-
         }
     }
 
@@ -673,16 +589,77 @@ export class GoogleConfig extends AbstractConfig {
         this.changedBoundsMap();
     }
 
+    private panTo(latLng: ILatLng): void {
+        this.map.api.panTo(latLng);
+    }
+
+    private getDetailedAddress(place: Array<GoogleAddressType>): Array<PointAddress> {
+        let componentAddress = this.getAddressSettings();
+        let pointAddress = [];
+        let resultAddress = [];
+
+        for (let i = 0; i < place.length; i++) {
+            let parseAddress = new AddressComponent();
+            let nameType = new PointAddress();
+            let addressType = place[i].types[0];
+
+            if (componentAddress[addressType]) {
+                let addressValue = place[i][componentAddress[addressType]];
+                nameType.type = addressType;
+                nameType.value = addressValue;
+                pointAddress.push(nameType);
+
+                switch (addressType) {
+                    case AddressType.country:
+                        parseAddress.type = PointAddressType.COUNTRY;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.locality:
+                    case AddressType.postalTown:
+                        parseAddress.type = PointAddressType.CITY;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.streetNumber:
+                        parseAddress.type = PointAddressType.HOUSE;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.administrativeAreaLevel1:
+                    case AddressType.administrativeAreaLevel2:
+                        parseAddress.type = PointAddressType.DISTRICT;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.route:
+                        parseAddress.type = PointAddressType.STREET;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                    case AddressType.postalCode:
+                        parseAddress.type = PointAddressType.POSTCODE;
+                        parseAddress.value = addressValue;
+                        resultAddress.push(parseAddress);
+                        break;
+                }
+            }
+        }
+        return resultAddress
+    }
+
+    private setSelectedMarker(marker) {
+        this.map.selectedMarker = marker;
+    }
+
     private generateCoordinates(position) {
         return new google.maps.LatLng(position.latitude, position.longitude);
     }
 
     private getCicleInfo(circle): CallbackCicleInfo {
-
         let position = new Position();
         position.latitude = circle.getCenter().lat();
         position.longitude = circle.getCenter().lng();
-
         let infoCicle = <CallbackCicleInfo>{
             radius: circle.getRadius(),
             position: position
@@ -698,7 +675,6 @@ export class GoogleConfig extends AbstractConfig {
     }
 
     private getConvertArrayPolygons(arrayCoordinates): Array<Position> {
-
         let ArrayPosition = [];
         for (var i = 0; i < arrayCoordinates.length; i++) {
             var item = arrayCoordinates[i];
@@ -708,22 +684,19 @@ export class GoogleConfig extends AbstractConfig {
             }
             ArrayPosition.push(position);
         }
-
         return ArrayPosition;
     }
 
     private fitBoundsArrayCoordinates(arrayCoordinates): void {
-
         let bounds = new google.maps.LatLngBounds();
-
         for (var n = 0; n < arrayCoordinates.length; n++) {
-
             bounds.extend(arrayCoordinates[n]);
         }
         this.map.api.panToBounds(bounds);
         this.map.api.fitBounds(bounds);
 
     }
+
     private placeHasPhoto(place): boolean {
         return place.photos !== undefined && "photos" in place && place.photos.length > 0
     }
@@ -739,7 +712,6 @@ export class GoogleConfig extends AbstractConfig {
             currentBounds.ne.longitude = NE.lng();
             currentBounds.sw.latitude = SW.lat();
             currentBounds.sw.longitude = NE.lng();
-
             this.map.callbackMap.emit(CallbackName.changedBoundsMap, currentBounds);
             this.drawMarkersOnMap();
         }

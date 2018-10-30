@@ -1,9 +1,9 @@
 import { IMapOptions } from "../../../interfaces/i-map-options";
 import { IPoint } from "../../../interfaces/i-point";
 import { Injectable } from "@angular/core";
+import { IMapTypeStyle } from "../../google/interfaces/i-map-type-style";
 
 declare var BMap;
-
 
 @Injectable()
 export class YandexMapOptions implements IMapOptions {
@@ -23,6 +23,7 @@ export class YandexMapOptions implements IMapOptions {
     disableDefaultUI: boolean;
     draggableCursor: string;
     scrollwheel: false;
+    styles?: IMapTypeStyle[];
 
     constructor() {
         this.minZoom = 3;

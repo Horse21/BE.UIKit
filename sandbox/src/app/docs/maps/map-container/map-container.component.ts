@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MapManager } from '../entity/map-manager';
 
 
@@ -7,19 +7,10 @@ import { MapManager } from '../entity/map-manager';
     templateUrl: './map-container.component.html',
     styleUrls: ['./map-container.component.css']
 })
-export class MapContainerComponent implements OnInit {
+export class MapContainerComponent {
 
     constructor(private manager: MapManager) {
-      
+
     }
-
-    @Input() private latitude: number;
-    @Input() private longitude: number;
-    @Input() private zoom: number;
-    @Input() private minZoom: number;
-
-    ngOnInit() {}
-
-    ngAfterViewInit() {}
 }
 

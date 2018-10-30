@@ -33,7 +33,6 @@ export class GoogleMap extends AbstractMap {
     }
 
     init(): void {
-
         this.api = new google.maps.Map(this.container, this.options);
         this.callbackMap.emit('initMap');
     }
@@ -58,7 +57,7 @@ export class GoogleMap extends AbstractMap {
                 };
             } else {
                 window['APILoaded'] = () => {
-                    this.setCenter();
+                    this.OnReady();
                     observer.next(FetchStatus.SUCCESS);
                 }
             }
@@ -71,12 +70,8 @@ export class GoogleMap extends AbstractMap {
         });
     }
 
-    private setCenter(): void {
+    private OnReady() {
         this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
-    }
-
-    private OnReady(latitude: number, longitude: number) {
-        this.options.center = new google.maps.LatLng(latitude, longitude);
     }
 
     destroy(): void {

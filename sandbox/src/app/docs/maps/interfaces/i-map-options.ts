@@ -1,4 +1,5 @@
 import { IPoint } from "./i-point";
+import { IMapTypeStyle } from "../providers/google/interfaces/i-map-type-style";
 
 export interface IMapOptions {
     center: IPoint;
@@ -9,7 +10,7 @@ export interface IMapOptions {
     allowScrolling: boolean;
     allowZooming: boolean;
     enableScaling: boolean;
-    enableZoomByDoubleClick:boolean;
+    enableZoomByDoubleClick: boolean;
     disableDoubleClickZoom: boolean;
     scaleControl: boolean;
     editable: boolean;
@@ -17,4 +18,5 @@ export interface IMapOptions {
     disableDefaultUI: boolean;
     draggableCursor: string;
     scrollwheel: boolean;
+    styles?: IMapTypeStyle[];
 }

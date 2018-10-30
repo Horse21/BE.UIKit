@@ -11,9 +11,7 @@ import { AbstractSearch } from './abstract-search';
 import { AbstractRouteBuilder } from './abstract-route-builder';
 import { BaseMarker } from '../entity/base-marker';
 import { BaseLayer } from '../entity/base-layer';
-import { EventsMapEmitter } from "../entity/event-emitter";
 import { EventEmitter } from 'events';
-import { SubjectSubscriber, Subject } from 'rxjs/internal/Subject';
 
 @Injectable()
 export abstract class AbstractMap {
