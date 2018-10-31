@@ -30,6 +30,7 @@ import { IPosition } from '../../interfaces/i-position';
 import { BoundsMap } from './classes/bounds-map';
 import { CallbackCicleInfo } from '../../classes/callback-cicle-radius';
 import { CallbackName } from '../../enum/e-callback-name';
+import { CallbackMarkerInfo } from '../../classes/callback-marker';
 
 declare var google;
 
@@ -37,10 +38,22 @@ declare var google;
 
 export class GoogleConfig extends AbstractConfig {
 
+    /**
+        * Method to get route information.
+        * 
+        ``return:``
+        ````
+        IRouteInfo;
+        ````
+        */
     getRouteInfo(): IRouteInfo {
         return this.map.route.routeInfo;
     }
 
+    /**
+     * Method scale the map so that all markers on the map are visible.
+     * 
+     */
     markersFitsBounds(): void {
         super.markersFitsBounds();
     }
@@ -77,7 +90,7 @@ export class GoogleConfig extends AbstractConfig {
         googleMarker["point"] = marker.point;
         google.maps.event.addListener(googleMarker, EventType.click, () => {
             this.setSelectedMarker(googleMarker);
-            this.map.callbackMap.emit('markerClick', googleMarker.point.id);
+            this.map.callbackMap.emit(CallbackName.markerClick, googleMarker.point.id);
         });
 
         if (this.getBounds().contains(googleMarker.getPosition())) {
@@ -88,10 +101,24 @@ export class GoogleConfig extends AbstractConfig {
         return true;
     }
 
-    buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show: boolean) {
+    /**
+       * Method build a route between the start and end point;
+       *  
+       `` takes four parameters:``
+       ````
+        *  from: IPoint;
+        *  to: IPoint;
+        *  typeRoute: TypeRoute; // route type;
+        *  show: boolean; // show the route on the map;
+        * ````
+       */
+    buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show: boolean): void {
         super.buildRoute(from, to, typeRoute, show);
     }
 
+    /**
+       * Method clear all objects from the map;
+       */
     clearAllMap(): void {
         this.clearPolygons();
         this.clearMarkers();
@@ -101,6 +128,9 @@ export class GoogleConfig extends AbstractConfig {
         this.map.selectedMarker = null;
     }
 
+    /**
+       * Method clear markers the map;
+       */
     clearMarkers(): void {
         if (this.map.cluster.googleCluster != null) {
             this.map.cluster.removeMarkers();
@@ -108,6 +138,9 @@ export class GoogleConfig extends AbstractConfig {
         super.clearMarkers();
     }
 
+    /**
+      * Method clear route the map;
+      */
     clearRoutes(): void {
         if (this.map.geo.routes != undefined && this.map.geo.routes[0] != null) {
             this.map.geo.routes.forEach((item) => {
@@ -117,6 +150,9 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+     * Method clear polygons the map;
+     */
     clearPolygons(): void {
         if (this.map.geo.polygons != undefined && this.map.geo.polygons[0] != null) {
             this.map.geo.polygons.forEach((item) => {
@@ -126,13 +162,24 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+     * Method clear cicle the map;
+     */
     clearCircle(): void {
         if (this.map.geo.circle != null) {
             this.map.geo.circle.setMap(null);
             super.clearCircle();
         }
     }
-
+    /**
+     * Method the method is triggered when there is a click event on the map.
+     *  
+       `` callback:``
+       ````
+        *  CallbackName.onclickMapPlaceId: string (placeId);
+        *  CallbackName.onclickMapCoordinates: Position;
+        * ````
+     */
     onClickMap(event: IEventClickMap) {
         try {
             event.stop();
@@ -142,33 +189,58 @@ export class GoogleConfig extends AbstractConfig {
                     this.map.callbackMap.emit(CallbackName.onclickMapPlaceId, event.placeId);
                 }
                 else {
-                    let LatLng = { latitude: event.latLng.lat(), longitude: event.latLng.lng() };
-                    this.map.callbackMap.emit(CallbackName.onclickMapCoordinates, LatLng);
+                    let position = <Position>{
+                        latitude: event.latLng.lat(),
+                        longitude: event.latLng.lng()
+                    }
+                    this.map.callbackMap.emit(CallbackName.onclickMapCoordinates, position);
                 }
             }
         } catch (error) { }
     }
-
+    /**
+         * Method to increase the current zoom on one position.
+         * 
+         */
     zoomIn(): void {
         try {
             let currentZoom = this.getZoom();
             this.setZoom(currentZoom + 1);
-        } catch (error) { }
+        }
+        catch (error) { }
     }
 
+    /**
+         * Method to decrease the current zoom on one position.
+         * 
+         */
     zoomOut(): void {
         try {
             let currentZoom = this.getZoom();
             this.setZoom(currentZoom - 1);
-        } catch (error) { }
+        }
+        catch (error) { }
     }
+
+    /**
+       * Method get the number of loaded points on the map;
+       * * return: number;
+       */
 
     getLoadCountMarker(): number {
         try {
             return this.map.geo.markers.length;
-        } catch (error) { }
+        }
+        catch (error) { }
     }
 
+    /**
+        * Method get point information based on coordinates;
+        *  * takes one parameter:
+        *  position: IPosition;
+        *  *  return:
+        * (callback: point: IPoint);
+        */
     getAddress(position: IPosition): void {
         try {
             let geocoder = new google.maps.Geocoder();
@@ -217,17 +289,23 @@ export class GoogleConfig extends AbstractConfig {
                         point.title = place.formatted_address;
                         point.type = 'internet'
                         point.source = 'google';
-                        this.map.callbackMap.emit('geocoderAddressResult', point);
+                        this.map.callbackMap.emit(CallbackName.geocoderAddressResult, point);
                     }
 
-                    this.map.callbackMap.emit('responseMapError', status);
+                    this.map.callbackMap.emit(CallbackName.responseMapError, status);
                 });
 
-        } catch (error) {
-
         }
+        catch (error) { }
     }
 
+    /**
+       * Method to get detailed information about the point;
+       *  * takes one parameter:
+       *  -placeId: string; ()
+       *  *  return:
+       * (callback: point: IPoint) 
+       */
     getDetailsPoint(placeId: string): void {
         try {
             let placesService = new google.maps.places.PlacesService(this.map.api);
@@ -238,7 +316,6 @@ export class GoogleConfig extends AbstractConfig {
                             let point: Point = new Point();
                             point.address = new Address();
                             point.additionalInformation = new AdditionalInformation();
-
                             let place = response;
                             let typeAddres = this.getDetailedAddress(place.address_components);
 
@@ -273,11 +350,9 @@ export class GoogleConfig extends AbstractConfig {
                                 latitude: place.geometry.location.lat(),
                                 longitude: place.geometry.location.lng()
                             }
-
                             if (this.placeHasPhoto(place)) {
                                 point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
                             }
-
                             point.additionalInformation = {
                                 webSite: place.website,
                                 rating: place.rating,
@@ -289,45 +364,72 @@ export class GoogleConfig extends AbstractConfig {
                             point.subtype = place.types[0];
                             point.type = 'internet'
                             point.source = 'google';
-                            this.map.callbackMap.emit('detailsAddressResultPoint', point);
+                            this.map.callbackMap.emit(CallbackName.detailsAddressResultPoint, point);
                         }
                     }
 
-                    this.map.callbackMap.emit('responseMapError', status);
+                    this.map.callbackMap.emit(CallbackName.responseMapError, status);
                 });
         } catch (error) { }
     }
 
+    /**
+       * Method get current map zoom;
+       * return number;
+       */
     getZoom(): number {
         try {
             return this.map.api.getZoom();
         } catch (error) { }
     }
 
+    /**
+       * Method get the boundaries of the visible map area;
+       * return ILatLngBounds;
+       */
     getBounds(): ILatLngBounds {
         try {
             return this.map.api.getBounds();
         } catch (error) { }
     }
 
+    /**
+       * Method to the center of the map;
+       * return ILatLng;
+       */
     getCenter(): ILatLng {
         try {
             return this.map.api.getCenter();
         } catch (error) { }
     }
 
+    /**
+       * Method set a specific zoom on the map;
+       * takes one parameter:
+       * - zoom: number;
+       */
     setZoom(zoom: number): void {
         try {
             this.map.api.setZoom(zoom);
         } catch (error) { }
     }
 
+    /**
+       * Method set minimum zoom map;
+       * takes one parameter:
+       * - zoom: number;
+       */
     setMinZoom(zoom: number): void {
         try {
             this.map.api.setOptions({ minZoom: zoom });
         } catch (error) { }
     }
 
+    /**
+       * Method set maximum zoom map;
+       * takes one parameter:
+       * - zoom: number;
+       */
     setMaxZoom(zoom: number): void {
         try {
             this.map.api.setOptions({ maxZoom: zoom });
@@ -335,6 +437,11 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+       * Method to set the center of the map;
+       * takes one parameter:
+       * - position: IPosition (Put the map in the center according to the coordinates);
+       */
     setCenter(position: IPosition): void {
         try {
             this.map.api.setCenter(this.generateCoordinates(position));
@@ -343,6 +450,11 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+       * Method toggle map drag;
+       * takes one parameter:
+       * - enabled: boolean (Set flag value: true - enable, false-disable);
+       */
     toggleMapDragging(enabled: boolean) {
         try {
             let currentMapOptions = super.getMapOptions();
@@ -365,7 +477,16 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-    showMarker(point: IPoint, onSelectedpoint: boolean, fitBounds: boolean) {
+    /**
+     * Method to add a marker to the map.
+     * 
+    ``takes two parameters:``
+    ```
+      point:IPoint;
+      onSelectedpoint:boolean;
+      ```
+     */
+    addMarker(point: IPoint, onSelectedPoint: boolean) {
         try {
             let googleMarkerOptions: GoogleMarkerOptions = {
                 draggable: false,
@@ -387,7 +508,7 @@ export class GoogleConfig extends AbstractConfig {
                 this.map.callbackMap.emit(CallbackName.markerClick, position);
             });
 
-            if (onSelectedpoint) {
+            if (onSelectedPoint) {
                 this.map.selectedMarker = marker;
             }
 
@@ -406,21 +527,33 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+
     drawMarkersOnMap(): void {
         super.drawMarkersOnMap();
     }
+
+
+    /**
+     * Method to set a dragged marker on the map.
+     * 
+     `` takes one parameter:``
+     ```
+     enabled: boolean;
+     ```
+     */
 
     setDraggableMarker(enabled: boolean): void {
         try {
             this.map.loadMarkers = !enabled;
             if (this.map.selectedMarker != null) {
-                this.map.callbackMap.emit(CallbackName.markerDraggable, '', enabled);
+                this.map.callbackMap.emit(CallbackName.markerDraggable, this.getMarkerInfo(this.map.selectedMarker));
                 this.map.selectedMarker.setDraggable(enabled);
+                console.log(this.map.selectedMarker, 'selectMarker')
             }
 
             google.maps.event.addListener(this.map.selectedMarker, EventType.dragEnd, () => {
                 let position = this.getPosition(this.map.selectedMarker);
-                this.map.callbackMap.emit(CallbackName.markerDraggableEnd, position);
+                this.map.callbackMap.emit(CallbackName.markerDraggableEnd, this.getMarkerInfo(this.map.selectedMarker));
             });
 
         } catch (error) {
@@ -428,6 +561,14 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+    * Method to set the circle on the map;
+    * 
+    `` takes one parameter:``
+    ``` 
+    cicle: BaseCicle
+    ```
+    */
     drawCircle(cicle: BaseCicle): void {
         try {
             if (this.map.geo.circle != null) {
@@ -464,44 +605,115 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
-
-    setCircleEditable(enabled: boolean) {
+    /**
+    * Method to set an editable circle.
+    * 
+    `` takes one parameter:``
+    ```
+    enabled: boolean;
+    ```
+    */
+    setCircleEditable(enabled: boolean): void {
         this.map.geo.circle.setEditable(enabled);
     }
 
-    setCircleRadius(radius: number) {
+    /**
+     * Method to set the radius of the circle.
+     * 
+    `` takes one parameter:``
+    ```
+     radius: number;
+     ```
+     */
+    setCircleRadius(radius: number): void {
         this.map.geo.circle.setRadius(radius);
     }
 
-    setCircleDraggable(enabled: boolean) {
+    /**
+     * Method to set the draggable circle.
+     * 
+     `` takes one parameter:``
+     ```
+     enabled: boolean;
+     ```
+     */
+    setCircleDraggable(enabled: boolean): void {
         this.map.geo.circle.setDraggable(enabled);
     }
 
-    setBindCicleToMarker() {
+    /**
+     * Method to install bind circle to marker.
+     * 
+     ``takes one parameter:``
+     ```
+    enabled: boolean;
+     ```
+     */
+    setBindCicleToMarker(): void {
         if (this.map.geo.circle != null) {
             this.map.geo.circle.bindTo(OptionType.center, this.map.selectedMarker, OptionType.position);
         }
     }
 
-    setLoadMarkers(enabled: boolean) {
+    /**
+     * Method to set the markers load.
+     * 
+     `` takes one parameter:``
+     ```
+     enabled: boolean;```
+     */
+    setLoadMarkers(enabled: boolean): void {
         this.map.loadMarkers = enabled;
     }
 
-    setClikMap(enabled: boolean) {
+    /**
+    * Method to set the click event on the map.
+    * 
+    ``takes one parameter:``
+    ````
+    enabled: boolean;
+    ````
+    */
+    setClikMap(enabled: boolean): void {
         this.map.clickMap = enabled;
     }
+
+    /**
+     * Method to draw polygon on the map.
+     * 
+     ``takes one parameter:``
+     ````
+     polyline: BasePolygon;
+     ````
+     */
 
     drawPolygon(polyline: BasePolygon): void {
         polyline = new google.maps.Polyline(polyline.options);
         polyline.setMap(this.map.api);
     }
 
-
-    drawPolyline(polygon: BasePolyline): void {
-        let polyline = new google.maps.Polyline(polygon.options);
+    /**
+        * Method to draw polyline on the map.
+        * 
+        ``takes one parameter:``
+        ````
+        polyline: BasePolyline;
+        ````
+        */
+    drawPolyline(polyline: BasePolyline): void {
+        polyline = new google.maps.Polyline(polyline.options);
         polyline.setMap(this.map.api);
     }
 
+    /**
+       * Method draw an arbitrary area on the map.
+       * 
+       ``takes two parameter:``
+       ````
+       polyline: BasePolyline;
+       polygon: BasePolygon;
+       ````
+       */
     drawArea(polyline: BasePolyline, polygon: BasePolygon): void {
         try {
             let drawShaping: any;
@@ -541,7 +753,14 @@ export class GoogleConfig extends AbstractConfig {
 
         }
     }
-
+    /**
+           * Method show the layer of traffic jams on the map.
+           *
+           `` takes one parameter:``
+           ````
+           show: boolean;
+           ````
+           */
     toggleTrafficLayer(show: boolean): void {
         try {
             if (this.map.trafficLayer == null) {
@@ -554,6 +773,14 @@ export class GoogleConfig extends AbstractConfig {
         }
     }
 
+    /**
+        * Method show public transport layer on map.
+        * 
+        ``takes one parameter:``
+        ````
+        show: boolean;
+        ````
+        */
     toggleTransitLayer(show: boolean): void {
         try {
             if (this.map.transitLayer == null) {
@@ -569,6 +796,13 @@ export class GoogleConfig extends AbstractConfig {
         return super.polygonsContainsMarker(marker, polygon);
     }
 
+    /**
+      * Method to change the size of the map.
+      * 
+      ``takes one parameter:``
+      ````
+      onCenter: boolean; (If you change the map container, place the map in the center);````
+      */
     resizeMap(onCenter: boolean) {
         try {
             if (onCenter) {
@@ -648,13 +882,28 @@ export class GoogleConfig extends AbstractConfig {
         return resultAddress
     }
 
-    private setSelectedMarker(marker) {
+    /**
+      * Method set the selected marker.
+      * 
+      ``takes one parameter:``
+      ````
+      marker: BaseMarker;````
+      */
+    private setSelectedMarker(marker: BaseMarker) {
         this.map.selectedMarker = marker;
     }
 
-    private generateCoordinates(position) {
+    /**
+     * Method generates coordinates for a specific provider (in this case google).
+     * 
+     ``takes one parameter:``
+     ````
+     position: IPosition;````
+     */
+    private generateCoordinates(position: IPosition) {
         return new google.maps.LatLng(position.latitude, position.longitude);
     }
+
 
     private getCicleInfo(circle): CallbackCicleInfo {
         let position = new Position();
@@ -665,6 +914,17 @@ export class GoogleConfig extends AbstractConfig {
             position: position
         }
         return infoCicle;
+    }
+
+    private getMarkerInfo(marker): CallbackMarkerInfo {
+        let position = new Position();
+        position.latitude = marker.getPosition().lat();
+        position.longitude = marker.getPosition().lng();
+        let infoMarker = <CallbackMarkerInfo>{
+            position: position,
+            id: marker.point.id,
+        }
+        return infoMarker;
     }
 
     private getPosition(marker): IPosition {
@@ -700,6 +960,7 @@ export class GoogleConfig extends AbstractConfig {
     private placeHasPhoto(place): boolean {
         return place.photos !== undefined && "photos" in place && place.photos.length > 0
     }
+
     private changedBoundsMap(): void {
         let bounds = this.getBounds();
         if (bounds) {

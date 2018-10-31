@@ -30,7 +30,7 @@ export interface IConfig {
     setMinZoom(zoom: number): void;
     setMaxZoom(zoom: number): void;
     setCenter(position: IPosition): void;
-    showMarker(point: IPoint, onSelectedpoint?: boolean, fitbounds?: boolean): void;
+    addMarker(point: IPoint, onSelectedpoint?: boolean, fitbounds?: boolean): void;
     toggleMapDragging(enabled?: boolean);
     toggleTrafficLayer(show?: boolean);
     toggleTransitLayer(show?: boolean);

@@ -60,7 +60,7 @@ export class MapSearchComponent {
 
   private SelectAutocomplete(placeid, type) {
     this.manager.getActiveMap().search.searchDetails(placeid).subscribe(point => {
-      this.manager.getActiveMap().config.showMarker(point, true);
+      this.manager.getActiveMap().config.addMarker(point, true);
 
       switch (type) {
         case 'from':

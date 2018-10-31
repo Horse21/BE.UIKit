@@ -2,7 +2,6 @@ import { AbstractRouteBuilder } from "../../abstract/abstract-route-builder";
 import { RouteInfo } from "../../classes/route-info";
 import { RouteTextValue } from "../../classes/route-text-value";
 import { Observable, Observer } from "rxjs";
-import { TravelMode } from "../../enum/e-travel-mode";
 import { TypeRoute } from "../../enum/e-type-route";
 import { ResponseStatus } from "../baidu/enum/e-status-response ";
 
@@ -12,12 +11,12 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
 
     showStartPoint(): void {
 
-        this.map.config.showMarker(this.startPoint, false);
+        this.map.config.addMarker(this.startPoint, false);
     }
 
     showFinishPoint(): void {
 
-        this.map.config.showMarker(this.finishPoint, false);
+        this.map.config.addMarker(this.finishPoint, false);
 
     }
 
@@ -43,11 +42,13 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         }
     }
 
-    getInfoRoute(): Observable<any> {
+	 /**
+     * Method route information.
+     */
 
+    getInfoRoute(): Observable<any> {
         try {
             return new Observable((observer: Observer<any>) => {
-
                 let directionsService = new google.maps.DirectionsService();
 
                 let start = new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude);
@@ -100,11 +101,17 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         }
     }
 
+     /**
+     * Method route distance information.
+     */
     getInfoDistance(): RouteInfo {
 
         return this.map.route.routeInfo;
     }
 
+    /**
+     * Method show route fly.
+     */
     private showRouteFly(): void {
 
         this.routeOptions.polylineOptions.path = [new google.maps.LatLng(this.map.route.startPoint.position.latitude, this.map.route.startPoint.position.longitude),
@@ -117,6 +124,9 @@ export class GoogleRouteBuilder extends AbstractRouteBuilder {
         this.map.geo.pushRoutes(directionsDisplay);
     }
 
+     /**
+     * Method show route car.
+     */
     private showRouteCar(): void {
 
         let directionsDisplay = new google.maps.DirectionsRenderer();

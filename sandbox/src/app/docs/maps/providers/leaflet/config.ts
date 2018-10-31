@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 import { IEventClickMap } from './interfaces/i-event-clik-map';
 import { ILatLng } from '../../providers/google/interfaces/i-latlng';
 import { ILatLngBounds } from './interfaces/i-latln-bounds';
-import { Observable } from 'rxjs';
 import { BasePolygon } from '../../entity/base-polygon';
 import { BasePolyline } from '../../entity/base-polyline';
 import { BaseCicle } from '../../entity/base-circle';
@@ -15,7 +14,7 @@ import { IPosition } from '../../interfaces/i-position';
 
 
 @Injectable()
-export class BaiduConfig extends AbstractConfig {
+export class LeafletConfig extends AbstractConfig {
     getRouteInfo(): IRouteInfo {
         throw new Error("Method not implemented.");
     }
@@ -71,7 +70,7 @@ export class BaiduConfig extends AbstractConfig {
     addMarker(point: IPoint, onSelectedpoint: boolean): void {
         throw new Error("Method not implemented.");
     }
-    draggableMarker(enabled: boolean): void {
+    draggableMarker(): void {
         throw new Error("Method not implemented.");
     }
     setZoom(zoom: number): void {

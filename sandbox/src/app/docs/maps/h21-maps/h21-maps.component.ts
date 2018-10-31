@@ -7,6 +7,9 @@ import { BoundsMap } from '../providers/google/classes/bounds-map';
 import { CallbackName } from '../enum/e-callback-name';
 import { MapType } from '../enum/e-map-type';
 import { Position } from '../entity/position';
+import { CallbackCicleInfo } from '../classes/callback-cicle-radius';
+import { CallbackMarkerInfo } from '../classes/callback-marker';
+import { RouteInfo } from '../classes/route-info';
 
 
 @Component({
@@ -24,6 +27,7 @@ export class H21MapsComponent implements OnInit {
     @Input() private longitude: number;
     @Input() private minZoom: number;
     @Input() private zoom: number;
+    @Input() private provider: string;
 
     @Output() afterMapInit: Subject<boolean> = new Subject<boolean>();
     @Output() onclickMapPlaceId: Subject<IPosition> = new Subject<IPosition>();
@@ -35,32 +39,32 @@ export class H21MapsComponent implements OnInit {
     @Output() geocoderAddressResult: Subject<IPoint> = new Subject<IPoint>();
     @Output() detailsAddressResultPoint: Subject<IPoint> = new Subject<IPoint>();
     @Output() markerClik: Subject<IPosition> = new Subject<IPosition>();
-    @Output() markerDraggable: Subject<any> = new Subject<any>();
-    @Output() markerDraggableEnd: Subject<any> = new Subject<any>();
-    @Output() drawRadiusStart: Subject<string> = new Subject<string>();
-    @Output() drawRadiusChanged: Subject<string> = new Subject<string>();
-    @Output() drawRadiusDragEnd: Subject<string> = new Subject<string>();
-    @Output() drawAreaStart: Subject<string> = new Subject<string>();
-    @Output() drawAreaDragEnd: Subject<string> = new Subject<string>();
+    @Output() markerDraggable: Subject<CallbackMarkerInfo> = new Subject<CallbackMarkerInfo>();
+    @Output() markerDraggableEnd: Subject<CallbackMarkerInfo> = new Subject<CallbackMarkerInfo>();
+    @Output() drawRadiusStart: Subject<CallbackCicleInfo> = new Subject<CallbackCicleInfo>();
+    @Output() drawRadiusChanged: Subject<CallbackCicleInfo> = new Subject<CallbackCicleInfo>();
+    @Output() drawRadiusDragEnd: Subject<CallbackCicleInfo> = new Subject<CallbackCicleInfo>();
+    @Output() drawAreaStart: Subject<IPosition> = new Subject<IPosition>();
+    @Output() drawAreaDragEnd: Subject<Position[]> = new Subject<Position[]>();
     @Output() countLoadsMarkers: Subject<number> = new Subject<number>();
-    @Output() infoRoute: Subject<number> = new Subject<number>();
+    @Output() infoRoute: Subject<RouteInfo> = new Subject<RouteInfo>();
 
 
     public InitMap(mapType: MapType) {
         this.manager.selectMap(mapType);
     }
 
-    ngAfterViewInit(): void {
-        this.InitMap(MapType.GOOGLE);
-    }
-
     ngOnInit() {
+        this.manager.changeType(MapType[this.provider.toUpperCase()]);
+        this.InitMap(MapType[this.provider.toUpperCase()]);
         let position = <Position>{
             latitude: this.latitude,
             longitude: this.longitude
         }
 
         setTimeout(() => {
+            this.manager.getActiveMap().options.minZoom = this.minZoom
+            this.manager.getActiveMap().options.zoom = this.zoom
             this.manager.getActiveMap().config.setCenter(position);
             this.manager.getActiveMap().config.setMinZoom(this.minZoom);
             this.manager.getActiveMap().config.setZoom(this.zoom);
@@ -127,6 +131,6 @@ export class H21MapsComponent implements OnInit {
             this.manager.getActiveMap().callbackMap.on(CallbackName.infoRoute, (infoRoute) => {
                 this.infoRoute.next(infoRoute);
             });
-        }, 170);
+        }, 175);
     }
 }

@@ -16,14 +16,32 @@ import { EventEmitter } from 'events';
 @Injectable()
 export abstract class AbstractMap {
     /**
-     * Map-specific API object
+     * Map-specific API object;
      */
     api: any;
+    /**
+     * allow to load markers dynamically;
+     */
     loadMarkers: boolean = true;
+    /**
+     * enable/disable the click event on the map;
+     */
     clickMap: boolean = false;
+     /**
+     * the object selected marker;
+     */
     selectedMarker: BaseMarker;
+    /**
+     * show/hide the public transport layer on the map;
+     */
     transitLayer: BaseLayer;
+     /**
+     * show/hide the traffic layer on the map;
+     */
     trafficLayer: BaseLayer;
+     /**
+     * List of subscriptions to map events;
+     */
     callbackMap: EventEmitter = new EventEmitter();
 
     public get container(): HTMLElement {

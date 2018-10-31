@@ -13,6 +13,7 @@ import { GoogleMarkerCluster } from "./cluster";
 import { GeoContainer } from "../../entity/geo-container";
 import { GoogleSearchMap } from "./search";
 import { GoogleRouteBuilder } from "./route";
+import { CallbackName } from "../../enum/e-callback-name";
 
 declare var google;
 declare var document;
@@ -32,11 +33,17 @@ export class GoogleMap extends AbstractMap {
 
     }
 
+  /**
+    * Method OnReady map.
+    */
     init(): void {
         this.api = new google.maps.Map(this.container, this.options);
-        this.callbackMap.emit('initMap');
+        this.callbackMap.emit(CallbackName.initMap);
     }
 
+      /**
+    * Method OnReady map.
+    */
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
 
         return new Observable((observer: Observer<FetchStatus>) => {
@@ -70,10 +77,17 @@ export class GoogleMap extends AbstractMap {
         });
     }
 
+     /**
+    * Method OnReady map.
+    */
     private OnReady() {
         this.options.center = new google.maps.LatLng(27.215556209029693, 18.45703125);
     }
 
+
+    /**
+    * Method destroy map.
+    */
     destroy(): void {
         super.destroy();
         google = null;

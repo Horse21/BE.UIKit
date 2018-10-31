@@ -363,7 +363,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         });
     }
 
-    abstract showMarker(point: IPoint, onSelectedpoint?: boolean, fitBounds?: boolean): void
+    abstract addMarker(point: IPoint, onSelectedpoint?: boolean, fitBounds?: boolean): void
 
     abstract setZoom(zoom: number): void;
 

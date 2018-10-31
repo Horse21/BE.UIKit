@@ -32,6 +32,14 @@ import { YandexRouteBuilder } from '../providers/yandex/route';
 import { YandexMarker } from '../providers/yandex/marker';
 import { YandexMapOptions } from '../providers/yandex/entity/yandex-map-options';
 import { YandexSearchMap } from '../providers/yandex/search';
+import { LeafletMap } from '../providers/leaflet/map';
+import { LeafletMarkerCluster } from '../providers/leaflet/cluster';
+import { LeafletEvent } from '../providers/leaflet/event';
+import { LeafletConfig } from '../providers/leaflet/config';
+import { LeafletRouteBuilder } from '../providers/leaflet/route';
+import { LeafletMarker } from '../providers/leaflet/marker';
+import { LeafletMapOptions } from '../providers/leaflet/entity/leaflet-map-options';
+import { LeafletSearchMap } from '../providers/leaflet/search';
 import { AppMaterialModule } from '../../../modules/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -91,6 +99,14 @@ import { BrowserModule } from '@angular/platform-browser';
     YandexMarker,
     YandexMapOptions,
     YandexSearchMap,
+    LeafletMap,
+    LeafletMarkerCluster,
+    LeafletEvent,
+    LeafletConfig,
+    LeafletRouteBuilder,
+    LeafletMarker,
+    LeafletMapOptions,
+    LeafletSearchMap,
   ],
 })
 export class H21MapsModule { }

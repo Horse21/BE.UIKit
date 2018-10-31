@@ -15,23 +15,39 @@ import { AddressSettings } from "./classes/address-settings";
 import { AddressTypeName } from "./enum/e-address-type-name";
 import { AddressType } from "./enum/e-adress-type";
 import { CallbackName } from "../../enum/e-callback-name";
+import { LanguageService } from "../../enum/e-language-service";
+import { MapType } from "../../enum/e-map-type";
+import { PointType } from "../../enum/e-point-type";
 
 declare var google;
 
 @Injectable()
 export class GoogleSearchMap extends AbstractSearch {
-
+    /**
+    * Method search on the map.
+    * 
+   ``takes one parameters:``
+   ```
+     query:string;
+     ```
+      ``return:``
+   ```
+     Array<IPoint>;
+     ```
+        ``callback:``
+   ```
+     Array<IPoint>;
+     ```
+    */
     search(query: string): Array<IPoint> {
-
         let result = [];
         let service = new google.maps.places.AutocompleteService();
         let request = {
             input: query,
-            language: 'en'
+            language: LanguageService.en
         };
 
         service.getPlacePredictions(request, (response, status) => {
-
             if (status == ResponseStatus.OK) {
                 for (var i = 0; i < response.length; i++) {
                     let point: Point = new Point();
@@ -41,9 +57,8 @@ export class GoogleSearchMap extends AbstractSearch {
                     point.googlePlaceId = place.place_id;
                     point.subtype = place.types[0];
                     point.title = place.formatted_address;
-                    point.type = 'internet'
-                    point.source = 'google';
-
+                    point.type = PointType.internet;
+                    point.source = MapType.GOOGLE;
                     result.push(point)
                 }
             }
@@ -51,13 +66,27 @@ export class GoogleSearchMap extends AbstractSearch {
         }
 
         );
-
         this.map.callbackMap.emit(CallbackName.searchResult, result);
         return result;
     }
 
+    /**
+        * Method get detailed information about a point.
+        * 
+       ``takes one parameters:``
+       ```
+         placeId:string;
+         ```
+          ``return:``
+       ```
+        Observable<IPoint> ;
+         ```
+            ``callback:``
+       ```
+        IPoint;
+         ```
+        */
     searchDetails(placeId: string): Observable<IPoint> {
-
         return new Observable((observer: Observer<IPoint>) => {
             let placesService = new google.maps.places.PlacesService(this.map.api);
 
@@ -101,12 +130,8 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.position.latitude = place.geometry.location.lat();
                             point.position.longitude = place.geometry.location.lng();
 
-                            if (place.photos !== undefined) {
-                                if ("photos" in place) {
-                                    if (place.photos.length > 0) {
-                                        point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
-                                    }
-                                }
+                            if (this.map.api.config.placeHasPhoto(place)) {
+                                point.photos = place.photos[0].getUrl({ 'maxWidth': 340, 'maxHeight': 340 });
                             }
 
                             point.address.description = place.formatted_address;
@@ -117,17 +142,15 @@ export class GoogleSearchMap extends AbstractSearch {
                             point.googlePlaceId = place.place_id;
                             point.id = place.id;
                             point.subtype = place.types[0];
-                            point.type = 'internet'
-                            point.source = 'google';
+                            point.type = PointType.internet;
+                            point.source = MapType.GOOGLE;
                             this.map.callbackMap.emit(CallbackName.searchDetailsResult, point);
                             observer.next(point);
                         }
 
                         this.map.callbackMap.emit(CallbackName.responseMapError, status);
                     }
-
                 });
-
         });
     }
 
@@ -136,16 +159,13 @@ export class GoogleSearchMap extends AbstractSearch {
         let componentAddress = this.getAddressSettings();
         let pointAddress = [];
         let resultAddress = [];
-
         for (let i = 0; i < place.length; i++) {
-
             let parseAddress = new AddressComponent();
             let nameType = new PointAddress();
             let addressType = place[i].types[0];
             if (componentAddress[addressType]) {
 
                 let addressValue = place[i][componentAddress[addressType]];
-
                 nameType.type = addressType;
                 nameType.value = addressValue;
                 pointAddress.push(nameType);
@@ -198,9 +218,7 @@ export class GoogleSearchMap extends AbstractSearch {
     }
 
     private getAddressSettings(): AddressSettings {
-
         let AdressSettings = new AddressSettings();
-
         AdressSettings.country = AddressTypeName.longName;
         AdressSettings.route = AddressTypeName.longName;
         AdressSettings.locality = AddressTypeName.longName;
@@ -209,7 +227,6 @@ export class GoogleSearchMap extends AbstractSearch {
         AdressSettings.sublocality_level_1 = AddressTypeName.longName;
         AdressSettings.street_number = AddressTypeName.shortName;
         AdressSettings.postal_code = AddressTypeName.shortName;
-
         return AdressSettings;
     }
 }
