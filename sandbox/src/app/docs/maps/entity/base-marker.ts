@@ -2,12 +2,14 @@ import { AbstractMap } from "../abstract/abstract-map";
 import { IPoint } from "../interfaces/i-point";
 import { IBaseMarkerOptions } from "../interfaces/i-base-marker-options";
 import { ILatLng } from "../providers/google/interfaces/i-latlng";
+import { IHotelInfo } from "../interfaces/i-hotel-info";
 
 export class BaseMarker {
 
     map: AbstractMap;
     point: IPoint;
-    options: IBaseMarkerOptions;
+	options: IBaseMarkerOptions;
+	hotelInfo: IHotelInfo;
 
     constructor(options: IBaseMarkerOptions) {
         this.options = options;

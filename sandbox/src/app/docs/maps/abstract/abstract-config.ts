@@ -28,11 +28,12 @@ import { BasePolyline } from '../entity/base-polyline';
 import { IRouteOptions } from '../interfaces/i-route-options';
 import { IH21DateTime } from '../../../../../projects/h21-be-ui-kit/src/dto';
 import { TypeRoute } from '../enum/e-type-route';
+import { HotelInfo } from '../entity/hotel-Info';
 
 
 @Injectable()
 export abstract class AbstractConfig implements IConfig, IInitMap {
-  
+
     map: AbstractMap;
 
     initMap(map: AbstractMap): void {
@@ -134,13 +135,13 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                     for (let i = 0; i < point.default.length; i++) {
                         let item = point.default[i];
 
-                        let marker = this.getBaseMarker(item);
+						let marker = this.getBaseMarker(item);
                         marker.point = new Point();
-                        marker.point.id = '';
+                        marker.point.id = item.HotelID;
                         marker.point.position = new Position();
-                        marker.point.position.latitude = item.Address.Lat;
-                        marker.point.position.longitude = item.Address.Lng;
-                        marker.point.title = item.Hotelname;
+                        marker.point.position.latitude = item.latitude;
+                        marker.point.position.longitude = item.longitude;
+                        marker.point.title = item.Name;
 
                         this.boundsContainsMarker(marker);
 
@@ -195,8 +196,8 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 fillOpacity: 0.35,
                 center: center,
                 radius: radius,
-                draggable: true,
-                editable: true
+                draggable: false,
+                editable: false
             };
 
             let circle = new BaseCicle(circleOptions);
@@ -302,7 +303,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         let polygonPointsCount = polygon.path.length;
         let contains: boolean = false;
 
-        /* 
+        /*
 
         NOTE:
             i - current index of marker in array
@@ -363,7 +364,7 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
         });
     }
 
-    abstract addMarker(point: IPoint, onSelectedpoint?: boolean, fitBounds?: boolean): void
+    abstract addMarker(point: IPoint, onSelectedpoint?: boolean): void
 
     abstract setZoom(zoom: number): void;
 
