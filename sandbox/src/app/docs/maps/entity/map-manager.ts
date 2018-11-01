@@ -47,19 +47,23 @@ export class MapManager {
     }
 
     load(): void {
-        this.currentMap.onDataFetched(data["InitList"][this.mapType])
-            .subscribe(status => {
-                if (status == FetchStatus.SUCCESS) {
-                    this.currentMap.init();
-                    this.currentMap.events.idle<void>().subscribe(() => {
-                        this.currentMap.config.onEventIdle();
-                    });
-                    this.currentMap.events.mapClicked<IEventClickMap>().subscribe((IEventClikMap) => {
-                        this.currentMap.config.onClickMap(IEventClikMap)
-                    });
-                    this.currentMap.cluster.initMarkerCluster();
-                }
-            })
+        try {
+            this.currentMap.onDataFetched(data["InitList"][this.mapType])
+                .subscribe(status => {
+                    if (status == FetchStatus.SUCCESS) {
+                        this.currentMap.init();
+                        this.currentMap.events.idle<void>().subscribe(() => {
+                            this.currentMap.config.onEventIdle();
+                        });
+                        this.currentMap.events.mapClicked<IEventClickMap>().subscribe((IEventClikMap) => {
+                            this.currentMap.config.onClickMap(IEventClikMap)
+                        });
+                        this.currentMap.cluster.initMarkerCluster();
+                    }
+                })
+        } catch (error) {
+
+        }
     }
 
     destroy(): void {

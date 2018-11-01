@@ -21,13 +21,14 @@ import { RouteInfo } from '../classes/route-info';
 @Injectable()
 export class H21MapsComponent implements OnInit {
 
+    MapType = MapType;
     constructor(public manager: MapManager) { }
 
     @Input() private latitude: number;
     @Input() private longitude: number;
     @Input() private minZoom: number;
     @Input() private zoom: number;
-    @Input() private provider: string;
+    @Input() private provider: MapType;
 
     @Output() afterMapInit: Subject<boolean> = new Subject<boolean>();
     @Output() onclickMapPlaceId: Subject<IPosition> = new Subject<IPosition>();

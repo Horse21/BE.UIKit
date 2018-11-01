@@ -32,54 +32,56 @@ export class YandexMap extends AbstractMap {
     }
 
     init(): void {
+        try {
+            this.api = new ymaps.Map(this.container, {
+                center: [27.215556209029693, 18.45703125],
+                behaviors: ['default', 'scrollZoom'],
+                zoom: 3,
+                controls: []
+            });
+        } catch (error) {
 
-        this.api = new ymaps.Map(this.container, {
-            center: [27.215556209029693, 18.45703125],
-            behaviors: ['default', 'scrollZoom'],
-            zoom: 3,
-            controls: []
-        });
+        }
     }
 
     onDataFetched(settings: IApiSettings): Observable<FetchStatus> {
+        try {
+            return new Observable((observer: Observer<FetchStatus>) => {
 
-        return new Observable((observer: Observer<FetchStatus>) => {
+                let apiScript = document.createElement('script');
+                let headElement = document.getElementsByTagName('head')[0];
+                let apiUrl: string;
+                apiScript.type = 'text/javascript';
+                apiUrl = settings.url + '&key=' + settings.key + '&language=' + settings.language;
+                apiScript.src = apiUrl;
+                apiScript.id = 'mapAPI';
 
-            let apiScript = document.createElement('script');
-            let headElement = document.getElementsByTagName('head')[0];
-            let apiUrl: string;
-            apiScript.type = 'text/javascript';
-            apiUrl = settings.url + '&key=' + settings.key + '&language=' + settings.language;
-            apiScript.src = apiUrl;
-            apiScript.id = 'mapAPI';
-
-            if (apiScript.readyState) {
-                apiScript.onreadystatechange = () => {
-                    if (apiScript.readyState === ReadyStateScript.loaded || apiScript.readyState === ReadyStateScript.complete) {
-                        apiScript.onreadystatechange = null;
+                if (apiScript.readyState) {
+                    apiScript.onreadystatechange = () => {
+                        if (apiScript.readyState === ReadyStateScript.loaded || apiScript.readyState === ReadyStateScript.complete) {
+                            apiScript.onreadystatechange = null;
+                        }
+                    };
+                } else {
+                    window['APILoaded'] = () => {
+                        this.OnReady();
+                        observer.next(FetchStatus.SUCCESS);
                     }
-                };
-            } else {
-                window['APILoaded'] = () => {
-                    this.setCenter();
-                    observer.next(FetchStatus.SUCCESS);
                 }
-            }
-            apiScript.onerror = (error) => {
-                observer.next(FetchStatus.ERROR);
-            };
+                apiScript.onerror = (error) => {
+                    observer.next(FetchStatus.ERROR);
+                };
 
-            headElement.appendChild(apiScript);
+                headElement.appendChild(apiScript);
 
-        });
+            });
+        } catch (error) {
+
+        }
     }
 
-    private setCenter(): void {
 
-
-    }
-
-    public OnReady(latitude: number, longitude: number) {
+    private OnReady() {
 
     }
 

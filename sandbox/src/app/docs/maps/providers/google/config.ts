@@ -889,8 +889,19 @@ export class GoogleConfig extends AbstractConfig {
       ````
       marker: BaseMarker;````
       */
-    private setSelectedMarker(marker: BaseMarker) {
+    private setSelectedMarker(marker: BaseMarker): void {
         this.map.selectedMarker = marker;
+    }
+
+     /**
+      * Method get selected marker.
+      * 
+      ``return:``
+      ````
+      BaseMarker;````
+      */
+     getSelectedMarker(): BaseMarker {
+        return this.map.selectedMarker;
     }
 
     /**
