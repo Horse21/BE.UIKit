@@ -6,7 +6,7 @@ import { IPoint } from "../../interfaces/i-point";
 
 @Injectable()
 export class YandexMarkerCluster extends AbstractMarkerCluster {
-   
+
 
     yandexCluster: MarkerClusterer;
 
@@ -21,7 +21,7 @@ export class YandexMarkerCluster extends AbstractMarkerCluster {
     addMarker(marker: BaseMarker, show?: boolean): void {
         throw new Error("Method not implemented.");
     }
-    addMarkers(markers: IPoint[], show?: boolean): void {
+    addMarkers(markers: BaseMarker[], show?: boolean): void {
         throw new Error("Method not implemented.");
     }
     refreshMarkers(): void {

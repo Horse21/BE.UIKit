@@ -79,8 +79,12 @@ export class GoogleConfig extends AbstractConfig {
 		return new google.maps.LatLngBounds();
 	};
 
+	/**
+	 * Bounds contains marker
+	 * @param marker
+	 * @returns true if contains marker
+	 */
 	boundsContainsMarker(marker: BaseMarker): boolean {
-		console.log(marker)
 		let googleMarkerOptions: GoogleMarkerOptions = {
 			draggable: marker.options.draggable,
 			clickable: marker.options.clickable,
@@ -105,7 +109,6 @@ export class GoogleConfig extends AbstractConfig {
 			this.map.geo.pushMarkers(googleMarker);
 			this.map.cluster.addMarker(googleMarker, false);
 		}
-
 		return true;
 	}
 
@@ -476,7 +479,7 @@ export class GoogleConfig extends AbstractConfig {
 	 * @param {boolean} onSelectedPoint
 	 * @memberof GoogleConfig
 	 */
-	addMarker(point: IPoint, onSelectedPoint: boolean) {
+	addMarker(point: IPoint, onSelectedPoint: boolean):void {
 		try {
 			let googleMarkerOptions: GoogleMarkerOptions = {
 				draggable: false,

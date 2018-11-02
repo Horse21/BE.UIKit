@@ -8,7 +8,7 @@ declare var L
 @Injectable()
 
 export class LeafletMarkerCluster extends AbstractMarkerCluster {
-   
+
     leafletCluster: any;
 
     constructor() {
@@ -34,7 +34,7 @@ export class LeafletMarkerCluster extends AbstractMarkerCluster {
 
     }
 
-    addMarkers(markers: Array<IPoint>, show?: boolean): void {
+    addMarkers(markers: Array<BaseMarker>, show?: boolean): void {
         this.leafletCluster.addMarker(markers, show);
     }
 

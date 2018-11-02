@@ -34,14 +34,15 @@ export class BaiduMarkerCluster extends AbstractMarkerCluster {
     }
 
     addMarker(marker: BaseMarker, show?: boolean): void {
+console.log(show)
 
         this.googleCluster.addMarker(marker, show);
 
     }
 
-    addMarkers(markers: Array<IPoint>, show?: boolean): void {
+    addMarkers(markers: Array<BaseMarker>, show?: boolean): void {
 
-        this.googleCluster.addMarker(markers, show);
+        this.googleCluster.addMarkers(markers, show);
     }
 
     refreshMarkers(): void {

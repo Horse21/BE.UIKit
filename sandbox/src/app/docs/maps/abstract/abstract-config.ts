@@ -46,8 +46,14 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
     marker: BaseMarker;
     markerCluster: AbstractMarkerCluster;
     radiusShape: ShapeType;
-
-    buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show?: boolean): void {
+/**
+ * Builds route
+ * @param from
+ * @param to
+ * @param typeRoute
+ * @param [show]
+ */
+buildRoute(from: IPoint, to: IPoint, typeRoute: TypeRoute, show?: boolean): void {
 
         let IH21DateTime: IH21DateTime = {
             year: 2018,
@@ -134,7 +140,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                 if (markersVisible) {
                     for (let i = 0; i < point.default.length; i++) {
                         let item = point.default[i];
-
 						let marker = this.getBaseMarker(item);
                         marker.point = new Point();
                         marker.point.id = item.HotelID;
@@ -144,7 +149,6 @@ export abstract class AbstractConfig implements IConfig, IInitMap {
                         marker.point.title = item.Name;
 
                         this.boundsContainsMarker(marker);
-
                     }
                 }
             }

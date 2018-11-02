@@ -33,15 +33,15 @@ export class GoogleMarkerCluster extends AbstractMarkerCluster {
         this.googleCluster = new MarkerClusterer(this.map.api, [], mcOptions);
     }
 
-    addMarker(marker: BaseMarker, show?: boolean): void {
+    addMarker(marker: BaseMarker, redraw?: boolean): void {
 
-        this.googleCluster.addMarker(marker, show);
+        this.googleCluster.addMarker(marker, redraw);
 
     }
 
-    addMarkers(markers: Array<IPoint>, show?: boolean): void {
+    addMarkers(markers: Array<BaseMarker>, redraw?: boolean): void {
 
-        this.googleCluster.addMarker(markers, show);
+        this.googleCluster.addMarkers(markers, redraw);
     }
 
     refreshMarkers(): void {
